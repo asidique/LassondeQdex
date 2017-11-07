@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G71214F61_A729_48AD_B22F_9B9E933F8853">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>MCV4U 1.4.2 - Estimating a Limit Numerically </title>
+    <creator>Asseel</creator>
+    <coverImage src="resources/cover.png" />
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+  </metadata>
+
+  <include src="resources/curriculumStyles.xml" />
+  <include src="resources/Utilities.xml" />
+
+  <!--                                      Header & Footer START                                         -->
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="whiteColor">Amanda Koon</p>
+      <p style="whiteColor rightText">MCV4U</p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/logo1.png" inspect="false" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/logo2.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--                                      Header & Footer END                                         -->
+
+  <!-- Section 1 -->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">1.4.2 Estimating a Limit Numerically</title>
+    <p style="sectionHeading">Introduction</p>
+    <stack name="contentStack" orientation="vertical" style="contentBG">
+      <p>When estimating a limit of a function as x approaches a constant, algebraic tools can usually be used to solve the limit. In this lesson,
+      we will take a look at some examples of solving limits without graphs or tables.</p>
+    </stack>
+    <p><br /></p>
+  </section>
+  
+  <sectionNoTitle name="section2" style="pageLayout">
+    <p style="sectionHeading">Summary</p>
+    <stack orientation="vertical" style="contentBG">
+      <p>If given a limit problem, we should use the following steps:</p>
+      <image src="resources/LimitSteps.png" />
+      <p style="subSectionHeading">Example 1</p>
+      <p>Evaluate: $\displaystyle{\lim_{x \to 2}} 12x^2-3x+8$</p>
+      <button name="btn1" content="Show Answer">
+        <onClick>
+          if btn1.Text == "Show Answer" then
+            btn1.Text = "Hide Answer";
+            ans.Style.Visibility = "visible";
+          elseif btn1.Text == "Hide Answer" then
+            btn1.Text = "Show Answer";
+            ans.Style.Visibility = "collapsed";
+          end
+        </onClick>
+      </button>
+      <stack name="ans" style="collapsed">
+        <p>Direct Substitution: $ (12(2)^2 - 3(2)+8) = 50 $</p>
+      </stack>
+      <p style="subSectionHeading">Example 2</p>
+      <p>Evaluate: $\displaystyle{\lim_{x \to -5}} \frac{x^2-25}{x^2+2x-15} $</p>
+      <button name="btn2" content="Show Answer">
+        <onClick>
+          if btn2.Text == "Show Answer" then
+          btn2.Text = "Hide Answer";
+          ans2.Style.Visibility = "visible";
+          elseif btn2.Text == "Hide Answer" then
+          btn2.Text = "Show Answer";
+          ans2.Style.Visibility = "collapsed";
+          end
+        </onClick>
+      </button>
+      <stack name="ans2" style="collapsed">
+        <p>Substituting $ x = -5 $ yields $ \frac{0}{0} $. Factor the rational expressions and evaluate: </p>
+        <p>$ \: \: \displaystyle{\lim_{x \to -5}} \frac{x^2-25}{x^2+2x-15} $</p>
+        <p>$ = \: \displaystyle{\lim_{x \to -5}} \frac{(x+5)(x-5)}{(x-3)(x+5)} $</p>
+        <p>$ = \: \displaystyle{\lim_{x \to -5}} \frac{x-5}{x-3} $</p>
+        <p>$ = \: \frac{-5-5}{-5-3} $</p>
+        <p>$ = \: \frac{5}{4} $</p>
+      </stack>
+    </stack>
+    <p><br /></p>
+  </sectionNoTitle>
+
+
+  <sectionNoTitle name="section3" style="pageLayout">
+    <script>
+      local stepsController = StepsController:new({stepsStack=stepsStack, numOfSteps=3})
+    </script>
+    <p style="sectionHeading">Summary</p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="subSectionHeading">Example 3</p>
+      <p style="justifiedText">Evaluate: $ \displaystyle{\lim_{x \to 4}} \frac{3- \sqrt{x+5}}{x-4} $</p>
+    </stack>
+    <stack name="stepsStack">
+      <!--Each step is a stack, and each step has alternating background colors-->
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Substitute</p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            <p>Substituting $ x = 4 $ yields $ \frac{0}{0} $. Using the chart on the previous page, our next step is to either factor or conjugate.</p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <onClick>
+            stepsController:toggleStep(1)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Conjugate</p>
+          <stack name="cont" style="invisible">
+            <stack orientation="horizontal">
+              <stack orientation="vertical">
+                <!--CONTENT GOES HERE-->
+                <p>Eliminate the square root term by multiplying the conjugate of the numerator over itself. Thus we get:</p>
+                <p>$= \displaystyle{\lim_{x \to 4}} \frac{3- \sqrt{x+5}}{x-4} \times \frac{3+ \sqrt{x+5}}{3+ \sqrt{x+5}} $</p>
+                <p>$= \displaystyle{\lim_{x \to 4}} \frac{9 - (x+5)}{(x-4)(3+ \sqrt{x+5})} $</p>
+                <p>$= \displaystyle{\lim_{x \to 4}} \frac{4-x}{(x-4)(3+ \sqrt{x+5})} $</p>
+                <p>$= \displaystyle{\lim_{x \to 4}} \frac{-(4-x)}{(x-4)(3+ \sqrt{x+5})} $</p>
+                <p>$= \displaystyle{\lim_{x \to 4}} \frac{-1}{3+ \sqrt{x+5}} $</p>
+              </stack>
+            </stack>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <onClick>
+            stepsController:toggleStep(2)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <!--CONTENT GOES HERE-->
+          <p>Substitution</p>
+          <stack name="cont" style="invisible">
+            <p>Evaluate the limit by substituting $ x = 4 $ and simplify:</p>
+            <p>$= \frac{-1}{3+ \sqrt{4+5}} $</p>
+            <p>$= - \frac{1}{6} $</p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <onClick>
+            stepsController:toggleStep(3)
+          </onClick>
+        </button>
+      </stack>
+      
+    </stack>
+  </sectionNoTitle>
+
+  <sectionNoTitle name="section4" style="pageLayout">
+    <p style="sectionHeading">Practice Questions</p>
+    <stack orientation="vertical" style="contentBG">
+      <p>Complete these questions on scrap paper and input the final answers here.</p>
+    </stack>
+    <p><br /></p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="subSectionHeading">Question 1</p>
+      <p style="centerText">$ \displaystyle{\lim_{x \to 4}} \frac{x^2-81}{2x^2-5x-3} = \frac{a}{b} $</p>
+      <p style="subSectionHeading">Answer</p>
+      <stack name="ans1" orientation="horizontal">
+        <p>
+          <style>
+            <widthPercentage>60%</widthPercentage>
+            <textAlignment>right</textAlignment>
+          </style>
+          a = 
+        </p>
+        <textField style="leftText" placeholder="Insert Answer Here"></textField>
+      </stack>
+      <stack name="ans2" orientation="horizontal">
+        <p>
+          <style>
+            <widthPercentage>60%</widthPercentage>
+            <textAlignment>right</textAlignment>
+          </style>
+          b =
+        </p>
+        <textField style="leftText" placeholder="Insert Answer Here"></textField>
+      </stack>
+      <button content="Check Answer" name="btn">
+        <onClick>
+          if ans1:Child(2).Text == "-62" and ans2:Child(2).Text == "9" or ans1:Child(2).Text == "62" and ans2:Child(2).Text == "-9" then
+            btn.Text = "Correct!"
+            btn.Style.BackgroundColor = color.green;
+          elseif ans1:Child(2).Text == "-62" or ans2:Child(2).Text  == "9" or ans1:Child(2).Text == "62" or ans2:Child(2).Text  == "-9" then
+            btn.Text = "One of the answers are incorrect!";
+            btn.Style.BackgroundColor = color.rgb(50, 133, 184);
+          else
+            btn.Text = "Try Again!"
+            btn.Style.BackgroundColor = color.rgb(50, 133, 184);
+          end
+        </onClick>
+      </button>
+    </stack>
+    <p><br /></p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="subSectionHeading">Question 2</p>
+      <p style="centerText">$ \displaystyle{\lim_{x \to 4}} \frac{ \frac{1}{x}+\frac{1}{2} }{  x^3+8 } = -\frac{a}{b} $</p>
+      <p style="subSectionHeading">Answer</p>
+      <stack name="ans1" orientation="horizontal">
+        <p>
+          <style>
+            <widthPercentage>60%</widthPercentage>
+            <textAlignment>right</textAlignment>
+          </style>
+          a =
+        </p>
+        <textField style="leftText" placeholder="Insert Answer Here"></textField>
+      </stack>
+      <stack name="ans2" orientation="horizontal">
+        <p>
+          <style>
+            <widthPercentage>60%</widthPercentage>
+            <textAlignment>right</textAlignment>
+          </style>
+          b =
+        </p>
+        <textField style="leftText" placeholder="Insert Answer Here"></textField>
+      </stack>
+      <button content="Check Answer" name="btn">
+        <onClick>
+          if ans1:Child(2).Text == "1" and ans2:Child(2).Text == "96" then
+            btn.Text = "Correct!"
+            btn.Style.BackgroundColor = color.green;
+          elseif ans2:Child(2).Text  == "96" or ans1:Child(2).Text == "1" then
+            btn.Text = "One of the answers are incorrect!";
+            btn.Style.BackgroundColor = color.rgb(50, 133, 184);
+          else
+            btn.Text = "Try Again!"
+            btn.Style.BackgroundColor = color.rgb(50, 133, 184);
+          end
+        </onClick>
+      </button>
+    </stack>
+    <p><br /></p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="subSectionHeading">Question 3</p>
+      <p style="centerText">$ \displaystyle{\lim_{x \to 4}} \frac{ x-27 }{ x^{\frac{1}{3}}-3} = a $</p>
+      <p style="subSectionHeading">Answer</p>
+      <stack name="ans1" orientation="horizontal">
+        <p>
+          <style>
+            <widthPercentage>60%</widthPercentage>
+            <textAlignment>right</textAlignment>
+          </style>
+          a =
+        </p>
+        <textField style="leftText" placeholder="Insert Answer Here"></textField>
+      </stack>
+      <p style="centerText">
+        <b>TIP:</b> Use 2 decimal places!</p>
+      <button content="Check Answer" name="btn">
+        <onClick>
+          if ans1:Child(2).Text == "16.28" then
+            btn.Text = "Correct!"
+            btn.Style.BackgroundColor = color.green;
+          else
+            btn.Text = "Try Again!"
+            btn.Style.BackgroundColor = color.rgb(50, 133, 184);
+          end
+        </onClick>
+      </button>
+    </stack>
+    <p><br /></p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="subSectionHeading">Challenge Question</p>
+      <p style="centerText">$ \displaystyle{\lim_{x \to 4}} \frac{ x^{\frac{1}{3}}-1 }{ x^{\frac{1}{4}}-1} = a $</p>
+      <p style="subSectionHeading">Answer</p>
+      <stack name="ans1" orientation="horizontal">
+        <p>
+          <style>
+            <widthPercentage>60%</widthPercentage>
+            <textAlignment>right</textAlignment>
+          </style>
+          a =
+        </p>
+        <textField style="leftText" placeholder="Insert Answer Here"></textField>
+      </stack>
+      <p style="centerText">
+        <b>TIP:</b> Use 2 decimal places!
+      </p>
+      <button content="Check Answer" name="btn">
+        <onClick>
+          if ans1:Child(2).Text == "1.42" then
+          btn.Text = "Correct!"
+          btn.Style.BackgroundColor = color.green;
+          else
+          btn.Text = "Try Again!"
+          btn.Style.BackgroundColor = color.rgb(50, 133, 184);
+          end
+        </onClick>
+      </button>
+    </stack>
+
+    <p>
+      <br />
+    </p>
+  </sectionNoTitle>
+</document>

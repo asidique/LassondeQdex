@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Empty XY Graph Qdex</Title>
+      <Author>Asseel</Author>
+      <Description>Used for qdex app development</Description>
+    </Header>
+    <Snippet>
+      <Code Language="XML">
+        <![CDATA[
+        <xyPlot name="xy1" pan="disabled" tap="disabled" zoom="disabled">
+          <axis dim="x" min="-10" max="10"></axis>
+          <axis dim="y" min="-10" max="10"></axis>
+          <series capacity="2" draw="line">
+            <style>
+              <foreground color="black" />
+              <lineThickness>1.5</lineThickness>
+            </style>
+            <data>
+              -10 0; 10 0
+            </data>
+          </series>
+          <series capacity="2" draw="line">
+            <style>
+              <foreground color="black" />
+              <lineThickness>1.5</lineThickness>
+            </style>
+            <data>
+              0 10; 0 -10
+            </data>
+          </series>
+        </xyPlot>
+                ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

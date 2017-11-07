@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<fragment xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd">
+
+  <!-- Shapes-->
+  <script>
+    <![CDATA[
+      vector2D = {}
+      vector2D.prototype = {x = 0, y = 0, width = 0, height = 0, color = color.white, radius = 0, proton = false, power = 0;}
+      vector2D.metatable = {__index = vector2D.prototype}
+      
+      function vector2D:new(o)
+        o = o or {}
+        setmetatable(o, vector2D.metatable)
+        return o;
+      end
+      
+      function drawSquare(x1, y1, w, h, series, color)
+        series:Add(x1 - w/2, y1 - w/2, color);
+        series:Add(x1 - w/2, y1 + w/2, color);
+        series:Add(x1 + w/2, y1 + w/2, color);
+        series:Add(x1 + w/2, y1 - w/2, color);
+        series:Add(x1 - w/2, y1 - w/2, color);
+      end
+      
+      function drawRectangle(x1, y1, w, h, series, color)
+        series:Add(x1 - w/2, y1 - h/2, color);
+        series:Add(x1 - w/2, y1 + h/2, color);
+        series:Add(x1 + w/2, y1 + h/2, color);
+        series:Add(x1 + w/2, y1 - h/2, color);
+        series:Add(x1 - w/2, y1 - h/2, color);
+      end
+      
+      function drawDiamond(x1, y1, w, h, series, color, color2) 
+        series:Add(x1 - w/2, y1 - h/2, color);
+        series:Add(x1, y1 + h/2, color);
+        series:Add(x1 + w/2, y1 - h/2, color);
+        series:Add(x1, y1 - h*1.5, color2);
+        series:Add(x1 - w/2, y1 - h/2, color2);
+        series:Add(x1 + w/2, y1 - h/2, color2);
+      end
+      
+      function distanceBetween(obj1, obj2)
+        return math.sqrt((obj2.x - obj1.x)^2 + (obj2.y - obj1.y)^2);
+      end
+      
+      function angleBetween(obj1, obj2)
+        return math.atan2((obj2.y - obj1.y), (obj2.x - obj1.x));
+      end
+      
+      function checkForCollision(obj1, obj2, width1, height1, width2, height2)
+        if obj1.x < obj2.x + width2 and obj1.x + width1 > obj2.x and obj1.y < obj2.y + height2 and obj1.y + height1 > obj2.y then
+          return true;
+        else
+          return false;
+        end
+      end
+      
+      function checkForCollisionCirc(obj1, obj2)
+        if distanceBetween(obj1, obj2) <= obj1.radius+obj2.radius then
+          return true;
+        end
+        return false;
+      end
+      
+      function randomizePosition(p)
+        seed = math.random(0, 5)
+        if seed == 1 then
+          p.x = math.random(1, 10);
+          p.y = math.random(1, 10);
+        elseif seed == 2 then
+          p.x = math.random(1, 10);
+          p.y = math.random(30, 40);
+        elseif seed == 3 then
+          p.x = math.random(30, 40);
+          p.y = math.random(30, 40);
+        elseif seed == 4 then
+          p.x = math.random(30, 40);
+          p.y = math.random(1, 10);
+        else
+          p.x = math.random(1, 30);
+          p.y = math.random(1, 30);
+        end
+      end
+                
+    ]]>
+  </script>
+
+</fragment>

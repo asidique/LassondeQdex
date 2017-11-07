@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G53B3A7B4_0C4F_47A5_BD9D_BA58822C66C5">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>Aanand Bajaj - Verlet Integration Testing!</title>
+    <creator>AanandB</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+  </metadata>
+
+  <include src="curriculumThemePack/curriculumStyles.xml" />
+  <include src="plotTools.xml" />
+  <include src="qdexLuaClass.xml" />
+
+  <sectionNoTitle>
+    <stack>
+      <style>
+        <widthPercentage>0.8</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <style>
+        <counter name="decBullet" format="decimal" />
+      </style>
+      <p style="titleMargin">
+        Verlet Integration Demo
+      </p>
+
+      <stack name="simStack" style="questionAnswer">
+        <style>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <style name="stick">
+          <foreground color="black" />
+          <lineThickness>1</lineThickness>
+        </style>
+        <p style="title">Cloth Simulation</p>
+        <xyPlot name="drawing" pan="disabled" tap="disabled" zoom="disabled">
+          <axis name="YAxis" auto="fixed" dim="y" min="-50" max="50" major="false"></axis>
+          <axis name="XAxis" auto="fixed" dim="x" min="-20" max="120" major="false"></axis>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series></series>
+          <series></series>
+          <series draw="lineSegments"></series>
+
+        </xyPlot>
+
+        <script>
+          <![CDATA[
+          -- dynamic = set the index of first axis with shapes
+          -- set index of first axis with sticks
+          -- set number of shapes & number of sticks
+          
+          -- add getters and setters
+          -- add physics engine with kinematics (loss of energy restitution factor, gravity, acceleration components)
+          -- wind; cloth simulation
+          
+          -- create a way to make multiple shapes with very little lines of code!
+         
+          plot = simStack:Child(2);
+          plotMinX = plot.XAxis.Min;
+          plotMinY = plot.YAxis.Min;
+          plotMaxX = plot.XAxis.Max;
+          plotMaxY = plot.YAxis.Max;
+          
+          -- do I need sticks for rigid body dynamics ???
+          local world = World:new({minX=plotMinX,minY=plotMinY,maxX=plotMaxX,maxY=plotMaxY,balls={},objects = {},verlets={},verletSticks = {}, polygons = {}, deltaT=0.03, gravity=-9.8})
+          
+          -- make array
+          -- can you so that you set the velocity? or nah? how would that work?
+          -- how to create multiple boxes in 1 plot and let them bounce off each other??
+          
+          -- add in constructor
+          local cloth = Cloth:new({x = 20, y = 20, width=50, height = 50, segments = 5, points = {}, lines = {}, series = plot:Child(7), cloth = true, pinned = true});
+          local square = RegularPolygon:new({x = 100, y=20, radius=20, segments=4, points={}, lines={}, series=plot:Child(5)})
+          local triangle = RegularPolygon:new({x = 100, y=-20, radius=20, segments=3, points={}, lines={}, series=plot:Child(6)})
+          local ball = VerletObject:new({x=50, y=-10, oldX=45, oldY=-10,pinned=false,series=plot:Child(3),radius=5});
+          local ball2 = VerletObject:new({x=50, y=0, oldX=45, oldY=0,pinned=false,series=plot:Child(4),radius=5});
+          world:addPolygons(cloth);
+          world:setInitialVariables();
+          cases = {"start","stop"};
+          
+          world:drawAllObjects();
+        
+          
+          ]]>
+        </script>
+        <button name="simButton" content="start">
+          <onClick>
+            <![CDATA[
+            if simButton.Text == cases[1] then
+              sim:Start();
+              simButton.Text = cases[2];
+            elseif simButton.Text == cases[2] then
+              sim:Stop();
+              --world:restartWorld();
+              world:drawAllObjects();
+              simButton.Text = cases[1];
+            end
+            ]]>
+          </onClick>
+        </button>
+
+        <slider name="handle" min="-20" max="120" value="0">
+          <onValueChanged>
+            <![CDATA[
+            cloth:movePinnedCoordinates(value,0);
+            ]]>
+          </onValueChanged>
+        </slider>
+        <p name="test"></p>
+        <simulation name="sim" duration="100" period="0.03">
+          <onUpdate>
+            <![CDATA[
+            test.Text = "x: "..ball.x.." y: "..ball.y;
+            world:update();
+            world:drawAllObjects();
+          ]]>
+          </onUpdate>
+        </simulation>
+      </stack>
+    </stack>
+  </sectionNoTitle>
+
+  <sectionNoTitle>
+    <stack>
+      <style>
+        <widthPercentage>0.8</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <style>
+        <counter name="decBullet" format="decimal" />
+      </style>
+      <p style="titleMargin">
+        Verlet Integration Demo
+      </p>
+
+      <stack name="simStack" style="questionAnswer">
+        <style>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <style name="stick">
+          <foreground color="black" />
+          <lineThickness>1</lineThickness>
+        </style>
+        <p style="title">Rigid Body Dynamics</p>
+        <xyPlot name="drawing" pan="disabled" tap="disabled" zoom="disabled">
+          <axis name="YAxis" auto="fixed" dim="y" min="-50" max="50" major="false"></axis>
+          <axis name="XAxis" auto="fixed" dim="x" min="-20" max="120" major="false"></axis>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+          <series draw="radialFill"></series>
+
+        </xyPlot>
+
+        <script>
+          <![CDATA[
+          -- dynamic = set the index of first axis with shapes
+          -- set index of first axis with sticks
+          -- set number of shapes & number of sticks
+          
+          -- add getters and setters
+          -- add physics engine with kinematics (loss of energy restitution factor, gravity, acceleration components)
+          -- wind; cloth simulation
+          
+          -- create a way to make multiple shapes with very little lines of code!
+         
+          plot = simStack:Child(2);
+          plotMinX = plot.XAxis.Min;
+          plotMinY = plot.YAxis.Min;
+          plotMaxX = plot.XAxis.Max;
+          plotMaxY = plot.YAxis.Max;
+          plotWidth = plotMaxX - plotMinX;
+          plotHeight = plotWidth;
+          
+          
+          -- do I need sticks for rigid body dynamics ???
+          local world = World:new({minX=plotMinX,minY=plotMinY,maxX=plotMaxX,maxY=plotMaxY,balls={},objects = {},verlets={},verletSticks = {}, polygons = {}, deltaT=0.03, gravity=-9.8})
+          
+          -- make array
+          -- can you so that you set the velocity? or nah? how would that work?
+          -- how to create multiple boxes in 1 plot and let them bounce off each other??
+          local balls = {};
+          
+          for i=1, 45 do
+            local x=math.random(0,100);
+            local y=math.random(-20,30);
+            balls[i] = VerletObject:new({x=x,y=y,oldX=x+(math.random(-5,5)),oldY=y,pinned=false,series=plot:Child(3+i),radius=math.random(2,7)})
+            world:addVerlets(balls[i]);
+          end
+          
+          world:setInitialVariables();
+          cases = {"start","stop"};
+          
+          world:drawAllObjects();
+        
+          
+          ]]>
+        </script>
+        <button name="simButton" content="start">
+          <onClick>
+            <![CDATA[
+            if simButton.Text == cases[1] then
+              sim:Start();
+              simButton.Text = cases[2];
+            elseif simButton.Text == cases[2] then
+              sim:Stop();
+              --world:restartWorld();
+              world:drawAllObjects();
+              simButton.Text = cases[1];
+            end
+            ]]>
+          </onClick>
+        </button>
+
+        <slider name="handle" min="-20" max="120" value="0">
+          <onValueChanged>
+            <![CDATA[
+            --cloth:movePinnedCoordinates(value,0);
+            ]]>
+          </onValueChanged>
+        </slider>
+        <p name="test"></p>
+        <simulation name="sim" duration="100" period="0.03">
+          <onUpdate>
+            <![CDATA[
+            world:update();
+            world:drawAllObjects();
+          ]]>
+          </onUpdate>
+        </simulation>
+      </stack>
+    </stack>
+  </sectionNoTitle>
+
+  <sectionNoTitle>
+    <stack>
+      <style>
+        <widthPercentage>0.8</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <style>
+        <counter name="decBullet" format="decimal" />
+      </style>
+      <p style="titleMargin">
+        Verlet Integration Demo
+      </p>
+
+      <stack name="simStack" style="questionAnswer">
+        <style>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <style name="stick">
+          <foreground color="black" />
+          <lineThickness>1</lineThickness>
+        </style>
+        <p style="title">Polygon Simulation</p>
+        <xyPlot name="drawing" pan="disabled" tap="disabled" zoom="disabled">
+          <axis name="YAxis" auto="fixed" dim="y" min="-50" max="50" major="false"></axis>
+          <axis name="XAxis" auto="fixed" dim="x" min="-20" max="120" major="false"></axis>
+          <series draw="lineSegments"></series>
+          <series draw="lineSegments"></series>
+          <series draw="lineSegments"></series>
+
+        </xyPlot>
+
+        <script>
+          <![CDATA[
+          -- dynamic = set the index of first axis with shapes
+          -- set index of first axis with sticks
+          -- set number of shapes & number of sticks
+          
+          -- add getters and setters
+          -- add physics engine with kinematics (loss of energy restitution factor, gravity, acceleration components)
+          -- wind; cloth simulation
+          
+          -- create a way to make multiple shapes with very little lines of code!
+         
+          plot = simStack:Child(2);
+          plotMinX = plot.XAxis.Min;
+          plotMinY = plot.YAxis.Min;
+          plotMaxX = plot.XAxis.Max;
+          plotMaxY = plot.YAxis.Max;
+          
+          -- do I need sticks for rigid body dynamics ???
+          local world = World:new({minX=plotMinX,minY=plotMinY,maxX=plotMaxX,maxY=plotMaxY,balls={},objects = {},verlets={},verletSticks = {}, polygons = {}, deltaT=0.03, gravity=-9.8})
+          
+          -- make array
+          -- can you so that you set the velocity? or nah? how would that work?
+          -- how to create multiple boxes in 1 plot and let them bounce off each other??
+          
+          local polygons = {};
+          
+          polygons[1] = RegularPolygon:new({x = 20, y = 20, radius=math.random(10,20), segments=4, points={}, lines={},boundaryLines = {}, series=plot:Child(3),insideLines=false})
+          
+          polygons[2] = RegularPolygon:new({x = 20, y = -20, radius=math.random(10,20), segments=4, points={}, lines={},boundaryLines = {}, series=plot:Child(3),insideLines=false})
+          
+          for i=1, getTableSize(polygons) do
+            world:addPolygons(polygons[i]);
+          end
+
+          world:setInitialVariables();
+          cases = {"start","stop"};
+          
+          world:drawAllObjects();
+          
+          local newObj = copy(polygons[1]);        
+          
+          ]]>
+        </script>
+        <button name="simButton" content="start">
+          <onClick>
+            <![CDATA[
+            if simButton.Text == cases[1] then
+              sim:Start();
+              simButton.Text = cases[2];
+            elseif simButton.Text == cases[2] then
+              sim:Stop();
+              --world:restartWorld();
+              world:drawAllObjects();
+              simButton.Text = cases[1];
+            end
+            ]]>
+          </onClick>
+        </button>
+
+        <slider name="handle" min="-20" max="120" value="0">
+          <onValueChanged>
+            <![CDATA[
+            --cloth:movePinnedCoordinates(value,0);
+            ]]>
+          </onValueChanged>
+        </slider>
+        <p name="test"></p>
+        <p name="test2"></p>
+        <simulation name="sim" duration="100" period="0.03">
+          <onUpdate>
+            <![CDATA[
+            test2.Text = "("..polygons[1].points[1].x..","..polygons[1].points[1].y..")";
+            world:update(test);
+            world:drawAllObjects();
+          ]]>
+          </onUpdate>
+        </simulation>
+      </stack>
+    </stack>
+  </sectionNoTitle>
+
+</document>

@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="GA224F011_5DA5_4BBD_8421_50F463285755">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>LA-ALGE-1.4 Row-echelon form and Gaussian elimination</title>
+    <creator>jason_wang</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/lassondeLogo.png" />
+  </metadata>
+
+
+  <include src="resources/curriculumStylesLassonde.xml" />
+  <include src="resources/Utilities.xml" />
+
+  <!--                                      Header & Footer START                                         -->
+  <header style="themeColour">
+    <stack style="center" orientation="horizontal">
+      <p></p>
+    </stack>
+  </header>
+  <footer style="themeColour">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="themeColourTitle">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--                                      Header & Footer END                                         -->
+
+
+  <!-- Cover Page -->
+  <!-- This is the standard way title pages are created. A great website to get copyright free images .. www.pexels.com
+  *** The style: "pageLayout" is defined in curriculumStylesLassonde.xml. It simply sets the content to the center and adjusts the width to 80% ***-->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">1.4 Row-echelon form and Gaussian elimination</title>
+    <p style="sectionHeading">Introduction</p>
+    <image src="resources/tools.jpeg" />
+    <stack orientation="vertical" style="contentBG">
+      <p style="justifiedText">
+        In this Module, we are going to learn how to solve a linear system by representing it with an augmented matrix and bringing the matrix to reduced row-echelon form.
+      </p>
+    </stack>
+  </section>
+
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Solve A Linear System</p>
+    <stack style="mcStackLayout">
+      <p style="justifiedText">
+        In order to solve a linear system with an augmented matrix, we will need to use the <link url="qdex:/G5F6FAEEB_479C_4D90_9681_7472DC564AF9">three row operations</link> that we learned from last section to transform the matrix into <b>reduced row-echelon form</b>.
+      </p>
+      <p>Consider a linear system and its augmented matrix:</p>
+      <p style="centeredText"><![CDATA[$\begin{matrix}x+y+z=3\\[6pt]x+2y+3z=0\\[6pt]x+3y+4z=-2\end{matrix} \quad \rightarrow \quad \begin{bmatrix}1&1&1&3\\[6pt]1&2&3&0\\[6pt]1&3&4&-2\end{bmatrix}$]]></p>
+      <p>After transformation, the augmented matrix will become:</p>
+      <p style="centeredText"><![CDATA[$\begin{bmatrix}1&0&0&5\\[6pt]0&1&0&-1\\[6pt]0&0&1&-1\end{bmatrix} \quad \rightarrow \quad \begin{matrix}x=5\\[6pt]y=-1\\[6pt]z=-1\end{matrix}$]]></p>
+    </stack>
+  </sectionNoTitle>
+  
+  <!--QUESTION STEP BY STEP LAYOUT-->
+  <!--Setup StepsController with correct number of Steps-->
+  <sectionNoTitle style="pageLayout">
+    <script>
+      local stepsController = StepsController:new({stepsStack=stepsStack, numOfSteps=4})
+    </script>
+    <p style="sectionHeading">Step by Step</p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="subSectionHeading">Question 1</p>
+      <p style="justifiedText">Recall the above linear system, and let's solve it step by step.</p>
+    </stack>
+    <stack name="stepsStack">
+      <!--Each step is a stack, and each step has alternating background colors-->
+      <!--Use Snippet to create any single step stack -->
+
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Get the Augmented Matrix</p>
+          <stack name="cont" style="invisible">
+            <p style="centeredText"><![CDATA[$\begin{bmatrix}1&1&1&3\\[6pt]1&2&3&0\\[6pt]1&3&4&-2\end{bmatrix}$]]></p>
+            <p style="justifiedText">The last column is all the constant terms and first three columns are different variables. We need to make some row operations to transform the matrix so that each column has only one non-zero element and its value equals to 1.</p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(1)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Perform Row Operations (1)</p>
+          <stack name="cont" style="invisible">
+            <p>$R_2 - R_1 \rightarrow R_2$</p>
+            <p>$R_3 - R_1 \rightarrow R_3$</p>
+            <p style="centeredText">
+              <![CDATA[$\begin{bmatrix}1&1&1&3\\[6pt]0&1&2&-3\\[6pt]0&2&3&-5\end{bmatrix}$]]>
+            </p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(2)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Perform Row Operations (2)</p>
+          <stack name="cont" style="invisible">
+            <p>$R_1 - R_2 \rightarrow R_1$</p>
+            <p>$R_3 - 2R_2 \rightarrow R_3$</p>
+            <p>$(-1)R_3 \rightarrow R_3$</p>
+            <p style="centeredText">
+              <![CDATA[$\begin{bmatrix}1&0&-1&6\\[6pt]0&1&2&-3\\[6pt]0&0&1&-1\end{bmatrix}$]]>
+            </p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(3)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Perform Row Operations (3)</p>
+          <stack name="cont" style="invisible">
+            <p>$R_2 - 2R_3 \rightarrow R_2$</p>
+            <p>$R_1 + R_3 \rightarrow R_1$</p>
+            <p style="centeredText">
+              <![CDATA[$\begin{bmatrix}1&0&0&5\\[6pt]0&1&0&-1\\[6pt]0&0&1&-1\end{bmatrix}$]]>
+            </p>
+            <p>Now we have the reduced row-echelon form, and let's transfer the matrix back to equation system.</p>
+            <p style="centeredText"><![CDATA[$\begin{bmatrix}1&0&0&5\\[6pt]0&1&0&-1\\[6pt]0&0&1&-1\end{bmatrix} \quad \rightarrow \quad \begin{matrix}x=5\\[6pt]y=-1\\[6pt]z=-1\end{matrix}$]]></p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(4)
+          </onClick>
+        </button>
+      </stack>
+
+    </stack>
+  </sectionNoTitle>
+
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Examples</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Example 1</p>
+      <table grid="false" widths="10% 90%">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>
+              Solve the linear system with its augmented matrix:
+            </p>
+            <p>
+              <![CDATA[$\begin{matrix}-x-2y=15\\[6pt]-7x-9y=70\end{matrix}$]]>
+            </p>
+          </column>
+        </row>
+      </table>
+      <stack name="answerStack" style="invisible">
+        <p style="subSectionHeading">Answer:</p>
+        <p>Augmented Matrix:</p>
+        <p style="centeredText"><![CDATA[$\begin{bmatrix}-1&-2&15\\[6pt]-7&-9&70\end{bmatrix}$]]></p>
+        <p>Perform following row operations:</p>
+        <p>$(-1)R_1 \rightarrow R_1$</p>
+        <p>$R_2+7R_1 \rightarrow R_2$</p>
+        <p>$\frac{1}{5}R_2 \rightarrow R_2$</p>
+        <p>$R_1-2R_2 \rightarrow R_1$</p>
+        <p style="centeredText"><![CDATA[$\begin{bmatrix}1&2&-15\\[6pt]0&5&-35\end{bmatrix} \rightarrow \begin{bmatrix}1&0&-1\\[6pt]0&1&-7\end{bmatrix} \rightarrow \begin{matrix}x=-1\\[6pt]y=-7\end{matrix}$]]></p>
+      </stack>
+      <button name="btn" content="Show Answer">
+        <onClick>
+          if btn.Text == "Show Answer" then
+          answerStack.Style.Visibility = "visible";
+          btn.Text = "Hide Answer";
+          else
+          answerStack.Style.Visibility = "collapsed";
+          btn.Text = "Show Answer";
+          end
+        </onClick>
+      </button>
+    </stack>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Example 2</p>
+      <table grid="false" widths="10% 90%">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>
+              Solve the linear system with its augmented matrix:
+            </p>
+            <p><![CDATA[$\begin{matrix}x+y+z=0\\[6pt]x-2y+2z=4\\[6pt]x+2y-z=2\end{matrix}$]]></p>
+          </column>
+        </row>
+      </table>
+      <stack name="answerStack" style="invisible">
+        <p style="subSectionHeading">Answer:</p>
+        <p>Augmented Matrix:</p>
+        <p style="centeredText"><![CDATA[$\begin{bmatrix}1&1&1&0\\[6pt]1&-2&2&4\\[6pt]1&2&-1&2\end{bmatrix}$]]></p>
+        <p>Perform following row operations:</p>
+        <p>$R_3-R_1 \rightarrow R_3$</p>
+        <p>$R_2-R_1 \rightarrow R_2$</p>
+        <p>$3R_3+R_2 \rightarrow R_3$</p>
+        <p>$-\frac{1}{5}R_3 \rightarrow R_3$</p>
+        <p>$R_2-R_3 \rightarrow R_2$</p>
+        <p>$-\frac{1}{3}R_2 \rightarrow R_2$</p>
+        <p>$R_1 - R_2 - R_3 \rightarrow R_1$</p>
+        <p style="centeredText"><![CDATA[$\begin{bmatrix}1&1&1&0\\[6pt]0&-3&1&4\\[6pt]0&1&-2&2\end{bmatrix} \rightarrow \begin{bmatrix}1&1&1&0\\[6pt]0&-3&1&4\\[6pt]0&0&-5&10\end{bmatrix}$]]></p>
+        <p style="centeredText"><![CDATA[$\rightarrow \begin{bmatrix}1&1&1&0\\[6pt]0&-3&0&6\\[6pt]0&0&1&-2\end{bmatrix} \rightarrow \begin{bmatrix}1&0&0&4\\[6pt]0&1&0&-2\\[6pt]0&0&1&-2\end{bmatrix} \rightarrow \begin{matrix}x=4\\[6pt]y=-2\\[6pt]z=-2\end{matrix}$]]></p>
+      </stack>
+      <button name="btn" content="Show Answer">
+        <onClick>
+          if btn.Text == "Show Answer" then
+          answerStack.Style.Visibility = "visible";
+          btn.Text = "Hide Answer";
+          else
+          answerStack.Style.Visibility = "collapsed";
+          btn.Text = "Show Answer";
+          end
+        </onClick>
+      </button>
+    </stack>
+  </sectionNoTitle>
+
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Challenge</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Question 1</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>
+              Solve the linear system with its augmented matrix:
+            </p>
+            <p><![CDATA[$\begin{matrix}8x_1+6x_2-5x_3-2x_4&=&18\\[6pt]-6x_1+3x_2-x_3+5x_4&=&-73\\[6pt]x_1+x_3-5x_4&=&26\\[6pt]-6x_1-2x_2-5x_3-5x_4&=&-39\end{matrix}$]]></p>
+          </column>
+        </row>
+      </table>
+      <stack name="inputStack">
+        <textField name="x1" placeholder="Enter x1 here" />
+        <textField name="x2" placeholder="Enter x2 here" />
+        <textField name="x3" placeholder="Enter x3 here" />
+        <textField name="x4" placeholder="Enter x4 here" />
+      </stack>
+      <script>
+        local answers = {"7","-4","4","-3"};
+        local attempts = 0;
+        local maxAttempts = 3;
+      </script>
+      <stack name="hint" style="invisible">
+        <p style="centeredText">Not quite there, try again!</p>
+      </stack>
+      <stack name="solution" style="invisible">
+        <p style="centeredText">Correct!</p>
+      </stack>
+      <stack name="answer" style="invisible">
+        <p style="subSectionHeading">answer</p>
+        <p><![CDATA[$\begin{matrix}x_1&=&7\\[6pt]x_2&=&-4\\[6pt]x_3&=&4\\[6pt]x_4&=&-3\end{matrix}$]]></p>
+      </stack>
+      <button name="checkBtn" content="Check Answer">
+        <onClick>
+          <![CDATA[
+          if checkBtn.Text == "Check Answer" then
+            attempts = attempts + 1;
+            local correct = true;
+            for i=1,4 do
+            if inputStack:Child(i).Text ~= answers[i] then
+             correct = false;
+            end
+            end
+            if correct then
+              hint.Style.Visibility = "collapsed";
+              solution.Style.Visibility = "visible";
+            else
+              hint.Style.Visibility = "visible";
+              solution.Style.Visibility = "collapsed";
+              if attempts >= maxAttempts then
+                checkBtn.Text = "Show Answer";
+              end
+            end
+          else
+            hint.Style.Visibility = "collapsed";
+            solution.Style.Visibility = "collapsed";
+            answer.Style.Visibility = "visible";
+          end
+          ]]>
+        </onClick>
+      </button>
+    </stack>
+  </sectionNoTitle>
+
+
+</document>

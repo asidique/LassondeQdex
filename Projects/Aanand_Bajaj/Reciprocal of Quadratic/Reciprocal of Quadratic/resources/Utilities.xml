@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<fragment xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd">
+  <script>
+    <![CDATA[
+    
+    ---------------------------
+    -- Start Color Constants --
+    ---------------------------
+    
+    gray1 = color.rgb(225, 225, 225)
+    gray2 = color.rgb(200, 200, 200)
+    themeColor = color.rgb(50,133,184)
+    
+    ---------------------------
+    -- End Color Constants --
+    ---------------------------
+    
+    
+    -----------------------
+    -- Start TabsManager --
+    -----------------------
+    
+    ------------------------------------------------------
+    -- TabsManager is a Class for Tabular Page Layout.
+    -- Follow exactly as TabPageSection Snippet in your xml
+    -- init TabsManager requires:
+    -- tabs stack
+    -- contents stack
+    -- initial selected tab index (default=1)
+    -- total number of tabs
+    -- call initStyle() right after creating TabsManager
+    ------------------------------------------------------
+    
+    TabsManager = {tStack,cStack,selectedTabIndex=1,numOfTabs}
+    function TabsManager:new(o)
+      o = o or {}
+      if o.tStack == nil or o.cStack == nil then error("Tabs Stack and Contents Stack must be provided!") end
+      setmetatable(o, self)
+      self.__index = self
+      return o
+    end
+    
+    function TabsManager:getCurrentTab()
+      return self.tStack:Child(self.selectedTabIndex)
+    end
+    
+    function TabsManager:getCurrentContent()
+      return self.cStack:Child(self.selectedTabIndex)
+    end
+    
+    function TabsManager:initStyle()
+      for i=1, self.numOfTabs do
+        if self.selectedTabIndex == i then
+          self:selectTab(i)
+        else
+          self:unselectTab(i)
+        end
+      end
+    end
+    
+    function TabsManager:changeTab(n)
+      if self.selectedTabIndex == n then return end
+      self:unselectTab(self.selectedTabIndex)
+      self:selectTab(n)
+    end
+    
+    function TabsManager:selectTab(n)
+      self.selectedTabIndex = n
+      local t = self:getCurrentTab()
+      t.Style.BackgroundColor = gray1
+      t:Child(1).Style.BackgroundColor = gray1
+      self:getCurrentContent().Style.Visibility = "visible"
+    end
+    
+    function TabsManager:unselectTab(n)
+      local t = self.tStack:Child(n)
+      t.Style.BackgroundColor = gray2
+      t:Child(1).Style.BackgroundColor = gray2
+      self.cStack:Child(n).Style.Visibility = "collapsed"
+    end
+      
+    ---------------------
+    -- End TabsManager --
+    ---------------------
+    
+    
+    -----------------------------------
+    -- Start Step by Step Controller --
+    -----------------------------------
+    
+    StepsController = {stepsStack,numOfSteps}
+    function StepsController:new(o)
+      o = o or {}
+      if o.stepsStack == nil or o.numOfSteps == nil or o.numOfSteps < 1 then
+        error("stepsStack and numOfSteps must be provided, and numOfSteps must be greater than 0!")
+      end
+      
+      -- initial setup
+      for i=1,o.numOfSteps do
+        local c = o.stepsStack:Child(i)
+        if i % 2 == 1 then
+          c.Style.BackgroundColor = gray2
+        else
+          c.Style.BackgroundColor = gray1
+        end
+        c.btn.Text = string.format("Show Step %d", i)
+      end
+      
+      setmetatable(o, self)
+      self.__index = self
+      return o
+    end
+    
+    function StepsController:toggleStep(n)
+      local c = self.stepsStack:Child(n)
+      if c.stepStack.cont.Style.Visibility == "Collapsed" then
+        c.stepStack.cont.Style.Visibility = "visible"
+        c.stepStack:Child(1).Style.Bold = 1
+        c.btn.Text = string.format("Hide Step %d", n)
+      else
+        c.stepStack.cont.Style.Visibility = "collapsed"
+        c.stepStack:Child(1).Style.Bold = 0
+        c.btn.Text = string.format("Show Step %d", n)
+      end
+    end
+    
+    ---------------------------------
+    -- End Step by Step Controller --
+    ---------------------------------
+    
+    -------------------------------------
+    -- Start Multi Question Controller --
+    -------------------------------------
+    
+    MQController = {mqStack,numOfSteps}
+    function MQController:new(o)
+      o = o or {}
+      if o.mqStack == nil or o.numOfSteps == nil or o.numOfSteps < 1 then
+        error("mqStack and numOfSteps must be provided, and numOfSteps must be greater than 0!")
+      end
+      
+      -- initial setup
+      for i=1,o.numOfSteps do
+        local c = o.mqStack:Child(i)
+        if i % 2 == 1 then
+          c.Style.BackgroundColor = gray2
+        else
+          c.Style.BackgroundColor = gray1
+        end
+      end
+      
+      setmetatable(o, self)
+      self.__index = self
+      return o
+    end
+    
+    function MQController:toggleStep(n, textShown, textHidden)
+      local c = self.mqStack:Child(n)
+      local t1 = textShown or string.format("Show Part %d", n)
+      local t2 = textHidden or string.format("Hide Part %d", n)
+      if c.content.Style.Visibility == "Collapsed" then
+        c.content.Style.Visibility = "visible"
+        c.header.title.Style.Bold = 1
+        c.header.btn.Text = t2
+      else
+        c.content.Style.Visibility = "collapsed"
+        c.header.title.Style.Bold = 0
+        c.header.btn.Text = t1
+      end
+    end
+    
+    -----------------------------------
+    -- End Multi Question Controller --
+    -----------------------------------
+    
+    ------------------------
+    -- Start MCController --
+    ------------------------
+    
+    MCController = {choiceBtns, checkBtn, answer}
+    function MCController:new(o)
+      o = o or {}
+      if o.choiceBtns == nil or o.checkBtn == nil or o.answer == nil then
+        error("choiceBtns, checkBtns, and answer must be provided for MCController!")
+      end
+      
+      setmetatable(o, self)
+      self.__index = self
+      return o
+    end
+    
+    function MCController:select(n)
+      if n == self.selectedIndex then return end
+      local btn = self.choiceBtns[n]
+      btn.Style.BackgroundColor = themeColor
+      btn.Style.ForegroundColor = color.white
+      if self.selectedIndex ~= nil then
+        local selectedBtn = self.choiceBtns[self.selectedIndex]
+        selectedBtn.Style.BackgroundColor = color.transparent
+        selectedBtn.Style.ForegroundColor = color.black
+      end
+      self.selectedIndex = n
+    end
+    
+    function MCController:checkAnswer()
+      if self.selectedIndex ~= self.answer then
+        self.checkBtn.Text = "Try Again!"
+        self.checkBtn.Style.BackgroundColor = themeColor;
+      else
+        self.checkBtn.Text = "Correct!"
+        self.checkBtn.Style.BackgroundColor = color.green
+        self.choiceBtns[self.selectedIndex].Style.BackgroundColor = color.green
+        self.choiceBtns[self.selectedIndex].Style.ForegroundColor = color.white
+      end
+    end
+    
+    ----------------------
+    -- End MCController --
+    ----------------------
+    
+    
+    
+    
+    ]]>
+  </script>
+</fragment>

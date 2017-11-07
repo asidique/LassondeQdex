@@ -1,0 +1,599 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="GB0E2A141_2859_47A4_B80F_DF9C07A5A3BE">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>LA-ALGE-1.10 Matrix Transformations</title>
+    <creator>jason_wang</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/lassondeLogo.png" />
+  </metadata>
+
+  <include src="resources/curriculumStylesLassonde.xml" />
+  <include src="resources/Utilities.xml" />
+  <include src="resources/plotTools.xml" />
+
+  <!--                                      Header & Footer START                                         -->
+  <header style="themeColour">
+    <stack style="center" orientation="horizontal">
+      <p></p>
+    </stack>
+  </header>
+  <footer style="themeColour">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="themeColourTitle">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--                                      Header & Footer END                                         -->
+
+
+
+
+  <!-- Cover Page -->
+  <!-- This is the standard way title pages are created. A great website to get copyright free images .. www.pexels.com
+  *** The style: "pageLayout" is defined in curriculumStylesLassonde.xml. It simply sets the content to the center and adjusts the width to 80% ***-->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">1.10 Matrix Transformations</title>
+    <p style="sectionHeading">Introduction</p>
+    <image src="resources/transformation.png" />
+    <stack orientation="vertical" style="contentBG">
+      <p style="justifiedText">
+        In this Module, we are going to introduce matrix transformations, and learn how matrices can be used as transformations of vectors or transformations of the plane.
+      </p>
+    </stack>
+  </section>
+
+
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Matrix Transformation Playground</p>
+    <stack style="mcStackLayout">
+      <p>The coordinates of a square vertexes are written as matrix A.</p>
+      <p style="centeredText">
+        <![CDATA[$A=\begin{bmatrix}0&0&2&2\\0&2&2&0\end{bmatrix}$]]>
+      </p>
+      <p style="justified">Play with the transformation matrices and see the change of the square</p>
+
+      <stack orientation="horizontal">
+        <stack orientation="vertical" name="stack1">
+          <style>
+            <widthPercentage>0.5</widthPercentage>
+          </style>
+          <xyPlot name="plot" pan="disabled" tap="disabled" zoom="disabled">
+            <style>
+              <widthPercentage>0.9</widthPercentage>
+              <textAlignment>center</textAlignment>
+              <horizontalAlignment>center</horizontalAlignment>
+            </style>
+            <axis dim="x" min="-4.5" max="5" auto="fixed" />
+            <axis dim="y" min="-4.5" max="5" auto="lockAspectRatio" />
+            <series name="origin" draw="lineSegments">
+              <data>0 0; 0.4 0; 0.6 0; 1 0; 1.2 0; 1.6 0; 1.8 0; 2 0; 2 0; 2 0.2; 2 0.4; 2 0.8; 2 1; 2 1.4; 2 1.6; 2 2; 2 2; 1.6 2; 1.4 2; 1 2; 0.8 2; 0.4 2; 0.2 2; 0 2; 0 2; 0 1.8; 0 1.6; 0 1.2; 0 1; 0 0.6; 0 0.4; 0 0;</data>
+            </series>
+            <series name="s4" draw="closedLine">
+              <data>0 0; 0 2; 2 2; 2 0; 0 0</data>
+              <colors>red; blue; blue; red; red</colors>
+            </series>
+          </xyPlot>
+        </stack>
+        <table grid="false" widths="50% 50%">
+          <style>
+            <widthPercentage>0.5</widthPercentage>
+          </style>
+          <row>
+            <column>
+              <p style="centeredText"><![CDATA[$\begin{bmatrix}2&0\\[5pt]0&2\end{bmatrix}$]]></p>
+            </column>
+            <column>
+              <p style="centeredText"><![CDATA[$\begin{bmatrix}\frac{\sqrt{2}}{2}&\frac{\sqrt{2}}{2}\\[5pt]-\frac{\sqrt{2}}{2}&\frac{\sqrt{2}}{2}\end{bmatrix}$]]></p>
+            </column>
+          </row>
+          <row>
+            <column>
+              <button name="btn" content="Transform 1" style="btnUnselected">
+                <onClick>
+                  _toggleBtn(btn,1)
+                  stack1.plot.s4.Transform = matrixf.scaling(2,2,1);
+                </onClick>
+              </button>
+            </column>
+            <column>
+              <button name="btn" content="Transform 2" style="btnUnselected">
+                <onClick>
+                  _toggleBtn(btn,2)
+                  stack1.plot.s4.Transform = matrixf.rotationAboutAxis(0,0,1,0.785)
+                </onClick>
+              </button>
+            </column>
+          </row>
+          <row>
+            <column>
+              <p style="centeredText"><![CDATA[$\begin{bmatrix}-1&0\\[5pt]0&1\end{bmatrix}$]]></p>
+            </column>
+            <column>
+              <p style="centeredText"><![CDATA[$\begin{bmatrix}1&0\\[5pt]0&-1\end{bmatrix}$]]></p>
+            </column>
+          </row>
+          <row>
+            <column>
+              <button name="btn" content="Transform 3" style="btnUnselected">
+                <onClick>
+                  _toggleBtn(btn,3)
+                  stack1.plot.s4.Transform = matrixf.reflection(1,0,0);
+                </onClick>
+              </button>
+            </column>
+            <column>
+              <button name="btn" content="Transform 4" style="btnUnselected">
+                <onClick>
+                  _toggleBtn(btn,4)
+                  stack1.plot.s4.Transform = matrixf.reflection(0,1,0);
+                </onClick>
+              </button>
+            </column>
+          </row>
+        </table>
+        <script>
+          <![CDATA[
+          -- Fill table data into a given table node. Table node structure must be row->col->p
+          function fillMatrixTable(tableName, m)
+            for i=1,#m do
+              for j=1, #m[1] do
+                tableName:Child(i):Child(j):Child(1).Text = string.format("%d", m[i][j])
+              end
+            end
+          end
+
+          -- Clear table data for a given table node. Table node structure must be row->col->p.
+          -- @param r number of rows
+          -- @param c number of cols
+          function clearMatrixTable(tableName, r, c)
+            for i=1,r do
+              for j=1,c do
+                tableName:Child(i):Child(j):Child(1).Text = ""
+              end
+            end
+          end
+
+
+          --////////////
+          --// matrix //
+          --////////////
+
+          Matrix = {};
+
+          --// Matrix.mul ( m1, m2 )
+          -- Multiply two matrices; m1 columns must be equal to m2 rows
+          -- e.g. #m1[1] == #m2
+          function Matrix.mul( m1, m2 )
+            -- multiply rows with columns
+            local mtx = {}
+            for i = 1,#m1 do
+              mtx[i] = {}
+              for j = 1,#m2[1] do
+                local num = m1[i][1] * m2[1][j]
+                for n = 2,#m1[1] do
+                  num = num + m1[i][n] * m2[n][j]
+                end
+                mtx[i][j] = num
+              end
+            end
+            return mtx
+          end
+          local a = {{0,0,2,2},{0,2,2,0}}
+          local t1 = {{2,0},{0,2}}
+          local v = math.sqrt(2)/2
+          local t2 = {{v,v},{-v,v}}
+          local t3 = {{-1,0},{0,1}}
+          local t4 = {{1,0},{0,-1}}
+          local T = {t1,t2,t3,t4}
+          local result
+          local selectedBtn
+          function _toggleBtn(btn,i)
+            if selectedBtn ~= nil then unselectBtn(selectedBtn); end
+            selectedBtn = btn
+            selectBtn(selectedBtn)
+
+            result = Matrix.mul(T[i],a)
+            fillMatrixTable(mStack.table, result)
+          end
+          
+          ]]>
+        </script>
+      </stack>
+      <stack name="mStack" orientation="horizontal">
+        <p>
+          <style>
+            <widthPercentage>0.1</widthPercentage>
+          </style>
+        </p>
+        <p>
+          <style>
+            <widthPercentage>0.2</widthPercentage>
+            <textAlignment>right</textAlignment>
+            <horizontalAlignment>right</horizontalAlignment>
+            <marginTop>40</marginTop>
+            <size scale="1.5" />
+          </style>
+          $T \cdot A =$
+        </p>
+        <p>
+          <style>
+            <widthPercentage>0.1</widthPercentage>
+            <textAlignment>right</textAlignment>
+            <horizontalAlignment>right</horizontalAlignment>
+            <size scale="1.6" />
+          </style>
+          $\bigg[$
+        </p>
+        <table name="table" grid="false" widths="25% 25% 25% 25%">
+          <style>
+            <widthPercentage>0.4</widthPercentage>
+            <textAlignment>left</textAlignment>
+            <horizontalAlignment>left</horizontalAlignment>
+          </style>
+          <row>
+            <column>
+              <p style="centeredText"></p>
+            </column>
+            <column>
+              <p style="centeredText"></p>
+            </column>
+            <column>
+              <p style="centeredText"></p>
+            </column>
+            <column>
+              <p style="centeredText"></p>
+            </column>
+          </row>
+          <row>
+            <column>
+              <p style="centeredText"></p>
+            </column>
+            <column>
+              <p style="centeredText"></p>
+            </column>
+            <column>
+              <p style="centeredText"></p>
+            </column>
+            <column>
+              <p style="centeredText"></p>
+            </column>
+          </row>
+        </table>
+        <p>
+          <style>
+            <widthPercentage>0.1</widthPercentage>
+            <textAlignment>left</textAlignment>
+            <horizontalAlignment>left</horizontalAlignment>
+            <size scale="1.6" />
+          </style>
+          $\bigg]$
+        </p>
+        <p>
+          <style>
+            <widthPercentage>0.1</widthPercentage>
+          </style>
+        </p>
+      </stack>
+    </stack>
+  </sectionNoTitle>
+
+
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Multiplication as A Transformation</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Definition</p>
+      <p style="justifiedText">
+        A <b>transformation matrix</b> is a special matrix that can describe 2d and 3d transformations. Transformations are frequently used in linear algebra and computer graphics, since transformations can be easily represented, combined and computed.
+      </p>
+      <p style="justifiedText"><![CDATA[A 2-dimensional linear transformation is a special kind of function that transforms a 2-dimensional vector $\begin{bmatrix}x&y\end{bmatrix}$ into another 2-dimensional vector.]]></p>
+      <p style="justifiedText">We will follow two rules to keep the transformation linear:</p>
+      <p>1.  The origin must remain fixed.</p>
+      <p>2.  All lines must remain linear lines.</p>
+    </stack>
+    
+    <p style="sectionHeading">Examples</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Example 1</p>
+      <p>Watch the video below</p>
+      <web url="https://www.youtube.com/embed/XUw95PFP1RE" />
+      <p><![CDATA[From the video, we saw that the green vector from $\begin{bmatrix}1\\0\end{bmatrix}$ to $\begin{bmatrix}1\\-2\end{bmatrix}$ and the red vector from $\begin{bmatrix}0\\1\end{bmatrix}$ to $\begin{bmatrix}3\\0\end{bmatrix}$.]]></p>
+      <p>The green and red vectors are actually the unit vectors for x-coordinate and y-coordinate, and after the transformation, the xy-coordinates are reformed.</p>
+      <p>Base on these two pairs of vectors, we can now deduce where all the points on the plane locate.</p>
+      <p><![CDATA[Since for each vector $\begin{bmatrix}x\\y\end{bmatrix}$, we can break down to $x\begin{bmatrix}1\\0\end{bmatrix}+y\begin{bmatrix}0\\1\end{bmatrix}$, and if green vector $\begin{bmatrix}1\\0\end{bmatrix}$ becomes $\begin{bmatrix}a\\c\end{bmatrix}$ and red vector $\begin{bmatrix}0\\1\end{bmatrix}$ becomes $\begin{bmatrix}b\\d\end{bmatrix}$, then the vector $\begin{bmatrix}x\\y\end{bmatrix}$ must become:]]></p>
+      <p style="centeredText"><![CDATA[$v'=x\begin{bmatrix}a\\c\end{bmatrix}+y\begin{bmatrix}b\\d\end{bmatrix}=\begin{bmatrix}ax+by\\cx+dy\end{bmatrix}$]]></p>
+      <p style="centeredText">OR</p>
+      <p style="centeredText"><![CDATA[$v'=Av=\begin{bmatrix}a&b\\c&d\end{bmatrix}\begin{bmatrix}x\\y\end{bmatrix}$]]></p>
+      <p><![CDATA[For example, watch the video once again and focus on point $\begin{bmatrix}-1\\2\end{bmatrix}$.]]></p>
+      <p>Use above method, we can get:</p>
+      <p style="centeredText"><![CDATA[$-1 \cdot \begin{bmatrix}1\\-2\end{bmatrix} + 2 \cdot \begin{bmatrix}3\\0\end{bmatrix}=\begin{bmatrix}5\\2\end{bmatrix}$]]></p>
+      <p style="centeredText">OR</p>
+      <p style="centeredText"><![CDATA[$A \cdot v = \begin{bmatrix}1&3\\-2&0\end{bmatrix}\cdot \begin{bmatrix}-1\\2\end{bmatrix}=\begin{bmatrix}5\\2\end{bmatrix}$]]></p>
+    </stack>
+
+  </sectionNoTitle>
+
+
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Practices</p>
+
+    <stack style="mcStackLayout">
+      <script>
+        local answer = 2
+        local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=answer})
+      </script>
+      <p style="subSectionHeading">Question 1</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources/question.png" inspect="false" />
+          </column>
+          <column>
+            <p>If the transformation matrix is</p>
+            <p><![CDATA[$T=\begin{bmatrix}2&0\\0&2\end{bmatrix}$]]></p>
+            <p>Which following graph can represent this tranformation when applied to the gray quadrilateral?</p>
+          </column>
+        </row>
+      </table>
+      <table name="choicesTable" grid="false" widths="50% 50%">
+        <row>
+          <column>
+            <xyPlot name="plot" style="mcLayout" pan="disabled" tap="disabled" zoom="disabled">
+              <axis dim="x" min="-4.5" max="5" auto="fixed" />
+              <axis dim="y" min="-4.5" max="5" auto="lockAspectRatio" />
+              <series name="origin" draw="closedLine" style="grayF">
+                <data>-2 2; 2 2; 2 -2; -2 -2; -2 2</data>
+              </series>
+              <series name="s1" draw="closedLine">
+                <data>-1 1; 1 1; 1 -1; -1 -1; -1 1</data>
+                <colors>red; blue; blue; red; red</colors>
+              </series>
+            </xyPlot>
+          </column>
+          <column>
+            <xyPlot name="plot" style="mcLayout" pan="disabled" tap="disabled" zoom="disabled">
+              <axis dim="x" min="-4.5" max="5" auto="fixed" />
+              <axis dim="y" min="-4.5" max="5" auto="lockAspectRatio" />
+              <series name="origin" draw="closedLine" style="grayF">
+                <data>-1 1; 1 1; 1 -1; -1 -1; -1 1</data>
+              </series>
+              <series name="s1" draw="closedLine">
+                <data>-2 2; 2 2; 2 -2; -2 -2; -2 2</data>
+                <colors>red; blue; blue; red; red</colors>
+              </series>
+            </xyPlot>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="A" style="btnUnselected">
+              <onClick>
+                mcController:select(1)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="B" style="btnUnselected">
+              <onClick>
+                mcController:select(2)
+              </onClick>
+            </button>
+          </column>
+        </row>
+        <row>
+          <column>
+            <xyPlot name="plot" style="mcLayout" pan="disabled" tap="disabled" zoom="disabled">
+              <axis dim="x" min="-4.5" max="5" auto="fixed" />
+              <axis dim="y" min="-4.5" max="5" auto="lockAspectRatio" />
+              <series name="origin" draw="closedLine" style="grayF">
+                <data>1 1; 3 1; 3 3; 1 3; 1 1</data>
+              </series>
+              <series name="s1" draw="closedLine">
+                <data>-3 1; -1 1; -1 3; -3 3; -3 1</data>
+                <colors>red; blue; blue; red; red</colors>
+              </series>
+            </xyPlot>
+          </column>
+          <column>
+            <xyPlot name="plot" style="mcLayout" pan="disabled" tap="disabled" zoom="disabled">
+              <axis dim="x" min="-4.5" max="5" auto="fixed" />
+              <axis dim="y" min="-4.5" max="5" auto="lockAspectRatio" />
+              <series name="origin" draw="closedLine" style="grayF">
+                <data>-2 2; 2 2; 2 -2; -2 -2; -2 2</data>
+              </series>
+              <series name="s1" draw="closedLine">
+                <data>-2 2; 2 2; 2 -2; -2 -2; -2 2</data>
+                <colors>red; blue; blue; red; red</colors>
+                <transform>
+                  0.7071067811865476 -0.7071067811865475 0 0;
+                  0.7071067811865476  0.7071067811865475 0 0;
+                  0                   0                  1 0;
+                  0                   0                  0 1
+                </transform>
+              </series>
+            </xyPlot>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="C" style="btnUnselected">
+              <onClick>
+                mcController:select(3)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="D" style="btnUnselected">
+              <onClick>
+                mcController:select(4)
+              </onClick>
+            </button>
+          </column>
+        </row>
+      </table>
+      <button name="checkBtn" content="Check Answer">
+        <onClick>
+          mcController:checkAnswer()
+        </onClick>
+      </button>
+    </stack>
+
+  </sectionNoTitle>
+
+
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Practices</p>
+
+    <stack style="mcStackLayout">
+      <script>
+        local answer = 4
+        local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=answer})
+      </script>
+      <p style="subSectionHeading">Question 2</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources/question.png" inspect="false" />
+          </column>
+          <column>
+            <p>If the transformation matrix is</p>
+            <p><![CDATA[$T=\begin{bmatrix}1&1\\1&0\end{bmatrix}$]]></p>
+            <p style="justifiedText">Which following graph can represent this tranformation when applied to the gray quadrilateral?</p>
+          </column>
+        </row>
+      </table>
+      <table name="choicesTable" grid="false" widths="50% 50%">
+        <row>
+          <column>
+            <xyPlot name="plot" style="mcLayout" pan="disabled" tap="disabled" zoom="disabled">
+              <axis dim="x" min="-4" max="6" auto="fixed" />
+              <axis dim="y" min="-4" max="6" auto="lockAspectRatio" />
+              <series name="origin" draw="closedLine" style="grayF">
+                <data>0 0; 2 0; 2 2; 0 2; 0 0</data>
+              </series>
+              <series name="s1" draw="closedLine">
+                <data>0 0; 2 0; 2 2; 0 2; 0 0</data>
+                <colors>red; blue; blue; red; red</colors>
+                <transform>
+                  0.7071067811865476 -0.7071067811865475 0 0;
+                  0.7071067811865476  0.7071067811865475 0 0;
+                  0                   0                  1 0;
+                  0                   0                  0 1
+                </transform>
+              </series>
+            </xyPlot>
+          </column>
+          <column>
+            <xyPlot name="plot" style="mcLayout" pan="disabled" tap="disabled" zoom="disabled">
+              <axis dim="x" min="-4" max="6" auto="fixed" />
+              <axis dim="y" min="-4" max="6" auto="lockAspectRatio" />
+              <series name="origin" draw="closedLine" style="grayF">
+                <data>0 0; 2 0; 2 2; 0 2; 0 0</data>
+              </series>
+              <series name="s1" draw="closedLine">
+                <data>0 0; 2 0; 2 2; 0 2; 0 0</data>
+                <colors>red; blue; blue; red; red</colors>
+                <transform>
+                  1 0 0 0;
+                  1 1 0 0;
+                  0 0 1 0;
+                  0 0 0 1
+                </transform>
+              </series>
+            </xyPlot>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="A" style="btnUnselected">
+              <onClick>
+                mcController:select(1)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="B" style="btnUnselected">
+              <onClick>
+                mcController:select(2)
+              </onClick>
+            </button>
+          </column>
+        </row>
+        <row>
+          <column>
+            <xyPlot name="plot" style="mcLayout" pan="disabled" tap="disabled" zoom="disabled">
+              <axis dim="x" min="-4" max="6" auto="fixed" />
+              <axis dim="y" min="-4" max="6" auto="lockAspectRatio" />
+              <series name="origin" draw="closedLine" style="grayF">
+                <data>0 0; 2 0; 2 2; 0 2; 0 0</data>
+              </series>
+              <series name="s1" draw="closedLine">
+                <data>0 0; 2 0; 2 2; 0 2; 0 0</data>
+                <colors>red; blue; blue; red; red</colors>
+                <transform>
+                  -1  0  0  0;
+                  0 -1  0  0;
+                  0  0  1  0;
+                  0  0  0  1
+                </transform>
+              </series>
+            </xyPlot>
+          </column>
+          <column>
+            <xyPlot name="plot" style="mcLayout" pan="disabled" tap="disabled" zoom="disabled">
+              <axis dim="x" min="-4" max="6" auto="fixed" />
+              <axis dim="y" min="-4" max="6" auto="lockAspectRatio" />
+              <series name="origin" draw="closedLine" style="grayF">
+                <data>0 0; 2 0; 2 2; 0 2; 0 0</data>
+              </series>
+              <series name="s1" draw="closedLine">
+                <data>0 0; 2 0; 2 2; 0 2; 0 0</data>
+                <colors>red; blue; blue; red; red</colors>
+                <transform>
+                  1 1 0 0;
+                  1 0 0 0;
+                  0 0 1 0;
+                  0 0 0 1
+                </transform>
+              </series>
+            </xyPlot>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="C" style="btnUnselected">
+              <onClick>
+                mcController:select(3)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="D" style="btnUnselected">
+              <onClick>
+                mcController:select(4)
+              </onClick>
+            </button>
+          </column>
+        </row>
+      </table>
+      <button name="checkBtn" content="Check Answer">
+        <onClick>
+          mcController:checkAnswer()
+        </onClick>
+      </button>
+    </stack>
+
+  </sectionNoTitle>
+
+
+
+</document>

@@ -1,0 +1,959 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="GA243B8B6_BFFB_44EF_BD13_671028E213F8">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>LA-PHYS-1.6 Forces and Free Body Diagrams (FBD)</title>
+    <creator>jason_wang</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/lassondeLogo.png" />
+  </metadata>
+
+
+  <include src="resources/curriculumStylesLassonde.xml" />
+  <include src="resources/Utilities.xml" />
+  <include src="resources/plotTools.xml" />
+  <include src="resources/simTools.xml" />
+
+  <!--                                      Header & Footer START                                         -->
+  <header style="themeColour">
+    <stack style="center" orientation="horizontal">
+      <p></p>
+    </stack>
+  </header>
+  <footer style="themeColour">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="themeColourTitle">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--                                      Header & Footer END                                         -->
+
+
+
+  <!-- Cover Page -->
+  <!-- This is the standard way title pages are created. A great website to get copyright free images .. www.pexels.com
+  *** The style: "pageLayout" is defined in curriculumStylesLassonde.xml. It simply sets the content to the center and adjusts the width to 80% ***-->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">1.6 Forces and Free Body Diagrams (FBD)</title>
+    <p style="sectionHeading">Introduction</p>
+    <image src="resources/fbd.jpeg" />
+    <stack orientation="vertical" style="contentBG">
+      <p style="justifiedText">
+        One of the most useful aids for solving a statics problem is the free body diagram (FBD). A free body diagram is a graphic, dematerialized, symbolic representation of the body (structure, element or segment of an element) in which all connecting "pieces" have been removed. In this module, we are going to learn how to analyse forces and draw FBDs.
+      </p>
+    </stack>
+  </section>
+
+  <!--Simulation-->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Simulation</p>
+    <stack style="mcStackLayout">
+      <p style="justifiedText">Play with the following simulator, and see the change of the free body diagram.</p>
+      <p style="notes">
+        <b>*</b> Assume Static friction and Kinetic friction are the same.
+      </p>
+      <stack name="simWrapper">
+        <style>
+          <marginLeft>8</marginLeft>
+          <marginRight>8</marginRight>
+          <background color="white" />
+        </style>
+        <stack name="simStack" orientation="horizontal">
+          <drawing name="drawing">
+            <title>Object Simulation</title>
+            <style>
+              <widthPercentage>0.5</widthPercentage>
+              <horizontalAlignment>center</horizontalAlignment>
+            </style>
+            <axis dim="x" min="0" max="20" auto="fixed" />
+            <axis dim="y" min="0" max="16" auto="fixed" />
+            <series name="s1" draw="radialFill" capacity="6" />
+            <series name="s2" draw="segmentedFill" capacity="3" />
+          </drawing>
+          <drawing name="fbd">
+            <title>Free Body Diagram</title>
+            <style>
+              <widthPercentage>0.5</widthPercentage>
+              <horizontalAlignment>center</horizontalAlignment>
+            </style>
+            <axis dim="x" min="-10" max="10" auto="fixed" />
+            <axis dim="y" min="-8" max="8" auto="fixed" />
+            <series name="nForce" draw="lineSegments" capacity="6" />
+            <series name="gForce" draw="lineSegments" capacity="6" />
+            <series name="gForceComponents" draw="lineSegments" capacity="48" />
+            <series name="fForce" draw="lineSegments" capacity="6" />
+            <series name="body" draw="segmentedFill" />
+          </drawing>
+        </stack>
+        <table grid="false" widths="10% 10% 10% 10% 10% 10% 10% 10% 10% 10%">
+          <row>
+            <column>
+              <p>
+                <style>
+                  <background color="blue" />
+                </style>
+              </p>
+            </column>
+            <column>
+              <p>
+                F<sub>g</sub>
+              </p>
+            </column>
+            <column>
+              <p>
+                <style>
+                  <background color="green" />
+                </style>
+              </p>
+            </column>
+            <column>
+              <p>
+                F<sub>N</sub>
+              </p>
+            </column>
+            <column>
+              <p>
+                <style>
+                  <background color="orange" />
+                </style>
+              </p>
+            </column>
+            <column>
+              <p>
+                F<sub>g,y</sub>
+              </p>
+            </column>
+            <column>
+              <p>
+                <style>
+                  <background color="purple" />
+                </style>
+              </p>
+            </column>
+            <column>
+              <p>
+                F<sub>g,x</sub>
+              </p>
+            </column>
+            <column>
+              <p>
+                <style>
+                  <background color="gray" />
+                </style>
+              </p>
+            </column>
+            <column>
+              <p>
+                F<sub>f</sub>
+              </p>
+            </column>
+          </row>
+        </table>
+      </stack>
+      <p style="notes">
+        <![CDATA[
+Note: Force Labels shall be written in the diagram in a real FBD. $F_{g,x}$ and $F_{g,y}$ are the components of $F_g$. They are shown only for comparison purpose with friction and normal force. 
+		]]>
+      </p>
+      <stack name="slider_labels" orientation="horizontal">
+        <p name="angle">
+          <style>
+            <widthPercentage>0.33</widthPercentage>
+            <horizontalAlignment>center</horizontalAlignment>
+            <textAlignment>center</textAlignment>
+          </style>
+          Angle 0°
+        </p>
+        <p name="mass">
+          <style>
+            <widthPercentage>0.33</widthPercentage>
+            <horizontalAlignment>center</horizontalAlignment>
+            <textAlignment>center</textAlignment>
+          </style>
+          Mass 4kg
+        </p>
+        <p name="friction">
+          <style>
+            <widthPercentage>0.33</widthPercentage>
+            <horizontalAlignment>center</horizontalAlignment>
+            <textAlignment>center</textAlignment>
+          </style>
+          Friction Coefficient 0
+        </p>
+      </stack>
+      <stack name="sliders" orientation="horizontal">
+        <slider name="angle_slider" min="0" max="50" value="0">
+          <style>
+            <widthPercentage>0.33</widthPercentage>
+            <horizontalAlignment>center</horizontalAlignment>
+          </style>
+          <onValueChanged>
+            local temp = round(angle_slider.Value, 1);
+            if angleInDegree ~= temp then
+            angleInDegree = temp;
+            angle = math.rad(angleInDegree);
+            slider_labels.angle.Text = string.format("Angle %d°",angleInDegree);
+            updateForces();
+            updateDrawing();
+            end
+          </onValueChanged>
+        </slider>
+        <slider name="mass_slider" min="4" max="7" value="4">
+          <style>
+            <widthPercentage>0.33</widthPercentage>
+            <horizontalAlignment>center</horizontalAlignment>
+          </style>
+          <onValueChanged>
+            local temp = round(mass_slider.Value, 0.5);
+            if mass ~= temp then
+            mass = temp;
+            slider_labels.mass.Text = string.format("Mass %.1fkg",mass);
+            updateForces();
+            updateDrawing();
+            end
+          </onValueChanged>
+        </slider>
+        <slider name="friction_slider" min="0" max="1.0" value="0">
+          <style>
+            <widthPercentage>0.33</widthPercentage>
+            <horizontalAlignment>center</horizontalAlignment>
+          </style>
+          <onValueChanged>
+            local temp = round(friction_slider.Value, 0.1);
+            if friction ~= temp then
+            friction = temp;
+            slider_labels.friction.Text = string.format("Friction Coefficient %.1f", friction);
+            updateForces();
+            updateDrawing();
+            end
+          </onValueChanged>
+        </slider>
+      </stack>
+
+      <p name="info"></p>
+      <button name="btn" content="Animation On" style="width50">
+        <onClick>
+          <![CDATA[
+				if btn.Text == "Animation On" then
+					btn.Text = "Animation Off"
+					sim:Play();
+				else
+					btn.Text = "Animation On";
+					sim:Pause();
+				end
+			]]>
+        </onClick>
+      </button>
+      <script>
+        <![CDATA[
+			angleInDegree = sliders.angle_slider.Value;
+			angle = math.rad(angleInDegree);
+			mass = sliders.mass_slider.Value;
+			friction = sliders.friction_slider.Value;
+			local blockLocation = 10;
+			local blockVelocity = 0;
+			local blockAcc = 0;
+
+			local l = 2;
+			local half = l / 2;
+			local s1 = simWrapper.simStack.drawing.s1;
+			local s2 = simWrapper.simStack.drawing.s2;
+
+			local function drawCenterSquare(s,c)
+				local shapeColor = c or color.red;
+				s:Add(0,0,shapeColor);
+				s:Add(-1,1,shapeColor);
+				s:Add(1,1,shapeColor);
+				s:Add(1,-1,shapeColor);
+				s:Add(-1,-1,shapeColor);
+				s:Add(-1,1,shapeColor);
+			end
+
+			local function calculateSquareCenter(x)
+				local center = {};
+				center[1] = x + half * math.sin(angle);
+				center[2] = (20 - x) * math.tan(angle) + half * math.cos(angle);
+				return center;
+			end
+
+			function updateDrawing()
+				s2:Add(0, 0);
+				s2:Add(0, 20 * math.tan(angle));
+				s2:Add(20, 0);
+
+				drawCenterSquare(s1);
+				local c = calculateSquareCenter(blockLocation);
+				s1.Transform = matrixf.translation(c[1], c[2], 0)*matrixf.rotationAboutAxis(0, 0, 1, -angle);
+			end
+
+			local gForce;
+			local nForce;
+			local forwardForce;
+			local frictionForce;
+
+			function updateForces()
+				-- scale forces to 1/10
+				gForce = mass * -9.81 / 10;
+				nForce = -gForce * math.cos(angle);
+				forwardForce = -gForce * math.sin(angle);
+				frictionForce = -nForce * friction;
+				updateFBD();
+			end
+			
+			function updateBlockStatus()
+				local F = (forwardForce + frictionForce)*10;
+				blockAcc = F / mass;
+				local vf = blockVelocity + blockAcc * 0.1;
+				if vf < 0 then vf = 0; blockAcc = 0; end
+				local avgV = 0.5 * (vf + blockVelocity);
+				blockLocation = blockLocation + blockVelocity * 0.1 + 0.5 * blockAcc * 0.01;
+				blockVelocity = vf;
+				if F < 0 then F = 0; end
+				info.Text = string.format("average velocity: %.1f, net Force: %.1f, acceleration: %.2f", avgV, F, blockAcc);
+			end
+
+			local body = simWrapper.simStack.fbd.body;
+			local f1 = simWrapper.simStack.fbd.gForce;
+			local f2 = simWrapper.simStack.fbd.nForce;
+			local f3 = simWrapper.simStack.fbd.gForceComponents;
+			local f4 = simWrapper.simStack.fbd.fForce;
+			local f5 = simWrapper.simStack.fbd.dashes;
+
+			-- draw FBD square body
+			local shapeColor = color.wheat;
+			body:Add(-1,1,shapeColor);
+			body:Add(1,1,shapeColor);
+			body:Add(1,-1,shapeColor);
+			body:Add(-1,-1,shapeColor);
+			body:Add(-1,1,shapeColor);
+			
+			
+			function updateFBD()
+				plotTools.drawArrow(f1, vector({0,0}), vector({0, gForce}), color.blue);
+				plotTools.drawArrow(f2, vector({0,0}), vector({0, nForce}), color.green);
+				if angle > 0 then
+					f2.Transform = matrixf.rotationAboutAxis(0,0,1,-angle);
+					plotTools.drawDashLineArrow(f3, vector({0,0}), vector({forwardForce, 0}), color.purple);
+					plotTools.drawDashLineArrow(f3, vector({0,0}), vector({0, -nForce}), color.orange);
+
+					-- plotTools.drawArrow(f3, vector({0,0}), vector({0, -nForce}), color.orange);
+					-- plotTools.drawArrow(f3, vector({0,0}), vector({forwardForce, 0}), color.purple);
+					f3.Transform = matrixf.rotationAboutAxis(0,0,1,-angle);
+					if frictionForce ~= 0 then
+						plotTools.drawArrow(f4, vector({0,0}), vector({frictionForce, 0}), color.gray);
+						f4.Transform = matrixf.translation(0,-1,0)*matrixf.rotationAboutAxis(0,0,1,-angle);
+					end
+				end
+				body.Transform = matrixf.rotationAboutAxis(0,0,1,-angle);
+			end
+
+			updateDrawing();
+			updateForces();
+		]]>
+      </script>
+      <simulation name="sim" loop="true" duration="5" period="0.1">
+        <onUpdate>
+          <![CDATA[
+					updateBlockStatus();
+					updateDrawing();
+					if blockLocation > 21 then
+						blockLocation = 10;
+						blockVelocity = 0;
+					end
+				]]>
+        </onUpdate>
+      </simulation>
+    </stack>
+    
+  </sectionNoTitle>
+
+  <!--Draw FBD-->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Draw a Free Body Diagram</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Key Points</p>
+      <p>1.  Keep it simple; often you can represent an object with a simple box or circle. Don't represent it as a point (because the forces often start at a certain point of the object, which could produce a torque.)</p>
+      <p>2.  Don't make the diagram too small because you will often add many stuff to it.</p>
+      <p>3.  Draw the forces, make them touch the object. See table next page for a list of possible forces. Don't break them up in components yet; It sometimes makes your diagram messy.</p>
+      <p>4.  Include any angles that are given.</p>
+      <p>5.  Draw an arrow with $\;v$ or $\;a$ in your diagram, if you know their direction. Don't let it touch the object! Only forces should touch the object.</p>
+      <p>6.  If you have multiple objects, use the same symbol for quantities with the same magnitude!</p>
+      <p style="notes">For example:</p>
+      <image src="resources/fbd.png" style="width50 centeredText" />
+    </stack>
+  </sectionNoTitle>
+
+  <!--Forces-->
+  <sectionNoTitle style="pageLayout">
+    <script>
+      local stepsController = StepsController:new({stepsStack=stepsStack, numOfSteps=8, shown_message="Show More", hidden_message="Show Less", showStepCounter=false})
+    </script>
+    <p style="sectionHeading">Forces</p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="subSectionHeading">List of Forces</p>
+    </stack>
+    <stack name="stepsStack">
+      <!--Each step is a stack, and each step has alternating background colors-->
+      <!--Use Snippet to create any single step stack -->
+
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Gravity</p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            <p style="justifiedText">
+              <b>Equation:</b> $F_g=mg$
+            </p>
+            <p style="justifiedText">
+              <b>Direction:</b> Downwards (towards center of the Earth)
+            </p>
+            <p style="justifiedText">
+              <b>Notes:</b> $g=9.8m/{s^2}$ on the Earth
+            </p>
+            <p style="justifiedText">
+              <link url="https://en.wikipedia.org/wiki/Gravity">Learn More</link>
+            </p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(1)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Normal Force</p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            <p style="justifiedText">
+              <b>Equation:</b> $F_N$
+            </p>
+            <p style="justifiedText">
+              <b>Direction:</b> Perpendicular to the surface
+            </p>
+            <p style="justifiedText">
+              <b>Notes:</b> Equal to whatever force is needed to prevent the object from falling through the floor
+            </p>
+            <p style="justifiedText">
+              <link url="https://en.wikipedia.org/wiki/Normal_force">Learn More</link>
+            </p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(2)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Tension</p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            <p style="justifiedText">
+              <b>Equation:</b> $F_T$
+            </p>
+            <p style="justifiedText">
+              <b>Direction:</b> In direction of the rope or string (away from the object)
+            </p>
+            <p style="justifiedText">
+              <b>Notes:</b> Is either given already, or needs to be found via the FBD recipe
+            </p>
+            <p style="justifiedText">
+              <link url="https://en.wikipedia.org/wiki/Tension_(physics)">Learn More</link>
+            </p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(3)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Spring Force (Hooke's law)</p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            <p style="justifiedText">
+              <b>Equation:</b> $F_s = kx$
+            </p>
+            <p style="justifiedText">
+              <b>Direction:</b> Opposite to the direction of x
+            </p>
+            <p style="justifiedText">
+              <b>Notes:</b> x is indicates how much the spring is compressed or stretched, and x = 0 if it's not stretched or compressed at all. k is called the spring constant
+            </p>
+            <p style="justifiedText">
+              <link url="https://en.wikipedia.org/wiki/Hooke%27s_law)">Learn More</link>
+            </p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(4)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Kinetic Friction</p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            <p style="justifiedText">
+              <b>Equation:</b> $f_k=\mu_{k}F_{N}$
+            </p>
+            <p style="justifiedText">
+              <b>Direction:</b> Opposite to the direction of the velocity
+            </p>
+            <p style="justifiedText">
+              <b>Notes:</b> $\;\mu_{k}$ is the coeficient of kinetic friction and $F_N$ the normal force
+            </p>
+            <p style="justifiedText">
+              <link url="https://en.wikipedia.org/wiki/Friction#Kinetic_friction)">Learn More</link>
+            </p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(5)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Static Friction</p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            <p style="justifiedText">
+              <b>Equation:</b> $f_s$
+            </p>
+            <p style="justifiedText">
+              <b>Direction:</b> Parallel to the surface, but the exact direction depends on what's needed to prevent object from moving
+            </p>
+            <p style="justifiedText">
+              <b>Notes:</b> Equal to whatever force is needed to prevent object from moving. However, the max value of $f_{s,max}=\mu_{s}F_{N}$ where $\;\mu_{s}$ is the coefficient of static friction
+            </p>
+            <p style="justifiedText">
+              <link url="https://en.wikipedia.org/wiki/Friction#Static_friction)">Learn More</link>
+            </p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(6)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Gravitational Force</p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            <p style="justifiedText">
+              <b>Equation:</b> $F_G=G\frac{m_{1}m_{2}}{r^2}$
+            </p>
+            <p style="justifiedText">
+              <b>Direction:</b> From centre of one mass towards the centre of the other
+            </p>
+            <p style="justifiedText">
+              <b>Notes:</b> Use this equation instead of $F_g=mg$ when the r is approximately the radius of the Earth or larger
+            </p>
+            <p style="justifiedText">
+              <link url="https://en.wikipedia.org/wiki/Gravity#Newton.27s_theory_of_gravitation)">Learn More</link>
+            </p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(7)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Bouyancy Force</p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            <p style="justifiedText">
+              <b>Equation:</b> $F_B=\rho_{f}V_{s}g$
+            </p>
+            <p style="justifiedText">
+              <b>Direction:</b> Upwards
+            </p>
+            <p style="justifiedText">
+              <b>Notes:</b> $\rho_f$ is the density of the fluid, and $V_s$ the part of the volume of the object that is submerged. When an object of mass m is floating, $F_B=\rho_{f}V_{s}g=mg$
+            </p>
+            <p style="justifiedText">
+              <link url="https://en.wikipedia.org/wiki/Buoyancy">Learn More</link>
+            </p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(8)
+          </onClick>
+        </button>
+      </stack>
+
+    </stack>
+  </sectionNoTitle>
+
+
+  <!--Practices-->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Practices</p>
+
+    <stack style="mcStackLayout">
+      <script>
+        local answer = 2
+        local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=answer})
+      </script>
+      <p style="subSectionHeading">Question 1</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources/question.png" inspect="false" />
+          </column>
+          <column>
+            <p style="justifiedText">A rightward force is applied to a book in order to move it across a desk at constant velocity. Consider frictional forces. Neglect air resistance. What does the free body diagram of the book look like?</p>
+          </column>
+        </row>
+      </table>
+      <table name="choicesTable" grid="false" widths="50% 50%">
+        <row>
+          <column>            
+						<image src="resources/A.png" style="mcLayout" />
+          </column>
+          <column>
+            <image src="resources/B.png" style="mcLayout" />
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="A" style="btnUnselected">
+              <onClick>
+                mcController:select(1)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="B" style="btnUnselected">
+              <onClick>
+                mcController:select(2)
+              </onClick>
+            </button>
+          </column>
+        </row>
+        <row>
+          <column>
+            <image src="resources/C.png" style="mcLayout" />
+          </column>
+          <column>
+            <image src="resources/D.png">
+              <style>
+                <widthPercentage>0.43</widthPercentage>
+                <horizontalAlignment>center</horizontalAlignment>
+              </style>
+            </image>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="C" style="btnUnselected">
+              <onClick>
+                mcController:select(3)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="D" style="btnUnselected">
+              <onClick>
+                mcController:select(4)
+              </onClick>
+            </button>
+          </column>
+        </row>
+      </table>
+      <button name="checkBtn" content="Check Answer">
+        <onClick>
+          mcController:checkAnswer()
+        </onClick>
+      </button>
+    </stack>
+    <stack style="mcStackLayout">
+      <script>
+        local answer = 1
+        local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=answer})
+      </script>
+      <p style="subSectionHeading">Question 2</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources/question.png" inspect="false" />
+          </column>
+          <column>
+            <p style="justifiedText">A force is applied to the right to drag a sled across loosely packed snow with a rightward acceleration. Neglect air resistance. What does the free body diagram of the book look like?</p>
+          </column>
+        </row>
+      </table>
+      <table name="choicesTable" grid="false" widths="50% 50%">
+        <row>
+          <column>
+            <image src="resources/A.png" style="mcLayout" />
+          </column>
+          <column>
+            <image src="resources/B.png" style="mcLayout" />
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="A" style="btnUnselected">
+              <onClick>
+                mcController:select(1)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="B" style="btnUnselected">
+              <onClick>
+                mcController:select(2)
+              </onClick>
+            </button>
+          </column>
+        </row>
+        <row>
+          <column>
+            <image src="resources/C.png" style="mcLayout" />
+          </column>
+          <column>
+            <image src="resources/D.png">
+              <style>
+                <widthPercentage>0.43</widthPercentage>
+                <horizontalAlignment>center</horizontalAlignment>
+              </style>
+            </image>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="C" style="btnUnselected">
+              <onClick>
+                mcController:select(3)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="D" style="btnUnselected">
+              <onClick>
+                mcController:select(4)
+              </onClick>
+            </button>
+          </column>
+        </row>
+      </table>
+      <button name="checkBtn" content="Check Answer">
+        <onClick>
+          mcController:checkAnswer()
+        </onClick>
+      </button>
+    </stack>
+    <stack style="mcStackLayout">
+      <script>
+        local answer = 4
+        local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=answer})
+      </script>
+      <p style="subSectionHeading">Question 1</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources/question.png" inspect="false" />
+          </column>
+          <column>
+            <p style="justifiedText">A car is coasting to the right and slowing down. Consider frictional forces. Neglect air resistance. What does the free body diagram of the book look like?</p>
+          </column>
+        </row>
+      </table>
+      <table name="choicesTable" grid="false" widths="50% 50%">
+        <row>
+          <column>
+            <image src="resources/A.png" style="mcLayout" />
+          </column>
+          <column>
+            <image src="resources/B.png" style="mcLayout" />
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="A" style="btnUnselected">
+              <onClick>
+                mcController:select(1)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="B" style="btnUnselected">
+              <onClick>
+                mcController:select(2)
+              </onClick>
+            </button>
+          </column>
+        </row>
+        <row>
+          <column>
+            <image src="resources/C.png" style="mcLayout" />
+          </column>
+          <column>
+            <image src="resources/D.png">
+              <style>
+                <widthPercentage>0.43</widthPercentage>
+                <horizontalAlignment>center</horizontalAlignment>
+              </style>
+            </image>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="C" style="btnUnselected">
+              <onClick>
+                mcController:select(3)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="D" style="btnUnselected">
+              <onClick>
+                mcController:select(4)
+              </onClick>
+            </button>
+          </column>
+        </row>
+      </table>
+      <button name="checkBtn" content="Check Answer">
+        <onClick>
+          mcController:checkAnswer()
+        </onClick>
+      </button>
+    </stack>
+
+  </sectionNoTitle>
+
+  <!--Challenge-->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Challenge</p>
+    <stack style="mcStackLayout">
+      <script>
+        local answer = 3
+        local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=answer})
+      </script>
+      <p style="subSectionHeading">Question 4</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources/question.png" inspect="false" />
+          </column>
+          <column>
+            <image src="resources/p1.png" style="width50" />
+            <p style="justifiedText">A truck accelerates so quickly that a box in front of it does not fall. What forces are acting on this box?</p>
+          </column>
+        </row>
+      </table>
+      <table name="choicesTable" grid="false" widths="50% 50%">
+        <row>
+          <column>
+            <image src="resources/p1_1.png">
+              <style>
+                <widthPercentage>0.25</widthPercentage>
+                <horizontalAlignment>center</horizontalAlignment>
+              </style>
+            </image>
+          </column>
+          <column>
+            <image src="resources/p1_2.png">
+              <style>
+                <widthPercentage>0.25</widthPercentage>
+                <horizontalAlignment>center</horizontalAlignment>
+              </style>
+            </image>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="A" style="btnUnselected">
+              <onClick>
+                mcController:select(1)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="B" style="btnUnselected">
+              <onClick>
+                mcController:select(2)
+              </onClick>
+            </button>
+          </column>
+        </row>
+        <row>
+          <column>
+            <image src="resources/p1_3.png">
+              <style>
+                <widthPercentage>0.3</widthPercentage>
+                <horizontalAlignment>center</horizontalAlignment>
+              </style>
+            </image>
+          </column>
+          <column>
+            <image src="resources/p1_4.png">
+              <style>
+                <widthPercentage>0.3</widthPercentage>
+                <horizontalAlignment>center</horizontalAlignment>
+              </style>
+            </image>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="C" style="btnUnselected">
+              <onClick>
+                mcController:select(3)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="D" style="btnUnselected">
+              <onClick>
+                mcController:select(4)
+              </onClick>
+            </button>
+          </column>
+        </row>
+      </table>
+      <button name="checkBtn" content="Check Answer">
+        <onClick>
+          mcController:checkAnswer()
+        </onClick>
+      </button>
+    </stack>
+  </sectionNoTitle>
+
+
+
+</document>

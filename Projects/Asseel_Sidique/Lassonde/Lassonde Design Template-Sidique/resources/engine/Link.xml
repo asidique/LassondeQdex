@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<fragment xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd">
+  <script>
+    <![CDATA[
+    -- The Link class is used for handling distance constraints between PointMasss.
+	Link = {series, p1, p2, restingDist, stiff, tearSensitivity, visible=true}
+	function Link:new(o)
+	  o = o or {}
+	  if o.series == nil or o.p1 == nil or o.p2 == nil or o.restingDist == nil then error("Fail to create Link: series, p1, p2, or restingDist is missing") end
+	  setmetatable(o, self)
+	  self.__index = self
+	  return o
+	end
+
+	-- Solve the link constraint
+	function Link:solve()
+	  local diffX = self.p1.x - self.p2.x
+	  local diffY = self.p1.y - self.p2.y
+	  local d = math.sqrt(diffX * diffX + diffY * diffY)
+
+	  -- find the difference or the ratio of how far along the restingDistance the actual distance is.
+	  local diff = (self.restingDist - d) / d
+
+	  
+
+	  -- Inverse the mass quantities
+	  local im1 = 1/self.p1.mass
+	  local im2 = 1/self.p2.mass
+	  local scalarP1 = (im1/(im1+im2))*self.stiff
+	  local scalarP2 = self.stiff - scalarP1
+
+	  -- Push/pull based on mass
+	  -- heavier objects will be pushed/pulled less than attached light objects
+	  self.p1.x = self.p1.x + diffX * scalarP1 * diff
+	  self.p1.y = self.p1.y + diffY * scalarP1 * diff
+	  self.p2.x = self.p2.x - diffX * scalarP2 * diff
+	  self.p2.y = self.p2.y - diffY * scalarP2 * diff
+	end
+
+	-- draw if it's visible
+	function Link:draw()
+	  if self.visible then
+		self.series:Add(self.p1.x, self.p1.y)
+		self.series:Add(self.p2.x, self.p2.y)
+	  end
+	end
+    ]]>
+  </script>
+</fragment>

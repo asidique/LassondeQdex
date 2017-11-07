@@ -1,0 +1,1218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="GDF468CE7_5733_4FA3_95E3_DE18A5732C12">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>1.2 Function Notation App</title>
+    <creator>Thiago</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/calculator.png" />
+  </metadata>
+
+  <include src="curriculumThemePack/curriculumStyles.xml" />
+  <include src="plotTools.xml" />
+
+
+
+
+
+
+
+
+
+
+  <!--                                      Header & Footer                                           -->
+  <style name="backgroundColor">
+    <background color="50 133 184" />
+  </style>
+  <style name="fontColor">
+    <foreground color="255 255 255" />
+  </style>
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="fontColor">Ms. Koon</p>
+      <p style="fontColor rightText">MCR3U</p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/logo1.png" inspect="false" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/logo2.png" inspect="false"/>
+    </stack>
+  </footer>
+  <!--                                      Header & Footer END                                         -->
+
+
+
+
+
+
+
+  <include src="plotTools.xml" />
+
+
+
+
+
+  
+
+
+
+
+
+
+  <!--                                      Section 1                                            -->
+
+
+
+  <section>
+    <title>
+      <style>
+        <textAlignment>right</textAlignment>
+        <marginTop>80</marginTop>
+      </style>
+      <size scale="xlarge">1.2</size>
+    </title>
+    <p style="chapterTitle">Function Notation</p>
+
+    <p style="title">
+      <size scale="large">Background Information</size>
+    </p>
+    <p>
+      You learned about the difference between a relation and a function in the previous lesson. A function defines a specific rule that relates each
+      input value to one unique output value. You can think of this as texting your friend Bob. You input Bob's name
+      in the <italic>To:</italic> field, then your text message will <italic>only</italic> be sent to Bob.
+    </p>
+    <p>
+      In today's lesson, we will learn about the <bold>function notation</bold> in this module. The notation <bold>
+        <italic>f(x)</italic>
+      </bold> was first introduced by Euler in 1734.
+    </p>
+    <section>
+      <title></title>
+      Enter the rest of the content for this section or chapter here.
+      <!-- Insert all of the content for this section above this line -->
+    </section>
+
+
+
+  </section>
+
+
+
+
+
+
+
+  <!--                                      Section 2                                             -->
+
+
+  <sectionNoTitle name="sectionSimulation">
+
+    <!--  <title style="centerText">
+      <foreground color="55 133 184">Simulation</foreground>
+    </title>
+-->
+
+    <stack style="questionAnswer">
+      <p style="title">Function Notation</p>
+
+      <p>
+        The equation of a function can be written using the x-y notation or the function notation.
+      </p>
+
+
+      <stack>
+        <style>
+          <horizontalAlignment>center</horizontalAlignment>
+          <widthPercentage>0.77</widthPercentage>
+        </style>
+        
+      <button style="large" name="myButton" content="x-y notation">
+        <onClick>
+          if myButton.Text == "x-y notation" then
+          myButton.Text = "y = 2x + 1";
+          else
+          myButton.Text = "x-y notation";
+          end
+        </onClick>
+      </button>
+
+
+
+      <button style="large" name="myButton2" content="Function notation">
+        <onClick>
+          if myButton2.Text == "Function notation" then
+          myButton2.Text = "f(x) = 2x + 1";
+          else
+          myButton2.Text = "Function notation";
+          end
+        </onClick>
+      </button>
+      </stack>
+      
+      
+      <p style="centerText">
+        Where <bold>f(x) </bold>is read as <italic>"the value of <b>f</b> at <b>x</b>"</italic> or <italic>
+          <b> "f of x"</b></italic>.
+      </p>
+    
+    <!-- This line can be removed after the curriculumStyles.xml fragment is included -->
+    <p style="invisible">This document is formatted improperly because the curriculumStyles.xml fragment was not included at the beginning of your document.</p>
+
+
+
+
+    </stack>
+
+
+      
+    
+
+    <xyPlot name="rotatePlot">
+      <style>
+        <widthPercentage>0.88</widthPercentage>
+      </style>
+
+      <!-- x-y AXIS -->
+      <style name="lineColor">
+        <foreground color="0 0 0" />
+      </style>
+
+      <series style="lineColor">
+        <data> 10 0; -10 0</data>
+      </series>
+      <series style="lineColor">
+        <data>0 10; 0 -10</data>
+      </series>
+      <!-- x-y AXIS END -->
+      
+      
+      <axis dim="x" max="5" min="-5" auto="fixed" />
+      <axis dim="y" max="5" min="-5" auto="fixed" />
+      <series name="plotSeries" manual="true">
+        <style>
+          <foreground color="55 134 185" />
+        </style>
+      </series>
+      <series name="dotPlot" manual="true" draw="radialFill">
+        <style>
+          <foreground color="55 134 185" />
+        </style>
+      </series>
+    </xyPlot>
+
+    <script>
+
+
+
+      local x, y;
+      local a = 0;
+      local b = -1*math.pow((a-2), 2) + 1
+      local cosPlot = rotatePlot.plotSeries;
+
+      local function drawPlot()
+
+      cosPlot:Clear()
+
+      for x = -10, 10, 0.05 do
+      y = -1*math.pow((x-2), 2) + 1
+      cosPlot:Add(x,y)
+      end
+      cosPlot:Update()
+      end
+
+
+      local function drawDot()
+
+
+
+
+      b = -1*math.pow((a-2), 2) + 1
+      rotatePlot.dotPlot:Clear()
+      rotatePlot.dotPlot:Add(a - 0.08, b - 0.05)
+      rotatePlot.dotPlot:Add(a - 0.08, b + 0.05)
+      rotatePlot.dotPlot:Add(a + 0.08, b + 0.05)
+      rotatePlot.dotPlot:Add(a + 0.08, b - 0.05)
+      rotatePlot.dotPlot:Add(a - 0.08, b - 0.05)
+      rotatePlot.dotPlot:Update()
+      end
+
+    </script>
+
+    <p style="centerText">
+      <style>
+        <marginTop>30</marginTop>
+      </style>
+      The graph above shows the function: $ f(x) = -(x - 2)^{2} + 1 $ <br />
+    </p>
+
+    
+
+    <slider name="sliderA" min="-5" max="5" value="1">
+      <style>
+        <widthPercentage>0.88</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+       
+      <onValueChanged>
+        a = value
+        b = -1*math.pow((a-2), 2) + 1
+        drawPlot()
+        drawDot()
+        resultX.Text = string.format("x = %0.1f \t and \tf(x) = %0.1f", value, b)
+        resultX.Style.ForegroundColor = color.rgb(55, 133, 184)
+      </onValueChanged>
+    </slider>
+
+    <p name="resultX" style="centerText">
+      <foreground color="55 133 184"></foreground>
+      <style>
+        <marginBottom>50</marginBottom>
+      </style>
+      Use the slider to change the value of <bold>x</bold>
+    </p>
+
+
+    
+   
+
+
+
+  </sectionNoTitle>
+
+
+
+
+  <!--                                      Section 3                                             -->
+
+
+
+  <sectionNoTitle name="section3">
+
+   <stack name="wrapTitle">
+      <style>
+        <widthPercentage>0.92</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <p style="titleStyle">
+        <style>
+          <marginTop>50</marginTop>
+          <size scale="large" />
+          <foreground color="50 135 184" />
+        </style>
+        <b>Examples</b>
+      </p>
+    </stack>
+
+
+
+
+
+
+    <stack style="questionAnswer">
+      <p style="title">Example 1</p>
+
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="curriculumThemePack\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>  Given $ f(x) = 3 - 2x $, find: </p>
+            <p>
+              a) $ f(3) $
+            </p>
+            <p>
+              b) $ f(-a) $
+            </p>
+            <p>
+              c) the value of $ x $ if $ f(x) = -7 $
+            </p>
+
+          </column>
+        </row>
+      </table>
+
+      <button name="button1" content="Answers">
+        <onClick>
+          if button1.Text == "Answers" then
+          wrap.Style.Visibility = "visible";
+          button1.Text = "Hide Answers"
+          else
+          button1.Text = "Answers"
+          wrap.Style.Visibility = "collapsed";
+          end
+
+        </onClick>
+      </button>
+
+      <stack style="collapsed" name="wrap">
+        <p style="title">a) Answer</p>
+        <p>
+          $  f(3) $ <br />
+          $  = 3 -2(3) $ ... substitute 3 into x <br />
+          $  = 3 - 6 $<br />
+          $  = -3 $
+        </p>
+
+
+        <p style="title">b) Answer</p>
+        <p>
+          $  f(-a) $ <br />
+          $  = 3 -2(-a) $ ... substitute -a into x <br />
+          $ = 3 + 2a $
+        </p>
+
+
+        <p style="title">c) Answer</p>
+        <p>the value of $ x $ if $ f(x) = -7 $</p>
+        <p>
+          Since $ f(x) = 3 - 2x $ is equivalent to $ y = 3 - 2x $
+        </p>
+
+        <p>    Therefore, we have </p>
+        <p>    $  -7 = 3 - 2x $ </p>
+        <p>   $  2x = 3 + 7 $   </p>
+        <p>   $  x = 5 $  </p>
+
+
+      </stack>
+
+    </stack>
+
+
+    <stack style="questionAnswer">
+      <p style="title">Example 2</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="curriculumThemePack\question.png" inspect="false" />
+          </column>
+          <column>
+            <p> Consider the function $ f(x) = x^{2} -8x + 16 $ , find: </p>
+          </column>
+        </row>
+      </table>
+
+      <p>
+        a) $ [ f(1) - 2 f(-2) ] - [ f(2) - f(0) ] $
+      </p>
+
+      <p>
+        <style>
+          <marginBottom>30</marginBottom>
+          <marginTop>30</marginTop>
+        </style>
+        <b>Method 1</b>
+      </p>
+
+      <p>
+        <bold> First evaluate each function expression...</bold>
+      </p>
+      <stack orientation="horizontal">
+        <p>$ f(1) = 1^{2} - 8(1) + 16 = 9 $ </p>
+        <p>$ f(-2) = (-2)^{2} - 8(-2) + 16 = 36 $</p>
+      </stack>
+      <stack orientation="horizontal">
+        <p>$ f(2) = 2^{2} - 8(2) + 16 = 4 $</p>
+        <p>$ f(0) = 0^{2} - 8(0) + 16 = 16 $</p>
+      </stack>
+
+
+
+
+      <p>
+        <bold> Then simplify...</bold>
+      </p>
+      <p>$ = [9 - 2(36)] - [4-16]$ </p>
+      <p>$ = -63 + 12 $</p>
+      <p>$   = -51 $</p>
+
+      <p>
+        <style>
+          <marginBottom>30</marginBottom>
+          <marginTop>30</marginTop>
+        </style>
+        <b>Method 2</b>
+      </p>
+
+      <p>$ [f(1)-2f(-2)]-[f(2)-f(0)] $</p>
+      <p>$ = [(1^{2}-8(1)+16)-2((-2)^{2}-8(-2)+16)]-[(2^{2}-8(2)+16)-(0^{2}-8(0)+16)] $</p>
+      <p>$ = [9-2(36)]-[4-16] $</p>
+      <p>$ = -63 + 12 $</p>
+      <p>$ = -51 $</p>
+
+
+
+      <p>
+        <style>
+          <marginTop>30</marginTop>
+          <marginBottom>30</marginBottom>
+        </style>
+
+        b) $ f(x^{2} - 1) + 3 f(2x + 1) $
+      </p>
+
+      <stack orientation="horizontal">
+        <stack>
+          <p>$ f(x^{2} - 1) $</p>
+          <p>$ = (x^{2} - 1)^{2} - 8(x^{2} - 1) + 16 $ </p>
+          <p name="step1" style="collapsed">$ = x^{4} - 2x^{2} + 1 - 8x^{2} + 8 +16 $</p>
+          <p name="step2" style="collapsed">$ = x^{4} - 10x^{2} + 25 $</p>
+          <button name="stepsButton1" content="Step 1">
+            <onClick>
+              if stepsButton1.Text == "Step 1" then
+              step1.Style.Visibility = "visible";
+              stepsButton1.Text = "Step 2"
+              elseif stepsButton1.Text == "Step 2" then
+              step2.Style.Visibility = "visible";
+              stepsButton1.Style.Visibility = "collapsed";
+              end
+            </onClick>
+          </button>
+        </stack>
+
+
+        <stack>
+          <p>$ f(2x + 1) $</p>
+          <p>$ = (2x + 1)^{2} - 8(2x + 1) + 16 $ </p>
+          <p name="step11" style="collapsed">$ = 4x^{2} + 4x + 1 - 16x - 8 + 16 $</p>
+          <p name="step22" style="collapsed">$ = 4x^{2} - 12x + 9 $</p>
+          <button name="stepsButton11" content="Step 1">
+            <onClick>
+              if stepsButton11.Text == "Step 1" then
+              step11.Style.Visibility = "visible";
+              stepsButton11.Text = "Step 2"
+              elseif stepsButton11.Text == "Step 2" then
+              step22.Style.Visibility = "visible";
+              stepsButton11.Style.Visibility = "collapsed";
+              end
+            </onClick>
+          </button>
+        </stack>
+      </stack>
+
+      <button name="finalStepButton" content="Show Final Step">
+        <onClick>
+          if finalStepButton.Text == "Hide Final Step" then
+          finalStepButton.Text = "Show Final Step";
+          finalStep.Style.Visibility = "collapsed";
+
+          else
+          finalStep.Style.Visibility = "visible";
+          finalStep.Style.MarginBottom = 20;
+          finalStepButton.Text = "Hide Final Step"
+          end
+        </onClick>
+      </button>
+
+      <stack style="collapsed" name="finalStep">
+        <p style="centerText">$ f(x^{2} - 1) + 3 f(2x + 1) $</p>
+        <p style="centerText">$ = x^{4} - 10x^{2} + 25 + 3 (4x^{2} - 12x + 9) $ </p>
+        <p style="centerText">$ = x^{4} - 10x^{2} + 24 + 12x^{2} - 36x + 27 $</p>
+        <p style="centerText">$ = x^{4} + 2x^{2} - 36x + 52 $</p>
+      </stack>
+
+
+
+
+
+
+    </stack>
+
+  </sectionNoTitle>
+ 
+  
+  
+    
+    
+      
+    
+    
+    
+
+    <sectionNoTitle name="section3_2">
+
+       <stack name="wrapTitle">
+      <style>
+        <widthPercentage>0.92</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <p style="titleStyle">
+        <style>
+          <marginTop>50</marginTop>
+          <size scale="large" />
+          <foreground color="50 135 184" />
+        </style>
+        <b>Examples</b>
+      </p>
+    </stack>
+
+
+      <stack style="questionAnswer">
+      <p style="title">Example 3</p>
+
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="curriculumThemePack\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>   For graph $ y = f(x)$, find:</p>
+            <p>a) $ f(4), f(0) $</p>
+            <p>b) $ x $, when $ f(x) = 5 $</p>
+          </column>
+        </row>
+      </table>
+
+
+
+
+      <script>
+        <![CDATA[
+
+   
+
+   plotTools.drawSquare(plot1A.filled_square_series11, vector({4,-3}), 0.2, 0.4 , color.rgb(55, 133, 184));
+   
+   plotTools.drawSquare(plot1A.filled_square_series22, vector({0,5}), 0.2, 0.4 , color.rgb(55, 133, 184));
+   
+   plotTools.drawSquare(plot1A.filled_square_series33, vector({0,5}), 0.2, 0.4 , color.rgb(55, 133, 184));
+   
+   plotTools.drawSquare(plot1A.filled_square_series44, vector({6,5}), 0.2, 0.4 , color.rgb(55, 133, 184));
+   
+   
+
+
+     
+      local x, y;
+      local c = 0;
+      local cosPlot = plot1.functionS;
+      local cosPlotA = plot1A.functionS;
+
+     
+
+      cosPlot:Clear()
+      cosPlotA:Clear()
+
+      for x = -6, 10, 0.1 do
+      y = math.pow((x-3), 2) - 4
+      cosPlot:Add(x,y)
+      cosPlotA:Add(x,y)
+      end
+      cosPlot:Update()
+      cosPlotA:Update()
+     
+
+
+]]>
+      </script>
+
+      <p style="centerText">
+        $ y = f(x) $
+      </p>
+
+      <xyPlot name="plot1">
+
+        <style>
+          <aspectRatio>0.5</aspectRatio>
+          <widthPercentage>0.80</widthPercentage>
+        </style>
+
+        <axis dim="x" auto="fixed" min="-0.5" max="6.5" />
+        <axis dim="y" auto="fixed" min="-6" max="7" />
+
+        <series name="functionS" manual="false">
+          <style>
+            <foreground color="55 135 184" />
+          </style>
+        </series>
+
+
+        <!-- x-y AXIS -->
+        <style name="lineColor">
+          <foreground color="0 0 0" />
+        </style>
+        <series style="lineColor">
+          <data> 10 0; -10 0</data>
+        </series>
+        <series style="lineColor">
+          <data>0 10; 0 -10</data>
+        </series>
+        <!-- x-y AXIS END -->
+
+      </xyPlot>
+
+
+      <script>
+        local x, y;
+        local sinePlot = plot1A.mySeries;
+
+        for x = -10, 10, 0.1 do
+        y = 5
+        sinePlot:Add(x,y)
+        end
+        sinePlot:Update()
+      </script>
+
+
+
+      <!-- copy of plot1 -->
+      <xyPlot style="collapsed" name="plot1A">
+
+        <style>
+          <aspectRatio>0.5</aspectRatio>
+          <widthPercentage>0.80</widthPercentage>
+        </style>
+
+        <axis dim="x" auto="fixed" min="-0.5" max="6.5" />
+        <axis dim="y" auto="fixed" min="-6" max="7" />
+
+        <series name="functionS" manual="false">
+          <style>
+            <foreground color="55 135 184" />
+          </style>
+        </series>
+
+
+        <series name="filled_square_series11" manual="true" draw="radialFill" />
+
+        <series name="filled_square_series22" manual="true" draw="radialFill" />
+
+        <series name="filled_square_series33" manual="true" draw="radialFill" />
+
+        <series name="filled_square_series44" manual="true" draw="radialFill" />
+
+        <series name="mySeries" draw="lineSegments" manual="true">
+          <style>
+            <foreground color="55 135 184" />
+          </style>
+        </series>
+
+        
+
+        <!-- x-y AXIS -->
+
+        <style name="lineColor">
+          <foreground color="0 0 0" />
+        </style>
+
+        <series style="lineColor">
+          <data> 10 0; -10 0</data>
+        </series>
+        <series style="lineColor">
+          <data>0 10; 0 -10</data>
+        </series>
+        <!-- x-y AXIS END -->
+
+      </xyPlot>
+
+
+
+
+      
+
+      
+
+
+
+      <button name="button2" content="Answers">
+        <onClick>
+          if button2.Text == "Answers" then
+          stack1.Style.Visibility = "visible";
+          plot1A.Style.Visibility = "visible";
+          plot1.Style.Visibility = "collapsed";
+
+          button2.Text = "Hide Answers";
+          else
+          stack1.Style.Visibility = "collapsed";
+          plot1A.Style.Visibility = "collapsed";
+          plot1.Style.Visibility = "visible";
+
+          button2.Text = "Answers";
+          end
+        </onClick>
+      </button>
+
+
+      <stack name="stack1" style="collapsed" orientation="horizontal">
+
+        <stack>
+
+          <p style="title centerText">a) Answer</p>
+          <p style="centerText">
+           $ f(4) = -3 $
+          </p>
+          <p style="centerText">$ f(0) = 5 $
+          </p>
+        </stack>
+
+        <stack>
+          <p style="title centerText">b) Answer</p>
+          <p style="centerText">when $ f(x) = 5 $</p>
+          <p style="centerText">$ x = 0 $ or $ x = 6 $</p>
+        </stack>
+      
+
+      </stack>
+
+      
+
+
+    </stack>
+
+
+
+
+
+
+
+
+    <stack style="questionAnswer">
+      <p style="title">Example 4</p>
+
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="curriculumThemePack\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>For graph $ y = g(x) $, find:</p>
+            <p>a) $ g(8), g(-4) $</p>
+            <p>b) $ x $, when $ g(x) = -8 $</p>
+          </column>
+        </row>
+      </table>
+
+
+
+
+      <script>
+        <![CDATA[
+
+   
+   -- Filled Shapes
+   
+  
+   plotTools.drawSquare(plot.filled_square_series1, vector({8,3}), 0.2, 0.4 , color.rgb(55, 133, 184)); 
+  
+   plotTools.drawSquare(plot.filled_square_series2, vector({-4,-3}), 0.2, 0.4 , color.rgb(55, 133, 184));
+ 
+   plotTools.drawSquare(plot.filled_square_series3, vector({0,-8}), 0.2, 0.4 , color.rgb(55, 133, 184));
+   
+   plotTools.drawSquare(plot.filled_square_series4, vector({4,6}), 0.2, 0.4 , color.rgb(55, 133, 184));
+   
+   plotTools.drawSquare(plot.filled_square_series5, vector({1,4}), 0.2, 0.4 , color.rgb(55, 133, 184));
+   
+   
+   
+
+   
+
+]]>
+      </script>
+
+      <p style="centerText">
+       $ y = g(x) $
+      </p>
+
+      <xyPlot name="plot">
+
+        <style>
+          <aspectRatio>0.5</aspectRatio>
+          <widthPercentage>0.80</widthPercentage>
+        </style>
+
+        <axis dim="x" auto="fixed" min="-4.5" max="8.5" />
+        <axis dim="y" auto="fixed" min="-9" max="7" />
+
+        <series name="filled_square_series1" manual="true" draw="radialFill" />
+        <series name="filled_square_series2" manual="true" draw="radialFill" />
+        <series name="filled_square_series3" manual="true" draw="radialFill" />
+        <series name="filled_square_series4" manual="true" draw="radialFill" />
+        <series name="filled_square_series5" manual="true" draw="radialFill" />
+        <series name="filled_square_series6" manual="true" draw="radialFill" />
+
+        <!-- x-y AXIS -->
+
+        <style name="lineColor">
+          <foreground color="0 0 0" />
+        </style>
+
+        <series style="lineColor">
+          <data> 10 0; -10 0</data>
+        </series>
+        <series style="lineColor">
+          <data>0 10; 0 -10</data>
+        </series>
+        <!-- x-y AXIS END -->
+
+      </xyPlot>
+
+
+
+      <button name="button2" content="Answers">
+        <onClick>
+          if button2.Text == "Answers" then
+          stack1.Style.Visibility = "visible";
+         
+          button2.Text = "Hide Answers";
+
+          else
+          stack1.Style.Visibility = "collapsed";
+          
+          button2.Text = "Answers";
+          end
+        </onClick>
+      </button>
+
+
+      <stack name="stack1" style="collapsed" orientation="horizontal">
+
+        <stack>
+          <p style="title centerText">a) Answer</p>
+          <p style="centerText">
+           $ g(8) = 3 $
+          </p>
+          <p style="centerText"> $ g(-4) = -3 $
+          </p>
+        </stack>
+        
+        <stack>
+          <p style="title centerText">b) Answer</p>
+          <p style="centerText">when $ g(x) = -8 $</p>
+          <p style="centerText">$ x = 0 $</p>
+        </stack>
+
+
+      </stack>
+
+     
+
+    </stack>
+
+
+
+  </sectionNoTitle>
+
+
+
+
+
+  <!--                                      Section 4                                            -->
+
+
+  <sectionNoTitle>
+
+      <stack name="wrapTitle">
+      <style>
+        <widthPercentage>0.92</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <p style="titleStyle">
+        <style>
+          <marginTop>50</marginTop>
+          <size scale="large" />
+          <foreground color="50 135 184" />
+        </style>
+        <b>Practice</b>
+      </p>
+    </stack>
+
+    <stack style="questionAnswer">
+      <p style="title qNum">
+      </p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="curriculumThemePack\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>Consider the graph, find $ f(-2) $ and $ f(3) $</p>
+          </column>
+        </row>
+      </table>
+
+      <p style="centerText">
+         $ y = f(x) $
+      </p>
+      <xyPlot>
+        <axis dim="x" auto="fixed" min="-3" max="4" />
+        <axis dim="y" auto="fixed" min="-2" max="5" />
+        <series>
+          <style>
+            <foreground color="50 135 184" />
+          </style>
+          <data>-3 5; -3 4; -2 2; -1 1; 0 0; 2 2; 3 3; 4 5 </data>
+        </series>
+
+        <!-- x-y AXIS -->
+        <style name="lineColor">
+          <foreground color="0 0 0" />
+        </style>
+        <series style="lineColor">
+          <data> 10 0; -10 0</data>
+        </series>
+        <series style="lineColor">
+          <data>0 10; 0 -10</data>
+        </series>
+        <!-- x-y AXIS END -->
+        
+      </xyPlot>
+
+      <p style="title">ANSWER</p>
+      <p name="answer" style="collapsed">B</p>
+      <script>
+        local selection = -1;
+        local deselectedColor = color.silver;
+        local selectedColor = color.rgb(50, 133, 184);
+
+        local function chooseButton(i)
+        if selection &gt; 0 then
+        stack.table:Child(selection):Child(2):Child(1).Style.BackgroundColor = deselectedColor;
+        end
+        stack.table:Child(i):Child(2):Child(1).Style.BackgroundColor = selectedColor;
+        selection = i;
+        end
+      </script>
+      <p>Choose one of the options:</p>
+      <stack orientation="horizontal" name="stack">
+        <table name="table" widths="10% 20% 60% 10%" grid="false">
+          <style name="buttons">
+            <foreground color="white" />
+            <background color="silver" />
+          </style>
+          <row name="row">
+            <column>
+              <image src="curriculumThemePack\answer.png" inspect="false" />
+            </column>
+            <column>
+              <button content="A">
+                <onClick>final.Text="A"; chooseButton(1);</onClick>
+              </button>
+            </column>
+            <column>
+              <p> $ f(-2) = -3 $ and $ f(3) = 4 $</p>
+            </column>
+            <column name="column">
+              <image name="mark" src="curriculumThemePack/invisible.png" inspect="false" />
+            </column>
+          </row>
+          <row>
+            <column />
+            <column>
+              <button content="B">
+                <onClick>final.Text="B"; chooseButton(2);</onClick>
+              </button>
+            </column>
+            <column>
+              <p> $ f(-2) = 2 $ and $ f(3) = 3 $</p>
+            </column>
+            <column>
+              <image src="curriculumThemePack/invisible.png" inspect="false" />
+            </column>
+          </row>
+          <row>
+            <column />
+            <column>
+              <button content="C">
+                <onClick>final.Text="C"; chooseButton(3);</onClick>
+              </button>
+            </column>
+            <column>
+              <p> $ f(-2) = -1 $ and $ f(3) = 3 $ </p>
+            </column>
+            <column>
+              <image src="curriculumThemePack/invisible.png" inspect="false" />
+            </column>
+          </row>
+          <!-- Insert the following code for each subsequent choice (Choice D, E, F, etc).  Delete if unnecessary.
+          <row>
+            <column />
+            <column>
+              <button content="Replace with Next Letter">
+                <onClick>final.Text="Replace with Next Letter"; chooseButton(Replace with Next Number);;</onClick>
+              </button>
+            </column>
+            <column>
+              <p>Enter Choice Here</p>
+            </column>
+            <column>
+              <image src="curriculumThemePack/invisible.png" inspect="false" />
+            </column>
+          </row> -->
+        </table>
+      </stack>
+      <p name="final" style="collapsed" />
+      <stack name="hint" style="collapsed">
+        <p>  Not quite there! Check again </p>
+      </stack>
+      <stack name="solution" style="collapsed">
+        <p> Correct! </p>
+      </stack>
+      <button content="Check Answer">
+        <onClick>
+          if string.lower(final.Text) == string.lower(answer.Text) then
+
+          solution.Style.Visibility = "visible";
+          hint.Style.Visibility = "collapsed";
+          else
+
+          solution.Style.Visibility = "collapsed";
+          hint.Style.Visibility = "visible";
+          end
+        </onClick>
+      </button>
+    </stack>
+    <!-- This line can be removed after the curriculumStyles.xml fragment is included -->
+    <p style="invisible">This document is formatted improperly because the curriculumStyles.xml fragment was not included at the beginning of your document.</p>
+
+
+
+
+
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="curriculumThemePack\question.png" inspect="false" />
+          </column>
+          <column>
+            <p> The graph below shows the function $ f(x) $, find: </p>
+            <p>a) $ f(-1) $</p>
+            <p>b) $ x $ when $ f(x) = 4 $</p>
+          </column>
+        </row>
+      </table>
+
+
+
+
+
+      <xyPlot name="myPlot">
+
+        <series name="aSeries" manual="true">
+          <style>
+            <foreground color="50 135 184" />
+          </style>
+        </series>
+        <axis dim="x" auto="fixed" min="-3" max="4" />
+        <axis dim="y" auto="fixed" min="-2" max="5" />
+
+        <!-- x-y AXIS -->
+
+        <style name="lineColor">
+          <foreground color="0 0 0" />
+        </style>
+
+        <series style="lineColor">
+          <data> 10 0; -10 0</data>
+        </series>
+        <series style="lineColor">
+          <data>0 10; 0 -10</data>
+        </series>
+        <!-- x-y AXIS END -->
+      </xyPlot>
+
+      <script>
+        local x, y;
+        local plotPointer = myPlot.aSeries;
+
+        for x = -10, 10, .05 do
+        y = 4*math.pow(x,3) - (2*x) + 2
+        plotPointer:Add(x,y)
+        end
+        plotPointer:Update()
+      </script>
+
+
+
+
+
+      <p style="title">ANSWER</p>
+      <table name="table" widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="curriculumThemePack\answer.png" inspect="false" />
+          </column>
+          <column>
+            <p style="collapsed">
+              a) $ f(-1) = 0 $ <br />
+              b) $ x = 1 $ when $ f(x) = 4 $
+            </p>
+          </column>
+        </row>
+      </table>
+      <button name="button1" content="Show Answer">
+        <onClick>
+          if button1.Text == "Show Answer" then
+          table:Child(1):Child(2):Child(1).Style.Visibility = "visible";
+          button1.Text = "Hide Answer"
+          else
+          table:Child(1):Child(2):Child(1).Style.Visibility = "collapsed";
+          button1.Text = "Show Answer"
+          end
+        </onClick>
+      </button>
+    </stack>
+    <!-- This line can be removed after the curriculumStyles.xml fragment is included -->
+    <p style="invisible">This document is formatted improperly because the curriculumStyles.xml fragment was not included at the beginning of your document.</p>
+
+  </sectionNoTitle>
+
+
+
+
+  
+  
+  
+  
+  
+  
+    
+      
+        
+        
+      
+
+  
+  
+    
+<!--   Section 5    FEEDBACK    -->
+<sectionNoTitle>
+
+
+  <web url="&#xD;&#xA;https://docs.google.com/forms/d/e/1FAIpQLSdAjX1Q2ajHdUKcut5dsno_O34hFaOo_oOa-E0xn0vrFCc_zA/viewform?usp=sf_link">
+  </web>
+  
+</sectionNoTitle>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</document>

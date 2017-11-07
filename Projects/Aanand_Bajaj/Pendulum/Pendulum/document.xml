@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G707B3D80_4684_42A8_833B_97F8475A1805">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>Pendulum</title>
+    <creator>admin</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+  </metadata>
+
+  <sectionNoTitle name="pendulumModel1">
+
+    <p>
+      Use the button below to generate a random oscillation boundary. Change the lengths of the pendulum and mass such that the pendulum oscillates within the edges of the boundary amplitude <i>at least once</i> within the alloted time.
+    </p>
+
+    <p>
+      <i>Note: the mass of the pendulum is a function of its length</i>
+    </p>
+
+    <!--Styles for the interaction drawing-->
+    <style name="plotLines">
+      <foreground color="black" />
+      <lineThickness>2</lineThickness>
+    </style>
+
+    <style name="largeDot">
+      <foreground color="darkGray" />
+      <lineThickness>10</lineThickness>
+    </style>
+
+    <style name="boundaryLine">
+      <foreground color="black" />
+    </style>
+
+    <style name="startStyle">
+      <foreground color="white" />
+      <background color="seaGreen" />
+    </style>
+
+    <style name="italicSmall">
+      <font name="serif" />
+      <italic>true</italic>
+    </style>
+
+    <style name="labelStyle">
+      <size scale="0.9" />
+    </style>
+
+
+    <script>
+      <![CDATA[
+        local inertia = 0.008;
+        local mass = 0.5;
+        local pendulumLength = 0.1;
+        local massLength = 0.01;
+        local length = 0.1524;
+        --local massLength = 0.0254;
+        mass = mass + massLength;
+        local l = pendulumLength + massLength;
+        local radius = length + (massLength/2);
+        local dyn = -90.25;
+        local x, y, ym, xm;
+        local I_cm = 0;
+        local I_piv = 0;
+        local g = 9.81;
+        local inertiaSci;
+        --local penSeries = plotStack.plot.penseries;
+        --local massSeries = plotStack.plot.massSeries;
+        local displacement = plotStack.timePlot.displacement;
+        local T= 0.785;
+        
+        function drawGuides(factor)
+          plotStack.drawing.guides:Clear();
+          plotStack.drawing.guides:Add(0, 00.2/6 * factor);
+          plotStack.drawing.guides:Add(0, -0.2 * factor);
+          plotStack.drawing.guides:Update();
+          --plotStack.drawing.ticMarks.Transform = matrixf.translation(-0.15 * factor, 0, 0);
+          plotStack.drawing.ticMarks.Transform = matrixf.translation(-0.15 * factor, 0, 0) * matrixf.scaling(factor, 1, 1);
+        end
+        
+        plotStack.drawing.pendulumSeries:Add(0, 0);
+        plotStack.drawing.pendulumSeries:Add(0, -0.1);
+
+        plotStack.drawing.massSeries:Add(00.0075, 00.0);
+        plotStack.drawing.massSeries:Add(00.0075, -0.01);
+        plotStack.drawing.massSeries:Add(-0.0075, -0.01);
+        plotStack.drawing.massSeries:Add(-0.0075, 00.0);
+        plotStack.drawing.massSeries.Transform = matrixf.translation(0, -pendulumLength, 0)
+      
+        function updateAngle(pendulumAngle)
+          angleLabel.FormattedText = string.format("Angle = %.2f degrees", pendulumAngle)
+          plotStack.drawing.massSeries.Transform = matrixf.rotationAboutAxis(0, 0, 1, pendulumAngle) * matrixf.translation(0, - pendulumLength, 0) * matrixf.scaling(1, massLength*100, 1)
+          plotStack.drawing.pendulumSeries.Transform = matrixf.rotationAboutAxis(0, 0, 1, pendulumAngle) * matrixf.scaling(1,   lengthSlider.Value/10, 1)
+          --plotStack.drawing.pendulumSeries:Update()
+          --plotStack.drawing.massSeries:Update()
+        end
+      
+      function testOffScreen(angle)
+        if angle <= math.rad(-45) and tapButton.Text == "Raising" then
+          tapButton:Click();
+        end
+      end
+      
+      function updateDyn (newLength, newMassLength) --Called onValueChanged for lengthSlider and massSlider, and onClick for tapButtom
+        pendulumLength = newLength/100; --meter to centimeter conversion
+        massLength = newMassLength/1000; --meter to millimeter conversion
+        drawGuides(0.5 * ((lengthSlider.Value/10) - 1) + 1)
+        
+        l = pendulumLength + massLength
+        radius = pendulumLength + (massLength/2);
+        mass = 0.5 + massLength;
+        
+        I_cm = (1/12) * mass * massLength^2;
+        I_piv = mass * radius^2;
+        T = 2*math.pi*math.sqrt(I_piv / (mass*g*(pendulumLength+massLength)));
+                      
+        inertia = I_piv + I_cm;
+        dyn = -(mass * g * pendulumLength)/(2.0 * inertia);
+        
+        updateEq();
+        pendSim.pendSolve.dynamics.Value = vector({dyn});
+      end
+      
+      function updateEq() --Only called by updateDyn()
+        inertiaSci = inertia*1000;
+      
+        if inertiaSci > 10 then
+          inertiaSci = inertiaSci*0.1;
+          showEq.inertEq:Child(2).FormattedText = string.format("I = %.2f", inertiaSci) .. " <size scale='0.8'>E</size> -2";
+        elseif inertiaSci < 1 then
+          inertiaSci = inertiaSci*10;
+          showEq.inertEq:Child(2).FormattedText = string.format("I = %.2f", inertiaSci) .. " <size scale='0.8'>E</size> -4";
+        else
+          showEq.inertEq:Child(2).FormattedText = string.format("I = %.2f", inertiaSci) .. " <size scale='0.8'>E</size> -3";
+        end
+        
+        showEq.oscEq:Child(2).Text = string.format("T = %.3f", T);
+        
+        massLabel:Child(1):Child(1).Text = string.format("Mass = %0.2f g", (mass*1000))
+      end
+      
+      updateDyn(lengthSlider.Value, massSlider.Value);
+
+      plotStack.drawing.massSeries.Transform = matrixf.translation(0, -pendulumLength,  0) * matrixf.scaling(1, massLength*100, 1)
+      plotStack.drawing.pendulumSeries.Transform = matrixf.scaling(1,   lengthSlider.Value/10, 1)]]>
+    </script>
+
+    <script>
+      local ampBound;
+      local timeBound;
+      local boundary1 = plotStack.timePlot.boundary1;
+      local boundary2 = plotStack.timePlot.boundary2;
+      boundaryColor = boundary1.Style.ForegroundColor
+      tapButton = plotButtons:Child(1)
+
+      function changeBoundary()
+      boundary1:Clear()
+      boundary1:Add(timeBound-T, ampBound, color.transparent)
+      boundary1:Add(timeBound-T, ampBound, boundaryColor)
+      boundary1:Add(timeBound+T, ampBound, boundaryColor)
+      boundary1:Add(timeBound+T, ampBound, color.transparent)
+      boundary1:Add(timeBound-T, -ampBound, color.transparent)
+      boundary1:Add(timeBound-T, -ampBound, boundaryColor)
+      boundary1:Add(timeBound+T, -ampBound, boundaryColor)
+      boundary1:Add(timeBound+T, -ampBound, color.transparent)
+      end
+    </script>
+
+    <!--Control Buttons for the interaction: Raise (Raises the pendulum and starts the simulation), and Random Boundary (Sets a random target boundary for pendulum)-->
+    <stack name="plotButtons" orientation="auto">
+      <button content="Raise" style="startStyle">
+        <onClick>
+          if tapButton.Text == "Raise" then
+          pendSim:Stop()
+          pendSim:Start()
+          pendSim.pendSolve.feedback.Value = vector({0.0});
+          if pendSim.pendSolve.integrator2:OutputAt(1,1) &gt; 0 then
+          pendSim.pendSolve.externAcc.Value = vector({0.1});
+          else
+          pendSim.pendSolve.externAcc.Value = vector({-0.1});
+          end
+          tapButton.Text = "Raising";
+          tapButton.Style.Visibility = "hidden"
+          else
+          pendSim.pendSolve.feedback.Value = vector({1.0});
+          pendSim.pendSolve.externAcc.Value = vector({0.0});
+          tapButton.Text = "Raise";
+          tapButton.Style.Visibility = "visible"
+          updateDyn(lengthSlider.Value, massSlider.Value);
+          end
+        </onClick>
+      </button>
+      <button content="Random Boundary" name="randButton">
+        <style>
+          <foreground color="white" />
+          <background color="darkGray" />
+        </style>
+        <onClick>
+          <![CDATA[
+            ampBound = math.deg(math.random()/2)
+            if ampBound < math.deg(0.2) then
+            ampBound = math.deg(0.3)
+            end
+            timeBound = math.random(8,15)
+            changeBoundary()
+            plotStack.timePlot.displacement:Clear()
+            pendSim:Stop()
+            if tapButton.Text == "Raising" then
+            tapButton:Click()
+            end
+            ]]>
+        </onClick>
+      </button>
+      <!--Controls the speed of the simulation: Real Time (Synchronous timing) vs. Fast Forward Simulation (Asynchronous timing)-->
+      <button content="Real-Time Speed" name="speed">
+        <style>
+          <foreground color="white" />
+          <background color="darkGray" />
+        </style>
+        <onClick>
+          <![CDATA[
+            pendSim:Stop()
+            if tapButton.Text == "Raising" then
+            tapButton:Click()
+            end
+            if speed.Text == "Real-Time Speed" then
+            speed.Text = "Fast Forward Speed"
+            pendSim.AsynchronousMode = false
+            else
+            speed.Text = "Real-Time Speed"
+            pendSim.AsynchronousMode = true
+            end
+            ]]>
+        </onClick>
+      </button>
+    </stack>
+
+    <!--Interaction Drawing-->
+    <stack name="plotStack" orientation="horizontal">
+      <drawing name="drawing">
+        <style>
+          <widthPercentage>1</widthPercentage>
+        </style>
+        <axis dim="y" auto="growAndShrink" />
+        <axis dim="x" auto="lockAspectRatio" />
+        <series name="ceiling" draw="segmentedFill" ignore="true">
+          <style>
+            <foreground color="peru" />
+          </style>
+          <data>-0.5 0; 0.5 0; -0.5 0.1; 0.5 0.1</data>
+        </series>
+        <series name="pendulumSeries" capacity="2" manual="true">
+          <style>
+            <foreground color="black" />
+            <lineThickness>1</lineThickness>
+          </style>
+        </series>
+        <series name="massSeries" draw="radialFill" capacity="4" manual="true">
+          <style>
+            <foreground color="slateGray" />
+          </style>
+        </series>
+        <series name="guides" manual="true">
+          <style>
+            <foreground color="transparent" />
+          </style>
+          <data>
+            0 0.033;
+            0 -0.2
+          </data>
+        </series>
+        <series name="ticMarks" draw="lineSegments" ignore="true">
+          <style>
+            <foreground color="black" />
+            <lineThickness>1</lineThickness>
+          </style>
+          <data>
+            00.00 00.0; 00.02 00.0;
+            00.00 -0.1; 00.02 -0.1;
+            00.00 -0.2; 00.02 -0.2;
+            00.00 -0.3; 00.02 -0.3;
+            00.00 -0.4; 00.02 -0.4;
+            00.00 -0.5; 00.02 -0.5
+          </data>
+        </series>
+      </drawing>
+
+      <timePlot name="timePlot">
+        <style>
+          <widthPercentage>1</widthPercentage>
+        </style>
+        <axis dim="y" auto="growOnly" min="-50" max="50" />
+        <axis dim="x" min="0" max="15" auto="stripChart" />
+        <series name="displacement" />
+        <series name="boundary1" ignore="true" style="boundaryLine" />
+      </timePlot>
+    </stack>
+
+    <!--Labels-->
+    <stack orientation="auto" name="showEq">
+      <style name="stacks">
+        <widthPercentage>0.8</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+        <marginBottom>10</marginBottom>
+      </style>
+      <stack name="inertEq">
+        <p>
+          $ I = I_{cm} + m (L + \frac{l_1}{2})^2 \quad \text{kgm}^2$
+        </p>
+        <p style="italicSmall">
+          I = 2.73 <size scale="0.8">E</size> -3
+        </p>
+      </stack>
+      <stack name="oscEq">
+        <p>
+          $ T = 2 \pi \sqrt{\frac{I}{mg(L + l_1)}} \quad \text{s} $
+        </p>
+        <p style="italicSmall">T = 0.785</p>
+      </stack>
+    </stack>
+    <stack name="massLabel" orientation="auto">
+      <style name="stacks">
+        <widthPercentage>0.8</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+        <marginBottom>10</marginBottom>
+      </style>
+      <stack>
+        <p style="italicSmall">Mass = 525.4 g</p>
+      </stack>
+      <stack></stack>
+    </stack>
+
+    <!--Simulation: Solver feeds values into the timeplot-->
+    <simulation name="pendSim" period="0.01" duration="15" asynchronous="true">
+      <solver name="pendSolve" period="0.01">
+        <onUpdate>
+          updateAngle(integrator2:OutputAt(1,1));
+          testOffScreen(integrator2:OutputAt(1,1));
+        </onUpdate>
+        <series>
+          <constant name="externAcc" value="0.0" />
+          <feedback positive="true">
+            <series>
+              <transferFunction name="integrator1" num="1" den="1 0" />
+              <parallel>
+                <gain name="damping" value="-0.75" />
+                <series>
+                  <transferFunction name="integrator2" num="1" den="1 0" />
+                  <math op="radToDeg" />
+                  <probe ref="pendulumModel1.plotStack.timePlot.displacement" />
+                  <math op="degToRad" />
+                  <system name="sin" states="0">
+                    <input name="u" width="1" />
+                    <output name="y" width="1" />
+                    <onOutputs>return vector({math.sin(u[1])})</onOutputs>
+                  </system>
+                  <gain name="dynamics" value="-90.25" />
+                </series>
+              </parallel>
+            </series>
+            <gain name="feedback" value="1.0" />
+          </feedback>
+        </series>
+      </solver>
+    </simulation>
+
+    <!--Length Label and Slider: for adjustments to the length of the "rope"-->
+    <label name="lengthLabel" style="labelStyle">
+      Length of Pendulum (<italic>
+        <font name="serif">L</font>
+      </italic>): 15.24 cm
+    </label>
+    <slider name="lengthSlider" min="12" max="50" value="15.24">
+      <onValueChanged>
+        pendSim:Stop()
+        if tapButton.Text == "Raising" then
+        tapButton:Click()
+        end
+        updateDyn(lengthSlider.Value, massSlider.Value);
+
+        plotStack.drawing.massSeries.Transform = matrixf.translation(0, -pendulumLength,  0) * matrixf.scaling(1, massLength*100, 1)
+        plotStack.drawing.pendulumSeries.Transform = matrixf.scaling(1,   lengthSlider.Value/10, 1)
+        plotStack.drawing.massSeries:Update()
+        plotStack.drawing.pendulumSeries:Update()
+        <![CDATA[
+        lengthLabel.FormattedText = "Length of Pendulum (<italic><font name='serif'>L</font></italic>): " .. string.format("%.2f",lengthSlider.Value) .. " cm"; ]]>
+      </onValueChanged>
+    </slider>
+
+    <!--Label and Slider for Mass lenght: for adjustments to the length of the pendulum mass-->
+    <label name="massLengthLabel" style="labelStyle">
+      Length of Mass (<font name="serif">
+        <italic>l</italic>
+        <size scale="0.6">1</size>
+      </font>): 25.40 mm
+    </label>
+    <slider name="massSlider" min="10" max="50" value="25.40">
+      <onValueChanged>
+        pendSim:Stop()
+        if tapButton.Text == "Raising" then
+        tapButton:Click()
+        end
+        updateDyn(lengthSlider.Value, massSlider.Value);
+
+        plotStack.drawing.massSeries.Transform = matrixf.translation(0, -pendulumLength,  0) * matrixf.scaling(1, massLength*100, 1)
+        plotStack.drawing.pendulumSeries.Transform = matrixf.scaling(1,   lengthSlider.Value/10, 1)
+        plotStack.drawing.massSeries:Update()
+        plotStack.drawing.pendulumSeries:Update()
+        <![CDATA[massLengthLabel.FormattedText = "Length of Mass (<italic><font name='serif'>l</font></italic><font name='serif'><size scale='0.6'>1</size></font>): " .. string.format("%.2f",massSlider.Value) .. " mm"; ]]>
+      </onValueChanged>
+    </slider>
+
+    <label name="angleLabel" style="labelStyle collapsed">Angle = 0.00 degrees</label>
+    <!--slider min="-45" max="45" value="0">
+        <onValueChanged>
+          updateAngle(math.rad(value))
+        </onValueChanged>
+      </slider-->
+  </sectionNoTitle>
+
+</document>

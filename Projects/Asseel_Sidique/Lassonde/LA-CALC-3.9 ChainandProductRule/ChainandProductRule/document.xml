@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="GA4195B14_DC44_4757_AF42_7EC8BE2BCCC9">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>LA-CALC-3.9 Combining Chain and Product Rule</title>
+    <creator>Thiago</creator>
+    <coverImage src="resources/LassondeLogo.png" />
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+  </metadata>
+
+  <include src="resources/curriculumStylesLassonde.xml" />
+  <include src="resources/Utilities.xml" />
+
+  <!--HEADER**********************************************-->
+  <header style="themeColour">
+    <stack style="center" orientation="horizontal">
+      <p></p>
+    </stack>
+  </header>
+  <footer style="themeColour">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="themeColourTitle">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--FOOTER**********************************************-->
+  
+
+  <!-- Section 1 -->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">Further Chain Rule</title>
+
+    <p style="sectionHeading">Introduction</p>
+    <stack style="contentBG">
+      <p>
+        This module will cover derivatives of functions such as: $ F(x) = f(x) \cdot g(h(x)) $, where we must use the Product rule <b>and</b> the Chain rule at least once to find $ F '(x) $.
+      </p>
+    </stack>
+  </section>
+
+  <sectionNoTitle name="section2" style="pageLayout">
+    <script>
+      local stepsController = StepsController:new({stepsStack=stepsStack, numOfSteps=3})
+    </script>
+    <p style="sectionHeading">Remarks</p>
+    <stack style="contentBG">
+      <p style="subSectionHeading">
+        <b>Product Rule</b>:
+      </p>
+      <p>
+        Let $ F(x) = f(x) \cdot g(x) $
+      </p>
+      <p>
+        then  $ F'(x) = f'(x) \cdot g(x) + f(x) \cdot g'(x) $
+      </p>
+
+      <p style="subSectionHeading">
+        <style>
+          <marginTop>40</marginTop>
+        </style>
+        <b>Chain Rule</b>:
+      </p>
+      <p>
+        Let $ F(x) = f(g(x)) $
+      </p>
+      <p>
+        <style>
+          <marginBottom>50</marginBottom>
+        </style>
+        then $ F'(x) = f'(g(x)) \cdot g'(x) $
+      </p>
+    </stack>
+    <p style="sectionHeading">Question Step-by-Step</p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="subSectionHeading">Step-by-Step Example</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>Let $ F(x) = e^{cosx} \cdot cos(e^{x}) $, find F'(x):</p>
+          </column>
+        </row>
+      </table>
+    </stack>
+    <stack name="stepsStack">
+      <!--Each step is a stack, and each step has alternating background colors-->
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>  Apply the Product Rule: </p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            <stack style="center">
+              <p style="centerText">
+                $ F'(x) = \frac{d}{dx}[ e^{cosx} ] \cdot cos(e^{x}) + e^{cosx} \cdot \frac{d}{dx}[ cos(e^{x}) ] $
+              </p>
+            </stack>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <onClick>
+            stepsController:toggleStep(1)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Apply the Chain Rule</p>
+          <stack name="cont" style="invisible">
+            <stack orientation="horizontal">
+              <stack orientation="vertical">
+                <!--CONTENT GOES HERE-->
+                <p style="centerText"> $ \frac{d}{dx}[ e^{cosx} ] = e^{cosx} \cdot (-sinx)  $</p>
+
+                <p style="centerText">$ \frac{d}{dx}[ cos(e^{x}) ] = -sinx(e^{x}) \cdot e^{x} $</p>
+              </stack>
+            </stack>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <onClick>
+            stepsController:toggleStep(2)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <!--CONTENT GOES HERE-->
+          <p>Plug in and Simplify</p>
+          <stack name="cont" style="invisible">
+            <p> $ F '(x) = (e^{cosx} \cdot (-sinx)) \cdot cos(e^{x}) + e^{cosx} \cdot (-sin(e^{x}) \cdot e^{x} ) $</p>
+            <p> $ F '(x) = -e^{cosx} \cdot sinx \cdot cos(e^{x}) - e^{x} \cdot e^{cosx} \cdot sin(e^{x}) $ </p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <onClick>
+            stepsController:toggleStep(3)
+          </onClick>
+        </button>
+      </stack>
+    </stack>
+    <p>
+      <br />
+    </p>
+  </sectionNoTitle>
+
+  <sectionNoTitle name="section3" style="pageLayout">
+    <p style="sectionHeading">Examples</p>
+
+
+    <stack style="contentBG">
+      <p style="subSectionHeading">Example 1</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>$ F(x) = (x^{2} + 1)^{2} \cdot lnx $, find $ F '(x) $:</p>
+          </column>
+        </row>
+      </table>
+
+
+
+
+
+      <stack name="answerWrap" style="collapsed">
+        <p style="subSectionHeading">Answer</p>
+        <table name="table" widths="10% 90%" grid="false">
+          <row>
+            <column>
+              <image src="resources\answer.png" inspect="false" />
+            </column>
+            <column>
+              <p> $ F ' (x) = \frac{d}{dx}[ (x^{2} + 1)^{2} ] \cdot lnx + (x^{2} + 1)^{2} \cdot \frac{1}{x} $</p>
+              <p> $ F ' (x) = ( 2 (x^{2}+1) \cdot 2x) \cdot lnx + \frac{(x^{2} + 1)^{2}}{x} $</p>
+              <p> $ F ' (x) = (4x(x^{2} + 1))lnx + \frac{ (x^{2} + 1)^{2} }{x} $</p>
+            </column>
+          </row>
+        </table>
+      </stack>
+
+      <button name="button1" content="Show Answer">
+        <onClick>
+          if button1.Text == "Show Answer" then
+          answerWrap.Style.Visibility = "visible";
+          button1.Text = "Hide Answer"
+          else
+          answerWrap.Style.Visibility = "collapsed";
+          button1.Text = "Show Answer"
+          end
+        </onClick>
+      </button>
+    </stack>
+    <p>
+      <br />
+    </p>
+
+    <stack style="contentBG">
+      <p style="subSectionHeading">Example 2</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>$ F(x) = (x \cdot sinx)^{2} $, find $ F '(x) $:</p>
+          </column>
+        </row>
+      </table>
+
+
+
+
+
+      <stack name="answerWrap" style="collapsed">
+        <p style="subSectionHeading">Answer</p>
+        <table name="table" widths="10% 90%" grid="false">
+          <row>
+            <column>
+              <image src="resources\answer.png" inspect="false" />
+            </column>
+            <column>
+              <p>$ F'(x) = 2(x \cdot sinx) \frac{d}{dx} [ x \cdot sinx ] $</p>
+
+              <p>
+                $ F'(x) =  2(x \cdot sinx ) \cdot (1 \cdot sinx + x \cdot cosx) $
+              </p>
+              <p>$ F'(x) = 2xsinx \cdot (sinx + xcosx) $</p>
+            </column>
+          </row>
+        </table>
+      </stack>
+
+      <button name="button1" content="Show Answer">
+        <onClick>
+          if button1.Text == "Show Answer" then
+          answerWrap.Style.Visibility = "visible";
+          button1.Text = "Hide Answer"
+          else
+          answerWrap.Style.Visibility = "collapsed";
+          button1.Text = "Show Answer"
+          end
+        </onClick>
+      </button>
+    </stack>
+
+    <p>
+      <br />
+    </p>
+
+    <stack style="contentBG">
+      <p style="subSectionHeading">Example 3</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>$ F(x) = sinx \cdot ln(x^{2}) $, find $ F '(x) $:</p>
+          </column>
+        </row>
+      </table>
+
+
+
+
+
+      <stack name="answerWrap" style="collapsed">
+        <p style="subSectionHeading">Answer</p>
+        <table name="table" widths="10% 90%" grid="false">
+          <row>
+            <column>
+              <image src="resources\answer.png" inspect="false" />
+            </column>
+            <column>
+              <p>$ F'(x) = cosx \cdot ln(x^{2}) + sinx \frac{d}{dx}[ln(x^{2})] $</p>
+
+              <p>
+                $ F'(x) = cosx \cdot ln(x^{2}) + \frac{2sinx}{x} $
+              </p>
+            </column>
+          </row>
+        </table>
+      </stack>
+
+      <button name="button1" content="Show Answer">
+        <onClick>
+          if button1.Text == "Show Answer" then
+          answerWrap.Style.Visibility = "visible";
+          button1.Text = "Hide Answer"
+          else
+          answerWrap.Style.Visibility = "collapsed";
+          button1.Text = "Show Answer"
+          end
+        </onClick>
+      </button>
+    </stack>
+
+
+    <p>
+      <style>
+        <marginBottom>50</marginBottom>
+      </style>
+    </p>
+  </sectionNoTitle>
+
+  <sectionNoTitle name="section4" style="pageLayout">
+    <p style="sectionHeading">Practice</p>
+    <stack style="contentBG">
+
+      <p style="subSectionHeading">Question 1</p>
+
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p> Let $ F(x) = x^{2} \sqrt{x^{3}+1} $. Find $F'(x)$:</p>
+          </column>
+        </row>
+      </table>
+
+
+
+
+
+
+
+      <p name="answer" style="collapsed">C</p>
+      <script>
+        local selection = -1;
+        local deselectedColor = color.silver;
+        local selectedColor = color.rgb(232, 12, 46);
+
+        local function chooseButton(i)
+        if selection &gt; 0 then
+        stack.table:Child(selection):Child(1):Child(1).Style.BackgroundColor = deselectedColor;
+        end
+        stack.table:Child(i):Child(1):Child(1).Style.BackgroundColor = selectedColor;
+        selection = i;
+        end
+      </script>
+      <stack orientation="horizontal" name="stack">
+        <table name="table" widths="10% 90%" grid="false">
+          <style name="buttons">
+            <foreground color="white" />
+            <background color="silver" />
+          </style>
+          <row name="row">
+
+            <column>
+              <button content="A">
+                <onClick>final.Text="A"; chooseButton(1);</onClick>
+              </button>
+            </column>
+
+            <column>
+              <p>$ F'(x) = \frac{ x(2x + 2)}{x} $</p>
+            </column>
+
+          </row>
+
+          <row>
+
+            <column>
+              <button content="B">
+                <onClick>final.Text="B"; chooseButton(2);</onClick>
+              </button>
+            </column>
+
+            <column>
+              <p>$ F'(x) = \frac{ x( \frac{7}{2}x^{3}+2)}{ \sqrt{x^{3} + 1}} $</p>
+            </column>
+
+          </row>
+
+          <row>
+
+            <column>
+              <button content="C">
+                <onClick>final.Text="C"; chooseButton(3);</onClick>
+              </button>
+            </column>
+
+            <column>
+              <p> $ F'(x) = \frac{x( 2x^{3}}{2}$ </p>
+            </column>
+
+          </row>
+        </table>
+      </stack>
+
+      <p name="final" style="collapsed" />
+      <stack name="hint" style="collapsed">
+        <p style="centerText">  Not quite there, try again ! </p>
+      </stack>
+      <stack name="solution" style="collapsed">
+        <p style="centerText"> Correct!  </p>
+      </stack>
+
+
+
+
+
+      <button content="Check Answer">
+        <onClick>
+          if string.lower(final.Text) == string.lower(answer.Text) then
+          solution.Style.Visibility = "visible";
+          stack.table:Child(selection):Child(1):Child(1).Style.BackgroundColor = color.rgb(0, 255, 0);
+
+          hint.Style.Visibility = "collapsed";
+          else
+          solution.Style.Visibility = "collapsed";
+          stack.table:Child(selection):Child(1):Child(1).Style.BackgroundColor = selectedColor;
+          hint.Style.Visibility = "visible";
+          end
+        </onClick>
+      </button>
+
+    </stack>
+    <p>
+      <br />
+    </p>
+    <stack style="contentBG">
+
+
+      <p style="subSectionHeading">Question 2</p>
+
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p> Let $ F(x) = x^{3}(2x + 6)^{5} $. Find $ F '(x)$:</p>
+          </column>
+        </row>
+      </table>
+
+
+
+
+
+
+
+      <p name="answer" style="collapsed">A</p>
+      <script>
+        local selection = -1;
+        local deselectedColor = color.silver;
+        local selectedColor = color.rgb(232, 12, 46);
+
+        local function chooseButton(i)
+        if selection &gt; 0 then
+        stack.table:Child(selection):Child(1):Child(1).Style.BackgroundColor = deselectedColor;
+        end
+        stack.table:Child(i):Child(1):Child(1).Style.BackgroundColor = selectedColor;
+        selection = i;
+        end
+      </script>
+      <stack orientation="horizontal" name="stack">
+        <table name="table" widths="10% 90%" grid="false">
+          <style name="buttons">
+            <foreground color="white" />
+            <background color="silver" />
+          </style>
+          <row name="row">
+
+            <column>
+              <button content="A">
+                <onClick>final.Text="A"; chooseButton(1);</onClick>
+              </button>
+            </column>
+
+            <column>
+              <p>$ F'(x) = x^{2} (2x)^{5} + 3x^{3}(2x + 2) $</p>
+            </column>
+
+          </row>
+
+          <row>
+
+            <column>
+              <button content="B">
+                <onClick>final.Text="B"; chooseButton(2);</onClick>
+              </button>
+            </column>
+
+            <column>
+              <p>$ F'(x) = 3x^{2}(2x + 6)^{5} + 10x^{3}(2x + 6)^{4} $</p>
+            </column>
+
+          </row>
+
+          <row>
+
+            <column>
+              <button content="C">
+                <onClick>final.Text="C"; chooseButton(3);</onClick>
+              </button>
+            </column>
+
+            <column>
+              <p>$ F'(x) = x^{2}(10x + 3)^{5} + 5x^{3}(x + 5)^{5} $</p>
+            </column>
+
+          </row>
+        </table>
+      </stack>
+
+      <p name="final" style="collapsed" />
+      <stack name="hint" style="collapsed">
+        <p style="centerText">  Not quite there, try again ! </p>
+      </stack>
+      <stack name="solution" style="collapsed">
+        <p style="centerText"> Correct! </p>
+      </stack>
+
+
+
+
+
+      <button content="Check Answer">
+        <onClick>
+          if string.lower(final.Text) == string.lower(answer.Text) then
+          solution.Style.Visibility = "visible";
+          stack.table:Child(selection):Child(1):Child(1).Style.BackgroundColor = color.rgb(0, 255, 0);
+
+          hint.Style.Visibility = "collapsed";
+          else
+          solution.Style.Visibility = "collapsed";
+          stack.table:Child(selection):Child(1):Child(1).Style.BackgroundColor = selectedColor;
+          hint.Style.Visibility = "visible";
+          end
+        </onClick>
+      </button>
+
+    </stack>
+    <p>
+      <style>
+        <marginBottom>50</marginBottom>
+      </style>
+    </p>
+
+  </sectionNoTitle>
+</document>

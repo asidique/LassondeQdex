@@ -1,0 +1,1712 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G9195EFA1_AE01_43B4_BF5F_802659E7713E">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>3.4 Practice A - Operations with Radicals</title>
+    <creator>admin</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+  </metadata>
+
+  <include src="curriculumThemePack/curriculumStyles.xml" />
+  <include src="plotTools.xml" />
+
+  <!--Header and Footer-->
+  <style name="backgroundColor">
+    <background color="50 133 184" />
+  </style>
+  <style name="fontColor">
+    <foreground color="255 255 255" />
+  </style>
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="fontColor">Amanda Koon</p>
+      <p style="fontColor rightText">MCR3U</p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/logo1.png" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/logo2.png" />
+    </stack>
+  </footer>
+
+  <!-- Section 1 -->
+  <section name="summary">
+    <title>A Quick Summary</title>
+    <stack style="highlightBox">
+      <p>Operations with radicals are like simplifying variables in algebra.</p>
+    </stack>
+    <stack style="highlightBox">
+      <p>A radical is in its SIMPLEST FORM when:</p>
+      <p>1) The radicand has no perfect square other than 1. For example:</p>
+      <equation>$ \sqrt{28} = \sqrt{4*7} = 2*\sqrt{7} $</equation>
+      <p>
+        <br />2)	No radical appears in the denominator of a fraction (i.e., always RATIONALIZE the denominator). For example:
+      </p>
+      <p>i) Monomial Denominator:</p>
+      <equation>$ \frac{3}{\sqrt{2}} = \frac{3}{\sqrt{2}} * \frac{\sqrt{2}}{\sqrt{2}} = \frac{3\sqrt{2}}{2}$</equation>
+      <p>
+        <br />ii) Mixed Radical Monomial Denominator:
+      </p>
+      <equation>$ -\frac{7}{5\sqrt{2}} = -\frac{7}{5\sqrt{2}} * \frac{\sqrt{2}}{\sqrt{2}} = -\frac{7\sqrt{2}}{10}$</equation>
+    </stack>
+  </section>
+
+  <!-- Practice Page 1-->
+  <section name="practice">
+    <title>Practice Problems</title>
+    <stack style="highlightBox">
+      <p>Write the following as mixed radicals.</p>
+    </stack>
+
+    <!--Question 1-->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">
+              Question: $ \sqrt{8} $
+            </p>
+            <p style="center">
+              Answer: $ a\sqrt{b} $
+            </p>
+            <style name="blackLine">
+              <foreground color="black" />
+            </style>
+            <style name="functionLine">
+              <foreground color="50 133 184" />
+              <lineThickness>3</lineThickness>
+            </style>
+            <script>
+              <![CDATA[
+             function round(value,multiple)
+                result = 0;
+                
+                if value % multiple ~= 0 then
+                  result = multiple;
+                  division = math.floor((value/multiple)+1);
+                  result = division*multiple;
+                  return result;
+                else 
+                  return value;
+                end
+              end
+              ]]>
+            </script>
+            <!--slider for a-->
+            <stack orientation="horizontal">
+              <p name="aLabel">a = 0</p>
+              <slider name="aSlider" min="0" max="10" value="1">
+                <onValueChanged>
+                  <![CDATA[
+                  aLabel.Text = "a = "..round(value,1);
+                  aSlider.Value = round(value,1);
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+            <!--slider for b-->
+            <stack orientation="horizontal">
+              <p name="bLabel">b = 0</p>
+              <slider name="bSlider" min="0" max="10" value="1">
+                <onValueChanged>
+                  <![CDATA[
+                  bLabel.Text = "b = "..round(value,1);
+                  bSlider.Value = round(value,1);
+
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+            <button content="Check Answer">
+              <onClick>
+                <![CDATA[
+                a = table:Child(1):Child(1):Child(3):Child(2).Value;
+                b = table:Child(1):Child(1):Child(4):Child(2).Value;
+                
+                if a == 2 and b == 2 then
+                  table:Child(1):Child(1):Child(6):Child(1).Text = "Correct!";
+                  table:Child(1):Child(1):Child(6):Child(1).Style.Visibility = "visible";
+                  table:Child(1):Child(1):Child(6):Child(2).Style.Visibility = "visible";
+                else
+                  table:Child(1):Child(1):Child(6):Child(1).Text = "Incorrect! Try again.";
+                  table:Child(1):Child(1):Child(6):Child(1).Style.Visibility = "visible";
+                end
+                ]]>
+              </onClick>
+            </button>
+            <stack>
+              <p name="answer" style="collapsed"></p>
+              <p name="answer2" style="collapsed">The answer is: $ 2\sqrt{2} $ </p>
+            </stack>
+          </column>
+        </row>
+      </table>
+    </stack>
+
+    <!--Question 2-->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">
+              Question: $ \sqrt{27} $
+            </p>
+            <p style="center">
+              Answer: $ a\sqrt{b} $
+            </p>
+            <style name="blackLine">
+              <foreground color="black" />
+            </style>
+            <style name="functionLine">
+              <foreground color="50 133 184" />
+              <lineThickness>3</lineThickness>
+            </style>
+            <script>
+              <![CDATA[
+             function round(value,multiple)
+                result = 0;
+                
+                if value % multiple ~= 0 then
+                  result = multiple;
+                  division = math.floor((value/multiple)+1);
+                  result = division*multiple;
+                  return result;
+                else 
+                  return value;
+                end
+              end
+              ]]>
+            </script>
+
+            <!--slider for a-->
+            <stack orientation="horizontal">
+              <p name="aLabel">a = 0</p>
+              <slider name="aSlider" min="0" max="10" value="1">
+                <onValueChanged>
+                  <![CDATA[
+                  aLabel.Text = "a = "..round(value,1);
+                  aSlider.Value = round(value,1);
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+            <!--slider for b-->
+
+            <stack orientation="horizontal">
+              <p name="bLabel">b = 0</p>
+              <slider name="bSlider" min="0" max="10" value="1">
+                <onValueChanged>
+                  <![CDATA[
+                  bLabel.Text = "b = "..round(value,1);
+                  bSlider.Value = round(value,1);
+
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+            <button content="Check Answer">
+              <onClick>
+                <![CDATA[
+                a = table:Child(1):Child(1):Child(3):Child(2).Value;
+                b = table:Child(1):Child(1):Child(4):Child(2).Value;
+                
+                if a == 3 and b == 3 then
+                  table:Child(1):Child(1):Child(6):Child(1).Text = "Correct!";
+                  table:Child(1):Child(1):Child(6):Child(1).Style.Visibility = "visible";
+                  table:Child(1):Child(1):Child(6):Child(2).Style.Visibility = "visible";
+                else
+                  table:Child(1):Child(1):Child(6):Child(1).Text = "Incorrect! Try again.";
+                  table:Child(1):Child(1):Child(6):Child(1).Style.Visibility = "visible";
+                end
+                ]]>
+              </onClick>
+            </button>
+            <stack>
+              <p name="answer" style="collapsed"></p>
+              <p name="answer2" style="collapsed">The answer is: $ 3\sqrt{3} $ </p>
+            </stack>
+          </column>
+        </row>
+      </table>
+    </stack>
+
+    <!--Question 3-->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">
+              Question: $ \sqrt{72} $
+            </p>
+            <p style="center">
+              Answer: $ a\sqrt{b} $
+            </p>
+            <style name="blackLine">
+              <foreground color="black" />
+            </style>
+            <style name="functionLine">
+              <foreground color="50 133 184" />
+              <lineThickness>3</lineThickness>
+            </style>
+            <script>
+              <![CDATA[
+             function round(value,multiple)
+                result = 0;
+                
+                if value % multiple ~= 0 then
+                  result = multiple;
+                  division = math.floor((value/multiple)+1);
+                  result = division*multiple;
+                  return result;
+                else 
+                  return value;
+                end
+              end
+              ]]>
+            </script>
+            <!--slider for a-->
+            <stack orientation="horizontal">
+              <p name="aLabel">a = 0</p>
+              <slider name="aSlider" min="0" max="10" value="1">
+                <onValueChanged>
+                  <![CDATA[
+                  aLabel.Text = "a = "..round(value,1);
+                  aSlider.Value = round(value,1);
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+            <!--slider for b-->
+            <stack orientation="horizontal">
+              <p name="bLabel">b = 0</p>
+              <slider name="bSlider" min="0" max="10" value="1">
+                <onValueChanged>
+                  <![CDATA[
+                  bLabel.Text = "b = "..round(value,1);
+                  bSlider.Value = round(value,1);
+
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+            <button content="Check Answer">
+              <onClick>
+                <![CDATA[
+                a = table:Child(1):Child(1):Child(3):Child(2).Value;
+                b = table:Child(1):Child(1):Child(4):Child(2).Value;
+                
+                if a == 6 and b == 2 then
+                  table:Child(1):Child(1):Child(6):Child(1).Text = "Correct!";
+                  table:Child(1):Child(1):Child(6):Child(1).Style.Visibility = "visible";
+                  table:Child(1):Child(1):Child(6):Child(2).Style.Visibility = "visible";
+                else
+                  table:Child(1):Child(1):Child(6):Child(1).Text = "Incorrect! Try again.";
+                  table:Child(1):Child(1):Child(6):Child(1).Style.Visibility = "visible";
+                end
+                ]]>
+              </onClick>
+            </button>
+            <stack>
+              <p name="answer" style="collapsed"></p>
+              <p name="answer2" style="collapsed">The answer is: $ 6\sqrt{2} $</p>
+            </stack>
+          </column>
+        </row>
+      </table>
+    </stack>
+
+    <!--Question 4-->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">
+              Question: $ \sqrt{400} $
+            </p>
+            <p style="center">
+              Answer: $ a $
+            </p>
+            <style name="blackLine">
+              <foreground color="black" />
+            </style>
+            <style name="functionLine">
+              <foreground color="50 133 184" />
+              <lineThickness>3</lineThickness>
+            </style>
+            <script>
+              <![CDATA[
+             function round(value,multiple)
+                result = 0;
+                
+                if value % multiple ~= 0 then
+                  result = multiple;
+                  division = math.floor((value/multiple)+1);
+                  result = division*multiple;
+                  return result;
+                else 
+                  return value;
+                end
+              end
+              ]]>
+            </script>
+            <!--slider for a-->
+            <stack orientation="horizontal">
+              <p name="aLabel">a = 0</p>
+              <slider name="aSlider" min="0" max="20" value="1">
+                <onValueChanged>
+                  <![CDATA[
+                  aLabel.Text = "a = "..round(value,1);
+                  aSlider.Value = round(value,1);
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+            <button content="Check Answer">
+              <onClick>
+                <![CDATA[
+                a = table:Child(1):Child(1):Child(3):Child(2).Value;
+                
+                if a == 20 then
+                  table:Child(1):Child(1):Child(5):Child(1).Text = "Correct!";
+                  table:Child(1):Child(1):Child(5):Child(1).Style.Visibility = "visible";
+                  table:Child(1):Child(1):Child(5):Child(2).Style.Visibility = "visible";
+                else
+                  table:Child(1):Child(1):Child(5):Child(1).Text = "Incorrect! Try again.";
+                  table:Child(1):Child(1):Child(5):Child(1).Style.Visibility = "visible";
+                end
+                ]]>
+              </onClick>
+            </button>
+            <stack>
+              <p name="answer" style="collapsed"></p>
+              <p name="answer2" style="collapsed">The answer is: $ 20 $ </p>
+            </stack>
+          </column>
+        </row>
+      </table>
+    </stack>
+
+    <!--Question 5-->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">
+              Question: $ \sqrt{2400} $
+            </p>
+            <p style="center">
+              Answer: $ a\sqrt{b} $
+            </p>
+            <style name="blackLine">
+              <foreground color="black" />
+            </style>
+            <style name="functionLine">
+              <foreground color="50 133 184" />
+              <lineThickness>3</lineThickness>
+            </style>
+            <script>
+              <![CDATA[
+             function round(value,multiple)
+                result = 0;
+                
+                if value % multiple ~= 0 then
+                  result = multiple;
+                  division = math.floor((value/multiple)+1);
+                  result = division*multiple;
+                  return result;
+                else 
+                  return value;
+                end
+              end
+              ]]>
+            </script>
+            <!--slider for a-->
+            <stack orientation="horizontal">
+              <p name="aLabel">a = 0</p>
+              <slider name="aSlider" min="0" max="20" value="1">
+                <onValueChanged>
+                  <![CDATA[
+                  aLabel.Text = "a = "..round(value,1);
+                  aSlider.Value = round(value,1);
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+            <!--slider for b-->
+            <stack orientation="horizontal">
+              <p name="bLabel">b = 0</p>
+              <slider name="bSlider" min="0" max="10" value="1">
+                <onValueChanged>
+                  <![CDATA[
+                  bLabel.Text = "b = "..round(value,1);
+                  bSlider.Value = round(value,1);
+
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+            <button content="Check Answer">
+              <onClick>
+                <![CDATA[
+                a = table:Child(1):Child(1):Child(3):Child(2).Value;
+                b = table:Child(1):Child(1):Child(4):Child(2).Value;
+                
+                if a == 20 and b == 6 then
+                  table:Child(1):Child(1):Child(6):Child(1).Text = "Correct!";
+                  table:Child(1):Child(1):Child(6):Child(1).Style.Visibility = "visible";
+                  table:Child(1):Child(1):Child(6):Child(2).Style.Visibility = "visible";
+                else
+                  table:Child(1):Child(1):Child(6):Child(1).Text = "Incorrect! Try again.";
+                  table:Child(1):Child(1):Child(6):Child(1).Style.Visibility = "visible";
+                end
+                ]]>
+              </onClick>
+            </button>
+            <stack>
+              <p name="answer" style="collapsed"></p>
+              <p name="answer2" style="collapsed">The answer is: $ 20\sqrt{6} $ </p>
+            </stack>
+          </column>
+        </row>
+      </table>
+    </stack>
+
+    <!--Question 6-->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">
+              Question: $ \sqrt{288} $
+            </p>
+            <p style="center">
+              Answer: $ a\sqrt{b} $
+            </p>
+            <style name="blackLine">
+              <foreground color="black" />
+            </style>
+            <style name="functionLine">
+              <foreground color="50 133 184" />
+              <lineThickness>3</lineThickness>
+            </style>
+            <script>
+              <![CDATA[
+             function round(value,multiple)
+                result = 0;
+                
+                if value % multiple ~= 0 then
+                  result = multiple;
+                  division = math.floor((value/multiple)+1);
+                  result = division*multiple;
+                  return result;
+                else 
+                  return value;
+                end
+              end
+              ]]>
+            </script>
+            <!--slider for a-->
+            <stack orientation="horizontal">
+              <p name="aLabel">a = 0</p>
+              <slider name="aSlider" min="0" max="10" value="1">
+                <onValueChanged>
+                  <![CDATA[
+                  aLabel.Text = "a = "..round(value,1);
+                  aSlider.Value = round(value,1);
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+            <!--slider for b-->
+            <stack orientation="horizontal">
+              <p name="bLabel">b = 0</p>
+              <slider name="bSlider" min="0" max="20" value="1">
+                <onValueChanged>
+                  <![CDATA[
+                  bLabel.Text = "b = "..round(value,1);
+                  bSlider.Value = round(value,1);
+
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+            <button content="Check Answer">
+              <onClick>
+                <![CDATA[
+                a = table:Child(1):Child(1):Child(3):Child(2).Value;
+                b = table:Child(1):Child(1):Child(4):Child(2).Value;
+                
+                if a == 2 and b == 12 then
+                  table:Child(1):Child(1):Child(6):Child(1).Text = "Correct!";
+                  table:Child(1):Child(1):Child(6):Child(1).Style.Visibility = "visible";
+                  table:Child(1):Child(1):Child(6):Child(2).Style.Visibility = "visible";
+                else
+                  table:Child(1):Child(1):Child(6):Child(1).Text = "Incorrect! Try again.";
+                  table:Child(1):Child(1):Child(6):Child(1).Style.Visibility = "visible";
+                end
+                ]]>
+              </onClick>
+            </button>
+            <stack>
+              <p name="answer" style="collapsed"></p>
+              <p name="answer2" style="collapsed">The answer is: $ 2\sqrt{12} $ </p>
+            </stack>
+          </column>
+        </row>
+      </table>
+    </stack>
+
+    <!--Question 7-->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">
+              Question: $ \sqrt{98} $
+            </p>
+            <p style="center">
+              Answer: $ a\sqrt{b} $
+            </p>
+            <style name="blackLine">
+              <foreground color="black" />
+            </style>
+            <style name="functionLine">
+              <foreground color="50 133 184" />
+              <lineThickness>3</lineThickness>
+            </style>
+            <script>
+              <![CDATA[
+             function round(value,multiple)
+                result = 0;
+                
+                if value % multiple ~= 0 then
+                  result = multiple;
+                  division = math.floor((value/multiple)+1);
+                  result = division*multiple;
+                  return result;
+                else 
+                  return value;
+                end
+              end
+              ]]>
+            </script>
+            <!--slider for a-->
+            <stack orientation="horizontal">
+              <p name="aLabel">a = 0</p>
+              <slider name="aSlider" min="0" max="10" value="1">
+                <onValueChanged>
+                  <![CDATA[
+                  aLabel.Text = "a = "..round(value,1);
+                  aSlider.Value = round(value,1);
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+            <!--slider for b-->
+            <stack orientation="horizontal">
+              <p name="bLabel">b = 0</p>
+              <slider name="bSlider" min="0" max="10" value="1">
+                <onValueChanged>
+                  <![CDATA[
+                  bLabel.Text = "b = "..round(value,1);
+                  bSlider.Value = round(value,1);
+
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+            <button content="Check Answer">
+              <onClick>
+                <![CDATA[
+                a = table:Child(1):Child(1):Child(3):Child(2).Value;
+                b = table:Child(1):Child(1):Child(4):Child(2).Value;
+                
+                if a == 7 and b == 2 then
+                  table:Child(1):Child(1):Child(6):Child(1).Text = "Correct!";
+                  table:Child(1):Child(1):Child(6):Child(1).Style.Visibility = "visible";
+                  table:Child(1):Child(1):Child(6):Child(2).Style.Visibility = "visible";
+                else
+                  table:Child(1):Child(1):Child(6):Child(1).Text = "Incorrect! Try again.";
+                  table:Child(1):Child(1):Child(6):Child(1).Style.Visibility = "visible";
+                end
+                ]]>
+              </onClick>
+            </button>
+            <stack>
+              <p name="answer" style="collapsed"></p>
+              <p name="answer2" style="collapsed">The answer is: $ 7\sqrt{2} $ </p>
+            </stack>
+          </column>
+        </row>
+      </table>
+    </stack>
+
+    <!--Question 8-->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">
+              Question: $ \sqrt{243} $
+            </p>
+            <p style="center">
+              Answer: $ a\sqrt{b} $
+            </p>
+            <style name="blackLine">
+              <foreground color="black" />
+            </style>
+            <style name="functionLine">
+              <foreground color="50 133 184" />
+              <lineThickness>3</lineThickness>
+            </style>
+            <script>
+              <![CDATA[
+             function round(value,multiple)
+                result = 0;
+                
+                if value % multiple ~= 0 then
+                  result = multiple;
+                  division = math.floor((value/multiple)+1);
+                  result = division*multiple;
+                  return result;
+                else 
+                  return value;
+                end
+              end
+              ]]>
+            </script>
+            <!--slider for a-->
+            <stack orientation="horizontal">
+              <p name="aLabel">a = 0</p>
+              <slider name="aSlider" min="0" max="10" value="1">
+                <onValueChanged>
+                  <![CDATA[
+                  aLabel.Text = "a = "..round(value,1);
+                  aSlider.Value = round(value,1);
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+            <!--slider for b-->
+            <stack orientation="horizontal">
+              <p name="bLabel">b = 0</p>
+              <slider name="bSlider" min="0" max="10" value="1">
+                <onValueChanged>
+                  <![CDATA[
+                  bLabel.Text = "b = "..round(value,1);
+                  bSlider.Value = round(value,1);
+
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+            <button content="Check Answer">
+              <onClick>
+                <![CDATA[
+                a = table:Child(1):Child(1):Child(3):Child(2).Value;
+                b = table:Child(1):Child(1):Child(4):Child(2).Value;
+                
+                if a == 9 and b == 3 then
+                  table:Child(1):Child(1):Child(6):Child(1).Text = "Correct!";
+                  table:Child(1):Child(1):Child(6):Child(1).Style.Visibility = "visible";
+                  table:Child(1):Child(1):Child(6):Child(2).Style.Visibility = "visible";
+                else
+                  table:Child(1):Child(1):Child(6):Child(1).Text = "Incorrect! Try again.";
+                  table:Child(1):Child(1):Child(6):Child(1).Style.Visibility = "visible";
+                end
+                ]]>
+              </onClick>
+            </button>
+            <stack>
+              <p name="answer" style="collapsed"></p>
+              <p name="answer2" style="collapsed">The answer is: $ 9\sqrt{3} $ </p>
+            </stack>
+          </column>
+        </row>
+      </table>
+    </stack>
+
+    <!--Question 9-->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">
+              Question: $ \sqrt{625} $
+            </p>
+            <p style="center">
+              Answer: $ a $
+            </p>
+            <style name="blackLine">
+              <foreground color="black" />
+            </style>
+            <style name="functionLine">
+              <foreground color="50 133 184" />
+              <lineThickness>3</lineThickness>
+            </style>
+            <script>
+              <![CDATA[
+             function round(value,multiple)
+                result = 0;
+                
+                if value % multiple ~= 0 then
+                  result = multiple;
+                  division = math.floor((value/multiple)+1);
+                  result = division*multiple;
+                  return result;
+                else 
+                  return value;
+                end
+              end
+              ]]>
+            </script>
+            <!--slider for a-->
+            <stack orientation="horizontal">
+              <p name="aLabel">a = 0</p>
+              <slider name="aSlider" min="0" max="30" value="1">
+                <onValueChanged>
+                  <![CDATA[
+                  aLabel.Text = "a = "..round(value,1);
+                  aSlider.Value = round(value,1);
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+            <button content="Check Answer">
+              <onClick>
+                <![CDATA[
+                a = table:Child(1):Child(1):Child(3):Child(2).Value;
+                
+                if a == 25 then
+                  table:Child(1):Child(1):Child(5):Child(1).Text = "Correct!";
+                  table:Child(1):Child(1):Child(5):Child(1).Style.Visibility = "visible";
+                  table:Child(1):Child(1):Child(5):Child(2).Style.Visibility = "visible";
+                else
+                  table:Child(1):Child(1):Child(5):Child(1).Text = "Incorrect! Try again.";
+                  table:Child(1):Child(1):Child(5):Child(1).Style.Visibility = "visible";
+                end
+                ]]>
+              </onClick>
+            </button>
+            <stack>
+              <p name="answer" style="collapsed"></p>
+              <p name="answer2" style="collapsed">The answer is: $ 25 $ </p>
+            </stack>
+          </column>
+        </row>
+      </table>
+    </stack>
+
+    <!--Question 10-->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">
+              Question: $ \sqrt{1156} $
+            </p>
+            <p style="center">
+              Answer: $ a $
+            </p>
+            <style name="blackLine">
+              <foreground color="black" />
+            </style>
+            <style name="functionLine">
+              <foreground color="50 133 184" />
+              <lineThickness>3</lineThickness>
+            </style>
+            <script>
+              <![CDATA[
+             function round(value,multiple)
+                result = 0;
+                
+                if value % multiple ~= 0 then
+                  result = multiple;
+                  division = math.floor((value/multiple)+1);
+                  result = division*multiple;
+                  return result;
+                else 
+                  return value;
+                end
+              end
+              ]]>
+            </script>
+            <!--slider for a-->
+            <stack orientation="horizontal">
+              <p name="aLabel">a = 0</p>
+              <slider name="aSlider" min="0" max="40" value="1">
+                <onValueChanged>
+                  <![CDATA[
+                  aLabel.Text = "a = "..round(value,1);
+                  aSlider.Value = round(value,1);
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+            <button content="Check Answer">
+              <onClick>
+                <![CDATA[
+                a = table:Child(1):Child(1):Child(3):Child(2).Value;
+                
+                if a == 34 then
+                  table:Child(1):Child(1):Child(5):Child(1).Text = "Correct!";
+                  table:Child(1):Child(1):Child(5):Child(1).Style.Visibility = "visible";
+                  table:Child(1):Child(1):Child(5):Child(2).Style.Visibility = "visible";
+                else
+                  table:Child(1):Child(1):Child(5):Child(1).Text = "Incorrect! Try again.";
+                  table:Child(1):Child(1):Child(5):Child(1).Style.Visibility = "visible";
+                end
+                ]]>
+              </onClick>
+            </button>
+            <stack>
+              <p name="answer" style="collapsed"></p>
+              <p name="answer2" style="collapsed">The answer is: $ 34 $ </p>
+            </stack>
+          </column>
+        </row>
+      </table>
+    </stack>
+  </section>
+
+
+  <!-- Practice Page 2 -->
+  <section name="practice2">
+    <title>Practice Problems</title>
+    <stack style="highlightBox">
+      <p>Simplify.</p>
+    </stack>
+
+    <!--Question 1-->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">
+              Question: $ \sqrt{8} \times \sqrt{12} $
+            </p>
+            <p style="center">
+              Answer: $ a\sqrt{b} $
+            </p>
+            <style name="blackLine">
+              <foreground color="black" />
+            </style>
+            <style name="functionLine">
+              <foreground color="50 133 184" />
+              <lineThickness>3</lineThickness>
+            </style>
+            <script>
+              <![CDATA[
+             function round(value,multiple)
+                result = 0;
+                
+                if value % multiple ~= 0 then
+                  result = multiple;
+                  division = math.floor((value/multiple)+1);
+                  result = division*multiple;
+                  return result;
+                else 
+                  return value;
+                end
+              end
+              ]]>
+            </script>
+            <!--slider for a-->
+            <stack orientation="horizontal">
+              <p name="aLabel">a = 0</p>
+              <slider name="aSlider" min="0" max="10" value="1">
+                <onValueChanged>
+                  <![CDATA[
+                  aLabel.Text = "a = "..round(value,1);
+                  aSlider.Value = round(value,1);
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+            <!--slider for b-->
+            <stack orientation="horizontal">
+              <p name="bLabel">b = 0</p>
+              <slider name="bSlider" min="0" max="10" value="1">
+                <onValueChanged>
+                  <![CDATA[
+                  bLabel.Text = "b = "..round(value,1);
+                  bSlider.Value = round(value,1);
+
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+            <button content="Check Answer">
+              <onClick>
+                <![CDATA[
+                a = table:Child(1):Child(1):Child(3):Child(2).Value;
+                b = table:Child(1):Child(1):Child(4):Child(2).Value;
+                
+                if a == 4 and b == 6 then
+                  table:Child(1):Child(1):Child(6):Child(1).Text = "Correct!";
+                  table:Child(1):Child(1):Child(6):Child(1).Style.Visibility = "visible";
+                  table:Child(1):Child(1):Child(6):Child(2).Style.Visibility = "visible";
+                else
+                  table:Child(1):Child(1):Child(6):Child(1).Text = "Incorrect! Try again.";
+                  table:Child(1):Child(1):Child(6):Child(1).Style.Visibility = "visible";
+                end
+                ]]>
+              </onClick>
+            </button>
+            <stack>
+              <p name="answer" style="collapsed"></p>
+              <p name="answer2" style="collapsed">The answer is: $ 4\sqrt{6} $ </p>
+            </stack>
+          </column>
+        </row>
+      </table>
+    </stack>
+
+    <!--Question 2-->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">
+              Question: $ \sqrt{125} \times \sqrt{10} \times \sqrt{2} $
+            </p>
+            <p style="center">
+              Answer: $ a $
+            </p>
+            <style name="blackLine">
+              <foreground color="black" />
+            </style>
+            <style name="functionLine">
+              <foreground color="50 133 184" />
+              <lineThickness>3</lineThickness>
+            </style>
+            <script>
+              <![CDATA[
+             function round(value,multiple)
+                result = 0;
+                
+                if value % multiple ~= 0 then
+                  result = multiple;
+                  division = math.floor((value/multiple)+1);
+                  result = division*multiple;
+                  return result;
+                else 
+                  return value;
+                end
+              end
+              ]]>
+            </script>
+
+            <!--slider for a-->
+            <stack orientation="horizontal">
+              <p name="aLabel">a = 0</p>
+              <slider name="aSlider" min="0" max="50" value="1">
+                <onValueChanged>
+                  <![CDATA[
+                  aLabel.Text = "a = "..round(value,1);
+                  aSlider.Value = round(value,1);
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+            <button content="Check Answer">
+              <onClick>
+                <![CDATA[
+                a = table:Child(1):Child(1):Child(3):Child(2).Value;
+                
+                if a == 50 then
+                  table:Child(1):Child(1):Child(5):Child(1).Text = "Correct!";
+                  table:Child(1):Child(1):Child(5):Child(1).Style.Visibility = "visible";
+                  table:Child(1):Child(1):Child(5):Child(2).Style.Visibility = "visible";
+                else
+                  table:Child(1):Child(1):Child(5):Child(1).Text = "Incorrect! Try again.";
+                  table:Child(1):Child(1):Child(5):Child(1).Style.Visibility = "visible";
+                end
+                ]]>
+              </onClick>
+            </button>
+            <stack>
+              <p name="answer" style="collapsed"></p>
+              <p name="answer2" style="collapsed">The answer is: $ 50 $ </p>
+            </stack>
+          </column>
+        </row>
+      </table>
+    </stack>
+
+    <!--Question 3-->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">
+              Question: $ \sqrt{15} \times \sqrt{5} \times \sqrt{21} $
+            </p>
+            <p style="center">
+              Answer: $ a\sqrt{b} $
+            </p>
+            <style name="blackLine">
+              <foreground color="black" />
+            </style>
+            <style name="functionLine">
+              <foreground color="50 133 184" />
+              <lineThickness>3</lineThickness>
+            </style>
+            <script>
+              <![CDATA[
+             function round(value,multiple)
+                result = 0;
+                
+                if value % multiple ~= 0 then
+                  result = multiple;
+                  division = math.floor((value/multiple)+1);
+                  result = division*multiple;
+                  return result;
+                else 
+                  return value;
+                end
+              end
+              ]]>
+            </script>
+            <!--slider for a-->
+            <stack orientation="horizontal">
+              <p name="aLabel">a = 0</p>
+              <slider name="aSlider" min="0" max="20" value="1">
+                <onValueChanged>
+                  <![CDATA[
+                  aLabel.Text = "a = "..round(value,1);
+                  aSlider.Value = round(value,1);
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+            <!--slider for b-->
+            <stack orientation="horizontal">
+              <p name="bLabel">b = 0</p>
+              <slider name="bSlider" min="0" max="20" value="1">
+                <onValueChanged>
+                  <![CDATA[
+                  bLabel.Text = "b = "..round(value,1);
+                  bSlider.Value = round(value,1);
+
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+            <button content="Check Answer">
+              <onClick>
+                <![CDATA[
+                a = table:Child(1):Child(1):Child(3):Child(2).Value;
+                b = table:Child(1):Child(1):Child(4):Child(2).Value;
+                
+                if a == 15 and b == 7 then
+                  table:Child(1):Child(1):Child(6):Child(1).Text = "Correct!";
+                  table:Child(1):Child(1):Child(6):Child(1).Style.Visibility = "visible";
+                  table:Child(1):Child(1):Child(6):Child(2).Style.Visibility = "visible";
+                else
+                  table:Child(1):Child(1):Child(6):Child(1).Text = "Incorrect! Try again.";
+                  table:Child(1):Child(1):Child(6):Child(1).Style.Visibility = "visible";
+                end
+                ]]>
+              </onClick>
+            </button>
+            <stack>
+              <p name="answer" style="collapsed"></p>
+              <p name="answer2" style="collapsed">The answer is: $ 15\sqrt{7} $</p>
+            </stack>
+          </column>
+        </row>
+      </table>
+    </stack>
+
+    <!--Question 4-->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">
+              Question: $ \sqrt{14} \times \sqrt{6} \times \sqrt{18} $
+            </p>
+            <p style="center">
+              Answer: $ a\sqrt{b} $
+            </p>
+            <style name="blackLine">
+              <foreground color="black" />
+            </style>
+            <style name="functionLine">
+              <foreground color="50 133 184" />
+              <lineThickness>3</lineThickness>
+            </style>
+            <script>
+              <![CDATA[
+             function round(value,multiple)
+                result = 0;
+                
+                if value % multiple ~= 0 then
+                  result = multiple;
+                  division = math.floor((value/multiple)+1);
+                  result = division*multiple;
+                  return result;
+                else 
+                  return value;
+                end
+              end
+              ]]>
+            </script>
+            <!--slider for a-->
+            <stack orientation="horizontal">
+              <p name="aLabel">a = 0</p>
+              <slider name="aSlider" min="0" max="20" value="1">
+                <onValueChanged>
+                  <![CDATA[
+                  aLabel.Text = "a = "..round(value,1);
+                  aSlider.Value = round(value,1);
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+            <!--slider for b-->
+            <stack orientation="horizontal">
+              <p name="bLabel">b = 0</p>
+              <slider name="bSlider" min="0" max="50" value="1">
+                <onValueChanged>
+                  <![CDATA[
+                  bLabel.Text = "b = "..round(value,1);
+                  bSlider.Value = round(value,1);
+
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+            <button content="Check Answer">
+              <onClick>
+                <![CDATA[
+                a = table:Child(1):Child(1):Child(3):Child(2).Value;
+                b = table:Child(1):Child(1):Child(4):Child(2).Value;
+                
+                if a == 6 and b == 42 then
+                  table:Child(1):Child(1):Child(6):Child(1).Text = "Correct!";
+                  table:Child(1):Child(1):Child(6):Child(1).Style.Visibility = "visible";
+                  table:Child(1):Child(1):Child(6):Child(2).Style.Visibility = "visible";
+                else
+                  table:Child(1):Child(1):Child(6):Child(1).Text = "Incorrect! Try again.";
+                  table:Child(1):Child(1):Child(6):Child(1).Style.Visibility = "visible";
+                end
+                ]]>
+              </onClick>
+            </button>
+            <stack>
+              <p name="answer" style="collapsed"></p>
+              <p name="answer2" style="collapsed">The answer is: $ 6\sqrt{42} $ </p>
+            </stack>
+          </column>
+        </row>
+      </table>
+    </stack>
+
+    <!--Question 5-->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">
+              Question: $ \sqrt{72} \times \sqrt{288} \times \sqrt{30} $
+            </p>
+            <p style="center">
+              Answer: $ a\sqrt{b} $
+            </p>
+            <style name="blackLine">
+              <foreground color="black" />
+            </style>
+            <style name="functionLine">
+              <foreground color="50 133 184" />
+              <lineThickness>3</lineThickness>
+            </style>
+            <script>
+              <![CDATA[
+             function round(value,multiple)
+                result = 0;
+                
+                if value % multiple ~= 0 then
+                  result = multiple;
+                  division = math.floor((value/multiple)+1);
+                  result = division*multiple;
+                  return result;
+                else 
+                  return value;
+                end
+              end
+              ]]>
+            </script>
+            <!--slider for a-->
+            <stack orientation="horizontal">
+              <p name="aLabel">a = 0</p>
+              <slider name="aSlider" min="100" max="150" value="100">
+                <onValueChanged>
+                  <![CDATA[
+                  aLabel.Text = "a = "..round(value,2);
+                  aSlider.Value = round(value,2);
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+            <!--slider for b-->
+            <stack orientation="horizontal">
+              <p name="bLabel">b = 0</p>
+              <slider name="bSlider" min="0" max="50" value="1">
+                <onValueChanged>
+                  <![CDATA[
+                  bLabel.Text = "b = "..round(value,1);
+                  bSlider.Value = round(value,1);
+
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+            <button content="Check Answer">
+              <onClick>
+                <![CDATA[
+                a = table:Child(1):Child(1):Child(3):Child(2).Value;
+                b = table:Child(1):Child(1):Child(4):Child(2).Value;
+                
+                if a == 144 and b == 30 then
+                  table:Child(1):Child(1):Child(6):Child(1).Text = "Correct!";
+                  table:Child(1):Child(1):Child(6):Child(1).Style.Visibility = "visible";
+                  table:Child(1):Child(1):Child(6):Child(2).Style.Visibility = "visible";
+                else
+                  table:Child(1):Child(1):Child(6):Child(1).Text = "Incorrect! Try again.";
+                  table:Child(1):Child(1):Child(6):Child(1).Style.Visibility = "visible";
+                end
+                ]]>
+              </onClick>
+            </button>
+            <stack>
+              <p name="answer" style="collapsed"></p>
+              <p name="answer2" style="collapsed">The answer is: $ 144\sqrt{30} $ </p>
+            </stack>
+          </column>
+        </row>
+      </table>
+    </stack>
+
+    <!--Question 6-->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">
+              Question: $ 3\sqrt{8} \times \sqrt{96} \times 5\sqrt{10} $
+            </p>
+            <p style="center">
+              Answer: $ a\sqrt{b} $
+            </p>
+            <style name="blackLine">
+              <foreground color="black" />
+            </style>
+            <style name="functionLine">
+              <foreground color="50 133 184" />
+              <lineThickness>3</lineThickness>
+            </style>
+            <script>
+              <![CDATA[
+             function round(value,multiple)
+                result = 0;
+                
+                if value % multiple ~= 0 then
+                  result = multiple;
+                  division = math.floor((value/multiple)+1);
+                  result = division*multiple;
+                  return result;
+                else 
+                  return value;
+                end
+              end
+              ]]>
+            </script>
+            <!--slider for a-->
+            <stack orientation="horizontal">
+              <p name="aLabel">a = 0</p>
+              <slider name="aSlider" min="200" max="250" value="200">
+                <onValueChanged>
+                  <![CDATA[
+                  aLabel.Text = "a = "..round(value,2);
+                  aSlider.Value = round(value,2);
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+            <!--slider for b-->
+            <stack orientation="horizontal">
+              <p name="bLabel">b = 0</p>
+              <slider name="bSlider" min="0" max="50" value="1">
+                <onValueChanged>
+                  <![CDATA[
+                  bLabel.Text = "b = "..round(value,1);
+                  bSlider.Value = round(value,1);
+
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+            <button content="Check Answer">
+              <onClick>
+                <![CDATA[
+                a = table:Child(1):Child(1):Child(3):Child(2).Value;
+                b = table:Child(1):Child(1):Child(4):Child(2).Value;
+                
+                if a == 240 and b == 30 then
+                  table:Child(1):Child(1):Child(6):Child(1).Text = "Correct!";
+                  table:Child(1):Child(1):Child(6):Child(1).Style.Visibility = "visible";
+                  table:Child(1):Child(1):Child(6):Child(2).Style.Visibility = "visible";
+                else
+                  table:Child(1):Child(1):Child(6):Child(1).Text = "Incorrect! Try again.";
+                  table:Child(1):Child(1):Child(6):Child(1).Style.Visibility = "visible";
+                end
+                ]]>
+              </onClick>
+            </button>
+            <stack>
+              <p name="answer" style="collapsed"></p>
+              <p name="answer2" style="collapsed">The answer is: $ 240\sqrt{3} $ </p>
+            </stack>
+          </column>
+        </row>
+      </table>
+    </stack>
+
+    <!--Question 7-->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">
+              Question: $ 10\sqrt{2} \times \sqrt{75} \times 12\sqrt{6} $
+            </p>
+            <p style="center">
+              Answer: $ a $
+            </p>
+            <style name="blackLine">
+              <foreground color="black" />
+            </style>
+            <style name="functionLine">
+              <foreground color="50 133 184" />
+              <lineThickness>3</lineThickness>
+            </style>
+            <script>
+              <![CDATA[
+             function round(value,multiple)
+                result = 0;
+                
+                if value % multiple ~= 0 then
+                  result = multiple;
+                  division = math.floor((value/multiple)+1);
+                  result = division*multiple;
+                  return result;
+                else 
+                  return value;
+                end
+              end
+              ]]>
+            </script>
+            <!--slider for a-->
+            <stack orientation="horizontal">
+              <p name="aLabel">a = 0</p>
+              <slider name="aSlider" min="1000" max="5000" value="1000">
+                <onValueChanged>
+                  <![CDATA[
+                  aLabel.Text = "a = "..round(value,100);
+                  aSlider.Value = round(value,100);
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+            <button content="Check Answer">
+              <onClick>
+                <![CDATA[
+                a = table:Child(1):Child(1):Child(3):Child(2).Value;
+                
+                if a == 3600 then
+                  table:Child(1):Child(1):Child(5):Child(1).Text = "Correct!";
+                  table:Child(1):Child(1):Child(5):Child(1).Style.Visibility = "visible";
+                  table:Child(1):Child(1):Child(5):Child(2).Style.Visibility = "visible";
+                else
+                  table:Child(1):Child(1):Child(5):Child(1).Text = "Incorrect! Try again.";
+                  table:Child(1):Child(1):Child(5):Child(1).Style.Visibility = "visible";
+                end
+                ]]>
+              </onClick>
+            </button>
+            <stack>
+              <p name="answer" style="collapsed"></p>
+              <p name="answer2" style="collapsed">The answer is: $ 3600 $ </p>
+            </stack>
+          </column>
+        </row>
+      </table>
+    </stack>
+
+    <!--Question 8-->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">
+              Question: $ \sqrt{36} \times \sqrt{169} \times \sqrt{25} $
+            </p>
+            <p style="center">
+              Answer: $ a $
+            </p>
+            <style name="blackLine">
+              <foreground color="black" />
+            </style>
+            <style name="functionLine">
+              <foreground color="50 133 184" />
+              <lineThickness>3</lineThickness>
+            </style>
+            <script>
+              <![CDATA[
+             function round(value,multiple)
+                result = 0;
+                
+                if value % multiple ~= 0 then
+                  result = multiple;
+                  division = math.floor((value/multiple)+1);
+                  result = division*multiple;
+                  return result;
+                else 
+                  return value;
+                end
+              end
+              ]]>
+            </script>
+            <!--slider for a-->
+            <stack orientation="horizontal">
+              <p name="aLabel">a = 0</p>
+              <slider name="aSlider" min="0" max="500" value="1">
+                <onValueChanged>
+                  <![CDATA[
+                  aLabel.Text = "a = "..round(value,20);
+                  aSlider.Value = round(value,20);
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+            <button content="Check Answer">
+              <onClick>
+                <![CDATA[
+                a = table:Child(1):Child(1):Child(3):Child(2).Value;
+                
+                if a == 340 then
+                  table:Child(1):Child(1):Child(5):Child(1).Text = "Correct!";
+                  table:Child(1):Child(1):Child(5):Child(1).Style.Visibility = "visible";
+                  table:Child(1):Child(1):Child(5):Child(2).Style.Visibility = "visible";
+                else
+                  table:Child(1):Child(1):Child(5):Child(1).Text = "Incorrect! Try again.";
+                  table:Child(1):Child(1):Child(5):Child(1).Style.Visibility = "visible";
+                end
+                ]]>
+              </onClick>
+            </button>
+            <stack>
+              <p name="answer" style="collapsed"></p>
+              <p name="answer2" style="collapsed">The answer is: $ 340 $ </p>
+            </stack>
+          </column>
+        </row>
+      </table>
+    </stack>
+
+    <!--Question 9-->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">
+              Question: $ \sqrt{144} \times \sqrt{196} \times \sqrt{100} $
+            </p>
+            <p style="center">
+              Answer: $ a $
+            </p>
+            <style name="blackLine">
+              <foreground color="black" />
+            </style>
+            <style name="functionLine">
+              <foreground color="50 133 184" />
+              <lineThickness>3</lineThickness>
+            </style>
+            <script>
+              <![CDATA[
+             function round(value,multiple)
+                result = 0;
+                
+                if value % multiple ~= 0 then
+                  result = multiple;
+                  division = math.floor((value/multiple)+1);
+                  result = division*multiple;
+                  return result;
+                else 
+                  return value;
+                end
+              end
+              ]]>
+            </script>
+            <!--slider for a-->
+            <stack orientation="horizontal">
+              <p name="aLabel">a = 0</p>
+              <slider name="aSlider" min="1000" max="2000" value="1">
+                <onValueChanged>
+                  <![CDATA[
+                  aLabel.Text = "a = "..round(value,20);
+                  aSlider.Value = round(value,20);
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+            <button content="Check Answer">
+              <onClick>
+                <![CDATA[
+                a = table:Child(1):Child(1):Child(3):Child(2).Value;
+                
+                if a == 1680 then
+                  table:Child(1):Child(1):Child(5):Child(1).Text = "Correct!";
+                  table:Child(1):Child(1):Child(5):Child(1).Style.Visibility = "visible";
+                  table:Child(1):Child(1):Child(5):Child(2).Style.Visibility = "visible";
+                else
+                  table:Child(1):Child(1):Child(5):Child(1).Text = "Incorrect! Try again.";
+                  table:Child(1):Child(1):Child(5):Child(1).Style.Visibility = "visible";
+                end
+                ]]>
+              </onClick>
+            </button>
+            <stack>
+              <p name="answer" style="collapsed"></p>
+              <p name="answer2" style="collapsed">The answer is: $ 1680 $ </p>
+            </stack>
+          </column>
+        </row>
+      </table>
+    </stack>
+
+    <!--Question 10-->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">
+              Question: $ \sqrt{225} \times \sqrt{123} \times \sqrt{1250} $
+            </p>
+            <p style="center">
+              Answer: $ a $
+            </p>
+            <style name="blackLine">
+              <foreground color="black" />
+            </style>
+            <style name="functionLine">
+              <foreground color="50 133 184" />
+              <lineThickness>3</lineThickness>
+            </style>
+            <script>
+              <![CDATA[
+             function round(value,multiple)
+                result = 0;
+                
+                if value % multiple ~= 0 then
+                  result = multiple;
+                  division = math.floor((value/multiple)+1);
+                  result = division*multiple;
+                  return result;
+                else 
+                  return value;
+                end
+              end
+              ]]>
+            </script>
+            <!--slider for a-->
+            <stack orientation="horizontal">
+              <p name="aLabel">a = 0</p>
+              <slider name="aSlider" min="0" max="10000" value="1">
+                <onValueChanged>
+                  <![CDATA[
+                  aLabel.Text = "a = "..round(value,500);
+                  aSlider.Value = round(value,500);
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+            <button content="Check Answer">
+              <onClick>
+                <![CDATA[
+                a = table:Child(1):Child(1):Child(3):Child(2).Value;
+                
+                if a == 6000 then
+                  table:Child(1):Child(1):Child(5):Child(1).Text = "Correct!";
+                  table:Child(1):Child(1):Child(5):Child(1).Style.Visibility = "visible";
+                  table:Child(1):Child(1):Child(5):Child(2).Style.Visibility = "visible";
+                else
+                  table:Child(1):Child(1):Child(5):Child(1).Text = "Incorrect! Try again.";
+                  table:Child(1):Child(1):Child(5):Child(1).Style.Visibility = "visible";
+                end
+                ]]>
+              </onClick>
+            </button>
+            <stack>
+              <p name="answer" style="collapsed"></p>
+              <p name="answer2" style="collapsed">The answer is: $ 6000 $ </p>
+            </stack>
+          </column>
+        </row>
+      </table>
+    </stack>
+  </section>
+</document>
+

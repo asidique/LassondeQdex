@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<fragment xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd">
+  <script>
+    <![CDATA[
+	-- PointMass
+	PointMass = {series, x, y}
+	-- PointMass constructor x,y coordinates are required
+	function PointMass:new(o)
+	  o = o or {}
+	  if o.series == nil or o.x == nil or o.y == nil then error("Fail to create PointMass: series, x or y is missing") end
+	  o.lastX = o.x
+	  o.lastY = o.y
+	  o.accX = 0
+	  o.accY = 0
+	  o.mass = 1
+	  o.damping = 20
+	  o.pinned = false
+	  o.links = {}
+	  setmetatable(o, self)
+	  self.__index = self
+	  return o
+	end
+
+	-- The update function is used to update the physics of the PointMass.
+	-- motion is applied, and links are drawn here
+	function PointMass:updatePhysics(world)
+	  self:applyForce(0, self.mass*world.gravity)
+	  local velX = self.x - self.lastX
+	  local velY = self.y - self.lastY
+
+	  -- dampen velocity
+	  velX = velX * 0.99
+	  velY = velY * 0.99
+
+	  local timeStepSq = world.timeStep * world.timeStep
+
+	  -- get the next position using Verlet Integration
+	  local nextX = self.x + velX + 0.5 * self.accX * timeStepSq
+	  local nextY = self.y + velY + 0.5 * self.accY * timeStepSq
+
+	  -- reset variables
+	  self.lastX = self.x
+	  self.lastY = self.y
+
+	  self.x = nextX
+	  self.y = nextY
+
+	  self.accX = 0
+	  self.accY = 0
+	end
+
+	function PointMass:updateInteractions(world)
+	  self.lastX = self.x - (world.mouseX - world.pmouseX) * world.mouseInfluenceScalar
+		self.lastY = self.y - (world.mouseY - world.pmouseY) * world.mouseInfluenceScalar
+	end
+
+	function PointMass:draw()
+	  -- draw the links and points
+    self.series:Add(self.x, self.y)
+	  for i=1, #self.links do
+		  self.links[i]:draw()
+		end
+	end
+
+	function PointMass:solveConstraints(world)
+	  -- Link Constraints
+	  -- Links make sure PointMasss connected to this one is at a set distance away
+	  for i = 1, #self.links do
+		  self.links[i]:solve()
+	  end
+
+	  -- Boundary Constraints
+	  -- These if statements keep the PointMasss within the screen
+	  if self.y < 1 then
+		  self.y = 2 - self.y
+	  end
+	  if self.y > world.height-1 then
+		  self.y = 2 * (world.height - 1) - self.y
+	  end
+	  if self.x > world.width - 1 then
+		  self.x = 2 * (world.width - 1) - self.x
+	  end
+	  if self.x < 1 then
+		  self.x = 2 - self.x
+	  end
+
+	  -- Other Constraints
+	  -- make sure the PointMass stays in its place if it's pinned
+	  if self.pinned then
+		  self.x = self.pinX
+		  self.y = self.pinY
+	  end
+	end
+
+	function PointMass:attachTo(lineSeries, P, restingDist, stiff, tearSensitivity, drawLink)
+    local ts = tearSensitivity or 30
+    local visible = drawLink or true
+	  local link = Link:new({series=lineSeries, p1=self, p2=P, restingDist=restingDist, stiff=stiff, tearSensitivity=ts, visible=visible})
+	  table.insert(self.links, link)
+	end 
+
+	
+	function PointMass:applyForce(fx, fy)
+	  self.accX = self.accX + fx/self.mass
+	  self.accY = self.accY + fy/self.mass
+	end
+
+	function PointMass:pinTo(px, py)
+	  self.pinned = true
+	  self.pinX = px
+	  self.pinY = py
+	end
+    ]]>
+</script>
+</fragment>

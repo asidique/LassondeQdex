@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="GB924511C_B285_45A0_846D_E08E60C6E553">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>2.4 Estimating a Limit of a Discontinuous Function</title>
+    <creator>admin</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/lassondeLogo.png" />
+  </metadata>
+
+  <include src="curriculumThemePack/curriculumStyles.xml" />
+  <include src="plotTools.xml" />
+
+  <!--
+  This module will have:
+  1) what is a continuous function
+  2) what is a discontinuous function
+  3) types of discontinuities 
+  4) Example on how to find the limit of a function with discontinuity step by step + graph solution
+  5) Practice questions with discontinuities 
+  -->
+  <!-- Continuity and Discontinuity 
+  
+  Definition of continuity
+  Definition of discontinuity 
+  4 types of discontinuities + graphs
+  -->
+
+  <!--Header & Footer-->
+  <style name="backgroundColor">
+    <background color="232 12 46" />
+  </style>
+  <style name="fontColor">
+    <foreground color="255 255 255" />
+  </style>
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="fontColor"></p>
+      <p style="fontColor rightText"></p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>20</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--Header & Footer END-->
+  <!--intro-->
+  <section>
+    <title>
+      <style>
+        <textAlignment>right</textAlignment>
+        <marginTop>100</marginTop>
+      </style>
+      <size scale="xlarge">2.4</size>
+    </title>
+    <p style="chapterTitle">Limit at a Point of Discontinuity</p>
+
+    <p style="title">INTRODUCTION</p>
+    <p>
+      Functions can either be continuous or discontinuous. In this lesson, we will be going over what a continuous function is, what a discontinuous function is, types of discontinuities, and finding the limit as x approaches a constant of a discontinuous function.
+    </p>
+  </section>
+
+  <!--
+  How to estimate limit at point of discontinuity
+  -->
+  <sectionNoTitle>
+    <stack>
+      <style>
+        <widthPercentage>0.93</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <style>
+        <counter name="decBullet" format="decimal" />
+      </style>
+
+      <p style="titleMargin">
+        <b>Summary</b>
+      </p>
+
+      <stack style="questionAnswer">
+        <p>
+          We can say a function, $ f(x) $ is continuous at x = a if: <br />
+        </p>
+        <p>
+          $ \lim_{x\rightarrow a} f(x) = f(a) $ <br />
+        </p>
+        <p>What this means is: f(x) is continuous at a specific x value if the limit of the function as x approaches a specific value, a, is equal to the y value at the specific x value, a. Basically, if the y value as x approaches a is equal to the y value at x = a, the function is continuous. </p>
+        <p>
+          Of course, this also means, that if there is a hole in the function and the above statement is violated, then a <b>discontinuity</b> exists. Next, let's look at some types of discontinuities.
+        </p>
+      </stack>
+      <p style="titleMargin">Types of Discontinuities</p>
+
+      <stack style="questionAnswer">
+        <p>1) Removable Discontinuity</p>
+        <!--Graph-->
+        <table name="table" grid="false">
+          <row>
+            <column>
+              <style name="blackLine">
+                <foreground color="black" />
+              </style>
+              <style name="redLine">
+                <foreground color="red" />
+              </style>
+              <style name="functionLine">
+                <foreground color="50 133 184" />
+                <lineThickness>2</lineThickness>
+              </style>
+              <xyPlot name="myPlot" pan="disabled" tap="disabled" zoom="disabled">
+                <axis dim="y" auto="fixed" min="-6" max="6"></axis>
+                <axis dim="x" auto="lockAspectRatio" min="-2" max="10"></axis>
+                <series name="xAxis" manual="true" style="blackLine" />
+                <series name="yAxis" manual="true" style="blackLine" />
+                <series name="graph" manual="true" style="functionLine" />
+                <series name="graph2" manual="true" style="functionLine" />
+                <series name="hole" manual="true" style="functionLine" />
+                <series name="hole_filled" manual="true" style="functionLine" draw="radialFill" />
+
+              </xyPlot>
+
+              <script>
+
+                <![CDATA[
+              
+              local x, y;
+              local x2,y2;
+              local graph = myPlot.graph;
+              local graph2 = myPlot.graph2;
+              
+             plotTools.drawCircle(myPlot.hole, vector({2,2}), 0.4)
+              
+             plotTools.drawCircle(myPlot.hole_filled, vector({2,4}), 0.4)
+              
+              local function redrawFunction()
+                graph:Clear();
+                graph2:Clear()
+                for x = -100,1.6,0.01 do
+                  y = x
+                  graph:Add(x,y);
+                end
+                
+                for x2 = 2.4,10,0.1 do
+                  y2 = x2
+                  graph2:Add(x2,y2);
+                end
+                
+                
+                graph:Update();
+                graph2:Update();
+              end
+              
+              
+              local xAxis = myPlot.xAxis;
+              local yAxis = myPlot.yAxis;
+
+              xAxis:Add(-100,0)
+              xAxis:Add(100,0)
+
+              yAxis:Add(0,-100)
+              yAxis:Add(0,100)
+              
+              redrawFunction();
+              ]]>
+              </script>
+
+            </column>
+          </row>
+        </table>
+        <p>
+          In the graph above, there is a hole at x = 2. These holes are called <b>removable discontinuities.</b> Note, however, that although there is a hole at x = 2, the limit of f(x) as x approaches 2 exists.
+        </p>
+      </stack>
+      <stack style="questionAnswer">
+        <p>2) Jump Discontinuity</p>
+        <!--Graph-->
+        <table name="table" grid="false">
+          <row>
+            <column>
+              <style name="blackLine">
+                <foreground color="black" />
+              </style>
+              <style name="redLine">
+                <foreground color="red" />
+              </style>
+              <style name="functionLine">
+                <foreground color="50 133 184" />
+                <lineThickness>2</lineThickness>
+              </style>
+              <xyPlot name="myPlot" pan="disabled" tap="disabled" zoom="disabled">
+                <axis dim="y" auto="fixed" min="-4" max="8"></axis>
+                <axis dim="x" auto="lockAspectRatio" min="0" max="10"></axis>
+                <series name="xAxis" manual="true" style="blackLine" />
+                <series name="yAxis" manual="true" style="blackLine" />
+                <series name="graph" manual="true" style="functionLine" />
+                <series name="graph2" manual="true" style="functionLine" />
+                <series name="hole" manual="true" style="functionLine" />
+                <series name="hole2" manual="true" style="functionLine" />
+
+              </xyPlot>
+
+              <script>
+
+                <![CDATA[
+              
+              local x, y;
+              local x2,y2;
+              local graph = myPlot.graph;
+              local graph2 = myPlot.graph2;
+              
+             plotTools.drawCircle(myPlot.hole, vector({2,2}), 0.4)
+              
+             plotTools.drawCircle(myPlot.hole2, vector({2,4}), 0.4)
+              
+              local function redrawFunction()
+                graph:Clear();
+                graph2:Clear()
+                for x = -100,1.6,0.01 do
+                  y = x
+                  graph:Add(x,y);
+                end
+                
+                for x2 = 2.4,10,0.1 do
+                  y2 = x2 + 2
+                  graph2:Add(x2,y2);
+                end
+                
+                
+                graph:Update();
+                graph2:Update();
+              end
+              
+              
+              local xAxis = myPlot.xAxis;
+              local yAxis = myPlot.yAxis;
+
+              xAxis:Add(-100,0)
+              xAxis:Add(100,0)
+
+              yAxis:Add(0,-100)
+              yAxis:Add(0,100)
+              
+              redrawFunction();
+              ]]>
+              </script>
+
+            </column>
+          </row>
+        </table>
+        <p>
+          In this graph above, you can see that $ \lim_{x\rightarrow 2^{-}} f(x) = 2 $ and $ \lim_{x\rightarrow 2^{+}} f(x) = 4 $. This means that both one-sided limits exist, but have different values. When this happens, we say there is a jump discontinuity at x = 2.
+        </p>
+      </stack>
+      <stack style="questionAnswer">
+        <p>3) Infinite Discontinuity</p>
+        <!--Graph-->
+        <table name="table" grid="false">
+          <row>
+            <column>
+              <style name="blackLine">
+                <foreground color="black" />
+              </style>
+              <style name="redLine">
+                <foreground color="red" />
+              </style>
+              <style name="functionLine">
+                <foreground color="50 133 184" />
+                <lineThickness>2</lineThickness>
+              </style>
+              <xyPlot name="myPlot" pan="disabled" tap="disabled" zoom="disabled">
+                <axis dim="y" auto="fixed" min="-2" max="8"></axis>
+                <axis dim="x" auto="lockAspectRatio" min="-10" max="10"></axis>
+                <series name="xAxis" manual="true" style="blackLine" />
+                <series name="yAxis" manual="true" style="blackLine" />
+                <series name="graph" manual="true" style="functionLine" />
+
+              </xyPlot>
+
+              <script>
+
+                <![CDATA[
+              
+              local x, y;
+              local x2,y2;
+              local graph = myPlot.graph;
+              
+              local function redrawFunction()
+                graph:Clear();
+                for x = -100,100,0.1 do
+                  y = 1/(math.pow(x,2))
+                  graph:Add(x,y);
+                end
+                
+                graph:Update();
+              end
+              
+              
+              local xAxis = myPlot.xAxis;
+              local yAxis = myPlot.yAxis;
+
+              xAxis:Add(-100,0)
+              xAxis:Add(100,0)
+
+              yAxis:Add(0,-100)
+              yAxis:Add(0,100)
+              
+              redrawFunction();
+              ]]>
+              </script>
+
+            </column>
+          </row>
+        </table>
+        <p>
+          The function indicates that it will grow infinitely large as x approaches a. Since the function doesn't approach a particular finite value, the limit does not exist. This is an infinite discontinuity. However, both one-sided limits exist and are an infinite number.
+        </p>
+      </stack>
+      <stack style="questionAnswer">
+        <p>4) Endpoint Discontinuity</p>
+        <!--Graph-->
+        <table name="table" grid="false">
+          <row>
+            <column>
+              <style name="blackLine">
+                <foreground color="black" />
+              </style>
+              <style name="redLine">
+                <foreground color="red" />
+              </style>
+              <style name="functionLine">
+                <foreground color="50 133 184" />
+                <lineThickness>2</lineThickness>
+              </style>
+              <xyPlot name="myPlot" pan="disabled" tap="disabled" zoom="disabled">
+                <axis dim="y" auto="fixed" min="-2" max="8"></axis>
+                <axis dim="x" auto="lockAspectRatio" min="-10" max="10"></axis>
+                <series name="xAxis" manual="true" style="blackLine" />
+                <series name="yAxis" manual="true" style="blackLine" />
+                <series name="graph" manual="true" style="functionLine" />
+
+              </xyPlot>
+
+              <script>
+
+                <![CDATA[
+              
+              local x, y;
+              local x2,y2;
+              local graph = myPlot.graph;
+              
+              local function redrawFunction()
+                graph:Clear();
+                for x = -100,100,0.1 do
+                  y = math.sqrt(x)
+                  graph:Add(x,y);
+                end
+                
+                graph:Update();
+              end
+              
+              
+              local xAxis = myPlot.xAxis;
+              local yAxis = myPlot.yAxis;
+
+              xAxis:Add(-100,0)
+              xAxis:Add(100,0)
+
+              yAxis:Add(0,-100)
+              yAxis:Add(0,100)
+              
+              redrawFunction();
+              ]]>
+              </script>
+
+            </column>
+          </row>
+        </table>
+        <p>
+          When a function is defined on an interval with a closed endpoint, the limit cannot exist at that endpoint. Why is this? This is because the limit has to examine the function values as x approaches the endpoint from both sides.
+          <br />
+          In the example above, consider finding $ \lim_{x\rightarrow 0} f(x) $. Note that x = 0 is the left endpoint of the function's domain: $ (0,\infty) $, and the function is not continuous there because the limit does not exist (because x cannot approach from both sides).
+
+          However, a one-sided limit exists as the function is continuous to the right.
+        </p>
+      </stack>
+      <p>
+        <style>
+          <marginBottom>120</marginBottom>
+        </style>
+      </p>
+    </stack>
+  </sectionNoTitle>
+  <sectionNoTitle>
+    <stack>
+      <style>
+        <widthPercentage>0.93</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <style>
+        <counter name="decBullet" format="decimal" />
+      </style>
+
+      <p style="titleMargin">
+        <b>Example</b>
+      </p>
+      <stack style="questionAnswer">
+        <p>Now we will go over how to find the limit of a discontinuous function!</p>
+      </stack>
+
+      <!--Example!!!!-->
+      <stack style="questionAnswer">
+        <!--Graph-->
+        <table name="table" grid="false">
+          <row>
+            <column>
+              <p>The function below has a removable discontinuity at x = 2. Redefine the function so that it becomes continuous at x = 2. </p>
+              <equation>$ f(x) = \frac{x^2 - 2x}{x^2 - 4} $</equation>
+              <style name="blackLine">
+                <foreground color="black" />
+              </style>
+              <style name="redLine">
+                <foreground color="red" />
+              </style>
+              <style name="functionLine">
+                <foreground color="50 133 184" />
+                <lineThickness>2</lineThickness>
+              </style>
+              <xyPlot name="myPlot" pan="disabled" tap="disabled" zoom="disabled">
+                <axis dim="y" auto="fixed" min="-2" max="6"></axis>
+                <axis dim="x" auto="fixed" min="-1" max="10"></axis>
+                <series name="xAxis" manual="true" style="blackLine" />
+                <series name="yAxis" manual="true" style="blackLine" />
+                <series name="graph" manual="true" style="functionLine" />
+                <series name="graph2" manual="true" style="functionLine" />
+                <series name="hole" manual="true" style="functionLine" />
+
+              </xyPlot>
+
+              <script>
+
+                <![CDATA[
+              
+              local x, y;
+              local x2,y2;
+              local graph = myPlot.graph;
+              local graph2 = myPlot.graph2;
+                                            
+              local function redrawFunction()
+                graph:Clear();
+                graph2:Clear()
+                for x = -100,1.6,0.1 do
+                  y = (math.pow(x,2) - 2*x)/(math.pow(x,2) - 4)
+                  graph:Add(x,y);
+                end
+                
+                for x2 = 2.4,10,0.1 do
+                  y2 = (math.pow(x2,2) - 2*x2)/(math.pow(x2,2) - 4)
+                  graph2:Add(x2,y2);
+                end
+               
+                graph:Update();
+                graph2:Update();
+              end
+             
+              plotTools.drawCircle(myPlot.hole, vector({2,0.5}), 0.4)
+
+              local xAxis = myPlot.xAxis;
+              local yAxis = myPlot.yAxis;
+
+              xAxis:Add(-100,0)
+              xAxis:Add(100,0)
+
+              yAxis:Add(0,-100)
+              yAxis:Add(0,100)
+              
+              redrawFunction();
+              ]]>
+              </script>
+
+            </column>
+          </row>
+          <row>
+
+            <column>
+              <p>To fix the discontinuity, we need to know the y value of the hole in the graph. TO determine this, we find the value of $ \lim_{x\rightarrow 2} f(x) $. Solving the limit:</p>
+              <p>
+                $ \lim_{x\rightarrow 2} \frac{x^2 - 2x}{x^2 - 4} = \frac{(2)^2 - 2(2)}{(2)^2 - 4} = \frac{0}{0}$. The division by zero tells us that there is definitely a discontinuity at x = 2. <br />
+              </p>
+              <p>
+                We can then factor the original $ f(x) $ using factoring:
+              </p>
+              <p>$ f(x) = \frac{x^2 - 2x}{x^2 - 4} = \frac{x(x - 2)}{(x-2)(x+2)} = \frac{x}{x+2} $. Therefore, we can find the limit now:</p>
+              <p>$ \lim_{x\rightarrow 2} \frac{x}{x+2} = \frac{1}{2} $</p>
+            </column>
+          </row>
+        </table>
+      </stack>
+
+      <p>
+        <style>
+          <marginBottom>120</marginBottom>
+        </style>
+      </p>
+    </stack>
+  </sectionNoTitle>
+
+
+</document>

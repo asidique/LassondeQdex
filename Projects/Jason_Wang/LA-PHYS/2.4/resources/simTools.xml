@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<fragment xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd">
+	<include src="plotTools.xml"/>
+  <script>
+    <![CDATA[
+    function round(value,multiple)
+      local remainder = value % multiple;
+      if remainder * 2 >= multiple then
+          return value - remainder + multiple;
+      else
+          return value - remainder;
+      end
+    end
+		
+		function getTableSize(T)
+			local count = 0
+			for _ in pairs(T) do count = count + 1 end
+			return count
+		end
+		
+		
+		function clone (t) -- deep-copy a table
+				if type(t) ~= "table" then return t end
+				local meta = getmetatable(t)
+				local target = {}
+				for k, v in pairs(t) do
+						if type(v) == "table" then
+								target[k] = clone(v)
+						else
+								target[k] = v
+						end
+				end
+				setmetatable(target, meta)
+				return target
+		end
+		
+		--[=====[
+		-- get all possible subsets with length k in table A from start index
+		-- example: subset({1,2,5,6,2,3}, 2, 1, 0);
+		local function subset(A,k,start,currLen,used)
+			if used == nil then used = {}; end
+			local pairs = {};
+			if currLen==k then
+					local pair = {}
+					for i=1,#A do
+							if used[i] == true then
+									table.insert(pair,A[i]);
+							end
+					end
+					table.insert(pairs,pair);
+					return pairs;
+			end
+			if start == #A then return pairs end
+			used[start] = true;
+			local set1 = subset(A,k,start+1,currLen+1,used);
+			if set1 ~= nil then
+					for i=1, #set1 do
+							table.insert(pairs, set1[i]);
+					end
+			end
+			used[start] = false;
+			local set2 = subset(A,k,start+1,currLen,used);
+			if set2 ~= nil then
+					for i=1, #set2 do
+							table.insert(pairs, set2[i]);
+					end
+			end
+			return pairs;
+		end
+		--]=====]
+		
+		
+		
+		----------------------
+		-- 2-D World Object --
+		----------------------
+		
+		World = {minX, minY, maxX, maxY, balls={}, deltaT=0.01};
+		function World:new(o)
+      o = o or {}
+      setmetatable(o, self)
+      self.__index = self
+      return o
+		end
+		
+		-- add object to the world. it will add to the end of the table.
+		function World:add(obj)
+			table.insert(self.balls, obj);
+		end
+		
+		-- find the key of the object in world, return -1 if not found.
+		function World:findIndexOf(obj)
+			for i=1,#self.balls do
+				if self.balls == obj then
+					return i;
+				end
+			end
+			return -1;
+		end
+		
+		-- Remove object at given index i
+		function World:removeAtIndex(i)
+			table.remove(self.balls,i);
+		end
+		
+		-- Change World refresh Rate
+		function World:setDeltaT(t)
+			self.deltaT = t;
+		end
+		
+		-- transform all balls to their current position;
+		-- all balls must initially set to {0,0} position
+		-- all balls must have individual series setup!
+		function World:updateTransform()
+			for i=1,getTableSize(self.balls) do
+				local b = self.balls[i];
+				b.series.Transform = matrixf.translation(b.x, b.y, 1);
+			end
+		end
+			
+		-- Update World by one deltaT
+		function World:update(updateTransform)
+
+			-- check ball collisions
+			local nums = getTableSize(self.balls);
+
+			for i=1,nums-1,1 do
+				for j=i+1,nums,1 do
+					local b1 = self.balls[i];
+					local b2 = self.balls[j];
+					b1:handleCollisionWith(b2);
+				end
+			end
+			
+			-- check border collision
+			for i=1,nums do
+				self.balls[i]:resolveBorderCollisionWith(self);
+			end
+					
+			-- update positions
+			for i=1,nums do
+				self.balls[i]:updatePosition(self.deltaT);
+			end
+			
+			-- update transform
+			if updateTransform then
+				self:updateTransform();
+			end
+		end
+		
+		
+		
+		-----------------------------
+		-- End of 2-D World Object --
+		-----------------------------
+
+    
+		-----------------------------------
+		-- Ball Object for 2-D Collision --
+    -----------------------------------
+		
+		Ball = {x, y, radius=1, mass=0, velocity={0,0}, elastic=true, series};
+    function Ball:new(o)
+      o = o or {}
+      setmetatable(o, self)
+      self.__index = self
+      return o
+    end
+		
+		-- Clear series, draw the ball and move to its location. ball series must be provided.
+		function Ball:initDrawing()
+			if self.series ~= nil then
+				self.series:Clear()
+				plotTools.drawCircle(self.series, vector({0,0}), self.radius)
+				if self.x ~= 0 or self.y ~= 0 then
+					self.series.Transform = matrixf.translation(self.x, self.y, 1);
+				end
+			end
+		end
+		
+		-- set ball velocity
+		function Ball:setVelocity(vx,vy)
+			self.velocity[1] = vx;
+			self.velocity[2] = vy;
+		end
+		
+		-- handle collision with other ball, check collision, if so, update velocities. return true if collide
+		function Ball:handleCollisionWith(ball)
+			local xDist = self.x - ball.x;
+			local yDist = self.y - ball.y;
+			local distSquared = xDist*xDist + yDist*yDist;
+			if distSquared <= (self.radius + ball.radius)*(self.radius + ball.radius) then
+				local xVelocity = ball.velocity[1] - self.velocity[1];
+				local yVelocity = ball.velocity[2] - self.velocity[2];
+				local dotProduct = xDist*xVelocity + yDist*yVelocity;
+				if dotProduct > 0 then
+					-- collision occurs
+					local combinedMass = self.mass + ball.mass;
+					if self.elastic and ball.elastic then
+						local collisionScale = dotProduct / distSquared;
+						local xCollision = xDist * collisionScale;
+						local yCollision = yDist * collisionScale;
+						local collisionWeightA = 2 * ball.mass / combinedMass;
+						local collisionWeightB = 2 * self.mass / combinedMass;
+						self:setVelocity(self.velocity[1]+collisionWeightA*xCollision, self.velocity[2]+collisionWeightA*yCollision)
+						ball:setVelocity(ball.velocity[1]-collisionWeightB*xCollision, ball.velocity[2]-collisionWeightB*yCollision)
+					else
+						local mtm1 = self:getMomentum()
+						local mtm2 = ball:getMomentum()
+						local sumX = mtm1[1] + mtm2[1]
+						local sumY = mtm1[2] + mtm2[2]
+						local newX = sumX/combinedMass
+						local newY = sumY/combinedMass
+						self:setVelocity(newX,newY)
+						ball:setVelocity(newX,newY)
+					end
+					return true;
+				end
+			end
+			return false;
+		end
+		
+		
+		function Ball:findCollisionPosition(ball, timeout, deltaT)
+			local ball1 = clone(self);
+			local ball2 = clone(ball);
+			local t = deltaT or 0.01;
+			local timeOutT = timeout or 100;
+			for i=1,100/t do
+				if ball1:handleCollisionWith(ball2) then
+					return {ball1, ball2};
+				end
+				ball1:updatePosition(t);
+				ball2:updatePosition(t);
+			end				
+			return nil;
+		end
+		
+		function Ball:findPositionAfter(ball, sec, deltaT)
+			local ball1 = clone(self);
+			local ball2 = clone(ball);
+			local t = deltaT or 0.01;
+			for i=1,sec/t do
+				ball1:handleCollisionWith(ball2);
+				ball1:updatePosition(t);
+				ball2:updatePosition(t);
+			end
+			return {ball1,ball2};
+		end
+
+		-- resolve border collision with the world
+		function Ball:resolveBorderCollisionWith(world)
+			if (world.minX ~= nil and self.x-self.radius < world.minX) or (world.maxX ~= nil and self.x+self.radius > world.maxX) then
+				self.velocity[1] = -self.velocity[1];
+			elseif (world.minY ~= nil and self.y-self.radius < world.minY) or (world.maxY ~= nil and self.y+self.radius > world.maxY) then
+				self.velocity[2] = -self.velocity[2];
+			end
+		end
+		
+		-- update position with given delta time
+		function Ball:updatePosition(deltaT)
+			self.x = self.x + self.velocity[1]*deltaT;
+			self.y = self.y + self.velocity[2]*deltaT;
+		end
+			
+		-- get ball momentum, return {px, py}
+		function Ball:getMomentum()
+			return {self.mass*self.velocity[1], self.mass*self.velocity[2]};
+		end
+		------------------------------------------
+		-- End of Ball Object for 2-D Collision --
+    ------------------------------------------
+    
+    
+    -- ADD FUNCTIONS HERE.
+    
+    ]]>
+  </script>
+
+</fragment>
+

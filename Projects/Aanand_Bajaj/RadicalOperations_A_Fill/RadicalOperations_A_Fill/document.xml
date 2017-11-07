@@ -1,0 +1,4286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G13F5C48A_281B_4313_BC78_1C695D45FA1E">
+  <!--Author: Aanand Bajaj
+Date Created: Feb 14, 2017
+This app is the 3.4 Practice for Radical Operations with Fill in the Blanks.
+-->
+  <!-- Meta Data -->
+  <metadata>
+    <title>MCR3U – 3.4 Radical Operations Part A</title>
+    <creator>AanandB</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/cover.jpg" />
+  </metadata>
+
+  <include src="curriculumThemePack/curriculumStyles.xml" />
+  <include src="plotTools.xml" />
+
+  <!--Header and Footer-->
+  <style name="backgroundColor">
+    <background color="50 133 184" />
+  </style>
+  <style name="fontColor">
+    <foreground color="255 255 255" />
+  </style>
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="fontColor">Amanda Koon</p>
+      <p style="fontColor rightText">MCR3U</p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/logo1.png" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/logo2.png" />
+    </stack>
+  </footer>
+
+  <!-- Summary -->
+  <section name="summary">
+    <title>A Quick Summary</title>
+    <stack style="highlightBox">
+      <p>Operations with radicals are like simplifying variables in algebra.</p>
+    </stack>
+    <stack style="highlightBox">
+      <p>A radical is in its SIMPLEST FORM when:</p>
+      <p>1) The radicand has no perfect square other than 1. For example:</p>
+      <equation>$ \sqrt{28} = \sqrt{4*7} = 2*\sqrt{7} $</equation>
+      <p>
+        <br />2)	No radical appears in the denominator of a fraction (i.e., always RATIONALIZE the denominator). For example:
+      </p>
+      <p>i) Monomial Denominator:</p>
+      <equation>$ \frac{3}{\sqrt{2}} = \frac{3}{\sqrt{2}} * \frac{\sqrt{2}}{\sqrt{2}} = \frac{3\sqrt{2}}{2}$</equation>
+      <p>
+        <br />ii) Mixed Radical Monomial Denominator:
+      </p>
+      <equation>$ -\frac{7}{5\sqrt{2}} = -\frac{7}{5\sqrt{2}} * \frac{\sqrt{2}}{\sqrt{2}} = -\frac{7\sqrt{2}}{10}$</equation>
+    </stack>
+  </section>
+
+  <!--Section Number 1-->
+  <section name="practice">
+    <title style="center">Practice #1</title>
+
+    <!--Question 1 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \sqrt{8} = a\sqrt{b} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 2 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input2" placeholder="insert answer here" />
+          </column>
+        </row>
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                
+                if a == 2 and b == 2 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \sqrt{8} = 2\sqrt{2} $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 2 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \sqrt{27} = a\sqrt{b} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 2 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input2" placeholder="insert answer here" />
+          </column>
+        </row>
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                
+                if a == 3 and b == 3 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \sqrt{27} = 3\sqrt{3} $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 3 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \sqrt{72} = a\sqrt{b} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 2 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input2" placeholder="insert answer here" />
+          </column>
+        </row>
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                
+                if a == 6 and b == 2 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \sqrt{72} = 6\sqrt{2} $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 4 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \sqrt{400} = a $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                
+                if a == 20 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \sqrt{400} = 20 $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 5 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \sqrt{2400} = a\sqrt{b} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 2 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input2" placeholder="insert answer here" />
+          </column>
+        </row>
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                
+                if a == 20 and b == 6 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \sqrt{2400} = 20\sqrt{6} $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 6 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \sqrt{288} = a\sqrt{b} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 2 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input2" placeholder="insert answer here" />
+          </column>
+        </row>
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                
+                if a == 12 and b == 2 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \sqrt{288} = 12\sqrt{2} $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 7 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \sqrt{98} = a\sqrt{b} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 2 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input2" placeholder="insert answer here" />
+          </column>
+        </row>
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                
+                if a == 7 and b == 2 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \sqrt{98} = 7\sqrt{2} $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 8 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \sqrt{243} = a\sqrt{b} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 2 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input2" placeholder="insert answer here" />
+          </column>
+        </row>
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                
+                if a == 9 and b == 3 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \sqrt{243} = 9\sqrt{3} $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 9 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \sqrt{625} = a $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                
+                if a == 25 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \sqrt{625} = 25 $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 10 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \sqrt{1156} = a $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                
+                if a == 34 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \sqrt{1156} = 34 $ </p>
+      </stack>
+    </stack>
+  </section>
+
+  <!--Section Number 2-->
+  <section name="practice2">
+    <title style="center">Practice #2</title>
+
+    <!--Question 1 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \sqrt{8} \times \sqrt{12} = a\sqrt{b} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 2 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input2" placeholder="insert answer here" />
+          </column>
+        </row>
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                
+                if a == 4 and b == 6 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \sqrt{8} \times \sqrt{12} = 4\sqrt{6} $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 2 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \sqrt{125} \times \sqrt{10} \times \sqrt{2} = a $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                
+                if a == 50 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \sqrt{125} \times \sqrt{10} \times \sqrt{2} = 50 $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 3 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \sqrt{15} \times \sqrt{5} \times \sqrt{21} = a\sqrt{b} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 2 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input2" placeholder="insert answer here" />
+          </column>
+        </row>
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                
+                if a == 15 and b == 7 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \sqrt{15} \times \sqrt{5} \times \sqrt{21} = 15\sqrt{7} $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 4 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \sqrt{14} \times \sqrt{6} \times \sqrt{18} = a\sqrt{b} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 2 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input2" placeholder="insert answer here" />
+          </column>
+        </row>
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                
+                if a == 6 and b == 42 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \sqrt{14} \times \sqrt{6} \times \sqrt{18} = 6\sqrt{42} $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 5 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \sqrt{72} \times \sqrt{288} \times \sqrt{30} = a\sqrt{b} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 2 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input2" placeholder="insert answer here" />
+          </column>
+        </row>
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                
+                if a == 144 and b == 30 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \sqrt{72} \times \sqrt{288} \times \sqrt{30} = 144\sqrt{30} $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 6 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ 3\sqrt{8} \times \sqrt{96} \times 5\sqrt{10} = a\sqrt{b} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 2 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input2" placeholder="insert answer here" />
+          </column>
+        </row>
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                
+                if a == 240 and b == 30 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ 3\sqrt{8} \times \sqrt{96} \times 5\sqrt{10} = 240\sqrt{30} $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 7 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ 10\sqrt{2} \times \sqrt{75} \times 12\sqrt{6} = a $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                
+                if a == 3600 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ 10\sqrt{2} \times \sqrt{75} \times 12\sqrt{6} = 3600 $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 8 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \sqrt{36} \times \sqrt{169} \times \sqrt{25} = a $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                
+                if a == 390 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \sqrt{36} \times \sqrt{169} \times \sqrt{25} = 390 $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 9 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \sqrt{144} \times \sqrt{196} \times \sqrt{100} = a $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                
+                if a == 1680 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \sqrt{144} \times \sqrt{196} \times \sqrt{100} = 1680 $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 10 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \sqrt{225} \times \sqrt{128} \times \sqrt{1250} = a $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                
+                if a == 6000 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \sqrt{225} \times \sqrt{128} \times \sqrt{1250} = 6000 $ </p>
+      </stack>
+    </stack>
+  </section>
+
+  <!--Section Number 3-->
+  <section name="practice3">
+    <title style="center">Practice #3</title>
+    <p>Use scrap paper to complete the following questions.</p>
+
+    <!--Question 1 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \frac{\sqrt{12}}{\sqrt{3}} = a $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                
+                if a == 2 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \frac{\sqrt{12}}{\sqrt{3}} = 2 $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 2 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \frac{\sqrt{125}}{\sqrt{5}} = a $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                
+                if a == 5 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \frac{\sqrt{125}}{\sqrt{5}} = 5 $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 3 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \frac{\sqrt{1000}}{\sqrt{125}} = a\sqrt{b} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 2 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input2" placeholder="insert answer here" />
+          </column>
+        </row>
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                
+                if a == 2 and b == 2 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \frac{\sqrt{1000}}{\sqrt{125}} = 2\sqrt{2} $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 4 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \frac{\sqrt{512}}{\sqrt{2}} = a $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                
+                if a == 16 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+                
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \frac{\sqrt{512}}{\sqrt{2}} = 16 $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 5 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \frac{\sqrt{216}}{\sqrt{6}} = a $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                
+                if a == 6 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \frac{\sqrt{216}}{\sqrt{6}} = 6 $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 6 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \frac{3\sqrt{8} \times 2\sqrt{3}}{6\sqrt{6}} = a $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                
+                if a == 2 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \frac{3\sqrt{8} \times 2\sqrt{3}}{6\sqrt{6}} = 2 $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 7 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \frac{2\sqrt{12} \times \sqrt{84}}{\sqrt{42}} = a\sqrt{b} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 2 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input2" placeholder="insert answer here" />
+          </column>
+        </row>
+
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                
+                if a == 4 and b == 6 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \frac{2\sqrt{12} \times \sqrt{84}}{\sqrt{42}} = 4\sqrt{6} $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 8 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \frac{\sqrt{95} \times \sqrt{38}}{\sqrt{30}} = \frac{a\sqrt{b}}{c} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 2 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input2" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 3 -->
+        <row>
+          <column>
+            <p>c = </p>
+          </column>
+          <column>
+            <textField name="input3" placeholder="insert answer here" />
+          </column>
+        </row>
+
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                c = tonumber(answers:Child(3):Child(2):Child(1).Text);
+                
+                if a == 19 and b == 3 and c == 3 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \frac{\sqrt{95} \times \sqrt{38}}{\sqrt{30}} = \frac{19\sqrt{3}}{3} $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 9 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \frac{\sqrt{63} \times \sqrt{56} \times \sqrt{21}}{\sqrt{42}} = a $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                
+                if a == 42 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \frac{\sqrt{63} \times \sqrt{56} \times \sqrt{21}}{\sqrt{42}} = 42 $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 10 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \frac{\sqrt{128} \times \sqrt{45} \times \sqrt{98}}{\sqrt{24} \times \sqrt{15}} = a\sqrt{b} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input2" placeholder="insert answer here" />
+          </column>
+        </row>
+
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                
+                if a == 28 and b == 2 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \frac{\sqrt{128} \times \sqrt{45} \times \sqrt{98}}{\sqrt{24} \times \sqrt{15}} = 28\sqrt{2} $ </p>
+      </stack>
+    </stack>
+  </section>
+
+  <!--Section Number 4-->
+  <section name="practice4">
+    <title style="center">Practice #4</title>
+
+    <!--Question 1 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \frac{1}{\sqrt{10}} = \frac{\sqrt{a}}{b} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 2 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input2" placeholder="insert answer here" />
+          </column>
+        </row>
+
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                
+                if a == 10 and b == 10 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \frac{1}{\sqrt{10}} = \frac{\sqrt{10}}{10} $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 2 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \frac{2}{\sqrt{6}} = \frac{\sqrt{a}}{b} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 2 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                
+                
+                if a == 6 and b == 3 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \frac{2}{\sqrt{6}} = \frac{\sqrt{6}}{3} $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 3 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \frac{3}{\sqrt{15}} = \frac{\sqrt{a}}{b} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 2 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input2" placeholder="insert answer here" />
+          </column>
+        </row>
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                
+                if a == 15 and b == 5 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \frac{3}{\sqrt{15}} = \frac{\sqrt{15}}{5} $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 4 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \frac{7}{\sqrt{14}} = \frac{\sqrt{a}}{b} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 2 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                
+                if a == 14 and b == 2 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+                
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \frac{7}{\sqrt{14}} = \frac{\sqrt{14}}{2} $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 5 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \frac{12}{\sqrt{12}} = a\sqrt{b} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                
+                if a == 2 and b == 3 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \frac{12}{\sqrt{12}} = 2\sqrt{3} $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 6 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \frac{10}{\sqrt{125}} = \frac{a\sqrt{b}}{c} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 2 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 3 -->
+        <row>
+          <column>
+            <p>c = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                c = tonumber(answers:Child(3):Child(2):Child(1).Text);
+                
+                if a == 2 and b == 5 and c == 5 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \frac{10}{\sqrt{125}} = \frac{2\sqrt{5}}{5} $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 7 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \frac{200}{\sqrt{300}} = \frac{a\sqrt{b}}{c} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 2 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input2" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 3 -->
+        <row>
+          <column>
+            <p>c = </p>
+          </column>
+          <column>
+            <textField name="input2" placeholder="insert answer here" />
+          </column>
+        </row>
+
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                c = tonumber(answers:Child(3):Child(2):Child(1).Text);
+                
+                if a == 20 and b == 3 and c == 3 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \frac{200}{\sqrt{300}} = \frac{20\sqrt{3}}{3} $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 8 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \frac{\sqrt{360}}{\sqrt{135}} = \frac{a\sqrt{b}}{c} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 2 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input2" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 3 -->
+        <row>
+          <column>
+            <p>c = </p>
+          </column>
+          <column>
+            <textField name="input3" placeholder="insert answer here" />
+          </column>
+        </row>
+
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                c = tonumber(answers:Child(3):Child(2):Child(1).Text);
+                
+                if a == 2 and b == 6 and c == 3 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \frac{\sqrt{360}}{\sqrt{135}} = \frac{2\sqrt{6}}{3} $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 9 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \sqrt{\frac{27}{8}} = \frac{a\sqrt{b}}{c} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 2 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 3 -->
+        <row>
+          <column>
+            <p>c = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                c = tonumber(answers:Child(3):Child(2):Child(1).Text);
+                
+                if a == 3 and b == 6 and c == 4 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \sqrt{\frac{27}{8}} = \frac{3\sqrt{6}}{4} $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 10 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \sqrt{\frac{1728}{3375}} = \frac{a\sqrt{b}}{c} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 2 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input2" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 3 -->
+        <row>
+          <column>
+            <p>c = </p>
+          </column>
+          <column>
+            <textField name="input3" placeholder="insert answer here" />
+          </column>
+        </row>
+
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                c = tonumber(answers:Child(3):Child(2):Child(1).Text);
+                
+                if a == 8 and b == 5 and c == 25 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \sqrt{\frac{1728}{3375}} = \frac{8\sqrt{5}}{25} $ </p>
+      </stack>
+    </stack>
+  </section>
+
+  <!--Section Number 5-->
+  <section name="practice5">
+    <title style="center">Practice #5</title>
+
+    <!--Question 1 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \sqrt{7} + \sqrt{7} + \sqrt{7} = a\sqrt{b} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 2 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input2" placeholder="insert answer here" />
+          </column>
+        </row>
+
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                
+                if a == 3 and b == 7 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \sqrt{7} + \sqrt{7} + \sqrt{7} = 3\sqrt{7} $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 2 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \sqrt{2} + 3\sqrt{2} + 4\sqrt{2} = a\sqrt{b} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 2 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                
+                
+                if a == 8 and b == 2 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \sqrt{2} + 3\sqrt{2} + 4\sqrt{2} = 8\sqrt{2} $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 3 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \sqrt{2} + \sqrt{5} + 2\sqrt{2} - 3\sqrt{5} = a\sqrt{b} - c\sqrt{d} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 2 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input2" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 3 -->
+        <row>
+          <column>
+            <p>c = </p>
+          </column>
+          <column>
+            <textField name="input3" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 4 -->
+        <row>
+          <column>
+            <p>d = </p>
+          </column>
+          <column>
+            <textField name="input4" placeholder="insert answer here" />
+          </column>
+        </row>
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                c = tonumber(answers:Child(3):Child(2):Child(1).Text);
+                d = tonumber(answers:Child(4):Child(2):Child(1).Text);
+                
+                if a == 3 and b == 2 and c == 2 and d == 5 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \sqrt{2} + \sqrt{5} + 2\sqrt{2} - 3\sqrt{5} = 3\sqrt{2} - 2\sqrt{5} $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 4 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \sqrt{48} - \sqrt{72} + \sqrt{8} - \sqrt{12} = a\sqrt{b} - c\sqrt{d} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 2 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input2" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 3 -->
+        <row>
+          <column>
+            <p>c = </p>
+          </column>
+          <column>
+            <textField name="input3" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 4 -->
+        <row>
+          <column>
+            <p>d = </p>
+          </column>
+          <column>
+            <textField name="input4" placeholder="insert answer here" />
+          </column>
+        </row>
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                c = tonumber(answers:Child(3):Child(2):Child(1).Text);
+                d = tonumber(answers:Child(4):Child(2):Child(1).Text);
+                
+                if a == 2 and b == 3 and c == 4 and d == 2 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \sqrt{48} - \sqrt{72} + \sqrt{8} - \sqrt{12} = 2\sqrt{3} - 4\sqrt{2} $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 5 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ 5\sqrt{5} + 10\sqrt{5} - 15\sqrt{5} = a $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                
+                if a == 0 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ 5\sqrt{5} + 10\sqrt{5} - 15\sqrt{5} = 0 $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 6 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \sqrt{8} + \sqrt{32} + \sqrt{128} = a\sqrt{b} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 2 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                
+                if a == 14 and b == 2 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \sqrt{8} + \sqrt{32} + \sqrt{128} = 14\sqrt{2} $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 7 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \sqrt{28} - \sqrt{175} + 2\sqrt{63} = a\sqrt{b} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                
+                if a == 3 and b == 7 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \sqrt{28} - \sqrt{175} + 2\sqrt{63} = 3\sqrt{7} $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 8 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \sqrt{48} + \sqrt{80} - \sqrt{3} + \sqrt{180} = a\sqrt{b} - c\sqrt{d} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 2 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input2" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 3 -->
+        <row>
+          <column>
+            <p>c = </p>
+          </column>
+          <column>
+            <textField name="input3" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 4 -->
+        <row>
+          <column>
+            <p>d = </p>
+          </column>
+          <column>
+            <textField name="input4" placeholder="insert answer here" />
+          </column>
+        </row>
+
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                c = tonumber(answers:Child(3):Child(2):Child(1).Text);
+                d = tonumber(answers:Child(4):Child(2):Child(1).Text);
+
+                
+                if a == 3 and b == 3 and c == 10 and d == 5 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \sqrt{48} + \sqrt{80} - \sqrt{3} + \sqrt{180} = 3\sqrt{3} - 10\sqrt{5} $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 9 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \sqrt{2} - \sqrt{4} + \sqrt{8} - \sqrt{16} = a\sqrt{b} - c $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 2 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 3 -->
+        <row>
+          <column>
+            <p>c = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                c = tonumber(answers:Child(3):Child(2):Child(1).Text);
+                
+                if a == 3 and b == 2 and c == 6 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \sqrt{2} - \sqrt{4} + \sqrt{8} - \sqrt{16} = 3\sqrt{2} - 6 $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 10 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \sqrt{50} + \sqrt{100} + \sqrt{200} - \sqrt{400} = a\sqrt{b} - c $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 2 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input2" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 3 -->
+        <row>
+          <column>
+            <p>c = </p>
+          </column>
+          <column>
+            <textField name="input3" placeholder="insert answer here" />
+          </column>
+        </row>
+
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                c = tonumber(answers:Child(3):Child(2):Child(1).Text);
+                
+                if a == 15 and b == 2 and c == 10 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \sqrt{50} + \sqrt{100} + \sqrt{200} - \sqrt{400} = 15\sqrt{2} - 10 $ </p>
+      </stack>
+    </stack>
+  </section>
+
+  <!--Section Number 6-->
+  <section name="practice6">
+    <title style="center">Practice #6</title>
+
+    <!--Question 1 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \sqrt{2}^{2} = a $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                
+                if a == 2 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \sqrt{2}^{2} = 2 $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 2 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \sqrt{2}^{3} = a\sqrt{b} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 2 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                
+                
+                if a == 2 and b == 2 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \sqrt{2}^{3} = 2\sqrt{2} $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 3 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ \sqrt{2}^{4} = a $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                
+                if a == 4 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ \sqrt{2}^{4} = 4 $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 4 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ (\sqrt{2} \times \sqrt{3})^{2} = a $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                
+                if a == 6 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ (\sqrt{2} \times \sqrt{3})^{2} = 6 $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 5 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ (2\sqrt{5})^{2} = a $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                
+                if a == 20 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ (2\sqrt{5})^{2} = 20 $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 6 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ (1 + \sqrt{2})^{2} = a + b\sqrt{c} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 2 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input2" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 3 -->
+        <row>
+          <column>
+            <p>c = </p>
+          </column>
+          <column>
+            <textField name="input3" placeholder="insert answer here" />
+          </column>
+        </row>
+
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                c = tonumber(answers:Child(3):Child(2):Child(1).Text);
+
+                
+                if a == 3 and b == 2 and c == 2 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ (1 + \sqrt{2})^{2} = 3 + 2\sqrt{2} $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 7 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ (1 - \sqrt{3})^{2} = a - b\sqrt{c} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 2 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 3 -->
+        <row>
+          <column>
+            <p>c = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                c = tonumber(answers:Child(3):Child(2):Child(1).Text);
+                
+                if a == 4 and b == 2 and c == 3 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ (1 - \sqrt{3})^{2} = 4 - 2\sqrt{3} $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 8 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ (\sqrt{2} + \sqrt{5})^{2} = a + b\sqrt{c} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 2 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input2" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 3 -->
+        <row>
+          <column>
+            <p>c = </p>
+          </column>
+          <column>
+            <textField name="input3" placeholder="insert answer here" />
+          </column>
+        </row>
+
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                c = tonumber(answers:Child(3):Child(2):Child(1).Text);
+
+                
+                if a == 7 and b == 2 and c == 10 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ (\sqrt{2} + \sqrt{5})^{2} = 7 + 2\sqrt{10} $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 9 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ (\sqrt{6} + \sqrt{2})^{2} = a + b\sqrt{c} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 2 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 3 -->
+        <row>
+          <column>
+            <p>c = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                c = tonumber(answers:Child(3):Child(2):Child(1).Text);
+                
+                if a == 8 and b == 4 and c == 3 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ (\sqrt{6} + \sqrt{2})^{2} = 8 + 4\sqrt{3} $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 10 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ (\sqrt{15} - \sqrt{3})^{2} = a - b\sqrt{c} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 2 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input2" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 3 -->
+        <row>
+          <column>
+            <p>c = </p>
+          </column>
+          <column>
+            <textField name="input3" placeholder="insert answer here" />
+          </column>
+        </row>
+
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                c = tonumber(answers:Child(3):Child(2):Child(1).Text);
+                
+                if a == 18 and b == 6 and c == 5 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ (\sqrt{15} - \sqrt{3})^{2} = 18 - 6\sqrt{5} $ </p>
+      </stack>
+    </stack>
+  </section>
+
+  <!--Section Number 7-->
+  <section name="practice7">
+    <title style="center">Practice #7</title>
+
+    <!--Question 1 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ (\frac{1}{\sqrt{2}})^{2} = \frac{a}{b} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                
+                if a == 1 and b == 2 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ (\frac{1}{\sqrt{2}})^{2} = \frac{1}{2} $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 2 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ (\frac{2}{\sqrt{3}})^{2} = \frac{a}{b} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 2 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                
+                
+                if a == 4 and b == 3 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ (\frac{2}{\sqrt{3}})^{2} = \frac{4}{3} $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 3 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ (\frac{1}{\sqrt{8}})^{3} = \frac{\sqrt{a}}{b} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                
+                if a == 2 and b == 32 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ (\frac{1}{\sqrt{8}})^{3} = \frac{\sqrt{2}}{32} $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 4 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ (\frac{10}{\sqrt{2}})^{3} = a\sqrt{b} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                
+                if a == 250 and b == 2 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ (\frac{10}{\sqrt{2}})^{3} = 250\sqrt{2} $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 5 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ (\frac{\sqrt{8}}{\sqrt{5}})^{2} = \frac{a}{b} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                
+                if a == 8 and b == 5 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ (\frac{\sqrt{8}}{\sqrt{5}})^{2} = \frac{8}{5} $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 6 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ (\sqrt{x} + \sqrt{y})^{2} = a + b\sqrt{c \times d} + e $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 2 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input2" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 3 -->
+        <row>
+          <column>
+            <p>c = </p>
+          </column>
+          <column>
+            <textField name="input3" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 3 -->
+        <row>
+          <column>
+            <p>d = </p>
+          </column>
+          <column>
+            <textField name="input3" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 3 -->
+        <row>
+          <column>
+            <p>e = </p>
+          </column>
+          <column>
+            <textField name="input3" placeholder="insert answer here" />
+          </column>
+        </row>
+
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                c = tonumber(answers:Child(3):Child(2):Child(1).Text);
+                d = tonumber(answers:Child(4):Child(2):Child(1).Text);
+                e = tonumber(answers:Child(5):Child(2):Child(1).Text);
+
+                
+                if a == x and b == 2 and c == x and d == y and e == y then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ (\sqrt{x} + \sqrt{y})^{2} = x + 2\sqrt{x \times y} + y $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 7 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ (\sqrt{x} - \sqrt{y})^{2} = a - b\sqrt{c \times d} + e $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 2 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 3 -->
+        <row>
+          <column>
+            <p>c = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 3 -->
+        <row>
+          <column>
+            <p>d = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 3 -->
+        <row>
+          <column>
+            <p>e = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                c = tonumber(answers:Child(3):Child(2):Child(1).Text);
+                d = tonumber(answers:Child(4):Child(2):Child(1).Text);
+                e = tonumber(answers:Child(5):Child(2):Child(1).Text);
+                
+                if a == x and b == 2 and c == x and d == y and e == y then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ (\sqrt{x} - \sqrt{y})^{2} = x - 2\sqrt{x \times y} + y $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 8 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ (x + \sqrt{y})^{2} = a^{2} + bc \sqrt{d} + e $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 2 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input2" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 3 -->
+        <row>
+          <column>
+            <p>c = </p>
+          </column>
+          <column>
+            <textField name="input3" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 3 -->
+        <row>
+          <column>
+            <p>d = </p>
+          </column>
+          <column>
+            <textField name="input3" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 3 -->
+        <row>
+          <column>
+            <p>e = </p>
+          </column>
+          <column>
+            <textField name="input3" placeholder="insert answer here" />
+          </column>
+        </row>
+
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                c = tonumber(answers:Child(3):Child(2):Child(1).Text);
+                d = tonumber(answers:Child(4):Child(2):Child(1).Text);
+                e = tonumber(answers:Child(5):Child(2):Child(1).Text);
+
+                
+                if a == x and b == 2 and c == x and d == y and e == y then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ (x + \sqrt{y})^{2} = x^{2} + 2x\sqrt{y} + y $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 9 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ (2x + 3\sqrt{y})^{2} = ab^{2} + cd \sqrt{e} + fg $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 2 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 3 -->
+        <row>
+          <column>
+            <p>c = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 3 -->
+        <row>
+          <column>
+            <p>d = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 3 -->
+        <row>
+          <column>
+            <p>e = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 3 -->
+        <row>
+          <column>
+            <p>f = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 3 -->
+        <row>
+          <column>
+            <p>g = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                c = tonumber(answers:Child(3):Child(2):Child(1).Text);
+                d = tonumber(answers:Child(4):Child(2):Child(1).Text);
+                e = tonumber(answers:Child(5):Child(2):Child(1).Text);
+                f = tonumber(answers:Child(6):Child(2):Child(1).Text);
+                g = tonumber(answers:Child(7):Child(2):Child(1).Text);
+                
+                if a == 4 and b == x and c == 12 and d == x and e == y and f == 9 and g == y then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ (2x + 3\sqrt{y})^{2} = 4x^{2} + 12x\sqrt{y} + 9y $ </p>
+      </stack>
+    </stack>
+
+    <!--Question 10 -->
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <p name="equation" style="center">Question: $ (3x - \sqrt{x^{2} + 1})^{2} = ab^{2} - cd\sqrt{e^{2} + f} + g $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="answers" widths="20% 80%" grid="false">
+        <!-- Row 1 -->
+        <row>
+          <column>
+            <p>a = </p>
+          </column>
+          <column>
+            <textField name="input1" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 2 -->
+        <row>
+          <column>
+            <p>b = </p>
+          </column>
+          <column>
+            <textField name="input2" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 3 -->
+        <row>
+          <column>
+            <p>c = </p>
+          </column>
+          <column>
+            <textField name="input3" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 3 -->
+        <row>
+          <column>
+            <p>d = </p>
+          </column>
+          <column>
+            <textField name="input3" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 3 -->
+        <row>
+          <column>
+            <p>e = </p>
+          </column>
+          <column>
+            <textField name="input3" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 3 -->
+        <row>
+          <column>
+            <p>f = </p>
+          </column>
+          <column>
+            <textField name="input3" placeholder="insert answer here" />
+          </column>
+        </row>
+
+        <!-- Row 3 -->
+        <row>
+          <column>
+            <p>g = </p>
+          </column>
+          <column>
+            <textField name="input3" placeholder="insert answer here" />
+          </column>
+        </row>
+
+      </table>
+      <button content="Check Answer">
+        <onClick>
+          <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                c = tonumber(answers:Child(3):Child(2):Child(1).Text);
+                d = tonumber(answers:Child(4):Child(2):Child(1).Text);
+                e = tonumber(answers:Child(5):Child(2):Child(1).Text);
+                f = tonumber(answers:Child(6):Child(2):Child(1).Text);
+                g = tonumber(answers:Child(7):Child(2):Child(1).Text);
+                
+                if a == 10 and b == x and c == 6 and d == x and e == x and f == 1 and g == 1 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+        </onClick>
+      </button>
+      <!-- Answer Stack -->
+      <stack name="solutions">
+        <p name="answer" style="collapsed"></p>
+        <p name="answer2" style="collapsed">The answer is: $ (3x - \sqrt{x^{2} + 1})^{2} = 10x^{2} - 6x\sqrt{x^{2} + 1} + 1 $ </p>
+      </stack>
+    </stack>
+  </section>
+
+</document>

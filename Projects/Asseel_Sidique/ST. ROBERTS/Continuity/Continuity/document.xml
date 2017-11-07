@@ -1,0 +1,801 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G19CFACD4_6E1A_45F1_809E_1BF01B2B2B90">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>MCV4U 1.6 - Continuity</title>
+    <creator>Asseel</creator>
+    <coverImage src="resources/cover.png" />
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+  </metadata>
+
+  <include src="resources/curriculumStyles.xml" />
+  <include src="resources/Utilities.xml" />
+  <include src="resources/plotTools.xml" />
+
+
+
+
+  <!--                                      Header & Footer START                                         -->
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="whiteColor">Amanda Koon</p>
+      <p style="whiteColor rightText">MCV4U</p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/logo1.png" inspect="false" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/logo2.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--                                      Header & Footer END                                         -->
+
+
+  <!-- Section 1 -->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">1.6 Continuity</title>
+    <p style="sectionHeading">Introduction</p>
+    <stack orientation="vertical" style="contentBG">
+      <p>Functions can either be continuous or discontinuous. In this lesson, we will be going over what a continuous function is, what is discountinuous function is, types of discontinuities and finding the limit as x approaches a constant of a discontinuous function.</p>
+    </stack>
+  </section>
+
+  <sectionNoTitle name="section2" style="pageLayout">
+    <p style="sectionHeading">Summary</p>
+    <stack orientation="vertical" style="contentBG">
+      <p>
+        A function $ f(x) $ is <b>continuous</b> at $ x = a $ if:
+      </p>
+      <p style="centerText">$ f(a) $ exists</p>
+      <p style="centerText">$ \displaystyle{\lim_{x \to a}}f(x) $ exists</p>
+      <p style="centerText">$ \displaystyle{\lim_{x \to a}}f(x) = f(a) $</p>
+      <p style="centerText">Otherwise, $ f(x) $ is discontinuous at $ x = a $</p>
+      <p>
+        What this means is: <b>f(x)</b> is continuous at a specific x-value if the limit of the function as <b>x</b> approaches a specific value, <b>a</b>, is equal to the y-value at the specific x-value, <b>a</b>. In other words, if the y-value as <b>x</b> approaches <b>a</b> is equal to the y-value at $x = a $, the function is continuous.
+      </p>
+      <p>
+        Of course, this also means that if there is a hole in the function and the above conditions are not met, then a <b>discontinuity</b> exists. Next, let's look at some types of discontinuities and the limit existence associated with each case.
+      </p>
+    </stack>
+    <p style="sectionHeading">Types of Discontinuities</p>
+    <stack orientation="vertical" style="contentBG">
+      <script>
+        <![CDATA[
+        for i=-8,8,0.01 do
+          if i < 1.9 then
+            plot.fx:Add(i, i);
+          elseif i > 2.1 then
+            plot.fx2:Add(i, i);
+          end
+        end
+        
+        char.textX(plot.xLabel, {7.5, -0.5}, 0.25, color.black);
+        char.textY(plot.xLabel, {-0.5, 7.5}, 0.25, color.black);
+        
+        plotTools.drawCircle(plot.circle1, {2, 2}, 0.2, color.blue)    
+        plotTools.drawCircle(plot.circle2, {2, 4}, 0.2, color.blue)    
+        ]]>
+      </script>
+      <p style="subSectionHeading">1) Removable Discontinuity</p>
+      <xyPlot name="plot">
+        <axis dim="x" auto="fixed" min="-8" max="8"></axis>
+        <axis dim="y" auto="fixed" min="-8" max="8"></axis>
+        <series name="fx">
+          <style>
+            <foreground color="blue" />
+          </style>
+        </series>
+        <series name="fx2">
+          <style>
+            <foreground color="blue" />
+          </style>
+        </series>
+        <series name="xAxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>2</lineThickness>
+          </style>
+          <data>
+            -10 0; 10 0;
+          </data>
+        </series>
+        <series name="yAxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>2</lineThickness>
+          </style>
+          <data>
+            0 10; 0 -10;
+          </data>
+        </series>
+        <series name="xLabel"></series>
+        <series name="yLabel"></series>
+        <series name="circle1" draw="line"></series>
+        <series name="circle2" draw="radialFill"></series>
+      </xyPlot>
+      <p>
+        In the graph above, there is a hole at $ x = 2 $. These holes are called <b>removable discontinuities</b>. Although there is a hole at $ x = 2 $, the limit of $ f(x) $ as $ x \to 2 $ exists.
+      </p>
+    </stack>
+    <stack orientation="vertical" style="contentBG">
+      <script>
+        <![CDATA[
+        for i=-8,8,0.01 do
+          if i < 1.9 then
+            plot.fx:Add(i, i);
+          elseif i > 2.1 then
+            plot.fx2:Add(i, i+2);
+          end
+        end
+        
+        char.textX(plot.xLabel, {7.5, -0.5}, 0.25, color.black);
+        char.textY(plot.xLabel, {-0.5, 7.5}, 0.25, color.black);
+        
+        plotTools.drawCircle(plot.circle1, {2, 2}, 0.2, color.blue)    
+        plotTools.drawCircle(plot.circle2, {2, 4}, 0.2, color.blue)    
+        ]]>
+      </script>
+      <p style="subSectionHeading">2) Jump Discontinuity</p>
+      <xyPlot name="plot">
+        <axis dim="x" auto="fixed" min="-8" max="8"></axis>
+        <axis dim="y" auto="fixed" min="-8" max="8"></axis>
+        <series name="fx">
+          <style>
+            <foreground color="blue" />
+          </style>
+        </series>
+        <series name="fx2">
+          <style>
+            <foreground color="blue" />
+          </style>
+        </series>
+        <series name="xAxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>2</lineThickness>
+          </style>
+          <data>
+            -10 0; 10 0;
+          </data>
+        </series>
+        <series name="yAxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>2</lineThickness>
+          </style>
+          <data>
+            0 10; 0 -10;
+          </data>
+        </series>
+        <series name="xLabel"></series>
+        <series name="yLabel"></series>
+        <series name="circle1" draw="line"></series>
+        <series name="circle2" draw="line"></series>
+      </xyPlot>
+      <p>
+        In the graph above, you can see that $ \displaystyle{\lim_{x \to 2^-}} f(x) = 2 $ and $ \displaystyle{\lim_{x \to 2^+}} f(x) = 4 $. This means that both one-sided limits exists, but have different values. When this happens, we say there is a jump discontinuity at $ x = 2 $.
+      </p>
+    </stack>
+    <stack orientation="vertical" style="contentBG">
+      <script>
+        <![CDATA[
+        for i=-8,8,0.01 do
+          if i < 0 then
+            plot.fx:Add(i, 1/i^2);
+          elseif i > 0 then
+            plot.fx2:Add(i, 1/i^2);
+          end
+        end
+        
+        char.textX(plot.xLabel, {7.5, -0.5}, 0.25, color.black);
+        char.textY(plot.xLabel, {-0.5, 7.5}, 0.25, color.black);
+        
+        ]]>
+      </script>
+      <p style="subSectionHeading">3) Infinite Discontinuity</p>
+      <xyPlot name="plot">
+        <axis dim="x" auto="fixed" min="-8" max="8"></axis>
+        <axis dim="y" auto="fixed" min="-8" max="8"></axis>
+        <series name="fx">
+          <style>
+            <foreground color="blue" />
+          </style>
+        </series>
+        <series name="fx2">
+          <style>
+            <foreground color="blue" />
+          </style>
+        </series>
+        <series name="xAxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>2</lineThickness>
+          </style>
+          <data>
+            -10 0; 10 0;
+          </data>
+        </series>
+        <series name="yAxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>2</lineThickness>
+          </style>
+          <data>
+            0 10; 0 -10;
+          </data>
+        </series>
+        <series name="xLabel"></series>
+        <series name="yLabel"></series>
+        <series name="circle1" draw="line"></series>
+        <series name="circle2" draw="line"></series>
+      </xyPlot>
+      <p>
+        This function indicates that it will grow infinitely large as $ x \to a $. Since the function doesn't approach a particular finite value, the limit does not exist. This is an infinite discontinuity; however, both one-sided limits exist and are an infinite number.
+      </p>
+    </stack>
+    <stack orientation="vertical" style="contentBG">
+      <script>
+        <![CDATA[
+        for i=-8,8,0.01 do
+          if i > 0 then
+            plot.fx2:Add(i, math.sqrt(i));
+          end
+        end
+        
+        char.textX(plot.xLabel, {7.5, -0.5}, 0.25, color.black);
+        char.textY(plot.xLabel, {-0.5, 7.5}, 0.25, color.black);
+        
+        ]]>
+      </script>
+      <p style="subSectionHeading">4) Endpoint Discontinuity</p>
+      <xyPlot name="plot">
+        <axis dim="x" auto="fixed" min="-8" max="8"></axis>
+        <axis dim="y" auto="fixed" min="-8" max="8"></axis>
+        <series name="fx">
+          <style>
+            <foreground color="blue" />
+          </style>
+        </series>
+        <series name="fx2">
+          <style>
+            <foreground color="blue" />
+          </style>
+        </series>
+        <series name="xAxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>2</lineThickness>
+          </style>
+          <data>
+            -10 0; 10 0;
+          </data>
+        </series>
+        <series name="yAxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>2</lineThickness>
+          </style>
+          <data>
+            0 10; 0 -10;
+          </data>
+        </series>
+        <series name="xLabel"></series>
+        <series name="yLabel"></series>
+        <series name="circle1" draw="line"></series>
+        <series name="circle2" draw="line"></series>
+      </xyPlot>
+      <p>
+        When a function is defined on an interval with a closed endpoint, the limit cannot exist at that endpoint. Why is this? This is because the limit has to examine the function values as $ x \to $ (approaches) the endpoint from both sides.
+        In the example above, consider finding $ \displaystyle{\lim_{x \to 0}} f(x) $. Note that $ x = 0 $ is the left endpoint of the function's domain: $ (0, \infty) $, and the function is not continuous there because the limit does not exist (because x cannot approach from
+        both sides). A one-sided limit exists as the function is continuous to the right.
+      </p>
+    </stack>
+    <p>
+      <br />
+    </p>
+  </sectionNoTitle>
+
+
+  <sectionNoTitle name="section3" style="pageLayout">
+    <p style="sectionHeading">Example Question</p>
+    <stack orientation="vertical" style="contentBG">
+      <script>
+        <![CDATA[
+        for i=-6,8,0.01 do
+          if i > 2.1 then
+            plot.fx2:Add(i, (i^2-2*i)/(i^2-4)  );
+          elseif i < 1.9 then
+            plot.fx:Add(i, (i^2-2*i)/(i^2-4)  );
+          end
+        end
+        
+        char.textX(plot.xLabel, {7.5, -0.5}, 0.25, color.black);
+        char.textY(plot.xLabel, {-0.5, 4.25}, 0.25, color.black);
+        
+        plotTools.drawCircle(plot.circle1, {2, 0.5}, 0.1, color.blue);
+        
+        ]]>
+      </script>
+      <xyPlot name="plot">
+        <axis dim="x" auto="fixed" min="-1.9" max="8"></axis>
+        <axis dim="y" auto="fixed" min="-3" max="5"></axis>
+        <series name="fx">
+          <style>
+            <foreground color="blue" />
+          </style>
+        </series>
+        <series name="fx2">
+          <style>
+            <foreground color="blue" />
+          </style>
+        </series>
+        <series name="xAxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>2</lineThickness>
+          </style>
+          <data>
+            -10 0; 10 0;
+          </data>
+        </series>
+        <series name="yAxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>2</lineThickness>
+          </style>
+          <data>
+            0 10; 0 -10;
+          </data>
+        </series>
+        <series name="xLabel"></series>
+        <series name="yLabel"></series>
+        <series name="circle1" draw="line"></series>
+      </xyPlot>
+      <p>The function above has a removable discontinuity at $ x = 2 $. Redefine the function so that it becomes continuous at $ x = 2 $.</p>
+      <p style="centerText">$ f(x) = \frac{x^2-2x}{x^2-4}$</p>
+      <p style="subSectionHeading">Solution</p>
+      <p>To fix the discontinuity, we need to know the y-value of the hole in the graph. To determine this, we find the value of $ \displaystyle{\lim_{x \to 2}} f(x) $. Solving the limit: </p>
+      <p>$ \displaystyle{\lim_{x \to 2}}  \frac{x^2-2x}{x^2-4} $</p>
+      <p>$= \frac{(2)^2-(2)2}{(2)^2-4} $</p>
+      <p>$= \frac{0}{0} $</p>
+      <p>The divison by zero tells us that there is definitely a discontinuity at $ x = 2 $.</p>
+      <p>We then factor the function $ f(x) $</p>
+      <p>$ f(x) = \frac{x^2-2x}{x^2-4}$</p>
+      <p>$ = \frac{x(x-2)}{(x-2)(x+2)}$</p>
+      <p>$ = \frac{x}{(x+2)}$</p>
+      <p>And as $ x \to 2 $</p>
+      <p>$ = \frac{2}{(2+2)}$</p>
+      <p>$ = \frac{1}{2} $</p>
+    </stack>
+    <p>
+      <br />
+    </p>
+  </sectionNoTitle>
+
+
+  <sectionNoTitle name="section4" style="pageLayout">
+    <p style="sectionHeading">Practice Questions</p>
+    <stack style="contentBG">
+      <p>Test the continuity of each function at the given point</p>
+    </stack>
+    <p><br /></p>
+    <stack orientation="vertical" style="contentBG">
+      <script>
+        local stepsController = StepsController:new({stepsStack=stepsStack, numOfSteps=4})
+      </script>
+      <p style="subSectionHeading">Question 1</p>
+      <p style="centerText">$ f(x) = 3x^2 + 5x + 2 $ at $ x = 1 $</p>
+      <p><br /></p>
+      <stack name="stepsStack">
+        <stack orientation="horizontal">
+          <stack name="stepStack" orientation="vertical">
+            <p>Part A</p>
+            <stack name="cont" style="invisible">
+              <!--CONTENT GOES HERE-->
+              <p style="centerText">$ f(1) =  $ ________?</p>
+              <stack name="mcStack" style="mcStackLayout">
+                <script>
+                  local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=1})
+                </script>
+                <table name="choicesTable" grid="false" widths="50% 50%">
+                  <row>
+                    <column>
+                      <p style="centerText">10</p>
+                    </column>
+                    <column>
+                      <p style="centerText">-10</p>
+                    </column>
+                  </row>
+                  <row>
+                    <column>
+                      <button name="btn" content="A" style="btnUnselected">
+                        <onClick>
+                          mcController:select(1)
+                        </onClick>
+                      </button>
+                    </column>
+                    <column>
+                      <button name="btn" content="B" style="btnUnselected">
+                        <onClick>
+                          mcController:select(2)
+                        </onClick>
+                      </button>
+                    </column>
+                  </row>
+                  <row>
+                    <column>
+                      <p style="centerText">11</p>
+                    </column>
+                    <column>
+                      <p style="centerText">-9</p>
+
+                    </column>
+                  </row>
+                  <row>
+                    <column>
+                      <button name="btn" content="C" style="btnUnselected">
+                        <onClick>
+                          mcController:select(3)
+                        </onClick>
+                      </button>
+                    </column>
+                    <column>
+                      <button name="btn" content="D" style="btnUnselected">
+                        <onClick>
+                          mcController:select(4)
+                        </onClick>
+                      </button>
+                    </column>
+                  </row>
+                </table>
+                <button name="checkBtn" content="Check Answer">
+                  <onClick>
+                    mcController:checkAnswer()
+                  </onClick>
+                </button>
+              </stack>
+            </stack>
+          </stack>
+          <button name="btn" style="stepByStepBtn">
+            <onClick>
+              stepsController:toggleStep2(1)
+            </onClick>
+          </button>
+        </stack>
+        <stack orientation="horizontal">
+          <stack name="stepStack" orientation="vertical">
+            <p>Part B</p>
+            <stack name="cont" style="invisible">
+              <stack orientation="horizontal">
+                <stack orientation="vertical">
+                  <!--CONTENT GOES HERE-->
+                  <p style="centerText">$ \displaystyle{\lim_{x \to 1}} 3x^2+5x+2 = $ ________?</p>
+                  <stack name="mcStack" style="mcStackLayout">
+                    <script>
+                      local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=1})
+                    </script>
+                    <table name="choicesTable" grid="false" widths="50% 50%">
+                      <row>
+                        <column>
+                          <p style="centerText">10</p>
+                        </column>
+                        <column>
+                          <p style="centerText">-10</p>
+                        </column>
+                      </row>
+                      <row>
+                        <column>
+                          <button name="btn" content="A" style="btnUnselected">
+                            <onClick>
+                              mcController:select(1)
+                            </onClick>
+                          </button>
+                        </column>
+                        <column>
+                          <button name="btn" content="B" style="btnUnselected">
+                            <onClick>
+                              mcController:select(2)
+                            </onClick>
+                          </button>
+                        </column>
+                      </row>
+                      <row>
+                        <column>
+                          <p style="centerText">11</p>
+                        </column>
+                        <column>
+                          <p style="centerText">-9</p>
+
+                        </column>
+                      </row>
+                      <row>
+                        <column>
+                          <button name="btn" content="C" style="btnUnselected">
+                            <onClick>
+                              mcController:select(3)
+                            </onClick>
+                          </button>
+                        </column>
+                        <column>
+                          <button name="btn" content="D" style="btnUnselected">
+                            <onClick>
+                              mcController:select(4)
+                            </onClick>
+                          </button>
+                        </column>
+                      </row>
+                    </table>
+                    <button name="checkBtn" content="Check Answer">
+                      <onClick>
+                        mcController:checkAnswer()
+                      </onClick>
+                    </button>
+                  </stack>
+                </stack>
+              </stack>
+            </stack>
+          </stack>
+          <button name="btn" style="stepByStepBtn">
+            <onClick>
+              stepsController:toggleStep2(2)
+            </onClick>
+          </button>
+        </stack>
+        <stack orientation="horizontal">
+          <stack name="stepStack" orientation="vertical">
+            <!--CONTENT GOES HERE-->
+            <p>Part C</p>
+            <stack name="cont" style="invisible">
+            <p style="centerText">∵ $ \displaystyle{ f(1) } $ ________ $ \displaystyle{\lim_{x \to 1}} f(x) $</p>
+              <stack name="mcStack" style="mcStackLayout">
+                <script>
+                  local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn}, checkBtn=checkBtn, answer=1})
+                </script>
+                <table name="choicesTable" grid="false" widths="50% 50%">
+                  <row>
+                    <column>
+                      <p style="centerText">=</p>
+                    </column>
+                    <column>
+                      <p style="centerText">≠</p>
+                    </column>
+                  </row>
+                  <row>
+                    <column>
+                      <button name="btn" content="A" style="btnUnselected">
+                        <onClick>
+                          mcController:select(1)
+                        </onClick>
+                      </button>
+                    </column>
+                    <column>
+                      <button name="btn" content="B" style="btnUnselected">
+                        <onClick>
+                          mcController:select(2)
+                        </onClick>
+                      </button>
+                    </column>
+                  </row>
+                </table>
+                <button name="checkBtn" content="Check Answer">
+                  <onClick>
+                    mcController:checkAnswer()
+                  </onClick>
+                </button>
+              </stack>
+            </stack>
+          </stack>
+          <button name="btn" style="stepByStepBtn">
+            <onClick>
+              stepsController:toggleStep2(3)
+            </onClick>
+          </button>
+        </stack>
+        <stack orientation="horizontal">
+          <stack name="stepStack" orientation="vertical">
+            <!--CONTENT GOES HERE-->
+            <p>Part D</p>
+            <stack name="cont" style="invisible">
+            <p style="centerText">∴ $ \displaystyle{ f(x) } $ is ________ at $ x = 1 $</p>
+              <stack name="mcStack" style="mcStackLayout">
+                <script>
+                  local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn}, checkBtn=checkBtn, answer=1})
+                </script>
+                <table name="choicesTable" grid="false" widths="50% 50%">
+                  <row>
+                    <column>
+                      <p style="centerText">Continuous</p>
+                    </column>
+                    <column>
+                      <p style="centerText">Discontinuous</p>
+                    </column>
+                  </row>
+                  <row>
+                    <column>
+                      <button name="btn" content="A" style="btnUnselected">
+                        <onClick>
+                          mcController:select(1)
+                        </onClick>
+                      </button>
+                    </column>
+                    <column>
+                      <button name="btn" content="B" style="btnUnselected">
+                        <onClick>
+                          mcController:select(2)
+                        </onClick>
+                      </button>
+                    </column>
+                  </row>
+                </table>
+                <button name="checkBtn" content="Check Answer">
+                  <onClick>
+                    mcController:checkAnswer()
+                  </onClick>
+                </button>
+              </stack>
+            </stack>
+          </stack>
+          <button name="btn" style="stepByStepBtn">
+            <onClick>
+              stepsController:toggleStep2(4)
+            </onClick>
+          </button>
+        </stack>
+      </stack>
+    </stack>
+    <p><br /></p>
+    <stack orientation="vertical" style="contentBG">
+      <script>
+        local stepsController = StepsController:new({stepsStack=stepsStack, numOfSteps=2})
+      </script>
+      <p style="subSectionHeading">Question 2</p>
+      <p style="centerText">$ f(x) = \frac{x}{(x+1)^2} $ at $ x = -1 $</p>
+      <p>
+        <br />
+      </p>
+      <stack name="stepsStack">
+        <stack orientation="horizontal">
+          <stack name="stepStack" orientation="vertical">
+            <p>Part A</p>
+            <stack name="cont" style="invisible">
+              <!--CONTENT GOES HERE-->
+              <p style="centerText">$ f(-1) =  $ ________?</p>
+              <stack name="mcStack" style="mcStackLayout">
+                <script>
+                  local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=4})
+                </script>
+                <table name="choicesTable" grid="false" widths="50% 50%">
+                  <row>
+                    <column>
+                      <p style="centerText">0</p>
+                    </column>
+                    <column>
+                      <p style="centerText">-1</p>
+                    </column>
+                  </row>
+                  <row>
+                    <column>
+                      <button name="btn" content="A" style="btnUnselected">
+                        <onClick>
+                          mcController:select(1)
+                        </onClick>
+                      </button>
+                    </column>
+                    <column>
+                      <button name="btn" content="B" style="btnUnselected">
+                        <onClick>
+                          mcController:select(2)
+                        </onClick>
+                      </button>
+                    </column>
+                  </row>
+                  <row>
+                    <column>
+                      <p style="centerText">1</p>
+                    </column>
+                    <column>
+                      <p style="centerText">Undefined</p>
+
+                    </column>
+                  </row>
+                  <row>
+                    <column>
+                      <button name="btn" content="C" style="btnUnselected">
+                        <onClick>
+                          mcController:select(3)
+                        </onClick>
+                      </button>
+                    </column>
+                    <column>
+                      <button name="btn" content="D" style="btnUnselected">
+                        <onClick>
+                          mcController:select(4)
+                        </onClick>
+                      </button>
+                    </column>
+                  </row>
+                </table>
+                <button name="checkBtn" content="Check Answer">
+                  <onClick>
+                    mcController:checkAnswer()
+                  </onClick>
+                </button>
+              </stack>
+            </stack>
+          </stack>
+          <button name="btn" style="stepByStepBtn">
+            <onClick>
+              stepsController:toggleStep2(1)
+            </onClick>
+          </button>
+        </stack>
+        <stack orientation="horizontal">
+          <stack name="stepStack" orientation="vertical">
+            <p>Part B</p>
+            <stack name="cont" style="invisible">
+              <stack orientation="horizontal">
+                <stack orientation="vertical">
+                  <!--CONTENT GOES HERE-->
+                  <p style="centerText">∴ $ \displaystyle{ f(x) } $ is ________ at $ x = -1 $</p>
+                  <stack name="mcStack" style="mcStackLayout">
+                    <script>
+                      local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn}, checkBtn=checkBtn, answer=2})
+                    </script>
+                    <table name="choicesTable" grid="false" widths="50% 50%">
+                      <row>
+                        <column>
+                          <p style="centerText">Continuous</p>
+                        </column>
+                        <column>
+                          <p style="centerText">Discontinuous</p>
+                        </column>
+                      </row>
+                      <row>
+                        <column>
+                          <button name="btn" content="A" style="btnUnselected">
+                            <onClick>
+                              mcController:select(1)
+                            </onClick>
+                          </button>
+                        </column>
+                        <column>
+                          <button name="btn" content="B" style="btnUnselected">
+                            <onClick>
+                              mcController:select(2)
+                            </onClick>
+                          </button>
+                        </column>
+                      </row>
+                    </table>
+                    <button name="checkBtn" content="Check Answer">
+                      <onClick>
+                        mcController:checkAnswer()
+                      </onClick>
+                    </button>
+                  </stack>
+                </stack>
+              </stack>
+            </stack>
+          </stack>
+          <button name="btn" style="stepByStepBtn">
+            <onClick>
+              stepsController:toggleStep2(2)
+            </onClick>
+          </button>
+        </stack>
+      </stack>
+    </stack>
+    <p><br /></p>
+  </sectionNoTitle>
+
+  
+</document>

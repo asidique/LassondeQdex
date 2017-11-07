@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G9AB64E04_E5F4_4FB6_932B_C5350D2E92C7">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>LA-ALGE-1.8 Multiplying Matrices by Matrices</title>
+    <creator>jason_wang</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/lassondeLogo.png" />
+  </metadata>
+
+  <include src="resources/curriculumStylesLassonde.xml" />
+  <include src="resources/Utilities.xml" />
+
+  <!--                                      Header & Footer START                                         -->
+  <header style="themeColour">
+    <stack style="center" orientation="horizontal">
+      <p></p>
+    </stack>
+  </header>
+  <footer style="themeColour">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="themeColourTitle">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--                                      Header & Footer END                                         -->
+
+
+  <!-- Cover Page -->
+  <!-- This is the standard way title pages are created. A great website to get copyright free images .. www.pexels.com
+  *** The style: "pageLayout" is defined in curriculumStylesLassonde.xml. It simply sets the content to the center and adjusts the width to 80% ***-->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">1.8 Multiplying Matrices by Matrices</title>
+    <p style="sectionHeading">Introduction</p>
+    <image src="resources/cubic.jpg" />
+    <stack orientation="vertical" style="contentBG">
+      <p style="justifiedText">
+        In this Module, we are going to learn how to multiply two matrices with simulations and examples.
+      </p>
+    </stack>
+  </section>
+
+  <!--Simulation-->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Simulation</p>
+    <stack style="mcStackLayout">
+      <p style="justifiedText">Take a look at following simulation to see an example of matrix multiplication step by step.</p>
+      <button name="btn" content="Start Calculation">
+        <style>
+          <widthPercentage>0.5</widthPercentage>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <onClick>
+          if btn.Text == "Start Calculation" then
+          btn.Text = "Pause"
+          sim:Start()
+          elseif btn.Text == "Pause" then
+          btn.Text = "Resume"
+          sim:Pause()
+          elseif btn.Text == "Resume" then
+          btn.Text = "Pause"
+          sim:Play()
+          end
+        </onClick>
+      </button>
+
+      <stack name="simStack" orientation="horizontal">
+        <p>
+          <style>
+            <widthPercentage>0.05</widthPercentage>
+            <textAlignment>center</textAlignment>
+            <horizontalAlignment>center</horizontalAlignment>
+            <size scale="2.8" />
+            <marginTop>0</marginTop>
+          </style>
+          $\bigg[$
+        </p>
+        <table grid="false" widths="33% 34% 33%" name="table1">
+          <style>
+            <marginTop>30</marginTop>
+            <widthPercentage>0.2</widthPercentage>
+            <horizontalAlignment>center</horizontalAlignment>
+          </style>
+          <row>
+            <column>
+              <p style="centeredText">1</p>
+            </column>
+            <column>
+              <p style="centeredText">2</p>
+            </column>
+            <column>
+              <p style="centeredText">3</p>
+            </column>
+          </row>
+          <row>
+            <column>
+              <p style="centeredText">4</p>
+            </column>
+            <column>
+              <p style="centeredText">5</p>
+            </column>
+            <column>
+              <p style="centeredText">6</p>
+            </column>
+          </row>
+        </table>
+        <p>
+          <style>
+            <widthPercentage>0.05</widthPercentage>
+            <textAlignment>center</textAlignment>
+            <horizontalAlignment>center</horizontalAlignment>
+            <size scale="2.8" />
+            <marginTop>0</marginTop>
+          </style>
+          $\bigg]$
+        </p>
+        <p>
+          <style>
+            <marginTop>35</marginTop>
+            <widthPercentage>0.05</widthPercentage>
+            <textAlignment>center</textAlignment>
+            <horizontalAlignment>center</horizontalAlignment>
+            <size points="40" />
+          </style>
+          ⋅
+        </p>
+        <p>
+          <style>
+            <widthPercentage>0.05</widthPercentage>
+            <textAlignment>center</textAlignment>
+            <horizontalAlignment>center</horizontalAlignment>
+            <size scale="2.8" />
+            <marginTop>0</marginTop>
+          </style>
+          $\bigg[$
+        </p>
+        <table grid="false" widths="50% 50%" name="table2">
+          <style>
+            <widthPercentage>0.2</widthPercentage>
+            <textAlignment>center</textAlignment>
+            <horizontalAlignment>center</horizontalAlignment>
+          </style>
+          <row>
+            <column>
+              <p style="centeredText">7</p>
+            </column>
+            <column>
+              <p style="centeredText">8</p>
+            </column>
+          </row>
+          <row>
+            <column>
+              <p style="centeredText">9</p>
+            </column>
+            <column>
+              <p style="centeredText">10</p>
+            </column>
+          </row>
+          <row>
+            <column>
+              <p style="centeredText">11</p>
+            </column>
+            <column>
+              <p style="centeredText">12</p>
+            </column>
+          </row>
+        </table>
+        <p>
+          <style>
+            <widthPercentage>0.05</widthPercentage>
+            <textAlignment>center</textAlignment>
+            <horizontalAlignment>center</horizontalAlignment>
+            <size scale="2.8" />
+            <marginTop>0</marginTop>
+          </style>
+          $\bigg]$
+        </p>
+        <p>
+          <style>
+            <marginTop>60</marginTop>
+            <widthPercentage>0.05</widthPercentage>
+            <textAlignment>center</textAlignment>
+            <horizontalAlignment>center</horizontalAlignment>
+          </style>$=$
+        </p>
+        <p>
+          <style>
+            <widthPercentage>0.05</widthPercentage>
+            <textAlignment>center</textAlignment>
+            <horizontalAlignment>center</horizontalAlignment>
+            <size scale="2.8" />
+            <marginTop>0</marginTop>
+          </style>
+          $\bigg[$
+        </p>
+        <table grid="false" widths="50% 50%" name="table3">
+          <style>
+            <marginTop>30</marginTop>
+            <widthPercentage>0.2</widthPercentage>
+            <textAlignment>center</textAlignment>
+            <horizontalAlignment>center</horizontalAlignment>
+          </style>
+          <row>
+            <column>
+              <p style="centeredText"></p>
+            </column>
+            <column>
+              <p style="centeredText"></p>
+            </column>
+          </row>
+          <row>
+            <column>
+              <p style="centeredText"></p>
+            </column>
+            <column>
+              <p style="centeredText"></p>
+            </column>
+          </row>
+        </table>
+        <p>
+          <style>
+            <widthPercentage>0.05</widthPercentage>
+            <textAlignment>center</textAlignment>
+            <horizontalAlignment>center</horizontalAlignment>
+            <size scale="2.8" />
+            <marginTop>0</marginTop>
+          </style>
+          $\bigg]$
+        </p>
+      </stack>
+      <p name="calc" style="centeredText"></p>
+      <p></p>
+      <p name="feedback" style="centeredText invisible">
+        <b>Can you find the pattern?</b>
+      </p>
+      <simulation name="sim" period="0.8" duration="9.6">
+        <onUpdate>
+          nextStep()
+        </onUpdate>
+      </simulation>
+
+      <script>
+        <![CDATA[
+          local matrix1 = {{1,2,3},{4,5,6}}
+          local matrix2 = {{7,8},{9,10},{11,12}}
+          local matrix3 = {{58,64},{139,154}}
+          local step = 1
+          local totalStep = 12
+          local cellOne;
+          local cellTwo;
+          local cellThree;
+
+          function nextStep()
+          if cellOne ~= nil then cellOne.Style.BackgroundColor = color.transparent end
+          if cellTwo ~= nil then cellTwo.Style.BackgroundColor = color.transparent end
+          if cellThree ~= nil then cellThree.Style.BackgroundColor = color.transparent end
+          if step > totalStep then
+          sim:Stop()
+          step = 1
+          btn.Text = "Start Calculation"
+          feedback.Style.Visibility = "visible"
+          return
+          end
+          
+          if step == 1 then calc.Text = "" end
+          
+          local row = math.ceil(step/3)
+          local col = step % 3
+          if col == 0 then col = 3 end
+        
+          local row1 = math.ceil(step/6)
+          cellOne = simStack.table1:Child(row1):Child(col):Child(1)
+          cellOne.Style.BackgroundColor = color.sandyBrown
+
+          local col2 = row % 2
+          if col2 == 0 then col2 = 2 end
+          cellTwo = simStack.table2:Child(col):Child(col2):Child(1)
+          cellTwo.Style.BackgroundColor = color.sandyBrown
+
+          cellThree = simStack.table3:Child(row1):Child(col2):Child(1)
+          cellThree.Style.BackgroundColor = color.sandyBrown
+          
+          local t = cellOne.Text .. " x " .. cellTwo.Text
+          
+          if col == 3 then
+            local sum = string.format("%d", matrix3[row1][col2])
+            cellThree.Text = sum
+            calc.Text = calc.Text .. t .. " = " .. sum .. "\n\n"
+          else
+            calc.Text = calc.Text .. t .. " + "
+          end
+          
+          step = step + 1
+          end
+        ]]>
+      </script>
+    </stack>
+  </sectionNoTitle>
+
+  <!--Definitions-->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">N-tuples and Dot Product</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Introduction</p>
+      <p style="justifiedText">Before we learn matrix multiplication, let's first take a look at n-tuples and dot product.</p>
+      <p style="justifiedText">An n-tuple is a generalization of ordered pairs (an ordered list of n numbers), for example: $(3,5,2)$.</p>
+      <p style="justifiedText">
+        To find the <b>dot product</b> of two n-tuples of equal length, we first calculate the products of corresponding entries and sum up:
+      </p>
+      <p style="centeredText"><![CDATA[$(2,5,7) \cdot (3, 4, 6) = 2 \times 3 + 5 \times 4 + 7 \times 6 = 68$]]></p>
+    </stack>
+
+    <p style="sectionHeading">Matrix Multiplication</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Introduction</p>
+      <p style="justifiedText">
+        To multiply a matrix by another matrix, let's think each matrix row and column as an <b>n-tuple</b>.
+      </p>
+      <p style="justifiedText">Each entry of the result matrix is the dot product of a row in the first matrix and a column in the second matrix.</p>
+      <p style="centeredText">
+        <![CDATA[$\bordermatrix{~ & ~ & ~ \cr a_1 & 1 & 2 \cr a_2 & 3 & 4 \cr} \quad \cdot \bordermatrix{~ & b_1 & b_2 \cr ~ & 5 & 6 \cr ~ & 7 & 8 \cr} = \begin{bmatrix}a_1 \cdot b_1 & a_1 \cdot b_2 \\ a_2 \cdot b_1 & a_2 \cdot b_2 \end{bmatrix}$]]>
+      </p>
+      <p style="subSectionHeading">Note:</p>
+      <p style="justifiedText">
+        Matrix multiplication $A \cdot B$ is valid if and only if the number of <b>columns</b> on matrix A and the number of <b>rows</b> on matrix B are equal.
+      </p>
+      <p style="justifiedText">
+        <b>Be aware that $A \cdot B$ doesn't always equal to $B \cdot A$. Matrix multiplication is not commutative.</b>
+      </p>
+    </stack>
+  </sectionNoTitle>
+
+  <!--Practices-->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Practices</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Question 1</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>Solve for X.</p>
+            <p><![CDATA[$A=\begin{bmatrix}2&3\\5&1\end{bmatrix} \quad and \quad B=\begin{bmatrix}1&5\\4&3\end{bmatrix} \quad X = A \cdot B$]]></p>
+          </column>
+        </row>
+      </table>
+      <stack name="inputStack" orientation="horizontal">
+        <label>
+          <style>
+            <widthPercentage>0.15</widthPercentage>
+            <horizontalAlignment>center</horizontalAlignment>
+            <marginTop>40</marginTop>
+            <marginLeft>30</marginLeft>
+          </style>
+          X =
+        </label>
+        <table name="input" widths="50% 50%" grid="false">
+          <style>
+            <widthPercentage>0.3</widthPercentage>
+            <horizontalAlignment>center</horizontalAlignment>
+          </style>
+          <row>
+            <column>
+              <textField name="x11" placeholder="[X11]" />
+            </column>
+            <column>
+              <textField name="x12" placeholder="[X12]" />
+            </column>
+          </row>
+          <row>
+            <column>
+              <textField name="x21" placeholder="[X21]" />
+            </column>
+            <column>
+              <textField name="x22" placeholder="[X22]" />
+            </column>
+          </row>
+        </table>
+      </stack>
+      <script> local answers = {{"14","19"},{"9","28"}}; local attempts = 0; local maxAttempts = 3; </script>
+      <stack name="hint" style="invisible">
+        <p style="centerText">Not quite there, try again!</p>
+      </stack>
+      <stack name="solution" style="invisible">
+        <p style="centeredText">Correct!</p>
+      </stack>
+      <stack name="answer" style="invisible">
+        <p style="subSectionHeading">Answer:</p>
+        <p style="centeredText">
+          <![CDATA[
+$\begin{bmatrix}2 \cdot 1 + 3 \cdot 4 & 2 \cdot 5 + 3 \cdot 3 \\ 5 \cdot 1 + 1 \cdot 4 & 5 \cdot 5 + 1 \cdot 3 \end{bmatrix} = \begin{bmatrix}14 & 19 \\ 9 & 28 \end{bmatrix}$
+]]>
+        </p>
+      </stack>
+      <button name="checkBtn" content="Check Answer">
+        <onClick> if checkBtn.Text == "Hide Answer" then hint.Style.Visibility = "collapsed"; solution.Style.Visibility = "collapsed"; answer.Style.Visibility = "collapsed"; checkBtn.Text = "Show Answer"; elseif checkBtn.Text == "Check Answer" then attempts = attempts + 1; local correct = true; for i=1,2 do for j=1,2 do if inputStack.input:Child(i):Child(j):Child(1).Text ~= answers[i][j] then correct = false; end end end if correct then hint.Style.Visibility = "collapsed"; solution.Style.Visibility = "visible"; else hint.Style.Visibility = "visible"; solution.Style.Visibility = "collapsed"; if attempts &gt;= maxAttempts then checkBtn.Text = "Show Answer"; end end else hint.Style.Visibility = "collapsed"; solution.Style.Visibility = "collapsed"; answer.Style.Visibility = "visible"; checkBtn.Text = "Hide Answer"; end </onClick>
+      </button>
+    </stack>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Question 2</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>Solve for X.</p>
+            <p><![CDATA[$A=\begin{bmatrix}3&5&-2\\7&5&1\end{bmatrix} \quad and \quad B=\begin{bmatrix}-3&2\\2&5\\7&3\end{bmatrix} \quad X = A \cdot B$]]></p>
+          </column>
+        </row>
+      </table>
+      <stack name="inputStack" orientation="horizontal">
+        <label>
+          <style>
+            <widthPercentage>0.15</widthPercentage>
+            <horizontalAlignment>center</horizontalAlignment>
+            <marginTop>40</marginTop>
+            <marginLeft>30</marginLeft>
+          </style>
+          X =
+        </label>
+        <table name="input" widths="50% 50%" grid="false">
+          <style>
+            <widthPercentage>0.3</widthPercentage>
+            <horizontalAlignment>center</horizontalAlignment>
+          </style>
+          <row>
+            <column>
+              <textField name="x11" placeholder="[X11]" />
+            </column>
+            <column>
+              <textField name="x12" placeholder="[X12]" />
+            </column>
+          </row>
+          <row>
+            <column>
+              <textField name="x21" placeholder="[X21]" />
+            </column>
+            <column>
+              <textField name="x22" placeholder="[X22]" />
+            </column>
+          </row>
+        </table>
+      </stack>
+      <script> local answers = {{"-13","25"},{"-4","42"}}; local attempts = 0; local maxAttempts = 3; </script>
+      <stack name="hint" style="invisible">
+        <p style="centeredText">Not quite there, try again!</p>
+      </stack>
+      <stack name="solution" style="invisible">
+        <p style="centeredText">Correct!</p>
+      </stack>
+      <stack name="answer" style="invisible">
+        <p style="subSectionHeading">Answer:</p>
+        <p style="centeredText">
+          <![CDATA[
+$\begin{bmatrix}3 \cdot (-3) + 5 \cdot 2 + (-2) \cdot 7 & 3 \cdot 2 + 5 \cdot 5 + (-2) \cdot 3 \\ 7 \cdot (-3) + 5 \cdot 2 + 1 \cdot 7 & 7 \cdot 2 + 5 \cdot 5 + 1 \cdot 3 \end{bmatrix} = \begin{bmatrix}-13 & 25 \\ -4 & 42 \end{bmatrix}$
+]]>
+        </p>
+      </stack>
+      <button name="checkBtn" content="Check Answer">
+        <onClick> if checkBtn.Text == "Hide Answer" then hint.Style.Visibility = "collapsed"; solution.Style.Visibility = "collapsed"; answer.Style.Visibility = "collapsed"; checkBtn.Text = "Show Answer"; elseif checkBtn.Text == "Check Answer" then attempts = attempts + 1; local correct = true; for i=1,2 do for j=1,2 do if inputStack.input:Child(i):Child(j):Child(1).Text ~= answers[i][j] then correct = false; end end end if correct then hint.Style.Visibility = "collapsed"; solution.Style.Visibility = "visible"; else hint.Style.Visibility = "visible"; solution.Style.Visibility = "collapsed"; if attempts &gt;= maxAttempts then checkBtn.Text = "Show Answer"; end end else hint.Style.Visibility = "collapsed"; solution.Style.Visibility = "collapsed"; answer.Style.Visibility = "visible"; checkBtn.Text = "Hide Answer"; end </onClick>
+      </button>
+    </stack>
+  </sectionNoTitle>
+  
+</document>

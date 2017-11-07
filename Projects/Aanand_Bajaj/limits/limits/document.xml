@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G29F0FD42_DAFC_4755_B998_C34C370F1F31">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>2.1 Introduction To Limits</title>
+    <creator>admin</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/lassondeLogo.png" />
+  </metadata>
+
+  <include src="curriculumThemePack/curriculumStyles.xml" />
+  <include src="plotTools.xml" />
+
+  <!--Header & Footer-->
+  <style name="backgroundColor">
+    <background color="232 12 46" />
+  </style>
+  <style name="fontColor">
+    <foreground color="255 255 255" />
+  </style>
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="fontColor"></p>
+      <p style="fontColor rightText"></p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>20</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--Header & Footer END-->
+
+  <!--intro-->
+  <section>
+    <title>
+      <style>
+        <textAlignment>right</textAlignment>
+        <marginTop>100</marginTop>
+      </style>
+      <size scale="xlarge">2.1</size>
+    </title>
+    <p style="chapterTitle">Introduction To Limits</p>
+
+    <p style="title">INTRODUCTION</p>
+    <p>
+      There are many types of math problems. Some math problems cannot be solved using basic algebra as they produce answers such as $ \frac{0}{0} $. To solve these problems, mathematicians introduced <b>limits.</b> In this lesson, we will go over what limits are, explain them graphically, and allow you to understand the concepts with a coin-toss game.
+    </p>
+  </section>
+
+  <!--What is limits-->
+  <sectionNoTitle name="Intro">
+    <stack>
+      <style>
+        <widthPercentage>0.93</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <p style="titleMargin">
+        <b>Summary</b>
+      </p>
+      <p>Sometimes we can't solve a math problem directly, but we can see the solution to the problem as we get closer and closer!</p>
+
+      <stack style="questionAnswer">
+        <p>
+          <b>Example</b>
+        </p>
+        <equation>$ \frac{(x^2 - 1)}{(x - 1)} $</equation>
+        <p>Let's solve the problem for x = 1:</p>
+        <equation>$ \frac{(1^2 - 1)}{1 - 1} = \frac{1 - 1}{1 - 1} = \frac{0}{0}$</equation>
+      </stack>
+      <p>
+        0/0 is indeterminate, which means we do not know the value of 0/0. Therefore, we need another way to answer this math problem. Instead of trying to solve the math problem with x = 1, let's solve it for x equal to a value getting closer and closer to 1.
+        <br />
+        Below is a table that highlights the value of $ \frac{(x^2 - 1)}{(x - 1)} $ as x approaches 1:
+      </p>
+      <table grid="true">
+        <head>
+          <column>
+            <p>$ x $</p>
+          </column>
+          <column>
+            <p>$ \frac{(x^2 - 1)}{(x - 1)} $</p>
+          </column>
+        </head>
+        <row>
+          <column>
+            <p>0.5</p>
+          </column>
+          <column>
+            <p>1.50000</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>0.9</p>
+          </column>
+          <column>
+            <p>1.90000</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>0.99</p>
+          </column>
+          <column>
+            <p>1.99000</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>0.999</p>
+          </column>
+          <column>
+            <p>1.99900</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>0.9999</p>
+          </column>
+          <column>
+            <p>1.99990</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>0.99999</p>
+          </column>
+          <column>
+            <p>1.99999</p>
+          </column>
+        </row>
+      </table>
+
+      <p>We have arrived at the following conclusion:</p>
+      <p style="bullet">When x = 1, we can't solve the math problem (it is indeterminate).</p>
+      <p style="bullet">When x approaches 1, the answer is going to be 2.</p>
+      <p>
+        We may be tempted to say the answer to the math problem is 2, but technically that is incorrect, so mathematicians say exactly what is going on by using the word "limit."
+      </p>
+
+      <stack style="questionAnswer">
+        <p>
+          In other words, <b>the limit of $ \frac{(x^2 - 1)}{(x - 1)} $ as x approaches 1 is 2.</b>
+        </p>
+        <p>Using symbols, it is written as: </p>
+        <equation>$ \lim_{x\rightarrow 1} \frac{(x^2 - 1)}{(x - 1)} = 2 $</equation>
+      </stack>
+    </stack>
+    <p>
+      <style>
+        <marginBottom>120</marginBottom>
+      </style>
+    </p>
+  </sectionNoTitle>
+
+  <!--Limits and Graphs-->
+  <sectionNoTitle name="graphs">
+    <stack>
+      <style>
+        <widthPercentage>0.93</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <p style="titleMargin">
+        <b>Limits and Graphs</b>
+      </p>
+      <p>As a graph it looks like:</p>
+      <stack style="questionAnswer">
+        <p style="title">Linear Representation</p>
+        <table name="table" grid="false">
+          <row>
+            <column>
+              <equation>
+                $ \lim_{x\rightarrow 1} \frac{(x^2 - 1)}{(x - 1)} = 2 $
+              </equation>
+              <style name="blackLine">
+                <foreground color="black" />
+              </style>
+              <style name="functionLine">
+                <foreground color="50 133 184" />
+                <lineThickness>5</lineThickness>
+              </style>
+              <style name="hole">
+                <foreground color="white" />
+              </style>
+              <xyPlot name="myPlot" pan="disabled" tap="disabled" zoom="disabled">
+                <axis dim="y" auto="fixed" min="-1" max="4"></axis>
+                <axis dim="x" auto="lockAspectRatio" min="-2" max="2"></axis>
+                <series name="xAxis" manual="true" style="blackLine" />
+                <series name="yAxis" manual="true" style="blackLine" />
+                <series name="exponential" manual="true" style="functionLine" capacity="100000" />
+                <series name="point" draw="points" style="hole" />
+              </xyPlot>
+
+              <script>
+
+                <![CDATA[
+              
+              local x, y;
+              local m, b;
+              local point = myPlot.point;
+              local expo = myPlot.exponential;
+              
+              local function redrawFunction()
+                expo:Clear();
+                for x = -2, 5, 0.4 do
+                  y = (math.pow(x,2) - 1)/(x - 1)
+                  expo:Add(x,y);
+                end
+                
+                expo:Update();
+              end
+                point:Add(1,2)
+              
+              local xAxis = myPlot.xAxis;
+              local yAxis = myPlot.yAxis;
+
+              xAxis:Add(-100,0)
+              xAxis:Add(100,0)
+
+              yAxis:Add(0,-100)
+              yAxis:Add(0,100)
+              
+              redrawFunction();
+              ]]>
+              </script>
+
+            </column>
+          </row>
+        </table>
+      </stack>
+      <p>In reality we cannot say what the value at x = 1 is, but we can say that as we approach x = 1, the limit is 2. In the graph, x = 1 cannot be calculated, so it is a "hole."</p>
+
+      <p style="titleMargin">
+        <b>Test Both Sides</b>
+      </p>
+      <p>To make sure we know what the value of y is when we approach x = 1, we should check the value from both sides. The table below solves for $ \frac{(x^2 - 1)}{(x - 1)} $ as x approaches 1: </p>
+      <table grid="true">
+        <head>
+          <column>
+            <p>$ x $</p>
+          </column>
+          <column>
+            <p>$ \frac{(x^2 - 1)}{(x - 1)} $</p>
+          </column>
+        </head>
+        <row>
+          <column>
+            <p>1.5</p>
+          </column>
+          <column>
+            <p>2.50000</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>1.1</p>
+          </column>
+          <column>
+            <p>2.10000</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>1.01</p>
+          </column>
+          <column>
+            <p>2.01000</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>1.001</p>
+          </column>
+          <column>
+            <p>2.00100</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>1.0001</p>
+          </column>
+          <column>
+            <p>2.00010</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>1.00001</p>
+          </column>
+          <column>
+            <p>2.00001</p>
+          </column>
+        </row>
+      </table>
+      <p>
+        <style>
+          <marginBottom>120</marginBottom>
+        </style>
+      </p>
+    </stack>
+  </sectionNoTitle>
+
+  <!-- Interactive -->
+  <sectionNoTitle name="understanding">
+    <stack name="questionStack">
+      <style>
+        <widthPercentage>0.93</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <p style="titleMargin">
+        <b>Coin Tossing Game</b>
+      </p>
+      <p>When we toss a coin, there are two possibly outcomes. It can be a head or a tail, which are both equally likely to happen with a probability of 50% (1/2) each.</p>
+      <p>If I toss a coin $ N $ times, what is the probability $ p(N) $ that I have not yet tossed a head ?</p>
+      <p>Now what is the limit as $ N \rightarrow \infty $ of $ \space p(N) $ ?</p>
+
+      <stack style="questionAnswer" name="coin">
+        <p name="coinLabel" style="hidden centerText"></p>
+        <p name="coinResult" style="hidden centerText"></p>
+      </stack>
+
+      <script>
+        <![CDATA[
+        local i = 0;
+        local myFunc = 0;
+        ]]>
+      </script>
+
+      <button content="Toss the coin">
+
+        <onClick>
+          <![CDATA[  
+          i = i+1;
+          myFunc = math.pow(0.5, i)
+          coin:Child(1).FormattedText = string.format("You tossed a coin <b> %d  </b> times. ", i)
+          coin:Child(2).FormattedText = string.format("The probability that you haven't yet tossed a head is = <b> %f</b>", myFunc)
+          coin:Child(1).Style.Visibility = "visible"
+          coin:Child(2).Style.Visibility = "visible"
+          return i;
+          ]]>
+        </onClick>
+      </button>
+
+
+      <button name="showAnswer" content="Show Answer">
+        <style>
+          <marginBottom>20</marginBottom>
+        </style>
+        <onClick>
+          if showAnswer.Text == "Show Answer" then
+          answerWrap.Style.Visibility = "visible"
+          graph.Style.Visibility = "visible"
+          showAnswer.Text = "Hide Answer"
+          else
+          answerWrap.Style.Visibility = "collapsed"
+          graph.Style.Visibility = "collapsed"
+          showAnswer.Text = "Show Answer"
+          end
+        </onClick>
+      </button>
+
+      <stack style="questionAnswer collapsed" name="answerWrap">
+        <p>The mathematical answer to this is $ p(N)=(\frac{1}{2})^{N} $ </p>
+        <p>Then: $ \lim_{N \rightarrow \infty}p(N) = 0 $</p>
+        <p>The reason for this is that $ p = \frac{1}{2}, \frac{1}{4} , \frac{1}{8} ... $, so $ p(N) $ gets closer and closer to zero as $ N $ gets "closer to $\infty$" </p>
+      </stack>
+
+      <stack style="questionAnswer collapsed" name="graph">
+        <p style="title">Answer on Graph</p>
+        <table name="table" grid="false">
+          <row>
+            <column>
+              <equation>
+                $ p(N)=(\frac{1}{2})^{N} $
+              </equation>
+              <equation>$ \lim_{N \rightarrow \infty}p(N) = 0 $</equation>
+              <style name="blackLine">
+                <foreground color="black" />
+              </style>
+              <style name="redLine">
+                <foreground color="red" />
+                <lineThickness>4</lineThickness>
+              </style>
+              <style name="functionLine">
+                <foreground color="50 133 184" />
+                <lineThickness>3</lineThickness>
+              </style>
+              <xyPlot name="myPlot" pan="disabled" tap="disabled" zoom="disabled">
+                <axis dim="y" auto="fixed" min="-0.25" max="1"></axis>
+                <axis dim="x" auto="fixed" min="-1" max="10"></axis>
+                <series name="xAxis" manual="true" style="blackLine" />
+                <series name="yAxis" manual="true" style="blackLine" />
+                <series name="curve" manual="true" style="functionLine" />
+                <series name="h_asymptote" manual="true" style="redLine" />
+              </xyPlot>
+
+              <script>
+
+                <![CDATA[
+              
+              a = 0;
+              b = 0;
+              r = 5;
+              curveSeries = myPlot.curve;
+              graphRoundValue = 0.1;
+              labelRoundValue = 0.1;
+              
+              
+             local function redrawFunction()
+                curveSeries:Clear();
+                for x = -100, 100, 0.1 do
+                  y = math.pow(0.5,x);
+                  curveSeries:Add(x,y);
+                end
+                curveSeries:Update();
+              end
+              
+              local xAxis = myPlot.xAxis;
+              local yAxis = myPlot.yAxis;
+              local hAsymptote = myPlot.h_asymptote;
+
+              xAxis:Add(-100,0)
+              xAxis:Add(100,0)
+
+              yAxis:Add(0,-100)
+              yAxis:Add(0,100)
+              
+              redrawFunction();
+
+              ]]>
+              </script>
+
+            </column>
+          </row>
+        </table>
+
+      </stack>
+    </stack>
+
+  </sectionNoTitle>
+
+</document>

@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="GDEC1020A_696F_43A3_893A_D2B457A9B651">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>LA-CALC-2.5 Limit Properties</title>
+    <creator>AanandB</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/lassondeLogo.png" />
+  </metadata>
+
+  <include src="resources/curriculumStylesLassonde.xml" />
+  <include src="resources/plotTools.xml" />
+
+  <!--Header & Footer-->
+  <style name="backgroundColor">
+    <background color="232 12 46" />
+  </style>
+  <style name="fontColor">
+    <foreground color="255 255 255" />
+  </style>
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="fontColor"></p>
+      <p style="fontColor rightText"></p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>20</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+
+  <!-- Section 1 -->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">2.5 Limit Properties</title>
+    <p style="sectionHeading">Introduction</p>
+    <stack orientation="vertical" style="contentBG">
+      <p>
+        When calculating limits, we can make use of some basic properties. Each can be proven using the formal definition of a limit. In this lesson, we will
+        go over the different properties of limits and go through some examples.
+      </p>
+    </stack>
+  </section>
+
+  <sectionNoTitle name="section2" style="pageLayout">
+    <p style="sectionHeading">Properties of Limits</p>
+    <stack orientation="vertical" style="contentBG">
+      <p>We must first assume that $ \displaystyle{\lim_{x \to c}}f(x) $ and $ \displaystyle{\lim_{x \to c}}g(x) $ exists and $ k $ is any constant.</p>
+    </stack>
+    <p style="subSectionHeading">Property 1</p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="centerText">$ \displaystyle{\lim_{x \to c}} k = k $</p>
+      <p>The limit of a constant, $ k $, as $ x $ approaches $ c $, is the constant $ k $.</p>
+    </stack>
+
+    <p style="subSectionHeading">Property 2</p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="centerText">$ \displaystyle{\lim_{x \to c}} x = c $</p>
+      <p>As $ x $ gets closer to $ c $, x is equal $ c $.</p>
+    </stack>
+
+    <p style="subSectionHeading">Property 3</p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="centerText">$ \displaystyle{\lim_{x \to c}} [kf(x)] =  k \displaystyle{\lim_{x \to c}} [f(x)] $</p>
+      <p>This property states that the limit of a function multiplied by a constant $ k $ is equal to $ k $ multiplied by the limit of that function.</p>
+    </stack>
+
+    <p style="subSectionHeading">Property 4</p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="centerText">$ \displaystyle{\lim_{x \to c}} [f(x) \pm g(x)] =  \displaystyle{\lim_{x \to c}} [f(x)] \pm  \displaystyle{\lim_{x \to c}} [g(x)] $</p>
+      <p>The limit of a sum or difference is the sum of or difference of the limits. </p>
+    </stack>
+
+    <p style="subSectionHeading">Property 5</p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="centerText">$ \displaystyle{\lim_{x \to c}} [f(x) \cdot g(x)] =  \displaystyle{\lim_{x \to c}} [f(x)] \cdot  \displaystyle{\lim_{x \to c}} [g(x)] $</p>
+      <p>The limit of a product is the product of the limits. </p>
+    </stack>
+
+
+    <p style="subSectionHeading">Property 6</p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="centerText">$ \displaystyle{\lim_{x \to c}} \frac{f(x)}{g(x)} =  \frac{ \displaystyle{\lim_{x \to c}} f(x) }{ \displaystyle{\lim_{x \to c}} g(x) } $</p>
+      <p>The limit of a quotient is the quotient of the limits. </p>
+    </stack>
+
+    <p style="subSectionHeading">Property 7</p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="centerText">$ \displaystyle{\lim_{x \to c}} [f(x)]^n =  [ \displaystyle{\lim_{x \to c}} f(x) ]^n $</p>
+      <p>The limit of a function with power of $ n $ is equal to the limit of a function to the power of $ n $.</p>
+    </stack>
+    <p>
+      <br />
+    </p>
+  </sectionNoTitle>
+
+  <sectionNoTitle name="section3" style="pageLayout">
+    <p style="sectionHeading">Practice Questions</p>
+    <stack orientation="vertical" style="contentBG">
+      <p>Complete these questions on scrap paper and input the final answers here.</p>
+    </stack>
+    <p>
+      <br />
+    </p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="subSectionHeading">Question 1</p>
+      <p style="centerText">Evaluate using limit properties:</p>
+      <p style="centerText">$ \displaystyle{\lim_{x \to 2}} [ x^2+3x ] = a $</p>
+      <p style="subSectionHeading">Answer</p>
+      <stack name="ans1" orientation="horizontal">
+        <p>
+          <style>
+            <widthPercentage>60%</widthPercentage>
+            <textAlignment>right</textAlignment>
+          </style>
+          a =
+        </p>
+        <textField style="leftText" placeholder="Insert Answer Here"></textField>
+      </stack>
+      <button content="Check Answer" name="btn">
+        <onClick>
+          if ans1:Child(2).Text == "10" then
+          btn.Text = "Correct!"
+          btn.Style.BackgroundColor = color.green;
+          else
+          btn.Text = "Try Again!"
+          btn.Style.BackgroundColor = color.rgb(50, 133, 184);
+          end
+        </onClick>
+      </button>
+      <button content="Show Solution" name="btn2">
+        <onClick>
+          if btn2.Text == "Show Solution" then
+          sol1.Style.Visibility = "visible";
+          btn2.Text = "Hide Solution";
+          elseif btn2.Text == "Hide Solution" then
+          sol1.Style.Visibility = "collapsed";
+          btn2.Text = "Show Solution";
+          end
+        </onClick>
+      </button>
+      <stack name="sol1" style="collapsed">
+        <p>$ = \displaystyle{\lim_{x \to 2}} x^2 + \displaystyle{\lim_{x \to 2}} 3x $</p>
+        <p>$ = 4 + 6 $</p>
+        <p>$ = 10 $</p>
+      </stack>
+    </stack>
+    <p>
+      <br />
+    </p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="subSectionHeading">Question 2</p>
+      <p style="centerText">Evaluate using limit properties:</p>
+
+      <p style="centerText">$ \displaystyle{\lim_{x \to -1}} \frac{3x+2}{1+x^2} = \frac{a}{b} $</p>
+      <p style="subSectionHeading">Answer</p>
+      <stack name="ans1" orientation="horizontal">
+        <p>
+          <style>
+            <widthPercentage>60%</widthPercentage>
+            <textAlignment>right</textAlignment>
+          </style>
+          a =
+        </p>
+        <textField style="leftText" placeholder="Insert Answer Here"></textField>
+      </stack>
+      <stack name="ans2" orientation="horizontal">
+        <p>
+          <style>
+            <widthPercentage>60%</widthPercentage>
+            <textAlignment>right</textAlignment>
+          </style>
+          b =
+        </p>
+        <textField style="leftText" placeholder="Insert Answer Here"></textField>
+      </stack>
+      <button content="Check Answer" name="btn">
+        <onClick>
+          if ans1:Child(2).Text == "-1" and ans2:Child(2).Text == "2" or ans1:Child(2).Text == "1" and ans2:Child(2).Text == "-2" then
+          btn.Text = "Correct!"
+          btn.Style.BackgroundColor = color.green;
+          elseif ans2:Child(2).Text  == "2" and ans1:Child(2).Text == "1" or ans2:Child(2).Text  == "-2" and ans1:Child(2).Text == "-1" or ans2:Child(2).Text  == "2" and not ans1:Child(2).Text == "1"   then
+          btn.Text = "One of the answers are incorrect!";
+          btn.Style.BackgroundColor = color.rgb(50, 133, 184);
+          else
+          btn.Text = "Try Again!"
+          btn.Style.BackgroundColor = color.rgb(50, 133, 184);
+          end
+        </onClick>
+      </button>
+      <button content="Show Solution" name="btn2">
+        <onClick>
+          if btn2.Text == "Show Solution" then
+          sol1.Style.Visibility = "visible";
+          btn2.Text = "Hide Solution";
+          elseif btn2.Text == "Hide Solution" then
+          sol1.Style.Visibility = "collapsed";
+          btn2.Text = "Show Solution";
+          end
+        </onClick>
+      </button>
+      <stack name="sol1" style="collapsed">
+        <p>$ = \frac{\displaystyle{\lim_{x \to -1}} 3x+2}{ \displaystyle{\lim_{x \to -1}} 1+x^2 }$</p>
+        <p>$ = \frac{3(-1)+2}{1+(-1)^2} $</p>
+        <p>$ = \frac{-1}{2} $</p>
+      </stack>
+    </stack>
+    <p>
+      <br />
+    </p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="subSectionHeading">Question 3</p>
+      <p style="centerText">$ \displaystyle{\lim_{x \to 8}} \sqrt{ \frac{x-7}{x+2} } = \frac{\sqrt{a}}{b} $</p>
+      <p style="subSectionHeading">Answer</p>
+      <stack name="ans1" orientation="horizontal">
+        <p>
+          <style>
+            <widthPercentage>60%</widthPercentage>
+            <textAlignment>right</textAlignment>
+          </style>
+          a =
+        </p>
+        <textField style="leftText" placeholder="Insert Answer Here"></textField>
+      </stack>
+      <stack name="ans2" orientation="horizontal">
+        <p>
+          <style>
+            <widthPercentage>60%</widthPercentage>
+            <textAlignment>right</textAlignment>
+          </style>
+          b =
+        </p>
+        <textField style="leftText" placeholder="Insert Answer Here"></textField>
+      </stack>
+      <button content="Check Answer" name="btn">
+        <onClick>
+          if ans1:Child(2).Text == "10" and ans2:Child(2).Text == "10" then
+          btn.Text = "Correct!"
+          btn.Style.BackgroundColor = color.green;
+          else
+          btn.Text = "Try Again!"
+          btn.Style.BackgroundColor = color.rgb(50, 133, 184);
+          end
+        </onClick>
+      </button>
+      <button content="Show Solution" name="btn2">
+        <onClick>
+          if btn2.Text == "Show Solution" then
+          sol1.Style.Visibility = "visible";
+          btn2.Text = "Hide Solution";
+          elseif btn2.Text == "Hide Solution" then
+          sol1.Style.Visibility = "collapsed";
+          btn2.Text = "Show Solution";
+          end
+        </onClick>
+      </button>
+      <stack name="sol1" style="collapsed">
+        <p>$ = \sqrt{ \displaystyle{\lim_{x \to 8}}  \frac{x-7}{x+2} } $</p>
+        <p>$ = \sqrt{ \frac{8-7}{8+2} } $</p>
+        <p>$ = \sqrt{ \frac{1}{10} } $</p>
+        <p>$ = \frac{\sqrt{10}}{10} $</p>
+      </stack>
+    </stack>
+    <p>
+      <br />
+    </p>
+  </sectionNoTitle>
+
+</document>

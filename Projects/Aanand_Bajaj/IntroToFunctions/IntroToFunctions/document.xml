@@ -1,0 +1,1041 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G40896A6D_B28C_48A9_908A_9B1C4CDDEA8E">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>MCR3U – 1.1 Introduction to Functions</title>
+    <creator>aanandbajaj</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/cover.jpg" />
+  </metadata>
+
+  <include src="curriculumThemePack/curriculumStyles.xml" />
+  <include src="plotTools.xml" />
+
+  <!--Header and Footer-->
+  <style name="backgroundColor">
+    <background color="50 133 184" />
+  </style>
+  <style name="fontColor">
+    <foreground color="255 255 255" />
+  </style>
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="fontColor">Amanda Koon</p>
+      <p style="fontColor rightText">MCR3U</p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/logo1.png" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/logo2.png" />
+    </stack>
+  </footer>
+
+  <!-- Background -->
+  <section name="BackgroundInfo">
+    <title></title>
+    <p style="chapterTitle">1.1 Introduction to Functions</p>
+
+    <p style="title">Background Information</p>
+    <p>
+      <b>
+        <i>Function</i>
+      </b> is a very important concept in mathematics. In 1714, the famous mathematician Leibniz used the word "function"
+      to mean quantities that depend on a variable. Like many important concepts in mathematics, the function concept arose from real life observations
+      (vibrating string in this case). Over time, the idea has deepened and evolved to what we understand today.
+    </p>
+  </section>
+
+  <!-- What Functions Are -->
+  <section name="Explanation">
+    <title style="centerText">Explanation</title>
+    <p>In previous courses, you studied patterns and the characteristics of linear and quadratic relations. these are examples of relations.</p>
+
+    <p>Click on the following buttons to reveal the difference between a relation and a function</p>
+
+    <stack orientation="vertical">
+      <button name="relationB" content="Relation">
+        <onClick>
+          if relationB.Text == "Relation" then
+          relationB.Text = "A set of ordered pairs (x,y)";
+          ending.Style.Visibility = "visible";
+          elseif relationB.Text == "A set of ordered pairs (x,y)" then
+          relationB.Text = "Relation";
+          end
+        </onClick>
+      </button>
+
+      <button name="functionB" content="Function">
+        <onClick>
+
+          if functionB.Text == "Function" then
+          functionB.Text = "For every value of x, there is only one value of y";
+          ending.Style.Visibility = "visible";
+          elseif functionB.Text == "For every value of x, there is only one value of y" then
+          functionB.Text = "Function";
+          end
+        </onClick>
+      </button>
+    </stack>
+
+    <p name="ending" style="collapsed">All relations are functions, but not all functions are relations.</p>
+  </section>
+
+  <!-- How to Represent Functions in Different Ways -->
+  <section name="RepresentingFunctions">
+    <title style="centerText">Representing Functions</title>
+    <p>Just like relations, there are different ways to represent functions. For example:</p>
+
+
+    <stack style="highlightBox">
+      <p style="title">a) A word description</p>
+      <p>
+        <i>Your math mark will go up 2% for every 5 homework questions you do.</i>
+      </p>
+    </stack>
+
+    <stack style="highlightBox">
+      <p style="title">b) A table of values</p>
+      <table>
+        <head>
+          <column>
+            <p># of Homework Questions</p>
+          </column>
+          <column>
+            <p>Math Mark(%)</p>
+          </column>
+        </head>
+        <data src="resources/TableOfValues.csv" />
+      </table>
+    </stack>
+
+    <stack style="highlightBox">
+      <p style="title">c) Arrow diagrams</p>
+      <image src="resources/ArrowDiagram.png" style="medium" />
+    </stack>
+
+    <stack style="highlightBox">
+      <p style="title">d) Equations</p>
+      <p>x-y notation: y=2x+60</p>
+      <p>f(x) notation: f(x)=2x+60</p>
+    </stack>
+
+    <!--make graph scale fixed-->
+    <stack style="highlightBox">
+      <p style="title">e) Graphs</p>
+      <style name="blackLine">
+        <foreground color="black" />
+      </style>
+      <xyPlot name="myPlot" pan="disabled" tap="disabled" zoom="disabled">
+        <axis dim="y" auto="fixed" min="-10" max="100"></axis>
+        <axis dim="x" auto="fixed" min="-2" max="16"></axis>
+        <series name="aSeries" manual="true" />
+        <series name="xAxis" manual="true" style="blackLine" />
+        <series name="yAxis" manual="true" style="blackLine" />
+      </xyPlot>
+      <script>
+        local x, y;
+        local plotPointer = myPlot.aSeries;
+        local xAxis = myPlot.xAxis;
+        local yAxis = myPlot.yAxis;
+
+        for x = 0, 60, 1 do
+        y = 2*math.pow(x,1) + 60
+        plotPointer:Add(x,y)
+        end
+        plotPointer:Update()
+
+        xAxis:Add(-100,0)
+        xAxis:Add(100,0)
+
+        yAxis:Add(0,-100)
+        yAxis:Add(0,100)
+      </script>
+    </stack>
+  </section>
+
+  <!-- Vertical Line Test -->
+  <section name="VerticalLineTest">
+    <title style="centerText">Vertical Line Test</title>
+    <p>If any vertical line passes through more than one point on a graph, then the relation is NOT a function.</p>
+
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="tablePlot" widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="curriculumThemePack\question.png" inspect="false" />
+          </column>
+          <column>
+            <p> Example #1: Is this a function? </p>
+            <style name="lineInvisible">
+              <foreground color="transparent" />
+            </style>
+            <style name="blackLine">
+              <foreground color="black" />
+            </style>
+            <xyPlot name="myPlot" manual="false">
+              <axis dim="y" auto="fixed" min="-5" max="5"></axis>
+              <axis dim="x" auto="fixed" min="-5" max="5"></axis>
+              <series name="p_Series" manual="true" />
+              <series name="vL_Series" manual="true" style="lineInvisible" />
+              <series name="vL_Series2" manual="true" style="lineInvisible" />
+              <series name="vL_Series3" manual="true" style="lineInvisible" />
+              <series name="xAxis" manual="true" style="blackLine" />
+              <series name="yAxis" manual="true" style="blackLine" />
+            </xyPlot>
+            <script>
+              local x, y;
+              parabolaPlot = myPlot.p_Series;
+              linePlot = myPlot.vL_Series;
+              linePlot2 = myPlot.vL_Series2;
+              linePlot3 = myPlot.vL_Series3;
+              local xAxis = myPlot.xAxis;
+              local yAxis = myPlot.yAxis;
+
+              for x = -100,100, 0.1 do
+              y = (-0.25)*math.pow(x,2) + 2
+              parabolaPlot:Add(x,y)
+              end
+              parabolaPlot:Update()
+
+              linePlot:Add(-3,-10)
+              linePlot:Add(-3,3)
+
+              linePlot2:Add(-1,-10)
+              linePlot2:Add(-1,3)
+
+              linePlot3:Add(-2,-10)
+              linePlot3:Add(-2,3)
+
+              xAxis:Add(-100,0)
+              xAxis:Add(100,0)
+
+              yAxis:Add(0,-100)
+              yAxis:Add(0,100)
+
+            </script>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="table" widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="curriculumThemePack\answer.png" inspect="false" />
+          </column>
+          <column style="collapsed">
+            <p>
+              Answer: Yes, this is a function!
+            </p>
+            <p>
+              Explanation: Each vertical line (no matter how many or where you draw) intersects the parabola ONCE, showing that for every value of x, there is only one value of y in the quadratic relation shown.
+            </p>
+          </column>
+        </row>
+      </table>
+      <button name="button" content="Vertical Line">
+        <onClick>
+          if button.Text == "Vertical Line" then
+          tablePlot:Child(1):Child(2):Child(2):Child(4).Style.ForegroundColor = "black";
+          button.Text = "Add another vertical line";
+
+          elseif button.Text == "Add another vertical line" then
+          tablePlot:Child(1):Child(2):Child(2):Child(5).Style.ForegroundColor = "black";
+          button.Text = "Add one more vertical line";
+
+          elseif button.Text == "Add one more vertical line" then
+          tablePlot:Child(1):Child(2):Child(2):Child(6).Style.ForegroundColor = "black";
+          button.Text = "Show Answer";
+
+          elseif button.Text == "Show Answer" then
+          table:Child(1):Child(2).Style.Visibility = "visible";
+          button.Text = "Hide Answer";
+
+          elseif button.Text == "Hide Answer" then
+          table:Child(1):Child(2).Style.Visibility = "collapsed";
+          button.Text = "Show Answer";
+          end
+
+        </onClick>
+      </button>
+    </stack>
+
+    <stack style="questionAnswer">
+      <p style="title qNum"></p>
+      <table name="tablePlot" widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="curriculumThemePack\question.png" inspect="false" />
+          </column>
+          <column>
+            <p> Example #1: Is this a function? </p>
+
+            <script>
+              <![CDATA[
+              -- plotTools.drawEllipse([Series],[Centre],[X-radius],[Y-radius])
+              plotTools.drawEllipse(plot.ellipse_series, vector({0, 0}), 1.5, 4)
+            ]]>
+
+              local xAxis = plot.xAxis;
+              local yAxis = plot.yAxis;
+              linePlot = plot.vL_Series;
+              linePlot:Add(0.5,-5)
+              linePlot:Add(0.5,5)
+
+              xAxis:Add(-100,0)
+              xAxis:Add(100,0)
+
+              yAxis:Add(0,-100)
+              yAxis:Add(0,100)
+
+            </script>
+            <style name="lineInvisible">
+              <foreground color="transparent" />
+            </style>
+            <style name="blackLine">
+              <foreground color="black" />
+            </style>
+            <xyPlot name="plot" manual="false">
+              <axis dim="y" auto="fixed" min="-5" max="5"></axis>
+              <axis dim="x" auto="fixed" min="-5" max="5"></axis>
+
+              <series name="ellipse_series" manual="true" />
+              <series name="vL_Series" manual="true" style="lineInvisible" />
+              <series name="xAxis" manual="true" style="blackLine" />
+              <series name="yAxis" manual="true" style="blackLine" />
+            </xyPlot>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table name="table" widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="curriculumThemePack\answer.png" inspect="false" />
+          </column>
+          <column style="collapsed">
+            <p name="answer">
+              Answer: No, this is NOT a function!
+            </p>
+            <p>
+              Explanation: Many vertical lines interesect the relation (an ellipse) twice, showing that some x values do not correspond to a unique
+              y value. This is a relation, but not a function.
+            </p>
+          </column>
+        </row>
+      </table>
+      <button name="button" content="Add vertical line">
+        <onClick>
+          if button.Text == "Add vertical line" then
+          tablePlot:Child(1):Child(2):Child(2):Child(4).Style.ForegroundColor = "black";
+          button.Text = "Show Answer";
+
+          elseif button.Text == "Show Answer" then
+          table:Child(1):Child(2).Style.Visibility = "visible";
+          button.Text = "Hide Answer";
+          else
+          table:Child(1):Child(2).Style.Visibility = "collapsed";
+          button.Text = "Show Answer";
+          end
+
+        </onClick>
+      </button>
+    </stack>
+
+  </section>
+
+  <!--Practice-->
+  <section name="Practice">
+    <title style="centerText">Practice</title>
+    <p>Determine if the following relations are functions.</p>
+
+    <stack style="questionAnswer">
+      <p style="title"> QUESTION 1</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="curriculumThemePack\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>Is the following relation a function?</p>
+            <style name="blackLine">
+              <foreground color="black" />
+            </style>
+            <xyPlot name="myPlot" pan="disabled" tap="disabled" zoom="disabled">
+              <axis dim="y" auto="fixed" min="-5" max="5"></axis>
+              <axis dim="x" auto="fixed" min="-5" max="5"></axis>
+              <series name="series" manual="true" />
+              <series name="xAxis" manual="true" style="blackLine" />
+              <series name="yAxis" manual="true" style="blackLine" />
+            </xyPlot>
+            <script>
+              local x, y;
+              line = myPlot.series;
+              local xAxis = myPlot.xAxis;
+              local yAxis = myPlot.yAxis;
+
+              for x = -100,100, 1 do
+              y = (1)*math.pow(x,1) + 2
+              line:Add(x,y)
+              end
+              line:Update()
+
+              xAxis:Add(-100,0)
+              xAxis:Add(100,0)
+
+              yAxis:Add(0,-100)
+              yAxis:Add(0,100)
+            </script>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <p name="answer" style="collapsed">a</p>
+      <script>
+        local selection = -1;
+        local deselectedColor = color.silver;
+        local selectedColor = color.rgb(50, 133, 184);
+
+        local function chooseButton(i)
+        if selection &gt; 0 then
+        stack.table:Child(selection):Child(2):Child(1).Style.BackgroundColor = deselectedColor;
+        end
+        stack.table:Child(i):Child(2):Child(1).Style.BackgroundColor = selectedColor;
+        selection = i;
+        end
+      </script>
+      <stack orientation="horizontal" name="stack">
+        <table name="table" widths="10% 20% 60% 10%" grid="false">
+          <style name="buttons">
+            <foreground color="white" />
+            <background color="silver" />
+          </style>
+          <row name="row">
+            <column>
+              <image src="curriculumThemePack\answer.png" inspect="false" />
+            </column>
+            <column>
+              <button content="A">
+                <onClick>final.Text="A"; chooseButton(1);</onClick>
+              </button>
+            </column>
+            <column>
+              <p>Yes, it is a function.</p>
+            </column>
+            <column name="column">
+              <image name="mark" src="curriculumThemePack/invisible.png" inspect="false" />
+            </column>
+          </row>
+          <row>
+            <column />
+            <column>
+              <button content="B">
+                <onClick>final.Text="B"; chooseButton(2);</onClick>
+              </button>
+            </column>
+            <column>
+              <p>No, it is not a function.</p>
+            </column>
+            <column>
+              <image src="curriculumThemePack/invisible.png" inspect="false" />
+            </column>
+          </row>
+        </table>
+      </stack>
+      <p name="final" style="collapsed" />
+      <stack name="hint" style="collapsed">
+        <p>  Not quite there, try again! </p>
+      </stack>
+      <stack name="solution" style="collapsed">
+        <p> Correct!</p>
+      </stack>
+      <button content="Check Answer">
+        <onClick>
+          if string.lower(final.Text) == string.lower(answer.Text) then
+          solution.Style.Visibility = "visible";
+          hint.Style.Visibility = "collapsed";
+          else
+          solution.Style.Visibility = "collapsed";
+          hint.Style.Visibility = "visible";
+          end
+        </onClick>
+      </button>
+    </stack>
+
+    <stack style="questionAnswer">
+      <p style="title"> QUESTION 2</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="curriculumThemePack\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>Is the following relation a function?</p>
+            <style name="blackLine">
+              <foreground color="black" />
+            </style>
+            <xyPlot name="myPlot" pan="disabled" tap="disabled" zoom="disabled">
+
+              <axis dim="y" auto="fixed" min="-5" max="5"></axis>
+              <axis dim="x" auto="fixed" min="-5" max="5"></axis>
+              <series name="series" manual="true" />
+              <series name="xAxis" manual="true" style="blackLine" />
+              <series name="yAxis" manual="true" style="blackLine" />
+            </xyPlot>
+            <script>
+              local x, y;
+              line = myPlot.series;
+              local xAxis = myPlot.xAxis;
+              local yAxis = myPlot.yAxis;
+
+              xAxis:Add(-100,0)
+              xAxis:Add(100,0)
+
+              yAxis:Add(0,-100)
+              yAxis:Add(0,100)
+
+              for x = -100,100, 0.1 do
+              y = (0.25)*math.pow(x,2) - 2
+              line:Add(x,y)
+              end
+              line:Update()
+            </script>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <p name="answer" style="collapsed">a</p>
+      <script>
+        local selection = -1;
+        local deselectedColor = color.silver;
+        local selectedColor = color.rgb(50, 133, 184);
+
+        local function chooseButton(i)
+        if selection &gt; 0 then
+        stack.table:Child(selection):Child(2):Child(1).Style.BackgroundColor = deselectedColor;
+        end
+        stack.table:Child(i):Child(2):Child(1).Style.BackgroundColor = selectedColor;
+        selection = i;
+        end
+      </script>
+      <stack orientation="horizontal" name="stack">
+        <table name="table" widths="10% 20% 60% 10%" grid="false">
+          <style name="buttons">
+            <foreground color="white" />
+            <background color="silver" />
+          </style>
+          <row name="row">
+            <column>
+              <image src="curriculumThemePack\answer.png" inspect="false" />
+            </column>
+            <column>
+              <button content="A">
+                <onClick>final.Text="A"; chooseButton(1);</onClick>
+              </button>
+            </column>
+            <column>
+              <p>Yes, it is a function.</p>
+            </column>
+            <column name="column">
+              <image name="mark" src="curriculumThemePack/invisible.png" inspect="false" />
+            </column>
+          </row>
+          <row>
+            <column />
+            <column>
+              <button content="B">
+                <onClick>final.Text="B"; chooseButton(2);</onClick>
+              </button>
+            </column>
+            <column>
+              <p>No, it is not a function.</p>
+            </column>
+            <column>
+              <image src="curriculumThemePack/invisible.png" inspect="false" />
+            </column>
+          </row>
+        </table>
+      </stack>
+      <p name="final" style="collapsed" />
+      <stack name="hint" style="collapsed">
+        <p>  Not quite there, try again! </p>
+      </stack>
+      <stack name="solution" style="collapsed">
+        <p> Correct!</p>
+      </stack>
+      <button content="Check Answer">
+        <onClick>
+          if string.lower(final.Text) == string.lower(answer.Text) then
+          solution.Style.Visibility = "visible";
+          hint.Style.Visibility = "collapsed";
+          else
+          solution.Style.Visibility = "collapsed";
+          hint.Style.Visibility = "visible";
+          end
+        </onClick>
+      </button>
+    </stack>
+
+    <stack style="questionAnswer">
+      <p style="title"> QUESTION 3</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="curriculumThemePack\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>Is the following relation a function?</p>
+            <style name="blackLine">
+              <foreground color="black" />
+            </style>
+            <xyPlot name="myPlot" pan="disabled" tap="disabled" zoom="disabled">
+
+              <axis dim="y" auto="fixed" min="-5" max="5"></axis>
+              <axis dim="x" auto="fixed" min="-5" max="5"></axis>
+              <series name="series" manual="true" />
+              <series name="xAxis" manual="true" style="blackLine" />
+              <series name="yAxis" manual="true" style="blackLine" />
+            </xyPlot>
+            <script>
+              local x, y;
+              line = myPlot.series;
+              local xAxis = myPlot.xAxis;
+              local yAxis = myPlot.yAxis;
+
+              xAxis:Add(-100,0)
+              xAxis:Add(100,0)
+
+              yAxis:Add(0,-100)
+              yAxis:Add(0,100)
+
+              for y = -100,100, 0.1 do
+              x = (0.5)*math.pow(y,2)
+              line:Add(x,y)
+              end
+              line:Update()
+            </script>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <p name="answer" style="collapsed">b</p>
+      <script>
+        local selection = -1;
+        local deselectedColor = color.silver;
+        local selectedColor = color.rgb(50, 133, 184);
+
+        local function chooseButton(i)
+        if selection &gt; 0 then
+        stack.table:Child(selection):Child(2):Child(1).Style.BackgroundColor = deselectedColor;
+        end
+        stack.table:Child(i):Child(2):Child(1).Style.BackgroundColor = selectedColor;
+        selection = i;
+        end
+      </script>
+      <stack orientation="horizontal" name="stack">
+        <table name="table" widths="10% 20% 60% 10%" grid="false">
+          <style name="buttons">
+            <foreground color="white" />
+            <background color="silver" />
+          </style>
+          <row name="row">
+            <column>
+              <image src="curriculumThemePack\answer.png" inspect="false" />
+            </column>
+            <column>
+              <button content="A">
+                <onClick>final.Text="A"; chooseButton(1);</onClick>
+              </button>
+            </column>
+            <column>
+              <p>Yes, it is a function.</p>
+            </column>
+            <column name="column">
+              <image name="mark" src="curriculumThemePack/invisible.png" inspect="false" />
+            </column>
+          </row>
+          <row>
+            <column />
+            <column>
+              <button content="B">
+                <onClick>final.Text="B"; chooseButton(2);</onClick>
+              </button>
+            </column>
+            <column>
+              <p>No, it is not a function.</p>
+            </column>
+            <column>
+              <image src="curriculumThemePack/invisible.png" inspect="false" />
+            </column>
+          </row>
+        </table>
+      </stack>
+      <p name="final" style="collapsed" />
+      <stack name="hint" style="collapsed">
+        <p>  Not quite there, try again! </p>
+      </stack>
+      <stack name="solution" style="collapsed">
+        <p> Correct!</p>
+      </stack>
+      <button content="Check Answer">
+        <onClick>
+          if string.lower(final.Text) == string.lower(answer.Text) then
+          solution.Style.Visibility = "visible";
+          hint.Style.Visibility = "collapsed";
+          else
+          solution.Style.Visibility = "collapsed";
+          hint.Style.Visibility = "visible";
+          end
+        </onClick>
+      </button>
+    </stack>
+
+    <stack style="questionAnswer">
+      <p style="title"> QUESTION 4</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="curriculumThemePack\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>Is the following relation a function?</p>
+            <style name="blackLine">
+              <foreground color="black" />
+            </style>
+            <xyPlot name="myPlot" pan="disabled" tap="disabled" zoom="disabled">
+
+              <axis dim="y" auto="fixed" min="-5" max="5"></axis>
+              <axis dim="x" auto="fixed" min="-5" max="5"></axis>
+              <series name="series" manual="true" />
+              <series name="xAxis" manual="true" style="blackLine" />
+              <series name="yAxis" manual="true" style="blackLine" />
+            </xyPlot>
+            <script>
+              local x, y;
+              line = myPlot.series;
+              local xAxis = myPlot.xAxis;
+              local yAxis = myPlot.yAxis;
+
+              xAxis:Add(-100,0)
+              xAxis:Add(100,0)
+
+              yAxis:Add(0,-100)
+              yAxis:Add(0,100)
+
+              line:Add(2,-10)
+              line:Add(2,10)
+
+            </script>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <p name="answer" style="collapsed">b</p>
+      <script>
+        local selection = -1;
+        local deselectedColor = color.silver;
+        local selectedColor = color.rgb(50, 133, 184);
+
+        local function chooseButton(i)
+        if selection &gt; 0 then
+        stack.table:Child(selection):Child(2):Child(1).Style.BackgroundColor = deselectedColor;
+        end
+        stack.table:Child(i):Child(2):Child(1).Style.BackgroundColor = selectedColor;
+        selection = i;
+        end
+      </script>
+      <stack orientation="horizontal" name="stack">
+        <table name="table" widths="10% 20% 60% 10%" grid="false">
+          <style name="buttons">
+            <foreground color="white" />
+            <background color="silver" />
+          </style>
+          <row name="row">
+            <column>
+              <image src="curriculumThemePack\answer.png" inspect="false" />
+            </column>
+            <column>
+              <button content="A">
+                <onClick>final.Text="A"; chooseButton(1);</onClick>
+              </button>
+            </column>
+            <column>
+              <p>Yes, it is a function.</p>
+            </column>
+            <column name="column">
+              <image name="mark" src="curriculumThemePack/invisible.png" inspect="false" />
+            </column>
+          </row>
+          <row>
+            <column />
+            <column>
+              <button content="B">
+                <onClick>final.Text="B"; chooseButton(2);</onClick>
+              </button>
+            </column>
+            <column>
+              <p>No, it is not a function.</p>
+            </column>
+            <column>
+              <image src="curriculumThemePack/invisible.png" inspect="false" />
+            </column>
+          </row>
+        </table>
+      </stack>
+      <p name="final" style="collapsed" />
+      <stack name="hint" style="collapsed">
+        <p>  Not quite there, try again! </p>
+      </stack>
+      <stack name="solution" style="collapsed">
+        <p> Correct!</p>
+      </stack>
+      <button content="Check Answer">
+        <onClick>
+          if string.lower(final.Text) == string.lower(answer.Text) then
+          solution.Style.Visibility = "visible";
+          hint.Style.Visibility = "collapsed";
+          else
+          solution.Style.Visibility = "collapsed";
+          hint.Style.Visibility = "visible";
+          end
+        </onClick>
+      </button>
+    </stack>
+
+    <stack style="questionAnswer">
+      <p style="title"> QUESTION 5</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="curriculumThemePack\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>Is the following relation a function?</p>
+            <style name="blackLine">
+              <foreground color="black" />
+            </style>
+            <xyPlot name="myPlot" pan="disabled" tap="disabled" zoom="disabled">
+
+              <axis dim="y" auto="fixed" min="-5" max="5"></axis>
+              <axis dim="x" auto="fixed" min="-5" max="5"></axis>
+              <series name="series" manual="true" />
+              <series name="xAxis" manual="true" style="blackLine" />
+              <series name="yAxis" manual="true" style="blackLine" />
+            </xyPlot>
+            <script>
+              local x, y;
+              line = myPlot.series;
+              local xAxis = myPlot.xAxis;
+              local yAxis = myPlot.yAxis;
+
+              xAxis:Add(-100,0)
+              xAxis:Add(100,0)
+
+              yAxis:Add(0,-100)
+              yAxis:Add(0,100)
+
+              line:Add(-10,-2)
+              line:Add(10,-2)
+
+            </script>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <p name="answer" style="collapsed">a</p>
+      <script>
+        local selection = -1;
+        local deselectedColor = color.silver;
+        local selectedColor = color.rgb(50, 133, 184);
+
+        local function chooseButton(i)
+        if selection &gt; 0 then
+        stack.table:Child(selection):Child(2):Child(1).Style.BackgroundColor = deselectedColor;
+        end
+        stack.table:Child(i):Child(2):Child(1).Style.BackgroundColor = selectedColor;
+        selection = i;
+        end
+      </script>
+      <stack orientation="horizontal" name="stack">
+        <table name="table" widths="10% 20% 60% 10%" grid="false">
+          <style name="buttons">
+            <foreground color="white" />
+            <background color="silver" />
+          </style>
+          <row name="row">
+            <column>
+              <image src="curriculumThemePack\answer.png" inspect="false" />
+            </column>
+            <column>
+              <button content="A">
+                <onClick>final.Text="A"; chooseButton(1);</onClick>
+              </button>
+            </column>
+            <column>
+              <p>Yes, it is a function.</p>
+            </column>
+            <column name="column">
+              <image name="mark" src="curriculumThemePack/invisible.png" inspect="false" />
+            </column>
+          </row>
+          <row>
+            <column />
+            <column>
+              <button content="B">
+                <onClick>final.Text="B"; chooseButton(2);</onClick>
+              </button>
+            </column>
+            <column>
+              <p>No, it is not a function.</p>
+            </column>
+            <column>
+              <image src="curriculumThemePack/invisible.png" inspect="false" />
+            </column>
+          </row>
+        </table>
+      </stack>
+      <p name="final" style="collapsed" />
+      <stack name="hint" style="collapsed">
+        <p>  Not quite there, try again! </p>
+      </stack>
+      <stack name="solution" style="collapsed">
+        <p> Correct!</p>
+      </stack>
+      <button content="Check Answer">
+        <onClick>
+          if string.lower(final.Text) == string.lower(answer.Text) then
+          solution.Style.Visibility = "visible";
+          hint.Style.Visibility = "collapsed";
+          else
+          solution.Style.Visibility = "collapsed";
+          hint.Style.Visibility = "visible";
+          end
+        </onClick>
+      </button>
+    </stack>
+
+    <stack style="questionAnswer">
+      <p style="title"> QUESTION 6</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="curriculumThemePack\question.png" inspect="false" />
+          </column>
+          <column>
+
+            <p>Is the following relation a function?</p>
+            <script>
+              <![CDATA[
+              -- plotTools.drawEllipse([Series],[Centre],[X-radius],[Y-radius])
+              plotTools.drawEllipse(plot.ellipse_series, vector({0, 0}), 1.5, 4)
+            ]]>
+
+              local xAxis = plot.xAxis;
+              local yAxis = plot.yAxis;
+
+              xAxis:Add(-100,0)
+              xAxis:Add(100,0)
+
+              yAxis:Add(0,-100)
+              yAxis:Add(0,100)
+
+            </script>
+            <style name="blackLine">
+              <foreground color="black" />
+            </style>
+            <xyPlot name="plot" pan="disabled" tap="disabled" zoom="disabled">
+              <axis dim="y" auto="fixed" min="-5" max="5"></axis>
+              <axis dim="x" auto="fixed" min="-5" max="5"></axis>
+
+              <series name="ellipse_series" manual="true" />
+              <series name="xAxis" manual="true" style="blackLine" />
+              <series name="yAxis" manual="true" style="blackLine" />
+            </xyPlot>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <p name="answer" style="collapsed">b</p>
+      <script>
+        local selection = -1;
+        local deselectedColor = color.silver;
+        local selectedColor = color.rgb(50, 133, 184);
+
+        local function chooseButton(i)
+        if selection &gt; 0 then
+        stack.table:Child(selection):Child(2):Child(1).Style.BackgroundColor = deselectedColor;
+        end
+        stack.table:Child(i):Child(2):Child(1).Style.BackgroundColor = selectedColor;
+        selection = i;
+        end
+      </script>
+      <stack orientation="horizontal" name="stack">
+        <table name="table" widths="10% 20% 60% 10%" grid="false">
+          <style name="buttons">
+            <foreground color="white" />
+            <background color="silver" />
+          </style>
+          <row name="row">
+            <column>
+              <image src="curriculumThemePack\answer.png" inspect="false" />
+            </column>
+            <column>
+              <button content="A">
+                <onClick>final.Text="A"; chooseButton(1);</onClick>
+              </button>
+            </column>
+            <column>
+              <p>Yes, it is a function.</p>
+            </column>
+            <column name="column">
+              <image name="mark" src="curriculumThemePack/invisible.png" inspect="false" />
+            </column>
+          </row>
+          <row>
+            <column />
+            <column>
+              <button content="B">
+                <onClick>final.Text="B"; chooseButton(2);</onClick>
+              </button>
+            </column>
+            <column>
+              <p>No, it is not a function.</p>
+            </column>
+            <column>
+              <image src="curriculumThemePack/invisible.png" inspect="false" />
+            </column>
+          </row>
+        </table>
+      </stack>
+      <p name="final" style="collapsed" />
+      <stack name="hint" style="collapsed">
+        <p>  Not quite there, try again! </p>
+      </stack>
+      <stack name="solution" style="collapsed">
+        <p> Correct!</p>
+      </stack>
+      <button content="Check Answer">
+        <onClick>
+          if string.lower(final.Text) == string.lower(answer.Text) then
+          solution.Style.Visibility = "visible";
+          hint.Style.Visibility = "collapsed";
+          else
+          solution.Style.Visibility = "collapsed";
+          hint.Style.Visibility = "visible";
+          end
+        </onClick>
+      </button>
+    </stack>
+
+  </section>
+</document>

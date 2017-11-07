@@ -1,0 +1,593 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G20D61F00_91C7_493B_A7C5_87ECFBCCFBA1">
+
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>LA-CALC-3.4 Derivative Chain Rule</title>
+    <creator>Thiago</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/LassondeLogo.png" />
+  </metadata>
+
+  <include src="resources/curriculumStylesLassonde.xml" />
+
+  <!--HEADER**********************************************-->
+  <header style="themeColour">
+    <stack style="center" orientation="horizontal">
+      <p></p>
+    </stack>
+  </header>
+  <footer style="themeColour">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="themeColourTitle">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--FOOTER**********************************************-->
+
+
+
+  <!--    SECTION 1    -->
+  <section style="pageLayout">
+    <title style="chapterTitle">Chain Rule</title>
+
+    <p style="sectionHeading">Introduction</p>
+
+    <stack style="contentBG">
+      <p>
+        In this module we will cover the Chain rule for derivatives.
+        The Chain rule is one of the core principals in calculus, and you're going to use it any time you take the derivative of a function even reasonably complex.
+        The Chain rule can be a little daunting at first because we use it when we have a smaller function inside of a bigger function, in example: $ h(g(x)) $,
+        and our goal is to take the derivative of $ h(g(x)) $.
+      </p>
+    </stack>
+
+
+  </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!--    SECTION 2    -->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Chain Rule</p>
+
+    <stack style="contentBG">
+      <p style="centerText">
+        Let $ f(x) = h(g(x)) $
+      </p>
+      <p style="centerText">
+        The Chain rule tells us that the derivative of $ f(x) $, is equal to:
+      </p>
+      <p style="centerText">
+        <style>
+          <marginBottom>40</marginBottom>
+        </style>
+        $ f'(x) = h'(g(x)) \cdot g'(x) $
+      </p>
+
+
+      <style name="myWrap">
+        <widthPercentage>0.93</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+
+      <style name="titleP">
+        <marginTop>50</marginTop>
+        <marginBottom>30</marginBottom>
+        <size scale="large" />
+        <foreground color="91 90 90" />
+      </style>
+    </stack>
+
+
+    <p style="sectionHeading">Examples</p>
+
+
+
+    <stack style="contentBG">
+
+      <stack>
+        <style>
+          <horizontalAlignment>center</horizontalAlignment>
+          <marginBottom>60</marginBottom>
+        </style>
+
+        <p style="subSectionHeading">Example 1</p>
+
+        <table widths="10% 90%" grid="false">
+          <row>
+            <column>
+              <image src="resources\question.png" inspect="false" />
+            </column>
+            <column>
+              <p>Let $ F(x) = (3x + 1)^{3} $, find $F'(x)$ :</p>
+            </column>
+          </row>
+        </table>
+
+
+
+        <p>Let $ h(x) $ be the outside function and $ g(x) $ be the inside function. In this case we get: </p>
+
+        <stack orientation="horizontal">
+          <style>
+            <widthPercentage>0.4</widthPercentage>
+          </style>
+          <p>$ h(x) = (-)^{3} $</p>
+          <p>$ g(x) = 3x + 1 $</p>
+        </stack>
+
+
+        <p>
+          <style>
+            <marginTop>35</marginTop>
+          </style>
+          By applying the <b> Power rule </b>, we get:
+        </p>
+        <stack orientation="horizontal">
+          <style>
+            <widthPercentage>0.4</widthPercentage>
+          </style>
+          <p>$ h'(x) = 3(-)^{2} $</p>
+          <p>$ g'(x) = 3 $</p>
+          <style>
+            <marginBottom>35</marginBottom>
+          </style>
+        </stack>
+
+
+
+        <p>
+          Finally, by applying the <b>Chain rule</b>, we get:
+        </p>
+
+        <p>$ F'(x) = 3(3x + 1)^{2} \cdot (3)  $</p>
+        <p>$ F'(x) = 9(3x + 1)^{2} $</p>
+
+      </stack>
+    </stack>
+
+    <p>
+      <br />
+    </p>
+
+    <stack style="contentBG">
+      <p style="subSectionHeading">Example 2</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>$ F(x) = (x^{2} + 3)^{7}, $ find $ F'(x): $</p>
+          </column>
+        </row>
+      </table>
+
+      <stack name="answerWrap" style="collapsed">
+        <p style="subSectionHeading">Answer</p>
+        <table name="table" widths="10% 90%" grid="false">
+          <row>
+            <column>
+              <image src="resources\answer.png" inspect="false" />
+            </column>
+            <column>
+              <p>$ f(x) = (-)^{7} $ and $ g(x) = (x^{2} + 3) $</p>
+              <p>$ f'(x) =  7(-)^{7 -1} $ and $ g'(x) = 2x $</p>
+              <p>$ F'(x) = 7(x^{2} + 3)^{6} \cdot 2x $</p>
+              <p>$ F'(x) = 14x(x^{2} + 3)^{6} $</p>
+            </column>
+          </row>
+        </table>
+      </stack>
+
+      <button name="button1" content="Show Answer">
+        <onClick>
+          if button1.Text == "Show Answer" then
+          answerWrap.Style.Visibility = "visible";
+          button1.Text = "Hide Answer"
+          else
+          answerWrap.Style.Visibility = "collapsed";
+          button1.Text = "Show Answer"
+          end
+        </onClick>
+      </button>
+
+    </stack>
+
+    <p>
+      <br />
+    </p>
+
+    <stack style="contentBG">
+      <p style="subSectionHeading">Example 2</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>$ F(x) = sin(2x), $ find $ F'(x): $</p>
+          </column>
+        </row>
+      </table>
+
+      <stack name="answerWrap" style="collapsed">
+        <p style="subSectionHeading">Answer</p>
+        <table name="table" widths="10% 90%" grid="false">
+          <row>
+            <column>
+              <image src="resources\answer.png" inspect="false" />
+            </column>
+            <column>
+              <p>$ f(x) = sin(x) $ and $ g(x) = 2x $</p>
+              <p>$ f'(x) =  cos(x) $ and $ g'(x) = 2 $</p>
+              <p>$ F'(x) = cos(2x) \cdot 2 $</p>
+              <p>$ F'(x) = 2cos(2x) $</p>
+            </column>
+          </row>
+        </table>
+      </stack>
+
+      <button name="button1" content="Show Answer">
+        <onClick>
+          if button1.Text == "Show Answer" then
+          answerWrap.Style.Visibility = "visible";
+          button1.Text = "Hide Answer"
+          else
+          answerWrap.Style.Visibility = "collapsed";
+          button1.Text = "Show Answer"
+          end
+        </onClick>
+      </button>
+
+    </stack>
+    <p>
+      <style>
+        <marginBottom>50</marginBottom>
+      </style>
+    </p>
+  </sectionNoTitle>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!--    Section 3     -->
+
+
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Practice</p>
+
+    <stack style="contentBG">
+
+
+      <p style="subSectionHeading">Question 1</p>
+
+
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>The following table lists the values of functions $ f $ and $g$, and of their derivatives, $f'$ and $g'$, for the $x$ values -2 and 4.</p>
+          </column>
+        </row>
+      </table>
+
+
+      <table grid="false">
+        <head>
+          <column>
+            <p>x</p>
+          </column>
+          <column>
+            <p>f(x)</p>
+          </column>
+          <column>
+            <p>g(x)</p>
+          </column>
+          <column>
+            <p>f'(x)</p>
+          </column>
+          <column>
+            <p>g'(x)</p>
+          </column>
+        </head>
+        <row>
+          <column>
+            <p>-2</p>
+          </column>
+          <column>
+            <p>5</p>
+          </column>
+          <column>
+            <p>-1</p>
+          </column>
+          <column>
+            <p>1</p>
+          </column>
+          <column>
+            <p>6</p>
+          </column>
+        </row>
+
+        <row>
+          <column>
+            <p>4</p>
+          </column>
+          <column>
+            <p>-4</p>
+          </column>
+          <column>
+            <p>-2</p>
+          </column>
+          <column>
+            <p>0</p>
+          </column>
+          <column>
+            <p>8</p>
+          </column>
+        </row>
+      </table>
+
+      <p>Let $ F(x)= f(g(x))$, find $ F'(4)$.</p>
+
+      <table name="table1" grid="false" widths="10% 90%">
+        <row name="row1">
+          <column>
+            <p>$ F'(4) = $</p>
+          </column>
+          <column name="column2">
+            <textInput name="userInput" spelling="false">
+              <placeholder>Insert answer here</placeholder>
+            </textInput>
+          </column>
+        </row>
+      </table>
+
+
+      <p name="answerLabel" style="collapsed centerText">  </p>
+
+      <stack name="explanationWrap" style="collapsed">
+        <p>
+          <style>
+            <size scale="small" />
+            <marginTop>55</marginTop>
+            <marginBottom>25</marginBottom>
+            <horizontalAlignment>center</horizontalAlignment>
+          </style>
+          <b>Question 1 - Explanation</b>
+        </p>
+        <p style="centerText">$ F'(4) = f'(g(x)) \cdot g'(x) $</p>
+        <p style="centerText">$ F'(4) = f'(g(4)) \cdot g'(4) $</p>
+        <p style="centerText">$ F'(4) = f'(-2) \cdot 8 $</p>
+        <p style="centerText">
+          <style>
+            <marginBottom>40</marginBottom>
+          </style>
+          $ F'(4) = 1 \cdot 8  = 8 $
+        </p>
+      </stack>
+
+      <stack orientation="horizontal">
+        <button content="Check Answer">
+          <onClick>
+
+            answerNumber = tonumber(table1.row1.column2.userInput.Text)
+
+            if answerNumber == 8 then
+            answerLabel.Text = "Correrct!"
+            else
+            answerLabel.Text = "Incorrect. Try again!"
+            end
+
+            answerLabel.Style.Visibility = "visible"
+          </onClick>
+        </button>
+        <button name="explanationButton" content="Explanation">
+          <style>
+            <background color="255 255 255" />
+            <foreground color="0 0 0" />
+          </style>
+          <onClick>
+            answerLabel.Style.Visibility = "collapsed"
+
+
+            if explanationButton.Text == "Explanation" then
+            explanationWrap.Style.Visibility = "visible"
+            explanationButton.Text = "Hide Explanation"
+            else
+            explanationWrap.Style.Visibility = "collapsed"
+            explanationButton.Text = "Explanation"
+            end
+
+
+          </onClick>
+        </button>
+      </stack>
+
+
+
+    </stack>
+
+
+
+
+
+
+
+
+
+    <stack style="contentBG">
+
+
+      <p style="subSectionHeading">Question 2</p>
+
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p> Let $ F(x) = (4x^{2} + 25)^{15} $. Find $ F'(x)$:</p>
+          </column>
+        </row>
+      </table>
+
+
+
+
+
+
+
+      <p name="answer" style="collapsed">B</p>
+      <script>
+        local selection = -1;
+        local deselectedColor = color.silver;
+        local selectedColor = color.rgb(232, 12, 46);
+
+        local function chooseButton(i)
+        if selection &gt; 0 then
+        stack.table:Child(selection):Child(1):Child(1).Style.BackgroundColor = deselectedColor;
+        end
+        stack.table:Child(i):Child(1):Child(1).Style.BackgroundColor = selectedColor;
+        selection = i;
+        end
+      </script>
+      <stack orientation="horizontal" name="stack">
+        <table name="table" widths="10% 90%" grid="false">
+          <style name="buttons">
+            <foreground color="white" />
+            <background color="silver" />
+          </style>
+          <row name="row">
+
+            <column>
+              <button content="A">
+                <onClick>final.Text="A"; chooseButton(1);</onClick>
+              </button>
+            </column>
+
+            <column>
+              <p>$ F'(x) = 30(4x + 25)^{14} \cdot 8x $</p>
+            </column>
+
+          </row>
+
+          <row>
+
+            <column>
+              <button content="B">
+                <onClick>final.Text="B"; chooseButton(2);</onClick>
+              </button>
+            </column>
+
+            <column>
+              <p>$ F'(x) = 15(4x^{2} + 25)^{14} \cdot 8x$</p>
+            </column>
+
+          </row>
+
+          <row>
+
+            <column>
+              <button content="C">
+                <onClick>final.Text="C"; chooseButton(3);</onClick>
+              </button>
+            </column>
+
+            <column>
+              <p>$ F'(x) = 15(8x)^{14} \cdot 8x $</p>
+            </column>
+
+          </row>
+        </table>
+      </stack>
+
+      <p name="final" style="collapsed" />
+      <stack name="hint" style="collapsed">
+        <p style="centerText">  Not quite there, try again ! </p>
+      </stack>
+      <stack name="solution" style="collapsed">
+        <p style="centerText"> Correct! $ F'(x) = 15(4x^{2} + 25)^{14} \cdot 8x$ </p>
+      </stack>
+
+
+
+
+
+      <button content="Check Answer">
+        <onClick>
+          if string.lower(final.Text) == string.lower(answer.Text) then
+          solution.Style.Visibility = "visible";
+          hint.Style.Visibility = "collapsed";
+          stack.table:Child(selection):Child(1):Child(1).Style.BackgroundColor = color.green;
+          else
+          solution.Style.Visibility = "collapsed";
+          hint.Style.Visibility = "visible";
+          stack.table:Child(selection):Child(1):Child(1).Style.BackgroundColor = selectedColor;
+          end
+        </onClick>
+      </button>
+
+    </stack>
+
+
+
+
+
+
+
+
+
+    <p>
+      <style>
+        <marginBottom>120</marginBottom>
+      </style>
+    </p>
+  </sectionNoTitle>
+
+
+
+
+
+
+</document>

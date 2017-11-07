@@ -1,0 +1,570 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G443C2DD5_EAE3_44C4_91C2_FCF3FFD809D4">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>MCR3U – Quadratic Function Plotter</title>
+    <creator>admin</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/cover.jpg" />
+  </metadata>
+
+  <include src="curriculumThemePack/curriculumStyles.xml" />
+  <include src="plotTools.xml" />
+
+  <!--Header and Footer-->
+  <style name="backgroundColor">
+    <background color="50 133 184" />
+  </style>
+  <style name="fontColor">
+    <foreground color="255 255 255" />
+  </style>
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="fontColor">Amanda Koon</p>
+      <p style="fontColor rightText">MCR3U</p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/logo1.png" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/logo2.png" />
+    </stack>
+  </footer>
+
+  <section name="Title">
+    <title>Quadratic Function Plotter - Main Page</title>
+    <stack>
+      <button content="Quadratic Function Plotter - Standard Form">
+        <onClick>
+          application.navigateTo(Quadratic_Standard);
+        </onClick>
+      </button>
+      
+      <button content="Quadratic Function Plotter - Vertex Form">
+        <onClick>
+          application.navigateTo(Quadratic_Vertex);
+        </onClick>
+      </button>
+
+      <button content="Quadratic Function Plotter - Factor Form">
+        <onClick>
+          application.navigateTo(Quadratic_Factored);
+        </onClick>
+      </button>
+    </stack>
+
+  </section>
+
+  <!-- Quadratic Standard -->
+  <section name="Quadratic_Standard">
+    <title>Quadratic Function - Standard Form</title>
+    <stack style="questionAnswer">
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <equation>
+              $ y = ax^2 + bx + c $
+            </equation>
+            <style name="blackLine">
+              <foreground color="black" />
+            </style>
+            <style name="functionLine">
+              <foreground color="50 133 184" />
+              <lineThickness>3</lineThickness>
+            </style>
+            <xyPlot name="myPlot" pan="disabled" tap="disabled" zoom="disabled">
+              <axis dim="y" auto="fixed" min="-20" max="20"></axis>
+              <axis dim="x" auto="fixed" min="-20" max="20"></axis>
+              <series name="xAxis" manual="true" style="blackLine" />
+              <series name="yAxis" manual="true" style="blackLine" />
+              <series name="quad_series" manual="true" style="functionLine" />
+            </xyPlot>
+
+            <script>
+
+              <![CDATA[
+              
+              local x, y;
+              local a = 1;
+              local b = 1;
+              local c = 0;
+              xIntercepts = {};
+              yInterecepts = {};
+              local quad = myPlot.quad_series;
+              
+              graphRoundValue = 0.1;
+              labelRoundValue = 0.1;
+              
+              local function redrawFunction()
+              quad:Clear()
+                for x = -100, 100, 0.1 do
+                  y = (a)*math.pow(x,2) + b*x + c
+                  if y == 0 then 
+                    xIntercepts[0] = x;
+                  end
+                  quad:Add(x,y);
+                end
+                quad:Update();
+              end
+                            
+              local xAxis = myPlot.xAxis;
+              local yAxis = myPlot.yAxis;
+
+              xAxis:Add(-100,0)
+              xAxis:Add(100,0)
+
+              yAxis:Add(0,-100)
+              yAxis:Add(0,100)
+              
+              redrawFunction();
+              ]]>
+            </script>
+
+            <p name="newEquation" style="centerText">
+              Your Equation: y = ax<sup>2</sup>+ bx + c
+            </p>
+            <p name="xInter" style="centerText">
+              x-intercepts = 
+            </p>
+            <p name="yInter" style="centerText">
+              y-intercepts: 
+            </p>
+            <script>
+              <![CDATA[
+              local i = a;
+              local j = b;
+              local k = c;
+              local function updateEquation()
+                newEquation.FormattedText = "Your Equation: y = " ..i.."x".."<sup>2</sup>".." + "..j.."x".." + "..k
+              end
+              
+              local function updateIntercepts()
+                local discrim;
+                local root1;
+                local root2;
+                discrim = math.pow(b,2) - (4*a*c);
+                --[[ x intercepts --]]
+                
+                if discrim > 0 then
+                  root1 = ((-1)*b + math.sqrt(discrim))/(2*a);
+                  root2 = ((-1)*b - math.sqrt(discrim))/(2*a);
+                  
+                  xInter.FormattedText = "X-intercepts: Two roots ("..round(root1,0.1)..",0) and ("..round(root2,0.1)..",0)";
+                elseif discrim < 0 then
+                  xInter.FormattedText = "X-intercepts: none";
+                elseif discrim == 0 then
+                  xInter.FormattedText = "X-intercepts: One root ("..round(root1,0.1)..",0)";
+                end
+                --[[ y intercepts --]]
+                
+                yInter.FormattedText = "Y-intercept: (0,"..c..")";
+              end
+              
+              local function updateAValue(value)
+                i = round(value,labelRoundValue);
+              end
+              
+              local function updateBValue(value)
+                j = round(value,labelRoundValue)
+              end
+              
+              local function updateCValue(value)
+                k = round(value,labelRoundValue)
+              end
+                
+              updateEquation()
+              
+               function round(value,multiple)
+                result = 0;
+                
+                if value % multiple ~= 0 then
+                  result = multiple;
+                  division = math.floor((value/multiple)+1);
+                  result = division*multiple;
+                  return result;
+                else 
+                  return value;
+                end
+              end
+            ]]>
+            </script>
+
+            <!--slider for a-->
+            <stack orientation="horizontal">
+              <p name="aLabel">a = 0</p>
+              <slider name="aSlider" min="-10" max="10" value="1">
+                <onValueChanged>
+                  <![CDATA[
+                  a = round(value,graphRoundValue);
+                  aLabel.Text = "a = "..round(value,labelRoundValue)
+                  redrawFunction();
+                  updateAValue(value);
+                  updateEquation();
+                  updateIntercepts();
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+            <!--slider for b-->
+            <stack orientation="horizontal">
+              <p name="bLabel">b = 0</p>
+              <slider name="bSlider" min="-20" max="20" value="1">
+                <onValueChanged>
+                  <![CDATA[
+                  b = round(value,graphRoundValue);
+                  bLabel.Text = "b = "..round(value,labelRoundValue)
+                  redrawFunction();
+                  updateBValue(value);
+                  updateEquation();
+                  updateIntercepts();
+                ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+            <!--slider for c-->
+            <stack orientation="horizontal">
+              <p name="cLabel">c = 0</p>
+              <slider name="cSlider" min="-50" max="50" value="0">
+                <onValueChanged>
+                  <![CDATA[
+                  c = round(value,graphRoundValue);
+                  cLabel.Text = "c = "..round(value,labelRoundValue)
+                  redrawFunction();
+                  updateCValue(value);
+                  updateEquation();
+                  updateIntercepts();
+                ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+          </column>
+        </row>
+      </table>
+    </stack>
+  </section>
+
+  <!-- Quadratic Vertex -->
+  <section name="Quadratic_Vertex">
+    <title>Quadratic Function - Vertex Form</title>
+    <stack style="questionAnswer">
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <equation>
+              $ y = a(x - h)^2 + k $
+            </equation>
+            <style name="blackLine">
+              <foreground color="black" />
+            </style>
+            <style name="functionLine">
+              <foreground color="50 133 184" />
+              <lineThickness>3</lineThickness>
+            </style>
+            <xyPlot name="myPlot" pan="disabled" tap="disabled" zoom="disabled">
+              <axis dim="y" auto="fixed" min="-20" max="20"></axis>
+              <axis dim="x" auto="fixed" min="-20" max="20"></axis>
+              <series name="xAxis" manual="true" style="blackLine" />
+              <series name="yAxis" manual="true" style="blackLine" />
+              <series name="quad_series" manual="true" style="functionLine" />
+            </xyPlot>
+
+            <script>
+
+              <![CDATA[
+              
+              local x, y;
+              local a = 1;
+              local h = 1;
+              local c = 0;
+              local quad = myPlot.quad_series;
+              
+              local function redrawFunction()
+                quad:Clear()
+                for x = -100, 100, 0.1 do
+                  y = (a)*(math.pow((x-h),2)) + c
+                  quad:Add(x,y);
+                end
+                quad:Update();
+              end
+              
+              local xAxis = myPlot.xAxis;
+              local yAxis = myPlot.yAxis;
+
+              xAxis:Add(-100,0)
+              xAxis:Add(100,0)
+
+              yAxis:Add(0,-100)
+              yAxis:Add(0,100)
+              
+              redrawFunction();
+              ]]>
+            </script>
+
+            <p name="newEquation" style="centerText">
+              Your Equation: y = a(x - h)<sup>2</sup>+ k
+            </p>
+            <p name="parameters" style="centerText">
+              Vertex (h,k)
+            </p>
+            <script>
+              <![CDATA[
+              local i = a;
+              local j = h;
+              local k = c;
+              local function updateEquation()
+                newEquation.FormattedText = "Your Equation: y = " ..i.."(x - "..j..")".."<sup>2</sup>".."+ "..k;
+                parameters.FormattedText = "Vertex ("..j..","..k..")";
+              end
+              
+              local function updateAValue(value)
+                i = round(value,labelRoundValue);
+              end
+              
+              local function updateBValue(value)
+                j = round(value,labelRoundValue);
+              end
+              
+              local function updateCValue(value)
+                k = round(value,labelRoundValue);
+              end
+                
+              updateEquation()
+              
+              function round(value,multiple)
+                result = 0;
+                
+                if value % multiple ~= 0 then
+                  result = multiple;
+                  division = math.floor((value/multiple)+1);
+                  result = division*multiple;
+                  return result;
+                else 
+                  return value;
+                end
+              end
+            ]]>
+            </script>
+
+            <!--slider for a-->
+            <stack orientation="horizontal">
+              <p name="aLabel">a = 1</p>
+              <slider name="aSlider" min="-10" max="10" value="1">
+                <onValueChanged>
+                  <![CDATA[
+                  a = round(value,graphRoundValue);
+                  aLabel.Text = "a = "..round(value,labelRoundValue)
+                  redrawFunction();
+                  updateAValue(value);
+                  updateEquation();
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+            <!--slider for b-->
+            <stack orientation="horizontal">
+              <p name="hLabel">h = 1</p>
+              <slider name="hSlider" min="-20" max="20" value="1">
+                <onValueChanged>
+                  <![CDATA[
+                  h = round(value,graphRoundValue);
+                  hLabel.Text = "h = "..round(value,labelRoundValue)
+                  redrawFunction();
+                  updateBValue(value);
+                  updateEquation();
+                ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+            <!--slider for c-->
+            <stack orientation="horizontal">
+              <p name="kLabel">c = 0</p>
+              <slider name="kSlider" min="-50" max="50" value="0">
+                <onValueChanged>
+                  <![CDATA[
+                  c = round(value,graphRoundValue);
+                  kLabel.Text = "k = "..round(value,labelRoundValue)
+                  redrawFunction();
+                  updateCValue(value);
+                  updateEquation();
+                ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+          </column>
+        </row>
+      </table>
+    </stack>
+  </section>
+
+  <!-- Quadratic Factor -->
+  <section name="Quadratic_Factored">
+    <title>Quadratic Function - Factored Form</title>
+    <stack style="questionAnswer">
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <equation>
+              $ y = a(x - s)(x - t) $
+            </equation>
+            <style name="blackLine">
+              <foreground color="black" />
+            </style>
+            <style name="functionLine">
+              <foreground color="50 133 184" />
+              <lineThickness>3</lineThickness>
+            </style>
+            <xyPlot name="myPlot" pan="disabled" tap="disabled" zoom="disabled">
+              <axis dim="y" auto="fixed" min="-20" max="20"></axis>
+              <axis dim="x" auto="fixed" min="-20" max="20"></axis>
+              <series name="xAxis" manual="true" style="blackLine" />
+              <series name="yAxis" manual="true" style="blackLine" />
+              <series name="quad_series" manual="true" style="functionLine" />
+            </xyPlot>
+
+            <script>
+
+              <![CDATA[
+              
+              local x, y;
+              local a = 1;
+              local s = 1;
+              local t = 1;
+              quad = myPlot.quad_series;
+              
+              local function redrawFunction()
+              quad:Clear()
+                for x = -100, 100, 0.1 do
+                  y = (a)*(x - s)*(x - t)
+                  quad:Add(x,y);
+                end
+                quad:Update();
+              end
+              
+              local xAxis = myPlot.xAxis;
+              local yAxis = myPlot.yAxis;
+
+              xAxis:Add(-100,0)
+              xAxis:Add(100,0)
+
+              yAxis:Add(0,-100)
+              yAxis:Add(0,100)
+              
+              redrawFunction();
+              ]]>
+            </script>
+
+            <p name="newEquation" style="centerText">
+              Your Equation: y = a(x - s)(x - t)
+            </p>
+            <p name="parameters" style="centerText">
+              Zeroes (s,t)
+            </p>
+            <script>
+              <![CDATA[
+              local i = a;
+              local j = s;
+              local k = t;
+              local function updateEquation()
+                newEquation.FormattedText = "Your Equation: y = " ..i.."(x - "..j..")".."(x - "..k..")"
+                parameters.FormattedText = "Zeroes: ("..j..",0) and ("..k..",0)";
+              end
+              
+              function updateAValue(value)
+                i = round(value,labelRoundValue);
+              end
+              
+              function updateBValue(value)
+                j = round(value,labelRoundValue);
+              end
+              
+              function updateCValue(value)
+                k = round(value,labelRoundValue);
+              end
+                
+              updateEquation()
+              
+               function round(value,multiple)
+                result = 0;
+                
+                if value % multiple ~= 0 then
+                  result = multiple;
+                  division = math.floor((value/multiple)+1);
+                  result = division*multiple;
+                  return result;
+                else 
+                  return value;
+                end
+              end
+            ]]>
+            </script>
+
+            <!--slider for a-->
+            <stack orientation="horizontal">
+              <p name="aLabel">a = 0</p>
+              <slider name="aSlider" min="-20" max="20" value="1">
+                <onValueChanged>
+                  <![CDATA[
+                  a = round(value,graphRoundValue);
+                  aLabel.Text = "a = "..round(value,labelRoundValue)
+                  redrawFunction();
+                  updateAValue(value);
+                  updateEquation();
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+            <!--slider for b-->
+            <stack orientation="horizontal">
+              <p name="sLabel">s = 1</p>
+              <slider name="sSlider" min="-20" max="20" value="1">
+                <onValueChanged>
+                  <![CDATA[
+                  s = round(value,graphRoundValue);
+                  sLabel.Text = "s = "..round(value,labelRoundValue)
+                  redrawFunction();
+                  updateBValue(value);
+                  updateEquation();
+                ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+            <!--slider for c-->
+            <stack orientation="horizontal">
+              <p name="tLabel">t = 1</p>
+              <slider name="tSlider" min="-50" max="50" value="0">
+                <onValueChanged>
+                  <![CDATA[
+                  t = round(value,graphRoundValue);
+                  tLabel.Text = "t = "..round(value,labelRoundValue)
+                  redrawFunction();
+                  updateCValue(value);
+                  updateEquation();
+                ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+          </column>
+        </row>
+      </table>
+    </stack>
+  </section>
+
+</document>

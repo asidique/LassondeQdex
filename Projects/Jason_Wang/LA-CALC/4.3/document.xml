@@ -1,0 +1,627 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G6931095C_3CC8_4DCA_BDD2_A023FE497A5E">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>LA-CALC-4.3 Finding Critical Points</title>
+    <creator>jason_wang</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/lassondeLogo.png" />
+  </metadata>
+
+  
+  <include src="resources/curriculumStylesLassonde.xml" />
+  <include src="resources/Utilities.xml" />
+  <include src="resources/plotTools.xml" />
+
+  <!--                                      Header & Footer START                                         -->
+  <header style="themeColour">
+    <stack style="center" orientation="horizontal">
+      <p></p>
+    </stack>
+  </header>
+  <footer style="themeColour">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="themeColourTitle">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--                                      Header & Footer END                                         -->
+
+
+  <!-- Cover Page -->
+  <!-- This is the standard way title pages are created. A great website to get copyright free images .. www.pexels.com
+  *** The style: "pageLayout" is defined in curriculumStylesLassonde.xml. It simply sets the content to the center and adjusts the width to 80% ***-->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">4.3 Finding Critical Points</title>
+    <p style="sectionHeading">Introduction</p>
+    <image src="resources/critical_points.png" />
+    <stack orientation="vertical" style="contentBG">
+      <p style="justifiedText">
+        In mathematics, a critical point of a differentiable function is any value in its domain where its derivative is 0 or undefined. Critical points are key in calculus to find maximum and minimum values of graphs, and are important to consider in many application problems of the derivative.
+      </p>
+    </stack>
+  </section>
+
+  <!--section 2 - Simulation-->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Simulation</p>
+    <stack style="mcStackLayout">
+      <p style="justifiedText">
+        The simulation below shows the critical points of a sine function and the positions on its first derivative. Pay attention on $cos(x)$ value when $sin(x)$ reaches its maximum and minimum points.
+      </p>
+      <xyPlot name="plot">
+        <axis dim="x" min="-0.1" max="10" auto="fixed" />
+        <axis dim="y" min="-1.5" max="1.5" auto="lockAspectRatio" />
+        <series name="sin_series" manual="false" style="quanserRedF" />
+        <series name="cos_series" manual="false" style="dodgerBlueF" />
+        <series name="sin_anchor" manual="false" draw="points" style="quanserRedF" />
+        <series name="cos_anchor" manual="false" draw="points" style="dodgerBlueF" />
+        <series name="maxPoints" manual="false" draw="points" style="grayF" />
+        <series name="minPoints" manual="false" draw="points" style="grayF" />
+        <series name="zeroPoints" manual="false" draw="points" style="darkVioletF" />
+      </xyPlot>
+      <script>
+        local x;
+        local sinPlot = plot.sin_series;
+        local cosPlot = plot.cos_series;
+        local sinAnchor = plot.sin_anchor;
+        local cosAnchor = plot.cos_anchor;
+        local maxPoints = plot.maxPoints;
+        local minPoints = plot.minPoints;
+        local zeroPoints = plot.zeroPoints;
+
+        for x = 0, 10, 0.1 do
+        sinPlot:Add(x,math.sin(x));
+        cosPlot:Add(x,math.cos(x));
+        end
+        sinPlot:Update();
+        cosPlot:Update();
+      </script>
+      <simulation name="mySim" period="0.1" duration="10.2">
+        <solver name="sineSolver">
+          <series>
+            <clock />
+            <system>
+              <input name="data" width="1" />
+              <onOutputs>
+                if time &gt; 10.1 then 
+                mySim:Stop();
+                startSimulationButton.Text = "Start Simulation";
+                end;
+                
+                local a = math.sin(data[1]);
+                local b = math.cos(data[1]);
+
+                sinAnchor:Clear();
+                sinAnchor:Add(data[1],a);
+                cosAnchor:Clear();
+                cosAnchor:Add(data[1],b);
+
+                if b &gt;= 0.99 then
+                local x = math.floor((data[1]+0.005)/2/math.pi)*2*math.pi;
+                maxPoints:Add(x, 1);
+                maxPoints:Update();
+                zeroPoints:Add(x, 0);
+                zeroPoints:Update();
+                end
+
+
+
+                if b &lt;= -0.99 then
+                local x = math.floor((data[1]+0.005)/2/math.pi)*2*math.pi+math.pi;
+                minPoints:Add(x, -1);
+                minPoints:Update();
+                zeroPoints:Add(x,0);
+                zeroPoints:Update();
+                end
+
+              </onOutputs>
+            </system>
+          </series>
+        </solver>
+      </simulation>
+      <table grid="false" widths="10% 5% 15% 5% 15% 5% 15% 5% 15% 10%">
+        <row>
+          <column></column>
+          <column>
+            <p style="quanserRedB"></p>
+          </column>
+          <column>
+            <p>$f(x)=sin(x)$</p>
+          </column>
+          <column>
+            <p style="dodgerBlueB"></p>
+          </column>
+          <column>
+            <p>$f'(x)=cos(x)$</p>
+          </column>
+          <column>
+            <p style="grayB"></p>
+          </column>
+          <column>
+            <p>$critical\;points$</p>
+          </column>
+          <column>
+            <p style="darkVioletB"></p>
+          </column>
+          <column>
+            <p>$f'(x)=0$</p>
+          </column>
+          <column></column>
+        </row>
+      </table>
+      <button style="large" name="startSimulationButton" content="Start Simulation">
+        <style>
+          <marginTop>85</marginTop>
+        </style>
+        <onClick>
+          if startSimulationButton.Text == "Start Simulation" then
+          plot.minPoints:Clear();
+          plot.maxPoints:Clear();
+          plot.zeroPoints:Clear();
+          mySim:Start();
+          startSimulationButton.Text = "Stop Simulation";
+          else
+          mySim:Stop();
+          startSimulationButton.Text = "Start Simulation";
+          end
+        </onClick>
+      </button>
+    </stack>
+  </sectionNoTitle>
+
+  <!--section 3 - Definition and Step by Step-->
+  <!--QUESTION STEP BY STEP LAYOUT-->
+  <!--Setup StepsController with correct number of Steps-->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Critical Points</p>
+
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Definition</p>
+      <p>Consider a function $f(x)$</p>
+      <p style="justifiedText">
+        A <b>critical point</b> or stationary point of $f(x)$ is a value $x_0$ in the domain $\;f\;$ where its derivative $f'(x) = 0 \; or \; undefined$.
+      </p>
+      <p style="justifiedText">In order to find its critical point(s), first we need to solve the derivative of $f(x)$ and set $f'(x)=0$ and solve for x.</p>
+    </stack>
+
+    <script>
+      local stepsController = StepsController:new({stepsStack=stepsStack, numOfSteps=3, shown_message="Show Step", hidden_message="Hide Step", showStepCounter=true})
+    </script>
+    <p style="sectionHeading">Step by Step</p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="subSectionHeading">Question 1</p>
+      <p style="justifiedText">Let $ f(x) = xe^{-2x^{2}} $, find the critical point(s) of $ f(x) $:</p>
+    </stack>
+    <stack name="stepsStack">
+      <!--Each step is a stack, and each step has alternating background colors-->
+      <!--Use Snippet to create any single step stack -->
+
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Critical Point Requirements</p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            <p style="justifiedText">c is a critical point of $f(x)$ if and only if:</p>
+            <p style="centeredText">$f'(c)=0 \hspace{0.5cm}or\hspace{0.5cm}f'(c)=\;undefined$</p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(1)
+          </onClick>
+        </button>
+      </stack>
+
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Solve for $f'(x)$</p>
+          <stack name="cont" style="invisible">
+            <p style="centeredText"><![CDATA[$\begin{matrix}f'(x)&=&\frac{d}{dx}[x]*e^{-2x^{2}} + \frac{d}{dx}[e^{-2x^{2}}]*x \\[6pt] &=&e^{-2x^{2}}+e^{-2x^{2}}*(-4x)x\\[6pt] &=&e^{-2x^{2}}(1-4x^2) \end{matrix}$]]></p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(2)
+          </onClick>
+        </button>
+      </stack>
+
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Set $f'(x)$ and solve for x</p>
+          <stack name="cont" style="invisible">
+            <p style="centeredText"><![CDATA[$0=e^{-2x^{2}}(1-4x^2)$]]></p>
+            <p style="justifiedText">Since $e^{-2x^2}$ can never be zero, we just consider $(1-4x^2)$:</p>
+            <p style="centeredText"><![CDATA[$\begin{matrix}0&=&1-4x^2\\[6pt] 1&=&4x^2 \\[6pt] x^2&=&\frac{1}{4} \\[6pt] x&=&\pm \frac{1}{2} \end{matrix}$]]></p>
+            <p style="justifiedText">Therefore, the critical points of $\;f(x)\;$ are: $\frac{1}{2} \; and \; -\frac{1}{2}$.</p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(3)
+          </onClick>
+        </button>
+      </stack>
+
+
+
+    </stack>
+  </sectionNoTitle>
+
+
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Examples</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Example 1</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>$ f(x) = 3x^5-20x^3 $, find the critical points of $f(x)$:</p>
+          </column>
+        </row>
+      </table>
+      <stack name="answerWrap" style="invisible">
+        <p style="subSectionHeading">Answer</p>
+        <table name="table" widths="10% 90%" grid="false">
+          <row>
+            <column>
+              <image src="resources\answer.png" inspect="false" />
+            </column>
+            <column>
+              <p><![CDATA[$\begin{matrix}f'(x)&=&15x^4-60x^2 \\[6pt] 0&=&15x^4-60x^2 \\[6pt] 15x^4&=&60x^2 \\[6pt] x^2&=&4 \\[6pt] x&=&\pm 2 \end{matrix}$]]></p>
+              <p style="justifiedText"> Critical Points at $ \hspace{0.2cm} x = \pm 2 $ </p>
+            </column>
+          </row>
+        </table>
+      </stack>
+      <button name="button1" content="Show Answer">
+        <onClick>
+          if button1.Text == "Show Answer" then
+          answerWrap.Style.Visibility = "visible";
+          button1.Text = "Hide Answer"
+          else
+          answerWrap.Style.Visibility = "collapsed";
+          button1.Text = "Show Answer"
+          end
+        </onClick>
+      </button>
+    </stack>
+
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Example 2</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>$ f(x) = x^{\frac{1}{3}} - x^{-\frac{2}{3}} $, find the critical points of $f(x)$:</p>
+          </column>
+        </row>
+      </table>
+
+      <stack name="answerWrap" style="invisible">
+        <p style="subSectionHeading">Answer</p>
+        <table name="table" widths="10% 90%" grid="false">
+          <row>
+            <column>
+              <image src="resources\answer.png" inspect="false" />
+            </column>
+            <column>
+              <p><![CDATA[$\begin{matrix}f'(x)&=&\frac{1}{3}x^{-\frac{2}{3}}+\frac{2}{3}x^{-\frac{5}{3}} \\[6pt] 0&=&\frac{1}{3}x^{-\frac{2}{3}}+\frac{2}{3}x^{-\frac{5}{3}} \\[6pt] 0&=&\frac{1}{3}x^{-\frac{2}{3}}(1+2x^{-1}) \\[6pt] 0&=&\frac{1}{3x^{\frac{2}{3}}}(1+\frac{2}{x}) \\[6pt] \end{matrix}$]]></p>
+              <p>Set each factor to 0:</p>
+              <stack orientation="horizontal">
+                <p><![CDATA[$\begin{matrix}\frac{1}{3x^{\frac{2}{3}}}&=&0& \\[6pt] x&=&0&\hspace{0.2cm}undefined \end{matrix}$]]></p>
+                <p><![CDATA[$\begin{matrix}1+\frac{2}{x}&=&0 \\[6pt] x&=&-2 \end{matrix}$]]></p>
+              </stack>
+              <p style="justifiedText"> Critical Points at $ \hspace{0.2cm} x = 0 \quad and \quad x = -2 $ </p>
+            </column>
+          </row>
+        </table>
+      </stack>
+
+      <button name="button1" content="Show Answer">
+        <onClick>
+          if button1.Text == "Show Answer" then
+          answerWrap.Style.Visibility = "visible";
+          button1.Text = "Hide Answer"
+          else
+          answerWrap.Style.Visibility = "collapsed";
+          button1.Text = "Show Answer"
+          end
+        </onClick>
+      </button>
+    </stack>
+
+
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Example 3</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>Find all critical points of $f(x)=sinx+cosx \; on \; [0,2\pi]$:</p>
+            <p>The domain of $f(x)$ is restricted to the closed interval $[0,2\pi]$.</p>
+          </column>
+        </row>
+      </table>
+
+      <stack name="answerWrap" style="invisible">
+        <p style="subSectionHeading">Answer</p>
+        <table name="table" widths="10% 90%" grid="false">
+          <row>
+            <column>
+              <image src="resources\answer.png" inspect="false" />
+            </column>
+            <column>
+              <p><![CDATA[$\begin{matrix}f'(x)&=&cosx-sinx \\[6pt] 0&=&cosx-sinx \\[6pt] cosx&=&sinx\\[6pt] x&=&\frac{\pi}{4} \quad or \quad \frac{5\pi}{4} \end{matrix}$]]></p>
+              <p style="justifiedText"> Critical Points at $ \hspace{0.2cm} x = \frac{\pi}{4} \quad and \quad x = \frac{5\pi}{4} $ </p>
+            </column>
+          </row>
+        </table>
+      </stack>
+
+      <button name="button1" content="Show Answer">
+        <onClick>
+          if button1.Text == "Show Answer" then
+          answerWrap.Style.Visibility = "visible";
+          button1.Text = "Hide Answer"
+          else
+          answerWrap.Style.Visibility = "collapsed";
+          button1.Text = "Show Answer"
+          end
+        </onClick>
+      </button>
+    </stack>
+  </sectionNoTitle>
+
+
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Practices</p>
+
+    <stack style="mcStackLayout">
+      <script>
+        local answer = 4
+        local mcController = MCController:new({choiceBtns={choicesTable:Child(1):Child(1).btn, choicesTable:Child(2):Child(1).btn, choicesTable:Child(3):Child(1).btn, choicesTable:Child(4):Child(1).btn}, checkBtn=checkBtn, answer=answer})
+      </script>
+      <p style="subSectionHeading">Question 1</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources/question.png" inspect="false" />
+          </column>
+          <column>
+            <p style="justifiedText">Let $ f(x)=x^4-8x^2  $, find the critical point(s) of $f(x)$:</p>
+          </column>
+        </row>
+      </table>
+      <table name="choicesTable" grid="false" widths="20% 80%">
+        <row>
+          <column>
+            <button name="btn" content="A" style="btnUnselected">
+              <onClick>
+                mcController:select(1)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <p style="justifiedText">At  $ x = 2 $</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="B" style="btnUnselected">
+              <onClick>
+                mcController:select(2)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <p style="justifiedText">At  $ x = \pm 2 $</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="C" style="btnUnselected">
+              <onClick>
+                mcController:select(3)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <p style="justifiedText">At  $ x = 0 $</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="D" style="btnUnselected">
+              <onClick>
+                mcController:select(4)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <p style="justifiedText">At  $ x = \pm 2 \; and \; 0 $</p>
+          </column>
+        </row>
+      </table>
+      <button name="checkBtn" content="Check Answer">
+        <onClick>
+          mcController:checkAnswer()
+        </onClick>
+      </button>
+    </stack>
+
+
+    <stack style="mcStackLayout">
+      <script>
+        local answer = 3
+        local mcController = MCController:new({choiceBtns={choicesTable:Child(1):Child(1).btn, choicesTable:Child(2):Child(1).btn, choicesTable:Child(3):Child(1).btn, choicesTable:Child(4):Child(1).btn}, checkBtn=checkBtn, answer=answer})
+      </script>
+      <p style="subSectionHeading">Question 2</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources/question.png" inspect="false" />
+          </column>
+          <column>
+            <p style="justifiedText">Let $ f(x)=\frac{4x}{x^2+1}  $, find the critical point(s) of $f(x)$:</p>
+          </column>
+        </row>
+      </table>
+      <table name="choicesTable" grid="false" widths="20% 80%">
+        <row>
+          <column>
+            <button name="btn" content="A" style="btnUnselected">
+              <onClick>
+                mcController:select(1)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <p style="justifiedText">At  $ x = \pm 1 $</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="B" style="btnUnselected">
+              <onClick>
+                mcController:select(2)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <p style="justifiedText">At  $ x = \pm 1 \; and \; 0 $</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="C" style="btnUnselected">
+              <onClick>
+                mcController:select(3)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <p style="justifiedText">At  $ x = \pm 1 $</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="D" style="btnUnselected">
+              <onClick>
+                mcController:select(4)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <p style="justifiedText">At  $ x = \pm 2 \; and \; 0 $</p>
+          </column>
+        </row>
+      </table>
+      <button name="checkBtn" content="Check Answer">
+        <onClick>
+          mcController:checkAnswer()
+        </onClick>
+      </button>
+    </stack>
+
+
+    <stack style="mcStackLayout">
+      <script>
+        local answer = 1
+        local mcController = MCController:new({choiceBtns={choicesTable:Child(1):Child(1).btn, choicesTable:Child(2):Child(1).btn, choicesTable:Child(3):Child(1).btn, choicesTable:Child(4):Child(1).btn}, checkBtn=checkBtn, answer=answer})
+      </script>
+      <p style="subSectionHeading">Question 3</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources/question.png" inspect="false" />
+          </column>
+          <column>
+            <p style="justifiedText">Let $ f(x)=10xe^{3-x^2}  $, find the critical point(s) of $f(x)$:</p>
+          </column>
+        </row>
+      </table>
+      <table name="choicesTable" grid="false" widths="20% 80%">
+        <row>
+          <column>
+            <button name="btn" content="A" style="btnUnselected">
+              <onClick>
+                mcController:select(1)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <p style="justifiedText">At  $ x = \pm \frac{1}{\sqrt{2}} $</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="B" style="btnUnselected">
+              <onClick>
+                mcController:select(2)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <p style="justifiedText">At  $ x = \frac{1}{\sqrt{2}} $</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="C" style="btnUnselected">
+              <onClick>
+                mcController:select(3)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <p style="justifiedText">At  $ x = -\frac{1}{\sqrt{2}} $</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="D" style="btnUnselected">
+              <onClick>
+                mcController:select(4)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <p style="justifiedText">At  $ x = 0 $</p>
+          </column>
+        </row>
+      </table>
+      <button name="checkBtn" content="Check Answer">
+        <onClick>
+          mcController:checkAnswer()
+        </onClick>
+      </button>
+    </stack>
+
+
+
+  </sectionNoTitle>
+
+
+
+</document>

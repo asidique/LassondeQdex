@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="GC0A895DB_1217_44F8_8A7B_51108F31ADBE">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>LA-ALGE-1.7 Properties of Matrix Addition and Scalar Multiplication</title>
+    <creator>jason_wang</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/lassondeLogo.png" />
+  </metadata>
+  
+  <include src="resources/curriculumStylesLassonde.xml" />
+  <include src="resources/Utilities.xml" />
+
+  <!--                                      Header & Footer START                                         -->
+  <header style="themeColour">
+    <stack style="center" orientation="horizontal">
+      <p></p>
+    </stack>
+  </header>
+  <footer style="themeColour">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="themeColourTitle">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--                                      Header & Footer END                                         -->
+
+  <!-- Cover Page -->
+  <!-- This is the standard way title pages are created. A great website to get copyright free images .. www.pexels.com
+  *** The style: "pageLayout" is defined in curriculumStylesLassonde.xml. It simply sets the content to the center and adjusts the width to 80% ***-->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">1.7 Properties of Matrix Addition and Scalar Multiplication</title>
+    <p style="sectionHeading">Introduction</p>
+    <image src="resources/scalar.png" />
+    <stack orientation="vertical" style="contentBG">
+      <p style="justifiedText">
+        In this Module, we are going to introduce zero matrices and learn about the properties of matrix scalar multiplication and addition with examples.
+      </p>
+    </stack>
+  </section>
+
+  <!--Zero Matrix and Properties of Addition-->
+  <sectionNoTitle style="pageLayout">
+    <script>
+      local stepsController = StepsController:new({stepsStack=stepsStack, numOfSteps=5, shown_message="Show More", hidden_message="Show Less", showStepCounter=false})
+    </script>
+    <p style="sectionHeading">Zero Matrix</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Definition</p>
+      <p style="justifiedText">
+        A <b>zero matrix</b> is a matrix in which all its entries are 0, and it's indicated by $\;O\;$.
+      </p>
+      <p>For example,</p>
+      <p>A 3x3 zero matrix:</p>
+      <p style="centeredText"><![CDATA[$O_{3 \times 3}=\begin{bmatrix}0&0&0\\[6pt]0&0&0\\[6pt]0&0&0\end{bmatrix}$]]></p>
+      <p>A 2x3 zero matrix:</p>
+      <p style="centeredText"><![CDATA[$O_{2 \times 3} = \begin{bmatrix}0&0&0\\[6pt]0&0&0\end{bmatrix}$]]></p>
+    </stack>
+    <p style="sectionHeading">Properties of Matrix Addition</p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="subSectionHeading">Note: the matrix A, B, and C in below have the same dimension.</p>
+      <p style="centeredText"><![CDATA[$Let \quad A=\begin{bmatrix}3&8\\7&2\end{bmatrix} \quad B=\begin{bmatrix}5&2\\9&7\end{bmatrix} \quad C=\begin{bmatrix}2&5\\3&4\end{bmatrix}$]]></p>
+    </stack>
+    <stack name="stepsStack">
+      <!--Each step is a stack, and each step has alternating background colors-->
+      <!--Use Snippet to create any single step stack -->
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Addition Commutativity</p>
+          <stack name="cont" style="invisible">
+            <p style="centeredText">$A+B=B+A$</p>
+            <p style="justifiedText">Adding two matrix with same dimension in both orders are equivalent.</p>
+            <p>For example,</p>
+            <p style="centeredText"><![CDATA[$\begin{matrix}A+B&=&\begin{bmatrix}3+5&8+2\\7+9&2+7\end{bmatrix} \\[20pt] &=& \begin{bmatrix}5+3&2+8\\9+7&7+2\end{bmatrix} \\[20pt] &=& \begin{bmatrix}5&2\\9&7\end{bmatrix} + \begin{bmatrix}3&8\\7&2\end{bmatrix} \\[20pt] &=& B+A \end{matrix}$]]></p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(1)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Addition Associativity</p>
+          <stack name="cont" style="invisible">
+            <p style="centeredText">$A+(B+C)=(A+B)+C$</p>
+            <p style="justifiedText">Changing the grouping in matrix addition won't affect the result.</p>
+            <p>For example,</p>
+            <p style="centeredText"><![CDATA[$\begin{matrix}(A+B)+C&=&\begin{bmatrix}3+5&8+2\\7+9&2+7\end{bmatrix}+ \begin{bmatrix}2&5\\3&4\end{bmatrix}\\[20pt] &=& \begin{bmatrix}(3+5)+2&(8+2)+5\\(7+9)+3&(2+7)+4\end{bmatrix} \\[20pt] &=& \begin{bmatrix}3+(5+2)&8+(2+5)\\7+(9+3)&2+(7+4)\end{bmatrix} \\[20pt] &=& \begin{bmatrix}3&8\\7&2\end{bmatrix} + \begin{bmatrix}5+2&2+5\\9+3&7+4\end{bmatrix} \\[20pt] &=& A+(B+C) \end{matrix}$]]></p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(2)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Additive Identity</p>
+          <stack name="cont" style="invisible">
+            <p style="centeredText">$A+O=A$</p>
+            <p style="justifiedText">When adding a $m \times n$ zero matrix to any $m \times n$ matrix A, we get $A + O = A \quad and \quad O + A = A$.</p>
+            <p>For example,</p>
+            <p style="centeredText"><![CDATA[$\begin{bmatrix}3&4\\[6pt]2&1\end{bmatrix} + \begin{bmatrix}0&0\\[6pt]0&0\end{bmatrix}=\begin{bmatrix}3&4\\[6pt]2&1\end{bmatrix}$]]></p>
+            <p style="centeredText"><![CDATA[$\begin{bmatrix}0&0\\[6pt]0&0\end{bmatrix} + \begin{bmatrix}3&4\\[6pt]2&1\end{bmatrix}=\begin{bmatrix}3&4\\[6pt]2&1\end{bmatrix}$]]></p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(3)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Additive Inverse</p>
+          <stack name="cont" style="invisible">
+            <p style="centeredText">$A+(-A)=O$</p>
+            <p>When adding any $m \times n$ matrix $\;A\;$ to its opposite matrix $-A$, we get a $m \times n$ zero matrix.</p>
+            <p style="centeredText">$A+(-A)=O \quad and \quad -A+A=O$</p>
+            <p>For example,</p>
+            <p style="centeredText"><![CDATA[$\begin{bmatrix}3&7\\[6pt]-6&5\end{bmatrix} + \begin{bmatrix}-3&-7\\[6pt]6&-5\end{bmatrix}=\begin{bmatrix}0&0\\[6pt]0&0\end{bmatrix}$]]></p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(4)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Closure Property of Addition</p>
+          <stack name="cont" style="invisible">
+            <p style="justifiedText">A + B is a matrix of the same dimensions as A and B.</p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(5)
+          </onClick>
+        </button>
+      </stack>
+    </stack>
+  </sectionNoTitle>
+
+
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Practices</p>
+
+    <stack style="mcStackLayout">
+      <script>
+        local answers = {true, true, true, false}
+        local cqController = CQController:new({checkboxes={table:Child(2):Child(1).checkbox, table:Child(2):Child(2).checkbox, table:Child(4):Child(1).checkbox, table:Child(4):Child(2).checkbox}, checkBtn=checkBtn, answers=answers})
+      </script>
+      <p style="subSectionHeading">Question 1</p>
+      <table widths="20% 80%" grid="false">
+        <row>
+          <column>
+            <image src="resources/question.png" inspect="false" />
+          </column>
+          <column>
+            <p>Which of the following are equivalent to $d(A+1B)$?</p>
+            <p>Select all that apply.</p>
+          </column>
+        </row>
+      </table>
+      <table name="table" grid="false" widths="50% 50%">
+        <row>
+          <column>
+            <p style="mcLayout">$dA+dB$</p>
+          </column>
+          <column>
+            <p style="mcLayout">$cA+1B$</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="checkbox" style="checkbox_style" content=" ">
+              <onClick>
+                cqController:toggleCheckbox(1)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="checkbox" style="checkbox_style" content=" ">
+              <onClick>
+                cqController:toggleCheckbox(2)
+              </onClick>
+            </button>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p style="mcLayout">$cB+cA$</p>
+          </column>
+          <column>
+            <p style="mcLayout">$(A+C)+(B+C)$</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="checkbox" style="checkbox_style" content=" ">
+              <onClick>
+                cqController:toggleCheckbox(3)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="checkbox" style="checkbox_style" content=" ">
+              <onClick>
+                cqController:toggleCheckbox(4)
+              </onClick>
+            </button>
+          </column>
+        </row>
+      </table>
+      <button name="checkBtn" content="Check Answer">
+        <onClick>
+          cqController:checkAnswer()
+        </onClick>
+      </button>
+    </stack>
+    <stack style="mcStackLayout">
+      <script>
+        local answers = {false, true, true, true}
+        local cqController = CQController:new({checkboxes={table:Child(2):Child(1).checkbox, table:Child(2):Child(2).checkbox, table:Child(4):Child(1).checkbox, table:Child(4):Child(2).checkbox}, checkBtn=checkBtn, answers=answers})
+      </script>
+      <p style="subSectionHeading">Question 2</p>
+      <table widths="20% 80%" grid="false">
+        <row>
+          <column>
+            <image src="resources/question.png" inspect="false" />
+          </column>
+          <column>
+            <p>Which of the following matrix expressions are equivalent to $A+(B+(-B))$? (A and B are $2 \times 2$ matrices)</p>
+            <p>Select all that apply.</p>
+          </column>
+        </row>
+      </table>
+      <table name="table" grid="false" widths="50% 50%">
+        <row>
+          <column>
+            <p style="mcLayout"><![CDATA[$A+\begin{bmatrix}0&0&0\\0&0&0\end{bmatrix}$]]></p>
+          </column>
+          <column>
+            <p style="mcLayout">$\;A\;$</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="checkbox" style="checkbox_style" content=" ">
+              <onClick>
+                cqController:toggleCheckbox(1)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="checkbox" style="checkbox_style" content=" ">
+              <onClick>
+                cqController:toggleCheckbox(2)
+              </onClick>
+            </button>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p style="mcLayout"><![CDATA[$A+\begin{bmatrix}0&0\\0&0\end{bmatrix}$]]></p>
+          </column>
+          <column>
+            <p style="mcLayout">$A-B+B$</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="checkbox" style="checkbox_style" content=" ">
+              <onClick>
+                cqController:toggleCheckbox(3)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="checkbox" style="checkbox_style" content=" ">
+              <onClick>
+                cqController:toggleCheckbox(4)
+              </onClick>
+            </button>
+          </column>
+        </row>
+      </table>
+      <button name="checkBtn" content="Check Answer">
+        <onClick>
+          cqController:checkAnswer()
+        </onClick>
+      </button>
+    </stack>
+
+  </sectionNoTitle>
+
+  <!--Properties of Scalar Multiplication-->
+  <sectionNoTitle style="pageLayout">
+    <script>
+      local stepsController = StepsController:new({stepsStack=stepsStack, numOfSteps=5, shown_message="Show More", hidden_message="Show Less", showStepCounter=false})
+    </script>
+    <p style="sectionHeading">Properties of Matrix Scalar Multiplication</p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="subSectionHeading justifiedText">Note: the matrix A, B in the table below have the same dimension. c and d are scalars and O is a zero matrix.</p>
+      <p style="centeredText"><![CDATA[$Let \quad A=\begin{bmatrix}3&8\\7&2\end{bmatrix} \quad B=\begin{bmatrix}5&2\\9&7\end{bmatrix} \quad O=\begin{bmatrix}0&0\\0&0\end{bmatrix}$]]></p>
+    </stack>
+    <stack name="stepsStack">
+      <!--Each step is a stack, and each step has alternating background colors-->
+      <!--Use Snippet to create any single step stack -->
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Multiplication Associativity</p>
+          <stack name="cont" style="invisible">
+            <p style="centeredText">$(cd)A=c(dA)$</p>
+            <p style="justifiedText">The order of multiplying two scalars with a matrix won't affect the result.</p>
+            <p style="justifiedText">You can multiply the scalars first or multiply the matrix by one scalar and then by the other.</p>
+            <p>For example,</p>
+            <p style="centeredText"><![CDATA[$\begin{matrix}(c \cdot d)A &=& (c \cdot d)\begin{bmatrix}3&8\\7&2\end{bmatrix} \\[20pt] &=& \begin{bmatrix}(c \cdot d)\cdot 3&(c \cdot d)\cdot 8\\(c \cdot d)\cdot 7&(c \cdot d)\cdot 2\end{bmatrix} \\[20pt] &=& \begin{bmatrix}c (d \cdot 3)&c (d \cdot 8)\\c (d \cdot 7)&c (d \cdot 2)\end{bmatrix} \\[20pt] &=& c\begin{bmatrix}(d \cdot 3)&(d \cdot 8)\\(d \cdot 7)&(d \cdot 2)\end{bmatrix} \\[20pt] &=& c(d\begin{bmatrix}3&8\\7&2\end{bmatrix}) \\[20pt] &=& c(dA) \end{matrix}$]]></p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(1)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Distributivity</p>
+          <stack name="cont" style="invisible">
+            <p style="justified">A scalar can be distributed over matrix addition.</p>
+            <p>1)  $c(A+B)=cA+cB$</p>
+            <p>For example,</p>
+            <p style="centeredText"><![CDATA[$\begin{matrix}c(A+B) &=& c(\begin{bmatrix}3&8\\7&2\end{bmatrix} + \begin{bmatrix}5&2\\9&7\end{bmatrix}) \\[20pt]&=& c\begin{bmatrix}3+5&8+2\\7+9&2+7\end{bmatrix} \\[20pt]&=&\begin{bmatrix}c(3+5)&c(8+2)\\c(7+9)&c(2+7)\end{bmatrix} \\[20pt]&=&\begin{bmatrix}3c+5c&8c+2c\\7c+9c&2c+7c\end{bmatrix} \\[20pt] &=&\begin{bmatrix}3c&8c\\7c&2c\end{bmatrix}+\begin{bmatrix}5c&2c\\9c&7c\end{bmatrix}\\[20pt]&=&c\begin{bmatrix}3&8\\7&2\end{bmatrix} + c\begin{bmatrix}5&2\\9&7\end{bmatrix} \\[20pt]&=&c\cdot A + c\cdot B \end{matrix}$]]></p>
+            <p>2)  $(c+d)A=cA+dA$</p>
+            <p>For example,</p>
+            <p style="centeredText"><![CDATA[$\begin{matrix} (c+d)A&=&(c+d)\begin{bmatrix} 3&8 \\ 7&2 \end{bmatrix} \\[20pt] &=& \begin{bmatrix} 3(c+d)&8(c+d) \\ 7(c+d)&2(c+d) \end{bmatrix} \\[20pt] &=& \begin{bmatrix}3c+3d&8c+8d\\7c+7d&2c+2d\end{bmatrix}\\[20pt]&=&\begin{bmatrix}3c&8c\\7c&2c\end{bmatrix}+\begin{bmatrix}3d&8d\\7d&2d\end{bmatrix}\\[20pt]&=&c\begin{bmatrix}3&8\\7&2\end{bmatrix} + d\begin{bmatrix}3&8\\7&2\end{bmatrix} \\[20pt]&=&cA+dA\end{matrix}$]]></p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(2)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Multiplicative Identity</p>
+          <stack name="cont" style="invisible">
+            <p style="centeredText">$1A=A$</p>
+            <p style="justifiedText">Multiply any matrix with scalar 1, the result is the original matrix.</p>
+            <p>For example,</p>
+            <p style="centeredText"><![CDATA[$\begin{matrix}1A&=&1\begin{bmatrix}3&8\\7&2\end{bmatrix}\\[20pt]&=&\begin{bmatrix}1\cdot 3&1\cdot 8\\1\cdot 7&1\cdot 2\end{bmatrix} \\[20pt]&=&\begin{bmatrix}3&8\\7&2\end{bmatrix}\\[20pt]&=&A \end{matrix}$]]></p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(3)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Multiplicative Properties of Zero</p>
+          <stack name="cont" style="invisible">
+            <p style="centeredText">$0A=O$</p>
+            <p style="justifiedText">Multiply any matrix with scalar 0, the result is the zero matrix with the same dimension.</p>
+            <p>For example,</p>
+            <p style="centeredText"><![CDATA[$\begin{matrix}0A&=&0\begin{bmatrix}3&8\\7&2\end{bmatrix}\\[20pt]&=&\begin{bmatrix}0\cdot 3&0\cdot 8\\0\cdot 7&0\cdot 2\end{bmatrix} \\[20pt]&=&\begin{bmatrix}0&0\\0&0\end{bmatrix}\\[20pt]&=&O\end{matrix}$]]></p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(4)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Closure Property of Multiplication</p>
+          <stack name="cont" style="invisible">
+            <p style="justifiedText">$cA$ is a matrix of the same dimensions as A.</p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(5)
+          </onClick>
+        </button>
+      </stack>
+    </stack>
+  </sectionNoTitle>
+
+
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Practices</p>
+    
+    <stack style="mcStackLayout">
+      <script>
+        local answers = {true, false, true, true}
+        local cqController = CQController:new({checkboxes={table:Child(2):Child(1).checkbox, table:Child(2):Child(2).checkbox, table:Child(4):Child(1).checkbox, table:Child(4):Child(2).checkbox}, checkBtn=checkBtn, answers=answers})
+      </script>
+      <p style="subSectionHeading">Question 1</p>
+      <table widths="20% 80%" grid="false">
+        <row>
+          <column>
+            <image src="resources/question.png" inspect="false" />
+          </column>
+          <column>
+            <p>Which of the following are equivalent to $d(A+1B)$?</p>
+            <p>Select all that apply.</p>
+          </column>
+        </row>
+      </table>
+      <table name="table" grid="false" widths="50% 50%">
+        <row>
+          <column>
+            <p style="mcLayout">$dA+dB$</p>
+          </column>
+          <column>
+            <p style="mcLayout">$cA+1B$</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="checkbox" style="checkbox_style" content=" ">
+              <onClick>
+                cqController:toggleCheckbox(1)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="checkbox" style="checkbox_style" content=" ">
+              <onClick>
+                cqController:toggleCheckbox(2)
+              </onClick>
+            </button>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p style="mcLayout">$dB+dA$</p>
+          </column>
+          <column>
+            <p style="mcLayout">$(A+B)d$</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="checkbox" style="checkbox_style" content=" ">
+              <onClick>
+                cqController:toggleCheckbox(3)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="checkbox" style="checkbox_style" content=" ">
+              <onClick>
+                cqController:toggleCheckbox(4)
+              </onClick>
+            </button>
+          </column>
+        </row>
+      </table>
+      <button name="checkBtn" content="Check Answer">
+        <onClick>
+          cqController:checkAnswer()
+        </onClick>
+      </button>
+    </stack>
+
+    <stack style="mcStackLayout">
+      <script>
+        local answers = {false, false, true, true}
+        local cqController = CQController:new({checkboxes={table:Child(2):Child(1).checkbox, table:Child(2):Child(2).checkbox, table:Child(4):Child(1).checkbox, table:Child(4):Child(2).checkbox}, checkBtn=checkBtn, answers=answers})
+      </script>
+      <p style="subSectionHeading">Question 2</p>
+      <table widths="20% 80%" grid="false">
+        <row>
+          <column>
+            <image src="resources/question.png" inspect="false" />
+          </column>
+          <column>
+            <p style="justifiedText">Which of the following are equivalent to $0B+(cd)B$?</p>
+            <p>Select all that apply.</p>
+          </column>
+        </row>
+      </table>
+      <table name="table" grid="false" widths="50% 50%">
+        <row>
+          <column>
+            <p style="mcLayout">$\,O\,$</p>
+          </column>
+          <column>
+            <p style="mcLayout">$\,B\,$</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="checkbox" style="checkbox_style" content=" ">
+              <onClick>
+                cqController:toggleCheckbox(1)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="checkbox" style="checkbox_style" content=" ">
+              <onClick>
+                cqController:toggleCheckbox(2)
+              </onClick>
+            </button>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p style="mcLayout">$c(dB)$</p>
+          </column>
+          <column>
+            <p style="mcLayout">$(0+cd)B$</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="checkbox" style="checkbox_style" content=" ">
+              <onClick>
+                cqController:toggleCheckbox(3)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="checkbox" style="checkbox_style" content=" ">
+              <onClick>
+                cqController:toggleCheckbox(4)
+              </onClick>
+            </button>
+          </column>
+        </row>
+      </table>
+      <button name="checkBtn" content="Check Answer">
+        <onClick>
+          cqController:checkAnswer()
+        </onClick>
+      </button>
+    </stack>
+
+
+  </sectionNoTitle>
+
+
+
+</document>

@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="GEFE63E4D_5C1E_417A_A3B4_C0F17B676538">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>LA-ALGE-1.6 Multiplying Matrices by Scalars</title>
+    <creator>jason_wang</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/lassondeLogo.png" />
+  </metadata>
+
+  <include src="resources/curriculumStylesLassonde.xml" />
+  <include src="resources/Utilities.xml" />
+  <include src="resources/plotTools.xml" />
+
+  <!--                                      Header & Footer START                                         -->
+  <header style="themeColour">
+    <stack style="center" orientation="horizontal">
+      <p></p>
+    </stack>
+  </header>
+  <footer style="themeColour">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="themeColourTitle">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--                                      Header & Footer END                                         -->
+
+
+  <!-- Cover Page -->
+  <!-- This is the standard way title pages are created. A great website to get copyright free images .. www.pexels.com
+  *** The style: "pageLayout" is defined in curriculumStylesLassonde.xml. It simply sets the content to the center and adjusts the width to 80% ***-->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">1.6 Multiplying Matrices by Scalars</title>
+    <p style="sectionHeading">Introduction</p>
+    <image src="resources/scalar.png" />
+    <stack orientation="vertical" style="contentBG">
+      <p style="justifiedText">
+        In this Module, we are going to learn how to multiply matrices by scalars (a real number).
+      </p>
+    </stack>
+  </section>
+
+
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Interactive Scalar Multiplication</p>
+    <stack style="mcStackLayout">
+      <p>The matrix below represents a square (each row represents one vertex, and column 1 is x-coordinate, column 2 is y-coordinate):</p>
+      <p style="centeredText"><![CDATA[$\begin{bmatrix}0&0\\[6pt]0&2\\[6pt]2&2\\[6pt]2&0\end{bmatrix}$]]></p>
+      <p>Change the scalar and see how the square changes?</p>
+      <table name="table" grid="false" widths="70% 30%">
+        <row>
+          <column>
+            <xyPlot name="plot">
+              <axis auto="fixed" min="0" max="13" dim="x">
+                <title>x</title>
+              </axis>
+              <axis auto="fixed" min="0" max="10" dim="y">
+                <title>y</title>
+              </axis>
+              <series name="series1" capacity="2000" draw="segmentedFill" manual="false">
+                <style>
+                  <foreground color="dodgerBlue" />
+                </style>
+                <data>0 0; 2 0; 2 2; 0 2; 0 0</data>
+              </series>
+            </xyPlot>
+          </column>
+          <column>
+            <table name="dataTable" grid="false" widths="50% 50%">
+              <row>
+                <column>
+                  <p style="centeredText">Scalar</p>
+                </column>
+                <column>
+                  <p style="centeredText"></p>
+                </column>
+              </row>
+              <row>
+                <column columnSpan="2">
+                  <p style="centeredText contentBG2">Matrix</p>
+                </column>
+              </row>
+              <row>
+                <column>
+                  <p style="centeredText"></p>
+                </column>
+                <column>
+                  <p style="centeredText"></p>
+                </column>
+              </row>
+              <row>
+                <column>
+                  <p style="centeredText"></p>
+                </column>
+                <column>
+                  <p style="centeredText"></p>
+                </column>
+              </row>
+              <row>
+                <column>
+                  <p style="centeredText"></p>
+                </column>
+                <column>
+                  <p style="centeredText"></p>
+                </column>
+              </row>
+              <row>
+                <column>
+                  <p style="centeredText"></p>
+                </column>
+                <column>
+                  <p style="centeredText"></p>
+                </column>
+              </row>
+            </table>
+          </column>
+        </row>
+      </table>
+
+      <script>
+        local sliderValue = slider.Value;
+        local s1 = table:Child(1):Child(1).plot.series1;
+        local dt = table:Child(1):Child(2).dataTable;
+        local data = {{0,0},{0,2},{2,2},{2,0}};
+        local function updateData()
+        dt:Child(1):Child(2):Child(1).Text = string.format("%.1f", sliderValue);
+        for i=3,6 do
+        for j=1,2 do
+        dt:Child(i):Child(j):Child(1).Text = string.format("%.1f", sliderValue * data[i-2][j]);
+        end
+        end
+        end
+        function updatePlot()
+        updateData();
+        s1.Transform = matrixf.scaling(sliderValue, sliderValue, 1);
+        end
+        updatePlot();
+      </script>
+      <slider min="0.1" max="5" value="1" name="slider">
+        <onValueChanged>
+          local x = round(slider.Value,0.1);
+          if x ~= sliderValue then
+          sliderValue = x;
+          updatePlot();
+          end
+        </onValueChanged>
+      </slider>
+    </stack>
+  </sectionNoTitle>
+  
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Scalars and Scalar Multiplication</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Definition</p>
+      <p style="justifiedText">
+        When we work with matrices, we refer to real numbers as <b>scalars</b>.
+      </p>
+      <p style="justifiedText">
+        <b>Scalar multiplication</b> is the product of a real number and matrix. In scalar mutiplication, each entry in the matrix is multiplied by the given scalar.
+      </p>
+      <p>For example,</p>
+      <p style="centeredText"><![CDATA[$A=\begin{bmatrix}5&12\\33&8\end{bmatrix} \quad find \;\; 3A.$]]></p>
+      <p>To find 3A, simply multiply each matrix entry by 3.</p>
+      <p style="centeredText"><![CDATA[$\begin{matrix}3A&=&3 \cdot \begin{bmatrix}5&12\\33&8\end{bmatrix} \hspace{0.2cm} \\[20pt] &=& \begin{bmatrix}3 \cdot 5&3 \cdot 12 \\[6pt] 3 \cdot 33& 3 \cdot 8 \end{bmatrix} \\[20pt] &=& \begin{bmatrix}15&36\\[6pt] 99&24 \end{bmatrix}\hspace{0.9cm} \end{matrix}$]]></p>
+
+    </stack>
+  </sectionNoTitle>
+  
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Examples</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Example 1</p>
+      <table grid="false" widths="10% 90%">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>
+              Solve for A.
+            </p>
+            <p><![CDATA[$4A=\begin{bmatrix}-5&3\\[6pt]1&8\end{bmatrix}$]]></p>
+          </column>
+        </row>
+      </table>
+      <stack name="answerStack" style="invisible">
+        <p style="subSectionHeading">Answer:</p>
+        <p style="centeredText"><![CDATA[$\begin{matrix}A&=&\frac{1}{4}\begin{bmatrix}-5&3\\[6pt]1&8\end{bmatrix}\hspace{0.5cm} \\[20pt] &=&\begin{bmatrix}\frac{1}{4} \cdot -5 & \frac{1}{4} \cdot 3 \\[6pt] \frac{1}{4} \cdot 1 & \frac{1}{4} \cdot 8 \end{bmatrix} \\[20pt] &=& \begin{bmatrix}\frac{-5}{4} & \frac{3}{4} \\[6pt] \frac{1}{4} & 2 \end{bmatrix}\hspace{0.9cm} \end{matrix}$]]></p>
+      </stack>
+      <button name="btn" content="Show Answer">
+        <onClick>
+          if btn.Text == "Show Answer" then
+          answerStack.Style.Visibility = "visible";
+          btn.Text = "Hide Answer";
+          else
+          answerStack.Style.Visibility = "collapsed";
+          btn.Text = "Show Answer";
+          end
+        </onClick>
+      </button>
+    </stack>
+
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Example 2</p>
+      <table grid="false" widths="10% 90%">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>
+              Solve for K.
+            </p>
+            <p><![CDATA[$\frac{1}{3}K=\begin{bmatrix}5&3&-1\\[6pt]2&-3&-6\end{bmatrix}$]]></p>
+          </column>
+        </row>
+      </table>
+      <stack name="answerStack" style="invisible">
+        <p style="subSectionHeading">Answer:</p>
+        <p style="centeredText"><![CDATA[$\begin{matrix}K&=&3\begin{bmatrix}5&3&-1\\[6pt]2&-3&-6\end{bmatrix}\hspace{0.9cm} \\[20pt] &=&\begin{bmatrix}3\cdot 5 & 3 \cdot 3 & 3 \cdot -1 \\[6pt] 3 \cdot 2 & 3 \cdot -3 & 3 \cdot -6 \end{bmatrix} \\[20pt] &=& \begin{bmatrix}15&9&-3 \\[6pt] 6&-9&-18\end{bmatrix}\hspace{0.9cm} \end{matrix}$]]></p>
+      </stack>
+      <button name="btn" content="Show Answer">
+        <onClick>
+          if btn.Text == "Show Answer" then
+          answerStack.Style.Visibility = "visible";
+          btn.Text = "Hide Answer";
+          else
+          answerStack.Style.Visibility = "collapsed";
+          btn.Text = "Show Answer";
+          end
+        </onClick>
+      </button>
+    </stack>
+
+  </sectionNoTitle>
+
+
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Challenge</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Question 1</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>
+              Solve for X.
+            </p>
+            <p>
+              <![CDATA[$\frac{1}{2}X+\begin{bmatrix}12&4&5\\[6pt]8&-3&7\\[6pt]0&-4&9\end{bmatrix}=\begin{bmatrix}4&4&7\\[6pt]3&5&8\\[6pt]2&3&5\end{bmatrix}$]]>
+            </p>
+          </column>
+        </row>
+      </table>
+      <table grid="false" widths="10% 15% 15% 15%" name="input">
+        <row>
+          <column></column>
+          <column>
+            <textField name="x11" placeholder="[X11]" style="centeredText"></textField>
+          </column>
+          <column>
+            <textField name="x12" placeholder="[X12]" style="centeredText"></textField>
+          </column>
+          <column>
+            <textField name="x13" placeholder="[X13]" style="centeredText"></textField>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>$\hspace{0.05cm}X=$</p>
+          </column>
+          <column>
+            <textField name="x21" placeholder="[X21]" style="centeredText"></textField>
+          </column>
+          <column>
+            <textField name="x22" placeholder="[X22]" style="centeredText"></textField>
+          </column>
+          <column>
+            <textField name="x23" placeholder="[X23]" style="centeredText"></textField>
+          </column>
+        </row>
+        <row>
+          <column></column>
+          <column>
+            <textField name="x31" placeholder="[X31]" style="centeredText"></textField>
+          </column>
+          <column>
+            <textField name="x32" placeholder="[X32]" style="centeredText"></textField>
+          </column>
+          <column>
+            <textField name="x33" placeholder="[X33]" style="centeredText"></textField>
+          </column>
+        </row>
+      </table>
+      <script> local answers = {{"-16","0","4"},{"-10","16","2"},{"4","14","-8"}}; local attempts = 0; local maxAttempts = 3; </script>
+      <stack name="hint" style="invisible">
+        <p style="centerText">Not quite there, try again!</p>
+      </stack>
+      <stack name="solution" style="invisible">
+        <p style="centerText">Correct!</p>
+      </stack>
+      <stack name="answer" style="invisible">
+        <p style="title">Answer:</p>
+        <p style="centeredText"><![CDATA[$\begin{matrix}\frac{1}{2}X&=&\begin{bmatrix}4&4&7\\[6pt]3&5&8\\[6pt]2&3&5\end{bmatrix} - \begin{bmatrix}12&4&5\\[6pt]8&-3&7\\[6pt]0&-4&9\end{bmatrix} \\[25pt] \frac{1}{2}X&=&\begin{bmatrix}-8&0&2\\[6pt]-5&8&1\\[6pt]2&7&-4\end{bmatrix} \hspace{2.0cm} \\[25pt] X&=&\begin{bmatrix}2 \cdot -8&2 \cdot 0&2 \cdot 2\\[6pt]2 \cdot -5&2 \cdot 8&2 \cdot 1\\[6pt]2 \cdot 2&2 \cdot 7&2 \cdot -4\end{bmatrix}\hspace{0.7cm} \\[25pt] X&=& \begin{bmatrix}-16&0&4\\[6pt]-10&16&2\\[6pt]4&14&-8\end{bmatrix}\hspace{1.6cm}\end{matrix}$]]></p>
+      </stack>
+      <button name="checkBtn" content="Check Answer">
+        <onClick>
+          if checkBtn.Text == "Hide Answer" then
+          hint.Style.Visibility = "collapsed";
+          solution.Style.Visibility = "collapsed";
+          answer.Style.Visibility = "collapsed";
+          checkBtn.Text = "Show Answer";
+          elseif checkBtn.Text == "Check Answer" then
+          attempts = attempts + 1;
+          local correct = true;
+          for i=1,3 do
+          for j=2,4 do
+          if input:Child(i):Child(j):Child(1).Text ~= answers[i][j-1] then
+          correct = false;
+          end
+          end
+          end
+          if correct then
+          hint.Style.Visibility = "collapsed";
+          solution.Style.Visibility = "visible";
+          else
+          hint.Style.Visibility = "visible";
+          solution.Style.Visibility = "collapsed";
+          if attempts &gt;= maxAttempts then
+          checkBtn.Text = "Show Answer";
+          end
+          end
+          else
+          hint.Style.Visibility = "collapsed";
+          solution.Style.Visibility = "collapsed";
+          answer.Style.Visibility = "visible";
+          checkBtn.Text = "Hide Answer";
+          end
+        </onClick>
+      </button>
+    </stack>
+  </sectionNoTitle>
+
+
+</document>

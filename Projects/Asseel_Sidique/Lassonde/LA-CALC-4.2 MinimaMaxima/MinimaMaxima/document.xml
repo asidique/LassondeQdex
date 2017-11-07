@@ -1,0 +1,1256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G2D0A9EB5_9CAC_4B69_B31E_1904AE3E03D2">
+  
+  <!-- Meta Data -->
+  <metadata>
+    <title>LA-CALC-4.2 Identifying Minima and Maxima</title>
+    <creator>Thiago</creator>
+    <coverImage src="resources/LassondeLogo.png" />
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+  </metadata>
+
+  <include src="resources/curriculumStylesLassonde.xml" />
+  <include src="resources/Utilities.xml" />
+  <include src="resources/plotTools.xml" />
+
+  <!--HEADER**********************************************-->
+  <header style="themeColour">
+    <stack style="center" orientation="horizontal">
+      <p></p>
+    </stack>
+  </header>
+  <footer style="themeColour">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="themeColourTitle">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--FOOTER**********************************************-->
+
+
+  <!-- Section 1 -->
+  <section style="pageLayout">
+    <title style="chapterTitle">Identifying Minima and Maxima</title>
+
+    <p style="sectionHeading">Introduction</p>
+    <stack style="contentBG">
+      <p>
+        This module will cover finding the <b> Minima and Maxima </b> of a function.
+        Functions can have "hills and valleys": places where they reach a minimum or maximum value.
+        It may not be the minimum or maximum for the whole function, but locally it is.
+      </p>
+    </stack>
+
+  </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!--  Section 2 -->
+
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Simulation 1</p>
+    <stack style="contentBG">
+      <p>
+        The simulation below shows a real life application of identifying minima and maxima points
+        of a function. The function of study is made by the
+        windmill motion where we can easily visualize
+        its local minimum and maximum points.
+      </p>
+
+
+    <stack name="graphWrap" orientation="horizontal">
+
+      <style>
+        <widthPercentage>0.88</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <!-- Windmill Simulation -->
+
+      <script>
+
+        local plotC = simOutput.mySeries;
+        local plotC2 = simOutput.mySeries2;
+        local plotC3 = simOutput.mySeries3;
+        local plotC4 = simOutput.mySeries4;
+        local plotC5 = simOutput.mySeries5;
+        local plotC6 = simOutput.mySeries6;
+
+        local followSquare = simOutput.squareF;
+
+        plotTools.drawCircle(simOutput.filled_circle_series, vector({0, 0}), 2, color.rgb(232 ,12 ,46))
+
+        simOutput.body1.Style.ForegroundColor = color.rgb(232 ,12 ,46)
+
+        simOutput.squareF.Style.ForegroundColor = color.purple
+        myPlotWave.mypoints.Style.ForegroundColor = color.red
+        myPlotWave.mypointsMin.Style.ForegroundColor = color.teal
+        myPlotWave.dotPlot.Style.ForegroundColor = color.purple
+
+        local plotDot = myPlotWave.dotPlot;
+
+
+
+
+
+      </script>
+
+
+      <drawing name="simOutput">
+        <series name="mySeries" manual="true" capacity="15" draw="segmentedFill" />
+        <series name="mySeries2" manual="true" capacity="15" draw="segmentedFill" />
+        <series name="mySeries3" manual="true" capacity="15" draw="segmentedFill" />
+        <series name="mySeries4" manual="true" capacity="15" draw="segmentedFill" />
+        <series name="mySeries5" manual="true" capacity="15" draw="segmentedFill" />
+        <series name="mySeries6" manual="true" capacity="15" draw="segmentedFill" />
+
+        <series name="squareF" manual="true" draw="radialFill" />
+
+        <series name="filled_circle_series" manual="true" draw="radialFill" capacity="8000" />
+
+        <series name="body1" draw="radialFill">
+          <data>-3 -25; -1 0; 0 0; 3 -25; 1 0; 0 0; </data>
+        </series>
+
+        <style>
+          <widthPercentage>0.99</widthPercentage>
+        </style>
+        <axis dim="x" max="20" min="-20" auto="fixed" />
+        <axis dim="y" max="25" min="-25" auto="fixed" />
+      </drawing>
+
+      <simulation name="mySim" period="0.1" duration="31">
+        <onUpdate>
+          curTime = time;
+        </onUpdate>
+        <solver name="sineSolver">
+          <series>
+            <clock />
+            <system>
+              <input name="data" width="1" />
+              <onOutputs>
+
+
+                curTime = time;
+
+
+
+
+                a = (data[1]/2)*2
+                b = 10*math.cos(a)
+                plotDot:Clear()
+                plotDot:Add(a - 0.6, b - 0.8)
+                plotDot:Add(a - 0.6, b + 0.8)
+                plotDot:Add(a + 0.6, b + 0.8)
+                plotDot:Add(a + 0.6, b - 0.8)
+                plotDot:Add(a - 0.6, b - 0.8)
+                plotDot:Update()
+
+
+
+                if b &gt;= 9.9 then
+                myPlotWave.mypoints:Add(a, 10);
+                myPlotWave.mypoints:Update();
+                end
+
+
+
+                if b &lt;= -9.9 then
+                myPlotWave.mypointsMin:Add(a, -10);
+                myPlotWave.mypointsMin:Update();
+                end
+
+
+
+                followSquare:Clear()
+                s = 10*math.sin(a)
+                w = 10*math.cos(a)
+                followSquare:Add(s - 0.8, w - 0.8)
+                followSquare:Add(s - 0.8, w + 0.8)
+                followSquare:Add(s + 0.8, w + 0.8)
+                followSquare:Add(s + 0.8, w - 0.8)
+                followSquare:Add(s - 0.8, w - 0.8)
+                followSquare:Update()
+
+
+
+                val1 = (data[1]/2)*2
+                val2 = val1 + 1
+                val3 = val2 + 1
+                val4 = val3 + 1
+                val5 = val4 + 1
+                val6 = val5 + 1.1
+
+
+
+                plotC:Add(0,0, color.black)
+                plotC:Add(10*math.sin(val1) + 0, 10*math.cos(val1) + 0, color.black)
+                plotC:Update()
+
+                plotC2:Add(0,0, color.black)
+                plotC2:Add(10*math.sin(val2) + 0 , 10*math.cos(val2) + 0, color.black)
+                plotC2:Update()
+
+                plotC3:Add(0,0, color.black)
+                plotC3:Add(10*math.sin(val3) + 0, 10*math.cos(val3) + 0, color.black)
+                plotC3:Update()
+
+                plotC4:Add(0,0, color.black)
+                plotC4:Add(10*math.sin(val4)+ 0, 10*math.cos(val4)+ 0, color.black)
+                plotC4:Update()
+
+                plotC5:Add(0,0, color.black)
+                plotC5:Add(10*math.sin(val5)+ 0, 10*math.cos(val5)+ 0, color.black)
+                plotC5:Update()
+
+                plotC6:Add(0,0, color.black)
+                plotC6:Add(10*math.sin(val6)+ 0, 10*math.cos(val6)+ 0, color.black)
+                plotC6:Update()
+
+
+
+                if time &gt;= 30 then
+                mySim:Stop()
+                startSimulationButton.Text = "Start Simulation"
+                end
+
+              </onOutputs>
+            </system>
+          </series>
+        </solver>
+      </simulation>
+
+
+      <!-- Windmill Simulation  END -->
+
+
+
+
+
+
+      <drawing name="myPlotWave">
+        <style>
+          <widthPercentage>0.99</widthPercentage>
+          <foreground color="55 135 184" />
+        </style>
+        <axis dim="x" max="30" min="-2" auto="fixed" />
+        <axis dim="y" max="25" min="-25" auto="fixed" />
+
+        <series name="dotPlot" manual="true" draw="radialFill" />
+
+        <series name="mypoints" manual="true" draw="points" />
+
+        <series name="mypointsMin" manual="true" draw="points" />
+
+        <series name="mySeries" manual="true">
+          <style>
+            <widthPercentage>0.78</widthPercentage>
+            <foreground color="0 0 0" />
+          </style>
+        </series>
+      </drawing>
+
+      <script>
+
+        <![CDATA[
+      local x, y;
+      local c = 0;
+      local cosPlot = myPlotWave.mySeries;
+     
+      cosPlot:Clear()
+      for x = -20, 100, 0.1 do
+      y =  10*math.cos(x)
+      cosPlot:Add(x,y)
+      end
+      cosPlot:Update()
+      ]]>
+      </script>
+
+    </stack>
+
+    <stack name="label1" style="collapsed" orientation="horizontal">
+
+      <style>
+        <widthPercentage>0.715</widthPercentage>
+        <marginTop>40</marginTop>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+
+      <p>
+        <image src="resources/redSquare.png" /> Local Maximum
+      </p>
+      <p>
+        <image src="resources/tealSquare.png" /> Local Minimum
+      </p>
+
+    </stack>
+
+    <button style="large" name="startSimulationButton" content="Start Simulation">
+      <style>
+        <marginTop>85</marginTop>
+      </style>
+      <onClick>
+        if startSimulationButton.Text == "Start Simulation" then
+        graphWrap.mySim:Start()
+        label1.Style.Visibility = "visible"
+        startSimulationButton.Text = "Stop Simulation"
+        else
+        graphWrap.mySim:Stop()
+        startSimulationButton.Text = "Start Simulation"
+        end
+      </onClick>
+    </button>
+
+    </stack>
+
+
+  </sectionNoTitle>
+
+
+  <!--    SECTION 3    -->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Minima and Maxima Values</p>
+
+    <stack style="contentBG">
+      <p>
+        Consider a function $ f(x) $
+      </p>
+
+      <p>
+        In order to find the points where the function $f(x)$
+        take on minimum or maximum values, we must first find the critical
+        points of $ f(x) $, and then find out which of those critical points
+        achieve a minimum or maximum value.
+      </p>
+
+      <p>
+        <b>Critical Points: $ f'(x) = 0 $</b>
+      </p>
+
+    </stack>
+
+
+    <script>
+      local stepsController = StepsController:new({stepsStack=stepsStack, numOfSteps=3})
+    </script>
+    <p style="sectionHeading">Question Step-by-Step</p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="subSectionHeading">Step-by-Step Example</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>Let $ f(x) = x^{2} - 12x + 2  $, find the minimum and maximum values of $ f(x) $:</p>
+          </column>
+        </row>
+      </table>
+    </stack>
+    <stack name="stepsStack">
+      <!--Each step is a stack, and each step has alternating background colors-->
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>
+            First we find the <b>Critical Points</b> of $f(x)$ :
+          </p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            <stack style="center">
+
+
+              <p style="centerText">
+                $  f'(x) = 3x^{2} - 12 $
+              </p>
+
+              <p style="centerText">
+                $ 3x^{2} - 12  = 0 $
+              </p>
+            </stack>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <onClick>
+            stepsController:toggleStep(1)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Then we solve for $ x $ : </p>
+          <stack name="cont" style="invisible">
+            <stack orientation="horizontal">
+              <stack orientation="vertical">
+                <!--CONTENT GOES HERE-->
+
+                <p style="centerText"> $ 3x^{2} - 12  = 0  $</p>
+
+                <p style="centerText">$ 3x^{2}  = 12 $</p>
+
+                <p style="centerText">$ x^{2}  = 4 $</p>
+
+                <p style="centerText"> $ x  = 2 $ </p>
+                <p style="centerText">OR</p>
+                <p style="centerText">$  x = -2 $</p>
+
+              </stack>
+            </stack>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <onClick>
+            stepsController:toggleStep(2)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <!--CONTENT GOES HERE-->
+          <p>
+            We can say that $ f $ has critical points at  :
+          </p>
+          <stack name="cont" style="invisible">
+
+            <p style="centerText"> $ x  = 2 $ </p>
+            <p style="centerText">AND</p>
+            <p style="centerText">$  x = -2 $</p>
+
+
+            <p style="centerText">
+              To figure out if these critical points are maximum, minimum or neither
+              we must find out whether the derivative changes signs around these points:
+            </p>
+
+
+            <p>
+              <style>
+                <marginTop>40</marginTop>
+              </style>
+              <b>Maximum</b> value: $ x = -2 $  because
+              the derivative is crossing from being positive to being a negative derivative
+              when $ x = -2 $.
+            </p>
+
+            <p>
+              <b>Minimum</b> value: $ x = 2 $  because
+              the derivative is crossing from being negative to being a positive derivative
+              when $ x = 2 $.
+            </p>
+
+
+
+
+
+
+            <stack orientation="horizontal">
+
+              <style>
+                <marginTop>50</marginTop>
+                <widthPercentage>0.5</widthPercentage>
+                <horizontalAlignment>center</horizontalAlignment>
+              </style>
+
+              <stack>
+                <p style="centerText">$ f(x) $</p>
+                <toggle name="myToggle1">
+                  <style>
+                    <horizontalAlignment>center</horizontalAlignment>
+                  </style>
+                  <onValueChanged>
+                    if myToggle1.Value == true then
+                    plotStack.myPlot1.Style.Visibility = "visible"
+                    else
+                    plotStack.myPlot1.Style.Visibility = "hidden"
+                    end
+                  </onValueChanged>
+                </toggle>
+              </stack>
+
+              <stack>
+                <p style="centerText">$ f'(x) $</p>
+                <toggle name="myToggle2">
+                  <style>
+                    <horizontalAlignment>center</horizontalAlignment>
+                  </style>
+                  <onValueChanged>
+                    if myToggle2.Value == true then
+                    plotStack.myPlot2.Style.Visibility = "visible"
+                    else
+                    plotStack.myPlot2.Style.Visibility = "hidden"
+                    end
+                  </onValueChanged>
+                </toggle>
+              </stack>
+            </stack>
+
+
+
+
+
+
+            <stack name="plotStack" orientation="horizontal">
+
+
+
+
+              <!--Graph 1-->
+              <xyPlot name="myPlot1" style="hidden">
+
+                <series name="aSeries" manual="true">
+                  <style>
+                    <foreground color="50 135 184" />
+                  </style>
+                </series>
+
+
+                <series name="aSeries2" manual="true" draw="points">
+                  <style>
+                    <foreground color="255 0 0" />
+                  </style>
+                </series>
+
+
+                <axis dim="x" auto="fixed" min="-4" max="4" />
+                <axis dim="y" auto="fixed" min="-20" max="25" />
+
+                <!-- x-y AXIS -->
+
+                <style name="lineColor">
+                  <foreground color="0 0 0" />
+                </style>
+
+                <series style="lineColor">
+                  <data> 100 0; -100 0</data>
+                </series>
+                <series style="lineColor">
+                  <data>0 100; 0 -100</data>
+                </series>
+                <!-- x-y AXIS END -->
+              </xyPlot>
+
+              <script>
+                local x, y;
+                local plotPointer = myPlot1.aSeries;
+                local plotPointer2 = myPlot1.aSeries2;
+
+                for x = -10, 10, .05 do
+                y = math.pow(x,3) - (12*x) + 2
+                plotPointer:Add(x,y)
+                end
+                plotPointer2:Add(-2,18)
+                plotPointer2:Add(2,-14)
+                plotPointer2:Update()
+                plotPointer:Update()
+
+
+              </script>
+
+
+
+
+
+
+              <!--Graph 2-->
+              <xyPlot name="myPlot2" style="hidden">
+
+                <series name="aSeries" manual="true">
+                  <style>
+                    <foreground color="50 135 184" />
+                  </style>
+                </series>
+
+                <series name="aSeries2" manual="true" draw="points">
+                  <style>
+                    <foreground color="255 0 0" />
+                  </style>
+                </series>
+
+
+                <axis dim="x" auto="fixed" min="-4" max="4" />
+                <axis dim="y" auto="fixed" min="-20" max="25" />
+
+                <!-- x-y AXIS -->
+
+                <style name="lineColor">
+                  <foreground color="0 0 0" />
+                </style>
+
+                <series style="lineColor">
+                  <data> 100 0; -100 0</data>
+                </series>
+                <series style="lineColor">
+                  <data>0 100; 0 -100</data>
+                </series>
+                <!-- x-y AXIS END -->
+              </xyPlot>
+
+              <script>
+                local x, y;
+                local plotPointer = myPlot2.aSeries;
+                local plotPointer2 = myPlot2.aSeries2;
+
+                for x = -10, 10, .05 do
+                y = 3*math.pow(x,2) - 12
+                plotPointer:Add(x,y)
+                end
+                plotPointer2:Add(-2,0)
+                plotPointer2:Add(2,0)
+                plotPointer2:Update()
+                plotPointer:Update()
+              </script>
+
+
+
+
+            </stack>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <onClick>
+            stepsController:toggleStep(3)
+          </onClick>
+        </button>
+      </stack>
+    </stack>
+
+    <p>
+      <style>
+        <marginBottom>50</marginBottom>
+      </style>
+    </p>
+
+  </sectionNoTitle>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- Section 4 -->
+  <sectionNoTitle style="pageLayout">
+
+    <p style="sectionHeading">Examples</p>
+
+    <stack style="contentBG">
+      <p style="subSectionHeading">Example 1</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>$ f(x) = -5x^{2} + 14x + 3 $, find the relative maximum of $f(x)$:</p>
+          </column>
+        </row>
+      </table>
+
+
+
+
+
+      <stack name="answerWrap" style="collapsed">
+        <p style="subSectionHeading">Answer</p>
+        <table name="table" widths="10% 90%" grid="false">
+          <row>
+            <column>
+              <image src="resources\answer.png" inspect="false" />
+            </column>
+            <column>
+              <p> $ f ' (x) =  -10x + 14 $</p>
+              <p> $ -10x + 14  = 0 $</p>
+              <p> $ -10x = -14 $    </p>
+              <p> $ x = 1.4 $       </p>
+              <p> Relative Maximum at $ x = 1.4 $ </p>
+            </column>
+          </row>
+        </table>
+      </stack>
+
+      <button name="button1" content="Show Answer">
+        <onClick>
+          if button1.Text == "Show Answer" then
+          answerWrap.Style.Visibility = "visible";
+          button1.Text = "Hide Answer"
+          else
+          answerWrap.Style.Visibility = "collapsed";
+          button1.Text = "Show Answer"
+          end
+        </onClick>
+      </button>
+    </stack>
+    <p>
+      <br />
+    </p>
+    <stack style="contentBG">
+      <p style="subSectionHeading">Example 2</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>$ f(x) = x^{4} - x^{5} $, find the relative maximum of $f(x)$:</p>
+          </column>
+        </row>
+      </table>
+
+
+
+
+
+      <stack name="answerWrap" style="collapsed">
+        <p style="subSectionHeading">Answer</p>
+        <table name="table" widths="10% 90%" grid="false">
+          <row>
+            <column>
+              <image src="resources\answer.png" inspect="false" />
+            </column>
+            <column>
+              <p>$ f'(x) = 4x^{3} - 5x^{4} $</p>
+
+              <p>
+                $ 4x^{3} - 5x^{4} =  0 $
+              </p>
+              <p>$ x^{3}(4 - 5x) = 0 $</p>
+              <p>$ x^{3} = 0 $ or $ 4 - 5x = 0 $</p>
+              <p> $ x = 0 $ or $ x = \frac{4}{5} $</p>
+              <p> Relative Maximum at $ x = \frac{4}{5} $</p>
+              <p> Relative Minimum at $ x = 0 $</p>
+            </column>
+          </row>
+        </table>
+      </stack>
+
+      <button name="button1" content="Show Answer">
+        <onClick>
+          if button1.Text == "Show Answer" then
+          answerWrap.Style.Visibility = "visible";
+          button1.Text = "Hide Answer"
+          else
+          answerWrap.Style.Visibility = "collapsed";
+          button1.Text = "Show Answer"
+          end
+        </onClick>
+      </button>
+    </stack>
+    <p>
+      <br />
+    </p>
+    <stack style="contentBG">
+      <p style="subSectionHeading">Example 3</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>$ f(x) = 5x^{3} + 2x^{2} - 3x $, find the relative maximum of $f(x)$:</p>
+          </column>
+        </row>
+      </table>
+
+
+
+
+
+      <stack name="answerWrap" style="collapsed">
+        <p style="subSectionHeading">Answer</p>
+        <table name="table" widths="10% 90%" grid="false">
+          <row>
+            <column>
+              <image src="resources\answer.png" inspect="false" />
+            </column>
+            <column>
+              <p>$ f'(x) = 15x^{2} + 4x - 3 $</p>
+
+              <p> $  15x^{2} + 4x - 3 = 0 $</p>
+
+              <p> $ x = - \frac{3}{5} $ or $ x = + \frac{1}{3} $</p>
+
+              <p>
+                The Second Derivative is   $ f''(x) = 30x + 4 $
+              </p>
+
+              <p>   $ f''(-3/5)  = 30(- 3/5 ) + 4 $  which is equal to  -14  </p>
+
+              <p> It is less than 0 , so −3/5 is a local maximum </p>
+
+              <p>
+                $ f''(1/3) = 30(1/3) + 4 $ which is equal to  14
+              </p>
+              <p>It is greater than 0, so +1/3 is a local minimum</p>
+
+            </column>
+          </row>
+        </table>
+      </stack>
+
+      <button name="button1" content="Show Answer">
+        <onClick>
+          if button1.Text == "Show Answer" then
+          answerWrap.Style.Visibility = "visible";
+          button1.Text = "Hide Answer"
+          else
+          answerWrap.Style.Visibility = "collapsed";
+          button1.Text = "Show Answer"
+          end
+        </onClick>
+      </button>
+    </stack>
+
+
+    <p>
+      <style>
+        <marginBottom>50</marginBottom>
+      </style>
+    </p>
+  </sectionNoTitle>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- Section 5 -->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Practice</p>
+    <stack style="contentBG">
+      <p style="subSectionHeading">Question 1</p>
+
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>Let $ f(x) = x^{5} + x^{4}  $, find the relative maximum of $f(x)$:</p>
+          </column>
+        </row>
+      </table>
+
+
+
+
+
+
+
+      <p name="answer" style="collapsed">A</p>
+      <script>
+        local selection = -1;
+        local deselectedColor = color.silver;
+        local selectedColor = color.rgb(232 ,12 ,46);
+
+        local function chooseButton(i)
+        if selection &gt; 0 then
+        stack.table:Child(selection):Child(1):Child(1).Style.BackgroundColor = deselectedColor;
+        end
+        stack.table:Child(i):Child(1):Child(1).Style.BackgroundColor = selectedColor;
+        selection = i;
+        end
+      </script>
+      <stack orientation="horizontal" name="stack">
+        <table name="table" widths="10% 90%" grid="false">
+          <style name="buttons">
+            <foreground color="white" />
+            <background color="silver" />
+          </style>
+          <row name="row">
+
+            <column>
+              <button content="A">
+                <onClick>final.Text="A"; chooseButton(1);</onClick>
+              </button>
+            </column>
+
+            <column>
+              <p>At  $ x = \frac{-4}{5} $</p>
+            </column>
+
+          </row>
+
+          <row>
+
+            <column>
+              <button content="B">
+                <onClick>final.Text="B"; chooseButton(2);</onClick>
+              </button>
+            </column>
+
+            <column>
+              <p>At  $ x = 0 $</p>
+            </column>
+
+          </row>
+
+          <row>
+
+            <column>
+              <button content="C">
+                <onClick>final.Text="C"; chooseButton(3);</onClick>
+              </button>
+            </column>
+
+            <column>
+              <p> At  $ x = \frac{5}{4} $ </p>
+            </column>
+
+          </row>
+        </table>
+      </stack>
+
+      <p name="final" style="collapsed" />
+      <stack name="hint" style="collapsed">
+        <p style="centerText">  Not quite there, try again ! </p>
+      </stack>
+      <stack name="solution" style="collapsed">
+        <p style="centerText"> Correct!   </p>
+      </stack>
+
+
+
+
+
+      <button content="Check Answer">
+        <onClick>
+          if string.lower(final.Text) == string.lower(answer.Text) then
+          solution.Style.Visibility = "visible";
+          hint.Style.Visibility = "collapsed";
+          stack.table:Child(selection):Child(1):Child(1).Style.BackgroundColor = color.green;
+
+          else
+          solution.Style.Visibility = "collapsed";
+          hint.Style.Visibility = "visible";
+          stack.table:Child(selection):Child(1):Child(1).Style.BackgroundColor = selectedColor;
+          end
+        </onClick>
+      </button>
+
+    </stack>
+    <p>
+      <br />
+    </p>
+
+    <stack style="contentBG">
+
+
+      <p style="subSectionHeading">Question 2</p>
+
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p> Let $ f(x) = x^{4} - 2x^{3} $, find the relative maximum of $f(x)$:</p>
+          </column>
+        </row>
+      </table>
+
+
+
+
+
+
+
+      <p name="answer" style="collapsed">C</p>
+      <script>
+        local selection = -1;
+        local deselectedColor = color.silver;
+        local selectedColor = color.rgb(232 ,12 ,46);
+
+        local function chooseButton(i)
+        if selection &gt; 0 then
+        stack.table:Child(selection):Child(1):Child(1).Style.BackgroundColor = deselectedColor;
+        end
+        stack.table:Child(i):Child(1):Child(1).Style.BackgroundColor = selectedColor;
+        selection = i;
+        end
+      </script>
+      <stack orientation="horizontal" name="stack">
+        <table name="table" widths="10% 90%" grid="false">
+          <style name="buttons">
+            <foreground color="white" />
+            <background color="silver" />
+          </style>
+          <row name="row">
+
+            <column>
+              <button content="A">
+                <onClick>final.Text="A"; chooseButton(1);</onClick>
+              </button>
+            </column>
+
+            <column>
+              <p>At $ x = 3 $</p>
+            </column>
+
+          </row>
+
+          <row>
+
+            <column>
+              <button content="B">
+                <onClick>final.Text="B"; chooseButton(2);</onClick>
+              </button>
+            </column>
+
+            <column>
+              <p> At $ x = 2  $</p>
+            </column>
+
+          </row>
+
+          <row>
+
+            <column>
+              <button content="C">
+                <onClick>final.Text="C"; chooseButton(3);</onClick>
+              </button>
+            </column>
+
+            <column>
+              <p>At $ x = \frac{3}{2}  $</p>
+            </column>
+
+          </row>
+        </table>
+      </stack>
+
+      <p name="final" style="collapsed" />
+      <stack name="hint" style="collapsed">
+        <p style="centerText">  Not quite there, try again ! </p>
+      </stack>
+      <stack name="solution" style="collapsed">
+        <p style="centerText"> Correct! </p>
+      </stack>
+
+
+
+
+
+      <button content="Check Answer">
+        <onClick>
+          if string.lower(final.Text) == string.lower(answer.Text) then
+          solution.Style.Visibility = "visible";
+          hint.Style.Visibility = "collapsed";
+          stack.table:Child(selection):Child(1):Child(1).Style.BackgroundColor = color.green;
+
+          else
+          solution.Style.Visibility = "collapsed";
+          hint.Style.Visibility = "visible";
+          stack.table:Child(selection):Child(1):Child(1).Style.BackgroundColor = selectedColor;
+          end
+        </onClick>
+      </button>
+
+    </stack>
+    <p>
+      <br />
+    </p>
+
+
+    <stack style="contentBG">
+
+
+      <p style="subSectionHeading">Question 3</p>
+
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>
+              Let $ f $ be a polynomial function and let $ f' $ ,
+              its derivative, be defined as $ f'(x) = -x(x+2)(x-2) $.
+            </p>
+            <p> At how many points does the graph of $ f $ have a relative maximum ?</p>
+          </column>
+        </row>
+      </table>
+
+
+
+
+
+
+
+      <p name="answer" style="collapsed">B</p>
+      <script>
+        local selection = -1;
+        local deselectedColor = color.silver;
+        local selectedColor = color.rgb(232 ,12 ,46);
+
+        local function chooseButton(i)
+        if selection &gt; 0 then
+        stack.table:Child(selection):Child(1):Child(1).Style.BackgroundColor = deselectedColor;
+        end
+        stack.table:Child(i):Child(1):Child(1).Style.BackgroundColor = selectedColor;
+        selection = i;
+        end
+      </script>
+      <stack orientation="horizontal" name="stack">
+        <table name="table" widths="10% 90%" grid="false">
+          <style name="buttons">
+            <foreground color="white" />
+            <background color="silver" />
+          </style>
+          <row name="row">
+
+            <column>
+              <button content="A">
+                <onClick>final.Text="A"; chooseButton(1);</onClick>
+              </button>
+            </column>
+
+            <column>
+              <p> None </p>
+            </column>
+
+          </row>
+
+          <row>
+
+            <column>
+              <button content="B">
+                <onClick>final.Text="B"; chooseButton(2);</onClick>
+              </button>
+            </column>
+
+            <column>
+              <p> Two Points</p>
+            </column>
+
+          </row>
+
+          <row>
+
+            <column>
+              <button content="C">
+                <onClick>final.Text="C"; chooseButton(3);</onClick>
+              </button>
+            </column>
+
+            <column>
+              <p> Three Points </p>
+            </column>
+
+          </row>
+        </table>
+      </stack>
+
+      <p name="final" style="collapsed" />
+      <stack name="hint" style="collapsed">
+        <p style="centerText">  Not quite there, try again ! </p>
+      </stack>
+      <stack name="solution" style="collapsed">
+        <p style="centerText"> Correct! </p>
+      </stack>
+
+
+
+
+
+      <button content="Check Answer">
+        <onClick>
+          if string.lower(final.Text) == string.lower(answer.Text) then
+          solution.Style.Visibility = "visible";
+          hint.Style.Visibility = "collapsed";
+          stack.table:Child(selection):Child(1):Child(1).Style.BackgroundColor = color.green;
+
+          else
+          solution.Style.Visibility = "collapsed";
+          hint.Style.Visibility = "visible";
+          stack.table:Child(selection):Child(1):Child(1).Style.BackgroundColor = selectedColor;
+          end
+        </onClick>
+      </button>
+
+    </stack>
+
+
+
+    <p>
+      <style>
+        <marginBottom>50</marginBottom>
+      </style>
+    </p>
+
+  </sectionNoTitle>
+
+</document>

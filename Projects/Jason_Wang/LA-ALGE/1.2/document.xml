@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G258B4A6E_34DD_40EE_A298_7AEB152E4C8C">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>LA-ALGE-1.2 Representing linear systems with matrices</title>
+    <creator>jason_wang</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/lassondeLogo.png" />
+  </metadata>
+
+  <include src="resources/curriculumStylesLassonde.xml" />
+  <include src="resources/Utilities.xml" />
+
+  <!-- Header & Footer START -->
+  <header style="themeColour">
+    <stack style="center" orientation="horizontal">
+      <p></p>
+    </stack>
+  </header>
+  <footer style="themeColour">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="themeColourTitle">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+  <!-- Header & Footer END -->
+
+  <!-- Cover Page -->
+  <!-- This is the standard way title pages are created. A great website to get copyright free images .. www.pexels.com
+  *** The style: "pageLayout" is defined in curriculumStylesLassonde.xml. It simply sets the content to the center and adjusts the width to 80% ***-->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">1.2 Representing Linear Systems with Matrices</title>
+    <p style="sectionHeading">Introduction</p>
+    <image src="resources/cubic.jpg" />
+    <stack orientation="vertical" style="contentBG">
+      <p style="justifiedTextText">
+        Matrices can be used to solve systems of equations. In this Module, we are going to learn how systems of linear equations with multiple variables are represented with matrices.
+      </p>
+    </stack>
+  </section>
+  
+  <!--Definition-->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Representing A Linear System with Matrices</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Augmented Matrix</p>
+      <p style="justifiedText">
+        A system of equations can be represented by an <b>augmented matrix</b>.
+      </p>
+      <p style="justifiedText">In an augmented matrix, each row represents one equation in the system and each column represents a variable or the constant term.</p>
+      <p>Consider following system of equations:</p>
+      <p style="centeredText"><![CDATA[$\begin{Bmatrix}5x-4y&=&8 \\[6pt] x+3z&=&-3 \\[6pt] 4x+6y-2z&=&2 \end{Bmatrix}$]]></p>
+      <p>Its argumented matrix can be represented as follow:</p>
+      <p style="centeredText"><![CDATA[$\begin{bmatrix}5&-4&0&8 \\[6pt] 1&0&3&-3 \\[6pt] 4&6&-2&2 \end{bmatrix}$]]></p>
+    </stack>
+
+    <p style="sectionHeading">Interactive Matrix</p>
+    <stack style="mcStackLayout">
+      <p style="justifiedText">
+        Click any button to add/remove the variable of the equation or toggle the switch to add/remove the equation, and see the change of the matrix.
+      </p>
+      <p style="centeredText">
+        <b>Argumented Matrix:</b>
+      </p>
+      <p name="matrix" style="centeredText"></p>
+      <table name="interactiveTable" grid="false" widths="20% 10% 10% 5% 10% 5% 10% 5% 10% 20%">
+        <row name="row1">
+          <column></column>
+          <column>
+            <toggle name="t1" value="true">
+              <onValueChanged>
+                toggleEquation(1);
+              </onValueChanged>
+            </toggle>
+          </column>
+          <column>
+            <button name="btn1" content="4x">
+              <onClick>
+                toggleButton(1,1,btn1)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <p>-</p>
+          </column>
+          <column>
+            <button name="btn2" content="3y">
+              <onClick>
+                toggleButton(1,2,btn2)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <p>+</p>
+          </column>
+          <column>
+            <button name="btn3" content="63z">
+              <onClick>
+                toggleButton(1,3,btn3)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <p>=</p>
+          </column>
+          <column>
+            <p>9</p>
+          </column>
+          <column></column>
+        </row>
+        <row name="row2">
+          <column></column>
+          <column>
+            <toggle name="t2" value="true">
+              <onValueChanged>
+                toggleEquation(2);
+              </onValueChanged>
+            </toggle>
+          </column>
+          <column>
+            <button name="btn4" content="2x">
+              <onClick>
+                toggleButton(2,1,btn4)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <p>+</p>
+          </column>
+          <column>
+            <button name="btn5" content="12y">
+              <onClick>
+                toggleButton(2,2,btn5)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <p>-</p>
+          </column>
+          <column>
+            <button name="btn6" content="8z">
+              <onClick>
+                toggleButton(2,3,btn6)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <p>=</p>
+          </column>
+          <column>
+            <p>13</p>
+          </column>
+          <column></column>
+        </row>
+        <row name="row3">
+          <column></column>
+          <column>
+            <toggle name="t3" value="true">
+              <onValueChanged>
+                toggleEquation(3);
+              </onValueChanged>
+            </toggle>
+          </column>
+          <column>
+            <button name="btn7" content="-7x">
+              <onClick>
+                toggleButton(3,1,btn7)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <p>+</p>
+          </column>
+          <column>
+            <button name="btn8" content="5y">
+              <onClick>
+                toggleButton(3,2,btn8)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <p>+</p>
+          </column>
+          <column>
+            <button name="btn9" content="3z">
+              <onClick>
+                toggleButton(3,3,btn9)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <p>=</p>
+          </column>
+          <column>
+            <p>64</p>
+          </column>
+          <column></column>
+        </row>
+      </table>
+
+      <button name="resetBtn" content="Reset">
+        <style>
+          <widthPercentage>0.5</widthPercentage>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <onClick>
+          resetMatrix();
+        </onClick>
+      </button>
+
+      <script>
+        <![CDATA[
+        local rows = 3;
+        local cols = 4;
+        local matrixFullValues = {{4,-3,63,9},{2,12,-8,13},{-7,5,3,64}};
+        local states = {{1,1,1,1},{1,1,1,1},{1,1,1,1}};
+        local rowStates = {1,1,1};
+        
+        function resetMatrix()
+          for i=1,3 do
+            interactiveTable:Child(i):Child(2):Child(1).Value = true;
+            for j=3,7,2 do
+              interactiveTable:Child(i):Child(j):Child(1).Style.BackgroundColor = color.quanserRed;
+            end
+          end
+          states = {{1,1,1,1},{1,1,1,1},{1,1,1,1}};
+          rowStates = {1,1,1};
+          updateMatrix();
+        end
+        
+        function toggleButton(row, col, btn)
+          if rowStates[row] ~= 0 then
+            local v = states[row][col];
+            if v == 1 then
+              states[row][col] = 0;
+              btn.Style.BackgroundColor = color.gainsboro;
+            else
+              states[row][col] = 1;
+              btn.Style.BackgroundColor = color.quanserRed;
+            end            
+            updateMatrix();
+          end
+        end
+        
+        function toggleEquation(row)
+          if rowStates[row] == 1 then rowStates[row] = 0 else rowStates[row] = 1 end
+          updateMatrix();
+        end
+        
+        function updateMatrix()
+          matrixString = "";
+          for i=1,rows do
+            if rowStates[i] == 1 then
+              for j=1,cols do
+                if states[i][j] == 1 then
+                  matrixString = matrixString .. string.format("%d", matrixFullValues[i][j]);
+                else
+                  matrixString = matrixString .. string.format("%d", 0);
+                end
+                if j ~= cols then matrixString = matrixString .. "<![CDATA[        ]]"..">"; end
+              end
+              if i ~= rows then matrixString = matrixString .. "<![CDATA[\n\n]]"..">"; else matrixString = matrixString; end
+            end
+          end
+          matrix.FormattedText = matrixString;
+        end
+        
+        updateMatrix();
+        ]]>
+      </script>
+    </stack>
+  </sectionNoTitle>
+
+  <!--Examples-->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Examples</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Example 1</p>
+      <table grid="false" widths="10% 90%">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>Which matrix represent the system?</p>
+            <p>$2x+5y=8$</p>
+            <p>$-3y-4x=12$</p>
+          </column>
+        </row>
+      </table>
+      <stack name="answerStack" style="invisible">
+        <p style="subSectionHeading">Answer:</p>
+        <p style="justifiedText">First, we need to sort the variables of the second equation to the same order as the first one since elements on the same column must represent the same variable.</p>
+        <p style="centeredText">$-4x-3y=12$</p>
+        <p style="centeredText"><![CDATA[$\begin{bmatrix}2&5&8\\[6pt]-4&-3&12\end{bmatrix}$]]></p>
+      </stack>
+      <button name="btn" content="Show Answer">
+        <onClick>
+          if btn.Text == "Show Answer" then
+          answerStack.Style.Visibility = "visible";
+          btn.Text = "Hide Answer";
+          else
+          answerStack.Style.Visibility = "collapsed";
+          btn.Text = "Show Answer";
+          end
+        </onClick>
+      </button>
+    </stack>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Example 2</p>
+      <table grid="false" widths="10% 90%">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>Which matrix represent the system?</p>
+            <p><![CDATA[$\\[6pt]\begin{matrix}3x-2y&=&8 \\[6pt] x-6z&=&-5 \\[6pt] -5x-3y+2z&=&0 \end{matrix} \\[6pt]$]]></p>
+          </column>
+        </row>
+      </table>
+      <stack name="answerStack" style="invisible">
+        <p style="subSectionHeading">Answer:</p>
+        <p style="centeredText"><![CDATA[$\begin{bmatrix}3&-2&0&8\\[6pt]1&0&-6&-5\\[6pt]-5&-3&2&0\end{bmatrix}$]]></p>
+      </stack>
+      <button name="btn" content="Show Answer">
+        <onClick>
+          if btn.Text == "Show Answer" then
+          answerStack.Style.Visibility = "visible";
+          btn.Text = "Hide Answer";
+          else
+          answerStack.Style.Visibility = "collapsed";
+          btn.Text = "Show Answer";
+          end
+        </onClick>
+      </button>
+    </stack>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Example 3</p>
+      <table grid="false" widths="10% 90%">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>Which system is represented by the augmented matrix?</p>
+            <p><![CDATA[$\begin{bmatrix}0&-5&8&13 \\[6pt] 9&0&0&7 \\[6pt] 0&4&-19&0 \\[6pt] 15&0&7&3 \end{bmatrix}$]]></p>
+          </column>
+        </row>
+      </table>
+      <stack name="answerStack" style="invisible">
+        <p style="subSectionHeading">Answer:</p>
+        <p style="centeredText"><![CDATA[$\begin{matrix}-5y+8z&=&13 \\[6pt] 9x&=&7 \\[6pt] 4y-19z&=&0 \\[6pt] 15x+7z&=&3 \end{matrix}$]]></p>
+      </stack>
+      <button name="btn" content="Show Answer">
+        <onClick>
+          if btn.Text == "Show Answer" then
+          answerStack.Style.Visibility = "visible";
+          btn.Text = "Hide Answer";
+          else
+          answerStack.Style.Visibility = "collapsed";
+          btn.Text = "Show Answer";
+          end
+        </onClick>
+      </button>
+    </stack>
+
+  </sectionNoTitle>
+
+  <!--Practices-->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Practices</p>
+    
+    <stack style="mcStackLayout">
+      <script>
+        local answer = 3
+        local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=answer})
+      </script>
+      <p style="subSectionHeading">Question 1</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources/question.png" inspect="false" />
+          </column>
+          <column>
+            <p>Which matrix represents the system?</p>
+            <p><![CDATA[$\begin{matrix}3x+2&=&12y \\[6pt] -8y&=&2x+15 \end{matrix}$]]></p>
+          </column>
+        </row>
+      </table>
+      <table name="choicesTable" grid="false" widths="50% 50%">
+        <row>
+          <column>
+            <p style="mcLayout"><![CDATA[$\begin{bmatrix}3&2&12\\[6pt]-8&2&15\end{bmatrix}$]]></p>
+          </column>
+          <column>
+            <p style="mcLayout"><![CDATA[$\begin{bmatrix}3&12&2\\[6pt]2&-8&15\end{bmatrix}$]]></p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="A" style="btnUnselected">
+              <onClick>
+                mcController:select(1)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="B" style="btnUnselected">
+              <onClick>
+                mcController:select(2)
+              </onClick>
+            </button>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p style="mcLayout"><![CDATA[$\begin{bmatrix}3&-12&-2\\[6pt]-2&-8&15\end{bmatrix}$]]></p>
+          </column>
+          <column>
+            <p style="mcLayout"><![CDATA[$\begin{bmatrix}3&-12&-2\\[6pt]-8&-2&15\end{bmatrix}$]]></p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="C" style="btnUnselected">
+              <onClick>
+                mcController:select(3)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="D" style="btnUnselected">
+              <onClick>
+                mcController:select(4)
+              </onClick>
+            </button>
+          </column>
+        </row>
+      </table>
+      <button name="checkBtn" content="Check Answer">
+        <onClick>
+          mcController:checkAnswer()
+        </onClick>
+      </button>
+    </stack>
+    <stack style="mcStackLayout">
+      <script>
+        local answer = 3
+        local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=answer})
+      </script>
+      <p style="subSectionHeading">Question 2</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources/question.png" inspect="false" />
+          </column>
+          <column>
+            <p>Which matrix represents the system?</p>
+            <p><![CDATA[$\begin{matrix}12x+2y+z+4t&=&9\\[6pt] 5x+15y-10z+20t&=&-5 \end{matrix}$]]></p>
+          </column>
+        </row>
+      </table>
+      <table name="choicesTable" grid="false" widths="50% 50%">
+        <row>
+          <column>
+            <p style="mcLayout"><![CDATA[$\begin{bmatrix}2&12&1&4&9\\[6pt]5&15&10&20&-5\end{bmatrix}$]]></p>
+          </column>
+          <column>
+            <p style="mcLayout"><![CDATA[$\begin{bmatrix}12&2&1&4&-9\\[6pt]5&15&-10&20&5\end{bmatrix}$]]></p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="A" style="btnUnselected">
+              <onClick>
+                mcController:select(1)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="B" style="btnUnselected">
+              <onClick>
+                mcController:select(2)
+              </onClick>
+            </button>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p style="mcLayout"><![CDATA[$\begin{bmatrix}12&2&1&4&9\\[6pt]5&15&-10&20&-5\end{bmatrix}$]]></p>
+          </column>
+          <column>
+            <p style="mcLayout"><![CDATA[$\begin{bmatrix}12&2&4&1&-9\\[6pt]5&15&-10&20&5\end{bmatrix}$]]></p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="C" style="btnUnselected">
+              <onClick>
+                mcController:select(3)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="D" style="btnUnselected">
+              <onClick>
+                mcController:select(4)
+              </onClick>
+            </button>
+          </column>
+        </row>
+      </table>
+      <button name="checkBtn" content="Check Answer">
+        <onClick>
+          mcController:checkAnswer()
+        </onClick>
+      </button>
+    </stack>
+    
+  </sectionNoTitle>
+  
+</document>

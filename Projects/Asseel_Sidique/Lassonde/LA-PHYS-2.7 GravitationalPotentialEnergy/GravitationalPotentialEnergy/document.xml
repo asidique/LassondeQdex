@@ -1,0 +1,1666 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="GF177F893_15C0_45D2_8688_4335D020DDD1">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>LA-PHYS-2.6 Gravitational Potential Energy and Conservation of Energy</title>
+    <creator>Asseel</creator>
+    <coverImage src="resources/LassondeLogo.png" />
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+  </metadata>
+
+  <include src="resources/curriculumStylesLassonde.xml" />
+  <include src="resources/plotTools.xml" />
+  
+   <!--                                      Header & Footer END                                         -->
+  <header style="themeColour">
+    <stack style="center" orientation="horizontal">
+      <p></p>
+    </stack>
+  </header>
+  <footer style="themeColour">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="themeColourTitle">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment> 
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--                                      Header & Footer END                                         -->
+  
+  <section name="titleSection" style="pageLayout">
+    <title style="chapterTitle">2.7 Gravitational Potential Energy and Conservation of Energy</title>
+    <p style="sectionHeading">Introduction</p>
+    <image src="resources/rollerCoaster.jpeg"></image>
+    <stack name="content1" style="contentBG">
+      <p>
+        Have you ever been on a roller coaster? If you have, then you have experience the force of <b>Gravitational Potential</b> Energy or <b>GPE</b>. This is energy that an object can store and is related to the
+        height of an object. The higher an object is, the more GPE it has. Have you ever wondered why most roller coasters start with the highest hill? Well, its because at that point, the roller coaster has lots of
+        GPE stored and can convert it to kinetic energy to move over smaller hills during the rest of the ride. We will introduce the concept of <b>Conservation of Energy</b>  in the next page.
+      </p>
+    </stack>
+    <p>
+      <br />
+    </p>
+  </section>
+  
+  <sectionNoTitle name="section2" style="pageLayout">
+    <p style="sectionHeading">Conservation of Energy</p>
+    <stack orientation="vertical" style="contentBG">
+      <p>The Law of The Conservation of Energy states that no energy can be created nor destroyed in a closed system. Instead, energy is converted from one form to another. For an example, when a jogger goes for a run, he is using his kinetic energy. When we move our bodies,
+      most of that energy is converted into thermal energy. The sun also gives of a lot of radiant energy. This energy can be transferred into electrical energy through solar technology. Conservation of Energy applies to many areas in Physics as well as Chemistry.</p>
+      <p>The Conservation of Energy Equation: </p>
+      <p>$ T_{E} = E_{1} + E_{2} + E_{3} .. $</p>
+      <p>This reads: The total energy in a system is the sum of all other energy in the system. Since energy is conserved in the closed system, $ T_{E} $ never changes, but energies might be converted from one form to another.</p>
+      <p>A more detailed example of this is the equation for Gravitational Potential Energy and Kinetic Energy: </p>
+      <p>$ \frac{1}{2}(mv^2)_{i} + mgh_{i} = \frac{1}{2}(mv^2)_{f} + mgh_{f} $</p>
+      <p>In this equation, we are looking at the formula for <b>Kinetic Energy</b>: $ \frac{1}{2}(mv^2)_{i} $ and <b>GPE</b>: $ mgh $. In this system, no energy is lost to heat.
+    </p>
+      <image src="resources/conservationImage.png" />
+    </stack>
+  <p><br /></p></sectionNoTitle>
+
+  <sectionNoTitle name="section1" style="pageLayout">
+
+    <p style="sectionHeading">Gravitational Potential Fields</p>
+    <stack orientation="vertical" style="contentBG">
+      <p>To understand how the Conservation of Energy works, take a look at this simulation below. The simulation will show the conversion of gravitational energy to kinetic energy in a friction-free roller coaster.
+      Press "Start the Ride" to begin the simulation, and if it seems to be running slow, use the toggle to move the velocity and height labels. Notice how the roller coaster loses kinetic energy as it climbs hills and gains speed as it goes down hills!</p>
+      <button content="Switch Label Positions" name="btn1">
+        <style>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <onClick>
+          if (labelToggle == true) then
+            labelToggle = false;
+            btn1.Style.BackgroundColor = color.blue;
+          else
+            labelToggle = true;
+            btn1.Style.BackgroundColor = color.red;
+          end
+            if (labelsGone) then
+              char.textS(simStack.plot.speedLabel, {graphX-30, 57}, 1.5, color.black);
+              char.textP(simStack.plot.speedLabel, {graphX-28.5, 57}, 1.5, color.black);
+              char.textE(simStack.plot.speedLabel, {graphX-27, 57}, 1.5, color.black);
+              char.textE(simStack.plot.speedLabel, {graphX-25.5, 57}, 1.5, color.black);
+              char.textD(simStack.plot.speedLabel, {graphX-24, 57}, 1.5, color.black);
+      
+              char.textM(simStack.plot.speedLabel, {graphX-26, 60}, 1.5, color.black)
+              char.slash(simStack.plot.speedLabel, {graphX-24.5, 60}, 1.5, color.black)
+              char.textS(simStack.plot.speedLabel, {graphX-23, 60}, 1.5, color.black)
+      
+      
+              char.textH(simStack.plot.speedLabel, {graphX-19, 57}, 1.5, color.black);
+              char.textE(simStack.plot.speedLabel, {graphX-17.5, 57}, 1.5, color.black);
+              char.textI(simStack.plot.speedLabel, {graphX-16, 57}, 1.5, color.black);
+              char.textG(simStack.plot.speedLabel, {graphX-15.5, 57}, 1.5, color.black);
+              char.textH(simStack.plot.speedLabel, {graphX-14, 57}, 1.5, color.black);
+              char.textT(simStack.plot.speedLabel, {graphX-12.5, 57}, 1.5, color.black);
+              section1.labelStack.speedLabel.Text = "";
+              section1.labelStack.heightLabel.Text = "";
+              labelsGone = false;
+            end
+            
+            if (not labelsGone) then
+              simStack.plot.speedLabel:Clear();
+              simStack.plot.heightNumber1:Clear();
+              simStack.plot.heightNumber2:Clear();
+              simStack.plot.speedNumber1:Clear();
+              simStack.plot.speedNumber2:Clear();
+              labelsGone = true;
+            end
+        </onClick>
+      </button>
+    </stack>
+    <stack orientation="horizontal" name="labelStack">
+      <p name="speedLabel">
+        <style>
+        <horizontalAlignment>center</horizontalAlignment>
+        <textAlignment>center</textAlignment>
+      </style>Speed: </p>
+      <p name="heightLabel">
+        <style>
+        <horizontalAlignment>center</horizontalAlignment>
+        <textAlignment>center</textAlignment>
+      </style>Height: </p>
+    </stack>
+    <stack orientation="horizontal" name="simStack">
+      <drawing name="plot" manual="true">
+        <axis dim="x" auto="none" min="0" max="100"></axis>
+        <axis dim="y" auto="none" min="0" max="100"></axis>
+        <series name="track">
+          <style>
+            <lineThickness>2.5</lineThickness>
+            <foreground color="black" />
+          </style> 
+        </series>
+        <series name="cart" draw="segmentedFill" capacity="6">
+          <style>
+            <foreground color="green" />
+          </style>
+          <data>
+          -1 50; -1 51; 1 51; 1 50; -1 50; -1 51;
+          </data>
+        </series>
+        <series name="cart2" draw="segmentedFill" capacity="6">
+          <style>
+            <foreground color="green" />
+          </style>
+          <data>
+          -1 50; -1 51; 1 51; 1 50; -1 50; -1 51;
+          </data>
+        </series>
+        <series name="cart3" draw="segmentedFill" capacity="6">
+          <style>
+            <foreground color="green" />
+          </style>
+          <data>
+          -1 50; -1 51; 1 51; 1 50; -1 50; -1 51;
+          </data>
+        </series>
+        <series name="cart4" draw="segmentedFill" capacity="6">
+          <style>
+            <foreground color="green" />
+          </style>
+          <data>
+          -1 50; -1 51; 1 51; 1 50; -1 50; -1 51;
+          </data>
+        </series>
+        <series name="graph1" draw="segmentedFill" capacity="6">
+          <style>
+            <foreground color="blue" />
+          </style>
+        </series>
+        <series name="graph2" draw="segmentedFill" capacity="6">
+          <style>
+            <foreground color="red" />
+          </style>
+        </series>
+        <series name="graph3" draw="segmentedFill" capacity="6">
+          <style>
+            <foreground color="blue" />
+          </style>
+        </series>
+        <series name="graph4" draw="segmentedFill" capacity="6">
+          <style>
+            <foreground color="red" />
+          </style>
+        </series>
+        <series name="graphLabel1">
+          <style>
+            <foreground color="blue" />
+          </style>
+        </series>
+        <series name="graphLabel2">
+          <style>
+            <foreground color="red" />
+          </style>
+        </series>
+        <series name="graphLabel3">
+          <style>
+            <foreground color="black" />
+          </style>
+        </series>
+        <series name="speedLabel">
+          <style>
+            <foreground color="black" />
+          </style>
+        </series>
+        <series name="heightLabel">
+          <style>
+            <foreground color="black" />
+          </style>
+        </series>
+        <series name="speedNumber1">
+          <style>
+            <foreground color="black" />
+          </style>
+        </series>
+        <series name="speedNumber2">
+          <style>
+            <foreground color="black" />
+          </style>
+        </series>
+        <series name="speedNumber3">
+          <style>
+            <foreground color="black" />
+          </style>
+        </series>
+        <series name="heightNumber1">
+          <style>
+            <foreground color="black" />
+          </style>
+        </series>
+        <series name="heightNumber2">
+          <style>
+            <foreground color="black" />
+          </style>
+        </series>
+        <series draw="line">
+        <data src="resources/drawing3.csv" />
+        <colors src="resources/drawing3_color.csv" />
+      </series>
+      </drawing>
+    </stack>
+    <simulation name="sim" period="0.01" duration="5" asynchronous="false">
+        <onDuration>
+          allowedClick = true;
+        </onDuration>
+        <onUpdate>
+          <![CDATA[
+          -- Initial Kinetic Energy + Initial Potential Energy + other work = Final Kinetic Enery + Final Potential Energy
+          -- 1/2mv^2 + mgh = 1/2mv^2 + mgh
+          -- initial height should be found with objects position
+          -- initially sqrt(2gh) = v
+          
+          
+          objectVelocity = math.sqrt(2*gravity*(cartY));
+          
+
+          cartX = cartX + 1/objectVelocity/2.5;
+          cartX2 = cartX - 1.5;
+          cartX3 = cartX2 - 1.5;
+          cartX4 = cartX3 - 1.5;
+          cartY = getYPosCoaster(cartX)+0.1;
+          cartY2 = getYPosCoaster(cartX2)+0.1;
+          cartY3 = getYPosCoaster(cartX3)+0.1;
+          cartY4 = getYPosCoaster(cartX4)+0.1;
+          
+          if graphHeight1 ~= 10*objectVelocity then
+            graphHeight1 = 10*objectVelocity;
+            graphHeight2 = 30 - (10*objectVelocity);
+            graphHeight3 = graphHeight1;
+            graphHeight4 = graphHeight2;
+            graphY4 = graphY3+graphHeight3;
+            drawGraph(graphX, graphY, simStack.plot.graph1, graphHeight1);
+            drawGraph(graphX2, graphY2, simStack.plot.graph2, graphHeight2);
+            drawGraph(graphX3, graphY3, simStack.plot.graph3, graphHeight3);
+            drawGraph(graphX4, graphY4, simStack.plot.graph4, graphHeight4);
+          end
+          
+          num = string.sub(tostring(gravity*1/cartY*4000), 0, string.find(tostring(gravity*1/cartY*4000), ".")+4)
+          num2 = string.sub(tostring(round(cartY, 1)), 0, 2)
+          if tonumber(num) <= 9 and not string.starts(num, "0") then
+            num = "0" .. num;
+          end
+          if tonumber(num2) <= 9 and not string.starts(num2, "0") then
+            num2 = "0" .. num2;
+          end
+          --label.Text = tostring(num);
+          
+          
+  
+          
+          --label.Text = tostring(tostring(firstNum)) .. " AND " .. string.sub(num, 1, 1);
+          
+ 
+            
+            
+          if (labelToggle) then
+           if (labelsGone) then
+              char.textS(simStack.plot.speedLabel, {graphX-30, 57}, 1.5, color.black);
+              char.textP(simStack.plot.speedLabel, {graphX-28.5, 57}, 1.5, color.black);
+              char.textE(simStack.plot.speedLabel, {graphX-27, 57}, 1.5, color.black);
+              char.textE(simStack.plot.speedLabel, {graphX-25.5, 57}, 1.5, color.black);
+              char.textD(simStack.plot.speedLabel, {graphX-24, 57}, 1.5, color.black);
+      
+              char.textM(simStack.plot.speedLabel, {graphX-26, 60}, 1.5, color.black)
+              char.slash(simStack.plot.speedLabel, {graphX-24.5, 60}, 1.5, color.black)
+              char.textS(simStack.plot.speedLabel, {graphX-23, 60}, 1.5, color.black)
+      
+      
+              char.textH(simStack.plot.speedLabel, {graphX-19, 57}, 1.5, color.black);
+              char.textE(simStack.plot.speedLabel, {graphX-17.5, 57}, 1.5, color.black);
+              char.textI(simStack.plot.speedLabel, {graphX-16, 57}, 1.5, color.black);
+              char.textG(simStack.plot.speedLabel, {graphX-15.5, 57}, 1.5, color.black);
+              char.textH(simStack.plot.speedLabel, {graphX-14, 57}, 1.5, color.black);
+              char.textT(simStack.plot.speedLabel, {graphX-12.5, 57}, 1.5, color.black);
+              section1.labelStack.speedLabel.Text = "";
+              section1.labelStack.heightLabel.Text = "";
+              labelsGone = false;
+            end
+            
+            if tostring(firstNum) ~= string.sub(num, 1, 1) then
+              simStack.plot.speedNumber1:Clear();
+              if string.sub(num, 1, 1) == "0" then
+                firstNum = 0;
+                char.num0(simStack.plot.speedNumber1, {graphX-30, 60}, 1.5, color.black)
+              elseif string.sub(num, 1, 1) == "1" then
+                firstNum = 1;
+                char.num1(simStack.plot.speedNumber1, {graphX-30, 60}, 1.5, color.black)
+              elseif string.sub(num, 1, 1) == "2" then
+                firstNum = 2;
+                char.num2(simStack.plot.speedNumber1, {graphX-30, 60}, 1.5, color.black)
+              elseif string.sub(num, 1, 1) == "3" then
+                firstNum = 3;
+                char.num3(simStack.plot.speedNumber1, {graphX-30, 60}, 1.5, color.black)
+              elseif string.sub(num, 1, 1) == "3" then
+                firstNum = 3;
+                char.num3(simStack.plot.speedNumber1, {graphX-30, 60}, 1.5, color.black)
+              elseif string.sub(num, 1, 1) == "4" then
+                firstNum = 4;
+                char.num3(simStack.plot.speedNumber1, {graphX-30, 60}, 1.5, color.black)
+              elseif string.sub(num, 1, 1) == "5" then
+                firstNum = 5;
+                char.num3(simStack.plot.speedNumber1, {graphX-30, 60}, 1.5, color.black)
+              end
+            end
+          
+          
+            if tostring(secondNum) ~= string.sub(num, 2, 2) then
+              simStack.plot.speedNumber2:Clear();
+              if string.sub(num, 2, 2) == "0" then
+                secondNum = 0;
+                char.num0(simStack.plot.speedNumber2, {graphX-28.5, 60}, 1.5, color.black)
+              elseif string.sub(num, 2, 2) == "1" then
+                secondNum = 1;
+                char.num1(simStack.plot.speedNumber2, {graphX-28.5, 60}, 1.5, color.black)
+              elseif string.sub(num, 2, 2) == "2" then
+                secondNum = 2;
+                char.num2(simStack.plot.speedNumber2, {graphX-28.5, 60}, 1.5, color.black)
+              elseif string.sub(num, 2, 2) == "3" then
+                secondNum = 3;
+                char.num3(simStack.plot.speedNumber2, {graphX-28.5, 60}, 1.5, color.black)
+              elseif string.sub(num, 2, 2) == "4" then
+                secondNum = 4;
+                char.num4(simStack.plot.speedNumber2, {graphX-28.5, 60}, 1.5, color.black)
+              elseif string.sub(num, 2, 2) == "5" then
+                secondNum = 5;
+                char.num5(simStack.plot.speedNumber2, {graphX-28.5, 60}, 1.5, color.black)
+              elseif string.sub(num, 2, 2) == "6" then
+                secondNum = 6;
+                char.num6(simStack.plot.speedNumber2, {graphX-28.5, 60}, 1.5, color.black)
+              elseif string.sub(num, 2, 2) == "7" then
+                secondNum = 7;
+                char.num7(simStack.plot.speedNumber2, {graphX-28.5, 60}, 1.5, color.black)
+              elseif string.sub(num, 2, 2) == "8" then
+                secondNum = 8;
+                char.num8(simStack.plot.speedNumber2, {graphX-28.5, 60}, 1.5, color.black)
+              elseif string.sub(num, 2, 2) == "9" then
+                secondNum = 9;
+                char.num9(simStack.plot.speedNumber2, {graphX-28.5, 60}, 1.5, color.black)
+              end
+            end
+          
+            if tostring(thirdNum) ~= string.sub(num2, 1, 1) then
+              simStack.plot.heightNumber1:Clear();
+              if string.sub(num2, 1, 1) == "0" then
+                thirdNum = 0;
+                char.num0(simStack.plot.heightNumber1, {graphX-17.5, 60}, 1.5, color.black)
+              elseif string.sub(num2, 1, 1) == "1" then
+                thirdNum = 1;
+                char.num1(simStack.plot.heightNumber1, {graphX-17.5, 60}, 1.5, color.black)
+              elseif string.sub(num2, 1, 1) == "2" then
+                thirdNum = 2;
+                char.num2(simStack.plot.heightNumber1, {graphX-17.5, 60}, 1.5, color.black)
+              elseif string.sub(num2, 1, 1) == "3" then
+                thirdNum = 3;
+                char.num3(simStack.plot.heightNumber1, {graphX-17.5, 60}, 1.5, color.black)
+              elseif string.sub(num2, 1, 1) == "4" then
+                thirdNum = 4;
+                char.num4(simStack.plot.heightNumber1, {graphX-17.5, 60}, 1.5, color.black)
+              elseif string.sub(num2, 1, 1) == "5" then
+                thirdNum = 5;
+                char.num5(simStack.plot.heightNumber1, {graphX-17.5, 60}, 1.5, color.black)
+              end
+            end
+          
+          if tostring(fourthNum) ~= string.sub(num2, 2, 2) then
+              simStack.plot.heightNumber2:Clear();
+              if string.sub(num2, 2, 2) == "0" then
+                fourthNum = 0;
+                char.num0(simStack.plot.heightNumber2, {graphX-15, 60}, 1.5, color.black)
+              elseif string.sub(num2, 2, 2) == "1" then
+                fourthNum = 1;
+                char.num1(simStack.plot.heightNumber2, {graphX-15, 60}, 1.5, color.black)
+              elseif string.sub(num2, 2, 2) == "2" then
+                fourthNum = 2;
+                char.num2(simStack.plot.heightNumber2, {graphX-15, 60}, 1.5, color.black)
+              elseif string.sub(num2, 2, 2) == "3" then
+                fourthNum = 3;
+                char.num3(simStack.plot.heightNumber2, {graphX-15, 60}, 1.5, color.black)
+              elseif string.sub(num2, 2, 2) == "4" then
+                fourthNum = 4;
+                char.num4(simStack.plot.heightNumber2, {graphX-15, 60}, 1.5, color.black)
+              elseif string.sub(num2, 2, 2) == "5" then
+                fourthNum = 5;
+                char.num5(simStack.plot.heightNumber2, {graphX-15, 60}, 1.5, color.black)
+              elseif string.sub(num2, 2, 2) == "6" then
+                fourthNum = 6;
+                char.num6(simStack.plot.heightNumber2, {graphX-15, 60}, 1.5, color.black)
+              elseif string.sub(num2, 2, 2) == "7" then
+                fourthNum = 7;
+                char.num7(simStack.plot.heightNumber2, {graphX-15, 60}, 1.5, color.black)
+              elseif string.sub(num2, 2, 2) == "8" then
+                fourthNum = 8;
+                char.num8(simStack.plot.heightNumber2, {graphX-15, 60}, 1.5, color.black)
+              elseif string.sub(num2, 2, 2) == "9" then
+                fourthNum = 9;
+                char.num9(simStack.plot.heightNumber2, {graphX-15, 60}, 1.5, color.black)
+              end
+            end
+
+          else
+            
+            section1.labelStack.speedLabel.Text = "Speed: " .. num .. "m/s";
+            section1.labelStack.heightLabel.Text = "Height: " .. num2 .. "m";
+          end
+          
+          drawCart(cartX, cartY, simStack.plot.cart);
+          drawCart(cartX2, cartY2, simStack.plot.cart2);
+          drawCart(cartX3, cartY3, simStack.plot.cart3);
+          drawCart(cartX4, cartY4, simStack.plot.cart4);
+            ]]>
+         
+        </onUpdate>
+        
+      </simulation>
+    <onDocumentOpened>
+      <![CDATA[
+      labelToggle = true;
+      labelsGone = false;
+      allowedClick = true;
+      
+      cartWidth = 1.2;
+      cartHeight = 1;
+      cartX = 0;
+      cartY = 52;
+      cartX2 = -2.5;
+      cartY2 = 52;
+      cartX3 = -5.0;
+      cartY3 = 52;
+      cartX4 = -7.5;
+      cartY4 = 52;
+      
+      graphWidth = 1;
+      graphHeight1 = 30;
+      graphHeight2 = 0;
+      graphHeight3 = graphHeight1;
+      graphHeight4 = graphHeight2;
+      
+      graphX = 75;
+      graphY = 60;
+      graphX2 = graphX + 3.5;
+      graphY2 = graphY;
+      graphX3 = graphX + 7;
+      graphY3 = graphY;
+      graphX4 = graphX3;
+      graphY4 = graphY3;
+      
+      firstNum = -1;
+      secondNum = -1;
+      thirdNum = -1
+      fourthNum = -1;
+          
+      
+      gravity = 9.8/100;
+      initialPotential = math.sqrt(2*cartY*gravity);
+      finalKinetic = initialPotential;
+      
+      function drawCart(x, y, ser)
+        ser:Add(x-cartWidth, y-cartHeight);
+        ser:Add(x-cartWidth, y+cartHeight);
+        ser:Add(x+cartWidth, y+cartHeight);
+        ser:Add(x+cartWidth, y-cartHeight);
+        ser:Add(x-cartWidth, y-cartHeight);
+        ser:Add(x-cartWidth, y+cartHeight);
+        ser:Update();
+      end
+      
+      function drawGraph(x, y, ser, height)
+        ser:Add(x-graphWidth, y);
+        ser:Add(x-graphWidth, y+height);
+        ser:Add(x+graphWidth, y+height);
+        ser:Add(x+graphWidth, y);
+        ser:Add(x-graphWidth, y);
+        ser:Add(x-graphWidth, y+height);
+        ser:Update();
+      end
+     
+      
+      drawCart(cartX, cartY, simStack.plot.cart);
+      drawCart(cartX2, cartY2, simStack.plot.cart2);
+      drawCart(cartX3, cartY3, simStack.plot.cart3);
+      drawCart(cartX4, cartY4, simStack.plot.cart4);
+      
+      drawGraph(graphX, graphY, simStack.plot.graph1, graphHeight1);
+      drawGraph(graphX2, graphY2, simStack.plot.graph2, graphHeight2);
+      drawGraph(graphX3, graphY3, simStack.plot.graph3, graphHeight3);
+      drawGraph(graphX4, graphY4, simStack.plot.graph4, graphHeight4);
+  --    function char.textU(series, anchor, height, customColor)
+
+      char.textU(simStack.plot.graphLabel1, {graphX, 57}, 1.5, color.black);
+      char.textK(simStack.plot.graphLabel2, {graphX2, 57}, 1.5, color.black);
+      char.textE(simStack.plot.graphLabel3, {graphX3, 57}, 1.5, color.black);
+      
+      char.textS(simStack.plot.speedLabel, {graphX-30, 57}, 1.5, color.black);
+      char.textP(simStack.plot.speedLabel, {graphX-28.5, 57}, 1.5, color.black);
+      char.textE(simStack.plot.speedLabel, {graphX-27, 57}, 1.5, color.black);
+      char.textE(simStack.plot.speedLabel, {graphX-25.5, 57}, 1.5, color.black);
+      char.textD(simStack.plot.speedLabel, {graphX-24, 57}, 1.5, color.black);
+      
+      char.textM(simStack.plot.speedLabel, {graphX-26, 60}, 1.5, color.black)
+      char.slash(simStack.plot.speedLabel, {graphX-24.5, 60}, 1.5, color.black)
+      char.textS(simStack.plot.speedLabel, {graphX-23, 60}, 1.5, color.black)
+      
+      
+      char.textH(simStack.plot.speedLabel, {graphX-19, 57}, 1.5, color.black);
+      char.textE(simStack.plot.speedLabel, {graphX-17.5, 57}, 1.5, color.black);
+      char.textI(simStack.plot.speedLabel, {graphX-16, 57}, 1.5, color.black);
+      char.textG(simStack.plot.speedLabel, {graphX-15.5, 57}, 1.5, color.black);
+      char.textH(simStack.plot.speedLabel, {graphX-14, 57}, 1.5, color.black);
+      char.textT(simStack.plot.speedLabel, {graphX-12.5, 57}, 1.5, color.black);
+      
+      char.textM(simStack.plot.speedLabel, {graphX-12.5, 60}, 1.5, color.black);
+
+
+      function getYPosCoaster(x)
+        if x < 62.3 then
+          return ( math.pow(math.exp(1),-0.02*x)*25*math.cos(0.2*x)+25);
+        else
+          return 32.15
+        end
+      end
+
+      for i = 0,62.3,0.1 do
+        simStack.plot.track:Add( i , math.pow(math.exp(1),-0.02*i)*25*math.cos(0.2*i)+25 )
+      end
+      for i = 62.3, 100, 0.1 do
+        simStack.plot.track:Add( i , 32.15);
+      end
+      
+      ]]>
+      
+    </onDocumentOpened>
+    <button content="Start the Ride">
+      <onClick>
+        if allowedClick then
+          allowedClick = false;
+          cartX = 0;
+          cartY = 52;
+          cartX2 = -2.5;
+          cartY2 = 52;
+          cartX3 = -5.0;
+          cartY3 = 52;
+          cartX4 = -7.5;
+          cartY4 = 52;    
+          sim:Stop();
+          simStack.plot.cart:Clear();
+          simStack.plot.cart2:Clear();
+          simStack.plot.cart3:Clear();
+          simStack.plot.cart4:Clear();
+          simStack.plot.graph1:Clear();
+          simStack.plot.graph2:Clear();
+          simStack.plot.graph3:Clear();
+          simStack.plot.graph4:Clear();
+          sim:Start();
+         end
+      </onClick>
+    </button>
+  <p><br /></p></sectionNoTitle>
+  
+  <sectionNoTitle name="section4" style="pageLayout">
+    <p style="sectionHeading">Example Question</p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="subSectionHeading">Question 1</p>
+      <p>Consider a roller coaster that weighs 100kg with a maximum height of 25m. The roller coaster starts at A, which is its maximum height. The roller coaster then makes its way down to B which has a height of 3m.
+      Determine:</p>
+      <p>a) The gravitational potential energy at A.</p>
+      <p>b) The speed of the cart at point B.</p>
+      <image src="resources/rollercoaster3.png" />
+    </stack>
+    <stack orientation="horizontal" style="contentBG2">
+      <stack name="stepStack" orientation="vertical">
+        <p>Sketch a diagram</p>
+        <stack name="cont">
+          <style>
+            <visibility>collapsed</visibility>
+          </style>
+          <p>This step is used to visualize the problem. Use the diagram given above as an example.</p>
+        </stack>
+      </stack>
+      <button name="btn" content="Show Step 1">
+        <style>
+          <horizontalAlignment>right</horizontalAlignment>
+          <widthPercentage>40%</widthPercentage>
+        </style>
+        <onClick>
+          if btn.Text=="Show Step 1" then
+          btn.Text = "Hide Step 1";
+          stepStack.cont.Style.Visibility = "visible";
+          stepStack:Child(1).Style.Bold = 1;
+          elseif btn.Text=="Hide Step 1" then
+          btn.Text = "Show Step 1";
+          stepStack.cont.Style.Visibility = "collapsed";
+          stepStack:Child(1).Style.Bold = 0;
+          end
+        </onClick>
+      </button>
+    </stack>
+    <stack orientation="horizontal" style="contentBG">
+      <stack name="stepStack" orientation="vertical">
+        <p>Identify the variables</p>
+        <stack name="cont">
+          <style>
+            <visibility>collapsed</visibility>
+          </style>
+          <stack orientation="horizontal">
+            <stack orientation="vertical">
+              <p>VARIABLES</p>
+              <p>$ m = 100kg $</p>
+              <p>$ v_{i} = 0 \frac{m}{s} $</p>
+              <p>$ v_{f} = ? \frac{m}{s} $</p>
+              <p>$ h_{i} = 25 m $</p>
+              <p>$ h_{f} = 3 m $</p>
+              <p>$ g = 9.8 \frac{m}{s^2} $</p>            
+            </stack>
+          </stack>
+        </stack>
+      </stack>
+      <button name="btn" content="Show Step 2">
+        <style>
+          <horizontalAlignment>right</horizontalAlignment>
+          <widthPercentage>40%</widthPercentage>
+        </style>
+        <onClick>
+          if btn.Text=="Show Step 2" then
+          btn.Text = "Hide Step 2";
+          stepStack.cont.Style.Visibility = "visible";
+          stepStack:Child(1).Style.Bold = 1;
+          elseif btn.Text=="Hide Step 2" then
+          btn.Text = "Show Step 2";
+          stepStack.cont.Style.Visibility = "collapsed";
+          stepStack:Child(1).Style.Bold = 0;
+          end
+        </onClick>
+      </button>
+    </stack>
+    <stack orientation="horizontal" style="contentBG2">
+      <stack name="stepStack" orientation="vertical">
+        <p>Solve for potential energy at A</p>
+        <stack name="cont">
+          <style>
+            <visibility>collapsed</visibility>
+          </style>
+          <p>$ T_{E} = \frac{1}{2}mv^2 + mgh $</p>
+          <p>$ T_{E} = mgh $</p>
+          <p>$ T_{E} = (100)(9.8)(25) $</p>
+          <p>$ T_{E} = 2.45x10^4 J $</p>
+        </stack>
+      </stack>
+      <button name="btn" content="Show Step 3">
+        <style>
+          <horizontalAlignment>right</horizontalAlignment>
+          <widthPercentage>40%</widthPercentage>
+        </style>
+        <onClick>
+          if btn.Text=="Show Step 3" then
+          btn.Text = "Hide Step 3";
+          stepStack.cont.Style.Visibility = "visible";
+          stepStack:Child(1).Style.Bold = 1;
+          elseif btn.Text=="Hide Step 3" then
+          btn.Text = "Show Step 3";
+          stepStack.cont.Style.Visibility = "collapsed";
+          stepStack:Child(1).Style.Bold = 0;
+          end
+        </onClick>
+      </button>
+    </stack>
+    <stack orientation="horizontal" style="contentBG">
+      <stack name="stepStack" orientation="vertical">
+        <p>Solve for final speed at B</p>
+        <stack name="cont">
+          <style>
+            <visibility>collapsed</visibility>
+          </style>
+          <p>$ T_{E} = \frac{1}{2}mv^2 + mgh $</p>
+          <p>$ 2.45x10^4 = \frac{1}{2}mv^2 + 0 $</p>
+          <p>$ 4.9x10^4 = mv^2 + 0 $</p>
+          <p>$ 490 = v^2 + 0 $</p>
+          <p>$ \sqrt{490} = 22.14 \frac{m}{s} $</p>
+        </stack>
+      </stack>
+      <button name="btn" content="Show Step 4">
+        <style>
+          <horizontalAlignment>right</horizontalAlignment>
+          <widthPercentage>40%</widthPercentage>
+        </style>
+        <onClick>
+          if btn.Text=="Show Step 4" then
+          btn.Text = "Hide Step 4";
+          stepStack.cont.Style.Visibility = "visible";
+          stepStack:Child(1).Style.Bold = 1;
+          elseif btn.Text=="Hide Step 4" then
+          btn.Text = "Show Step 4";
+          stepStack.cont.Style.Visibility = "collapsed";
+          stepStack:Child(1).Style.Bold = 0;
+          end
+        </onClick>
+      </button>
+    </stack>
+  <p><br /></p></sectionNoTitle>
+  
+  <sectionNoTitle name="section3" style="pageLayout">
+    <p style="sectionHeading">Practice Questions</p>
+    <stack name="questionStack" style="contentBG">
+      <!--QUESTION TABLE (4x4) USE THIS FOR ANY PROJECT-->
+      <p style="subSectionHeading">
+        Question 1
+      </p>
+      <p>
+        A roller coaster has a mass of 300kg and starts at rest at point A. The height at point A is 50m. The roller coaster
+        then reaches point B which has a height of 25m.
+      </p>
+      <image src="resources/rollercoaster2.png" />
+      <stack orientation="vertical" name="stepStack">
+      <stack orientation="horizontal" style="contentBG2">
+        <p>PART A ►</p>
+        <button name="btn" content="Show Part A">
+          <style>
+            <horizontalAlignment>right</horizontalAlignment>
+            <widthPercentage>40%</widthPercentage>
+          </style>
+          <onClick>
+            if btn.Text=="Show Part A" then
+                btn.Text = "Hide Step A";
+                stepStack.cont.Style.Visibility = "visible";
+                stepStack:Child(1).Style.Bold = 1;
+                stepStack:Child(1):Child(1).Text = "PART A ▼"
+              elseif btn.Text=="Hide Step A" then
+                btn.Text = "Show Part A";
+                stepStack.cont.Style.Visibility = "collapsed";
+                stepStack:Child(1).Style.Bold = 0;
+                stepStack:Child(1):Child(1).Text = "PART A ►"
+            end
+          </onClick>
+        </button>
+      </stack>
+      <stack name="cont" style="contentBG2">
+        <style>
+          <visibility>collapsed</visibility>
+        </style>
+          <p>Find the potential energy of the cart at point A:</p>
+          <table name="qTable" widths="50% 50%" grid="false">
+            <style>
+              <widthPercentage>80%</widthPercentage>
+              <horizontalAlignment>center</horizontalAlignment>
+            </style>
+            <row name="r1">
+              <column name="c1">
+                <p>
+                <style>
+                  <textAlignment>center</textAlignment>
+                </style>
+                  $ 1.47x10^5 J $
+                </p>
+                <button content="■" style="center" name="btn">
+                  <style>
+                    <background color="gray" />
+                    <foreground color="darkGray" />
+                  </style>
+                  <onClick>
+                    btn.Style.BackgroundColor = color.red;
+                    btn.Style.ForegroundColor = color.white;
+                    section3.questionStack.stepStack.cont.qTable.r1.c2.btn.Style.BackgroundColor = color.gray;
+                    section3.questionStack.stepStack.cont.qTable.r1.c2.btn.Style.ForegroundColor = color.darkGray;
+                    section3.questionStack.stepStack.cont.qTable.r2.c1.btn.Style.BackgroundColor = color.gray;
+                    section3.questionStack.stepStack.cont.qTable.r2.c1.btn.Style.ForegroundColor = color.darkGray;
+                    section3.questionStack.stepStack.cont.qTable.r2.c2.btn.Style.BackgroundColor = color.gray;
+                    section3.questionStack.stepStack.cont.qTable.r2.c2.btn.Style.ForegroundColor = color.darkGray;
+
+                  </onClick>
+                </button> 
+              </column>
+              <column name="c2">
+                <p>
+                <style>
+                  <textAlignment>center</textAlignment>
+                </style>
+                  $ 1.47x10^4 J $
+                </p>
+                <button content="■" style="center" name="btn">
+                  <style>
+                    <background color="gray" />
+                    <foreground color="darkGray" />
+                  </style>
+                  <onClick>
+                    btn.Style.BackgroundColor = color.red;
+                    btn.Style.ForegroundColor = color.white;
+                    section3.questionStack.stepStack.cont.qTable.r1.c1.btn.Style.BackgroundColor = color.gray;
+                    section3.questionStack.stepStack.cont.qTable.r1.c1.btn.Style.ForegroundColor = color.darkGray;
+                    section3.questionStack.stepStack.cont.qTable.r2.c1.btn.Style.BackgroundColor = color.gray;
+                    section3.questionStack.stepStack.cont.qTable.r2.c1.btn.Style.ForegroundColor = color.darkGray;
+                    section3.questionStack.stepStack.cont.qTable.r2.c2.btn.Style.BackgroundColor = color.gray;
+                    section3.questionStack.stepStack.cont.qTable.r2.c2.btn.Style.ForegroundColor = color.darkGray;
+                  </onClick>
+                </button>
+            </column>
+            </row>
+            <row name="r2">
+              <column name="c1">
+                <p>
+                <style>
+                  <textAlignment>center</textAlignment>
+                </style>
+                  $ 1.46x10^5 J $
+                </p>
+                <button content="■" style="center" name="btn">
+                  <style>
+                    <background color="gray" />
+                    <foreground color="darkGray" />
+                  </style>
+                  <onClick>
+                    btn.Style.BackgroundColor = color.red;
+                    btn.Style.ForegroundColor = color.white;
+                    section3.questionStack.stepStack.cont.qTable.r1.c2.btn.Style.BackgroundColor = color.gray;
+                    section3.questionStack.stepStack.cont.qTable.r1.c2.btn.Style.ForegroundColor = color.darkGray;
+                    section3.questionStack.stepStack.cont.qTable.r1.c1.btn.Style.BackgroundColor = color.gray;
+                    section3.questionStack.stepStack.cont.qTable.r1.c1.btn.Style.ForegroundColor = color.darkGray;
+                    section3.questionStack.stepStack.cont.qTable.r2.c2.btn.Style.BackgroundColor = color.gray;
+                    section3.questionStack.stepStack.cont.qTable.r2.c2.btn.Style.ForegroundColor = color.darkGray;
+                    
+                  </onClick>
+                </button>
+              </column>
+              <column name="c2">
+                <p>
+                <style>
+                  <textAlignment>center</textAlignment>
+                </style>
+                  $ 2.24x10^4 J $
+                </p>
+                <button content="■" style="center" name="btn">
+                  <style>
+                    <background color="gray" />
+                    <foreground color="darkGray" />
+                  </style>
+                  <onClick>
+                    btn.Style.BackgroundColor = color.red;
+                    btn.Style.ForegroundColor = color.white;
+                    section3.questionStack.stepStack.cont.qTable.r1.c2.btn.Style.BackgroundColor = color.gray;
+                    section3.questionStack.stepStack.cont.qTable.r1.c2.btn.Style.ForegroundColor = color.darkGray;
+                    section3.questionStack.stepStack.cont.qTable.r1.c1.btn.Style.BackgroundColor = color.gray;
+                    section3.questionStack.stepStack.cont.qTable.r1.c1.btn.Style.ForegroundColor = color.darkGray;
+                    section3.questionStack.stepStack.cont.qTable.r2.c1.btn.Style.BackgroundColor = color.gray;
+                    section3.questionStack.stepStack.cont.qTable.r2.c1.btn.Style.ForegroundColor = color.darkGray;
+                  </onClick>
+                </button>
+              </column>
+            </row>
+          </table>
+          <button content="Check Answer" name="btn" style="center">
+            <onClick>
+              if section3.questionStack.stepStack.cont.qTable.r1.c1.btn.Style.BackgroundColor == color.red then
+                btn.Text = "You are Correct!"
+                btn.Style.BackgroundColor = color.green;
+              else 
+                btn.Text = "Try Again!"
+                btn.Style.BackgroundColor = color.red;
+              end
+            </onClick>
+          </button>
+        </stack>
+      </stack>
+      <stack orientation="vertical" name="stepStack2">
+      <stack orientation="horizontal" style="contentBG">
+        <p>PART B ►</p>
+        <button name="btn" content="Show Part B">
+          <style>
+            <horizontalAlignment>right</horizontalAlignment>
+            <widthPercentage>40%</widthPercentage>
+          </style>
+          <onClick>
+            if btn.Text=="Show Part B" then
+                btn.Text = "Hide Step B";
+                stepStack2.cont.Style.Visibility = "visible";
+                stepStack2:Child(1).Style.Bold = 1;
+                stepStack2:Child(1):Child(1).Text = "PART B ▼"
+              elseif btn.Text=="Hide Step B" then
+                btn.Text = "Show Part B";
+                stepStack2.cont.Style.Visibility = "collapsed";
+                stepStack2:Child(1).Style.Bold = 0;
+                stepStack2:Child(1):Child(1).Text = "PART B ►"
+            end
+          </onClick>
+        </button>
+      </stack>
+      <stack name="cont" style="contentBG">
+        <style>
+          <visibility>collapsed</visibility>
+        </style>
+          <p>Find the potential energy of the cart at point B:</p>
+          <table name="qTable" widths="50% 50%" grid="false">
+            <style>
+              <widthPercentage>80%</widthPercentage>
+              <horizontalAlignment>center</horizontalAlignment>
+            </style>
+            <row name="r1">
+              <column name="c1">
+                <p>
+                <style>
+                  <textAlignment>center</textAlignment>
+                </style>
+                  $ 7.63x10^4 J $
+                </p>
+                <button content="■" style="center" name="btn">
+                  <style>
+                    <background color="gray" />
+                    <foreground color="darkGray" />
+                  </style>
+                  <onClick>
+                    btn.Style.BackgroundColor = color.red;
+                    btn.Style.ForegroundColor = color.white;
+                    section3.questionStack.stepStack2.cont.qTable.r1.c2.btn.Style.BackgroundColor = color.gray;
+                    section3.questionStack.stepStack2.cont.qTable.r1.c2.btn.Style.ForegroundColor = color.darkGray;
+                    section3.questionStack.stepStack2.cont.qTable.r2.c1.btn.Style.BackgroundColor = color.gray;
+                    section3.questionStack.stepStack2.cont.qTable.r2.c1.btn.Style.ForegroundColor = color.darkGray;
+                    section3.questionStack.stepStack2.cont.qTable.r2.c2.btn.Style.BackgroundColor = color.gray;
+                    section3.questionStack.stepStack2.cont.qTable.r2.c2.btn.Style.ForegroundColor = color.darkGray;
+                  </onClick>
+                </button> 
+              </column>
+              <column name="c2">
+                <p>
+                <style>
+                  <textAlignment>center</textAlignment>
+                </style>
+                  $ 7.43x10^3 J $
+                </p>
+                <button content="■" style="center" name="btn">
+                  <style>
+                    <background color="gray" />
+                    <foreground color="darkGray" />
+                  </style>
+                  <onClick>
+                    btn.Style.BackgroundColor = color.red;
+                    btn.Style.ForegroundColor = color.white;
+                    section3.questionStack.stepStack2.cont.qTable.r1.c1.btn.Style.BackgroundColor = color.gray;
+                    section3.questionStack.stepStack2.cont.qTable.r1.c1.btn.Style.ForegroundColor = color.darkGray;
+                    section3.questionStack.stepStack2.cont.qTable.r2.c1.btn.Style.BackgroundColor = color.gray;
+                    section3.questionStack.stepStack2.cont.qTable.r2.c1.btn.Style.ForegroundColor = color.darkGray;
+                    section3.questionStack.stepStack2.cont.qTable.r2.c2.btn.Style.BackgroundColor = color.gray;
+                    section3.questionStack.stepStack2.cont.qTable.r2.c2.btn.Style.ForegroundColor = color.darkGray;   
+                  </onClick>
+                </button>
+            </column>
+            </row>
+            <row name="r2">
+              <column name="c1">
+                <p>
+                <style>
+                  <textAlignment>center</textAlignment>
+                </style>
+                  $ 7.35x10^4 J $
+                </p>
+                <button content="■" style="center" name="btn">
+                  <style>
+                    <background color="gray" />
+                    <foreground color="darkGray" />
+                  </style>
+                  <onClick>
+                    btn.Style.BackgroundColor = color.red;
+                    btn.Style.ForegroundColor = color.white;
+                    section3.questionStack.stepStack2.cont.qTable.r1.c1.btn.Style.BackgroundColor = color.gray;
+                    section3.questionStack.stepStack2.cont.qTable.r1.c1.btn.Style.ForegroundColor = color.darkGray;
+                    section3.questionStack.stepStack2.cont.qTable.r1.c2.btn.Style.BackgroundColor = color.gray;
+                    section3.questionStack.stepStack2.cont.qTable.r1.c2.btn.Style.ForegroundColor = color.darkGray;
+                    section3.questionStack.stepStack2.cont.qTable.r2.c2.btn.Style.BackgroundColor = color.gray;
+                    section3.questionStack.stepStack2.cont.qTable.r2.c2.btn.Style.ForegroundColor = color.darkGray;      
+                  </onClick>
+                </button>
+              </column>
+              <column name="c2">
+                <p>
+                <style>
+                  <textAlignment>center</textAlignment>
+                </style>
+                  $ 7.45x10^5 J $
+                </p>
+                <button content="■" style="center" name="btn">
+                  <style>
+                    <background color="gray" />
+                    <foreground color="darkGray" />
+                  </style>
+                  <onClick>
+                    btn.Style.BackgroundColor = color.red;
+                    btn.Style.ForegroundColor = color.white;
+                    section3.questionStack.stepStack2.cont.qTable.r1.c1.btn.Style.BackgroundColor = color.gray;
+                    section3.questionStack.stepStack2.cont.qTable.r1.c1.btn.Style.ForegroundColor = color.darkGray;
+                    section3.questionStack.stepStack2.cont.qTable.r1.c2.btn.Style.BackgroundColor = color.gray;
+                    section3.questionStack.stepStack2.cont.qTable.r1.c2.btn.Style.ForegroundColor = color.darkGray;
+                    section3.questionStack.stepStack2.cont.qTable.r2.c1.btn.Style.BackgroundColor = color.gray;
+                    section3.questionStack.stepStack2.cont.qTable.r2.c1.btn.Style.ForegroundColor = color.darkGray;     
+                  </onClick>
+                </button>
+              </column>
+            </row>
+          </table>
+          <button content="Check Answer" name="btn" style="center">
+            <onClick>
+              if section3.questionStack.stepStack2.cont.qTable.r2.c1.btn.Style.BackgroundColor == color.red then
+                btn.Text = "You are Correct!"
+                btn.Style.BackgroundColor = color.green;
+              else 
+                btn.Text = "Try Again!"
+                btn.Style.BackgroundColor = color.red;
+              end            
+            </onClick>
+          </button>
+        </stack>
+      </stack>
+      <stack orientation="vertical" name="stepStack3">
+      <stack orientation="horizontal" style="contentBG2">
+        <p>PART C ►</p>
+        <button name="btn" content="Show Part C">
+          <style>
+            <horizontalAlignment>right</horizontalAlignment>
+            <widthPercentage>40%</widthPercentage>
+          </style>
+          <onClick>
+            if btn.Text=="Show Part C" then
+                btn.Text = "Hide Step C";
+                stepStack3.cont.Style.Visibility = "visible";
+                stepStack3:Child(1).Style.Bold = 1;
+                stepStack3:Child(1):Child(1).Text = "PART C ▼"
+              elseif btn.Text=="Hide Step C" then
+                btn.Text = "Show Part C";
+                stepStack3.cont.Style.Visibility = "collapsed";
+                stepStack3:Child(1).Style.Bold = 0;
+                stepStack3:Child(1):Child(1).Text = "PART C ►"
+            end
+          </onClick>
+        </button>
+      </stack>
+      <stack name="cont" style="contentBG2">
+        <style>
+          <visibility>collapsed</visibility>
+        </style>
+          <p>Find the velocity when the roller coaster reaches a height of 0m.</p>
+          <table name="qTable" widths="50% 50%" grid="false">
+            <style>
+              <widthPercentage>80%</widthPercentage>
+              <horizontalAlignment>center</horizontalAlignment>
+            </style>
+            <row name="r1">
+              <column name="c1">
+                <p>
+                <style>
+                  <textAlignment>center</textAlignment>
+                </style>
+                  $ 31.3 \frac{m}{s} $
+                </p>
+                <button content="■" style="center" name="btn">
+                  <style>
+                    <background color="gray" />
+                    <foreground color="darkGray" />
+                  </style>
+                  <onClick>
+                    btn.Style.BackgroundColor = color.red;
+                    btn.Style.ForegroundColor = color.white;
+                    section3.questionStack.stepStack3.cont.qTable.r1.c2.btn.Style.BackgroundColor = color.gray;
+                    section3.questionStack.stepStack3.cont.qTable.r1.c2.btn.Style.ForegroundColor = color.darkGray;
+                    section3.questionStack.stepStack3.cont.qTable.r2.c1.btn.Style.BackgroundColor = color.gray;
+                    section3.questionStack.stepStack3.cont.qTable.r2.c1.btn.Style.ForegroundColor = color.darkGray;
+                    section3.questionStack.stepStack3.cont.qTable.r2.c1.btn.Style.BackgroundColor = color.gray;
+                    section3.questionStack.stepStack3.cont.qTable.r2.c1.btn.Style.ForegroundColor = color.darkGray;
+                  </onClick>
+                </button> 
+              </column>
+              <column name="c2">
+                <p>
+                <style>
+                  <textAlignment>center</textAlignment>
+                </style>
+                  $ 34.3 \frac{m}{s} $
+                </p>
+                <button content="■" style="center" name="btn">
+                  <style>
+                    <background color="gray" />
+                    <foreground color="darkGray" />
+                  </style>
+                  <onClick>
+                    btn.Style.BackgroundColor = color.red;
+                    btn.Style.ForegroundColor = color.white;
+                    section3.questionStack.stepStack3.cont.qTable.r1.c1.btn.Style.BackgroundColor = color.gray;
+                    section3.questionStack.stepStack3.cont.qTable.r1.c1.btn.Style.ForegroundColor = color.darkGray;
+                    section3.questionStack.stepStack3.cont.qTable.r2.c1.btn.Style.BackgroundColor = color.gray;
+                    section3.questionStack.stepStack3.cont.qTable.r2.c1.btn.Style.ForegroundColor = color.darkGray;
+                    section3.questionStack.stepStack3.cont.qTable.r2.c2.btn.Style.BackgroundColor = color.gray;
+                    section3.questionStack.stepStack3.cont.qTable.r2.c2.btn.Style.ForegroundColor = color.darkGray;
+                  </onClick>
+                </button>
+            </column>
+            </row>
+            <row name="r2">
+              <column name="c1">
+                <p>
+                <style>
+                  <textAlignment>center</textAlignment>
+                </style>
+                  $ 24.3 \frac{m}{s} $
+                </p>
+                <button content="■" style="center" name="btn">
+                  <style>
+                    <background color="gray" />
+                    <foreground color="darkGray" />
+                  </style>
+                  <onClick>
+                    btn.Style.BackgroundColor = color.red;
+                    btn.Style.ForegroundColor = color.white;
+                    section3.questionStack.stepStack3.cont.qTable.r1.c2.btn.Style.BackgroundColor = color.gray;
+                    section3.questionStack.stepStack3.cont.qTable.r1.c2.btn.Style.ForegroundColor = color.darkGray;
+                    section3.questionStack.stepStack3.cont.qTable.r1.c1.btn.Style.BackgroundColor = color.gray;
+                    section3.questionStack.stepStack3.cont.qTable.r1.c1.btn.Style.ForegroundColor = color.darkGray;
+                    section3.questionStack.stepStack3.cont.qTable.r2.c2.btn.Style.BackgroundColor = color.gray;
+                    section3.questionStack.stepStack3.cont.qTable.r2.c2.btn.Style.ForegroundColor = color.darkGray;
+                  </onClick>
+                </button>
+              </column>
+              <column name="c2">
+                <p>
+                <style>
+                  <textAlignment>center</textAlignment>
+                </style>
+                  $ 34.6 \frac{m}{s} $
+                </p>
+                <button content="■" style="center" name="btn">
+                  <style>
+                    <background color="gray" />
+                    <foreground color="darkGray" />
+                  </style>
+                  <onClick>
+                    btn.Style.BackgroundColor = color.red;
+                    btn.Style.ForegroundColor = color.white;
+                    section3.questionStack.stepStack3.cont.qTable.r1.c2.btn.Style.BackgroundColor = color.gray;
+                    section3.questionStack.stepStack3.cont.qTable.r1.c2.btn.Style.ForegroundColor = color.darkGray;
+                    section3.questionStack.stepStack3.cont.qTable.r1.c1.btn.Style.BackgroundColor = color.gray;
+                    section3.questionStack.stepStack3.cont.qTable.r1.c1.btn.Style.ForegroundColor = color.darkGray;
+                    section3.questionStack.stepStack3.cont.qTable.r2.c1.btn.Style.BackgroundColor = color.gray;
+                    section3.questionStack.stepStack3.cont.qTable.r2.c1.btn.Style.ForegroundColor = color.darkGray;
+                  </onClick>
+                </button>
+              </column>
+            </row>
+          </table>
+          <button content="Check Answer" name="btn" style="center">
+            <onClick>
+              if section3.questionStack.stepStack3.cont.qTable.r1.c1.btn.Style.BackgroundColor == color.red then
+                btn.Text = "You are Correct!"
+                btn.Style.BackgroundColor = color.green;
+              else 
+                btn.Text = "Try Again!"
+                btn.Style.BackgroundColor = color.red;
+              end      
+            </onClick>
+          </button>
+        </stack>
+      </stack>
+    </stack>
+  <p><br /></p></sectionNoTitle>
+  
+  <sectionNoTitle name="section5" style="pageLayout">
+    <p style="sectionHeading">Practice Questions</p>
+    <stack name="questionStack" style="contentBG">
+      <!--QUESTION TABLE (4x4) USE THIS FOR ANY PROJECT-->
+      <p style="subSectionHeading">
+        Question 2
+      </p>
+      <p>
+        A skate boarder that weights 60kg slides down a half-pipe. The skate boarder reaches a final velocity of 25m/s at the bottom of the pipe.
+      </p>
+      <image src="resources/rollercoaster4.png" />
+      <stack orientation="vertical" name="stepStack">
+      <stack orientation="horizontal" style="contentBG2">
+        <p>PART A ►</p>
+        <button name="btn" content="Show Part A">
+          <style>
+            <horizontalAlignment>right</horizontalAlignment>
+            <widthPercentage>40%</widthPercentage>
+          </style>
+          <onClick>
+            if btn.Text=="Show Part A" then
+                btn.Text = "Hide Step A";
+                stepStack.cont.Style.Visibility = "visible";
+                stepStack:Child(1).Style.Bold = 1;
+                stepStack:Child(1):Child(1).Text = "PART A ▼"
+              elseif btn.Text=="Hide Step A" then
+                btn.Text = "Show Part A";
+                stepStack.cont.Style.Visibility = "collapsed";
+                stepStack:Child(1).Style.Bold = 0;
+                stepStack:Child(1):Child(1).Text = "PART A ►"
+            end
+          </onClick>
+        </button>
+      </stack>
+      <stack name="cont" style="contentBG2">
+        <style>
+          <visibility>collapsed</visibility>
+        </style>
+          <p>Find the height of the half-pipe.</p>
+          <table name="qTable" widths="50% 50%" grid="false">
+            <style>
+              <widthPercentage>80%</widthPercentage>
+              <horizontalAlignment>center</horizontalAlignment>
+            </style>
+            <row name="r1">
+              <column name="c1">
+                <p>
+                <style>
+                  <textAlignment>center</textAlignment>
+                </style>
+                  $ 20.5 m $
+                </p>
+                <button content="■" style="center" name="btn">
+                  <style>
+                    <background color="gray" />
+                    <foreground color="darkGray" />
+                  </style>
+                  <onClick>
+                    btn.Style.BackgroundColor = color.red;
+                    btn.Style.ForegroundColor = color.white;
+                    section5.questionStack.stepStack.cont.qTable.r1.c2.btn.Style.BackgroundColor = color.gray;
+                    section5.questionStack.stepStack.cont.qTable.r1.c2.btn.Style.ForegroundColor = color.darkGray;
+                    section5.questionStack.stepStack.cont.qTable.r2.c1.btn.Style.BackgroundColor = color.gray;
+                    section5.questionStack.stepStack.cont.qTable.r2.c1.btn.Style.ForegroundColor = color.darkGray;
+                    section5.questionStack.stepStack.cont.qTable.r2.c2.btn.Style.BackgroundColor = color.gray;
+                    section5.questionStack.stepStack.cont.qTable.r2.c2.btn.Style.ForegroundColor = color.darkGray;
+                  </onClick>
+                </button> 
+              </column>
+              <column name="c2">
+                <p>
+                <style>
+                  <textAlignment>center</textAlignment>
+                </style>
+                  $ 31.9 m $
+                </p>
+                <button content="■" style="center" name="btn">
+                  <style>
+                    <background color="gray" />
+                    <foreground color="darkGray" />
+                  </style>
+                  <onClick>
+                    btn.Style.BackgroundColor = color.red;
+                    btn.Style.ForegroundColor = color.white;
+                    section5.questionStack.stepStack.cont.qTable.r1.c1.btn.Style.BackgroundColor = color.gray;
+                    section5.questionStack.stepStack.cont.qTable.r1.c1.btn.Style.ForegroundColor = color.darkGray;
+                    section5.questionStack.stepStack.cont.qTable.r2.c1.btn.Style.BackgroundColor = color.gray;
+                    section5.questionStack.stepStack.cont.qTable.r2.c1.btn.Style.ForegroundColor = color.darkGray;
+                    section5.questionStack.stepStack.cont.qTable.r2.c2.btn.Style.BackgroundColor = color.gray;
+                    section5.questionStack.stepStack.cont.qTable.r2.c2.btn.Style.ForegroundColor = color.darkGray;
+                  </onClick>
+                </button>
+            </column>
+            </row>
+            <row name="r2">
+              <column name="c1">
+                <p>
+                <style>
+                  <textAlignment>center</textAlignment>
+                </style>
+                  $ 32.9 m $
+                </p>
+                <button content="■" style="center" name="btn">
+                  <style>
+                    <background color="gray" />
+                    <foreground color="darkGray" />
+                  </style>
+                  <onClick>
+                    btn.Style.BackgroundColor = color.red;
+                    btn.Style.ForegroundColor = color.white;
+                    section5.questionStack.stepStack.cont.qTable.r1.c2.btn.Style.BackgroundColor = color.gray;
+                    section5.questionStack.stepStack.cont.qTable.r1.c2.btn.Style.ForegroundColor = color.darkGray;
+                    section5.questionStack.stepStack.cont.qTable.r1.c1.btn.Style.BackgroundColor = color.gray;
+                    section5.questionStack.stepStack.cont.qTable.r1.c1.btn.Style.ForegroundColor = color.darkGray;
+                    section5.questionStack.stepStack.cont.qTable.r2.c2.btn.Style.BackgroundColor = color.gray;
+                    section5.questionStack.stepStack.cont.qTable.r2.c2.btn.Style.ForegroundColor = color.darkGray;
+                    
+                  </onClick>
+                </button>
+              </column>
+              <column name="c2">
+                <p>
+                <style>
+                  <textAlignment>center</textAlignment>
+                </style>
+                  $ 26.9 m $
+                </p>
+                <button content="■" style="center" name="btn">
+                  <style>
+                    <background color="gray" />
+                    <foreground color="darkGray" />
+                  </style>
+                  <onClick>
+                    btn.Style.BackgroundColor = color.red;
+                    btn.Style.ForegroundColor = color.white;
+                    section5.questionStack.stepStack.cont.qTable.r1.c2.btn.Style.BackgroundColor = color.gray;
+                    section5.questionStack.stepStack.cont.qTable.r1.c2.btn.Style.ForegroundColor = color.darkGray;
+                    section5.questionStack.stepStack.cont.qTable.r1.c1.btn.Style.BackgroundColor = color.gray;
+                    section5.questionStack.stepStack.cont.qTable.r1.c1.btn.Style.ForegroundColor = color.darkGray;
+                    section5.questionStack.stepStack.cont.qTable.r2.c1.btn.Style.BackgroundColor = color.gray;
+                    section5.questionStack.stepStack.cont.qTable.r2.c1.btn.Style.ForegroundColor = color.darkGray;
+                  </onClick>
+                </button>
+              </column>
+            </row>
+          </table>
+          <button content="Check Answer" name="btn" style="center">
+            <onClick>
+              if section5.questionStack.stepStack.cont.qTable.r1.c2.btn.Style.BackgroundColor == color.red then
+                btn.Text = "You are Correct!"
+                btn.Style.BackgroundColor = color.green;
+              else 
+                btn.Text = "Try Again!"
+                btn.Style.BackgroundColor = color.red;
+              end
+            </onClick>
+          </button>
+        </stack>
+      </stack>
+      <stack orientation="vertical" name="stepStack2">
+      <stack orientation="horizontal" style="contentBG">
+        <p>PART B ►</p>
+        <button name="btn" content="Show Part B">
+          <style>
+            <horizontalAlignment>right</horizontalAlignment>
+            <widthPercentage>40%</widthPercentage>
+          </style>
+          <onClick>
+            if btn.Text=="Show Part B" then
+                btn.Text = "Hide Step B";
+                stepStack2.cont.Style.Visibility = "visible";
+                stepStack2:Child(1).Style.Bold = 1;
+                stepStack2:Child(1):Child(1).Text = "PART B ▼"
+              elseif btn.Text=="Hide Step B" then
+                btn.Text = "Show Part B";
+                stepStack2.cont.Style.Visibility = "collapsed";
+                stepStack2:Child(1).Style.Bold = 0;
+                stepStack2:Child(1):Child(1).Text = "PART B ►"
+            end
+          </onClick>
+        </button>
+      </stack>
+      <stack name="cont" style="contentBG">
+        <style>
+          <visibility>collapsed</visibility>
+        </style>
+          <p>Determine the height of the half-pipe if the velocity were the same but the mass of the skateboarder were 120kg. </p>
+          <table name="qTable" widths="50% 50%" grid="false">
+            <style>
+              <widthPercentage>80%</widthPercentage>
+              <horizontalAlignment>center</horizontalAlignment>
+            </style>
+            <row name="r1">
+              <column name="c1">
+                <p>
+                <style>
+                  <textAlignment>center</textAlignment>
+                </style>
+                  $ 77.2 m $
+                </p>
+                <button content="■" style="center" name="btn">
+                  <style>
+                    <background color="gray" />
+                    <foreground color="darkGray" />
+                  </style>
+                  <onClick>
+                   btn.Style.BackgroundColor = color.red;
+                    btn.Style.ForegroundColor = color.white;
+                    section5.questionStack.stepStack2.cont.qTable.r1.c2.btn.Style.BackgroundColor = color.gray;
+                    section5.questionStack.stepStack2.cont.qTable.r1.c2.btn.Style.ForegroundColor = color.darkGray;
+                    section5.questionStack.stepStack2.cont.qTable.r2.c1.btn.Style.BackgroundColor = color.gray;
+                    section5.questionStack.stepStack2.cont.qTable.r2.c1.btn.Style.ForegroundColor = color.darkGray;
+                    section5.questionStack.stepStack2.cont.qTable.r2.c2.btn.Style.BackgroundColor = color.gray;
+                    section5.questionStack.stepStack2.cont.qTable.r2.c2.btn.Style.ForegroundColor = color.darkGray;
+                  </onClick>
+                </button> 
+              </column>
+              <column name="c2">
+                <p>
+                <style>
+                  <textAlignment>center</textAlignment>
+                </style>
+                  $ 67.2 m $
+                </p>
+                <button content="■" style="center" name="btn">
+                  <style>
+                    <background color="gray" />
+                    <foreground color="darkGray" />
+                  </style>
+                  <onClick>
+                   btn.Style.BackgroundColor = color.red;
+                    btn.Style.ForegroundColor = color.white;
+                    section5.questionStack.stepStack2.cont.qTable.r1.c1.btn.Style.BackgroundColor = color.gray;
+                    section5.questionStack.stepStack2.cont.qTable.r1.c1.btn.Style.ForegroundColor = color.darkGray;
+                    section5.questionStack.stepStack2.cont.qTable.r2.c1.btn.Style.BackgroundColor = color.gray;
+                    section5.questionStack.stepStack2.cont.qTable.r2.c1.btn.Style.ForegroundColor = color.darkGray;
+                    section5.questionStack.stepStack2.cont.qTable.r2.c2.btn.Style.BackgroundColor = color.gray;
+                    section5.questionStack.stepStack2.cont.qTable.r2.c2.btn.Style.ForegroundColor = color.darkGray;   
+                  </onClick>
+                </button>
+            </column>
+            </row>
+            <row name="r2">
+              <column name="c1">
+                <p>
+                <style>
+                  <textAlignment>center</textAlignment>
+                </style>
+                  $ 31.9 m $
+                </p>
+                <button content="■" style="center" name="btn">
+                  <style>
+                    <background color="gray" />
+                    <foreground color="darkGray" />
+                  </style>
+                  <onClick>
+                     btn.Style.BackgroundColor = color.red;
+                    btn.Style.ForegroundColor = color.white;
+                    section5.questionStack.stepStack2.cont.qTable.r1.c2.btn.Style.BackgroundColor = color.gray;
+                    section5.questionStack.stepStack2.cont.qTable.r1.c2.btn.Style.ForegroundColor = color.darkGray;
+                    section5.questionStack.stepStack2.cont.qTable.r1.c1.btn.Style.BackgroundColor = color.gray;
+                    section5.questionStack.stepStack2.cont.qTable.r1.c1.btn.Style.ForegroundColor = color.darkGray;
+                    section5.questionStack.stepStack2.cont.qTable.r2.c2.btn.Style.BackgroundColor = color.gray;
+                    section5.questionStack.stepStack2.cont.qTable.r2.c2.btn.Style.ForegroundColor = color.darkGray;
+                  </onClick>
+                </button>
+              </column>
+              <column name="c2">
+                <p>
+                <style>
+                  <textAlignment>center</textAlignment>
+                </style>
+                  $ 61.5 m $
+                </p>
+                <button content="■" style="center" name="btn">
+                  <style>
+                    <background color="gray" />
+                    <foreground color="darkGray" />
+                  </style>
+                  <onClick>
+   btn.Style.BackgroundColor = color.red;
+                    btn.Style.ForegroundColor = color.white;
+                    section5.questionStack.stepStack2.cont.qTable.r1.c2.btn.Style.BackgroundColor = color.gray;
+                    section5.questionStack.stepStack2.cont.qTable.r1.c2.btn.Style.ForegroundColor = color.darkGray;
+                    section5.questionStack.stepStack2.cont.qTable.r2.c1.btn.Style.BackgroundColor = color.gray;
+                    section5.questionStack.stepStack2.cont.qTable.r2.c1.btn.Style.ForegroundColor = color.darkGray;
+                    section5.questionStack.stepStack2.cont.qTable.r1.c1.btn.Style.BackgroundColor = color.gray;
+                    section5.questionStack.stepStack2.cont.qTable.r1.c1.btn.Style.ForegroundColor = color.darkGray;                  </onClick>
+                </button>
+              </column>
+            </row>
+          </table>
+          <button content="Check Answer" name="btn" style="center">
+            <onClick>
+              if section5.questionStack.stepStack2.cont.qTable.r2.c1.btn.Style.BackgroundColor == color.red then
+                btn.Text = "You are Correct!"
+                btn.Style.BackgroundColor = color.green;
+              else 
+                btn.Text = "Try Again!"
+                btn.Style.BackgroundColor = color.red;
+              end            
+            </onClick>
+          </button>
+        </stack>
+      </stack>
+      <stack orientation="vertical" name="stepStack3">
+      <stack orientation="horizontal" style="contentBG2">
+        <p>PART C ►</p>
+        <button name="btn" content="Show Part C">
+          <style>
+            <horizontalAlignment>right</horizontalAlignment>
+            <widthPercentage>40%</widthPercentage>
+          </style>
+          <onClick>
+            if btn.Text=="Show Part C" then
+                btn.Text = "Hide Step C";
+                stepStack3.cont.Style.Visibility = "visible";
+                stepStack3:Child(1).Style.Bold = 1;
+                stepStack3:Child(1):Child(1).Text = "PART C ▼"
+              elseif btn.Text=="Hide Step C" then
+                btn.Text = "Show Part C";
+                stepStack3.cont.Style.Visibility = "collapsed";
+                stepStack3:Child(1).Style.Bold = 0;
+                stepStack3:Child(1):Child(1).Text = "PART C ►"
+            end
+          </onClick>
+        </button>
+      </stack>
+      <stack name="cont" style="contentBG2">
+        <style>
+          <visibility>collapsed</visibility>
+        </style>
+          <p>Find the velocity when the skater reaches halfway down the half-pipe. </p>
+          <table name="qTable" widths="50% 50%" grid="false">
+            <style>
+              <widthPercentage>80%</widthPercentage>
+              <horizontalAlignment>center</horizontalAlignment>
+            </style>
+            <row name="r1">
+              <column name="c1">
+                <p>
+                <style>
+                  <textAlignment>center</textAlignment>
+                </style>
+                  $ 17.7 \frac{m}{s} $
+                </p>
+                <button content="■" style="center" name="btn">
+                  <style>
+                    <background color="gray" />
+                    <foreground color="darkGray" />
+                  </style>
+                  <onClick>
+                    btn.Style.BackgroundColor = color.red;
+                    btn.Style.ForegroundColor = color.white;
+                    section5.questionStack.stepStack3.cont.qTable.r1.c2.btn.Style.BackgroundColor = color.gray;
+                    section5.questionStack.stepStack3.cont.qTable.r1.c2.btn.Style.ForegroundColor = color.darkGray;
+                    section5.questionStack.stepStack3.cont.qTable.r2.c1.btn.Style.BackgroundColor = color.gray;
+                    section5.questionStack.stepStack3.cont.qTable.r2.c1.btn.Style.ForegroundColor = color.darkGray;
+                    section5.questionStack.stepStack3.cont.qTable.r2.c1.btn.Style.BackgroundColor = color.gray;
+                    section5.questionStack.stepStack3.cont.qTable.r2.c1.btn.Style.ForegroundColor = color.darkGray;
+                  </onClick>
+                </button> 
+              </column>
+              <column name="c2">
+                <p>
+                <style>
+                  <textAlignment>center</textAlignment>
+                </style>
+                  $ 18.3 \frac{m}{s} $
+                </p>
+                <button content="■" style="center" name="btn">
+                  <style>
+                    <background color="gray" />
+                    <foreground color="darkGray" />
+                  </style>
+                  <onClick>
+                    btn.Style.BackgroundColor = color.red;
+                    btn.Style.ForegroundColor = color.white;
+                    section5.questionStack.stepStack3.cont.qTable.r1.c1.btn.Style.BackgroundColor = color.gray;
+                    section5.questionStack.stepStack3.cont.qTable.r1.c1.btn.Style.ForegroundColor = color.darkGray;
+                    section5.questionStack.stepStack3.cont.qTable.r2.c1.btn.Style.BackgroundColor = color.gray;
+                    section5.questionStack.stepStack3.cont.qTable.r2.c1.btn.Style.ForegroundColor = color.darkGray;
+                    section5.questionStack.stepStack3.cont.qTable.r2.c2.btn.Style.BackgroundColor = color.gray;
+                    section5.questionStack.stepStack3.cont.qTable.r2.c2.btn.Style.ForegroundColor = color.darkGray;
+                  </onClick>
+                </button>
+            </column>
+            </row>
+            <row name="r2">
+              <column name="c1">
+                <p>
+                <style>
+                  <textAlignment>center</textAlignment>
+                </style>
+                  $ 14.3 \frac{m}{s} $
+                </p>
+                <button content="■" style="center" name="btn">
+                  <style>
+                    <background color="gray" />
+                    <foreground color="darkGray" />
+                  </style>
+                  <onClick>
+                    btn.Style.BackgroundColor = color.red;
+                    btn.Style.ForegroundColor = color.white;
+                    section5.questionStack.stepStack3.cont.qTable.r1.c2.btn.Style.BackgroundColor = color.gray;
+                    section5.questionStack.stepStack3.cont.qTable.r1.c2.btn.Style.ForegroundColor = color.darkGray;
+                    section5.questionStack.stepStack3.cont.qTable.r1.c1.btn.Style.BackgroundColor = color.gray;
+                    section5.questionStack.stepStack3.cont.qTable.r1.c1.btn.Style.ForegroundColor = color.darkGray;
+                    section5.questionStack.stepStack3.cont.qTable.r2.c2.btn.Style.BackgroundColor = color.gray;
+                    section5.questionStack.stepStack3.cont.qTable.r2.c2.btn.Style.ForegroundColor = color.darkGray;
+                  </onClick>
+                </button>
+              </column>
+              <column name="c2">
+                <p>
+                <style>
+                  <textAlignment>center</textAlignment>
+                </style>
+                  $ 14.6 \frac{m}{s} $
+                </p>
+                <button content="■" style="center" name="btn">
+                  <style>
+                    <background color="gray" />
+                    <foreground color="darkGray" />
+                  </style>
+                  <onClick>
+                    btn.Style.BackgroundColor = color.red;
+                    btn.Style.ForegroundColor = color.white;
+                    section5.questionStack.stepStack3.cont.qTable.r1.c2.btn.Style.BackgroundColor = color.gray;
+                    section5.questionStack.stepStack3.cont.qTable.r1.c2.btn.Style.ForegroundColor = color.darkGray;
+                    section5.questionStack.stepStack3.cont.qTable.r1.c1.btn.Style.BackgroundColor = color.gray;
+                    section5.questionStack.stepStack3.cont.qTable.r1.c1.btn.Style.ForegroundColor = color.darkGray;
+                    section5.questionStack.stepStack3.cont.qTable.r2.c1.btn.Style.BackgroundColor = color.gray;
+                    section5.questionStack.stepStack3.cont.qTable.r2.c1.btn.Style.ForegroundColor = color.darkGray;
+                  </onClick>
+                </button>
+              </column>
+            </row>
+          </table>
+          <button content="Check Answer" name="btn" style="center">
+            <onClick>
+              if section5.questionStack.stepStack3.cont.qTable.r1.c1.btn.Style.BackgroundColor == color.red then
+                btn.Text = "You are Correct!"
+                btn.Style.BackgroundColor = color.green;
+              else 
+                btn.Text = "Try Again!"
+                btn.Style.BackgroundColor = color.red;
+              end      
+            </onClick>
+          </button>
+        </stack>
+      </stack>
+    </stack>
+  <p><br /></p></sectionNoTitle>
+
+  <sectionNoTitle name="section6" style="pageLayout">
+    <p style="sectionHeading">Extra Resources</p>
+    <web url="https://www.khanacademy.org/science/physics/work-and-energy/work-and-energy-tutorial/v/conservation-of-energy" />
+  <p><br /></p></sectionNoTitle>
+</document>

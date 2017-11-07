@@ -1,0 +1,1064 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G6CE05940_6A50_4E9A_8BE6_61C027D455C3">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>MHF4U 3.2 – The Reciprocal of a Quadratic Function</title>
+    <creator>AanandB</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/cover.jpg" />
+  </metadata>
+
+  <include src="curriculumThemePack/curriculumStyles.xml" />
+  <include src="resources/plotTools.xml" />
+  <include src="resources/simTools.xml" />
+  <include src="resources/Utilities.xml" />
+
+  <style name="bgRed">
+    <background color="red" />
+    <foreground color="white" />
+  </style>
+  <style name="bgGreen">
+    <background color="green" />
+    <foreground color="white" />
+  </style>
+  <!--Header and Footer-->
+  <style name="backgroundColor">
+    <background color="50 133 184" />
+  </style>
+  <style name="fontColor">
+    <foreground color="255 255 255" />
+  </style>
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="fontColor">Amanda Koon</p>
+      <p style="fontColor rightText">MCR3U</p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/logo1.png" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/logo2.png" />
+    </stack>
+  </footer>
+
+  <!-- Intro 1 -->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">3.2 The Reciprocal of a Quadratic Function</title>
+    <p style="sectionHeading">Introduction</p>
+    <image src="resources/graph.jpg" />
+    <stack orientation="vertical" style="contentBG">
+      <p>
+        In Module 3.1, you learned that the vertical asymptotes seen on the graph of a rational function results from the zero denominators in the function.  The reciprocal of a linear function in the form of $ f(x) = \frac{1}{kx - c} $ is $ x = \frac{c}{k} $. Now consider the reciprocal of a quadratic function. How many vertical asymptotes can such a graph have?
+        <br />
+        <br />
+        In this module, we will learn the properties of the reciprocal quadratic function using the key features:  asymptotes, intercepts, domain, range, and positive and negative intervals.
+      </p>
+    </stack>
+  </section>
+
+  <!--Example 1-->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">
+      Example 1
+    </p>
+
+    <stack style="contentBG">
+      <p style="centerText">Consider the graph of $ f(x) = x^2 + 4 $ and $ g(x) = \frac{1}{x^2 + 4} $.</p>
+      <!--plot-->
+      <stack orientation="vertical" name="plotStack">
+        <style>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <style name="blackLine">
+          <foreground color="black" />
+        </style>
+        <style name="functionLine">
+          <foreground color="red" />
+          <lineThickness>2</lineThickness>
+        </style>
+        <xyPlot name="myPlot" pan="disabled" tap="disabled" zoom="disabled">
+          <axis auto="fixed" dim="y" min="0" max="5" major="true"></axis>
+          <axis auto="fixed" dim="x" min="-5" max="5" major="true"></axis>
+          <series name="xAxis" manual="true" style="blackLine" />
+          <series name="yAxis" manual="true" style="blackLine" />
+          <series name="aSeries" manual="true" style="functionLine" visible="true" />
+          <series name="bSeries" manual="true" style="functionLine" visible="true" />
+        </xyPlot>
+
+        <script>
+          <![CDATA[
+                
+                local quad = myPlot.aSeries;
+                local recipQuad = myPlot.bSeries;
+
+                local function drawQuadratic()
+                local x,y;
+                  for x = -100, 100, 0.1 do
+                    y = math.pow(x,2) + 4;
+                    quad:Add(x,y)
+                  end
+                  quad:Update()
+                end
+                
+                local function drawRecipQuadratic()
+                local x,y;
+                  for x = -100, 100, 1 do
+                    y = 1/(math.pow(x,2) + 4);
+                    recipQuad:Add(x,y)
+                  end
+                  recipQuad:Update()
+                end
+                
+                local xAxis = myPlot.xAxis;
+                local yAxis = myPlot.yAxis;
+
+                xAxis:Add(-100,0)
+                xAxis:Add(100,0)
+
+                yAxis:Add(0,-100)
+                yAxis:Add(0,100)
+                
+                drawQuadratic();
+                drawRecipQuadratic();
+                ]]>
+        </script>
+      </stack>
+
+      <!--toggling buttons-->
+      <stack orientation="horizontal">
+        <button name="button1" content="Hide f(x)">
+          <onClick>
+            <![CDATA[
+              if button1.Text == "Hide f(x)" then
+                plotStack.myPlot.aSeries.Visible = false;
+                button1.Text = "Show f(x)"
+              elseif button1.Text == "Show f(x)" then
+                plotStack.myPlot.aSeries.Visible = true;
+                button1.Text = "Hide f(x)"
+              end
+              ]]>
+          </onClick>
+        </button>
+        <button name="button2" content="Hide g(x)">
+          <onClick>
+            <![CDATA[
+              if button2.Text == "Hide g(x)" then
+                plotStack.myPlot.bSeries.Visible = false;
+                button2.Text = "Show g(x)";
+                plotStack.myPlot.YAxis:SetRange(3, 10);
+              elseif button2.Text == "Show g(x)" then
+                plotStack.myPlot.bSeries.Visible = true;
+                button2.Text = "Hide g(x)";
+                plotStack.myPlot.YAxis:SetRange(0, 5);
+              end
+              ]]>
+          </onClick>
+        </button>
+      </stack>
+
+    </stack>
+
+    <p style="line">
+      <style>
+        <widthPercentage>1.1</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      _
+    </p>
+
+    <stack style="contentBG">
+      <p style="centerText">Complete the table for the function $ g(x) = \frac{1}{x^2 + 4} $</p>
+    </stack>
+
+    <table grid="true" widths="30% 70%">
+      <style>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <row>
+        <column>
+          <p>x-intercept</p>
+        </column>
+        <column>
+          <p>$ 0 = \frac{1}{x^2 + 4} $... no x-intercept.</p>
+        </column>
+      </row>
+
+      <row>
+        <column>
+          <p>y-intercept</p>
+        </column>
+        <column>
+          <p>$ g(0) = \frac{1}{0^2 + 4} = \frac{1}{4}$</p>
+        </column>
+      </row>
+
+      <row>
+        <column>
+          <p>Horizontal Asymptote</p>
+        </column>
+        <column>
+          <p>$ y = 0 $</p>
+        </column>
+      </row>
+
+      <row>
+        <column>
+          <p>Vertical Asymptote</p>
+        </column>
+        <column>
+          <p>
+            Set the denominator = 0 and solve for x. <br />
+            $ x^2 + 4 = 0 $ <br />
+            $ x^2 = -4 $ <br />
+            No solution. Therefore, no vertical asymptote (as seen in graph).
+          </p>
+        </column>
+      </row>
+
+      <row>
+        <column>
+          <p>Domain</p>
+        </column>
+        <column>
+          <p>
+            $ {x \in \mathbf{R}} $
+          </p>
+        </column>
+      </row>
+
+      <row>
+        <column>
+          <p>Range</p>
+        </column>
+        <column>
+          <p>
+            $ {y \in \mathbf{R} | y &gt; 0} $
+          </p>
+        </column>
+      </row>
+    </table>
+  </sectionNoTitle>
+
+  <!--Example 2-->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">
+      Example 2
+    </p>
+
+    <stack style="contentBG">
+      <p style="centerText">Consider the graph of $ f(x) = x^2 - 4x + 4 $ and $ g(x) = \frac{1}{x^2 - 4x + 4} $.</p>
+      <!--plot-->
+      <stack orientation="vertical" name="plotStack">
+        <style>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <style name="blackLine">
+          <foreground color="black" />
+        </style>
+        <style name="functionLine">
+          <foreground color="red" />
+          <lineThickness>2</lineThickness>
+        </style>
+        <xyPlot name="myPlot" pan="disabled" tap="disabled" zoom="disabled">
+          <axis auto="fixed" dim="y" min="0" max="5" major="true"></axis>
+          <axis auto="fixed" dim="x" min="-5" max="5" major="true"></axis>
+          <series name="xAxis" manual="true" style="blackLine" />
+          <series name="yAxis" manual="true" style="blackLine" />
+          <series name="aSeries" manual="true" style="functionLine" visible="true" />
+          <series name="bSeries" manual="true" style="functionLine" visible="true" />
+        </xyPlot>
+
+        <script>
+          <![CDATA[
+                
+                local quad = myPlot.aSeries;
+                local recipQuad = myPlot.bSeries;
+
+                local function drawQuadratic()
+                local x,y;
+                  for x = -100, 100, 0.1 do
+                    y = math.pow(x,2) - 4*x + 4;
+                    quad:Add(x,y)
+                  end
+                  quad:Update()
+                end
+                
+                local function drawRecipQuadratic()
+                local x,y;
+                  for x = -100, 100, 0.1 do
+                    y = 1/(math.pow(x,2) - 4*x + 4);
+                    recipQuad:Add(x,y)
+                  end
+                  recipQuad:Update()
+                end
+                
+                local xAxis = myPlot.xAxis;
+                local yAxis = myPlot.yAxis;
+
+                xAxis:Add(-100,0)
+                xAxis:Add(100,0)
+
+                yAxis:Add(0,-100)
+                yAxis:Add(0,100)
+                
+                drawQuadratic();
+                drawRecipQuadratic();
+                ]]>
+        </script>
+      </stack>
+
+      <!--toggling buttons-->
+      <stack orientation="horizontal">
+        <button name="button1" content="Hide f(x)">
+          <onClick>
+            <![CDATA[
+              if button1.Text == "Hide f(x)" then
+                plotStack.myPlot.aSeries.Visible = false;
+                button1.Text = "Show f(x)"
+              elseif button1.Text == "Show f(x)" then
+                plotStack.myPlot.aSeries.Visible = true;
+                button1.Text = "Hide f(x)"
+              end
+              ]]>
+          </onClick>
+        </button>
+        <button name="button2" content="Hide g(x)">
+          <onClick>
+            <![CDATA[
+              if button2.Text == "Hide g(x)" then
+                plotStack.myPlot.bSeries.Visible = false;
+                button2.Text = "Show g(x)";
+              elseif button2.Text == "Show g(x)" then
+                plotStack.myPlot.bSeries.Visible = true;
+                button2.Text = "Hide g(x)";
+              end
+              ]]>
+          </onClick>
+        </button>
+      </stack>
+
+    </stack>
+
+    <p style="line">
+      <style>
+        <widthPercentage>1.1</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      _
+    </p>
+
+    <stack style="contentBG">
+      <style>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <p style="centerText">Complete the table for the function $ g(x) = \frac{1}{x^2 - 4x + 4} $</p>
+    </stack>
+
+    <table grid="true" widths="30% 70%">
+      <style>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <row>
+        <column>
+          <p>x-intercept</p>
+        </column>
+        <column>
+          <p>$ 0 = \frac{-1}{(x-2)^2} $... no x-intercept.</p>
+        </column>
+      </row>
+
+      <row>
+        <column>
+          <p>y-intercept</p>
+        </column>
+        <column>
+          <p>$ g(0) = -\frac{1}{4}$</p>
+        </column>
+      </row>
+
+      <row>
+        <column>
+          <p>Horizontal Asymptote</p>
+        </column>
+        <column>
+          <p>$ y = 0 $</p>
+        </column>
+      </row>
+
+      <row>
+        <column>
+          <p>Vertical Asymptote</p>
+        </column>
+        <column>
+          <p>
+            Set the denominator = 0 and solve for x. <br />
+            $ x^2 - 4x + 4 = 0 $ <br />
+            $ (x-2)^2 = 0 $ <br />
+            $ x = 2 $ <br />
+            Vertical asymptote at $x = 2$.
+          </p>
+        </column>
+      </row>
+
+      <row>
+        <column>
+          <p>Domain</p>
+        </column>
+        <column>
+          <p>
+            $ {x \in \mathbf{R}|x \neq 2} $
+          </p>
+        </column>
+      </row>
+
+      <row>
+        <column>
+          <p>Range</p>
+        </column>
+        <column>
+          <p>
+            $ {y \in \mathbf{R} | y \textless 0} $
+          </p>
+        </column>
+      </row>
+
+      <row>
+        <column>
+          <p>
+            End Behaviours: <br />
+            What happens as $ x \rightarrow  \infty$ and the vertical asymptote?
+          </p>
+        </column>
+        <column>
+          <p>
+            As $ x \rightarrow  2^{-} $, $ g(x) \rightarrow -\infty $ <br />
+            As $ x \rightarrow  2^{+} $, $ g(x) \rightarrow -\infty $ <br />
+            As $ x \rightarrow  \infty $, $ g(x) \rightarrow 0 $ <br />
+            As $ x \rightarrow  -\infty $, $ g(x) \rightarrow 0 $ <br />
+          </p>
+        </column>
+      </row>
+    </table>
+  </sectionNoTitle>
+
+  <!--Example 3-->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">
+      Example 3
+    </p>
+
+    <stack style="contentBG">
+      <style>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <p style="centerText">Consider the graph of $ f(x) = 2x^2 - 9x - 5 $ and $ g(x) = \frac{1}{2x^2 - 9x - 5} $. Predict the number of asymptotes $f(x)$ has.</p>
+
+      <!--plot-->
+      <stack orientation="vertical" name="plotStack">
+        <style>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <style name="blackLine">
+          <foreground color="black" />
+        </style>
+        <style name="functionLineRed">
+          <foreground color="red" />
+          <lineThickness>2</lineThickness>
+        </style>
+        <style name="functionLineGreen">
+          <foreground color="green" />
+          <lineThickness>2</lineThickness>
+        </style>
+        <xyPlot name="myPlot" pan="disabled" tap="disabled" zoom="disabled">
+          <axis auto="fixed" dim="y" min="-10" max="10" major="true"></axis>
+          <axis auto="fixed" dim="x" min="-20" max="20" major="true"></axis>
+          <series name="xAxis" manual="true" style="blackLine" />
+          <series name="yAxis" manual="true" style="blackLine" />
+          <series name="aSeries" manual="true" style="functionLineRed" visible="true" />
+          <series name="bSeries" manual="true" style="functionLineGreen" visible="true" />
+        </xyPlot>
+
+        <script>
+          <![CDATA[
+                
+                local quad = myPlot.aSeries;
+                local recipQuad = myPlot.bSeries;
+
+
+                function calculateQuadratic(x)
+                  local y;
+                  
+                  y = 2*(math.pow(x,2)) - 9*x - 5;
+                  return y;
+                end
+                
+                function calculateRecipQuadratic(x)
+                  local y;
+                  
+                  y = 1/(2*(math.pow(x,2)) - 9*x - 5);
+                  return y;
+                end
+                
+                local function drawQuadratic()
+                  local x,y;
+                  for x = -100, 100, 0.1 do
+                    y = calculateQuadratic(x);
+                    quad:Add(x,y)
+                  end
+                  quad:Update()
+                end
+                
+                local function drawRecipQuadratic()
+                local x,y;
+                  for x = -100, 100, 0.1 do
+                    y = calculateRecipQuadratic(x);
+                    recipQuad:Add(x,y)
+                  end
+                  recipQuad:Update()
+                end
+                
+                local xAxis = myPlot.xAxis;
+                local yAxis = myPlot.yAxis;
+
+                xAxis:Add(-100,0)
+                xAxis:Add(100,0)
+
+                yAxis:Add(0,-100)
+                yAxis:Add(0,100)
+                
+                drawQuadratic();
+                drawRecipQuadratic();
+                ]]>
+        </script>
+      </stack>
+
+      <!--toggling buttons-->
+      <stack orientation="horizontal">
+        <button name="button1" content="Hide f(x)">
+          <onClick>
+            <![CDATA[
+              if button1.Text == "Hide f(x)" then
+                plotStack.myPlot.aSeries.Visible = false;
+                button1.Text = "Show f(x)"
+              elseif button1.Text == "Show f(x)" then
+                plotStack.myPlot.aSeries.Visible = true;
+                button1.Text = "Hide f(x)"
+              end
+              ]]>
+          </onClick>
+        </button>
+
+        <button name="button2" content="Hide g(x)">
+          <onClick>
+            <![CDATA[
+              if button2.Text == "Hide g(x)" then
+                plotStack.myPlot.bSeries.Visible = false;
+                button2.Text = "Show g(x)";
+              elseif button2.Text == "Show g(x)" then
+                plotStack.myPlot.bSeries.Visible = true;
+                button2.Text = "Hide g(x)";
+              end
+              ]]>
+          </onClick>
+        </button>
+      </stack>
+
+      <table name="slider" widths="50% 50%" grid="false">
+        <row>
+          <column>
+            <p name="xText" style="centerText">x = 0</p>
+          </column>
+          <column>
+            <style>
+              <widthPercentage>80%</widthPercentage>
+            </style>
+            <slider name="mySlider" min="-10" max="10" value="0">
+              <onValueChanged>
+                <![CDATA[
+                    slider:Child(1):Child(1):Child(1).Text = "x = "..round(value,0.1);
+                    results:Child(1).Text = "f(x) = "..round(calculateQuadratic(value),0.1);
+                    results:Child(2).Text = "g(x) = "..round(calculateRecipQuadratic(value),0.1);
+                ]]>
+              </onValueChanged>
+            </slider>
+          </column>
+        </row>
+      </table>
+
+      <stack name="results" orientation="horizontal">
+        <p style="centerText bgRed">f(x) = </p>
+        <p style="centerText bgGreen">g(x) = </p>
+      </stack>
+
+    </stack>
+
+    <p style="line">
+      <style>
+        <widthPercentage>1.1</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      _
+    </p>
+
+    <stack style="contentBG">
+      <style>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <p style="centerText">Complete the table for the function $ g(x) = \frac{1}{2x^2 - 9x - 5} $</p>
+    </stack>
+
+    <table grid="true" widths="30% 70%">
+      <style>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <row>
+        <column>
+          <p>x-intercept</p>
+        </column>
+        <column>
+          <p>no x-intercept. </p>
+        </column>
+      </row>
+
+      <row>
+        <column>
+          <p>y-intercept</p>
+        </column>
+        <column>
+          <p>$ g(0) = -\frac{1}{5}$</p>
+        </column>
+      </row>
+
+      <row>
+        <column>
+          <p>Horizontal Asymptote</p>
+        </column>
+        <column>
+          <p>$ y = 0 $</p>
+        </column>
+      </row>
+
+      <row>
+        <column>
+          <p>Vertical Asymptote</p>
+        </column>
+        <column>
+          <p>
+            Set the denominator = 0 and solve for x. <br />
+            $ 2x^2 - 9x - 5 = 0 $ <br />
+            $ (2x + 1)(x - 5) = 0 $ <br />
+            Vertical asymptote at $x = -\frac{1}{2}$, $ x = 5 $.
+          </p>
+        </column>
+      </row>
+
+      <row>
+        <column>
+          <p>Domain</p>
+        </column>
+        <column>
+          <p>
+            $ {x \in \mathbf{R}|x \neq -\frac{1}{2},5} $
+          </p>
+        </column>
+      </row>
+
+      <row>
+        <column>
+          <p>Range</p>
+        </column>
+        <column>
+          <p>
+            $ {y \in \mathbf{R} | y \neq 0} $
+          </p>
+        </column>
+      </row>
+
+      <row>
+        <column>
+          <p>
+            End Behaviours: <br />
+            What happens as $ x \rightarrow  \infty$ and the vertical asymptote?
+          </p>
+        </column>
+        <column>
+          <p>
+            As $ x \rightarrow  -\frac{1}{2}^{-} $, $ g(x) \rightarrow +\infty $ <br />
+            As $ x \rightarrow  -\frac{1}{2}^{+} $, $ g(x) \rightarrow -\infty $ <br />
+            As $ x \rightarrow  5^{-} $, $ g(x) \rightarrow -\infty $ <br />
+            As $ x \rightarrow  5^{+} $, $ g(x) \rightarrow +\infty $ <br />
+            As $ x \rightarrow  \infty $, $ g(x) \rightarrow 0 $
+          </p>
+        </column>
+      </row>
+    </table>
+
+    <stack style="contentBG" orientation="vertical">
+      <p>You can also provide a detail description of the function:</p>
+      <p>- Reaches a LOCAL max on the interval $-0.5 \textless x \textless 5$ at $x = 2.25$ and $y = -0.066$</p>
+      <p>- f(x) increases when $x \textless -0.5$, $-0.5 \textless x \textless 2.25$</p>
+      <p>- f(x) decreases when $2.25 \textless x \textless 5$ , $x \textgreater 5$</p>
+      <p>- f(x) is negative when $-0.5 \textless x \textless 5$</p>
+    </stack>
+  </sectionNoTitle>
+
+  <!--Practice-->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">
+      Practice
+    </p>
+
+
+    <stack style="contentBG">
+      <p style="subSectionHeading">
+        Question 1
+        <br />
+      </p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="curriculumThemePack/question.png" inspect="false" />
+          </column>
+          <column>
+            <p style="justifiedText">How many vertical asymptotes does $ y = \frac{1}{x^2 - 10x + 25} $ have? </p>
+          </column>
+        </row>
+      </table>
+      <textField name="myInput" style="centerText">
+        <placeholder>
+          Type your answer here
+        </placeholder>
+      </textField>
+
+      <button name="checkBtn" content="Check Answer">
+        <onClick>
+          <![CDATA[
+          if myInput.Text == "1" then
+            checkBtn.Style.BackgroundColor = "green";
+          else
+            checkBtn.Style.BackgroundColor = "red";
+          end
+          
+          ]]>
+        </onClick>
+      </button>
+      <style>
+        <marginBottom>50</marginBottom>
+      </style>
+    </stack>
+
+    <stack style="contentBG">
+      <p style="subSectionHeading">
+        Question 2
+        <br />
+      </p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="curriculumThemePack/question.png" inspect="false" />
+          </column>
+          <column>
+            <p style="justifiedText">How many vertical asymptotes does $ y = \frac{1}{x^2 - 1} $ have? </p>
+          </column>
+        </row>
+      </table>
+      <textField name="myInput" style="centerText">
+        <placeholder>
+          Type your answer here
+        </placeholder>
+      </textField>
+
+      <button name="checkBtn" content="Check Answer">
+        <onClick>
+          <![CDATA[
+          if myInput.Text == "2" then
+            checkBtn.Style.BackgroundColor = "green";
+          else
+            checkBtn.Style.BackgroundColor = "red";
+          end
+          
+          ]]>
+        </onClick>
+      </button>
+      <style>
+        <marginBottom>50</marginBottom>
+      </style>
+    </stack>
+
+    <stack style="contentBG">
+      <p style="subSectionHeading">
+        Question 3
+        <br />
+      </p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="curriculumThemePack/question.png" inspect="false" />
+          </column>
+          <column>
+            <p style="justifiedText">How many vertical asymptotes does $ y = \frac{1}{1 + 2x^2} $ have? </p>
+          </column>
+        </row>
+      </table>
+      <textField name="myInput" style="centerText">
+        <placeholder>
+          Type your answer here
+        </placeholder>
+      </textField>
+
+      <button name="checkBtn" content="Check Answer">
+        <onClick>
+          <![CDATA[
+          if myInput.Text == "0" then
+            checkBtn.Style.BackgroundColor = "green";
+          else
+            checkBtn.Style.BackgroundColor = "red";
+          end
+          
+          ]]>
+        </onClick>
+      </button>
+      <style>
+        <marginBottom>50</marginBottom>
+      </style>
+    </stack>
+
+    <stack name="mcStack" style="mcStackLayout">
+      <script>
+        local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=1})
+      </script>
+      <p style="subSectionHeading">Question 4</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="curriculumThemePack/question.png" inspect="false" />
+          </column>
+          <column>
+            <p style="justifiedText">The domain of $ \frac{1}{x^2 + 5x - 14} $ is: </p>
+          </column>
+        </row>
+      </table>
+      <table name="choicesTable" grid="false" widths="50% 50%">
+        <row>
+          <column>
+            <p style="centerText">$ {x \in \mathbf{R}|x \neq -7,2} $</p>
+          </column>
+          <column>
+            <p style="centerText">$ {x \in \mathbf{R}|x \neq -2,7} $</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="A" style="btnUnselected">
+              <onClick>
+                mcController:select(1)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="B" style="btnUnselected">
+              <onClick>
+                mcController:select(2)
+              </onClick>
+            </button>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p style="centerText">$ {x \in \mathbf{R}|x \neq 0} $</p>
+          </column>
+          <column>
+            <p style="centerText">$ {x \in \mathbf{R}|x \neq 2} $</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="C" style="btnUnselected">
+              <onClick>
+                mcController:select(3)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="D" style="btnUnselected">
+              <onClick>
+                mcController:select(4)
+              </onClick>
+            </button>
+          </column>
+        </row>
+      </table>
+      <button name="checkBtn" content="Check Answer">
+        <onClick>
+          mcController:checkAnswer()
+        </onClick>
+      </button>
+    </stack>
+    <stack name="mcStack2" style="mcStackLayout">
+      <script>
+        local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=1})
+      </script>
+      <p style="subSectionHeading">Question 5</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="curriculumThemePack/question.png" inspect="false" />
+          </column>
+          <column>
+            <p style="justifiedText">The domain of $ \frac{-1}{x^2 + 12x + 36} $ is: </p>
+          </column>
+        </row>
+      </table>
+      <table name="choicesTable" grid="false" widths="50% 50%">
+        <row>
+          <column>
+            <p style="centerText">$ {x \in \mathbf{R}|x \neq -6,6} $</p>
+          </column>
+          <column>
+            <p style="centerText">$ {x \in \mathbf{R}|x \neq -6} $</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="A" style="btnUnselected">
+              <onClick>
+                mcController:select(1)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="B" style="btnUnselected">
+              <onClick>
+                mcController:select(2)
+              </onClick>
+            </button>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p style="centerText">$ {x \in \mathbf{R}|y \textgreater 0} $</p>
+          </column>
+          <column>
+            <p style="centerText">$ {x \in \mathbf{R}|y \textless 2} $</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="C" style="btnUnselected">
+              <onClick>
+                mcController:select(3)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="D" style="btnUnselected">
+              <onClick>
+                mcController:select(4)
+              </onClick>
+            </button>
+          </column>
+        </row>
+      </table>
+      <button name="checkBtn" content="Check Answer">
+        <onClick>
+          mcController:checkAnswer()
+        </onClick>
+      </button>
+    </stack>
+
+  </sectionNoTitle>
+
+  <!--Summary -->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Summary</p>
+    <stack style="contentBG">
+      <p>There are 3 types of reciprocal quadratic functions, $ y = \frac{1}{Q(x)} $. The behaviour (s) near the asymptote(s) can be predicted by analysing the roots of the quadratic relation in the denominator. </p>
+    </stack>
+    <table grid="true" widths="25% 25% 25% 25%">
+      <head>
+        <column>
+          <p># of Roots of Q(x)</p>
+        </column>
+        <column>
+          <p># of V.A.</p>
+        </column>
+        <column>
+          <p># of Branches</p>
+        </column>
+        <column>
+          <p>Shape of Graph</p>
+        </column>
+      </head>
+      <row>
+        <column>
+          <p>
+            0
+          </p>
+        </column>
+        <column>
+          <p>
+            0
+          </p>
+        </column>
+        <column>
+          <p>
+            1 continuous
+          </p>
+        </column>
+        <column>
+          <image src="resources/quad1.png" />
+        </column>
+      </row>
+      <row>
+        <column>
+          <p>
+            1
+          </p>
+        </column>
+        <column>
+          <p>
+            1
+          </p>
+        </column>
+        <column>
+          <p>
+            2 discontinuous
+          </p>
+        </column>
+        <column>
+          <image src="resources/quad3.png" />
+        </column>
+      </row>
+      <row>
+        <column>
+          <p>
+            2
+          </p>
+        </column>
+        <column>
+          <p>
+            2
+          </p>
+        </column>
+        <column>
+          <p>
+            3 discontinuous; middle branch reaches a local max/min @ midpoint between V.A.'s
+          </p>
+        </column>
+        <column>
+          <image src="resources/quad2.png" />
+        </column>
+      </row>
+    </table>
+  </sectionNoTitle>
+
+</document>

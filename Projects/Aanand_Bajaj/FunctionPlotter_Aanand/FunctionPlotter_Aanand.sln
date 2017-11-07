@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{3509FA56-3B69-4017-88D1-3C70D67D8588}") = "FunctionPlotter_Aanand", "FunctionPlotter_Aanand\FunctionPlotter_Aanand.qdexproj", "{D3C8C5A9-D110-410C-997C-8C4B63A5DDF2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D3C8C5A9-D110-410C-997C-8C4B63A5DDF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3C8C5A9-D110-410C-997C-8C4B63A5DDF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3C8C5A9-D110-410C-997C-8C4B63A5DDF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3C8C5A9-D110-410C-997C-8C4B63A5DDF2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

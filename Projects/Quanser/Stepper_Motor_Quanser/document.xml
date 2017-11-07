@@ -1,0 +1,310 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G07CA4560_0095_4270_A7B4_59C4F82E5314">
+  <!-- Meta Data -->
+  <!--Stepper Motor v3: Updated to plotTools v6.1. Removed NaN method in drawing. Reorganized buttonsStack for autoStack capabilities (improved display on phones). -->
+  <metadata>
+    <title>Stepper Motor</title>
+    <creator>Quanser Consulting Inc.</creator>
+    <contributor>Ursula Chen</contributor> <!-- Co-op Student Jan 2016 - Aug 2016 -->
+    <abstract>This app is a companion to the Instructor's Workbook of the QNET Mechatronic Actuators Board for NI ELVIS - Stepper Motor.</abstract>
+    <coverImage src="resources/Cover.png" />
+  </metadata>
+  
+  <include src="plotTools v6.1.xml" />
+  <include src="NI_ThemePack/NI_Styles.xml" />
+  <include src="NI_ThemePack/NI_FooterMain.xml" />
+  
+    <style name="mySeries">
+        <foreground color="silver" />
+    </style>
+    <style name="coilOff">
+        <foreground color="sienna" />
+    </style>
+    <style name="coilOn">
+        <foreground color="darkOrange" />
+    </style>
+  
+    <!--Title Page-->
+    <sectionNoTitle>
+        <!-- DRM: Titles must come immediately after the section tag -->
+        <image src="NI_ThemePack/CoverBanner3.jpg" style="xlarge noMargins" inspect="false" />
+        <p>
+        </p>
+        <p style="sectionHeadings sectionLevel1Headings">STEPPER MOTOR</p>
+        <p style="center">QNET Mechatronic Actuators Board for NI ELVIS</p>
+        <p style="center">Developed by Quanser</p>
+        <p style="center">
+            <b>Curriculum designed by:</b>
+            <br />
+            Peter Martin, M. A. Sc., Quanser<br />
+            Matthias Krug, Ph. D., Quanser<br />
+            Jacob Apkarian, Ph. D., Quanser
+        </p>
+    </sectionNoTitle>
+  
+  <!--Main Content-->
+    <section>
+        <title>Stepper Motor</title>
+        <!--Background Information-->
+        <section>
+            <title>Background</title>
+            <image src="resources/Cover.png" style="medium" inspect="false" />
+            <p>
+              Stepper motors provide precise position control and can be found in electronics such as printers, plotters, and CNC milling machines.
+              In contrast to the continuous rotation of a brushed or brushless DC motor, a stepper motor rotates the armature in
+              discrete steps. The amount of steps it takes to complete a full revolution determines the stepper motor’s step size.
+              As the motor is only stepping between known distinct positions, it is possible to command it to hold a certain position
+              without requiring any feedback sensors. This kind of control is called open-loop control and is easily implemented.
+              To perform the same position control task with brushed or brushless DC motors requires sensor data feedback and
+              is called closed-loop control.
+            </p>
+        </section>
+
+      <!--Hidden extended Bckground Information-->
+      <sectionNoTitle name="moreBackground" style="collapsed">
+        <figure name="figure2">
+          <title>Figure 2: Schematic of a 4-phase stepper motor</title>
+          <image src="resources/Stepper.png" inspect="false">
+            <style>
+              <widthPercentage>0.4</widthPercentage>
+            </style>
+          </image>
+        </figure>
+        <p>
+          The QNET Mechatronic Actuators uses a unipolar coil winding, as shown in <crossRef ref="moreBackground.figure2">Figure 2</crossRef>. The armature has
+          six teeth that are driven in four phases, resulting in a total of 6 × 4 steps per revolution, or a step size of 15°. There
+          are several excitation modes for stepper motors of this configuration that are explained below, and summarized in
+          Figure 3.
+        </p>
+        <figure name="figure3">
+          <title>Figure 3: Coil current of different drive modes on a 4-phase unipolar stepper motor</title>
+          <image src="resources/Drive Full.png" style="medium" />
+        </figure>
+
+        <section>
+          <title>Wave Drive</title>
+          <p>
+            The most basic excitation mode is called wave drive. In this mode, one phase is on and three phases are off at
+            any given time. At each step, the teeth of the rotor are aligned with the active phase pair, for example A+ and
+            A- in <crossRef ref="moreBackground.figure2"> Figure 2</crossRef>. Once the next step is commanded, the currently active phase pair, A, deactivates and the next
+            phase pair, B, activates, resulting in a 15° step and a total of 24 steps per revolution. This excitation mode is easy
+            to implement, but the holding torque is significantly less than the rated torque of the motor.
+          </p>
+        </section>
+        <section>
+          <title>Full Step Drive</title>
+          <p>
+            To achieve the rated torque, a full step drive is used. In this excitation mode, two neighboring phases are active at
+            any given time, resulting in the maximum rated torque. Starting, for example, from phase A and B being active, a
+            step command deactivates phase A and activates phase C. This approach results in a 15° step and a total of 24
+            steps per revolution.
+          </p>
+        </section>
+        <section>
+          <title>Half-Step Drive</title>
+          <p>
+            Half-step drive is another excitation mode. Here, the motor alternates between one and two active phases,
+            resulting in double the angular resolution of wave or full step drives. Starting from phase A being active, the next
+            step would activate phase A and B, rotating the armature by 7.5°. The next step would deactivate phase A and
+            phase B remains active, moving the armature another 7.5°, resulting in a total of 48 steps for a complete revolution.
+            This also implies that the maximum holding torque is only present when two phases are active, or only for every
+            other step command.
+          </p>
+        </section>
+        <section>
+          <title>Micro-Stepping</title>
+          <p>
+            Lastly, a stepper motor can be excited using micro-stepping. In this excitation mode, the current in each of the phases
+            approximate sinusoids, allowing for very smooth motor operation. It is often referred to as sine cosine micro-stepping
+            and is depicted in <crossRef ref="moreBackground.figure3">Figure 3</crossRef>. In contrast to the other excitation modes described above, micro-stepping requires
+            a more complex amplifier circuitry. Furthermore, as the micro-stepping divisor grows, the step size repeatability
+            degrades.
+          </p>
+        </section>
+      </sectionNoTitle>
+
+      <!--Button to toggle visibility of extended background section-->
+      <button name="backgroundButton" content="Show More Background Information">
+        <onClick>
+          if backgroundButton.Text == "Show More Background Information" then
+          moreBackground.Style.Visibility = "visible"
+          backgroundButton.Text = "Hide Background Information"
+          else
+          moreBackground.Style.Visibility = "collapsed"
+          backgroundButton.Text = "Show More Background Information"
+          end
+        </onClick>
+      </button>
+        
+        <!-- Simulation Section -->
+        <section name="sim">
+            <title>Interaction</title>
+            <p>
+                Select an excitation mode and click <b>Start</b>. Note how the rotor changes orientation according to which coils are charged.
+                Switch to <b>Manual Control</b> to increment or decrement the rotations step by step.
+            </p>
+            <stack name="statusStack">
+                <p name="selectionPrompt" style="quanserRed collapsed">Please select an excitation mode first.</p>
+            </stack>
+          <script>
+            <![CDATA[
+                -- Define a Lua table to represent the buttons.
+                local buttons = {};
+                
+                -- Define state information for the buttons
+                buttons.priorSelection = -1;
+                buttons.manualCheck = 0;
+                
+                --Determines which stack the respective 'mode' buttons are in (Wave Drive = 1, Full Step = 2, Half Step = 3, and Microstep = 4. So 1 and 2 are in stack 1, whereas 3 and 4 are in stack 2).
+                function buttons.childValue(num)
+                  return math.ceil(num/2);
+                end
+                
+                --Identifies which button has been selected within the stack identifies in buttons.childValue(num). 
+                --E.g., Half step = 3, so 2 - math.fmod(3, 2) = 2 - 1 = 1. Therefore half step is the 1st button (from buttons.subChildValue(num) in the 2nd stack (from buttons.childValue(num)
+                function buttons.subChildValue(num)
+                  return 2 - math.fmod(num, 2)
+                end
+                
+                --Changes color of buttons when selected (and resets other previous selection to unselected color). 
+                buttons.chooseButton = function (self, buttonNum)
+                    if self.priorSelection > 0 then
+                        buttonStack:Child(buttons.childValue(self.priorSelection)):Child(buttons.subChildValue(self.priorSelection)).Style.BackgroundColor = niTheme.lightButton;
+                    end
+                    buttonStack:Child(buttons.childValue(buttonNum)):Child(buttons.subChildValue(buttonNum)).Style.BackgroundColor = niTheme.selectedButton
+                    statusStack.selectionPrompt.Style.Visibility = "collapsed"
+                    --startButton.Text = "Start"
+                    self.priorSelection = buttonNum
+                end
+                buttons:chooseButton(1)
+            ]]>
+          </script>
+
+          <!--Included drawing, 'mode' buttons and functions to animate stepper motor in a fragment. 
+          Note: Functions can be accessed across document.xml and Motor.xml, but local variables cannot be manipulated across the files-->
+            <include src="Motor.xml" />
+
+            <!--drawIndicator(): uses xPos values outputted by simulation and manual controls (increment/decrement) to draw position of indicator-->
+            <!--reset(): deselects all excitation mode buttons (wave, full, half, micro), and resets t and xPos to respective starting position. Sets indicatorStep (for plots) value and increment (rotor angle) value.-->
+            <!--checkCoilPattern(): determines which coil pattern algorithm to use according to button selected-->
+            <!--checkPlots(): controls which plots are visible according to the active excitation pattern-->
+            <!--spinRotor()-->
+            <script>
+                <![CDATA[
+                motor:spinRotor()
+                -- Define methods for the buttons
+                
+                buttons.reset = function (self)
+                    if buttonStack:Child(2).half.Style.BackgroundColor == niTheme.selectedButton then
+                        motor:reset('half');
+                    elseif buttonStack:Child(1).wave.Style.BackgroundColor == niTheme.selectedButton then
+                        motor:reset('wave');
+                    elseif buttonStack:Child(1).full.Style.BackgroundColor == niTheme.selectedButton then
+                        motor:reset('full');
+                    elseif buttonStack:Child(2).micro.Style.BackgroundColor == niTheme.selectedButton then
+                        motor:reset('micro');
+                    end
+                end
+                buttons:reset()
+                ]]>
+            </script>
+          
+          <!--Two interactive experiences are offered to users after they select a drive mode: Auto Mode and Manual Control. Only one 'experience' can be selected at a time.
+          Auto Mode: Upon clicking the startButton, will continuously increment/rotate the rotor until stopped (rotations can be stopped by: switching to Manual Control, selecting another drive mode button or selecting the startButton again (when .Text == "Stop" 
+          Manual Control: Allows users increment (or decrement) the rotor one step at a time, as they select the increment (or decrement) button-->
+          
+          <!--Start Button is initially visible when the page is opened and when the interaction is in 'Auto Mode', but will be collapsed if Manual Control is activated-->
+          <!--If Start Button is removed, selectionPrompt becomes obsolete-->
+          <button name="startButton" content="Start">
+            <style>
+              <marginTop>0</marginTop>
+              <background color="seaGreen" />
+            </style>
+            <onClick>
+              if buttons.priorSelection &gt; 0 then
+              statusStack.selectionPrompt.Style.Visibility = "collapsed"
+              if startButton.Text == "Start" then
+              stepSim:Start()
+              startButton.Style.BackgroundColor = color.fireBrick
+              startButton.Text = "Stop"
+              else
+              stepSim:Stop()
+              startButton.Style.BackgroundColor = color.seaGreen
+              startButton.Text = "Start"
+              end
+              else
+              statusStack.selectionPrompt.Style.Visibility = "visible"
+              end
+            </onClick>
+          </button>
+          
+            <!--manualStack: Manual Control buttons (Decrement, Increment) are initially collapsed when the page is opened and when Auto Mode is active, but becomes visible when Manual Control is activated.-->
+            <stack name="manualStack" orientation="horizontal" style="collapsed">
+                <button content="Decrement">
+                  <style>
+                    <background color="darkGray" />
+                    <marginTop>0</marginTop>
+                  </style>
+                    <onClick>
+                        <![CDATA[
+                        if buttons.priorSelection < 0 then
+                            statusStack.selectionPrompt.Style.Visibility = "visible"
+                        else
+                            motor:decrementRotor();
+                        end
+                        ]]>
+                    </onClick>
+                </button>
+                <button content="Increment">
+                  <style>
+                    <background color="darkGray" />
+                    <marginTop>0</marginTop>
+                  </style>
+                    <onClick>
+                        <![CDATA[
+                        if buttons.priorSelection < 0 then
+                            statusStack.selectionPrompt.Style.Visibility = "visible"
+                        else
+                            motor:incrementRotor();
+                        end
+                        ]]>
+                    </onClick>
+                </button>
+            </stack>
+            
+            <!--manualButton: toggles the controls between Auto and Manual Control Experiences-->
+            <button name="manualButton" content="Switch to Manual Control">
+              <style>
+                <marginTop>0</marginTop>
+              </style>
+                <onClick>
+                    <![CDATA[
+                    stepSim:Stop()
+                    if manualButton.Text == "Switch to Manual Control" then
+                        startButton.Style.Visibility = "collapsed"
+                        manualStack.Style.Visibility = "visible"
+                        manualButton.Text = "Switch to Auto Mode"
+                        buttons.manualCheck = 1
+                    else
+                        startButton.Style.Visibility = "visible"
+                        manualStack.Style.Visibility = "collapsed"
+                        manualButton.Text = "Switch to Manual Control"
+                        buttons.manualCheck = 0
+                        startButton.Style.BackgroundColor = color.seaGreen
+                        startButton.Text = "Start"
+                    end
+                    motor:spinRotor()
+                    ]]>
+                </onClick>
+            </button>
+            <simulation name="stepSim" period="1">
+                <onActivePageChanged>
+                    stepSim:Stop()
+                </onActivePageChanged>
+                <onUpdate>
+                    motor:update();
+                </onUpdate>
+            </simulation>
+        </section>
+    </section>
+</document>

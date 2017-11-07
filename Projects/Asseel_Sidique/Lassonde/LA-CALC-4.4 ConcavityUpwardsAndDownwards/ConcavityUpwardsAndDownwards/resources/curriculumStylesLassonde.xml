@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fragment xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd">
+
+
+  <!-- Question mark icon by Freepik (http://www.freepik.com) from http://www.flaticon.com -->
+  <!-- Letter A icon by Freepik (http://www.freepik.com) from http://www.flaticon.com -->
+  <!-- Cross mark icon by Dave Gandy (http://fontawesome.io) from http://www.flaticon.com -->
+  <!-- Check sign icon by Elegant Themes (http://www.elegantthemes.com) from http://www.flaticon.com -->
+
+
+  <!-- Overall theme color. SHould be a very light shade.  -->
+
+  <!-- Title theme colour. Should be a darker shade of themeColour -->
+  <style name="themeColourTitle">
+    <foreground color="64 64 64" />
+  </style>
+
+
+  <!-- YorkU Red Color-->
+  <style name="themeColour">
+    <background color="232 12 46"/>
+  </style>
+
+  <style name="noMargins">
+    <marginLeft>0</marginLeft>
+    <marginRight>0</marginRight>
+    <marginTop>0</marginTop>
+    <marginBottom>0</marginBottom>
+  </style>
+
+  <style name="button">
+    <foreground color="black"/>
+    <background color="transparent"/>
+  </style>
+
+  <!-- COLORS FOR STACK BACKGROUNDS -->
+  <style name="contentBG2">
+    <background color="200 200 200"/>
+  </style>
+
+  <style name="contentBG">
+    <background color="225 225 225" />
+  </style>
+  
+  <!-- TAB LAYOUT BUTTONS-->
+  <style name="tab" link="contentBG2">
+    <foreground color="black"/>
+    <borderColor color="transparent"/>
+  </style>
+  
+  <!--Default Page Layout 80 %-->
+  <style name="pageLayout">
+    <widthPercentage>80%</widthPercentage>
+    <horizontalAlignment>center</horizontalAlignment>
+  </style>
+
+  <!--Chapter Title-->
+  <style name="chapterTitle" link="themeColourTitle">
+    <size scale="xlarge" />
+    <textAlignment>right</textAlignment>
+    <marginTop>50</marginTop>
+    <marginBottom>50</marginBottom>
+  </style>
+
+  <!--- Make all section headings bold -->
+  <style name="sectionHeading" link="themeColourTitle">
+    <bold>true</bold>
+    <marginTop>20</marginTop>
+    <marginBottom>10</marginBottom>
+    <size scale="large"/>
+    <foreground color="100 100 100"/>
+  </style>
+
+  <!-- Define a style for section level 2 headings to make the font a bit larger -->
+  <style name="subSectionHeading">
+    <bold>true</bold>
+    <marginTop>10</marginTop>
+    <marginBottom>10</marginBottom>
+    <size scale="normal"/>
+  </style>
+
+  <!--MULTIPLE CHOICE BUTTON-->
+  <style name="btnUnselected">
+    <background color="transparent"/>
+    <foreground color="black"/>
+  </style>
+
+  <!--MULTIPLE CHOICE SELECTED BUTTON-->
+  <style name="btnSelected">
+    <background color="232 12 46"/>
+    <foreground color="white"/>
+  </style>
+  
+  <!--MULTIPLE CHOICE CORRECT BUTTON-->
+  <style name="btnCorrect">
+    <background color="green"/>
+    <foreground color="white"/>
+  </style>
+
+  <style name="lightRedBackground">
+    <background color="232 12 46 50"/>
+  </style>
+
+  <style>
+    <counter name="chaptNum" format="decimal"/>
+  </style>
+
+  <style name="chapterNumber" link="themeColourTitle">
+    <size scale="10"/>
+    <textAlignment>right</textAlignment>
+
+    <increment counter="chaptNum"/>
+    <numbering counter="chaptNum" mode="hierarchical" suffix="true"/>
+  </style>
+
+  <style name="chapterContents" cascading="true">
+    <horizontalAlignment>right</horizontalAlignment>
+    <marginTop>200</marginTop>
+    <marginBottom>200</marginBottom>
+  </style>
+
+  <style>
+    <counter name="contentBullet" format="decimal"/>
+  </style>
+
+  <style name="numbered">
+    <increment counter="contentBullet"/>
+    <numbering counter="contentBullet" mode="flat" pattern="1.#   "/>
+  </style>
+
+  <style name="stripe" link="themeColour">
+    <widthPercentage>0.3</widthPercentage>
+  </style>
+
+
+  <style name="questionAnswer" link="contentBG">
+    <widthPercentage>0.9</widthPercentage>
+    <horizontalAlignment>center</horizontalAlignment>
+    <marginBottom>20</marginBottom>
+    <marginTop>20</marginTop>
+  </style>
+
+  <style name="title" link="themeColourTitle">
+    <bold>true</bold>
+    <size scale="0.8"/>
+  </style>
+
+  <style name="icon">
+    <widthPercentage>0.1</widthPercentage>
+  </style>
+
+  <style name="definition" link="themeColour">
+    <bold>true</bold>
+    <marginLeft>40</marginLeft>
+    <marginRight>40</marginRight>
+  </style>
+
+  <style>
+    <counter name="codeNumber" format="decimal" parent="sections"/>
+  </style>
+
+  <style name="codeTitle">
+    <increment counter="codeNumber"/>
+    <numbering counter="codeNumber" mode="hierarchical">
+      <pattern>
+        <b>Code Snippet #</b>
+      </pattern>
+    </numbering>
+  </style>
+
+
+  <style name="codeBorder" link="themeColour">
+    <widthPercentage>0.5</widthPercentage>
+    <horizontalAlignment>center</horizontalAlignment>
+  </style>
+
+  <style name="border">
+    <background color="white"/>
+    <marginLeft>4</marginLeft>
+    <marginRight>4</marginRight>
+    <marginTop>4</marginTop>
+    <marginBottom>4</marginBottom>
+  </style>
+
+  <style name="tableHeaders" link="themeColour" />
+
+  <style name="summary" link="themeColour">
+    <widthPercentage>0.9</widthPercentage>
+    <horizontalAlignment>center</horizontalAlignment>
+    <marginBottom>20</marginBottom>
+  </style>
+
+  <style name="collapsed">
+    <visibility>collapsed</visibility>
+  </style>
+
+  <style>
+    <counter name="questions"/>
+  </style>
+
+  <style name="qNum">
+    <numbering counter="questions" mode="flat" pattern="QUESTION #"/>
+    <increment counter="questions"/>
+  </style>
+
+  <style name="iconSci">
+    <widthPercentage>0.9</widthPercentage>
+  </style>
+
+  <style name="sciNot">
+    <size scale="0.9"/>
+    <textAlignment>center</textAlignment>
+  </style>
+
+  <style name="iconSol">
+    <widthPercentage>0.11</widthPercentage>
+  </style>
+
+  <style name="iconMulti">
+    <widthPercentage>0.17</widthPercentage>
+  </style>
+
+  <style name="finalStyle" link="noMargins">
+    <foreground color="gray"/>
+    <size scale="0.8"/>
+    <textAlignment>center</textAlignment>
+  </style>
+
+  <style name="center">
+    <textAlignment>center</textAlignment>
+  </style>
+
+  <style name="finalTF">
+    <foreground color="gray"/>
+    <textAlignment>center</textAlignment>
+  </style>
+
+  <style name="TF" link="margins">
+    <widthPercentage>1</widthPercentage>
+  </style>
+
+  <style name="iconTF">
+    <widthPercentage>0.29</widthPercentage>
+  </style>
+
+  <style name="select">
+    <background color="gray"/>
+  </style>
+
+  <style name="invisible">
+    <visibility>collapsed</visibility>
+  </style>
+
+
+
+</fragment>

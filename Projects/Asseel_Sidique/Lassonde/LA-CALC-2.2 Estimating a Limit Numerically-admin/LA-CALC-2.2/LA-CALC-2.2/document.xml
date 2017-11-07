@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="GAF3C4215_50EC_47AA_909B_8EFC86566223">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>LA-CALC-2.2 Estimating a Limit Numerically</title>
+    <creator>Aanand</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/lassondeLogo.png" />
+  </metadata>
+
+
+  <include src="resources/curriculumStylesLassonde.xml" />
+  <include src="resources/plotTools.xml" />
+  <include src="resources/Utilities.xml" />
+  <!--Header & Footer-->
+  <style name="backgroundColor">
+    <background color="232 12 46" />
+  </style>
+  <style name="fontColor">
+    <foreground color="255 255 255" />
+  </style>
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="fontColor"></p>
+      <p style="fontColor rightText"></p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>20</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--Header & Footer END-->
+
+  <!--intro-->
+  <section style="pageLayout">
+    <title style="chapterTitle">2.2 Estimating A Limit Numerically</title>
+    <p style="sectionHeading">Introduction</p>
+    <stack style="contentBG">
+      <p>
+        When estimating a limit of a function as x approaches a constant, algebraic tools can usually be used to solve the limit. In this lesson, we will take a look at some examples of solving limits without graphs or tables.
+      </p>
+    </stack>
+  </section>
+
+  <!--Summary-->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Summary</p>
+    <stack style="contentBG">    
+      <p>If given a limit problem, we should use the following steps:</p>
+      <p>
+        <b>1: </b>Try solving the problem by inputting x into the problem.
+      </p>
+      <p>
+        <b>2: </b>If arrive at $ \frac{0}{0} $, try to use algebraic manipulation to solve for the limit as x approaches a constant.
+      </p>
+      <p>
+        <b>3: </b>If cannot use algebraic tools (factoring, conjugation, etc.) use a table or a graph to solve for the limit as x approaches a constant.
+      </p>
+      <p>However, first we should determine whether the problem can be solved without the need for a table.</p>
+    </stack>
+
+    <p style="sectionHeading">Example 1</p>
+    <stack style="contentBG">
+        <p>solve: $ \lim_{x\rightarrow 2} (12x^2 - 3x + 8) $</p>
+        <p>$ (12(2)^2 - 3(2) + 8) = 50 $</p>
+      </stack>
+
+    <p style="sectionHeading">Example 2</p>
+    <stack style="contentBG">
+        <p>Solve: $ \lim_{x\rightarrow -5} \frac{x^2 - 25}{x^2 + 2x - 15} $</p>
+        <p>If we just plug-in -5, we will get 0/0, and thus will have to use the table method to solve this problem. However, if we look more closely, we can simplify the problem and then compute the limit again.</p>
+        <p>$ \lim_{x\rightarrow -5} \frac{x^2 - 25}{x^2 + 2x - 15} = \lim_{x\rightarrow -5} \frac{(x - 5)(x+5)}{(x - 3)(x + 5)} = \lim_{x\rightarrow -5} \frac{x-5}{x-3} $</p>
+        <p>We then plug-in -5 and arrive at $ \frac{-10}{-8} = \frac{5}{4} $</p>
+      </stack>
+  </sectionNoTitle>
+
+
+  <sectionNoTitle name="section4" style="pageLayout">
+    <script>
+      local stepsController = StepsController:new({stepsStack=stepsStack, numOfSteps=3})
+    </script>
+    <p style="sectionHeading">Step-By-Step Example</p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="subSectionHeading">Question 1</p>
+      <p style="justifiedText">Solve: $ \lim_{x\rightarrow 4} \frac{3 - \sqrt{x+5}}{x-4} $
+      <style>
+        <marginTop>5</marginTop>
+        <marginBottom>5</marginBottom>
+      </style>
+    </p>
+    </stack>
+    <stack name="stepsStack">
+      <!--Each step is a stack, and each step has alternating background colors-->
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Step 1</p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            <p>
+              Plug in x = 4 into the function.
+            </p>
+
+            <equation>$ \lim_{x\rightarrow 4} \frac{3 - \sqrt{x+5}}{x-4} = \frac{0}{0} $</equation>
+            <p style="ptag">We have to simplify the equation using algebra. Eliminate the square root term by multiplying by the conjugate of the numerator over itself. </p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <onClick>
+            stepsController:toggleStep(1)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Step 2</p>
+          <stack name="cont" style="invisible">
+            <stack orientation="horizontal">
+              <stack orientation="vertical">
+                <!--CONTENT GOES HERE-->
+                <p>
+                   Then we get:  
+                </p>
+
+                <equation>$ = \lim_{x\rightarrow 4} \frac{3 - \sqrt{x+5}}{x-4}\times \frac{3 + \sqrt{x+5}}{3 + \sqrt{x+5}} $</equation>
+                <equation>$ = \lim_{x\rightarrow 4} \frac{9 - (x+5)}{(x-4)(3 + \sqrt{x+5})}$ </equation>
+                <equation>$ = \lim_{x\rightarrow 4} \frac{4 - x}{(x-4)(3 + \sqrt{x+5})} $</equation>
+                <equation>$ = \lim_{x\rightarrow 4} \frac{-(x - 4)}{(x-4)(3 + \sqrt{x+5})} $</equation>
+
+                <p style="ptag">Divide out the factors (x-4), which cause the indeterminate form $ \frac{0}{0}. $</p>
+
+                <equation>$ = \lim_{x\rightarrow 4} \frac{-1}{(3 + \sqrt{x+5})} $</equation>
+
+              </stack>
+            </stack>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <onClick>
+            stepsController:toggleStep(2)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <!--CONTENT GOES HERE-->
+          <p>Step 3</p>
+          <stack name="cont" style="invisible">
+            <p>
+              Now the limit can be computed!
+            </p>
+
+            <equation>$ = \lim_{x\rightarrow 4} \frac{-1}{(3 + \sqrt{x+5})} $</equation>
+            <equation>$ = \frac{-1}{(3 + \sqrt{4+5})} $</equation>
+            <equation>$ = -\frac{1}{6} $</equation>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <onClick>
+            stepsController:toggleStep(3)
+          </onClick>
+        </button>
+      </stack>
+    </stack>
+  </sectionNoTitle>
+
+  <!--Practice-->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Practice</p>
+      <!--Question 1 -->
+      <stack style="contentBG">
+        <p style="subSectionHeading">Question 1</p>
+        <table name="table" grid="false">
+          <row>
+            <column>
+              <p name="equation" style="center">Solve: $ \lim_{x\rightarrow 4} \frac{x^4 - 81}{2x^2 - 5x - 3} = \frac{a}{b}$</p>
+            </column>
+          </row>
+        </table>
+        <p style="title">ANSWER</p>
+        <table name="answers" widths="20% 80%" grid="false">
+          <!-- Row 1 -->
+          <row>
+            <column>
+              <p>a = </p>
+            </column>
+            <column>
+              <textField name="input1" placeholder="insert answer here" />
+            </column>
+          </row>
+
+          <!-- Row 2 -->
+          <row>
+            <column>
+              <p>b = </p>
+            </column>
+            <column>
+              <textField name="input2" placeholder="insert answer here" />
+            </column>
+          </row>
+
+        </table>
+        <button content="Check Answer">
+          <onClick>
+            <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                
+                if a == 108 and b == 7 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+          </onClick>
+        </button>
+        <!-- Answer Stack -->
+        <stack name="solutions">
+          <p name="answer" style="collapsed"></p>
+          <p name="answer2" style="collapsed">The answer is: $ \lim_{x\rightarrow 4} \frac{x^4 - 81}{2x^2 - 5x - 3} = \frac{108}{7} $ </p>
+        </stack>
+      </stack>
+    <p>
+      <br />
+    </p>
+
+      <!--Question 2 -->
+      <stack style="contentBG">
+        <p style="subSectionHeading">Question 2</p>
+        <table name="table" grid="false">
+          <row>
+            <column>
+              <p name="equation" style="center">Solve: $ \lim_{x\rightarrow 4} \frac{\frac{1}{x} + \frac{1}{2}}{x^3 + 8} = -\frac{a}{b}$</p>
+            </column>
+          </row>
+        </table>
+        <p style="title">ANSWER</p>
+        <table name="answers" widths="20% 80%" grid="false">
+          <!-- Row 1 -->
+          <row>
+            <column>
+              <p>a = </p>
+            </column>
+            <column>
+              <textField name="input1" placeholder="insert answer here" />
+            </column>
+          </row>
+
+          <!-- Row 2 -->
+          <row>
+            <column>
+              <p>b = </p>
+            </column>
+            <column>
+              <textField name="input2" placeholder="insert answer here" />
+            </column>
+          </row>
+
+        </table>
+        <button content="Check Answer">
+          <onClick>
+            <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                
+                if a == 1 and b == 48 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+          </onClick>
+        </button>
+        <!-- Answer Stack -->
+        <stack name="solutions">
+          <p name="answer" style="collapsed"></p>
+          <p name="answer2" style="collapsed">The answer is: $ \lim_{x\rightarrow 4} \frac{\frac{1}{x} + \frac{1}{2}}{x^3 + 8} = -\frac{1}{48} $ </p>
+        </stack>
+      </stack>
+    <p>
+      <br />
+    </p>
+      <!--Question 3 -->
+      <stack style="contentBG">
+        <p style="subSectionHeading">Question 3</p>
+        <table name="table" grid="false">
+          <row>
+            <column>
+              <p name="equation" style="center">Solve: $ \lim_{x\rightarrow 4} \frac{x-27}{x^{\frac{1}{3}}-3} = a$</p>
+            </column>
+          </row>
+        </table>
+        <p style="title">ANSWER</p>
+        <table name="answers" widths="20% 80%" grid="false">
+          <!-- Row 1 -->
+          <row>
+            <column>
+              <p>a = </p>
+            </column>
+            <column>
+              <textField name="input1" placeholder="insert answer here" />
+            </column>
+          </row>
+
+        </table>
+        <button content="Check Answer">
+          <onClick>
+            <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                
+                if a == 27 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+          </onClick>
+        </button>
+        <!-- Answer Stack -->
+        <stack name="solutions">
+          <p name="answer" style="collapsed"></p>
+          <p name="answer2" style="collapsed">The answer is: $ \lim_{x\rightarrow 4} \frac{x-27}{x^{\frac{1}{3}}-3} = 27 $ </p>
+        </stack>
+      </stack>
+    <p>
+      <br />
+    </p>
+      <!--Question 4 -->
+      <stack style="contentBG">
+        <p style="subSectionHeading">Challenge Question</p>
+        <table name="table" grid="false">
+          <row>
+            <column>
+              <p name="equation" style="center">Solve: $ \lim_{x\rightarrow 4} \frac{x^{\frac{1}{3}}-1}{x^{\frac{1}{4}}-1} = \frac{a}{b}$</p>
+            </column>
+          </row>
+        </table>
+        <p style="title">ANSWER</p>
+        <table name="answers" widths="20% 80%" grid="false">
+          <!-- Row 1 -->
+          <row>
+            <column>
+              <p>a = </p>
+            </column>
+            <column>
+              <textField name="input1" placeholder="insert answer here" />
+            </column>
+          </row>
+
+          <!-- Row 1 -->
+          <row>
+            <column>
+              <p>b = </p>
+            </column>
+            <column>
+              <textField name="input2" placeholder="insert answer here" />
+            </column>
+          </row>
+
+        </table>
+        <button content="Check Answer">
+          <onClick>
+            <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                
+                if a == 4 and b == 3 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+          </onClick>
+        </button>
+        <!-- Answer Stack -->
+        <stack name="solutions">
+          <p name="answer" style="collapsed"></p>
+          <p name="answer2" style="collapsed">The answer is: $ \lim_{x\rightarrow 4} \frac{x^{\frac{1}{3}}-1}{x^{\frac{1}{4}}-1} = \frac{4}{3} $ </p>
+        </stack>
+      </stack>
+    <p>
+      <br />
+    </p>
+  </sectionNoTitle>
+
+</document>

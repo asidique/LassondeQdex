@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G84D6871C_3417_49CB_BCC4_D60C64E916B9">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>MCR3U – Reciprocal Function Plotter</title>
+    <creator>admin</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+  </metadata>
+
+  <include src="curriculumThemePack/curriculumStyles.xml" />
+  <include src="plotTools.xml" />
+
+  <!--Header and Footer-->
+  <style name="backgroundColor">
+    <background color="50 133 184" />
+  </style>
+  <style name="fontColor">
+    <foreground color="255 255 255" />
+  </style>
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="fontColor">Amanda Koon</p>
+      <p style="fontColor rightText">MCR3U</p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/logo1.png" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/logo2.png" />
+    </stack>
+  </footer>
+
+  <!-- Reciprocal Function -->
+  <section name="Reciprocal">
+    <title>Reciprocal Function</title>
+    <stack style="questionAnswer">
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <equation style="centerText">
+              $ y = a/k(x - d) + c $
+            </equation>
+            <style name="blackLine">
+              <foreground color="black" />
+            </style>
+            <style name="functionLine">
+              <foreground color="50 133 184" />
+              <lineThickness>2</lineThickness>
+            </style>
+            <xyPlot name="myPlot" pan="disabled" tap="disabled" zoom="disabled">
+              <axis dim="y" auto="fixed" min="-5" max="5"></axis>
+              <axis dim="x" auto="fixed" min="-5" max="5"></axis>
+              <series name="xAxis" manual="true" style="blackLine" />
+              <series name="yAxis" manual="true" style="blackLine" />
+              <series name="quad_series" manual="true" style="functionLine" />
+            </xyPlot>
+
+            <script>
+
+              <![CDATA[
+              
+              local x, y;
+              local a = 1;
+              local b = 1;
+              local c = 0;
+              local d = 1; 
+              local quad = myPlot.quad_series;
+              
+              graphRoundValue = 0.1;
+              labelRoundValue = 0.1;
+              
+              local function redrawFunction()
+              quad:Clear()
+                for x = -100, 100, 0.1 do
+                  y = (a)/(b*(x-d)) + c
+                  quad:Add(x,y);
+                end
+                quad:Update();
+              end
+              
+              local xAxis = myPlot.xAxis;
+              local yAxis = myPlot.yAxis;
+
+              xAxis:Add(-100,0)
+              xAxis:Add(100,0)
+
+              yAxis:Add(0,-100)
+              yAxis:Add(0,100)
+              
+              redrawFunction();
+              ]]>
+            </script>
+
+            <p name="newEquation" style="centerText">
+              Your Equation: y = a/[k(x - d)] + c
+            </p>
+            <p name="horizontal" style="centerText">
+              Horizontal Asymptote: y = c
+            </p>
+            <p name="vertical" style="centerText">
+              Vertical Asymptote: x = d
+            </p>
+            <script>
+              <![CDATA[
+              local a2 = a;
+              local b2 = b;
+              local c2 = c;
+              local d2 = d;
+              local function updateEquation()
+                newEquation.FormattedText = "Your Equation: y = "..a2.."/["..b2.."(x - "..d2..")] + "..c2
+                horizontal.FormattedText = "Horizontal Asymptote: y = "..c2
+                vertical.FormattedText = "Vertical Asymptote: x = "..d2
+              end
+              
+              local function updateAValue(value)
+                a2 = round(value,labelRoundValue)
+              end
+              
+              local function updateBValue(value)
+                b2 = round(value,labelRoundValue)
+              end
+              
+              local function updateCValue(value)
+                c2 = round(value,labelRoundValue)
+              end
+              
+              local function updateDValue(value)
+                d2 = round(value,labelRoundValue)
+              end
+              
+                
+              updateEquation()
+              
+               function round(value,multiple)
+                result = 0;
+                
+                if value % multiple ~= 0 then
+                  result = multiple;
+                  division = math.floor((value/multiple)+1);
+                  result = division*multiple;
+                  return result;
+                else 
+                  return value;
+                end
+              end
+            ]]>
+            </script>
+
+            <!--slider for a-->
+            <stack orientation="horizontal">
+              <p name="aLabel">a = 1</p>
+              <slider name="aSlider" min="-10" max="10" value="1">
+                <onValueChanged>
+                  <![CDATA[
+                  a = round(value, graphRoundValue)
+                  aLabel.Text = "a = "..round(value,labelRoundValue)
+                  redrawFunction();
+                  updateAValue(value)
+                  updateEquation();
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+            <!--slider for b-->
+            <stack orientation="horizontal">
+              <p name="kLabel">k = 1</p>
+              <slider name="kSlider" min="-20" max="20" value="1">
+                <onValueChanged>
+                  <![CDATA[
+                  b = round(value, graphRoundValue);
+                  kLabel.Text = "k = "..round(value,labelRoundValue)
+                  redrawFunction();
+                  updateBValue(value)
+                  updateEquation();
+                ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+            <!--slider for c-->
+            <stack orientation="horizontal">
+              <p name="cLabel">c = 0</p>
+              <slider name="cSlider" min="-50" max="50" value="0">
+                <onValueChanged>
+                  <![CDATA[
+                  c = round(value, graphRoundValue)
+                  cLabel.Text = "c = "..round(value,labelRoundValue)
+                  redrawFunction();
+                  updateCValue(value)                  
+                  updateEquation();
+                ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+            <!--slider for d-->
+            <stack orientation="horizontal">
+              <p name="dLabel">d = 1</p>
+              <slider name="dSlider" min="-50" max="50" value="0">
+                <onValueChanged>
+                  <![CDATA[
+                  d = round(value, graphRoundValue)
+                  dLabel.Text = "d = "..round(value,labelRoundValue)
+                  redrawFunction();
+                  updateDValue(value)
+                  updateEquation();
+                ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+          </column>
+        </row>
+      </table>
+    </stack>
+  </section>
+
+</document>

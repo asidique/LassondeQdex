@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<fragment xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd">
+  <include src="plotTools.xml" />
+  <script>
+    <![CDATA[
+    --------------------------- Math Methods ---------------------------
+    function round(value,multiple)
+      local remainder = value % multiple;
+      if remainder * 2 >= multiple then
+          return value - remainder + multiple;
+      else
+          return value - remainder;
+      end
+    end
+    
+    function convertToRadians(deg)
+      rad = (deg*math.pi)/180;
+      return rad;
+    end
+    
+    function getTableSize(T)
+      local count = 0
+      for _ in pairs(T) do count = count + 1 end
+        return count
+      end
+    
+    function emptyTable(t)
+      for k in pairs (t) do
+        t [k] = nil;
+      end
+    end
+    
+    function dotProduct(a,b)
+      return (a.x * b.x) + (a.y * b.y);
+    end
+    
+    function intervalDistance(minA,maxA,minB,maxB)
+      if minA < minB then
+        return minB - maxA;
+      else
+        return minA - maxB;
+      end
+    end
+    
+    -- copy function from https://gist.github.com/tylerneylon/81333721109155b2d244
+    function copy(obj)
+      if type(obj) ~= 'table' then return obj end
+      local res = setmetatable({}, getmetatable(obj))
+      for k, v in pairs(obj) do res[copy(k)] = copy(v) end
+      return res
+    end
+    
+      
+   ]]>
+  </script>
+</fragment>

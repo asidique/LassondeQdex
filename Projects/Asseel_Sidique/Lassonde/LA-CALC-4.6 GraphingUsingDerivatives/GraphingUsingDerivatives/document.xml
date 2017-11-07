@@ -1,0 +1,1034 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G0E31AFC9_AEB6_4E5C_A7F1_B8B1BB19139A">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>LA-CALC-4.6 Graphing Using Derivatives</title>
+    <creator>Asseel</creator>
+    <abstract>The goal of this module is to be able to draw graphs with tools other than a table of values. Following the steps, we will be able
+    to have an idea of functions should be drawn with a high-level of abstraction.</abstract>
+    <coverImage src="resources/LassondeLogo.png" />
+  </metadata>
+
+  <include src="resources/curriculumStylesLassonde.xml" />
+
+  <header style="themeColour">
+    <stack style="center" orientation="horizontal">
+      <p></p>
+    </stack>
+  </header>
+  <footer style="themeColour">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="themeColourTitle">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+  
+  
+  <!-- Section 1 -->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">4.6 Graphing Using Derivatives</title>
+    <p style="sectionHeading">Introduction</p>
+    <image src="resources/graphPic.png" inspect="false" />
+    <stack name="stack1" orientation="vertical" style="contentBG">
+      <p>
+      Using concepts from concavity, critical points and inflection points, we are able to graph functions efficiently without the use of a graphing calculator. This
+      is just one of the many uses of derivatives.
+      In this module we will look at graphing polynomial functions step-by-step.
+    </p>
+    </stack>
+    <p>
+      <br />
+    </p>
+  </section>
+
+
+  <!-- Section 2-->
+  <sectionNoTitle name="section2" style="pageLayout">
+    <stack name="stack1" orientation="vertical">
+      <p style="sectionHeading">Steps for Sketching a Function $ f( x ) $</p>
+      <stack orientation="horizontal" style="contentBG2">
+        <stack name="stepStack" orientation="vertical">
+          <p>Determine the domain of the function</p>
+          <stack name="cont">
+            <style>
+              <visibility>collapsed</visibility>
+            </style>
+            <p>To find the domain of a given function $ f ( x ) $, we have to find if there are any values for x such that $ f ( x ) $ is undefined.</p>
+
+            <p>If there are no such values where the value of y is undefined for a given x, then we can simply state the domain as $ x \in R $</p>
+
+            <p>If there are x values that make $ f ( x ) $ undefined, we must determine what that value is. For an example, a function with a fraction such as $ f ( x ) = \frac{2}{x-5} $ will
+            have an undefined point at $ x = 5 $. In this case, our domain would be $ \{ x \in R | x \neq 5 \} $ or $ (-\infty , 5 ) \cup ( 5 , \infty) $</p>
+          </stack>
+        </stack>
+        <button name="btn" content="Show Step 1">
+          <style>
+            <horizontalAlignment>right</horizontalAlignment>
+            <widthPercentage>40%</widthPercentage>
+          </style>
+          <onClick>
+            if btn.Text=="Show Step 1" then
+              btn.Text = "Hide Step 1";
+              stepStack.cont.Style.Visibility = "visible";
+              stepStack:Child(1).Style.Bold = 1;
+            elseif btn.Text=="Hide Step 1" then
+              btn.Text = "Show Step 1";
+              stepStack.cont.Style.Visibility = "collapsed";
+              stepStack:Child(1).Style.Bold = 0;
+            end
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal" style="contentBG">
+        <stack name="stepStack" orientation="vertical">
+          <p>Determine x-intercepts and y-intercepts</p>
+          <stack name="cont">
+            <style>
+              <visibility>collapsed</visibility>
+            </style>
+            <p>To determine the x and the y intercept of $ f ( x ) $, simply determine what value (if any) is obtained from substituting $ x = 0 $ and $ y = 0 $.</p>
+
+            <p>To find the y intercept, plug in $ x = 0 $ and solve. Here is an example:</p>
+            <p>$ f( x ) = 5x^3+x^2 $</p>
+            <p>$ f( x ) = 5( 0 )^3+( 0 )^2 $</p>
+            <p>$ f ( x ) = 0 $</p>
+
+
+            <p>To find the x intercept, plug in $ f ( x ) = 0 $ and solve. Here is an example: </p>
+            <p>$ f( x ) = 5x^3+x^2 $</p>
+            <p>$ 0 = 5x^3+x^2 $ </p>
+            <p>$ -x^2=5x^3 $ </p>
+            <p>$ -1 = 5x $</p>
+            <p>$ \frac{-1}{5} = x $</p>
+
+            <p>In this case, we have a y intercept at $ x = 0 $ and an x intercept at $ x = \frac{-1}{5} $</p>
+          </stack>
+        </stack>
+        <button name="btn" content="Show Step 2">
+          <style>
+            <horizontalAlignment>right</horizontalAlignment>
+            <widthPercentage>40%</widthPercentage>
+          </style>
+          <onClick>
+            if btn.Text=="Show Step 2" then
+              btn.Text = "Hide Step 2";
+              stepStack.cont.Style.Visibility = "visible";
+              stepStack:Child(1).Style.Bold = 1;
+            elseif btn.Text=="Hide Step 2" then
+              btn.Text = "Show Step 2";
+              stepStack.cont.Style.Visibility = "collapsed";
+              stepStack:Child(1).Style.Bold = 0;
+            end
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal" style="contentBG2">
+        <stack name="stepStack" orientation="vertical">
+          <p>Find the first derivative of $ f ( x ) $ </p>
+          <stack name="cont">
+            <style>
+              <visibility>collapsed</visibility>
+            </style>
+            <p>In this step, we simply need to find the first derivative of $ f ( x ) $. This will be used to determine local maxima and minima. Here's an example: </p>
+            <p>$ f( x ) = 5x^3+x^2 $</p>
+            <p>$ f'( x ) = 15x^2+2x $</p>
+          
+     
+          </stack>
+        </stack>
+        <button name="btn" content="Show Step 3">
+          <style>
+            <horizontalAlignment>right</horizontalAlignment>
+            <widthPercentage>40%</widthPercentage>
+          </style>
+          <onClick>
+            if btn.Text=="Show Step 3" then
+              btn.Text = "Hide Step 3";
+              stepStack.cont.Style.Visibility = "visible";
+              stepStack:Child(1).Style.Bold = 1;
+            elseif btn.Text=="Hide Step 3" then
+              btn.Text = "Show Step 3";
+              stepStack.cont.Style.Visibility = "collapsed";
+              stepStack:Child(1).Style.Bold = 0;
+            end
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal" style="contentBG">
+        <stack name="stepStack" orientation="vertical">
+          <p>Find all critical points of the function</p>
+          <stack name="cont">
+            <style>
+              <visibility>collapsed</visibility>
+            </style>
+            <p>To determine critical points, determine where $ f'( x ) = 0 $. That is, determine where the first derivative is equal to zero. Here's an example</p>
+            <p>$  f'( x ) = 15x^2+2x $</p>
+            <p>$ 0 = 15x^2+2x $</p>
+            <p>$ -2x = 15x^2 $</p>
+            <p>$ -2 = 15x $</p>
+            <p>$ \frac{-2}{15} = x $</p>
+            <p>Note: Some critical points can be minima and maxima if we can also determine whether the function is concaving upward or downward at the critical point. To find out how to determine concavity, see the Step 7.</p>
+          </stack>
+        </stack>
+        <button name="btn" content="Show Step 4">
+          <style>
+            <horizontalAlignment>right</horizontalAlignment>
+            <widthPercentage>40%</widthPercentage>
+          </style>
+          <onClick>
+            if btn.Text=="Show Step 4" then
+              btn.Text = "Hide Step 4";
+              stepStack.cont.Style.Visibility = "visible";
+              stepStack:Child(1).Style.Bold = 1;
+            elseif btn.Text=="Hide Step 4" then
+              btn.Text = "Show Step 4";
+              stepStack.cont.Style.Visibility = "collapsed";
+              stepStack:Child(1).Style.Bold = 0;
+            end
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal" style="contentBG2">
+        <stack name="stepStack" orientation="vertical">
+          <p>Find the second derivative of $ f ( x ) $</p>
+          <stack name="cont">
+            <style>
+              <visibility>collapsed</visibility>
+            </style>
+            <p>To determine the second derivative, simply derive the first derivative. This will be useful to determine the concavity of a function. Here's an example: </p>
+            <p>$ f( x ) = 5x^3+x^2 $</p>
+            <p>$ f'( x ) = 15x^2+2x $</p>
+            <p>$ f''( x ) = 30x + 4 $</p>
+          </stack>
+        </stack>
+        <button name="btn" content="Show Step 5">
+          <style>
+            <horizontalAlignment>right</horizontalAlignment>
+            <widthPercentage>40%</widthPercentage>
+          </style>
+          <onClick>
+            if btn.Text=="Show Step 5" then
+              btn.Text = "Hide Step 5";
+              stepStack.cont.Style.Visibility = "visible";
+              stepStack:Child(1).Style.Bold = 1;
+            elseif btn.Text=="Hide Step 5" then
+              btn.Text = "Show Step 5";
+              stepStack.cont.Style.Visibility = "collapsed";
+              stepStack:Child(1).Style.Bold = 0;
+            end
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal" style="contentBG">
+        <stack name="stepStack" orientation="vertical">
+          <p>Determine points of interest from $ f''( x ) $</p>
+          <stack name="cont">
+            <style>
+              <visibility>collapsed</visibility>
+            </style>
+            <p>To determine points of interest, find out when $ f''( x ) = 0 $. That is, find out when the second derivative is equal to zero. Here's an example: </p>
+            <p>$ f''( x ) = 30x + 4 $</p>
+            <p>$ 0 = 30x+4 $</p>
+            <p>$ -4 = 30x $</p>
+            <p>$ \frac{-2}{15} = x $</p>
+          </stack>
+        </stack>
+        <button name="btn" content="Show Step 6">
+          <style>
+            <horizontalAlignment>right</horizontalAlignment>
+            <widthPercentage>40%</widthPercentage>
+          </style>
+          <onClick>
+            if btn.Text=="Show Step 6" then
+              btn.Text = "Hide Step 6";
+              stepStack.cont.Style.Visibility = "visible";
+              stepStack:Child(1).Style.Bold = 1;
+            elseif btn.Text=="Hide Step 6" then
+              btn.Text = "Show Step 6";
+              stepStack.cont.Style.Visibility = "collapsed";
+              stepStack:Child(1).Style.Bold = 0;
+            end
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal" style="contentBG2">
+        <stack name="stepStack" orientation="vertical">
+          <p>Determine the concavity from the points of interest</p>
+          <stack name="cont">
+            <style>
+              <visibility>collapsed</visibility>
+            </style>
+            <p>To determine the concavity from any points of interest, we have to find the value of $ f''( x ) $ to the left and to the right of any points of interest. If $ f''( x ) $ is positive on both sides,
+            we have an area of the graph where the function is concaving upwards. If $ f''( x ) $ is negative, we have an area of the graph where the function is concaving downwards. If we have a positive value on
+            one side and a negative value on another, then the point is an inflection point.</p>
+            <p>$ f''( x ) = 30x + 4 $</p>
+            <p>$ x = \frac{-2}{15} $</p>
+            <p>From the left: $ f''( \frac{-2}{15} ) &lt; 0 $</p>
+            <p>From the right: $ f''( \frac{-2}{15} ) &gt; 0 $</p>
+            <p>Therefore we can determine that this point is an inflection point. It is concaving downwards as $ x \rightarrow \frac{-2}{15} $ from the left and is concaving upwards as $ x \rightarrow \frac{-2}{15} $ from the right</p>
+          </stack>
+        </stack>
+        
+        <button name="btn" content="Show Step 7">
+          <style>
+            <horizontalAlignment>right</horizontalAlignment>
+            <widthPercentage>40%</widthPercentage>
+          </style>
+          <onClick>
+            if btn.Text=="Show Step 7" then
+              btn.Text = "Hide Step 7";
+              stepStack.cont.Style.Visibility = "visible";
+              stepStack:Child(1).Style.Bold = 1;
+            elseif btn.Text=="Hide Step 7" then
+              btn.Text = "Show Step 7";
+              stepStack.cont.Style.Visibility = "collapsed";
+              stepStack:Child(1).Style.Bold = 0;
+            end
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal" style="contentBG">
+        <stack name="stepStack" orientation="vertical">
+          <p>Sketch the function</p>
+          <stack name="cont">
+            <style>
+              <visibility>collapsed</visibility>
+            </style>
+            <p>Use all the information from the steps above to graph the function $ f( x ) = 5x^3+x^2 $</p>
+
+            <p>Domain: $ x \in R $</p>
+            <p>y-intercept at $ f( x ) = 0 $. Plug this into $ f ( x ) $ and we have point $ ( 0, 0 ) $ </p>
+            <p>x-intercept at $ x = \frac{-1}{5} $ Plug this into $ f ( x ) $ and we have point $ ( \frac{-1}{5} , 0 ) $</p>
+            <p>Critical Point(s): $ x = \frac{-2}{15} $ Plug this into $ f ( x ) $ and we have point $ ( -0.1333, 0.0059 ) $. Since we have determined that the function is concaving downward at this critical point, this is a local maximum. </p>
+            <p> Inflection Point(s): $ x = \frac{-2}{15} $ </p>
+            <p>When $ x &lt; \frac{-2}{15} $ the function concaves downwards</p>
+            <p>When $ x &gt; \frac{-2}{15} $ the function concaves upwards.</p> 
+            <button name="btn2" content="Sketch Graph">
+              <onClick>
+                sim:Stop();
+                sim:Play();
+                xy1.fun1:Clear();
+              </onClick>
+            </button>
+            <xyPlot name="xy1" pan="disabled" zoom="disabled" tap="disabled">
+              <axis dim="x" min="-0.6" max="0.6" auto="none"></axis>
+              <axis dim="y" min="-0.1" max="0.1" auto="none"></axis>
+              <series name="xAxis" draw="line">
+                <style>
+                  <foreground color="black" />
+                  <lineThickness>1.5</lineThickness>
+                </style>
+                <data>
+                -10 0; 10 0;
+                </data>
+              </series>
+              <series name="yAxis" draw="line">
+                <style>
+                  <foreground color="black" />
+                  <lineThickness>1.5</lineThickness>
+                </style>
+                <data>
+                0 10; 0 -10;
+                </data>
+              </series>
+              <series name="fun1" draw="line">
+                <style>
+                  <foreground color="red" />
+                </style>
+              </series>
+            </xyPlot>
+            <simulation duration="5" name="sim" asynchronous="false" period="0.01">
+              <onDuration>
+                
+              </onDuration>
+              <onUpdate>
+                local series = xy1.fun1;
+                local x = (time - 2.5) / 5
+                series:Add(x, 5* math.pow(x, 3) + math.pow(x, 2))
+              </onUpdate>
+            </simulation>
+          </stack>
+        </stack>
+          <button name="btn" content="Show Step 8">
+          <style>
+            <horizontalAlignment>right</horizontalAlignment>
+            <widthPercentage>40%</widthPercentage>
+          </style>
+          <onClick>
+            if btn.Text=="Show Step 8" then
+              btn.Text = "Hide Step 8";
+              stepStack.cont.Style.Visibility = "visible";
+              stepStack:Child(1).Style.Bold = 1;
+            elseif btn.Text=="Hide Step 8" then
+              btn.Text = "Show Step 8";
+              stepStack.cont.Style.Visibility = "collapsed";
+              stepStack:Child(1).Style.Bold = 0;
+            end
+          </onClick>
+        </button>
+        </stack>
+    </stack>
+  </sectionNoTitle>
+  <!-- Section 3-->
+  <sectionNoTitle name="section3" style="pageLayout">
+    <stack name="stack1" orientation="vertical">
+      <p style="sectionHeading">
+        Sketch the Function $ f( x ) = 3x^4 - 4x^3 + 2 $
+      </p>
+      <stack orientation="horizontal" style="contentBG2">
+        <stack name="stepStack" orientation="vertical">
+          <p>Determine the domain of the function</p>
+          <stack name="cont">
+            <style>
+              <visibility>collapsed</visibility>
+            </style>
+            <p></p>
+            <p>Since there are no such values where the value of y is undefined for a given x, we can simply state the domain as $ x \in R $</p>
+          </stack>
+        </stack>
+        <button name="btn" content="Show Step 1">
+          <style>
+            <horizontalAlignment>right</horizontalAlignment>
+            <widthPercentage>40%</widthPercentage>
+          </style>
+          <onClick>
+            if btn.Text=="Show Step 1" then
+              btn.Text = "Hide Step 1";
+              stepStack.cont.Style.Visibility = "visible";
+              stepStack:Child(1).Style.Bold = 1;
+            elseif btn.Text=="Hide Step 1" then
+              btn.Text = "Show Step 1";
+              stepStack.cont.Style.Visibility = "collapsed";
+              stepStack:Child(1).Style.Bold = 0;
+            end
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal" style="contentBG">
+        <stack name="stepStack" orientation="vertical">
+          <p>Determine x-intercepts and y-intercepts</p>
+          <stack name="cont">
+            <style>
+              <visibility>collapsed</visibility>
+            </style>
+            <p>To find the x intercept, plug in $ f ( x ) = 0 $ and solve.</p>
+            <p>$ f( x ) = 3x^4 - 4x^3 + 2 $</p>
+            <p>$ 0 = 3x^4 - 4x^3 + 2 $ </p>
+            <p>$ -2 = 3x^4 - 4x^3 $</p>
+            <p>At this point, we would have to use the square root function to simplify. If we go any further, we see that we are square rooting a negative number (which
+              is an imaginary number). Therefore, this function does not intercept the x axis on a real number graph. </p>
+
+            <p>To find the y intercept, plug in $ x = 0 $ and solve.</p>
+            <p>$ f( x ) = 3x^4 - 4x^3 + 2 $</p>
+            <p>$ f( 0 ) = 3(0)^4 - 4(0)^3 + 2 $</p>
+            <p>$ f( 0 ) = 2 $</p>
+            <p>We know that our graph intercepts the y-axis at $ f( 0 ) = 2 $</p>
+            <p>In this case, we have a y intercept at $ f( 0 ) $</p>
+          </stack>
+        </stack>
+        <button name="btn" content="Show Step 2">
+          <style>
+            <horizontalAlignment>right</horizontalAlignment>
+            <widthPercentage>40%</widthPercentage>
+          </style>
+          <onClick>
+            if btn.Text=="Show Step 2" then
+              btn.Text = "Hide Step 2";
+              stepStack.cont.Style.Visibility = "visible";
+              stepStack:Child(1).Style.Bold = 1;
+            elseif btn.Text=="Hide Step 2" then
+              btn.Text = "Show Step 2";
+              stepStack.cont.Style.Visibility = "collapsed";
+              stepStack:Child(1).Style.Bold = 0;
+            end
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal" style="contentBG2">
+        <stack name="stepStack" orientation="vertical">
+          <p>Find the first derivative of $ f( x ) = 3x^4 - 4x^3 + 2  $ </p>
+          <stack name="cont">
+            <style>
+              <visibility>collapsed</visibility>
+            </style>
+            <p>$ f( x ) = 3x^4 - 4x^3 + 2 $</p>
+            <p>$ f'( x ) = 12x^3 - 12x^2 $</p>
+          </stack>
+        </stack>
+        <button name="btn" content="Show Step 3">
+          <style>
+            <horizontalAlignment>right</horizontalAlignment>
+            <widthPercentage>40%</widthPercentage>
+          </style>
+          <onClick>
+            if btn.Text=="Show Step 3" then
+              btn.Text = "Hide Step 3";
+              stepStack.cont.Style.Visibility = "visible";
+              stepStack:Child(1).Style.Bold = 1;
+            elseif btn.Text=="Hide Step 3" then
+              btn.Text = "Show Step 3";
+              stepStack.cont.Style.Visibility = "collapsed";
+              stepStack:Child(1).Style.Bold = 0;
+            end
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal" style="contentBG">
+        <stack name="stepStack" orientation="vertical">
+          <p>Find all critical points of the function</p>
+          <stack name="cont">
+            <style>
+              <visibility>collapsed</visibility>
+            </style>
+            <p>We have to determine where $ f'( x ) = 0 $</p>
+            <p>$ f'( x ) = 12x^3 - 12x^2 $</p>
+            <p>$ f'( x ) = 12x^2(x - 1) $</p>
+            <p>$ x = 1, x = 0 $</p>
+            <p>We have two critical points, one at x = 1 and another at x = 0. We will determine if these are minima or maxima points when determining the second derivative. </p>
+          </stack>
+        </stack>
+        <button name="btn" content="Show Step 4">
+          <style>
+            <horizontalAlignment>right</horizontalAlignment>
+            <widthPercentage>40%</widthPercentage>
+          </style>
+          <onClick>
+            if btn.Text=="Show Step 4" then
+              btn.Text = "Hide Step 4";
+              stepStack.cont.Style.Visibility = "visible";
+              stepStack:Child(1).Style.Bold = 1;
+            elseif btn.Text=="Hide Step 4" then
+              btn.Text = "Show Step 4";
+              stepStack.cont.Style.Visibility = "collapsed";
+              stepStack:Child(1).Style.Bold = 0;
+            end
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal" style="contentBG2">
+        <stack name="stepStack" orientation="vertical">
+          <p>Find the second derivative of $ f ( x ) $</p>
+          <stack name="cont">
+            <style>
+              <visibility>collapsed</visibility>
+            </style>
+            <p>$ f( x ) = 3x^4 - 4x^3 + 2 $</p>
+            <p>$ f'( x ) = 12x^3 - 12x^2 $</p>
+            <p>$ f''( x ) = 36x^2 - 24x $</p>
+          </stack>
+        </stack>
+        <button name="btn" content="Show Step 5">
+          <style>
+            <horizontalAlignment>right</horizontalAlignment>
+            <widthPercentage>40%</widthPercentage>
+          </style>
+          <onClick>
+            if btn.Text=="Show Step 5" then
+              btn.Text = "Hide Step 5";
+              stepStack.cont.Style.Visibility = "visible";
+              stepStack:Child(1).Style.Bold = 1;
+            elseif btn.Text=="Hide Step 5" then
+              btn.Text = "Show Step 5";
+              stepStack.cont.Style.Visibility = "collapsed";
+              stepStack:Child(1).Style.Bold = 0;
+            end
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal" style="contentBG">
+        <stack name="stepStack" orientation="vertical">
+          <p>Determine points of interest from $ f''( x ) $</p>
+          <stack name="cont">
+            <style>
+              <visibility>collapsed</visibility>
+            </style>
+            <p>We have to determine where $ f''( x ) = 0 $</p>
+            <p>$ f''( x ) = 36x^2 - 24x $</p>
+            <p>$ 0 = 36x^2 - 24x $</p>
+            <p>$ 24x = 36x^2 $</p>
+            <p>$ 24 = 36x $</p>
+            <p>$ x = \frac{2}{3} $</p>
+            <p>Therefore, we have one point of interest at $ x = \frac{2}{3} $</p>
+          </stack>
+        </stack>
+        <button name="btn" content="Show Step 6">
+          <style>
+            <horizontalAlignment>right</horizontalAlignment>
+            <widthPercentage>40%</widthPercentage>
+          </style>
+          <onClick>
+            if btn.Text=="Show Step 6" then
+              btn.Text = "Hide Step 6";
+              stepStack.cont.Style.Visibility = "visible";
+              stepStack:Child(1).Style.Bold = 1;
+            elseif btn.Text=="Hide Step 6" then
+              btn.Text = "Show Step 6";
+              stepStack.cont.Style.Visibility = "collapsed";
+              stepStack:Child(1).Style.Bold = 0;
+            end
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal" style="contentBG2">
+        <stack name="stepStack" orientation="vertical">
+          <p>Determine the concavity from the points of interest</p>
+          <stack name="cont">
+            <style>
+              <visibility>collapsed</visibility>
+            </style>
+            
+            <p>$ f''( x ) = 36x^2 - 24x $</p>
+            <p>$ x = \frac{2}{3} $</p>
+            <p>From the left: $ f''( \frac{2}{3} ) &lt; 0 $</p>
+            <p>From the right: $ f''( \frac{2}{3} ) &gt; 0 $</p>
+            <p>Therefore this point is an inflection point. It is concaving downwards as $ x \rightarrow \frac{2}{3} $ from the left and is concaving upwards as $ x \rightarrow \frac{2}{3} $ from the right</p>
+            <p>We can also determine whether our critical points are maxima or minima by plugging it into our second derivative.</p>
+            <p>Our two critical points were $ x = 0 $ and $ x = 1 $</p>
+            <p>$ f''( 1 ) = 12. $ We know that this is concave upwards</p>
+            <p>$ f''( 0 ) = 0.  $ This might be another inflection point. We can determine this by checking to the left and to the right of $ f( 0 ) $</p>
+            <p>From the left: $ f''( -0.1 ) &gt; 0 $</p>
+            <p>From the right: $ f''( 0.1 ) &lt; 0 $</p>
+            <p>Therefore this point is also another inflection point. It is concaving upwards to the left and concaving downwards from the right</p>
+          </stack>
+        </stack>
+        
+        <button name="btn" content="Show Step 7">
+          <style>
+            <horizontalAlignment>right</horizontalAlignment>
+            <widthPercentage>40%</widthPercentage>
+          </style>
+          <onClick>
+            if btn.Text=="Show Step 7" then
+              btn.Text = "Hide Step 7";
+              stepStack.cont.Style.Visibility = "visible";
+              stepStack:Child(1).Style.Bold = 1;
+            elseif btn.Text=="Hide Step 7" then
+              btn.Text = "Show Step 7";
+              stepStack.cont.Style.Visibility = "collapsed";
+              stepStack:Child(1).Style.Bold = 0;
+            end
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal" style="contentBG">
+        <stack name="stepStack" orientation="vertical">
+          <p>Sketch the function</p>
+          <stack name="cont">
+            <style>
+              <visibility>collapsed</visibility>
+            </style>
+            <p>Use all the information from the steps above to graph the function $ f( x ) = 3x^4 - 4x^3 + 2 $</p>
+
+            <p>Domain: $ x \in R $</p>
+            <p>y-intercept at $ f( 0 ) = 2 $. Plug this into $ f ( x ) $ and we have point $ ( 0, 2 ) $ </p>
+            <p>x-intercept does not exist</p>
+            <p>Critical Point(s): $ x = 1 $ Plug this into $ f ( x ) $ and we have point $ ( 1, 1 ) $. Since we have determined that the function is concaving upward at this critical point, this is a local minimum. </p>
+            <p>Inflection Point(s): $ x = 0 $ Plug this into $ f ( x ) $ and we have point $ ( 0, 2 ) $. The function concaves upwards to the left and downwards to the right of this point. </p>
+            <p>Inflection Point(s): $ x = \frac{2}{3} $ Plug this into $ f ( x ) $ and we have point $ ( 0.66, 1.41 ) $. The function concaves downwards to the left and upwards to the right of this point. </p>
+            <button name="btn2" content="Sketch Graph">
+              <onClick>
+                sim:Stop();
+                sim:Play();
+                xy1.fun1:Clear();
+              </onClick>
+            </button>
+            <xyPlot name="xy1" pan="disabled" zoom="disabled" tap="disabled">
+              <axis dim="x" min="-2" max="2" auto="none"></axis>
+              <axis dim="y" min="0" max="4" auto="none"></axis>
+              <series name="xAxis" draw="line">
+                <style>
+                  <foreground color="black" />
+                  <lineThickness>1.5</lineThickness>
+                </style>
+                <data>
+                -10 0; 10 0;
+                </data>
+              </series>
+              <series name="yAxis" draw="line">
+                <style>
+                  <foreground color="black" />
+                  <lineThickness>1.5</lineThickness>
+                </style>
+                <data>
+                0 10; 0 -10;
+                </data>
+              </series>
+              <series name="fun1" draw="line">
+                <style>
+                  <foreground color="red" />
+                </style>
+              </series>
+            </xyPlot>
+            <simulation duration="3.5" name="sim" asynchronous="false" period="0.01">
+              <onDuration>
+              </onDuration>
+              <onUpdate>
+                local series = xy1.fun1;
+                local x = (time - 1.5)
+                series:Add(x, 3* math.pow(x, 4) - 4* math.pow(x, 3) + 2)
+              </onUpdate>
+            </simulation>
+          </stack>
+        </stack>
+          <button name="btn" content="Show Step 8">
+          <style>
+            <horizontalAlignment>right</horizontalAlignment>
+            <widthPercentage>40%</widthPercentage>
+          </style>
+          <onClick>
+            if btn.Text=="Show Step 8" then
+              btn.Text = "Hide Step 8";
+              stepStack.cont.Style.Visibility = "visible";
+              stepStack:Child(1).Style.Bold = 1;
+            elseif btn.Text=="Hide Step 8" then
+              btn.Text = "Show Step 8";
+              stepStack.cont.Style.Visibility = "collapsed";
+              stepStack:Child(1).Style.Bold = 0;
+            end
+          </onClick>
+        </button>
+        </stack>
+    </stack>
+    <p>
+      <br />
+    </p>
+  </sectionNoTitle>
+
+  <!-- Section 4-->
+  <sectionNoTitle name="section4" style="pageLayout">
+    <p style="sectionHeading">Practice Question 1</p>
+    <stack name="stack1" orientation="vertical" style="contentBG">
+      <p>Sketch the graph for $ f ( x ) = 3x^3 - 2x^2 - 5x $</p>
+      <script>
+        <![CDATA[
+        local red = 255
+        local green = 0
+        local blue = 0
+        local myColor = color.rgb(255, 0, 0)
+        oldX = 0;
+        oldY = 0;
+        
+
+        ]]>
+      </script>
+      <drawing name="panPlot" pan="custom" manual="true">
+        <axis dim="x" min="-4" max="4" auto="fixed" major="true" />
+        <axis dim="y" min="-6" max="6" auto="fixed" major="true" />
+        <series name="xAxis" draw="line">
+                <style>
+                  <foreground color="black" />
+                  <lineThickness>1.5</lineThickness>
+                </style>
+                <data>
+                -10 0; 10 0;
+                </data>
+              </series>
+        <series name="yAxis" draw="line">
+          <style>
+            <foreground color="black" />
+            <lineThickness>1.5</lineThickness>
+          </style>
+          <data>
+          0 10; 0 -10;
+          </data>
+        </series>
+        <onPan>
+          local x = panPlot.XAxis.Min + state.Current.X * (panPlot.XAxis.Max - panPlot.XAxis.Min);
+          local y = panPlot.YAxis.Min + state.Current.Y * (panPlot.YAxis.Max - panPlot.YAxis.Min);
+         
+          
+          if state.IsStart then
+            panSeries:Add(oldX,oldY,color.transparent)
+            panSeries:Add(x,y,color.transparent)
+            panSeries:Add(x,y,myColor)
+          else
+             panSeries:Add(x,y,myColor)
+          end
+    
+          oldX = x
+          oldY = y
+        </onPan>
+        <series name="panSeries" capacity="300">
+          <style>
+            <lineThickness>3</lineThickness>
+          </style>
+        </series>
+      </drawing>
+      <stack orientation="horizontal">
+        <style>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <button content="Reset Sketch">
+          <onClick>
+            panPlot.panSeries:Clear();
+          </onClick>
+        </button>
+        <button name="btn2" content="Write Notes">
+          <onClick>
+            if btn2.Text == "Write Notes" then
+              btn2.Text = "Hide Notes"
+              section4.stack1.noteInput.Style.Visibility = "visible";
+            elseif btn2.Text == "Hide Notes" then
+              btn2.Text = "Show Notes"
+              section4.stack1.noteInput.Style.Visibility = "collapsed";
+            elseif btn2.Text == "Show Notes" then
+              btn2.Text = "Hide Notes"
+              section4.stack1.noteInput.Style.Visibility = "visible";
+            end
+          </onClick>
+        </button>
+        <button name="btn3" content="Show Answer">
+          <onClick>
+            if btn3.Text == "Show Answer" then
+              section4.stack1.xy1.Style.Visibility = "visible";
+              section4.stack1.xy1.fun1:Clear();
+              section4.stack1.sim:Stop();
+              section4.stack1.sim:Start();
+              btn3.Text = "Hide Answer"
+            elseif btn3.Text == "Hide Answer" then
+              section4.stack1.sim:Stop();
+              section4.stack1.xy1.Style.Visibility = "collapsed";
+              btn3.Text = "Show Answer";
+            end
+          </onClick>
+        </button>
+      </stack>
+      <textInput name="noteInput" spelling="false">
+        <style>
+          <visibility>collapsed</visibility>
+        </style>
+        <placeholder>
+          Type your notes here!
+        </placeholder>
+      </textInput>
+      <xyPlot name="xy1" pan="disabled" zoom="disabled" tap="disabled">
+        <style>
+          <visibility>collapsed</visibility>
+        </style>
+        <axis dim="x" min="-4" max="4" auto="none"></axis>
+        <axis dim="y" min="-6" max="6" auto="none"></axis>
+        <series name="xAxis" draw="line">
+          <style>
+            <foreground color="black" />
+            <lineThickness>1.5</lineThickness>
+          </style>
+          <data>
+          -10 0; 10 0;
+          </data>
+        </series>
+        <series name="yAxis" draw="line">
+          <style>
+            <foreground color="black" />
+            <lineThickness>1.5</lineThickness>
+          </style>
+          <data>
+          0 10; 0 -10;
+          </data>
+        </series>
+        <series name="fun1" draw="line">
+          <style>
+            <foreground color="red" />
+          </style>
+        </series>
+      </xyPlot>
+      <simulation duration="4" name="sim" asynchronous="false" period="0.01">
+        <onDuration>
+                
+        </onDuration>
+        <onUpdate>
+          local series = xy1.fun1;
+          local x = (time - 2)
+          series:Add(x, 3* math.pow(x, 3) - 2*math.pow(x, 2) - 5*x)
+        </onUpdate>
+      </simulation>
+    </stack>
+    <p>
+      <br />
+    </p>
+  </sectionNoTitle>
+
+  
+  <!--Section 5-->
+  <sectionNoTitle name="section5" style="pageLayout">
+    <p style="sectionHeading">Practice Question 2</p>
+    <stack name="stack1" orientation="vertical" style="contentBG">
+      <p>Use all the information provided to graph the function $ f( x ) = -x^6 + 4x^4 $</p>
+
+      <p>Domain: $ x \in R $</p>
+      <p>y-intercept at $ f( 0 ) = 0 $. </p>
+      <p>x-intercept at $ x = \pm \sqrt[4]{3} $ </p>
+      <p>Critical Point(s): $ x = -1, x = 1 $ </p>
+      <p>Inflection Point(s): $ x = + \frac{1}{ \sqrt[4]{5} } $. From the left it is concaving upwards and from the right it is concaving downwards. </p>
+      <p>Inflection Point(s): $ x = - \frac{1}{ \sqrt[4]{5} } $. From the left it is concaving downwards and from the right it is concaving upwards. </p>
+
+      <script>
+        <![CDATA[
+        local red = 255
+        local green = 0
+        local blue = 0
+        local myColor = color.rgb(255, 0, 0)
+        oldX = 0;
+        oldY = 0;
+        ]]>
+      </script>
+      <drawing name="panPlot" pan="custom" manual="true">
+        <axis dim="x" min="-2" max="2" auto="fixed" major="true" />
+        <axis dim="y" min="-1" max="3" auto="fixed" major="true" />
+        <series name="xAxis" draw="line">
+                <style>
+                  <foreground color="black" />
+                  <lineThickness>1.5</lineThickness>
+                </style>
+                <data>
+                -10 0; 10 0;
+                </data>
+              </series>
+        <series name="yAxis" draw="line">
+          <style>
+            <foreground color="black" />
+            <lineThickness>1.5</lineThickness>
+          </style>
+          <data>
+          0 10; 0 -10;
+          </data>
+        </series>
+        <onPan>
+          local x = panPlot.XAxis.Min + state.Current.X * (panPlot.XAxis.Max - panPlot.XAxis.Min);
+          local y = panPlot.YAxis.Min + state.Current.Y * (panPlot.YAxis.Max - panPlot.YAxis.Min);
+         
+          
+          if state.IsStart then
+            panSeries:Add(oldX,oldY,color.transparent)
+            panSeries:Add(x,y,color.transparent)
+            panSeries:Add(x,y,myColor)
+          else
+             panSeries:Add(x,y,myColor)
+          end
+    
+          oldX = x
+          oldY = y
+        </onPan>
+        <series name="panSeries" capacity="300">
+          <style>
+            <lineThickness>3</lineThickness>
+          </style>
+        </series>
+      </drawing>
+      <stack orientation="horizontal">
+        <style>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <button content="Reset Sketch">
+          <onClick>
+            panPlot.panSeries:Clear();
+          </onClick>
+        </button>
+        <button name="btn2" content="Write Notes">
+          <onClick>
+            if btn2.Text == "Write Notes" then
+              btn2.Text = "Hide Notes"
+              section5.stack1.noteInput.Style.Visibility = "visible";
+            elseif btn2.Text == "Hide Notes" then
+              btn2.Text = "Show Notes"
+              section5.stack1.noteInput.Style.Visibility = "collapsed";
+            elseif btn2.Text == "Show Notes" then
+              btn2.Text = "Hide Notes"
+              section5.stack1.noteInput.Style.Visibility = "visible";
+            end
+          </onClick>
+        </button>
+        <button name="btn3" content="Show Answer">
+          <onClick>
+            if btn3.Text == "Show Answer" then
+              section5.stack1.xy1.Style.Visibility = "visible";
+              section5.stack1.xy1.fun1:Clear();
+              section5.stack1.sim:Stop();
+              section5.stack1.sim:Start();
+              btn3.Text = "Hide Answer"
+            elseif btn3.Text == "Hide Answer" then
+              section5.stack1.sim:Stop();
+              section5.stack1.xy1.Style.Visibility = "collapsed";
+              btn3.Text = "Show Answer";
+            end
+          </onClick>
+        </button>
+      </stack>
+      <textInput name="noteInput" spelling="false">
+        <style>
+          <visibility>collapsed</visibility>
+        </style>
+        <placeholder>
+          Type your notes here!
+        </placeholder>
+      </textInput>
+      <xyPlot name="xy1" pan="disabled" zoom="disabled" tap="disabled">
+        <style>
+          <visibility>collapsed</visibility>
+        </style>
+        <axis dim="x" min="-2" max="2" auto="none"></axis>
+        <axis dim="y" min="-1" max="3" auto="none"></axis>
+        <series name="xAxis" draw="line">
+          <style>
+            <foreground color="black" />
+            <lineThickness>1.5</lineThickness>
+          </style>
+          <data>
+          -10 0; 10 0;
+          </data>
+        </series>
+        <series name="yAxis" draw="line">
+          <style>
+            <foreground color="black" />
+            <lineThickness>1.5</lineThickness>
+          </style>
+          <data>
+          0 10; 0 -10;
+          </data>
+        </series>
+        <series name="fun1" draw="line">
+          <style>
+            <foreground color="red" />
+          </style>
+        </series>
+      </xyPlot>
+      <simulation duration="3" name="sim" asynchronous="false" period="0.01">
+        <onDuration>
+                
+        </onDuration>
+        <onUpdate>
+          local series = xy1.fun1;
+          local x = (time - 1.5)
+          series:Add(x, -1 * math.pow(x, 6) + 3*math.pow(x, 2))
+        </onUpdate>
+      </simulation>
+    </stack>
+    <p>
+      <br />
+    </p>
+  </sectionNoTitle>
+  
+  <!-- EXTRA HELP -->
+  <sectionNoTitle>
+    <stack orientation="vertical">
+      <style>
+        <horizontalAlignment>center</horizontalAlignment>
+        <widthPercentage>80%</widthPercentage>
+      </style>
+      <p style="sectionHeading">STILL NEED MORE HELP?</p>
+      <p>Check out these resources on concavity: </p>
+      <web url="https://www.khanacademy.org/math/ap-calculus-ab/analyzing-functions-with-calculus-ab/sketching-graphs-using-calculus-ab/v/calculus-graphing-using-derivatives"></web>
+      <web url="https://www.khanacademy.org/math/ap-calculus-ab/analyzing-functions-with-calculus-ab/sketching-graphs-using-calculus-ab/v/calculus-graphing-with-derivatives-example"></web>
+    </stack>
+
+  </sectionNoTitle>
+</document>
+

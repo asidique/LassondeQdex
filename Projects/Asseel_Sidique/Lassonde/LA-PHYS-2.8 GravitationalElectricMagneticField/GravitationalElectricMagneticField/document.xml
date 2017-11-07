@@ -1,0 +1,1338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G5A8A6B42_FD52_48F0_BC7A_348C51D24585">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>LA-PHYS-2.8 Gravitational, Magnetic and Electric Fields</title>
+    <creator>Asseel</creator>
+    <coverImage src="resources/LassondeLogo.png" />
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+  </metadata>
+
+  <include src="resources/curriculumStylesLassonde.xml" />
+  <include src="resources/plotTools.xml" />
+  <include src="resources/obj.xml" />
+
+  <!--                                      Header & Footer END                                         -->
+  <header style="themeColour">
+    <stack style="center" orientation="horizontal">
+      <p></p>
+    </stack>
+  </header>
+  <footer style="themeColour">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="themeColourTitle">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+          
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--                                      Header & Footer END                                         -->
+  
+  
+
+ <!-- Section 1 -->
+<section name="section1" style="pageLayout">
+  <title style="chapterTitle">2.9 Gravitational, Magnetic and Electric Fields</title>
+  <p style="sectionHeading">Introduction</p>
+  <image src="resources/arora.jpeg" />
+  <stack orientation="vertical" style="contentBG">
+    <p>
+      The Arora Borealis is a natural phenomenom that is caused by particles from the sun colliding with earth's magnetic field. This phenomenom is only visible in near the poles of the earth,
+      but earth's magnetic field encloses the entire planet.
+      In physics, a field is defined as a an area where the objects inside of it are effected by a force. An example of one field is the gravitational field around us now, which is keeping us from
+      floating into space. The three fields we will be investigating in this module are:
+      <b>Gravitational Fields</b>, <b>Magnetic Fields</b>, and <b>Electric Fields</b>.
+    </p>
+  </stack>
+</section>
+
+<sectionNoTitle name="section2" style="pageLayout">
+  <p style="sectionHeading">Gravitational Field</p>
+  <stack orientation="vertical" style="contentBG">
+    <p>
+      The Earth's gravitational field is the most common example of this field. Gravitational force exists when there is two objects with mass. This means
+      that anything can have its own gravitational field. Even me and you! The only difference between us and the earth is how much more massive it is than us.
+    </p>
+
+    <p>
+      Newton's Law of Gravitation states that every partical of matter in the universe attracts every other particle with a force which is directly proportional to the product of the masses of the particles and inversely proportional
+      to the square of the distance between them. To put this into mathematical terms:
+    </p>
+
+    <p style="center"> $ F_{g} = \frac{Gm_{1}m_{2}}{r^2} $</p>
+    <p>Where: </p>
+    <p>$ F_{g} $ is the force of gravity</p>
+    <p>$ G $ is the gravitational constant; $ = 6.67384(80) \times 10^-11 \frac{Nm^2}{kg^2} $</p>
+    <p>$ m_{1} $ is the mass of the first object</p>
+    <p>$ m_{2} $ is the mass of the second object</p>
+    <p>$ r $ is the distance between the two objects</p>
+
+    <p>Using this equation, we can find the force of gravity as well as the force we have on the earth. Check the next page to see the calculation!</p>
+  </stack>
+  <p>
+    <br />
+  </p>
+</sectionNoTitle>
+
+<sectionNoTitle name="section3" style="pageLayout">
+  <p style="sectionHeading">Earth's Gravitational Field vs Average Human</p>
+  <stack orientation="vertical" style="contentBG">
+    <p>Now we will investigate how to find the force of gravity using Newton's Law of Gravitation.</p>
+    <p>Using the equation: $ F_{g} = \frac{Gm_{1}m_{2}}{r^2} $ </p>
+    <p>Let's use $ m_{1}  = 68kg $ for an average weight of an adult.</p>
+    <p>For earth's mass, $ m_{2} = 5.972 \times 10^{24} kg $</p>
+    <p>Last, for the distance, let's use the radius of the earth. $ r = 6.371 \times 10^6 m $</p>
+    <p style="subSectionHeading">Calculation</p>
+    <p>$ F_{g} = \frac{Gm_{1}m_{2}}{r^2} $ </p>
+    <p>$ F_{g} = \frac{(6.6738 \times 10^{-11})(68)(5.972 \times 10^{24})}{(6.371 \times 10^6)^2} $ </p>
+    <p>$ F_{g} = 667.71 N $</p>
+    <p>Since $ F = ma $, we are going to divide by the mass of an average human to get our answer. </p>
+    <p> Acceleration due to Gravity $ = \frac{667.71N}{68kg} $</p>
+    <p> Acceleration due to Gravity $ = 9.81 \frac{m}{s^2} $</p>
+    <p>So there you have it, we have gravity!</p>
+    <p>
+      To find the acceleration that we apply to earth with our gravitational force, instead of dividing by our mass in the previous, we divide by
+      earth's mass. This would give us a small value of $ 1.12 \times 10^{-22} $.
+    </p>
+  </stack>
+  <p>
+    <br />
+  </p>
+</sectionNoTitle>
+
+<sectionNoTitle name="section4" style="pageLayout">
+  <script>
+    <!--DECLARE SOME VARS HERE-->
+    earthX = 33;
+    earthY = 32;
+    sunX = 40;
+    sunY = 40;
+    marsX = 30;
+    marsY = 30;
+    mercX = 36;
+    mercY = 40;
+  </script>
+  <p style="sectionHeading">Visualizing Gravitational Fields</p>
+  <!--SIMULATION GOES HERE-->
+  <stack orientation="vertical" style="contentBG">
+    <drawing name="plot1">
+      <style>
+        <aspectRatio>1</aspectRatio>
+      </style>
+      <axis dim="x" auto="none" min="20" max="60"></axis>
+      <axis dim="y" auto="none" min="20" max="60"></axis>
+      <series name="sun" draw="radialFill"></series>
+      <series name="earth" draw="radialFill" capacity="720"></series>
+      <series name="mars" draw="radialFill" capacity="720"></series>
+      <series name="mercury" draw="radialFill" capacity="720"></series>
+      <series name="sunLine" capacity="9000"></series>
+      <series name="earthLine" capacity="7000"></series>
+      <series name="mercuryLine" capacity="4000"></series>
+    </drawing>
+    <simulation name="sim1" period="0.01" loop="1">
+      <onDocumentOpened>
+        plotTools.drawCircle(plot1.sun, {sunX, sunY}, 2, color.yellow)
+        plotTools.drawCircle(plot1.earth, {earthX, earthY}, 1, color.green);
+        plotTools.drawCircle(plot1.mars, {marsX, marsY}, 0.8, color.orange);
+        plotTools.drawCircle(plot1.mercury, {mercX, mercY}, 0.6, color.red);
+        plotTools.drawCircle(plot1.mercuryLine, {sunX, sunY}, sunX-mercX, color.red);
+        plotTools.drawCircle(plot1.earthLine, {sunX, sunY}, 10.63, color.green);
+        plotTools.drawCircle(plot1.sunLine, {sunX, sunY}, 14.14, color.orange);
+      </onDocumentOpened>
+      <onUpdate>
+        if plot1.earth ~= null and plot1.mars ~= null and plot1.mercury ~= null then
+        plot1.earth.Transform = matrixf.translation(sunX,sunY,0)*matrixf.rotationAboutAxis(0,0,1,-time)*matrixf.translation(-sunX,-sunY,0);
+        plot1.mars.Transform = matrixf.translation(sunX,sunY,0)*matrixf.rotationAboutAxis(0,0,1,-time)*matrixf.translation(-sunX,-sunY,0);
+        plot1.mercury.Transform = matrixf.translation(sunX,sunY,0)*matrixf.rotationAboutAxis(0,0,1,-time)*matrixf.translation(-sunX,-sunY,0);
+        end
+      </onUpdate>
+    </simulation>
+    <button name="startbtn" content="Start Simulation">
+      <onClick>
+        if startbtn.Text == "Start Simulation" then
+        sim1:Start();
+        startbtn.Text = "Stop Simulation";
+        else
+        sim1:Stop();
+        startbtn.Text = "Start Simulation";
+        end
+      </onClick>
+    </button>
+  </stack>
+  <p>
+    <br />
+  </p>
+  <p style="sectionHeading">Analysis</p>
+  <stack orientation="vertical" style="contentBG">
+    <p>
+      Above is a simulation of a few planets orbiting around a sun. This orbital motion is all due to the gravitational field that the massive sun creates.
+      The simulation only shows what a perfect orbit would appear as the planets around the sun orbit in a perfect circle. In our actual solar system, orbits are more
+      ellipse shaped than perfect circles.
+    </p>
+    <image src="resources/orbit.png" />
+  </stack>
+  <p>
+    <br />
+  </p>
+</sectionNoTitle>
+
+<sectionNoTitle style="pageLayout" name="section5">
+  <p style="sectionHeading">Simulation Instructions</p>
+  <stack orientation="vertical" style="contentBG">
+    <p>
+      For this simulation, you play the role of a giant yellow star in space. Your objective is to stay as close as you can to white stars in order to devour them. Use your finger to pan around and move
+      your sun. Use the slider to increase your mass/decrease your mass.
+    </p>
+  </stack>
+  <p style="sectionHeading">Gravity Simulator</p>
+  <!--This sim will show a ball in the middle and little particles around it. The ball will pull the particles towards it with gravitational field. User can 
+    change the size of the ball to see how the mass effects the field it creates.-->
+  <stack orientation="vertical" style="contentBG2" name="gameStack">
+    <onDocumentOpened>
+      function startGame()
+      playerScore = 0;
+
+      playerObj = vector2D:new();
+      playerObj.width = 2;
+      playerObj.height = 2;
+      particleArray = {};
+
+      particle = vector2D:new();
+      particle.x = 25;
+      particle.y = 25;
+      particle.width = 1;
+      particle.height = 1;
+
+      particle2 = vector2D:new();
+      particle2.x = 20;
+      particle2.y = 20;
+      particle2.width = 1;
+      particle2.height = 1;
+
+      particle3 = vector2D:new();
+      particle3.x = 15;
+      particle3.y = 15;
+      particle3.width = 1;
+      particle3.height = 1;
+
+      particle4 = vector2D:new();
+      particle4.x = 10;
+      particle4.y = 10;
+      particle4.width = 1;
+      particle4.height = 1;
+
+      particle5 = vector2D:new();
+      particle5.x = 32;
+      particle5.y = 15;
+      particle5.width = 1;
+      particle5.height = 1;
+
+      particle6 = vector2D:new();
+      particle6.x = 34;
+      particle6.y = 30;
+      particle6.width = 1;
+      particle6.height = 1;
+
+
+      particleArray[1] = particle;
+      particleArray[2] = particle2;
+      particleArray[3] = particle3;
+      particleArray[4] = particle4;
+      particleArray[5] = particle5;
+      particleArray[6] = particle6;
+
+      seriesArray = {plot1.particle1, plot1.particle2, plot1.particle3, plot1.particle4, plot1.particle5, plot1.particle6};
+      labelArray = {section5.label1, section5.label2, section5.label3, section5. label4, section5.label5, section5.label6};
+
+      for i, p in ipairs(particleArray) do
+      drawSquare(p.x, p.y, p.width, p.height, seriesArray[i], color.white);
+      end
+
+      gameActive = false;
+
+      end
+
+      startGame()
+    </onDocumentOpened>
+    <drawing name="plot1" pan="custom" tap="custom" manual="true">
+      <axis dim="x" auto="none" min="0" max="50"></axis>
+      <axis dim="y" auto="none" min="0" max="50"></axis>
+      <onPan>
+        if plot1.main ~= null then
+          plot1.main:Clear();
+          playerObj.x = plot1.XAxis.Min + state.Current.X * (plot1.XAxis.Max - plot1.XAxis.Min);
+          playerObj.y = plot1.YAxis.Min + state.Current.Y * (plot1.YAxis.Max - plot1.YAxis.Min);
+
+          plotTools.drawCircle(plot1.main, {playerObj.x, playerObj.y}, playerObj.width, color.yellow);
+          plot1.main:Update();
+        end
+      </onPan>
+      <series name="background" draw="segmentedFill">
+        <style>
+          <foreground color="black" />
+        </style>
+        <data>
+          0 0; 0 50; 50 50; 50 0; 0 0;
+        </data>
+
+      </series>
+      <series manual="true" name="main" draw="radialFill"></series>
+      <series manual="true" name="particle1" capacity="5" draw="segmentedFill"></series>
+      <series manual="true" name="particle2" capacity="5" draw="segmentedFill"></series>
+      <series manual="true" name="particle3" capacity="5" draw="segmentedFill"></series>
+      <series manual="true" name="particle4" capacity="5" draw="segmentedFill"></series>
+      <series manual="true" name="particle5" capacity="5" draw="segmentedFill"></series>
+      <series manual="true" name="particle6" capacity="5" draw="segmentedFill"></series>
+    </drawing>
+    <simulation name="sim1" period="0.01" loop="true">
+      <onActivePageChanged>
+        sim1:Start();
+      </onActivePageChanged>
+      <onUpdate>
+        <![CDATA[
+        
+        
+        if gameActive then
+          section5.labelStack.scoreLabel.Text = "Score: " .. playerScore;
+          for i, p in ipairs(particleArray) do
+            seriesArray[i]:Clear();
+            if checkForCollision(p, playerObj, p.width, p.height, playerObj.width, playerObj.height) then
+                playerScore = playerScore + 1;
+                randomizePosition(p);
+            end
+            drawSquare(p.x, p.y, p.width, p.height, seriesArray[i], color.white);
+            seriesArray[i]:Update();
+            dist = distanceBetween(p, playerObj);
+            angle = angleBetween(p, playerObj);
+            acceleration = 1/dist^2 * playerObj.width;
+            p.x = p.x + acceleration*math.cos(angle);
+            p.y = p.y + acceleration*math.sin(angle);
+            
+            if p.x > 50 then
+                randomizePosition(p);
+            end
+                
+            if p.x < 0 then
+                randomizePosition(p);
+            end
+            if p.y > 50 then
+                randomizePosition(p);
+            end
+                
+            if p.y < 0 then
+                randomizePosition(p);
+            end
+          end
+         end
+        
+        ]]>
+
+      </onUpdate>
+    </simulation>
+  </stack>
+  <stack orientation="horizontal" style="contentBG" name="labelStack">
+    <p name="scoreLabel"></p>
+    <button content="Start Game" name="btn1">
+      <onClick>
+        if btn1.Text == "Pause Game" then
+        gameActive = false;
+        btn1.Text = "Start Game"
+        elseif btn1.Text == "Start Game" then
+        gameActive = true;
+        btn1.Text = "Pause Game";
+        end
+      </onClick>
+    </button>
+    <button content="Reset Game">
+      <onClick>
+        section5.gameStack.sim1:Reset();
+        gameActive = false;
+        startGame();
+      </onClick>
+    </button>
+    <slider min="1" max="5" value="2" name="massSlider">
+      <onValueChanged>
+        section5.gameStack.plot1.main:Clear();
+        playerObj.width = massSlider.Value;
+        playerObj.height = massSlider.Value;
+        plotTools.drawCircle(section5.gameStack.plot1.main, {playerObj.x, playerObj.y}, playerObj.width, color.yellow);
+        section5.gameStack.plot1.main:Update();
+      </onValueChanged>
+    </slider>
+  </stack>
+  <p style="sectionHeading">Analysis</p>
+  <stack orientation="vertical" style="contentBG">
+    <p>
+      Notice how the more massive your star is, the stronger its gravitational pull towards other stars is. This is exactly true in reality as well. The more massive an object is, the stronger its gravitational
+      pull on surrounding objects are. One of the most massive objects in our galaxies are black holes. One is said to be in the center of our Milky Way galaxy. Black holes are so strong, not even light can escape it; it
+      is not easy to find either! Black holes are created after the death of a sun and a lot of the suns mass collects into such a small area making it really dense. This density (since it is a result of mass in a small area) gives black holes
+      their immense gravitational pull.
+    </p>
+    <image src="resources/blackhole.jpg" />
+  </stack>
+  <p>
+    <br />
+  </p>
+</sectionNoTitle>
+
+<sectionNoTitle style="pageLayout" name="section6">
+  <p style="sectionHeading">Magnetic Fields</p>
+  <stack orientation="vertical" style="contentBG">
+    <p>
+      Magnets are all around us. They can be found on our fridge doors and in computer parts. A magnetic field is produced when a charged
+      object is in motion. A simple example is a regular bar magnet. It has a south and a north pole and can either attract or repel depending on the orientation
+      of the object around it. The magnetic field surronds the magnet (use the picture below to get an idea). The closer you are to the magnet, the stronger the magnetic
+      force becomes. The strength of the magnetic field can be measured by <b>Ampere's Law</b> which tells us how strong the field is if as we move away or towards the magnet.
+    </p>
+    <image src="resources/field.jpg" />
+    <p>
+      One large magnetic field is the earth's magnetic field. The magnetic field lines stretch all the way from the north pole to the south pole and sorround earth. Earth's magnetic field
+      protects us from radiation and solar winds from the sun. When solar winds come near earth, they react with earth's magnetic field and stops it from penetrating us. This reaction can be seen
+      near the earth's poles and is commonly known as the Arora Borealis.
+    </p>
+  </stack>
+  <p>
+    <br />
+  </p>
+</sectionNoTitle>
+
+<sectionNoTitle style="pageLayout" name="section7">
+  <p style="sectionHeading">Ampere's Law</p>
+  <stack orientation="vertical" style="contentBG">
+    <p>
+      Magnetic fields can be produced by currents passing through a wire. Ampere's Law relates magnetic fields in a closed loop to the electric current through that loop. Ampere's law
+      can be used for electric currents running through a wire since it is a closed loop.
+    </p>
+    <p style="center">$ | \overrightarrow{B} | = \frac{u_{0}I}{2 \pi r} $</p>
+  </stack>
+  <p style="sectionHeading">Right Hand Rule</p>
+  <stack orientation="vertical" style="contentBG">
+    <p>
+      Depending on the orientation of the current, the direction of the
+      magnetic field also changes. Using the right hand rule, we can find the direction of the magnetic field around a wire. Simply point your thumb (with your right hand) to the direction
+      of the current running through the wire and curl your fingers. Your fingers will then represent the orientation of the magnetic field around that wire.
+    </p>
+    <image src="resources/magneticfield.png" />
+  </stack>
+  <p>
+    <br />
+  </p>
+</sectionNoTitle>
+
+<sectionNoTitle style="pageLayout" name="section8">
+  <p style="sectionHeading">Visualizing Magnetic Fields</p>
+  <stack style="contentBG">
+    <p>
+      In this simulation, pan your finger around the simulation area to see how the orientation of the needle changes depending on its position relative to the bar magnet in the middle. This is a
+      demonstration of how compasses can show directions. It uses the earth's magnetic field as the magnet and the needle which is placed inside of the compass.
+    </p>
+  </stack>
+  <p style="sectionHeading">Simulation</p>
+  <stack orientation="vertical" style="contentBG" name="contentStack">
+    <drawing name="plot2" pan="custom" manual="true" tap="custom">
+      <onDocumentOpened>
+        section8.contentStack.plot2.magnet.Transform = matrixf.translation(-2, 0, 1);
+        section8.contentStack.plot2.magnet2.Transform = matrixf.translation(2, 0, 1);
+        char.textS( section8.contentStack.plot2.SLabel, {21.5, 23.5}, 1, color.white)
+        char.textN( section8.contentStack.plot2.NLabel, {27.5, 23.5}, 1, color.white)
+        player = vector2D:new();
+        player.width = 2;
+        player.height = 5;
+        magnetN = vector2D:new();
+        magnetS = vector2D:new();
+        magnetN.x = 27.5
+        magnetN.y = 23.5;
+        magnetS.x = 21.5;
+        magnetS.y = 23.5;
+        l1 = 0;
+        a1 = 0;
+        offset = 0;
+      </onDocumentOpened>
+      <onPan>
+        <![CDATA[
+            
+           
+
+            
+            player.x = plot2.XAxis.Min + state.Current.X * (plot2.XAxis.Max - plot2.XAxis.Min);
+            player.y = plot2.YAxis.Min + state.Current.Y * (plot2.YAxis.Max - plot2.YAxis.Min);
+            
+
+            if player.x > 25 then
+              l1 = distanceBetween(player, magnetN)
+              a1 = angleBetween(player, magnetN);
+            elseif player.x < 25 then
+              l1 = distanceBetween(player, magnetS)
+              a1 = angleBetween(player, magnetS);
+            end
+            drawDiamond(player.x, player.y, player.width, player.height, plot2.main, color.red, color.black);
+
+            plot2.main:Update();
+            
+            ]]>
+      </onPan>
+      <axis dim="x" auto="none" min="0" max="50"></axis>
+      <axis dim="y" auto="none" min="0" max="50"></axis>
+      <series draw="line" name="line">
+        <style>
+          <lineThickness>2</lineThickness>
+          <foreground color="gray" />
+        </style>
+        <data src="resources/field2.csv" />
+      </series>
+      <series name="main" draw="segmentedFill" capacity="6"></series>
+      <series name="magnet" draw="segmentedFill">
+        <style>
+          <foreground color="black" />
+        </style>
+        <data>
+          23 23; 23 25; 27 25; 27 25; 27 23; 23 23; 23 23;
+        </data>
+      </series>
+      <series name="magnet2" draw="segmentedFill">
+        <style>
+          <foreground color="red" />
+        </style>
+        <data>
+          23 23; 23 25; 27 25; 27 25; 27 23; 23 23; 23 23;
+        </data>
+      </series>
+      <series name="NLabel"></series>
+      <series name="SLabel"></series>
+
+    </drawing>
+
+    <simulation name="sim1" period="0.01" loop="true">
+      <onDocumentOpened>
+        sim1:Start();
+        time2=0;
+        pulseTime = 2.5;
+      </onDocumentOpened>
+      <onUpdate>
+        time2 = time2+0.01;
+
+        if time2 &gt; pulseTime then
+        time2 = 0;
+        else
+
+        temp = time2/pulseTime * 255;
+        if temp &gt; 125 then
+        r = 260 - (time2/pulseTime * 255);
+        g = 260 - (time2/pulseTime * 255);
+        b = 260 - (time2/pulseTime * 255);
+        elseif temp &gt; 0 then
+        r = (time2/pulseTime * 255);
+        g = (time2/pulseTime * 255);
+        b = (time2/pulseTime * 255);
+        end
+          if plot2.line ~= null then
+            plot2.line.Style.ForegroundColor = color.rgb(r+121,g+121,b+121);
+          end
+        end
+
+
+        if player.x &gt; 25 then
+        if offset &lt; 180 then
+        offset = offset +  time*1.2;
+        else
+        offset = 180
+        end
+        else
+        if offset &gt; 0 then
+        offset = offset -  time*1.2;
+        else
+        offset = 0;
+        end
+        end
+        if section8.contentStack.plot2.main ~= null then
+          plot2.main.Transform = matrixf.translation(player.x, player.y, 0)*matrixf.rotationAboutAxis(0,0,1,a1-(math.pi/180*(90+offset)))*matrixf.translation(-player.x, -player.y, 0);
+        end
+      </onUpdate>
+    </simulation>
+    <p name="label1"></p>
+  </stack>
+  <p>
+    <br />
+  </p>
+</sectionNoTitle>
+
+<sectionNoTitle style="pageLayout" name="section9">
+  <onDocumentOpened>
+    section9.contentStack.sectionImage.ImageSource = "resources/electricfield.png";
+    section9.contentStack.sectionImage2.Style.Visibility = "collapsed";
+    section9.contentStack.sectionImage3.Style.Visibility = "collapsed";
+  </onDocumentOpened>
+  <p style="sectionHeading">Electric Fields</p>
+  <stack orientation="vertical" style="contentBG" name="contentStack">
+    <p>
+      Electric Fields is defined as an area round a charged particle where force is exerted on other charged particles inside that area. Every charged particle has an electric field. Unlike
+      Magnetic Fields, Electric Fields do not require a moving current in order to generate a field; only the particle must be charged positively or negatively. Electric Fields are measured in newton per coulomb using the equation:
+      $ \overrightarrow{E} = \frac{ \overrightarrow{F} }{q} $.
+    </p>
+    <image name="sectionImage" src="resources/electricfield.png" />
+    <image name="sectionImage2" src="resources/electricfield2.png" />
+    <image name="sectionImage3" src="resources/electricfield3.png" />
+    <stack orientation="horizontal" style="center">
+      <button content="+ -">
+        <onClick>
+          section9.contentStack.sectionImage.Style.Visibility = "visible";
+          section9.contentStack.sectionImage2.Style.Visibility = "collapsed";
+          section9.contentStack.sectionImage3.Style.Visibility = "collapsed";
+        </onClick>
+      </button>
+      <button content="+ +">
+        <onClick>
+          section9.contentStack.sectionImage2.Style.Visibility = "visible";
+          section9.contentStack.sectionImage.Style.Visibility = "collapsed";
+          section9.contentStack.sectionImage3.Style.Visibility = "collapsed";
+        </onClick>
+      </button>
+      <button content="- -">
+        <onClick>
+          section9.contentStack.sectionImage3.Style.Visibility = "visible";
+          section9.contentStack.sectionImage.Style.Visibility = "collapsed";
+          section9.contentStack.sectionImage2.Style.Visibility = "collapsed";
+        </onClick>
+      </button>
+    </stack>
+    <p>
+      To measure the force that an electric field exerts on another point charge, we can use <b>Coulomb's Law</b>. This law helps determine the force between two charged particles. <b>Note: </b> charged particles can
+      refer to positive or negative charges, and when calculating forces in electric fields, it is always important to remember the direction of the force. One way to remember is to understand how electric field lines are drawn. Notice the images above
+      which shows how the fields look depending on what pair of charges are present.
+    </p>
+  </stack>
+  <p>
+    <br />
+  </p>
+</sectionNoTitle>
+  
+<sectionNoTitle name="test" style="pageLayout">
+    <p style="sectionHeading">Simulation Instructions</p>
+    <stack style="contentBG">
+      <p>Below is a simulation of several positive and negative particles isolated in an area. To interact with this simulation, pan your finger around the simulation and notice the effect it has on the surrounding
+      particles. Initially, you control a positive particle and you can change this by tapping on the simulation to become negative. The particle movement is based on <b>Coulomb's Law</b>.
+    </p>
+    </stack>
+    <p style="sectionHeading">Charged Particle Sandbox</p>
+    <stack name="content" orientation="vertical" style="contentBG">
+      <drawing name="plot1" pan="custom" manual="true" tap="custom">
+        <style>
+          <aspectRatio>1.0</aspectRatio>
+          <widthPercentage>90%</widthPercentage>
+        </style>
+        <axis dim="x" name="XAxis" auto="none" min="0" max="50"></axis>
+        <axis dim="y" name="YAxis" auto="none" min="0" max="50"></axis>
+       
+        <series manual="true" name="circle" draw="radialFill"></series>
+        <series manual="true" name="circle0" draw="radialFill"></series>
+        <series capacity="8" name="label0" draw="line"></series>
+        <series manual="true" name="circle1" draw="radialFill"></series>
+        <series capacity="8" name="label1" draw="line"></series>
+        <series manual="true" name="circle2" draw="radialFill"></series>
+        <series capacity="8" name="label2" draw="line"></series>
+        <series manual="true" name="circle3" draw="radialFill"></series>
+        <series capacity="8" name="label3" draw="line"></series>
+        <series manual="true" name="circle4" draw="radialFill"></series>
+        <series capacity="8" name="label4" draw="line"></series>
+        <series manual="true" name="circle5" draw="radialFill"></series>
+        <series capacity="8" name="label5" draw="line"></series>
+        <series manual="true" name="circle6" draw="radialFill"></series>
+        <series capacity="8" name="label6" draw="line"></series>
+        <series manual="true" name="circle7" draw="radialFill"></series>
+        <series capacity="8" name="label7" draw="line"></series>
+        <series manual="true" name="circle8" draw="radialFill"></series>
+        <series capacity="8" name="label8" draw="line"></series>
+        <series manual="true" name="circle9" draw="radialFill"></series>
+        <series capacity="8" name="label9" draw="line"></series>
+      
+        <onPan>
+          if plot1.circle ~= null then
+            plot1.circle:Clear();
+            circ1.x = plot1.XAxis.Min + state.Current.X * (plot1.XAxis.Max - plot1.XAxis.Min);
+            circ1.y = plot1.YAxis.Min + state.Current.Y * (plot1.YAxis.Max - plot1.YAxis.Min);
+        
+            plotTools.drawCircle(plot1.circle, {circ1.x, circ1.y}, circ1.radius, circ1.color);
+            plot1.circle:Update();
+          end
+        </onPan>
+
+        <onTap>
+          if plot1.circle ~= null then
+            plot1.circle:Clear();
+            if circ1.proton == true then
+              circ1.proton = false;
+              circ1.color = color.rgb(0,0,0);
+            else
+              circ1.proton = true;
+              circ1.color = color.rgb(255,0,0);
+            end
+            plotTools.drawCircle(plot1.circle, {circ1.x, circ1.y}, circ1.radius, circ1.color);
+            plot1.circle:Update();
+
+          end
+        </onTap>
+      
+      
+      </drawing>
+      <simulation name="sim" period="0.01">
+        <onDocumentOpened>
+          <!--COULOMBS CONSTANT-->
+          k = 1
+        
+          circ1 = vector2D:new();
+          circ1.color = color.red;
+          circ1.x = 25;
+          circ1.y = 25;
+          circ1.proton = true;
+          circ1.radius=3;
+          circ1.power = 5;
+          velocityx = 0;
+          velocityy = 0;
+          circleArray = {};
+          circlePlotArray = {};
+          circlePlotArray[1] = plot1.circle0;
+          circlePlotArray[2] = plot1.circle1;
+          circlePlotArray[3] = plot1.circle2;
+          circlePlotArray[4] = plot1.circle3;
+          circlePlotArray[5] = plot1.circle4;
+          circlePlotArray[6] = plot1.circle5;
+          circlePlotArray[7] = plot1.circle6;
+          circlePlotArray[8] = plot1.circle7;
+          circlePlotArray[9] = plot1.circle8;
+          circlePlotArray[10] = plot1.circle9;
+        
+          labelPlotArray = {};
+          labelPlotArray[1] = plot1.label0;
+          labelPlotArray[2] = plot1.label1;
+          labelPlotArray[3] = plot1.label2;
+          labelPlotArray[4] = plot1.label3;
+          labelPlotArray[5] = plot1.label4;
+          labelPlotArray[6] = plot1.label5;
+          labelPlotArray[7] = plot1.label6;
+          labelPlotArray[8] = plot1.label7;
+          labelPlotArray[9] = plot1.label8;
+          labelPlotArray[10] = plot1.label9;
+
+          function drawCirc()
+            for i=1,10 do
+              plotTools.drawCircle(circlePlotArray[i], {circleArray.x, circleArray.y}, circleArray.radius, circleArray.color);
+              if circlePlotArray[i].proton then
+                symbol.drawPlus(labelPlotArray[i], {circleArray.x - circleArray.radius/3, circleArray.y - circleArray.radius/2}, circleArray.radius, color.white);
+              else
+                symbol.drawMinus(labelPlotArray[i], {circleArray.x - circleArray.radius/3, circleArray.y - circleArray.radius/2}, circleArray.radius, color.white);
+              end
+            end
+          end
+
+        
+            for i=1,10 do
+              circleArray[i] = vector2D:new();
+              circleArray[i].radius = math.random(1,2);
+              circleArray[i].x = math.random(50-circleArray[i].radius);
+              circleArray[i].y = math.random(50-circleArray[i].radius);
+              circleArray[i].power = circleArray[i].radius;
+              if math.random(0, 10) &gt; 5 then
+                circleArray[i].color = color.rgb(255, 0, 0);
+                circleArray[i].proton = true;
+              else
+                circleArray[i].color = color.rgb(0, 0, 0);
+                circleArray[i].proton = false;
+              end
+              plotTools.drawCircle(circlePlotArray[i], {circleArray[i].x, circleArray[i].y}, circleArray[i].radius, circleArray[i].color);
+          
+              if circleArray[i].proton then
+                symbol.drawPlus(labelPlotArray[i], {circleArray[i].x - circleArray[i].radius/3, circleArray[i].y - circleArray[i].radius/2}, circleArray[i].radius, color.white);
+              else
+                symbol.drawMinus(labelPlotArray[i], {circleArray[i].x - circleArray[i].radius/3, circleArray[i].y - circleArray[i].radius/2}, circleArray[i].radius, color.white);
+              end
+            end
+        
+          plotTools.drawCircle(plot1.circle, {circ1.x, circ1.y}, circ1.radius, circ1.color);
+          circleArray[11] = circ1;
+        </onDocumentOpened>
+        <onUpdate>
+          for i, p in ipairs(circlePlotArray) do
+            circlePlotArray[i]:Clear();
+          end
+          for i=1, 10 do
+              if (circleArray[i].x + circleArray[i].radius &gt; 50) then
+                circleArray[i].x = 50 - circleArray[i].radius - 1;
+                velocityx = velocityx* -1;
+              elseif (circleArray[i].x - circleArray[i].radius &lt; 0) then
+                circleArray[i].x = 0 + circleArray[i].radius + 1;
+                velocityx = velocityx* -1;
+              end
+            
+              if (circleArray[i].y + circleArray[i].radius &gt; 50)  then
+                circleArray[i].y = 50 - circleArray[i].radius - 1;
+                velocityy = velocityy*-1;
+              elseif (circleArray[i].y - circleArray[i].radius &lt; 0) then
+                circleArray[i].y = 0 + circleArray[i].radius + 1;
+                velocityy = velocityy*-1;
+              end
+            for j=i+1, 11 do
+              direction = {};
+              direction[1] = circleArray[j].x-circleArray[i].x;
+              direction[2] = circleArray[j].y-circleArray[i].y
+              len = direction[1]*direction[1] + direction[2]*direction[2];
+              directionNormalized = {};
+              if circleArray[i].proton and circleArray[j].proton then
+                directionNormalized[1] = -direction[1]/math.sqrt(len)
+                directionNormalized[2] = -direction[2]/math.sqrt(len);
+              elseif not circleArray[i].proton and circleArray[j].proton then
+                directionNormalized[1] = direction[1]/math.sqrt(len)
+                directionNormalized[2] = direction[2]/math.sqrt(len);
+              elseif circleArray[i].proton and not circleArray[j].proton then
+                directionNormalized[1] = direction[1]/math.sqrt(len)
+                directionNormalized[2] = direction[2]/math.sqrt(len);
+              elseif not circleArray[i].proton and not circleArray[j].proton then
+                directionNormalized[1] = -direction[1]/math.sqrt(len)
+                directionNormalized[2] = -direction[2]/math.sqrt(len);
+              end
+              force = k*circleArray[i].power*circleArray[j].power/(math.pow(distanceBetween(circleArray[i], circleArray[j]), 2));
+
+              if (checkForCollisionCirc(circleArray[i], circleArray[j])) then
+                force=0;
+              end
+            
+              velocityx = force*directionNormalized[1];
+              velocityy = force*directionNormalized[2];
+            
+              circleArray[i].x = circleArray[i].x + velocityx;
+              circleArray[i].y = circleArray[i].y + velocityy;
+              circleArray[j].x = circleArray[j].x - velocityx;
+              circleArray[j].y = circleArray[j].y - velocityy;
+            end
+            plotTools.drawCircle(circlePlotArray[i], {circleArray[i].x, circleArray[i].y}, circleArray[i].radius, circleArray[i].color);
+            if circleArray[i].proton then
+              symbol.drawPlus(labelPlotArray[i], {circleArray[i].x - circleArray[i].radius/3, circleArray[i].y - circleArray[i].radius/2}, circleArray[i].radius, color.white);
+            else
+              symbol.drawMinus(labelPlotArray[i], {circleArray[i].x - circleArray[i].radius/3, circleArray[i].y - circleArray[i].radius/2}, circleArray[i].radius, color.white);
+            end
+          end
+          for i, p in ipairs(circlePlotArray) do
+            circlePlotArray[i]:Update();
+          end
+
+        </onUpdate>
+      </simulation>
+      <stack orientation="horizontal">
+        <button name="btnStart" content="Start">
+          <onClick>
+            if btnStart.Text == "Start" then
+            test.content.sim:Start();
+            btnStart.Text = "Stop";
+            elseif btnStart.Text == "Stop" then
+            btnStart.Text = "Start";
+            test.content.sim:Stop();
+            end
+
+          </onClick>
+        </button>
+        <button content="Reset">
+          <onClick>
+            k = 1
+            circ1 = vector2D:new();
+            circ1.color = color.red;
+            circ1.x = 25;
+            circ1.y = 25;
+            circ1.proton = true;
+            circ1.radius=3;
+            circ1.power = 5;
+            velocityx = 0;
+            velocityy = 0;
+            circleArray = {};
+            circlePlotArray = {};
+            circlePlotArray[1] = test.content.plot1.circle0;
+            circlePlotArray[2] = test.content.plot1.circle1;
+            circlePlotArray[3] = test.content.plot1.circle2;
+            circlePlotArray[4] = test.content.plot1.circle3;
+            circlePlotArray[5] = test.content.plot1.circle4;
+            circlePlotArray[6] = test.content.plot1.circle5;
+            circlePlotArray[7] = test.content.plot1.circle6;
+            circlePlotArray[8] = test.content.plot1.circle7;
+            circlePlotArray[9] = test.content.plot1.circle8;
+            circlePlotArray[10] = test.content.plot1.circle9;
+
+            labelPlotArray = {};
+            labelPlotArray[1] = test.content.plot1.label0;
+            labelPlotArray[2] = test.content.plot1.label1;
+            labelPlotArray[3] = test.content.plot1.label2;
+            labelPlotArray[4] = test.content.plot1.label3;
+            labelPlotArray[5] = test.content.plot1.label4;
+            labelPlotArray[6] = test.content.plot1.label5;
+            labelPlotArray[7] = test.content.plot1.label6;
+            labelPlotArray[8] = test.content.plot1.label7;
+            labelPlotArray[9] = test.content.plot1.label8;
+            labelPlotArray[10] = test.content.plot1.label9;
+
+            function drawCirc()
+            for i=1,10 do
+            plotTools.drawCircle(circlePlotArray[i], {circleArray.x, circleArray.y}, circleArray.radius, circleArray.color);
+            if circlePlotArray[i].proton then
+            symbol.drawPlus(labelPlotArray[i], {circleArray.x - circleArray.radius/3, circleArray.y - circleArray.radius/2}, circleArray.radius, color.white);
+            else
+            symbol.drawMinus(labelPlotArray[i], {circleArray.x - circleArray.radius/3, circleArray.y - circleArray.radius/2}, circleArray.radius, color.white);
+            end
+            end
+            end
+
+
+            for i=1,10 do
+            circleArray[i] = vector2D:new();
+            circleArray[i].radius = math.random(1,2);
+            circleArray[i].x = math.random(50-circleArray[i].radius);
+            circleArray[i].y = math.random(50-circleArray[i].radius);
+            circleArray[i].power = circleArray[i].radius;
+            if math.random(0, 10) &gt; 5 then
+            circleArray[i].color = color.rgb(255, 0, 0);
+            circleArray[i].proton = true;
+            else
+            circleArray[i].color = color.rgb(0, 0, 0);
+            circleArray[i].proton = false;
+            end
+            plotTools.drawCircle(circlePlotArray[i], {circleArray[i].x, circleArray[i].y}, circleArray[i].radius, circleArray[i].color);
+
+            if circleArray[i].proton then
+            symbol.drawPlus(labelPlotArray[i], {circleArray[i].x - circleArray[i].radius/3, circleArray[i].y - circleArray[i].radius/2}, circleArray[i].radius, color.white);
+            else
+            symbol.drawMinus(labelPlotArray[i], {circleArray[i].x - circleArray[i].radius/3, circleArray[i].y - circleArray[i].radius/2}, circleArray[i].radius, color.white);
+            end
+            end
+
+            plotTools.drawCircle(plot1.circle, {circ1.x, circ1.y}, circ1.radius, circ1.color);
+            circleArray[11] = circ1;
+          </onClick>
+        </button>
+      </stack>
+      
+    </stack>
+  </sectionNoTitle>
+
+<sectionNoTitle name="section10" style="pageLayout">
+  <p style="sectionHeading">Magnetic vs Electric Fields</p>
+  <stack style="contentBG">
+    <image src="resources/magneticvselectric.png" />
+    <p>Here are some key differences between magnetic and electric fields.</p>
+    <stack orientation="horizontal" style="center">
+      <p style="subSectionHeading">Electric Fields</p>
+      <p style="subSectionHeading">Magnetic Fields</p>
+    </stack>
+    <stack orientation="horizontal" style="center">
+      <p>Made from voltage, in which electrons can be stationary or in motion</p>
+      <p>Made from current, in which electrons are in motion</p>
+    </stack>
+    <stack orientation="horizontal" style="center">
+      <p>Measured in v/m (volts per meter)</p>
+      <p>Measured in Guass(G) or Tesla(T)</p>
+    </stack>
+    <stack orientation="horizontal" style="center">
+      <p>Positive charges and negative charges can be isolated</p>
+      <p>Cannot become a dipole (can not have only one north or south pole)</p>
+    </stack>
+    <stack orientation="horizontal" style="center">
+      <p>Ekectric force is not perpindicular to the direction of charge</p>
+      <p>Magnetic force is perpindicular to the direction of the charge</p>
+    </stack>
+  </stack>
+  <p>
+    <br />
+  </p>
+</sectionNoTitle>
+
+<sectionNoTitle name="section11" style="pageLayout">
+  <p style="sectionHeading">Practice</p>
+  <stack orientation="vertical" style="contentBG">
+    <p style="subSectionHeading">Question 1</p>
+    <!--Image of question-->
+    <image src="resources/gravity1.png" />
+    <table widths="10% 90%" grid="0">
+      <row>
+        <column>
+          <!--QUESTION PICTURE-->
+          <image src="resources/question.png" />
+        </column>
+        <column>
+          <!--QUESTION GOES HERE-->
+          <p>
+            There are two suns that are only $ 2.5 \times 10^{15} m $ away from each other. The mass of the first sun is $ 2.5 \times 10^{20} kg $ and the mass of the other
+            sun is only $ 7.5 \times 10^{15} kg $. Determine the gravitational force between these two suns.
+          </p>
+        </column>
+      </row>
+    </table>
+    <button name="btn" style="center" content="Show Answer">
+      <onClick>
+        <!--SHOW ANSWER HERE-->
+        if btn.Text == "Show Answer" then
+        ans.Style.Visibility = "visible";
+        btn.Text = "Hide Answer";
+        elseif btn.Text == "Hide Answer" then
+        ans.Style.Visibility = "collapsed";
+        btn.Text = "Show Answer";
+        end
+      </onClick>
+    </button>
+    <stack name="ans" orientation="vertical" style="collapsed">
+      <p>Using the formula $ F = \frac{GMm}{r^2} $, we first must find our given information</p>
+      <p>$ G = 6.674 \times 10^{-11} \frac{m^3}{kg s^{-2}} $</p>
+      <p>$ M = 2.5 \times 10^{20} kg  $</p>
+      <p>$ m = 7.5 \times 10^{15} kg $</p>
+      <p>$ r = 2.5 \times 10^{15} $</p>
+
+      <p>To solve for F, we must simply plug in our given values.</p>
+      <p>Thus for the gravitational force, the answer is $ F = 5.0 \times 10^{10} N $</p>
+    </stack>
+  </stack>
+  <p>
+    <br />
+  </p>
+  <stack orientation="vertical" style="contentBG">
+    <p style="subSectionHeading">Question 2</p>
+    <!--Image of question-->
+    <image src="resources/gravity2.png" />
+    <table widths="10% 90%" grid="0">
+      <row>
+        <column>
+          <!--QUESTION PICTURE-->
+          <image src="resources/question.png" />
+        </column>
+        <column>
+          <!--QUESTION GOES HERE-->
+          <p>
+            Mass and weight are different measurements. Mass is consistent while weight changes relative to the force of gravity. Using this information, determine what your weight is first and then
+            determine your weight on mars. (Requires some research).
+          </p>
+        </column>
+      </row>
+    </table>
+    <button name="btn" style="center" content="Show Answer">
+      <onClick>
+        <!--SHOW ANSWER HERE-->
+        if btn.Text == "Show Answer" then
+        ans.Style.Visibility = "visible";
+        btn.Text = "Hide Answer";
+        elseif btn.Text == "Hide Answer" then
+        ans.Style.Visibility = "collapsed";
+        btn.Text = "Show Answer";
+        end
+      </onClick>
+    </button>
+    <stack name="ans" orientation="vertical" style="collapsed">
+      <p>Let's take an average weight of $ 60kg $. The actual downward force of our weight can be calculated using $ F = mg $ and we can determine the force by plugging in our earth's acceleration due to gravity and our mass. Doing so gives us: </p>
+      <p>$ F = 588 N $</p>
+      <p>Now, take the acceleration of mars which turns out to be $ 3.7 \frac{m}{s^2} $ and use the same formula to determine your weight.</p>
+      <p>$ F = (60kg)(3.7 \frac{m}{s^2}) $</p>
+      <p>$ F = 222 N $</p>
+      <p>This is a lot less weight than on earth. To determine your apparent weight, use the ratio between your weight on earth and your weight on mars and multiply this ratio to your mass.</p>
+      <p>$ \frac{F_{mars}}{F_{earth}} = 0.378 $</p>
+      <p>$ m \times 0.378 = m_{apparent} $</p>
+      <p>$ m_{apparent} = 22.8 kg $</p>
+    </stack>
+  </stack>
+  <p>
+    <br />
+  </p>
+  <stack orientation="vertical" style="contentBG">
+    <p style="subSectionHeading">Question 3</p>
+    <!--Image of question-->
+    <image src="resources/gravity3.png" />
+    <table widths="10% 90%" grid="0">
+      <row>
+        <column>
+          <!--QUESTION PICTURE-->
+          <image src="resources/question.png" />
+        </column>
+        <column>
+          <!--QUESTION GOES HERE-->
+          <p>
+            How much of earth's gravity is lost (in percentage) 50km above the surface of the earth?
+          </p>
+        </column>
+      </row>
+    </table>
+    <button name="btn" style="center" content="Show Answer">
+      <onClick>
+        <!--SHOW ANSWER HERE-->
+        if btn.Text == "Show Answer" then
+        ans.Style.Visibility = "visible";
+        btn.Text = "Hide Answer";
+        elseif btn.Text == "Hide Answer" then
+        ans.Style.Visibility = "collapsed";
+        btn.Text = "Show Answer";
+        end
+      </onClick>
+    </button>
+    <stack name="ans" orientation="vertical" style="collapsed">
+      <p>Using the formula $ g = \frac{GM}{r^2} $ we can determine two different g's. One at $ r = 6.37 \times 10^6 m $ (earth's radius) and the other at $ r = 6.37 \times 10^7 + 5.0 \times 10^4 m $.</p>
+      <p>$ g_{1} = 9.81 \frac{m}{s^2} $</p>
+      <p>$ g_{2} = 9.66 \frac{m}{s^2} $</p>
+      <p>Dividing $ r_{1} $ by $ r_{2} $ and multiplying by 100 gives us a percentage, however we must subtract 100 by this percentage to find how much is lost.</p>
+      <p>Therefore $1.53$ % of earth's gravity is lost. </p>
+    </stack>
+  </stack>
+</sectionNoTitle>
+
+<sectionNoTitle name="section13" style="pageLayout">
+  <p style="sectionHeading">Practice</p>
+  <stack orientation="vertical" style="contentBG">
+    <p style="subSectionHeading">Question 1</p>
+    <!--Image of question-->
+    <image src="resources/parallelplates.png" />
+    <table widths="10% 90%" grid="0">
+      <row>
+        <column>
+          <!--QUESTION PICTURE-->
+          <image src="resources/question.png" />
+        </column>
+        <column>
+          <!--QUESTION GOES HERE-->
+          <p>
+            Two parallel oppositely charged plates are $ 6.0cm $ apart. The potential
+            difference, in volts, between the plates is 36.0 V. Find the electric field strength between them.
+          </p>
+        </column>
+      </row>
+    </table>
+    <button name="btn" style="center" content="Show Answer">
+      <onClick>
+        <!--SHOW ANSWER HERE-->
+        if btn.Text == "Show Answer" then
+        ans.Style.Visibility = "visible";
+        btn.Text = "Hide Answer";
+        elseif btn.Text == "Hide Answer" then
+        ans.Style.Visibility = "collapsed";
+        btn.Text = "Show Answer";
+        end
+      </onClick>
+    </button>
+    <stack name="ans" orientation="vertical" style="collapsed">
+      <p>Using the formula $ V = Ed $, we first must find our given information</p>
+      <p>$ V = 36.0V $</p>
+      <p>$ d = 6.0cm = 0.06m $</p>
+      <p>$ E = ? $</p>
+      <p>To solve for $ E $, we rearrange the formula to $ E = \frac{V}{d} $, plug in and solve.</p>
+      <p>Thus for the electric field strength, the answer is $ E = 6.0 \times 10^2 \frac{N}{C} $</p>
+    </stack>
+  </stack>
+  <p>
+    <br />
+  </p>
+  <stack orientation="vertical" style="contentBG">
+    <p style="subSectionHeading">Question 2</p>
+    <!--Image of question-->
+    <image src="resources/electricfield4.png" />
+    <table widths="10% 90%" grid="0">
+      <row>
+        <column>
+          <!--QUESTION PICTURE-->
+          <image src="resources/question.png" />
+        </column>
+        <column>
+          <!--QUESTION GOES HERE-->
+          <p>
+            Find the distance where the electric field strength is $ 1.90 \times 10^5 \frac{N}{C} $ from a positive charge of $ 4.5 nC $
+          </p>
+        </column>
+      </row>
+    </table>
+    <button name="btn" style="center" content="Show Answer">
+      <onClick>
+        <!--SHOW ANSWER HERE-->
+        if btn.Text == "Show Answer" then
+        ans.Style.Visibility = "visible";
+        btn.Text = "Hide Answer";
+        elseif btn.Text == "Hide Answer" then
+        ans.Style.Visibility = "collapsed";
+        btn.Text = "Show Answer";
+        end
+      </onClick>
+    </button>
+    <stack name="ans" orientation="vertical" style="collapsed">
+      <p>Using the formula $ E = \frac{Kq}{d^2} $, we first must find our given information</p>
+      <p>$ E = 1.90 \times 10^5 \frac{N}{C} $</p>
+      <p>$ d = ? $</p>
+      <p>$ q = 4.5 nC = 4.5 \times 10^{-9} C $</p>
+      <p>$ K = 9.0 \times 10^9 \frac{N m^2}{C^2} $</p>
+      <p>To solve for $ d $, we rearrange the formula to $ d = \sqrt{\frac{Kq}{E}} $, plug in and solve.</p>
+      <p>Thus for the distance, the answer is $ d = 1.5 \times 10^{-2} m $</p>
+    </stack>
+  </stack>
+  <p>
+    <br />
+  </p>
+  <stack orientation="vertical" style="contentBG">
+    <p style="subSectionHeading">Question 3</p>
+    <!--Image of question-->
+    <image src="resources/electricfield6.png" />
+    <table widths="10% 90%" grid="0">
+      <row>
+        <column>
+          <!--QUESTION PICTURE-->
+          <image src="resources/question.png" />
+        </column>
+        <column>
+          <!--QUESTION GOES HERE-->
+          <p>
+            What must the charge (sign and magnitude) of a particle of mass $ 5 g $ be for it to remain stationary when placed in a downward-directed electric field of magnitude $ 800 \frac{N}{C} $?
+          </p>
+        </column>
+      </row>
+    </table>
+    <button name="btn" style="center" content="Show Answer">
+      <onClick>
+        <!--SHOW ANSWER HERE-->
+        if btn.Text == "Show Answer" then
+        ans.Style.Visibility = "visible";
+        btn.Text = "Hide Answer";
+        elseif btn.Text == "Hide Answer" then
+        ans.Style.Visibility = "collapsed";
+        btn.Text = "Show Answer";
+        end
+      </onClick>
+    </button>
+    <stack name="ans" orientation="vertical" style="collapsed">
+      <p>We have equilibrium. It means that the net force is 0. Then the gravitational force should be equal to electric force:</p>
+      <p>$ mg = |q|E $</p>
+      <p>From this equation we find the charge of the particle:</p>
+      <p>$ |q| = \frac{mg}{E} = \frac{0.005 \times 9.8}{800} $</p>
+      <p>Since $ q $ must oppose the force of gravity and the eletric field is downward, the charge must be negative.</p>
+      <p>Therefore $ q = 6.13 \times 10^{-5} C $</p>
+    </stack>
+  </stack>
+</sectionNoTitle>
+
+<sectionNoTitle name="section12" style="pageLayout">
+  <p style="sectionHeading">Practice</p>
+  <stack orientation="vertical" style="contentBG">
+    <p style="subSectionHeading">Question 1</p>
+    <!--Image of question-->
+    <image src="resources/magneticq1.png" />
+    <table widths="10% 90%" grid="0">
+      <row>
+        <column>
+          <!--QUESTION PICTURE-->
+          <image src="resources/question.png" />
+        </column>
+        <column>
+          <!--QUESTION GOES HERE-->
+          <p>
+            Find the resultant magnetic field at point $ O $, produced by $ I_{1} $, $ I_{2} $ and $ I_{3} $.
+          </p>
+        </column>
+      </row>
+    </table>
+    <button name="btn" style="center" content="Show Answer">
+      <onClick>
+        <!--SHOW ANSWER HERE-->
+        if btn.Text == "Show Answer" then
+        ans.Style.Visibility = "visible";
+        btn.Text = "Hide Answer";
+        elseif btn.Text == "Hide Answer" then
+        ans.Style.Visibility = "collapsed";
+        btn.Text = "Show Answer";
+        end
+      </onClick>
+    </button>
+    <stack name="ans" orientation="vertical" style="collapsed">
+      <p> Using the formula $ B_{resultant} = B_{1} + B_{2} + B_{3} $ where $ B_{n} = \frac{ \mu _{0} I}{2 \pi r} $</p>
+      <p>$ B = $ Magnetic Field, $ \mu _{0} = $ Permeability of free space $ ( 4 \pi x 10^{-7} m/A ) $, $ I = $ Magnitude of electric current (A), $ r = $ distance (m).</p>
+      <p>$ B_{1} = 12 \times 10^{-6} \frac{N}{Am} $</p>
+      <p>$ B_{2} = 8 \times 10^{-6} \frac{N}{Am} $</p>
+      <p>$ B_{3} = 16 \times 10^{-6} \frac{N}{Am} $</p>
+      <p>$ B_{resultant} = 4 \sqrt{5} \times 10^{-6} \frac{N}{Am} $</p>
+
+    </stack>
+  </stack>
+  <p>
+    <br />
+  </p>
+  <stack orientation="vertical" style="contentBG">
+    <p style="subSectionHeading">Question 2</p>
+    <!--Image of question-->
+    <image src="resources/magneticq3.png" />
+    <table widths="10% 90%" grid="0">
+      <row>
+        <column>
+          <!--QUESTION PICTURE-->
+          <image src="resources/question.png" />
+        </column>
+        <column>
+          <!--QUESTION GOES HERE-->
+          <p>
+            A particle with a negative charge of $ 0.006 C $ is moving perpendicular to a magnetic field of strength 0.5 T. The particle has a speed of $ 300 \frac{m}{s} $ . Calculate the magnitude of the magnetic force exerted on the particle.
+          </p>
+        </column>
+      </row>
+    </table>
+    <button name="btn" style="center" content="Show Answer">
+      <onClick>
+        <!--SHOW ANSWER HERE-->
+        if btn.Text == "Show Answer" then
+        ans.Style.Visibility = "visible";
+        btn.Text = "Hide Answer";
+        elseif btn.Text == "Hide Answer" then
+        ans.Style.Visibility = "collapsed";
+        btn.Text = "Show Answer";
+        end
+      </onClick>
+    </button>
+    <stack name="ans" orientation="vertical" style="collapsed">
+      <p>Using the formula $ F=qv \times B $ we can determine the force by inputting $ q, v $ and $ B $. </p>
+      <p>$ B = 0.5T $</p>
+      <p>$ q = -0.006 C $</p>
+      <p>$ v = 400 \frac{m}{s} $</p>
+      <p>$ F = -0.72N $</p>
+    </stack>
+  </stack>
+  <p>
+    <br />
+  </p>
+  <stack orientation="vertical" style="contentBG">
+    <p style="subSectionHeading">Question 3</p>
+    <!--Image of question-->
+    <image src="resources/magneticq2.png" />
+    <table widths="10% 90%" grid="0">
+      <row>
+        <column>
+          <!--QUESTION PICTURE-->
+          <image src="resources/question.png" />
+        </column>
+        <column>
+          <!--QUESTION GOES HERE-->
+          <p>
+            A particle with a positive charge of $ 0.512 C $ is moving parallel to a magnetic field of strength $ 21.5 T $. The particle has a speed of $ 15.5 \frac{m}{s} $. Calculate the magnitude of the magnetic force exerted on the particle.
+          </p>
+        </column>
+      </row>
+    </table>
+    <button name="btn" style="center" content="Show Answer">
+      <onClick>
+        <!--SHOW ANSWER HERE-->
+        if btn.Text == "Show Answer" then
+        ans.Style.Visibility = "visible";
+        btn.Text = "Hide Answer";
+        elseif btn.Text == "Hide Answer" then
+        ans.Style.Visibility = "collapsed";
+        btn.Text = "Show Answer";
+        end
+      </onClick>
+    </button>
+    <stack name="ans" orientation="vertical" style="collapsed">
+      <p>Since the particle is moving parallel to the magnetic field, the force is 0.</p>
+      <p>We can see this given the equation $ F = qvBsin \theta $ where $ sin \theta = 0 $</p>
+    </stack>
+  </stack>
+</sectionNoTitle>
+
+  
+    
+</document>

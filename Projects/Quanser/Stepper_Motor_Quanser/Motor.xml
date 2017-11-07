@@ -1,0 +1,1328 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<fragment xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd">
+
+  <!--buttonStack: Selection buttons for excitation mode (wave drive, full-step drive, half-step drive, micro step.-->
+  <stack name="buttonStack" orientation="auto">
+    <stack orientation="horizontal">
+      <button name="wave" content="Wave Drive" style="lightButton">
+        <onClick>
+          <![CDATA[
+        if startButton.Text == "Stop" then
+          startButton:Click()
+        end
+        --stepSim.Duration = 23.5
+        stepSim.Period = 1
+        buttons:chooseButton(1)
+        buttons:reset()
+        --[[if buttons.manualCheck == 0 then
+            stepSim:Start()
+        end--]]
+        ]]>
+        </onClick>
+      </button>
+      <button name="full" content="Full Step Drive" style="lightButton">
+        <onClick>
+          <![CDATA[
+        if startButton.Text == "Stop" then
+          startButton:Click()
+        end
+        --stepSim.Duration = 23.5
+        stepSim.Period = 1
+        buttons:chooseButton(2)
+        buttons:reset()
+        --[[if buttons.manualCheck == 0 then
+            stepSim:Start()
+        end--]]
+        ]]>
+        </onClick>
+      </button>
+    </stack>
+    <stack orientation="horizontal">
+      <button name="half" content="Half-Step Drive" style="lightButton">
+        <onClick>
+          <![CDATA[
+        if startButton.Text == "Stop" then
+          startButton:Click()
+        end
+        --stepSim.Duration = 47
+        stepSim.Period = 1
+        buttons:chooseButton(3)
+        buttons:reset()                        
+        --[[if buttons.manualCheck == 0 then
+            stepSim:Start()
+        end--]]
+        ]]>
+        </onClick>
+      </button>
+      <button name="micro" content="Microstepping" style="lightButton">
+        <onClick>
+          <![CDATA[
+        if startButton.Text == "Stop" then
+          startButton:Click()
+        end
+        --stepSim.Duration = 14.3
+        stepSim.Period = 0.1
+        buttons:chooseButton(4)
+        buttons:reset()                        
+        --[[if buttons.manualCheck == 0 then
+            stepSim:Start()
+        end--]]
+        ]]>
+        </onClick>
+      </button>
+    </stack>
+  </stack>
+
+  <!--Stepper Motor Drawing and Graphs-->
+  <drawing name="drawing">
+    <style>
+      <widthPercentage>0.9</widthPercentage>
+      <horizontalAlignment>center</horizontalAlignment>
+      <marginBottom>0</marginBottom>
+    </style>
+    <axis dim="y" auto="fixed" min="-30" max="12" />
+    <axis dim="x" auto="lockAspectRatio" />
+    <series name="outerRing" style="mySeries" draw="radialFill" capacity="8000" />
+    <series name="innerRing" draw="radialFill" capacity="6000">
+      <style>
+        <foreground color="white" />
+      </style>
+    </series>
+    <series name="anchoredTeeth" style="mySeries" draw="segmentedFill" manual="true">
+      <data>
+        -1.000 09.000; -1.000 09.000; -1.000 04.645; 01.000 04.645; 01.000 09.000; -1.000 09.000; -1.000 09.000;
+        -7.013 05.599; -7.013 05.599; -3.991 02.577; -2.577 03.991; -5.599 07.013; -7.013 05.599; -7.013 05.599;
+        -9.000 -1.000; -9.000 -1.000; -4.645 -1.000; -4.645 01.000; -9.000 01.000; -9.000 -1.000; -9.000 -1.000;
+        -5.599 -7.013; -5.599 -7.013; -2.577 -3.991; -3.991 -2.577; -7.013 -5.599; -5.599 -7.013; -5.599 -7.013;
+        01.000 -9.000; 01.000 -9.000; 01.000 -4.644; -1.000 -4.644; -1.000 -9.000; 01.000 -9.000; 01.000 -9.000;
+        07.013 -5.599; 07.013 -5.599; 03.991 -2.577; 02.577 -3.991; 05.599 -7.013; 07.013 -5.599; 07.013 -5.599;
+        09.000 01.000; 09.000 01.000; 04.645 01.000; 04.645 -1.000; 09.000 -1.000; 09.000 01.000; 09.000 01.000;
+        05.599 07.013; 05.599 07.013; 02.577 03.991; 03.991 02.577; 07.013 05.599; 05.599 07.013; 05.599 07.013
+      </data>
+      <colors>
+        transparent; silver; silver; silver; silver; silver; transparent;
+        transparent; silver; silver; silver; silver; silver; transparent;
+        transparent; silver; silver; silver; silver; silver; transparent;
+        transparent; silver; silver; silver; silver; silver; transparent;
+        transparent; silver; silver; silver; silver; silver; transparent;
+        transparent; silver; silver; silver; silver; silver; transparent;
+        transparent; silver; silver; silver; silver; silver; transparent;
+        transparent; silver; silver; silver; silver; silver; transparent
+      </colors>
+    </series>
+    <series name="coil1" style="coilOff" draw="triangles">
+      <data>
+        -1.25 7.75; 1.25 7.75; 1.25 8.25;
+        -1.25 7.75; 1.25 7.75; -1.25 7.25;
+
+        -1.25 7.00; 1.25 7.00; 1.25 7.50;
+        -1.25 7.00; 1.25 7.00; -1.25 6.50;
+
+        -1.25 6.25; 1.25 6.25; 1.25 6.75;
+        -1.25 6.25; 1.25 6.25; -1.25 5.75;
+
+        -1.25 5.50; 1.25 5.50; 1.25 6.00;
+        -1.25 5.50; 1.25 5.50; -1.25 5.00
+      </data>
+    </series>
+    <series name="coil2" style="coilOff" draw="triangles">
+      <data>
+        -6.364 4.596; -4.596 6.364; -4.95 6.718;
+        -6.364 4.596; -4.596 6.364; -6.010 4.243;
+
+        -5.834 4.066; -4.066 5.834; -4.419 6.187;
+        -5.834 4.066; -4.066 5.834; -5.480 3.712;
+
+        -5.303 3.536; -3.536 5.303; -3.889 5.657;
+        -5.303 3.536; -3.536 5.303; -4.950 3.182;
+
+        -4.773 3.005; -3.005 4.773; -3.359 5.127;
+        -4.773 3.005; -3.005 4.773; -4.419 2.652
+      </data>
+    </series>
+    <series name="coil3" style="coilOff" draw="triangles">
+      <data>
+        -7.75 -1.25; -7.75 1.25; -8.25 1.25;
+        -7.75 -1.25; -7.75 1.25; -7.25 -1.25;
+
+        -7.00 -1.25; -7.00 1.25; -7.50 1.25;
+        -7.00 -1.25; -7.00 1.25; -6.50 -1.25;
+
+        -6.25 -1.25; -6.25 1.25; -6.75 1.25;
+        -6.25 -1.25; -6.25 1.25; -5.75 -1.25;
+
+        -5.50 -1.25; -5.50 1.25; -6.00 1.25;
+        -5.50 -1.25; -5.50 1.25; -5.00 -1.25
+      </data>
+    </series>
+    <series name="coil4" style="coilOff" draw="triangles">
+      <data>
+        -4.773 -3.005; -3.005 -4.773; -2.652 -4.419;
+        -4.773 -3.005; -3.005 -4.773; -5.127 -3.359;
+
+        -5.303 -3.536; -3.536 -5.303; -3.182 -4.950;
+        -5.303 -3.536; -3.536 -5.303; -5.657 -3.889;
+
+        -5.834 -4.066; -4.066 -5.834; -3.712 -5.480;
+        -5.834 -4.066; -4.066 -5.834; -6.187 -4.419;
+
+        -6.364 -4.596; -4.596 -6.364; -4.243 -6.010;
+        -6.364 -4.596; -4.596 -6.364; -6.718 -4.950
+      </data>
+    </series>
+    <series name="coil5" style="coilOff" draw="triangles">
+      <data>
+        -1.25 -5.50; 1.25 -5.50; 1.25 -5.00;
+        -1.25 -5.50; 1.25 -5.50; -1.25 -6.00;
+
+        -1.25 -6.25; 1.25 -6.25; 1.25 -5.75;
+        -1.25 -6.25; 1.25 -6.25; -1.25 -6.75;
+
+        -1.25 -7.00; 1.25 -7.00; 1.25 -6.50;
+        -1.25 -7.00; 1.25 -7.00; -1.25 -7.50;
+
+        -1.25 -7.75; 1.25 -7.75; 1.25 -7.25;
+        -1.25 -7.75; 1.25 -7.75; -1.25 -8.25
+      </data>
+    </series>
+    <series name="coil6" style="coilOff" draw="triangles">
+      <data>
+        3.005 -4.773; 4.773 -3.005; 4.419 -2.652;
+        3.005 -4.773; 4.773 -3.005; 3.359 -5.127;
+
+        3.536 -5.303; 5.303 -3.536; 4.950 -3.182;
+        3.536 -5.303; 5.303 -3.536; 3.889 -5.657;
+
+        4.066 -5.834; 5.834 -4.066; 5.480 -3.712;
+        4.066 -5.834; 5.834 -4.066; 4.419 -6.187;
+
+        4.596 -6.364; 6.364 -4.596; 6.010 -4.243;
+        4.596 -6.364; 6.364 -4.596; 4.95 -6.718
+      </data>
+    </series>
+    <series name="coil7" style="coilOff" draw="triangles">
+      <data>
+        5.50 -1.25; 5.50 1.25; 5.00 1.25;
+        5.50 -1.25; 5.50 1.25; 6.00 -1.25;
+
+        6.25 -1.25; 6.25 1.25; 5.75 1.25;
+        6.25 -1.25; 6.25 1.25; 6.75 -1.25;
+
+        7.00 -1.25; 7.00 1.25; 6.50 1.25;
+        7.00 -1.25; 7.00 1.25; 7.50 -1.25;
+
+        7.75 -1.25; 7.75 1.25; 7.25 1.25;
+        7.75 -1.25; 7.75 1.25; 8.25 -1.25
+      </data>
+    </series>
+    <series name="coil8" style="coilOff" draw="triangles">
+      <data>
+        4.596 6.364; 6.364 4.596; 6.718 4.950;
+        4.596 6.364; 6.364 4.596; 4.243 6.010;
+
+        4.066 5.834; 5.834 4.066; 6.187 4.419;
+        4.066 5.834; 5.834 4.066; 3.712 5.480;
+
+        3.536 5.303; 5.303 3.536; 5.657 3.889;
+        3.536 5.303; 5.303 3.536; 3.182 4.950;
+
+        3.005 4.773; 4.773 3.005; 5.127 3.359;
+        3.005 4.773; 4.773 3.005; 2.652 4.419
+      </data>
+    </series>
+    <series name="coilShading" draw="triangles">
+      <style>
+        <foreground color="255 0 0 255" />
+      </style>
+      <data>
+        -1.25 7.75; 1.25 7.75; 1.25 8.25;
+        -1.25 7.75; 1.25 7.75; -1.25 7.25;
+
+        -1.25 7.00; 1.25 7.00; 1.25 7.50;
+        -1.25 7.00; 1.25 7.00; -1.25 6.50;
+
+        -1.25 6.25; 1.25 6.25; 1.25 6.75;
+        -1.25 6.25; 1.25 6.25; -1.25 5.75;
+
+        -1.25 5.50; 1.25 5.50; 1.25 6.00;
+        -1.25 5.50; 1.25 5.50; -1.25 5.00;
+
+        -6.364 4.596; -4.596 6.364; -4.95 6.718;
+        -6.364 4.596; -4.596 6.364; -6.010 4.243;
+
+        -5.834 4.066; -4.066 5.834; -4.419 6.187;
+        -5.834 4.066; -4.066 5.834; -5.480 3.712;
+
+        -5.303 3.536; -3.536 5.303; -3.889 5.657;
+        -5.303 3.536; -3.536 5.303; -4.950 3.182;
+
+        -4.773 3.005; -3.005 4.773; -3.359 5.127;
+        -4.773 3.005; -3.005 4.773; -4.419 2.652;
+
+        -7.75 -1.25; -7.75 1.25; -8.25 1.25;
+        -7.75 -1.25; -7.75 1.25; -7.25 -1.25;
+
+        -7.00 -1.25; -7.00 1.25; -7.50 1.25;
+        -7.00 -1.25; -7.00 1.25; -6.50 -1.25;
+
+        -6.25 -1.25; -6.25 1.25; -6.75 1.25;
+        -6.25 -1.25; -6.25 1.25; -5.75 -1.25;
+
+        -5.50 -1.25; -5.50 1.25; -6.00 1.25;
+        -5.50 -1.25; -5.50 1.25; -5.00 -1.25;
+
+        -4.773 -3.005; -3.005 -4.773; -2.652 -4.419;
+        -4.773 -3.005; -3.005 -4.773; -5.127 -3.359;
+
+        -5.303 -3.536; -3.536 -5.303; -3.182 -4.950;
+        -5.303 -3.536; -3.536 -5.303; -5.657 -3.889;
+
+        -5.834 -4.066; -4.066 -5.834; -3.712 -5.480;
+        -5.834 -4.066; -4.066 -5.834; -6.187 -4.419;
+
+        -6.364 -4.596; -4.596 -6.364; -4.243 -6.010;
+        -6.364 -4.596; -4.596 -6.364; -6.718 -4.950;
+
+        -1.25 -5.50; 1.25 -5.50; 1.25 -5.00;
+        -1.25 -5.50; 1.25 -5.50; -1.25 -6.00;
+
+        -1.25 -6.25; 1.25 -6.25; 1.25 -5.75;
+        -1.25 -6.25; 1.25 -6.25; -1.25 -6.75;
+
+        -1.25 -7.00; 1.25 -7.00; 1.25 -6.50;
+        -1.25 -7.00; 1.25 -7.00; -1.25 -7.50;
+
+        -1.25 -7.75; 1.25 -7.75; 1.25 -7.25;
+        -1.25 -7.75; 1.25 -7.75; -1.25 -8.25;
+
+        3.005 -4.773; 4.773 -3.005; 4.419 -2.652;
+        3.005 -4.773; 4.773 -3.005; 3.359 -5.127;
+
+        3.536 -5.303; 5.303 -3.536; 4.950 -3.182;
+        3.536 -5.303; 5.303 -3.536; 3.889 -5.657;
+
+        4.066 -5.834; 5.834 -4.066; 5.480 -3.712;
+        4.066 -5.834; 5.834 -4.066; 4.419 -6.187;
+
+        4.596 -6.364; 6.364 -4.596; 6.010 -4.243;
+        4.596 -6.364; 6.364 -4.596; 4.95 -6.718;
+
+        5.50 -1.25; 5.50 1.25; 5.00 1.25;
+        5.50 -1.25; 5.50 1.25; 6.00 -1.25;
+
+        6.25 -1.25; 6.25 1.25; 5.75 1.25;
+        6.25 -1.25; 6.25 1.25; 6.75 -1.25;
+
+        7.00 -1.25; 7.00 1.25; 6.50 1.25;
+        7.00 -1.25; 7.00 1.25; 7.50 -1.25;
+
+        7.75 -1.25; 7.75 1.25; 7.25 1.25;
+        7.75 -1.25; 7.75 1.25; 8.25 -1.25;
+
+        4.596 6.364; 6.364 4.596; 6.718 4.950;
+        4.596 6.364; 6.364 4.596; 4.243 6.010;
+
+        4.066 5.834; 5.834 4.066; 6.187 4.419;
+        4.066 5.834; 5.834 4.066; 3.712 5.480;
+
+        3.536 5.303; 5.303 3.536; 5.657 3.889;
+        3.536 5.303; 5.303 3.536; 3.182 4.950;
+
+        3.005 4.773; 4.773 3.005; 5.127 3.359;
+        3.005 4.773; 4.773 3.005; 2.652 4.419
+      </data>
+
+      <!-- DRM: Colors must come after data in series -->
+      <colors src="resources/CoilShading.csv" />
+    </series>
+    <series name="rotaryTeeth" manual="true" draw="radialFill" />
+    <series name="rotaryBase" style="mySeries" draw="radialFill" />
+    <series name="indicator" style="thick2" manual="true" capacity="2">
+      <style>
+        <foreground color="145 145 145" />
+      </style>
+    </series>
+    <series name="plot" draw="lineSegments">
+      <style>
+        <foreground color="black" />
+      </style>
+      <data>
+        -24 -12; -24 -15;
+        -24 -15; 24 -15;
+
+        -24 -16; -24 -19;
+        -24 -19; 24 -19;
+
+        -24 -20; -24 -23;
+        -24 -23; 24 -23;
+
+        -24 -24; -24 -27;
+        -24 -27; 24 -27
+      </data>
+    </series>
+    <series name="wavePlot" style="blackLines">
+      <data>
+        -24 -13; -24 -13; -20 -13; -20 -15; -08 -15; -08 -13; -4 -13; -4 -15; 8 -15; 8 -13; 12 -13; 12 -15; 24 -15; 24 -15;
+        -24 -19; -24 -19; -20 -19; -20 -17; -16 -17; -16 -19; -4 -19; -4 -17; 0 -17; 0 -19; 12 -19; 12 -17; 16 -17; 16 -19; 24 -19; 24 -19;
+        -24 -23; -24 -23; -16 -23; -16 -21; -12 -21; -12 -23; 00 -23; 00 -21; 4 -21; 4 -23; 16 -23; 16 -21; 20 -21; 20 -23; 24 -23; 24 -23;
+        -24 -27; -24 -27; -12 -27; -12 -25; -08 -25; -08 -27; 04 -27; 04 -25; 8 -25; 8 -27; 20 -27; 20 -25; 24 -25; 24 -27; 24 -27
+      </data>
+      <colors>
+        transparent; black; black; black; black; black; black; black; black; black; black; black; black; transparent;
+        transparent; black; black; black; black; black; black; black; black; black; black; black; black; black; black; transparent;
+        transparent; black; black; black; black; black; black; black; black; black; black; black; black; black; black; transparent;
+        transparent; black; black; black; black; black; black; black; black; black; black; black; black; black; transparent
+      </colors>
+    </series>
+    <series name="fullPlot" style="blackLines" visible="false">
+      <data>
+        -24 -13; -24 -13; -20 -13; -20 -15; -12 -15; -12 -13; -4 -13; -4 -15; 4 -15; 4 -13; 12 -13; 12 -15; 20 -15; 20 -13; 24 -13; 24 -13;
+        -24 -17; -24 -17; -16 -17; -16 -19; -8 -19; -8 -17; 0 -17; 0 -19; 8 -19; 8 -17; 16 -17; 16 -19; 24 -19; 24 -19;
+        -24 -23; -24 -23; -20 -23; -20 -21; -12 -21; -12 -23; -4 -23; -4 -21; 4 -21; 4 -23; 12 -23; 12 -21; 20 -21; 20 -23; 24 -23; 24 -23;
+        -24 -27; -24 -27; -16 -27; -16 -25; -8 -25; -8 -27; 0 -27; 0 -25; 8 -25; 8 -27; 16 -27; 16 -25; 24 -25; 24 -27; 24 -27
+      </data>
+      <colors>
+        transparent; black; black; black; black; black; black; black; black; black; black; black; black; black; black; transparent;
+        transparent; black; black; black; black; black; black; black; black; black; black; black; black; transparent;
+        transparent; black; black; black; black; black; black; black; black; black; black; black; black; black; black; transparent;
+        transparent; black; black; black; black; black; black; black; black; black; black; black; black; black; transparent
+      </colors>
+    </series>
+    <series name="halfPlot" style="blackLines" visible="false">
+      <data>
+        -24 -13; -24 -13; -20 -13; -20 -15; -10 -15; -10 -13; -4 -13; -4 -15; 6 -15; 6 -13; 12 -13; 12 -15; 22 -15; 22 -13; 24 -13; 24 -13;
+        -24 -19; -24 -19; -22 -19; -22 -17; -16 -17; -16 -19; -6 -19; -6 -17; 0 -17; 0 -19; 10 -19; 10 -17; 16 -17; 16 -19; 24 -19; 24 -19;
+        -24 -23; -24 -23; -18 -23; -18 -21; -12 -21; -12 -23; -2 -23; -2 -21; 4 -21; 4 -23; 14 -23; 14 -21; 20 -21; 20 -23; 24 -23; 24 -23;
+        -24 -27; -24 -27; -14 -27; -14 -25; -08 -25; -08 -27; 02 -27; 02 -25; 8 -25; 8 -27; 18 -27; 18 -25; 24 -25; 24 -27; 24 -27
+      </data>
+      <colors>
+        transparent; black; black; black; black; black; black; black; black; black; black; black; black; black; black; transparent;
+        transparent; black; black; black; black; black; black; black; black; black; black; black; black; black; black; transparent;
+        transparent; black; black; black; black; black; black; black; black; black; black; black; black; black; black; transparent;
+        transparent; black; black; black; black; black; black; black; black; black; black; black; black; black; transparent
+      </colors>
+    </series>
+    <series name="microPlot" style="blackLines" visible="false" />
+    <series name="highCurrent" />
+    <series name="plotIndicator" style="series5 thick2" manual="true" capacity="2" />
+    <series name="lettering" style="blackLines" />
+  </drawing>
+
+  <script>
+    <![CDATA[
+       --Creates cosine waves with an origin at (x, start), and filters for only y-values greater than -0.01 for microStepping excitation plots.
+                function drawMicroPlots(series, start)
+                    --[[
+                    local x = vectorf.linearRange(-24, 0.1, 24);
+                    local theta = (x - start[1]) * math.pi/8;
+                    local y = 2 * theta:pcos();
+                    local mask = y:greaterOrEqual(-0.01);
+                    
+                    x = x:subvector(mask);
+                    y = y:subvector(mask);
+                    series:Add(x, y + start[2], color.transparent);
+                    series:Add(x, y + start[2], color.black);
+                    ]]
+                    
+                    local x = -24;
+                    local y = 2*math.cos((x - start[1])*math.pi/8);
+                      if y >= -0.01 then
+                          series:Add(x, y + start[2], color.transparent);
+                      else
+                          series:Add(x, start[2], color.transparent);
+                      end
+                    
+                    for x = -24, 24, 0.1 do
+                        y = 2*math.cos((x - start[1])*math.pi/8)
+                        if y >= -0.01 then
+                            series:Add(x, y + start[2], color.black)
+                        end
+                    end
+                    
+                    x = 24
+                    y = 2*math.cos((x - start[1])*math.pi/8)
+                      if y >= -0.01 then
+                          series:Add(x, y + start[2], color.transparent);
+                      else
+                          series:Add(x, start[2], color.transparent);
+                      end
+                end
+                
+                drawMicroPlots(drawing.microPlot, {-24, -15});
+                drawMicroPlots(drawing.microPlot, {-20, -19});
+                drawMicroPlots(drawing.microPlot, {-16, -23});
+                drawMicroPlots(drawing.microPlot, {-12, -27});
+                
+                -- Basic Drawing of Motor: stepper motor rings
+                plotTools.drawCircle(drawing.outerRing, vector({0, 0}), 9.5)
+                plotTools.drawCircle(drawing.innerRing, vector({0, 0}), 8.5)
+                plotTools.drawCircle(drawing.rotaryBase, vector({0, 0}), 3.3)
+  
+                -- Text Labels for drawing
+                char.textA(drawing.lettering, vector({-0.5, 10}), 1.35)
+                char.textA(drawing.lettering, vector({-0.5, -11.35}), 1.35)
+                char.textA(drawing.lettering, vector({-25.5, -14.5}), 1.35)
+                char.textB(drawing.lettering, vector({-8.50, 07.00}), 1.35)
+                char.textB(drawing.lettering, vector({07.50, -8.25}), 1.35)
+                char.textB(drawing.lettering, vector({-25.5, -18.5}), 1.35)
+                char.textC(drawing.lettering, vector({10.00, -0.75}), 1.35)
+                char.textC(drawing.lettering, vector({-12.25, -0.75}), 1.35)
+                char.textC(drawing.lettering, vector({-25.75, -22.5}), 1.35)
+                char.textD(drawing.lettering, vector({07.25, 07.00}), 1.35)
+                char.textD(drawing.lettering, vector({-8.75, -8.25}), 1.35)
+                char.textD(drawing.lettering, vector({-25.5, -26.5}), 1.35)
+
+                symbol.drawPlus(drawing.lettering, vector({00.75, 10.00}), 1.35)
+                symbol.drawPlus(drawing.lettering, vector({-7.25, 07.00}), 1.35)
+                symbol.drawPlus(drawing.lettering, vector({-10.75, -0.75}), 1.35)
+                symbol.drawPlus(drawing.lettering, vector({-7.25, -8.25}), 1.35)
+                symbol.drawMinus(drawing.lettering, vector({00.75, -11.00}), 1.35)
+                symbol.drawMinus(drawing.lettering, vector({08.75, -08.25}), 1.35)
+                symbol.drawMinus(drawing.lettering, vector({11.50, -00.75}), 1.35)
+                symbol.drawMinus(drawing.lettering, vector({08.75, 07.00}), 1.35)
+
+                ]]>
+  </script>
+
+    <script>
+        <![CDATA[
+        -- Define a Lua table that will represent the motor as an object
+        local motor = {};
+        
+        -- Define the state information required by the motor
+        motor.mode = '';
+        motor.xPos = -22;
+        motor.xHalfStart = -23;
+        motor.increment = 15;
+        motor.indicatorStep = 0;
+        motor.i = 0;
+        motor.t = 0;
+        motor.tRad = math.rad(motor.t)
+        motor.coilA = color.sienna;
+        motor.coilB = color.sienna;
+        motor.coilC = color.sienna;
+        motor.coilD = color.sienna;
+        motor.coilOn = color.rgb(255, 174, 67)
+        motor.coilOff = color.sienna
+        motor.highlightA = color.rgb(192, 192, 192);
+        motor.highlightB = color.rgb(192, 192, 192);
+        motor.highlightC = color.rgb(192, 192, 192);
+        motor.highlightD = color.rgb(192, 192, 192);
+        motor.highlight = color.darkOrange
+        motor.rotaryFill = color.silver
+        motor.innerR = 3.3
+        motor.outerR = 4.26
+
+        --
+        -- Define methods for operating on the motor
+        --
+            
+        -- Draws the plot indicator according the excitation levels of the stepper motor coils
+        motor.drawIndicator = function (self)
+            drawing.plotIndicator:Add(self.xPos, -12)
+            drawing.plotIndicator:Add(self.xPos, -28)
+            drawing.plotIndicator:Update()
+            --motor.drawWavePlot()
+        end
+
+        -- Calculates the color gradients for each coil pairing, according to the microstep excitation levels
+        motor.coilColour = function (self)
+            local yA = math.cos((self.xPos+24)*math.pi/8)
+            local yB = math.cos((self.xPos+20)*math.pi/8)
+            local yC = math.cos((self.xPos+16)*math.pi/8)
+            local yD = math.cos((self.xPos+12)*math.pi/8)
+    
+            if yA > -0.1 then
+                self.coilA = color.rgb(160 + 95*yA, 82 + 92*yA, 45 + 22*yA)
+                self.highlightA = color.rgb(192 + 63*yA, 192 - 52*yA, 192 - 192*yA)
+            else
+                self.coilA = color.sienna
+            end
+    
+            if yB > -0.01 then
+                self.coilB = color.rgb(160 + 95*yB, 82 + 92*yB, 45 + 22*yB)
+                self.highlightB = color.rgb(192 + 63*yB, 192 - 52*yB, 192 - 192*yB)
+            else
+                self.coilB = color.sienna
+            end
+
+            if yC > -0.01 then
+                self.coilC = color.rgb(160 + 95*yC, 82 + 92*yC, 45 + 22*yC)
+                self.highlightC = color.rgb(192 + 63*yC, 192 - 52*yC, 192 - 192*yC)
+            else
+                self.coilC = color.sienna
+            end
+
+            if yD > -0.01 then
+                self.coilD = color.rgb(160 + 95*yD, 82 + 92*yD, 45 + 22*yD)
+                self.highlightD = color.rgb(192 + 63*yD, 192 - 52*yD, 192 - 192*yD)
+            else
+                self.coilD = color.sienna
+            end
+        end
+
+        -- Sets the coils to gradient colors (calculated by motor.coilColour()) during Microstep drive mode
+        motor.microCoils = function(self)
+            self:coilColour();
+            
+            drawing.coil1.Style.ForegroundColor = self.coilA;
+            drawing.coil5.Style.ForegroundColor = self.coilA;
+            drawing.coil2.Style.ForegroundColor = self.coilB;
+            drawing.coil6.Style.ForegroundColor = self.coilB;
+            drawing.coil3.Style.ForegroundColor = self.coilC;
+            drawing.coil7.Style.ForegroundColor = self.coilC;
+            drawing.coil4.Style.ForegroundColor = self.coilD;
+            drawing.coil8.Style.ForegroundColor = self.coilD;
+        end
+    
+        -- Sets coil colors for Half Step Drive
+        motor.colourCoils = function(self)
+            if self.t <= 7.5 and self.t > -15 or self.t < -45 and self.t > -75 or self.t < -105 and self.t > -135 then
+                drawing.coil1.Style.ForegroundColor = self.coilOn
+                drawing.coil5.Style.ForegroundColor = self.coilOn
+            else
+                drawing.coil1.Style.ForegroundColor = self.coilOff
+                drawing.coil5.Style.ForegroundColor = self.coilOff
+            end
+
+            if self.t < 0 and self.t > -30 or self.t < -60 and self.t > -90 or self.t < -120 and self.t > -150 then
+                drawing.coil2.Style.ForegroundColor = self.coilOn
+                drawing.coil6.Style.ForegroundColor = self.coilOn
+            else
+                drawing.coil2.Style.ForegroundColor = self.coilOff
+                drawing.coil6.Style.ForegroundColor = self.coilOff
+            end
+    
+            if self.t < -15 and self.t > -45 or self.t < -75 and self.t > -105 or self.t < -135 or self.t > 15 then
+                drawing.coil3.Style.ForegroundColor = self.coilOn
+                drawing.coil7.Style.ForegroundColor = self.coilOn
+            else
+                drawing.coil3.Style.ForegroundColor = self.coilOff
+                drawing.coil7.Style.ForegroundColor = self.coilOff
+            end
+    
+            if self.t < -30 and self.t > -60 or self.t < -90 and self.t > -120 or self.t < -150 or self.t > 0 then
+                drawing.coil4.Style.ForegroundColor = self.coilOn
+                drawing.coil8.Style.ForegroundColor = self.coilOn
+            else
+                drawing.coil4.Style.ForegroundColor = self.coilOff
+                drawing.coil8.Style.ForegroundColor = self.coilOff
+            end
+        end
+        
+        -- Resets t and xPos to respective starting position. Sets indicatorStep value and increment value.
+        motor.reset = function (self, mode)
+            self.i = 0
+            self.mode = mode;
+            
+            if mode == 'half' then
+                self.t = 0
+                self.xPos = -23
+                self.indicatorStep = 2
+                self.increment = 7.5
+            elseif mode == 'wave' then
+                self.t = 0
+                self.xPos = -22
+                self.indicatorStep = 4
+                self.increment = 15
+            elseif mode == 'full' then
+                self.t = 22.5
+                self.xPos = -22
+                self.indicatorStep = 4
+                self.increment = 15
+            elseif mode == 'micro' then
+                self.t = 0
+                self.xPos = -24
+                self.indicatorStep = 2/3
+                self.increment = 2.5
+            end
+
+            self:checkPlots()
+            --self:coilColour()
+            self:checkCoilPattern()
+            self:spinRotor()
+        end
+
+        motor.decrementRotor = function (self)
+            if self.t == 0 then
+                self.t = -180 + self.increment
+            elseif self.t == 22.5 then
+                self.t = -157.5 + self.increment
+            else
+                self.t = self.t + self.increment
+            end
+
+            if self.xPos - self.indicatorStep < -24 then
+                if self.mode == 'micro' then
+                    self.xPos = 24 - 2/3
+                elseif self.mode == 'half' then
+                    self.xPos = 23
+                elseif self.mode == 'wave' then
+                    self.xPos = 22
+                elseif self.mode == 'full' then
+                    self.xPos = 22
+                end
+            else
+                self.xPos = self.xPos - self.indicatorStep
+            end
+
+            motor:checkCoilPattern()
+            motor:spinRotor()
+        end
+         -- For incrementing the rotor in Manual Control.
+        motor.incrementRotor = function (self)
+            if self.t - self.increment == -180 then
+                self.t = 0
+            elseif self.t - self.increment == -157.5 then
+                self.t = 22.5
+            else
+                self.t = self.t - self.increment
+            end
+
+            if self.xPos + self.indicatorStep >= 24 then
+                if self.mode == 'micro' then
+                    self.xPos = -24
+                elseif self.mode == 'half' then
+                    self.xPos = -23
+                elseif self.mode == 'wave' then
+                    self.xPos = -22
+                elseif self.mode == 'full' then
+                    self.xPos = -22
+                end
+            else
+                self.xPos = self.xPos + self.indicatorStep
+            end
+
+            motor:checkCoilPattern()
+            motor:spinRotor()
+        end
+        
+        -- Perform one simulation timestep
+        motor.update = function (self)
+            if self.i % 2 == 0 then
+                if self.t - self.increment == -180 then
+                    self.t = 0
+                elseif self.t - self.increment == -157.5 then
+                    self.t = 22.5
+                else
+                    self.t = self.t - self.increment
+                end
+
+                if self.xPos + self.indicatorStep >= 24 then
+                    if self.mode == 'micro' then
+                        self.xPos = -24
+                    elseif self.mode == 'half' then
+                        self.xPos = -23
+                    elseif self.mode == 'wave' then
+                        self.xPos = -22
+                    elseif self.mode == 'full' then
+                        self.xPos = -22
+                    end
+                else
+                    self.xPos = self.xPos + self.indicatorStep
+                end
+
+                motor:checkCoilPattern()
+            else
+                motor:spinRotor()
+            end
+            self.i = self.i + 1
+        end
+        
+        motor.checkCoilPattern = function (self)
+            if self.mode == 'wave' then
+               self:waveCoils()
+            elseif self.mode == 'full' then
+                self:fullCoils()
+            elseif self.mode == 'half' then
+                self:colourCoils()
+            elseif self.mode == 'micro' then
+                self:microCoils()
+            else
+                drawing.coil1.Style.ForegroundColor = self.coilOff
+                drawing.coil2.Style.ForegroundColor = self.coilOff
+                drawing.coil3.Style.ForegroundColor = self.coilOff
+                drawing.coil4.Style.ForegroundColor = self.coilOff
+                drawing.coil5.Style.ForegroundColor = self.coilOff
+                drawing.coil6.Style.ForegroundColor = self.coilOff
+                drawing.coil7.Style.ForegroundColor = self.coilOff
+                drawing.coil8.Style.ForegroundColor = self.coilOff
+                --self:updateCoils()
+            end
+            self:drawIndicator()
+        end
+
+        -- motor.checkPlots(): controls which plots are visible according to which excitation pattern is active
+        motor.checkPlots = function (self)
+            if self.mode == 'wave' then
+                drawing.microPlot.Visible = false
+                drawing.halfPlot.Visible = false
+                drawing.fullPlot.Visible = false
+                drawing.wavePlot.Visible = true
+
+            elseif self.mode == 'full' then
+                drawing.microPlot.Visible = false
+                drawing.halfPlot.Visible = false
+                drawing.wavePlot.Visible = false
+                drawing.fullPlot.Visible = true
+
+            elseif self.mode == 'half' then
+                drawing.microPlot.Visible = false
+                drawing.wavePlot.Visible = false
+                drawing.fullPlot.Visible = false
+                drawing.halfPlot.Visible = true
+
+            elseif self.mode == 'micro' then
+                drawing.wavePlot.Visible = false
+                drawing.fullPlot.Visible = false
+                drawing.halfPlot.Visible = false
+                drawing.microPlot.Visible = true
+
+            end
+        end
+        
+        motor.colourUpdate = function(self)
+            if self.t == 0 or self.t == 22.5 then
+                self.highlight1 = self.highlight
+                self.highlight2 = self.rotaryFill
+                self.highlight3 = self.rotaryFill
+                self.highlight4 = self.highlight
+                self.highlight5 = self.rotaryFill
+                self.highlight6 = self.rotaryFill
+
+            elseif self.t == -15 or self.t == 7.5 then
+                self.highlight1 = self.rotaryFill
+                self.highlight2 = self.highlight
+                self.highlight3 = self.rotaryFill
+                self.highlight4 = self.rotaryFill
+                self.highlight5 = self.highlight
+                self.highlight6 = self.rotaryFill
+
+            elseif self.t == -30 or self.t == -7.5 then
+                self.highlight1 = self.rotaryFill
+                self.highlight2 = self.rotaryFill
+                self.highlight3 = self.highlight
+                self.highlight4 = self.rotaryFill
+                self.highlight5 = self.rotaryFill
+                self.highlight6 = self.highlight
+
+            elseif self.t == -45 or self.t == -22.5 then
+                self.highlight1 = self.highlight
+                self.highlight2 = self.rotaryFill
+                self.highlight3 = self.rotaryFill
+                self.highlight4 = self.highlight
+                self.highlight5 = self.rotaryFill
+                self.highlight6 = self.rotaryFill
+
+            elseif self.t == -60 or self.t == -37.5 then
+                self.highlight1 = self.rotaryFill
+                self.highlight2 = self.highlight
+                self.highlight3 = self.rotaryFill
+                self.highlight4 = self.rotaryFill
+                self.highlight5 = self.highlight
+                self.highlight6 = self.rotaryFill
+
+            elseif self.t == -75 or self.t == -52.5 then
+                self.highlight1 = self.rotaryFill
+                self.highlight2 = self.rotaryFill
+                self.highlight3 = self.highlight
+                self.highlight4 = self.rotaryFill
+                self.highlight5 = self.rotaryFill
+                self.highlight6 = self.highlight
+
+            elseif self.t == -90 or self.t == -67.5 then
+                self.highlight1 = self.highlight
+                self.highlight2 = self.rotaryFill
+                self.highlight3 = self.rotaryFill
+                self.highlight4 = self.highlight
+                self.highlight5 = self.rotaryFill
+                self.highlight6 = self.rotaryFill
+
+            elseif self.t == -105 or self.t == -82.5 then
+                self.highlight1 = self.rotaryFill
+                self.highlight2 = self.highlight
+                self.highlight3 = self.rotaryFill
+                self.highlight4 = self.rotaryFill
+                self.highlight5 = self.highlight
+                self.highlight6 = self.rotaryFill
+
+            elseif self.t == -120 or self.t == -97.5 then
+                self.highlight1 = self.rotaryFill
+                self.highlight2 = self.rotaryFill
+                self.highlight3 = self.highlight
+                self.highlight4 = self.rotaryFill
+                self.highlight5 = self.rotaryFill
+                self.highlight6 = self.highlight
+
+            elseif self.t == -135 or self.t == -112.5 then
+                self.highlight1 = self.highlight
+                self.highlight2 = self.rotaryFill
+                self.highlight3 = self.rotaryFill
+                self.highlight4 = self.highlight
+                self.highlight5 = self.rotaryFill
+                self.highlight6 = self.rotaryFill
+
+            elseif self.t == -150 or self.t == -127.5 then
+                self.highlight1 = self.rotaryFill
+                self.highlight2 = self.highlight
+                self.highlight3 = self.rotaryFill
+                self.highlight4 = self.rotaryFill
+                self.highlight5 = self.highlight
+                self.highlight6 = self.rotaryFill
+
+            elseif self.t == -165 or self.t == -142.5 then
+                self.highlight1 = self.rotaryFill
+                self.highlight2 = self.rotaryFill
+                self.highlight3 = self.highlight
+                self.highlight4 = self.rotaryFill
+                self.highlight5 = self.rotaryFill
+                self.highlight6 = self.highlight
+
+            else
+                self.highlight1 = self.rotaryFill
+                self.highlight2 = self.rotaryFill
+                self.highlight3 = self.rotaryFill
+                self.highlight4 = self.rotaryFill
+                self.highlight5 = self.rotaryFill
+                self.highlight6 = self.rotaryFill
+
+            end
+        end
+
+        motor.fullCoils = function (self)
+            if self.t == 22.5 then
+                drawing.coil1.Style.ForegroundColor = self.coilOn
+                drawing.coil2.Style.ForegroundColor = self.coilOn
+                drawing.coil3.Style.ForegroundColor = self.coilOff
+                drawing.coil4.Style.ForegroundColor = self.coilOff
+                drawing.coil5.Style.ForegroundColor = self.coilOn
+                drawing.coil6.Style.ForegroundColor = self.coilOn
+                drawing.coil7.Style.ForegroundColor = self.coilOff
+                drawing.coil8.Style.ForegroundColor = self.coilOff
+
+            elseif self.t == 7.5 then
+                drawing.coil1.Style.ForegroundColor = self.coilOff
+                drawing.coil2.Style.ForegroundColor = self.coilOn
+                drawing.coil3.Style.ForegroundColor = self.coilOn
+                drawing.coil4.Style.ForegroundColor = self.coilOff
+                drawing.coil5.Style.ForegroundColor = self.coilOff
+                drawing.coil6.Style.ForegroundColor = self.coilOn
+                drawing.coil7.Style.ForegroundColor = self.coilOn
+                drawing.coil8.Style.ForegroundColor = self.coilOff
+
+            elseif self.t == -7.5 then
+                drawing.coil1.Style.ForegroundColor = self.coilOff
+                drawing.coil2.Style.ForegroundColor = self.coilOff
+                drawing.coil3.Style.ForegroundColor = self.coilOn
+                drawing.coil4.Style.ForegroundColor = self.coilOn
+                drawing.coil5.Style.ForegroundColor = self.coilOff
+                drawing.coil6.Style.ForegroundColor = self.coilOff
+                drawing.coil7.Style.ForegroundColor = self.coilOn
+                drawing.coil8.Style.ForegroundColor = self.coilOn
+
+            elseif self.t == -22.5 then
+                drawing.coil1.Style.ForegroundColor = self.coilOn
+                drawing.coil2.Style.ForegroundColor = self.coilOff
+                drawing.coil3.Style.ForegroundColor = self.coilOff
+                drawing.coil4.Style.ForegroundColor = self.coilOn
+                drawing.coil5.Style.ForegroundColor = self.coilOn
+                drawing.coil6.Style.ForegroundColor = self.coilOff
+                drawing.coil7.Style.ForegroundColor = self.coilOff
+                drawing.coil8.Style.ForegroundColor = self.coilOn
+
+            elseif self.t == -37.5 then
+                drawing.coil1.Style.ForegroundColor = self.coilOn
+                drawing.coil2.Style.ForegroundColor = self.coilOn
+                drawing.coil3.Style.ForegroundColor = self.coilOff
+                drawing.coil4.Style.ForegroundColor = self.coilOff
+                drawing.coil5.Style.ForegroundColor = self.coilOn
+                drawing.coil6.Style.ForegroundColor = self.coilOn
+                drawing.coil7.Style.ForegroundColor = self.coilOff
+                drawing.coil8.Style.ForegroundColor = self.coilOff
+
+            elseif self.t == -52.5 then
+                drawing.coil1.Style.ForegroundColor = self.coilOff
+                drawing.coil2.Style.ForegroundColor = self.coilOn
+                drawing.coil3.Style.ForegroundColor = self.coilOn
+                drawing.coil4.Style.ForegroundColor = self.coilOff
+                drawing.coil5.Style.ForegroundColor = self.coilOff
+                drawing.coil6.Style.ForegroundColor = self.coilOn
+                drawing.coil7.Style.ForegroundColor = self.coilOn
+                drawing.coil8.Style.ForegroundColor = self.coilOff
+
+            elseif self.t == -67.5 then
+                drawing.coil1.Style.ForegroundColor = self.coilOff
+                drawing.coil2.Style.ForegroundColor = self.coilOff
+                drawing.coil3.Style.ForegroundColor = self.coilOn
+                drawing.coil4.Style.ForegroundColor = self.coilOn
+                drawing.coil5.Style.ForegroundColor = self.coilOff
+                drawing.coil6.Style.ForegroundColor = self.coilOff
+                drawing.coil7.Style.ForegroundColor = self.coilOn
+                drawing.coil8.Style.ForegroundColor = self.coilOn
+
+            elseif self.t == -82.5 then
+                drawing.coil1.Style.ForegroundColor = self.coilOn
+                drawing.coil2.Style.ForegroundColor = self.coilOff
+                drawing.coil3.Style.ForegroundColor = self.coilOff
+                drawing.coil4.Style.ForegroundColor = self.coilOn
+                drawing.coil5.Style.ForegroundColor = self.coilOn
+                drawing.coil6.Style.ForegroundColor = self.coilOff
+                drawing.coil7.Style.ForegroundColor = self.coilOff
+                drawing.coil8.Style.ForegroundColor = self.coilOn
+
+            elseif self.t == -97.5 then
+                drawing.coil1.Style.ForegroundColor = self.coilOn
+                drawing.coil2.Style.ForegroundColor = self.coilOn
+                drawing.coil3.Style.ForegroundColor = self.coilOff
+                drawing.coil4.Style.ForegroundColor = self.coilOff
+                drawing.coil5.Style.ForegroundColor = self.coilOn
+                drawing.coil6.Style.ForegroundColor = self.coilOn
+                drawing.coil7.Style.ForegroundColor = self.coilOff
+                drawing.coil8.Style.ForegroundColor = self.coilOff
+
+            elseif self.t == -112.5 then
+                drawing.coil1.Style.ForegroundColor = self.coilOff
+                drawing.coil2.Style.ForegroundColor = self.coilOn
+                drawing.coil3.Style.ForegroundColor = self.coilOn
+                drawing.coil4.Style.ForegroundColor = self.coilOff
+                drawing.coil5.Style.ForegroundColor = self.coilOff
+                drawing.coil6.Style.ForegroundColor = self.coilOn
+                drawing.coil7.Style.ForegroundColor = self.coilOn
+                drawing.coil8.Style.ForegroundColor = self.coilOff
+
+            elseif self.t == -127.5 then
+                drawing.coil1.Style.ForegroundColor = self.coilOff
+                drawing.coil2.Style.ForegroundColor = self.coilOff
+                drawing.coil3.Style.ForegroundColor = self.coilOn
+                drawing.coil4.Style.ForegroundColor = self.coilOn
+                drawing.coil5.Style.ForegroundColor = self.coilOff
+                drawing.coil6.Style.ForegroundColor = self.coilOff
+                drawing.coil7.Style.ForegroundColor = self.coilOn
+                drawing.coil8.Style.ForegroundColor = self.coilOn
+
+            elseif self.t == -142.5 then
+                drawing.coil1.Style.ForegroundColor = self.coilOn
+                drawing.coil2.Style.ForegroundColor = self.coilOff
+                drawing.coil3.Style.ForegroundColor = self.coilOff
+                drawing.coil4.Style.ForegroundColor = self.coilOn
+                drawing.coil5.Style.ForegroundColor = self.coilOn
+                drawing.coil6.Style.ForegroundColor = self.coilOff
+                drawing.coil7.Style.ForegroundColor = self.coilOff
+                drawing.coil8.Style.ForegroundColor = self.coilOn
+            end
+
+            self.highlight1 = self.rotaryFill
+            self.highlight2 = self.rotaryFill
+            self.highlight3 = self.rotaryFill
+            self.highlight4 = self.rotaryFill
+            self.highlight5 = self.rotaryFill
+            self.highlight6 = self.rotaryFill
+
+            self:drawRotor()
+            --self:updateCoils()
+            self:drawRotor()
+
+        end
+    
+        motor.waveCoils = function (self)
+            if self.t == 0 then
+                drawing.coil1.Style.ForegroundColor = self.coilOn
+                drawing.coil2.Style.ForegroundColor = self.coilOff
+                drawing.coil3.Style.ForegroundColor = self.coilOff
+                drawing.coil4.Style.ForegroundColor = self.coilOff
+                drawing.coil5.Style.ForegroundColor = self.coilOn
+                drawing.coil6.Style.ForegroundColor = self.coilOff
+                drawing.coil7.Style.ForegroundColor = self.coilOff
+                drawing.coil8.Style.ForegroundColor = self.coilOff
+
+            elseif self.t == -15 then
+                drawing.coil1.Style.ForegroundColor = self.coilOff
+                drawing.coil2.Style.ForegroundColor = self.coilOn
+                drawing.coil3.Style.ForegroundColor = self.coilOff
+                drawing.coil4.Style.ForegroundColor = self.coilOff
+                drawing.coil5.Style.ForegroundColor = self.coilOff
+                drawing.coil6.Style.ForegroundColor = self.coilOn
+                drawing.coil7.Style.ForegroundColor = self.coilOff
+                drawing.coil8.Style.ForegroundColor = self.coilOff
+
+            elseif self.t == -30 then
+                drawing.coil1.Style.ForegroundColor = self.coilOff
+                drawing.coil2.Style.ForegroundColor = self.coilOff
+                drawing.coil3.Style.ForegroundColor = self.coilOn
+                drawing.coil4.Style.ForegroundColor = self.coilOff
+                drawing.coil5.Style.ForegroundColor = self.coilOff
+                drawing.coil6.Style.ForegroundColor = self.coilOff
+                drawing.coil7.Style.ForegroundColor = self.coilOn
+                drawing.coil8.Style.ForegroundColor = self.coilOff
+
+            elseif self.t == -45 then
+                drawing.coil1.Style.ForegroundColor = self.coilOff
+                drawing.coil2.Style.ForegroundColor = self.coilOff
+                drawing.coil3.Style.ForegroundColor = self.coilOff
+                drawing.coil4.Style.ForegroundColor = self.coilOn
+                drawing.coil5.Style.ForegroundColor = self.coilOff
+                drawing.coil6.Style.ForegroundColor = self.coilOff
+                drawing.coil7.Style.ForegroundColor = self.coilOff
+                drawing.coil8.Style.ForegroundColor = self.coilOn
+
+            elseif self.t == -60 then
+                drawing.coil1.Style.ForegroundColor = self.coilOn
+                drawing.coil2.Style.ForegroundColor = self.coilOff
+                drawing.coil3.Style.ForegroundColor = self.coilOff
+                drawing.coil4.Style.ForegroundColor = self.coilOff
+                drawing.coil5.Style.ForegroundColor = self.coilOn
+                drawing.coil6.Style.ForegroundColor = self.coilOff
+                drawing.coil7.Style.ForegroundColor = self.coilOff
+                drawing.coil8.Style.ForegroundColor = self.coilOff
+
+            elseif self.t == -75 then
+                drawing.coil1.Style.ForegroundColor = self.coilOff
+                drawing.coil2.Style.ForegroundColor = self.coilOn
+                drawing.coil3.Style.ForegroundColor = self.coilOff
+                drawing.coil4.Style.ForegroundColor = self.coilOff
+                drawing.coil5.Style.ForegroundColor = self.coilOff
+                drawing.coil6.Style.ForegroundColor = self.coilOn
+                drawing.coil7.Style.ForegroundColor = self.coilOff
+                drawing.coil8.Style.ForegroundColor = self.coilOff
+
+            elseif self.t == -90 then
+                drawing.coil1.Style.ForegroundColor = self.coilOff
+                drawing.coil2.Style.ForegroundColor = self.coilOff
+                drawing.coil3.Style.ForegroundColor = self.coilOn
+                drawing.coil4.Style.ForegroundColor = self.coilOff
+                drawing.coil5.Style.ForegroundColor = self.coilOff
+                drawing.coil6.Style.ForegroundColor = self.coilOff
+                drawing.coil7.Style.ForegroundColor = self.coilOn
+                drawing.coil8.Style.ForegroundColor = self.coilOff
+
+            elseif self.t == -105 then
+                drawing.coil1.Style.ForegroundColor = self.coilOff
+                drawing.coil2.Style.ForegroundColor = self.coilOff
+                drawing.coil3.Style.ForegroundColor = self.coilOff
+                drawing.coil4.Style.ForegroundColor = self.coilOn
+                drawing.coil5.Style.ForegroundColor = self.coilOff
+                drawing.coil6.Style.ForegroundColor = self.coilOff
+                drawing.coil7.Style.ForegroundColor = self.coilOff
+                drawing.coil8.Style.ForegroundColor = self.coilOn
+
+            elseif self.t == -120 then
+                drawing.coil1.Style.ForegroundColor = self.coilOn
+                drawing.coil2.Style.ForegroundColor = self.coilOff
+                drawing.coil3.Style.ForegroundColor = self.coilOff
+                drawing.coil4.Style.ForegroundColor = self.coilOff
+                drawing.coil5.Style.ForegroundColor = self.coilOn
+                drawing.coil6.Style.ForegroundColor = self.coilOff
+                drawing.coil7.Style.ForegroundColor = self.coilOff
+                drawing.coil8.Style.ForegroundColor = self.coilOff
+
+            elseif self.t == -135 then
+                drawing.coil1.Style.ForegroundColor = self.coilOff
+                drawing.coil2.Style.ForegroundColor = self.coilOn
+                drawing.coil3.Style.ForegroundColor = self.coilOff
+                drawing.coil4.Style.ForegroundColor = self.coilOff
+                drawing.coil5.Style.ForegroundColor = self.coilOff
+                drawing.coil6.Style.ForegroundColor = self.coilOn
+                drawing.coil7.Style.ForegroundColor = self.coilOff
+                drawing.coil8.Style.ForegroundColor = self.coilOff
+
+            elseif self.t == -150 then
+                drawing.coil1.Style.ForegroundColor = self.coilOff
+                drawing.coil2.Style.ForegroundColor = self.coilOff
+                drawing.coil3.Style.ForegroundColor = self.coilOn
+                drawing.coil4.Style.ForegroundColor = self.coilOff
+                drawing.coil5.Style.ForegroundColor = self.coilOff
+                drawing.coil6.Style.ForegroundColor = self.coilOff
+                drawing.coil7.Style.ForegroundColor = self.coilOn
+                drawing.coil8.Style.ForegroundColor = self.coilOff
+
+            elseif self.t == -165 then
+                drawing.coil1.Style.ForegroundColor = self.coilOff
+                drawing.coil2.Style.ForegroundColor = self.coilOff
+                drawing.coil3.Style.ForegroundColor = self.coilOff
+                drawing.coil4.Style.ForegroundColor = self.coilOn
+                drawing.coil5.Style.ForegroundColor = self.coilOff
+                drawing.coil6.Style.ForegroundColor = self.coilOff
+                drawing.coil7.Style.ForegroundColor = self.coilOff
+                drawing.coil8.Style.ForegroundColor = self.coilOn
+            end
+
+            self.highlight1 = self.rotaryFill
+            self.highlight2 = self.rotaryFill
+            self.highlight3 = self.rotaryFill
+            self.highlight4 = self.rotaryFill
+            self.highlight5 = self.rotaryFill
+            self.highlight6 = self.rotaryFill
+
+            self:drawRotor()
+            --self:updateCoils()
+            self:drawRotor()
+
+        end
+
+        motor.halfColourUpdate = function(self)
+            if self.t <= 15 and self.t > -15 or self.t < -30 and self.t > -60 or self.t < -75 and self.t > -105 or self.t < -120 and self.t > -150 then
+                self.highlight1 = self.highlight
+                self.highlight4 = self.highlight
+            else
+                self.highlight1 = self.rotaryFill
+                self.highlight4 = self.rotaryFill
+            end
+    
+            if self.t < 0 and self.t > -30 or self.t < -45 and self.t > -75 or self.t < -90 and self.t > -120 or self.t < -135 or self.t > 15 then
+                self.highlight2 = self.highlight
+                self.highlight5 = self.highlight
+            else
+                self.highlight2 = self.rotaryFill
+                self.highlight5 = self.rotaryFill
+            end
+    
+            if self.t < -15 and self.t > -45 or self.t < -60 and self.t > -90 or self.t < -105 and self.t > -135 or self.t < -150 or self.t > 0 then
+                self.highlight3 = self.highlight
+                self.highlight6 = self.highlight
+            else
+                self.highlight3 = self.rotaryFill
+                self.highlight6 = self.rotaryFill
+            end
+        end
+
+        motor.microColourUpdate = function(self)
+            if self.t <= 15 and self.t >= -15 then 
+                self.highlight1 = self.highlightA
+                self.highlight4 = self.highlightA
+            end
+    
+            if self.t <= -30 and self.t >= -60 then 
+                self.highlight1 = self.highlightD
+                self.highlight4 = self.highlightD
+            end
+    
+            if self.t <= -75 and self.t >= -105 then 
+                self.highlight1 = self.highlightC
+                self.highlight4 = self.highlightC
+            end
+    
+            if self.t <= -120 and self.t >= -150 then
+                self.highlight1 = self.highlightB
+                self.highlight4 = self.highlightB
+            end
+    
+            if self.t <= 0 and self.t >= -30 then 
+                self.highlight2 = self.highlightB
+                self.highlight5 = self.highlightB
+            end
+    
+            if self.t <= -45 and self.t >= -75 then
+                self.highlight2 = self.highlightA
+                self.highlight5 = self.highlightA
+            end
+    
+            if self.t <= -90 and self.t >= -120 then 
+                self.highlight2 = self.highlightD
+                self.highlight5 = self.highlightD
+            end
+    
+            if self.t <= -135 or self.t >= 15 then
+                self.highlight2 = self.highlightC
+                self.highlight5 = self.highlightC
+            end
+    
+            if self.t <= -15 and self.t >= -45 then
+                self.highlight3 = self.highlightC
+                self.highlight6 = self.highlightC
+            end
+    
+            if self.t <= -60 and self.t >= -90 then 
+                self.highlight3 = self.highlightB
+                self.highlight6 = self.highlightB
+            end
+    
+            if self.t <= -105 and self.t >= -135 then 
+                self.highlight3 = self.highlightA
+                self.highlight6 = self.highlightA
+            end
+    
+            if self.t <= -150 or self.t >= 0 then
+                self.highlight3 = self.highlightD
+                self.highlight6 = self.highlightD
+            end
+        end
+
+        motor.spinRotor = function (self)
+            motor.tRad = math.rad(self.t)
+
+            if self.mode == 'full' or self.mode == 'wave' then
+                self:colourUpdate()
+            elseif self.mode == 'half' then
+                self:halfColourUpdate()
+            elseif self.mode == 'micro' then
+                self:microColourUpdate()
+            else
+                self.highlight1 = self.rotaryFill
+                self.highlight2 = self.rotaryFill
+                self.highlight3 = self.rotaryFill
+                self.highlight4 = self.rotaryFill
+                self.highlight5 = self.rotaryFill
+                self.highlight6 = self.rotaryFill
+            end
+
+            self:drawRotor()
+            self:drawRotor()
+
+        end
+
+        motor.drawRotor = function(self)
+
+            local rad = math.rad
+
+            drawing.rotaryTeeth:Clear()
+
+            drawing.rotaryTeeth:Add(0, 0, self.rotaryFill)
+            drawing.rotaryTeeth:Add(self.innerR*math.cos(rad(12.25) + self.tRad), self.innerR*math.sin(rad(12.25) + self.tRad), self.rotaryFill)
+            drawing.rotaryTeeth:Add(self.outerR*math.cos(rad(16.25) + self.tRad), self.outerR*math.sin(rad(16.25) + self.tRad), self.rotaryFill)
+            drawing.rotaryTeeth:Add(self.outerR*math.cos(rad(30.00) + self.tRad), self.outerR*math.sin(rad(30.00) + self.tRad), self.highlight6)
+            drawing.rotaryTeeth:Add(self.outerR*math.cos(rad(43.75) + self.tRad), self.outerR*math.sin(rad(43.75) + self.tRad), self.rotaryFill)
+            drawing.rotaryTeeth:Add(self.innerR*math.cos(rad(47.75) + self.tRad), self.innerR*math.sin(rad(47.75) + self.tRad), self.rotaryFill)
+
+            drawing.rotaryTeeth:Add(self.innerR*math.cos(rad(72.25) + self.tRad), self.innerR*math.sin(rad(72.25) + self.tRad), self.rotaryFill)
+            drawing.rotaryTeeth:Add(self.outerR*math.cos(rad(76.25) + self.tRad), self.outerR*math.sin(rad(76.25) + self.tRad), self.rotaryFill)
+            drawing.rotaryTeeth:Add(self.outerR*math.cos(rad(90.00) + self.tRad), self.outerR*math.sin(rad(90.00) + self.tRad), self.highlight1)
+            drawing.rotaryTeeth:Add(self.outerR*math.cos(rad(103.75) + self.tRad), self.outerR*math.sin(rad(103.75) + self.tRad), self.rotaryFill)
+            drawing.rotaryTeeth:Add(self.innerR*math.cos(rad(107.75) + self.tRad), self.innerR*math.sin(rad(107.75) + self.tRad), self.rotaryFill)
+
+            drawing.rotaryTeeth:Add(self.innerR*math.cos(rad(132.25) + self.tRad), self.innerR*math.sin(rad(132.25) + self.tRad), self.rotaryFill)
+            drawing.rotaryTeeth:Add(self.outerR*math.cos(rad(136.25) + self.tRad), self.outerR*math.sin(rad(136.25) + self.tRad), self.rotaryFill)
+            drawing.rotaryTeeth:Add(self.outerR*math.cos(rad(150.00) + self.tRad), self.outerR*math.sin(rad(150.00) + self.tRad), self.highlight2)
+            drawing.rotaryTeeth:Add(self.outerR*math.cos(rad(163.75) + self.tRad), self.outerR*math.sin(rad(163.75) + self.tRad), self.rotaryFill)
+            drawing.rotaryTeeth:Add(self.innerR*math.cos(rad(167.75) + self.tRad), self.innerR*math.sin(rad(167.75) + self.tRad), self.rotaryFill)
+
+            drawing.rotaryTeeth:Add(self.innerR*math.cos(rad(192.25) + self.tRad), self.innerR*math.sin(rad(192.25) + self.tRad), self.rotaryFill)
+            drawing.rotaryTeeth:Add(self.outerR*math.cos(rad(196.25) + self.tRad), self.outerR*math.sin(rad(196.25) + self.tRad), self.rotaryFill)
+            drawing.rotaryTeeth:Add(self.outerR*math.cos(rad(210.00) + self.tRad), self.outerR*math.sin(rad(210.00) + self.tRad), self.highlight3)
+            drawing.rotaryTeeth:Add(self.outerR*math.cos(rad(223.75) + self.tRad), self.outerR*math.sin(rad(223.75) + self.tRad), self.rotaryFill)
+            drawing.rotaryTeeth:Add(self.innerR*math.cos(rad(227.75) + self.tRad), self.innerR*math.sin(rad(227.75) + self.tRad), self.rotaryFill)
+
+            drawing.rotaryTeeth:Add(self.innerR*math.cos(rad(252.25) + self.tRad), self.innerR*math.sin(rad(252.25) + self.tRad), self.rotaryFill)
+            drawing.rotaryTeeth:Add(self.outerR*math.cos(rad(256.25) + self.tRad), self.outerR*math.sin(rad(256.25) + self.tRad), self.rotaryFill)
+            drawing.rotaryTeeth:Add(self.outerR*math.cos(rad(270.00) + self.tRad), self.outerR*math.sin(rad(270.00) + self.tRad), self.highlight4)
+            drawing.rotaryTeeth:Add(self.outerR*math.cos(rad(283.75) + self.tRad), self.outerR*math.sin(rad(283.75) + self.tRad), self.rotaryFill)
+            drawing.rotaryTeeth:Add(self.innerR*math.cos(rad(287.75) + self.tRad), self.innerR*math.sin(rad(287.75) + self.tRad), self.rotaryFill)
+
+            drawing.rotaryTeeth:Add(self.innerR*math.cos(rad(312.25) + self.tRad), self.innerR*math.sin(rad(312.25) + self.tRad), self.rotaryFill)
+            drawing.rotaryTeeth:Add(self.outerR*math.cos(rad(316.25) + self.tRad), self.outerR*math.sin(rad(316.25) + self.tRad), self.rotaryFill)
+            drawing.rotaryTeeth:Add(self.outerR*math.cos(rad(330.00) + self.tRad), self.outerR*math.sin(rad(330.00) + self.tRad), self.highlight5)
+            drawing.rotaryTeeth:Add(self.outerR*math.cos(rad(343.75) + self.tRad), self.outerR*math.sin(rad(343.75) + self.tRad), self.rotaryFill)
+            drawing.rotaryTeeth:Add(self.innerR*math.cos(rad(347.75) + self.tRad), self.innerR*math.sin(rad(347.75) + self.tRad), self.rotaryFill)
+
+            drawing.rotaryTeeth:Add(self.innerR*math.cos(rad(12.25) + self.tRad), self.innerR*math.sin(rad(12.25) + self.tRad), self.rotaryFill)
+
+            drawing.indicator:Add(math.cos(rad(-90) + self.tRad), math.sin(rad(-90) + self.tRad))
+            drawing.indicator:Add(math.cos(rad(90) + self.tRad), math.sin(rad(90) + self.tRad))
+
+            drawing.rotaryTeeth:Update()
+            drawing.indicator:Update()
+        end
+        
+        ]]>
+    </script>
+    
+</fragment>

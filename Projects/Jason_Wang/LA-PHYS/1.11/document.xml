@@ -1,0 +1,1107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G418670D9_0E03_4F7D_9E85_E4FA71D211BA">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>LA-PHYS-1.11 Centripetal Force</title>
+    <creator>jason_wang</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/lassondeLogo.png" />
+  </metadata>
+  
+  <include src="resources/curriculumStylesLassonde.xml" />
+  <include src="resources/Utilities.xml" />
+  <include src="resources/plotTools.xml" />
+
+  <!--                                      Header & Footer START                                         -->
+  <header style="themeColour">
+    <stack style="center" orientation="horizontal">
+      <p></p>
+    </stack>
+  </header>
+  <footer style="themeColour">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="themeColourTitle">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--                                      Header & Footer END                                         -->
+
+
+  <!-- Cover Page -->
+  <!-- This is the standard way title pages are created. A great website to get copyright free images .. www.pexels.com
+  *** The style: "pageLayout" is defined in curriculumStylesLassonde.xml. It simply sets the content to the center and adjusts the width to 80% ***-->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">1.11 Centripetal Force</title>
+    <p style="sectionHeading">Introduction</p>
+    <image src="resources/centripetal.jpeg" />
+    <stack orientation="vertical" style="contentBG">
+      <p style="justifiedText">
+        Any motion in a curved path represents accelerated motion, and requires a force directed toward the center of curvature of the path. This force is called the centripetal force which means "center seeking" force. In this module, we are going to learn to solve centripetal force through simulations and examples.
+      </p>
+    </stack>
+  </section>
+
+
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Simulation</p>
+    <stack style="mcStackLayout">
+      <p style="justifiedText">Following simulation shows a string is causing a ball to rotate in a circle on a frictionless surface at constant speed.</p>
+      <p style="justifiedText">Play the simulation below and think what forces act on the ball?</p>
+      <stack name="simStack" orientation="horizontal">
+        <drawing name="drawing">
+          <title>Top View</title>
+          <axis dim="x" min="-15" max="15" auto="fixed" />
+          <axis dim="y" min="-15" max="15" auto="lockAspectRatio" />
+          <series name="circle" capacity="7500" />
+          <series name="radius" draw="line" style="dodgerBlueF" />
+          <series name="vectors" draw="lineSegments" />
+          <series name="ball" draw="radialFill" />
+        </drawing>
+      </stack>
+      <p style="notes">The green vector represents the velocity. What does the red vector represent?</p>
+      <button name="btn" content="Simulation On" style="width50">
+        <onClick>
+          <![CDATA[
+				if btn.Text == "Simulation On" then
+					btn.Text = "Simulation Off"
+					sim:Play();
+				else
+					btn.Text = "Simulation On";
+					sim:Pause();
+				end
+			]]>
+        </onClick>
+      </button>
+      <script>
+        <![CDATA[
+			local s_circle = simStack.drawing.circle;
+			local s_radius = simStack.drawing.radius;
+			local s_ball = simStack.drawing.ball;
+			local s_vectors = simStack.drawing.vectors;
+			
+			local radius = 10;
+			local ball_radius = 0.5;
+			local vectorLength = 3;
+			local angle = 0;
+			local deltaAngle = math.pi / 180;
+			
+			plotTools.drawCircle(s_circle, vector({0,0}), radius, color.rgb(78,78,78));
+			s_radius:Add(0,0);
+			s_radius:Add(radius,0);
+			plotTools.drawCircle(s_ball, vector({radius,0}), ball_radius, color.dodgerBlue);
+			plotTools.drawArrow(s_vectors, vector({radius,0}), vector({radius, vectorLength}), color.forestGreen);
+			plotTools.drawArrow(s_vectors, vector({radius,0}), vector({radius-vectorLength,0}), color.quanserRed);
+
+			function updatePlot()
+				if angle == math.pi*2 then 
+					angle = deltaAngle; 
+				else
+					angle = angle + deltaAngle;
+				end
+				s_radius.Transform = matrixf.rotationAboutAxis(0, 0, 1, angle);
+				s_ball.Transform = matrixf.rotationAboutAxis(0, 0, 1, angle);
+				s_vectors.Transform = matrixf.rotationAboutAxis(0, 0, 1, angle);
+			end
+
+			updatePlot();
+		]]>
+      </script>
+      <simulation name="sim" loop="true" duration="5.4" period="0.015">
+        <onUpdate>
+          <![CDATA[
+					updatePlot();
+				]]>
+        </onUpdate>
+      </simulation>
+    </stack>
+  </sectionNoTitle>
+
+
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Recall From Previous Simulation</p>
+    <stack style="mcStackLayout">
+      <p style="justifiedText">
+        The force points to the center from the previous simulation is the tension force $\;T$. We also name this kind of force that points toward the center of circle: <b>Centripetal Force</b>.
+      </p>
+      <p style="justifiedText">As we know $\overrightarrow{F} = m\overrightarrow{a}$, however, since the force towards to the center, the acceleration will have the same direction.</p>
+    </stack>
+
+    <p style="sectionHeading">Centripetal Acceleration</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Definition</p>
+      <p style="justifiedText">The centripetal acceleration expression is obtained from analysis of constant speed circular motion by the use of similar triangles. From the ratio of the sides of the triangles:</p>
+      <stack>
+        <stack name="simStack" orientation="horizontal">
+          <drawing name="drawing">
+            <style>
+              <widthPercentage>0.5</widthPercentage>
+              <horizontalAlignment>center</horizontalAlignment>
+            </style>
+            <axis dim="x" min="0" max="15" auto="fixed" />
+            <axis dim="y" min="0" max="12" auto="fixed" />
+            <series name="arc" capacity="7500" />
+            <series name="fixedLines" draw="lineSegments" />
+            <series name="tri" draw="lineSegments" capacity="1000" />
+            <series name="s" draw="lineSegments" capacity="2" />
+          </drawing>
+          <drawing name="drawing2">
+            <style>
+              <widthPercentage>0.5</widthPercentage>
+              <horizontalAlignment>center</horizontalAlignment>
+            </style>
+            <axis dim="x" min="-5" max="5" auto="fixed" />
+            <axis dim="y" min="-5" max="5" auto="lockAspectRatio" />
+            <series name="v1" draw="lineSegments" />
+            <series name="v2" draw="lineSegments" />
+            <series name="dotV" draw="lineSegments" capacity="6" />
+          </drawing>
+        </stack>
+        <button name="btn" content="Start Simulation" style="width50">
+          <onClick>
+            <![CDATA[
+				if btn.Text == "Start Simulation" then
+					btn.Text = "Pause Simulation"
+					sim:Play();
+				else
+					btn.Text = "Start Simulation";
+					sim:Pause();
+				end
+			]]>
+          </onClick>
+        </button>
+        <script>
+          local s_arc = simStack.drawing.arc;
+          local s_fixed = simStack.drawing.fixedLines;
+          local s_tri = simStack.drawing.tri;
+          local s_s = simStack.drawing.s;
+
+          local s_v1 = simStack.drawing2.v1;
+          local s_v2 = simStack.drawing2.v2;
+          local s_dotV = simStack.drawing2.dotV;
+
+          local radius = 10;
+          local deltaAngle = math.pi / 180;
+          angle = 0;
+          local vectorLength = 3;
+
+          -- plot 1
+
+          plotTools.drawArc(s_arc, 0, 90, vector({0,0}), radius, color.rgb(78,78,78));
+          s_fixed:Add(0,0,color.black);
+          s_fixed:Add(radius,0,color.black);
+          plotTools.drawArrow(s_fixed, vector({radius,0}), vector({radius, vectorLength}), color.black);
+          s_tri:Add(radius,0,color.black);
+          s_tri:Add(0,0,color.black);
+          plotTools.drawArrow(s_tri, vector({radius,0}), vector({radius, vectorLength}), color.dodgerBlue);
+
+          -- plot 2
+
+          plotTools.drawArrow(s_v1, vector({0,0}), vector({0, vectorLength}), color.black);
+          plotTools.drawArrow(s_v2, vector({0,0}), vector({0, vectorLength}), color.dodgerBlue);
+
+          function updatePlot2()
+          angle = angle + deltaAngle;
+          s_tri.Transform = matrixf.rotationAboutAxis(0, 0, 1, angle);
+          s_s:Add(radius,0,color.forestGreen);
+          s_s:Add(math.cos(angle)*radius,math.sin(angle)*radius,color.forestGreen);
+
+          s_v2.Transform = matrixf.rotationAboutAxis(0, 0, 1, angle);
+          local angle2 = math.pi / 2 + angle;
+          plotTools.drawArrow(s_dotV, vector({0, vectorLength}), vector({math.cos(angle2)*vectorLength, math.sin(angle2)*vectorLength}), color.quanserRed);
+          end
+
+        </script>
+        <simulation name="sim" duration="3.15" period="0.07">
+          <onUpdate>
+            <![CDATA[
+					updatePlot2();
+					if angle >= math.pi / 4 then 
+						angle = 0;
+						btn.Text = "Start Simulation";
+						sim:Stop();
+					end
+					]]>
+          </onUpdate>
+        </simulation>
+
+        <p style="justifiedText">The black arrow is velocity $v_1$, the blue arrow is velocity $v_2$, the green line is the chord $\;s$, and the red arrow is the difference of the velocities $\Delta v$.</p>
+        <p style="justifiedText">By similar triangles: $\frac{s}{r}=\frac{\Delta v}{v}$</p>
+        <p style="justifiedText">Approximating the arc with the chord: $s=v\Delta t$</p>
+        <p style="justifiedText">
+          Substituting for $\;s$ and rearranging gives the <b>Centripetal Acceleration:</b>
+        </p>
+        <p style="centeredText">$a_c=\frac{\Delta v}{\Delta t}=\frac{v^2}{r}$</p>
+      </stack>
+    </stack>
+
+    <p style="sectionHeading">Centripetal Force</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Definition</p>
+      <p style="justifiedText">
+        <b>Centripetal force</b> is the net force causing the centripetal acceleration of an object in circular motion.
+      </p>
+      <p style="notes">Note: the centripetal force is not a fundamental force, but just a label given to the net force which causes an object to move in a circular path.</p>
+      <p style="justifiedText">
+        Starting with newton's 2<sup>nd</sup> law:
+      </p>
+      <p style="centeredText">$a=\frac{F}{m}$</p>
+      <p style="justifiedText">Then replace a with centripetal acceleration equation:</p>
+      <p style="centeredText">$\frac{v^2}{r}=\frac{F}{m}$</p>
+      <p style="justifiedText">We can show that the centripetal force $F_c = \frac{mv^2}{r}$</p>
+      <p style="justifiedText">and is always directed towards the center of the circular path. Equivalently, if ω is the angular velocity then because v=rω,</p>
+      <p style="centeredText">$F_c=mr\omega^2$</p>
+    </stack>
+  </sectionNoTitle>
+
+
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Riding Over the Hill</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Example 1</p>
+      <p style="justifiedText">Consider the situation below, if you were riding your bike through a circular hill. Assume the mass of you and your bike is 100kg and when you at the top of the hill, your velocity is 6m/s and you were riding constantly. What's the normal force? What will happen if your velocity is too fast?</p>
+      <p style="justifiedText">Play with the interactive simulation below and see if you can figure out the answers.</p>
+      <drawing name="drawing">
+        <axis dim="x" min="-20" max="20" auto="fixed" />
+        <axis dim="y" min="-10" max="10" auto="lockAspectRatio" />
+        <series name="circle" draw="lineSegments" capacity="7500" />
+        <series name="arc" capacity="3500" />
+        <series name="fixedLines" draw="lineSegments" />
+        <series name="r" draw="lineSegments">
+          <style>
+            <foreground color="dodgerBlue" />
+          </style>
+          <data>0 0; 0 1.5; 0 3; 0 4.5; 0 6; 0 7.5; 0 9; 0 10;</data>
+        </series>
+        <series name="r_chart" />
+        <series name="obj" draw="radialFill" capacity="1000" />
+      </drawing>
+      <button name="btn" content="Start Simulation" style="width50">
+        <onClick>
+          <![CDATA[
+				if btn.Text == "Start Simulation" then
+					btn.Text = "Pause Simulation"
+					sim:Play();
+				else
+					btn.Text = "Start Simulation";
+					sim:Pause();
+				end
+			]]>
+        </onClick>
+      </button>
+      <script>
+        <![CDATA[
+				local s_arc = drawing.arc;
+				local s_circle = drawing.circle;
+				local s_fixed = drawing.fixedLines;
+				local s_obj = drawing.obj;
+				local s_r = drawing.r;
+				local s_r_chart = drawing.r_chart;
+				
+				local radius = 10;
+				local angle = 60;
+				local fixedColor = color.rgb(78,78,78);
+
+				plotTools.drawArc(s_arc, 90-angle, 90+angle, vector({0,0}), radius, fixedColor);
+				local x = math.sin(math.rad(angle))*radius;
+				local y = math.cos(math.rad(angle))*radius;
+				s_fixed:Add(x,y,fixedColor);
+				s_fixed:Add(x+10,y,fixedColor);
+				s_fixed:Add(-x,y,fixedColor);
+				s_fixed:Add(-x-10,y,fixedColor);
+				
+				char.textR(s_r_chart, vector({1.5,radius/2-2}), 2, color.dodgerBlue);
+				local i = 0;
+				while i < 360 do
+					plotTools.drawArc(s_circle, i, i+4, vector({0,0}), radius, color.dodgerBlue);
+					i = i + 8;
+				end
+				
+				-- obj physical status
+				m = 100;										-- mass (kg)
+				v_i = 6;										-- initial velocity (m/s)
+				local obj_height = 0.5;
+				local obj_x = 0;
+				local obj_y = radius+obj_height;
+				local v_t ,f_g, a_c, f_c, f_n;
+				
+				local function updateObjStates()
+					v_t = v_i;						-- tangential velocity 
+					f_g =  m*9.81;				-- force of gravity
+					a_c = v_t*v_t/radius;	-- centripetal acceleration
+					f_c = m * a_c;				-- centripetal force
+					if f_g < f_c then
+						a_c = 0;
+						f_n = 0;
+					else
+						f_n = f_g - f_c;
+					end
+				end
+				
+				updateObjStates();
+				
+				local t = 0;
+				local delta_t = 0.03;
+				
+				plotTools.drawSquare(s_obj, vector({obj_x,obj_y}), 1, 1, color.quanserRed);
+				
+				-- calculate surface y coordinate, givenX must be positive.
+				local function calculateSurfaceYCoordinate(givenX)
+					if givenX > x then
+						return y;
+					else
+						return math.sqrt(radius*radius - givenX*givenX);
+					end
+				end
+				
+				local function updateObj()
+					updateObjStates();
+					obj_x = v_t*t;
+					local surface_y = calculateSurfaceYCoordinate(obj_x)+obj_height;
+					if f_c > f_g then
+						-- airborne
+						obj_y = radius+obj_height-0.5*9.81*t*t;
+						if obj_y < surface_y then
+							obj_y = surface_y;
+							f_n = f_g;
+						else
+							f_n = 0;
+						end
+					else
+						if obj_x > x then a_c = 0; f_c = 0; end
+						obj_y = surface_y;
+					end
+				end
+        
+        local function updateData()
+          dataTable:Child(2):Child(1):Child(1).Text = string.format("%d", m)
+          dataTable:Child(2):Child(2):Child(1).Text = string.format("%d", v_t)
+          dataTable:Child(2):Child(3):Child(1).Text = string.format("%d", a_c)
+          dataTable:Child(2):Child(4):Child(1).Text = string.format("%d", f_g)
+          dataTable:Child(2):Child(5):Child(1).Text = string.format("%d", f_c)
+          dataTable:Child(2):Child(6):Child(1).Text = string.format("%d", f_n)
+        end
+        
+				function resetPlot3()
+					obj_x = 0;
+					obj_y = radius+obj_height;
+					t = 0;
+					updateObjStates();
+					s_obj.Transform = matrixf.translation(obj_x,obj_y-radius-obj_height,1);
+          updateData()
+				end
+				
+				function updatePlot3()
+					if obj_x > x+10 then 
+						resetPlot3();
+					else
+						updateObj();
+						t = t + delta_t;
+						s_obj.Transform = matrixf.translation(obj_x,obj_y-radius-obj_height,1);
+					end
+          updateData()
+				end
+				]]>
+      </script>
+      <simulation name="sim" period="0.03" loop="true">
+        <onUpdate>
+          updatePlot3();
+        </onUpdate>
+      </simulation>
+      <table name="controllerTable" grid="false" widths="50% 50%">
+        <row>
+          <column>
+            <p style="centeredText">Mass</p>
+          </column>
+          <column>
+            <p style="centeredText">Initial velocity</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <slider name="mass" min="50" max="150" value="100">
+              <onValueChanged>
+                local tmp = round(mass.Value,1);
+                if tmp ~= v_i then
+                sim:Stop();
+                btn.Text = "Start Simulation";
+                m = tmp;
+                resetPlot3();
+                end
+              </onValueChanged>
+            </slider>
+          </column>
+          <column>
+            <slider name="velocity" min="0" max="20" value="6">
+              <onValueChanged>
+                local tmp = round(velocity.Value,1);
+                if tmp ~= v_i then
+                sim:Stop();
+                btn.Text = "Start Simulation";
+                v_i = tmp;
+                resetPlot3();
+                end
+              </onValueChanged>
+            </slider>
+          </column>
+        </row>
+      </table>
+      <table name="dataTable" grid="false" widths="18% 16% 16% 16% 16% 18%">
+        <style>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <row>
+          <column style="contentBG2">
+            <p style="centeredText">mass (kg)</p>
+          </column>
+          <column style="contentBG2">
+            <p style="centeredText">v<sub>t</sub> (m/s)</p>
+          </column>
+          <column style="contentBG2">
+            <p style="centeredText">a<sub>c</sub> (m/s<sup>2</sup>)</p>
+          </column>
+          <column style="contentBG2">
+            <p style="centeredText">F<sub>g</sub> (N)</p>
+          </column>
+          <column style="contentBG2">
+            <p style="centeredText">F<sub>c</sub> (N)</p>
+          </column>
+          <column style="contentBG2">
+            <p style="centeredText">F<sub>N</sub> (N)</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p style="centeredText"></p>
+          </column>
+          <column>
+            <p style="centeredText"></p>
+          </column>
+          <column>
+            <p style="centeredText"></p>
+          </column>
+          <column>
+            <p style="centeredText"></p>
+          </column>
+          <column>
+            <p style="centeredText"></p>
+          </column>
+          <column>
+            <p style="centeredText"></p>
+          </column>
+        </row>
+      </table>
+      <button name="expBtn" style="width50" content="Show Solution">
+        <onClick>
+          if expBtn.Text == "Show Solution" then
+          expStack.Style.Visibility = "visible";
+          expBtn.Text = "Hide Solution";
+          else
+          expStack.Style.Visibility = "collapsed";
+          expBtn.Text = "Show Solution";
+          end
+        </onClick>
+      </button>
+      <stack name="expStack" style="invisible">
+        <p style="subSectionHeading">Solution</p>
+        <p style="justifiedText">Let's draw the free body diagram</p>
+        <image src="resources/fbd1.png">
+          <style>
+            <horizontalAlignment>center</horizontalAlignment>
+            <widthPercentage>0.2</widthPercentage>
+          </style>
+        </image>
+        <p style="centeredText"><![CDATA[$\begin{matrix}a_c&=&\frac{\sum F_c}{m}\\[6pt]a_c&=&\frac{mg-F_N}{m}\\[6pt]\frac{v^2}{r}&=&\frac{mg-F_N}{m}\\[6pt]F_N&=&mg-\frac{mv^2}{r}\\[6pt]F_N&=&100*9.81-\frac{100*6^2}{10}\\[6pt]F_N&=&621N\end{matrix}$]]></p>
+        <p style="justifiedText">As we can see, the normal force actually is smaller than our force of gravity, and when the velocity increases, the normal force decreases.</p>
+        <p style="justifiedText">When the velocity is fast enough, the normal force will finally become zero, and it becomes airborne.</p>
+      </stack>
+    </stack>
+  </sectionNoTitle>
+
+  <!--QUESTION STEP BY STEP LAYOUT-->
+  <!--Setup StepsController with correct number of Steps-->
+  <sectionNoTitle style="pageLayout">
+    <script>
+      local stepsController = StepsController:new({stepsStack=stepsStack, numOfSteps=4, shown_message="Show More", hidden_message="Show Less", showStepCounter=false})
+    </script>
+    <p style="sectionHeading">Yo-Yo in Vertical Circle</p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="subSectionHeading">Example 2</p>
+      <p style="justifiedText">Let's say you started with a yo-yo and you whirled it around vertically. They whirl it around, goes high, and then it goes low. Let's say the mass of the yo-yo is 0.25kg, the length of the string is about 0.5m, and the yo-yo has a constant velocity 4m/s. How strong does your string need to be?</p>
+      <drawing name="drawing">
+        <axis dim="x" min="-25" max="25" auto="fixed" />
+        <axis dim="y" min="-20" max="20" auto="lockAspectRatio" />
+        <series name="circle" capacity="7500" />
+        <series name="radius" draw="lineSegments" capacity="2" />
+        <series name="g" draw="lineSegments" />
+        <series name="t" draw="lineSegments" capacity="6" style="dodgerBlueF" />
+        <series name="ball" draw="radialFill" />
+      </drawing>
+      <table grid="false" widths="10% 10% 10% 10%">
+        <row>
+          <column>
+            <p style="quanserRedB"></p>
+          </column>
+          <column>
+            <p style="centeredText">
+              F<sub>g</sub>
+            </p>
+          </column>
+          <column>
+            <p style="dodgerBlueB"></p>
+          </column>
+          <column>
+            <p style="centeredText">
+              T
+            </p>
+          </column>
+        </row>
+      </table>
+      <p name="data" style="justifiedText"></p>
+      <button name="btn" content="Simulation On" style="width50">
+        <onClick>
+          <![CDATA[
+				if btn.Text == "Simulation On" then
+					btn.Text = "Simulation Off"
+					sim:Play();
+				else
+					btn.Text = "Simulation On";
+					sim:Pause();
+				end
+			]]>
+        </onClick>
+      </button>
+      <script>
+        <![CDATA[
+					local s_circle = drawing.circle;
+					local s_radius = drawing.radius;
+					local s_g = drawing.g;
+					local s_t = drawing.t;
+					local s_ball = drawing.ball;
+
+					local angle = 0;
+					local deltaAngle = math.pi / 180;
+					local ratio = 20;
+					local m = 0.25;
+					local raw_r = 0.5;
+					local r = 0.5*ratio;
+					local v = 4;
+					local ball_radius = r/20;
+					local f_g = m*9.81;
+					local f_g_center;
+					local a_c = v*v/raw_r;
+					local original_f_t;
+					local f_t;
+
+					local x=0;
+					local y=0;
+
+					local function updateTension()
+						f_g_center = math.cos(angle)*f_g;
+						f_t = a_c*m - f_g_center;
+					end
+
+					updateTension();
+					original_f_t = f_t;
+
+					local gray = color.rgb(78,78,78);
+					plotTools.drawCircle(s_circle, vector({0,0}), r, gray);
+					s_radius:Add(0,0,gray);
+					s_radius:Add(0,r,gray);
+					plotTools.drawArrow(s_g,vector({0,r}),vector({0,f_g}), color.quanserRed);
+					plotTools.drawCircle(s_ball,vector({0,r}),ball_radius,color.rgb(23,23,23));
+					plotTools.drawArrow(s_t,vector({0,r}),vector({0,f_t}));
+
+					function updatePlot4()
+						updateTension();
+						data.FormattedText = string.format("a<sub>c</sub>=%.2fm/s<sup>2</sup>, F<sub>g</sub>=%.2fN, F<sub>g,centre</sub>=%.2fN, T=%.2fN",a_c,f_g,f_g_center,f_t);
+						s_radius.Transform = matrixf.rotationAboutAxis(0, 0, 1, angle);
+						s_ball.Transform = matrixf.rotationAboutAxis(0, 0, 1, angle);
+						local k_sin = math.sin(angle);
+						local k_cos = math.cos(angle);
+						plotTools.drawArrow(s_t,vector({-k_sin*r,k_cos*r}),vector({-k_sin*(r-f_t),k_cos*(r-f_t)}));
+						x = -k_sin*r;
+						y = -r+k_cos*r;
+						s_g.Transform = matrixf.translation(x,y,1);
+						if angle == math.pi*2 then
+							angle = deltaAngle;
+						else
+							angle = angle + deltaAngle;
+						end
+					end
+					]]>
+      </script>
+      <simulation name="sim" period="0.02" loop="true">
+        <onUpdate>
+          updatePlot4();
+        </onUpdate>
+      </simulation>
+    </stack>
+    <stack name="stepsStack">
+      <!--Each step is a stack, and each step has alternating background colors-->
+      <!--Use Snippet to create any single step stack -->
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Yo-Yo at Top</p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            <image src="resources/fbd2.png">
+              <style>
+                <horizontalAlignment>center</horizontalAlignment>
+                <widthPercentage>0.2</widthPercentage>
+              </style>
+            </image>
+            <p style="justifiedText">
+              F<sub>g</sub> at this case points towards the centre and so does the tension force.Therefore, both F<sub>g</sub> and Tension force will be positive in the $\sum F_c$:
+            </p>
+            <p style="centeredText">
+              <![CDATA[
+					$\begin{matrix}
+						a_c&=&\frac{\sum F_c}{m}\\[6pt]
+						a_c&=&\frac{mg+T}{m}\\[6pt]
+						\frac{v^2}{r}&=&\frac{mg+T}{m}\\[6pt]
+						T&=&\frac{mv^2}{r}-mg\\[6pt]
+						T&=&\frac{0.25\times 4^2}{0.5}-0.25\times 9.81\\[6pt]
+						T&=&5.55N
+					\end{matrix}$
+					]]>
+            </p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(1)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Yo-Yo at Bottom</p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            <image src="resources/fbd3.png">
+              <style>
+                <horizontalAlignment>center</horizontalAlignment>
+                <widthPercentage>0.2</widthPercentage>
+              </style>
+            </image>
+            <p style="justifiedText">
+              F<sub>g</sub> at this case points towards opposite of the centre. Therefore, F<sub>g</sub> will be negative in the $\sum F_c$:
+            </p>
+            <p style="centeredText">
+              <![CDATA[
+					$\begin{matrix}
+						a_c&=&\frac{\sum F_c}{m}\\[6pt]
+						a_c&=&\frac{-mg+T}{m}\\[6pt]
+						\frac{v^2}{r}&=&\frac{-mg+T}{m}\\[6pt]
+						T&=&\frac{mv^2}{r}+mg\\[6pt]
+						T&=&\frac{0.25\times 4^2}{0.5}+0.25\times 9.81\\[6pt]
+						T&=&10.45N
+					\end{matrix}$
+					]]>
+            </p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(2)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Yo-Yo at 45 degree Top Left</p>
+          <stack name="cont" style="invisible">
+            <image src="resources/fbd4.png">
+              <style>
+                <horizontalAlignment>center</horizontalAlignment>
+                <widthPercentage>0.35</widthPercentage>
+              </style>
+            </image>
+            <p style="justifiedText">
+              F<sub>g</sub> at this case does not directly point towards the centre and so we need to find its component that points towards the centre first:
+            </p>
+            <p style="centeredText">
+              $F_{g,centre} = cos(\theta)\times F_g = cos(45^{\circ})\times 0.25 \times 9.81 = 1.73N$
+            </p>
+            <p style="justifiedText">As we can see $F_{g,centre}$ points towards the centre of the circle, so it's positive.</p>
+            <p style="centeredText">
+              <![CDATA[
+					$\begin{matrix}
+						a_c&=&\frac{\sum F_c}{m}\\[6pt]
+						a_c&=&\frac{F_{g,centre}+T}{m}\\[6pt]
+						T&=&\frac{mv^2}{r}-F_{g,centre}\\[6pt]
+						T&=&\frac{0.25\times 4^2}{0.5}-1.73\\[6pt]
+						T&=&6.27N
+					\end{matrix}$
+					]]>
+            </p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(3)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Conclusion</p>
+          <stack name="cont" style="invisible">
+            <p style="justifiedText">In conclusion, the Tension force at the bottom of the circle is the largest, therefore, the string must be able to hold more than 10.45N to avoid break.</p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(4)
+          </onClick>
+        </button>
+      </stack>
+    </stack>
+  </sectionNoTitle>
+
+
+  <!--QUESTION STEP BY STEP LAYOUT-->
+  <!--Setup StepsController with correct number of Steps-->
+  <sectionNoTitle style="pageLayout">
+    <script>
+      local stepsController = StepsController:new({stepsStack=stepsStack, numOfSteps=3, shown_message="Show More", hidden_message="Show Less", showStepCounter=false})
+    </script>
+    <p style="sectionHeading">Mass Swinging in a Horizontal Circle</p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="subSectionHeading">Example 3</p>
+      <p style="justifiedText">A ball with mass 3kg tied to a string with length $2m$ and that string is secured to the ceiling, and the ball has been given an initial velocity so that it swings around in a horizontal circle. This ball is going to maintain a constant height. The angle between the vertical center and the circular motion edge is 30º.</p>
+      <p style="justifiedText">What's the tension and the speed of the ball?</p>
+      <stack name="simStack">
+        <drawing name="drawing">
+          <style>
+            <widthPercentage>0.8</widthPercentage>
+            <horizontalAlignment>center</horizontalAlignment>
+          </style>
+          <axis dim="x" min="-10" max="10" auto="fixed" />
+          <axis dim="y" auto="lockAspectRatio" />
+          <series name="beam" draw="radialFill" />
+          <series name="dash" draw="lineSegments" style="blackF" />
+          <series name="ellipse" capacity="13500" />
+          <series name="line" draw="lineSegments" capacity="2" style="dodgerBlueF" />
+          <series name="ball" draw="radialFill" />
+        </drawing>
+      </stack>
+      <button name="btn" content="Simulation On" style="width50">
+        <onClick>
+          <![CDATA[
+				if btn.Text == "Simulation On" then
+					btn.Text = "Simulation Off"
+					sim:Play();
+				else
+					btn.Text = "Simulation On";
+					sim:Pause();
+				end
+			]]>
+        </onClick>
+      </button>
+      <script>
+        <![CDATA[
+			local ball = simStack.drawing.ball;
+			local line = simStack.drawing.line;
+			local beam = simStack.drawing.beam;
+			local dash = simStack.drawing.dash;
+			local ellipse = simStack.drawing.ellipse;
+			
+			local cameraAngle = 75;
+			local cameraDistance = 16;
+			
+			local lineLength = 10;
+			local angle = 30;
+			local ballRadius = 0.3;
+			local circleRadius = lineLength * math.sin(math.rad(angle));
+			local ellipseXRadius = circleRadius;
+			local ellipseYRadius = circleRadius*math.cos(math.rad(cameraAngle));
+			local height = lineLength * math.cos(math.rad(angle));
+			
+			
+			local currentAngle = 0;
+			
+			local function calculateEllipseCoordinate()
+				local x = ellipseXRadius*math.cos(math.rad(currentAngle));
+				local y = -height + ellipseYRadius*math.sin(math.rad(currentAngle));
+				return {x,y};
+			end
+			
+			local currentCoord = calculateEllipseCoordinate();
+			
+			plotTools.drawSquare(beam, vector({0,0.5}), ellipseXRadius*2, 1, color.black);
+			plotTools.drawEllipse(ellipse, vector({0,-height}),ellipseXRadius,ellipseYRadius,color.gray);
+			plotTools.drawDashLine(dash, vector({0,0}), vector({0,-height}));
+			plotTools.drawDashLine(dash, vector({0,0}), vector({ellipseXRadius/5, -height/5}), color.black, 3);
+			plotTools.drawArc(dash, -60, -90, vector({0,0}), 0.9);
+			plotTools.drawCircle(ball, vector({0,0}), ballRadius, color.dodgerBlue);
+			ball.Transform = matrixf.translation(currentCoord[1], currentCoord[2], 1);
+			
+			function updatePlot5()
+				local coord = calculateEllipseCoordinate();
+				line:Add(0,0);
+				line:Add(coord[1],coord[2]);
+				local ratio = cameraDistance / ((height + coord[2])*math.tan(math.rad(cameraAngle)) + cameraDistance);
+				ball.Transform = matrixf.translation(coord[1], coord[2], 1) * matrixf.scaling(ratio, ratio, 1);
+				currentCoord = coord;
+				if currentAngle >= 360 then
+					currentAngle = 0;
+				else
+					currentAngle = currentAngle + 1;
+				end
+				
+			end
+			
+			updatePlot5();
+			]]>
+
+      </script>
+      <simulation name="sim" loop="true" period="0.02">
+        <onUpdate>
+          updatePlot5();
+        </onUpdate>
+      </simulation>
+    </stack>
+    <stack name="stepsStack">
+      <!--Each step is a stack, and each step has alternating background colors-->
+      <!--Use Snippet to create any single step stack -->
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Free Body Diagram</p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            <image src="resources/p3.png">
+              <style>
+                <widthPercentage>0.4</widthPercentage>
+                <horizontalAlignment>center</horizontalAlignment>
+              </style>
+            </image>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(1)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Solve Tension Force</p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            <p style="justifiedText"><![CDATA[2.  Use $a=\frac{\sum F}{m}$ for each direction]]></p>
+            <p style="centeredText">$a_y=\frac{\sum F_y}{m}$</p>
+            <p style="justifiedText">Since the ball remains the same in y direction, $a_y=0$</p>
+            <p style="justifiedText">There are two Forces in y direction: $-mg$ and $T_y=Tcos(30)$</p>
+            <p style="centeredText">
+              <![CDATA[
+$\begin{matrix}
+	0&=&\frac{-mg+Tcos(30)}{m}\\[6pt]
+	T&=&\frac{mg}{cos(30)}\\[6pt]
+	T&=&\frac{3\times9.81}{cos(30)}\\[6pt]
+	T&=&34N
+\end{matrix}$]]>
+            </p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(2)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Solve Velocity</p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            <p style="justifiedText">There is only one force for the centrepital force: $T_x=Tsin(30)$</p>
+            <p style="centeredText">
+              <![CDATA[
+$\begin{matrix}
+	a_c&=&\frac{\sum F_c}{m}\\[6pt]
+	\frac{v^2}{r}&=&\frac{Tsin(30)}{m}\\[6pt]
+	\frac{v^2}{Lsin(30)}&=&\frac{Tsin(30)}{m}\\[6pt]
+	v&=&\sqrt{\frac{Tsin(30)Lsin(30)}{m}}\\[6pt]
+	v&=&\sqrt{\frac{34sin(30)\times 2sin(30)}{3}}\\[6pt]
+	v&=&2.4m/s
+\end{matrix}$]]>
+            </p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(3)
+          </onClick>
+        </button>
+      </stack>
+
+    </stack>
+  </sectionNoTitle>
+
+
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Practices</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Question 1</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p style="justifiedText">A 700kg car makes a turn going at 30 m/s with radius of curvature of 120m. What is the force of friction between the car’s tires and the road?</p>
+          </column>
+        </row>
+      </table>
+      <textField name="input" placeholder="Enter your answer here." />
+      <p name="answer" style="invisible">5250</p>
+      <stack name="answerStack" style="invisible">
+        <!--q3 solution-->
+        <p>Answer: 5250N</p>
+      </stack>
+      <p name="feedback" style="invisible" />
+      <script>
+        local attempt = 0;
+        local max = 3;
+      </script>
+      <button name="btn" content="Check Answer" style="btnSelected">
+        <onClick>
+          if input.Text ~= answer.Text then
+          feedback.Style.Visibility = "visible"
+          feedback.Text = "Incorrect! Try again."
+          attempt = attempt + 1
+          if attempt &gt;= max then
+          answerStack.Style.Visibility = "visible"
+          end
+          else
+          feedback.Style.Visibility = "visible"
+          feedback.Text = "Correct, Good Job!"
+          end
+        </onClick>
+      </button>
+    </stack>
+
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Question 2</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p style="justifiedText">An object of mass 10kg is in a circular orbit of radius 10m at a velocity of 10m/s.</p>
+            <p style="justifiedText"><![CDATA[a. Calculate the centripetal force (in N) required to maintain this orbit.]]></p>
+            <p style="justifiedText"><![CDATA[b.  What is the acceleration of this object?]]></p>
+          </column>
+        </row>
+      </table>
+      <textField name="input" placeholder="Enter your answer for part a." />
+      <textField name="input2" placeholder="Enter your answer for part b." />
+      <p name="answer" style="invisible">100</p>
+      <p name="answer2" style="invisible">10</p>
+      <stack name="answerStack" style="invisible">
+        <!--q3 solution-->
+        <p>Answer: a) 100N  b) 10m/s<sup>2</sup></p>
+      </stack>
+      <p name="feedback" style="invisible" />
+      <script>
+        local attempt = 0;
+        local max = 3;
+      </script>
+      <button name="btn" content="Check Answer" style="btnSelected">
+        <onClick>
+          if input.Text ~= answer.Text or input2.Text ~= answer2.Text then
+          feedback.Style.Visibility = "visible"
+          feedback.Text = "Incorrect! Try again."
+          attempt = attempt + 1
+          if attempt &gt;= max then
+          answerStack.Style.Visibility = "visible"
+          end
+          else
+          feedback.Style.Visibility = "visible"
+          feedback.Text = "Correct, Good Job!"
+          end
+        </onClick>
+      </button>
+    </stack>
+
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Question 3</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p style="justifiedText">
+              Suppose you are spinning a child around in a circle by her arms. The radius of her orbit around you is 1 meter. Her speed is 1m/s. Her mass is 25kg.
+            </p>
+            <p style="justifiedText"><![CDATA[a. What is the magnitude and direction of tension in your arms?]]></p>
+            <p style="justifiedText"><![CDATA[b. In her arms?]]></p>
+          </column>
+        </row>
+      </table>
+      <p style="subSectionHeading">Answer</p>
+      <stack name="answer" style="invisible">
+        <p><![CDATA[a.  25N towards her]]></p>
+        <p><![CDATA[b.  25N towards you]]></p>
+      </stack>
+      <button content="Show Answer">
+        <onClick>
+          answer.Style.Visibility = "visible";
+        </onClick>
+      </button>
+    </stack>
+  </sectionNoTitle>
+
+
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Challenge</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Question 4</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p style="justifiedText">
+              Neutron stars are the corpses of stars left over after supernova explosions. They are the size of a small city, but can spin several times per second. (Try to imagine this in your head.) Consider a neutron star of radius 10km that spins with a period of 0.8 seconds. Imagine a person is standing at the equator of this neutron star.
+            </p>
+            <p style="justifiedText"><![CDATA[a.  Calculate the centripetal acceleration of this person and express it as a multiple of the acceleration g due to gravity (on Earth).]]></p>
+            <p style="justifiedText"><![CDATA[b.  Now, find the minimum acceleration due to gravity that the neutron star must have in order to keep the person from flying off.]]></p>
+          </column>
+        </row>
+      </table>
+      <p style="subSectionHeading">Answer</p>
+      <stack name="answer" style="invisible">
+        <p><![CDATA[a.  $6.3\times 10^4 g\,m/s^2$]]></p>
+        <p><![CDATA[b.  same as a]]></p>
+      </stack>
+      <button content="Show Answer">
+        <onClick>
+          answer.Style.Visibility = "visible";
+        </onClick>
+      </button>
+    </stack>
+  </sectionNoTitle>
+
+
+</document>

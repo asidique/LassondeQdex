@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<fragment xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd">
+
+  <script>
+    <![CDATA[
+    --------------------------- Math Methods ---------------------------
+    function round(value,multiple)
+      local remainder = value % multiple;
+      if remainder * 2 >= multiple then
+          return value - remainder + multiple;
+      else
+          return value - remainder;
+      end
+    end
+    
+    function convertToRadians(deg)
+      rad = (deg*math.pi)/180;
+      return rad;
+    end
+    
+    function getTableSize(T)
+      local count = 0
+      for _ in pairs(T) do count = count + 1 end
+        return count
+      end
+  
+    --------------------------- World Class ---------------------------
+    
+    World = {minX, minY, maxX, maxY, balls={}, objects = {}, deltaT=0.01};
+    function World:new(o)
+      o = o or {}
+      setmetatable(o, self)
+      self.__index = self
+      return o
+    end
+    
+    -- add object to the world. it will add to the end of the table.
+    function World:addBall(obj)
+      table.insert(self.balls, obj);
+    end
+    
+    function World:addObject(obj)
+      table.insert(self.objects,obj);
+    end
+    
+      -- transform all balls to their current position;
+      -- all balls must initially set to {0,0} position
+      -- all balls must have individual series setup!
+      function World:updateTransform()
+        for i=1,getTableSize(self.balls) do
+          local b = self.balls[i];
+          b.series.Transform = matrixf.translation(b.x, b.y, 1);
+        end
+        for i=1,getTableSize(self.objects) do
+          local o = self.objects[i];
+          o.series.Transform = matrixf.translation(o.x, o.y, 1);
+        end
+      end
+    
+      function World:restartWorld()
+        for i=1,getTableSize(self.balls) do
+          local b = self.balls[i];
+          b.series.Visible = true;
+          b:resetInitialState();
+        end
+        for i=1,getTableSize(self.objects) do
+          local o = self.objects[i];
+          o.series.Visible = true;
+          o:resetInitialState();
+        end
+      end
+      
+      function World:setInitialVariables()
+        for i=1,getTableSize(self.balls) do
+          local b = self.balls[i];
+          b:setInitialVariables();
+        end
+        for i=1,getTableSize(self.objects) do
+          local o = self.objects[i];
+          o:setInitialVariables();
+        end
+      end
+      
+      function World:drawAllObjects()
+        for i=1,getTableSize(self.balls) do
+          local b = self.balls[i];
+          b:drawObject();
+        end
+        for i=1,getTableSize(self.objects) do
+          local o = self.objects[i];
+          o:drawObject();
+        end
+      end
+      
+      -- Update World by one deltaT
+      function World:update(updateTransform,period)
+        -- check ball collisions
+        local ballsNums = getTableSize(self.balls);
+        local objectNums = getTableSize(self.objects);
+        for i=1,ballsNums-1,1 do
+          for j=i+1,ballsNums,1 do
+            local b1 = self.balls[i];
+            local b2 = self.balls[j];
+            b1:handleCollision(b2);
+          end
+        end
+        
+        -- check border collision
+        for i=1,ballsNums do
+          self.balls[i]:resolveBorderCollisionWith(self);
+        end
+        -- update positions
+        for i=1,ballsNums do
+          self.balls[i]:updatePosition(period);
+        end
+        -- update positions
+        for i=1,objectNums do
+          self.objects[i]:updatePosition(period);
+        end
+        -- update transform
+        if updateTransform then
+          self:updateTransform();
+        end
+      end
+
+    --------------------------- WorldObject Class ---------------------------
+      -- mass is kg
+      -- velocity has x and y component (m/s; 1 pixel = 1 m)
+      -- series is the plotTools series
+      -- This is a generic world object which other objects can inherit from
+    
+      WorldObject = {x = 0, y = 0, mass = 0, velocity = {0,0}, series};
+      function WorldObject:new(o)
+        o = o or {};
+        setmetatable(o, self);
+        self.__index = self;
+        return o;
+      end
+      
+      function WorldObject:initDrawing()
+      if self.series ~= nil then
+        self.series:Clear()
+        plotTools.drawCircle(self.series, vector({0,0}), self.radius)
+        if self.x ~= 0 or self.y ~= 0 then
+          self.series.Transform = matrixf.translation(self.x, self.y, 1);
+        end
+      end
+      end
+
+      function WorldObject:setInitialVariables()
+        self.initX = self.x;
+        self.initY = self.y;
+        self.initMass = self.mass;
+        self.initVelocity = {self.velocity[1], self.velocity[2]};
+      end
+  
+      function WorldObject:getVelocity()
+        local vel = math.sqrt(math.pow(self.velocity[1],2) + math.pow(self.velocity[2],2));
+        return vel;
+      end
+      
+      function WorldObject:updatePosition(period)
+        self:drawObject();
+        self.x = self.x + self.velocity[1]*period;
+        self.y = self.y + self.velocity[2]*period;
+      end
+      
+      function WorldObject:drawObject()
+        self.series.Transform = matrixf.translation(self.x,self.y,0);
+      end
+      
+      function WorldObject:resetInitialState()
+        self.x = self.initX;
+        self.y = self.initY;
+        self.mass = self.initMass;
+        self.velocity = {self.initVelocity[1], self.initVelocity[2]};
+        self.impact = 0;
+      end
+
+    --------------------------- Ball Object ---------------------------
+
+      -- mass is kg
+      -- velocity has x and y component (m/s; 1 pixel = 1 m)
+      -- series is the plotTools series
+      -- must also declare RADIUS when create the Ball object
+      
+      Ball = WorldObject:new();
+      function Ball:new(o)
+        o = o or {}
+        setmetatable(o, self)
+        self.__index = self;
+        return o
+      end
+        
+      function Ball:handleCollision(ball)
+        local xDist = self.x - ball.x;
+        local yDist = self.y - ball.y;
+        local distSquared = (xDist*xDist) + (yDist*yDist);
+    
+        if distSquared <= ((self.radius + ball.radius)*(self.radius + ball.radius)) then
+          xVelocity = ball.velocity[1] - self.velocity[1];
+          yVelocity = ball.velocity[2] - self.velocity[2];
+      
+          dotProduct = xDist*xVelocity + yDist*yVelocity;
+      
+          if dotProduct > 0 then
+            collisionScale = dotProduct / distSquared;
+            xCollision = xDist*collisionScale;
+            yCollision = yDist*collisionScale;
+        
+            combinedMass = self.mass + ball.mass;
+            collisionWeightA = 2*(ball.mass/combinedMass);
+            collisionWeightB = 2*(self.mass/combinedMass);
+        
+            self.velocity[1] = self.velocity[1] + (collisionWeightA*xCollision);
+            self.velocity[2] = self.velocity[2] + (collisionWeightA*yCollision);
+            ball.velocity[1] = ball.velocity[1] - (collisionWeightA*xCollision);
+            ball.velocity[2] = ball.velocity[2] - (collisionWeightA*yCollision);
+          end
+         end  
+      end
+      
+      -- resolve border collision with the world
+      function Ball:resolveBorderCollisionWith(world)
+        if (world.minX ~= nil and self.x-self.radius < world.minX) or (world.maxX ~= nil and self.x+self.radius > world.maxX) then
+          self.velocity[1] = -self.velocity[1];
+        elseif (world.minY ~= nil and self.y < world.minY+self.radius) or (world.maxY ~= nil and self.y+self.radius > world.maxY - self.radius) then
+          self.velocity[2] = -self.velocity[2];
+        end
+      end
+      
+      function Ball:handleCollisionWithRectangle(rect)
+        if rect.impact < 1 then
+          local xDist = rect.x - self.x;
+          local yDist = (rect.y + (rect.height/2)) - self.y;
+          local distSquared = (xDist*xDist) + (yDist*yDist);
+          
+          if distSquared <= self.radius*self.radius then
+            self.velocity = {rect.velocity[1],rect.velocity[2]};
+            rect.velocity = {0,0};
+            rect.impact = rect.impact + 1;
+          end
+         end
+      end
+      
+      
+   ]]>
+  </script>
+</fragment>

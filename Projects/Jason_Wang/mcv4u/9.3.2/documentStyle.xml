@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<fragment xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd">
+
+	<include src="curriculumThemePack/curriculumStyles.xml" />
+
+	<style name="backgroundColor1">
+		<background color="50 133 184" />
+	</style>
+	
+	<style name="fontColor1">
+		<foreground color="255 255 255" />
+	</style>
+	
+	<style name="fontColorRed">
+		<foreground color="red" />
+	</style>
+
+	<style name="fontColorGreen">
+		<foreground color="forestGreen" />
+	</style>
+
+  <style name="quanserRedF">
+    <foreground color="quanserRed" />
+  </style>
+  <style name="dodgerBlueF">
+    <foreground color="dodgerBlue" />
+  </style>
+  <style name="darkVioletF">
+    <foreground color="darkViolet" />
+  </style>
+  <style name="grayF">
+    <foreground color="gray" />
+  </style>
+
+  <style name="quanserRedB">
+    <background color="quanserRed" />
+  </style>
+  <style name="dodgerBlueB">
+    <background color="dodgerBlue" />
+  </style>
+  <style name="darkVioletB">
+    <background color="darkViolet" />
+  </style>
+  <style name="grayB">
+    <background color="gray" />
+  </style>
+
+	<style name="small">
+		<size scale="small" />
+	</style>
+
+	<style name="large">
+		<size scale="large" />
+	</style>
+
+	<style name="xlarge">
+		<size scale="xlarge" />
+	</style>
+
+	<style name="boldText">
+		<bold>true</bold>
+	</style>
+
+	<style name="marginTop15">
+		<marginTop>15</marginTop>
+	</style>
+
+	<style name="marginTop30">
+		<marginTop>30</marginTop>
+	</style>
+	
+	<style name="marginTop50">
+		<marginTop>50</marginTop>
+	</style>
+
+	<style name="marginBottom0">
+		<marginBottom>0</marginBottom>
+	</style>
+	
+	<style name="marginBottom15">
+		<marginBottom>15</marginBottom>
+	</style>
+
+	<style name="marginBottom30">
+		<marginBottom>30</marginBottom>
+	</style>
+	
+	<style name="marginBottom50">
+		<marginBottom>50</marginBottom>
+	</style>
+
+	<style name="marginLeft15">
+		<marginLeft>15</marginLeft>
+	</style>
+	
+	<style name="width50">
+		<widthPercentage>0.5</widthPercentage>
+		<horizontalAlignment>center</horizontalAlignment>
+	</style>
+
+  <style name="width70">
+    <widthPercentage>0.7</widthPercentage>
+    <horizontalAlignment>center</horizontalAlignment>
+  </style>
+
+  <style name="widt80">
+    <widthPercentage>0.8</widthPercentage>
+    <horizontalAlignment>center</horizontalAlignment>
+  </style>
+
+	<style name="width90">
+		<widthPercentage>0.9</widthPercentage>
+		<horizontalAlignment>center</horizontalAlignment>
+	</style>
+
+	<style name="width93">
+		<widthPercentage>0.93</widthPercentage>
+		<horizontalAlignment>center</horizontalAlignment>
+	</style>
+
+	<style name="width95">
+		<widthPercentage>0.95</widthPercentage>
+		<horizontalAlignment>center</horizontalAlignment>
+	</style>
+	
+	<style name="wrap" link="marginTop30 marginBottom30 width95">
+	</style>
+
+	<style name="justified">
+		<textAlignment>justify</textAlignment>
+		<horizontalAlignment>center</horizontalAlignment>
+	</style>
+
+	<style name="centeredText">
+		<textAlignment>center</textAlignment>
+		<horizontalAlignment>center</horizontalAlignment>
+	</style>
+
+	<style name="chaptNumTitle" link="themeColourTitle xlarge">
+		<marginTop>80</marginTop>
+		<textAlignment>right</textAlignment>
+	</style>
+
+	<style name="sectionTitle1"
+		link="large marginTop30 boldText">
+    <foreground color="91 90 90" />
+    
+	</style>
+
+  <style name="sectionTitle2" link="large marginTop30 boldText width93">
+    <foreground color="91 90 90" />
+    <marginBottom>35</marginBottom>
+  </style>
+
+	<style name="switchButtonStyle">
+		<foreground color="white" />
+		<background color="cornflowerBlue" />
+	</style>
+	
+</fragment>

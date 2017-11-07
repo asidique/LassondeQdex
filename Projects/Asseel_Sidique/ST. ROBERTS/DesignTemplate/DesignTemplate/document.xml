@@ -1,0 +1,802 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="GCEFB474D_015A_4C63_A1B2_5664F30B0077">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>Lassonde Design Template</title>
+    <creator>Sidique</creator>
+    <coverImage src="resources/LassondeLogoDesign.png" />
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+  </metadata>
+  
+  <include src="resources/curriculumStylesLassonde.xml" />
+  
+    <!--                                      Header & Footer START                                         -->
+  <header style="themeColour">
+    <stack style="center" orientation="horizontal">
+      <p></p>
+    </stack>
+  </header>
+  <footer style="themeColour">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="themeColourTitle">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--                                      Header & Footer END                                         -->
+
+  <!-- Section 1 -->
+  <!-- This is the standard way title pages are created. A great website to get copyright free images .. www.pexels.com
+  *** The style: "pageLayout" is defined in curriculumStylesLassonde.xml. It simply sets the content to the center and adjusts the width to 80% ***-->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">1.1 Name of Module</title>
+    <p style="sectionHeading">Introduction</p>
+    <image src="resources/spacex.jpg" />
+    <!--*** The style: "contentBG" is defined in curriculumStylesLassonde.xml. This sets the color of the stack. -->
+    <stack orientation="vertical" style="contentBG">
+      <p>This is where your introductory content goes. This is a great place to introduce the concepts being discussed in the module and highlight
+      some key terms in <b>bold</b>. Including a history of the topic or a high level view on the topic will be a great transition into the rest of the
+      document. In some cases, explain the picture you've included to give a visual attachment to the document.
+    </p>
+    </stack>
+    <!--Don't forget to add a break at the end of the page to seperate the content from the footer.-->
+    <p><br /></p>
+  </section>
+  
+  <!--Make sure to set pageLayout to every section to keep consistency-->
+  <sectionNoTitle name="section2" style="pageLayout">
+    <p style="sectionHeading">Simple Page with Content</p>
+    <stack orientation="vertical" name="contentStack" style="contentBG">
+      <p>Here is where you can discuss content in detail, show examples and so on. To seperate paragraphs, it should be done with a new p tag like so:</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+      dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <p>To add media such as images or videos, keep it inside the stack.</p>
+      <image src="resources/spacex2.jpg" />
+    </stack>
+    <p style="sectionHeading">Additional Topic</p>
+    <stack orientation="vertical" name="contentStack2" style="contentBG">
+      <p>If you would like to introduce another topic on the same page, simply follow the same styles as in the first topic. Make sure to create a seperate
+      stack so that the sections can be easily identified. There is a margin of 20 that the section headings have so it already spaces out the different topics.</p>
+    </stack>
+    <p><br /></p>
+  </sectionNoTitle>
+  
+  <!--TABULAR LAYOUT-->
+  <sectionNoTitle name="section3" style="pageLayout">
+    <onDocumentOpened>
+      <!--This is to set the colors of the first tab so it appears selected.-->
+      tabs.tab1.Style.BackgroundColor = color.rgb(225, 225, 225);
+      tabs.tab1.btn.Style.BackgroundColor = color.rgb(225, 225, 225);
+      
+      stackArray = {tabs.tab1, tabs.tab2, tabs.tab3, tabs.tab4};
+      btnArray = {tabs.tab1.btn, tabs.tab2.btn, tabs.tab3.btn, tabs.tab4.btn};
+      tabContentArray = {tabContent.content1, tabContent.content2, tabContent.content3, tabContent.content4}
+      
+      function setElementColor(array, a, colActive, colInactive)
+        for i, p in ipairs(array) do
+            if i == a then
+              p.Style.BackgroundColor = colActive or color.rgb(225, 225, 225);
+            else
+              p.Style.BackgroundColor = colInactive or color.rgb(200, 200, 200);
+            end
+        end
+      end
+      
+      function setElementVisible(array, a)
+        for i, p in ipairs(array) do
+            if i == a then
+              p.Style.Visibility = "visible"
+            else
+              p.Style.Visibility = "collapsed";
+            end
+          end
+        end
+      <!--This function simply makes it easier to switch tab colors depending on which one we have selected. See the <onClick> function under btn to see how to
+      set a tab to become active. You have to pass this function an array that points to the stack.
+      function setActiveTab(array, a)
+        tabs.tab1.Style.BackgroundColor = color.rgb(200, 200, 200);
+        tabs.tab1.btn.Style.BackgroundColor = color.rgb(200, 200, 200);
+        
+        tabs.tab2.Style.BackgroundColor = color.rgb(200, 200, 200);
+        tabs.tab2.btn.Style.BackgroundColor = color.rgb(200, 200, 200);
+        
+        tabs.tab3.Style.BackgroundColor = color.rgb(200, 200, 200);
+        tabs.tab3.btn.Style.BackgroundColor = color.rgb(200, 200, 200);
+        
+        tabs.tab4.Style.BackgroundColor = color.rgb(200, 200, 200);
+        tabs.tab4.btn.Style.BackgroundColor = color.rgb(200, 200, 200);
+        
+        tabContent.content1.Style.Visibility = "collapsed";
+        tabContent.content2.Style.Visibility = "collapsed";
+        tabContent.content3.Style.Visibility = "collapsed";
+        tabContent.content4.Style.Visibility = "collapsed";
+        
+        if a == 1 then
+          tabs.tab1.Style.BackgroundColor = color.rgb(225, 225, 225);
+          tabs.tab1.btn.Style.BackgroundColor = color.rgb(225, 225, 225);
+          tabContent.content1.Style.Visibility = "visible";
+        elseif a == 2 then
+          tabs.tab2.Style.BackgroundColor = color.rgb(225, 225, 225);
+          tabs.tab2.btn.Style.BackgroundColor = color.rgb(225, 225, 225);
+          tabContent.content2.Style.Visibility = "visible";
+        elseif a == 3 then
+          tabs.tab3.Style.BackgroundColor = color.rgb(225, 225, 225);
+          tabs.tab3.btn.Style.BackgroundColor = color.rgb(225, 225, 225);
+          tabContent.content3.Style.Visibility = "visible";
+        elseif a == 4 then
+          tabs.tab4.Style.BackgroundColor = color.rgb(225, 225, 225);
+          tabs.tab4.btn.Style.BackgroundColor = color.rgb(225, 225, 225);
+          tabContent.content4.Style.Visibility = "visible";
+        end
+      end-->
+      setElementColor(stackArray, 1)
+      setElementColor(btnArray, 1)
+      setElementVisible(tabContentArray, 1);
+    </onDocumentOpened>
+    <p style="sectionHeading">Tabular Page Layout</p>
+    <!--This stack only contains the tabs themselves and not the content. The content is held in a stack directly underneat the tabs.-->
+    <stack name="tabs" orientation="horizontal" style="contentBG2">
+      <stack name="tab1" orientation="horizontal" style="contentBG">
+        <button name="btn" content="First Tab" style="tab">
+          <onClick>
+            setElementColor(stackArray, 1)
+            setElementColor(btnArray, 1)
+            setElementVisible(tabContentArray, 1);
+          </onClick>
+        </button>
+      </stack>
+      <stack name="tab2" orientation="horizontal" style="contentBG2">
+        <button name="btn" content="Second Tab" style="tab">
+          <onClick>
+            setElementColor(stackArray, 2)
+            setElementColor(btnArray, 2)
+            setElementVisible(tabContentArray, 2);
+          </onClick>
+        </button>
+      </stack>
+      <stack name="tab3" orientation="horizontal" style="contentBG2">
+        <button name="btn" content="Third Tab" style="tab">
+          <onClick>
+            setElementColor(stackArray, 3)
+            setElementColor(btnArray, 3)
+            setElementVisible(tabContentArray, 3);
+          </onClick>
+        </button>
+      </stack>
+      <stack name="tab4" orientation="horizontal" style="contentBG2">
+        <button name="btn" content="Fourth Tab" style="tab">
+          <onClick>
+            setElementColor(stackArray, 4)
+            setElementColor(btnArray, 4)
+            setElementVisible(tabContentArray, 4);
+          </onClick>
+        </button>
+      </stack>
+    </stack>
+    <stack name="tabContent" orientation="vertical" style="contentBG">
+      <stack name="content1" orientation="vertical">
+        <!--ADD YOUR CONTENT HERE-->
+        <p>In this section, feel free to add a sub section heading to categorize topics within the tab.</p>
+        <p style="subSectionHeading">Topic 1</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+      dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p style="subSectionHeading">Topic 2</p>
+        <p>Adding images to your tabbed content is also very effective.</p>
+        <image src="resources/spacex3.png" />
+      </stack>
+      <stack name="content2" orientation="vertical" style="collapsed">
+        <!--ADD YOUR CONTENT HERE-->
+        <p style="subSectionHeading">Topic 1</p>
+        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, 
+        totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. 
+        Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione 
+        voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non 
+        numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem
+        ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit 
+        esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
+        <p style="subSectionHeading">Topic 2</p>
+        <p>Adding images to your tabbed content is also very effective.</p>
+        <image src="resources/spacex4.jpg" />
+      </stack>
+      <stack name="content3" orientation="vertical" style="collapsed">
+        <!--ADD YOUR CONTENT HERE-->
+        <p style="subSectionHeading">Topic 1</p>
+        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti 
+        atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa 
+        qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. 
+        Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, 
+        omnis voluptas assumenda est, omnis dolor repellendus.</p>
+        <p style="subSectionHeading">Topic 2</p>
+        <p>Adding images to your tabbed content is also very effective.</p>
+        <image src="resources/spacex5.jpg" />
+      </stack>
+      <stack name="content4" orientation="vertical" style="collapsed">
+        <!--ADD YOUR CONTENT HERE-->
+        <p style="subSectionHeading">Topic 1</p>
+        <p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus 
+        saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. 
+        Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus 
+        maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>
+        <p style="subSectionHeading">Topic 2</p>
+        <p>Adding images to your tabbed content is also very effective.</p>
+        <image src="resources/spacex6.jpg" />
+      </stack>
+    </stack>
+    <p><br /></p>
+  </sectionNoTitle>
+  
+  <!--QUESTION STEP BY STEP LAYOUT-->
+  <sectionNoTitle name="section4" style="pageLayout">
+    <p style="sectionHeading">Question Step-by-Step</p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="subSectionHeading">QUESTION 1</p>
+      <p>Here is where you ask the question... make sure to add an image that relates to the question to help visualize the question.</p>
+      <image src="resources/diagram1.jpeg" />
+    </stack>
+    <!--Each step is a stack, and each step has alternating background colors-->
+    <stack orientation="horizontal" style="contentBG2">
+      <stack name="stepStack" orientation="vertical">
+        <p>Sketch a diagram</p>
+        <stack name="cont">
+          <style>
+            <visibility>collapsed</visibility>
+          </style>
+          <!--CONTENT GOES HERE-->
+          <p>This step is used to visualize the problem. Use the diagram given above as an example.</p>
+        </stack>
+      </stack>
+      <button name="btn" content="Show Step 1">
+        <style>
+          <horizontalAlignment>right</horizontalAlignment>
+          <widthPercentage>40%</widthPercentage>
+        </style>
+        <onClick>
+          if btn.Text=="Show Step 1" then
+            btn.Text = "Hide Step 1";
+            stepStack.cont.Style.Visibility = "visible";
+            stepStack:Child(1).Style.Bold = 1;
+          elseif btn.Text=="Hide Step 1" then
+            btn.Text = "Show Step 1";
+            stepStack.cont.Style.Visibility = "collapsed";
+            stepStack:Child(1).Style.Bold = 0;
+          end
+        </onClick>
+      </button>
+    </stack>
+    <stack orientation="horizontal" style="contentBG">
+      <stack name="stepStack" orientation="vertical">
+        <p>Identify the variables</p>
+        <stack name="cont">
+          <style>
+            <visibility>collapsed</visibility>
+          </style>
+          <stack orientation="horizontal">
+            <stack orientation="vertical">
+              <!--CONTENT GOES HERE-->
+              <p>Make sure to include an explanation at each step and use latex to format your mathematical solutions!</p>
+              <p>VARIABLES</p>
+              <p>$ m = 100kg $</p>
+              <p>$ v_{i} = 0 \frac{m}{s} $</p>
+              <p>$ v_{f} = ? \frac{m}{s} $</p>
+              <p>$ h_{i} = 25 m $</p>
+              <p>$ h_{f} = 3 m $</p>
+              <p>$ g = 9.8 \frac{m}{s^2} $</p>            
+            </stack>
+          </stack>
+        </stack>
+      </stack>
+      <button name="btn" content="Show Step 2">
+        <style>
+          <horizontalAlignment>right</horizontalAlignment>
+          <widthPercentage>40%</widthPercentage>
+        </style>
+        <onClick>
+          if btn.Text=="Show Step 2" then
+          btn.Text = "Hide Step 2";
+          stepStack.cont.Style.Visibility = "visible";
+          stepStack:Child(1).Style.Bold = 1;
+          elseif btn.Text=="Hide Step 2" then
+          btn.Text = "Show Step 2";
+          stepStack.cont.Style.Visibility = "collapsed";
+          stepStack:Child(1).Style.Bold = 0;
+          end
+        </onClick>
+      </button>
+    </stack>
+    <stack orientation="horizontal" style="contentBG2">
+      <stack name="stepStack" orientation="vertical">
+        <!--CONTENT GOES HERE-->
+        <p>Solve for potential energy at A</p>
+        <stack name="cont">
+          <style>
+            <visibility>collapsed</visibility>
+          </style>
+          <p>$ T_{E} = \frac{1}{2}mv^2 + mgh $</p>
+          <p>$ T_{E} = mgh $</p>
+          <p>$ T_{E} = (100)(9.8)(25) $</p>
+          <p>$ T_{E} = 2.45x10^4 J $</p>
+        </stack>
+      </stack>
+      <button name="btn" content="Show Step 3">
+        <style>
+          <horizontalAlignment>right</horizontalAlignment>
+          <widthPercentage>40%</widthPercentage>
+        </style>
+        <onClick>
+          if btn.Text=="Show Step 3" then
+          btn.Text = "Hide Step 3";
+          stepStack.cont.Style.Visibility = "visible";
+          stepStack:Child(1).Style.Bold = 1;
+          elseif btn.Text=="Hide Step 3" then
+          btn.Text = "Show Step 3";
+          stepStack.cont.Style.Visibility = "collapsed";
+          stepStack:Child(1).Style.Bold = 0;
+          end
+        </onClick>
+      </button>
+    </stack>
+    <stack orientation="horizontal" style="contentBG">
+      <stack name="stepStack" orientation="vertical">
+        <!--CONTENT GOES HERE-->
+        <p>Solve for final speed at B</p>
+        <stack name="cont">
+          <style>
+            <visibility>collapsed</visibility>
+          </style>
+          <p>$ T_{E} = \frac{1}{2}mv^2 + mgh $</p>
+          <p>$ 2.45x10^4 = \frac{1}{2}mv^2 + 0 $</p>
+          <p>$ 4.9x10^4 = mv^2 + 0 $</p>
+          <p>$ 490 = v^2 + 0 $</p>
+          <p>$ \sqrt{490} = 22.14 \frac{m}{s} $</p>
+        </stack>
+      </stack>
+      <button name="btn" content="Show Step 4">
+        <style>
+          <horizontalAlignment>right</horizontalAlignment>
+          <widthPercentage>40%</widthPercentage>
+        </style>
+        <onClick>
+          if btn.Text=="Show Step 4" then
+            btn.Text = "Hide Step 4";
+            stepStack.cont.Style.Visibility = "visible";
+            stepStack:Child(1).Style.Bold = 1;
+          elseif btn.Text=="Hide Step 4" then
+            btn.Text = "Show Step 4";
+            stepStack.cont.Style.Visibility = "collapsed";
+            stepStack:Child(1).Style.Bold = 0;
+          end
+        </onClick>
+      </button>
+    </stack>
+    <p><br /></p>
+  </sectionNoTitle>
+
+  <sectionNoTitle name="section5" style="pageLayout">
+    <onDocumentOpened>
+      selected = 0;
+      contentArray2 = {contentStack.choicesTable:Child(2):Child(1).btn, contentStack.choicesTable:Child(2):Child(2).btn, contentStack.choicesTable:Child(4):Child(1).btn, contentStack.choicesTable:Child(4):Child(2).btn};
+      function setFontBlack(array, a)
+        for i, p in ipairs(array) do
+            if i == a then
+              p.Style.ForegroundColor = color.white;
+            else
+              p.Style.ForegroundColor = color.black;
+            end
+          end 
+        end
+    </onDocumentOpened>
+    <p style="sectionHeading">Multiple Choice Single Page</p>
+    <stack name="contentStack" style="contentBG">
+      <p style="subSectionHeading">Question 1</p>
+      <table widths="10% 90%" grid="false">
+				<row>
+					<column>
+						<image src="resources/question.png" inspect="false" />
+					</column>
+					<column>
+						<p>A rightward force is applied to a book in order to move it across a desk at constant velocity. Consider frictional forces. Neglect air resistance. What does the free body diagram of the book look like?</p>
+					</column>
+				</row>
+			</table>
+			<table name="choicesTable" grid="false" widths="50% 50%">
+				<row>
+					<column>
+						<image src="resources/q.jpeg">
+							<style>
+								<widthPercentage>0.6</widthPercentage>
+								<horizontalAlignment>center</horizontalAlignment>
+							</style>
+						</image>
+					</column>
+					<column>
+						<image src="resources/q.jpeg">
+							<style>
+								<widthPercentage>0.6</widthPercentage>
+								<horizontalAlignment>center</horizontalAlignment>
+							</style>
+						</image>
+					</column>
+				</row>
+				<row>
+					<column>
+						<button name="btn" content="A" style="btnUnselected">
+							<onClick>
+                setElementColor(contentArray2, 1, color.rgb(232, 12, 46), color.transparent);
+                setFontBlack(contentArray2, 1)
+                selected = 1;
+							</onClick>
+						</button>
+					</column>
+					<column>
+						<button name="btn" content="B" style="btnUnselected">
+							<onClick>
+                setElementColor(contentArray2, 2, color.rgb(232, 12, 46), color.transparent);
+                setFontBlack(contentArray2, 2)
+                selected = 2;
+							</onClick>
+						</button>
+					</column>
+				</row>
+				<row>
+					<column>
+						<image src="resources/q.jpeg">
+							<style>
+								<widthPercentage>0.6</widthPercentage>
+								<horizontalAlignment>center</horizontalAlignment>
+							</style>
+						</image>
+					</column>
+					<column>
+						<image src="resources/q.jpeg">
+							<style>
+								<widthPercentage>0.6</widthPercentage>
+								<horizontalAlignment>center</horizontalAlignment>
+							</style>
+						</image>
+					</column>
+				</row>
+				<row>
+					<column>
+						<button name="btn" content="C" style="btnUnselected">
+							<onClick>
+                setElementColor(contentArray2, 3, color.rgb(232, 12, 46), color.transparent);
+                setFontBlack(contentArray2, 3)
+                selected = 3;
+							</onClick>
+						</button>
+					</column>
+					<column>
+						<button name="btn" content="D" style="btnUnselected">
+							<onClick>
+                setElementColor(contentArray2, 4, color.rgb(232, 12, 46), color.transparent);
+                setFontBlack(contentArray2, 4)
+                selected = 4;
+							</onClick>
+						</button>
+					</column>
+				</row>
+			</table>
+      <button name="btn" content="Check Answer">
+				<onClick>
+         local answer = 1;
+         if selected == answer then
+          btn.Style.BackgroundColor = color.green;
+          setElementColor(contentArray2, selected, color.green, color.transparent);
+          btn.Text = "Correct!"
+         else
+          btn.Style.BackgroundColor = color.rgb(232, 12, 46);
+          btn.Text = "Try Again!"
+         end
+				</onClick>
+			</button>
+    </stack>
+  </sectionNoTitle>
+
+  <sectionNoTitle name="section6" style="pageLayout">
+    <onDocumentOpened>
+      contentArray3 = {contA.contentStack.choicesTable:Child(2):Child(1).btn, contA.contentStack.choicesTable:Child(2):Child(2).btn, contA.contentStack.choicesTable:Child(4):Child(1).btn, contA.contentStack.choicesTable:Child(4):Child(2).btn}
+      selected = 0;
+      contentArray4 = {contB.contentStack.choicesTable:Child(2):Child(1).btn, contB.contentStack.choicesTable:Child(2):Child(2).btn, contB.contentStack.choicesTable:Child(4):Child(1).btn, contB.contentStack.choicesTable:Child(4):Child(2).btn};
+      function setFontBlack(array, a)
+        for i, p in ipairs(array) do
+            if i == a then
+              p.Style.ForegroundColor = color.white;
+            else
+              p.Style.ForegroundColor = color.black;
+            end
+          end 
+        end
+    </onDocumentOpened>
+    <p style="sectionHeading">Multiple Choice Nested</p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="subSectionHeading">QUESTION 1</p>
+      <p>Here is where you ask the question... make sure to add an image that relates to the question to help visualize the question.</p>
+      <image src="resources/diagram1.jpeg" />
+    </stack>
+    <!--Each step is a stack, and each step has alternating background colors
+    The stacks with name "contA" and "contB" and such is where the multiple choice question lies.-->
+    <stack name="partA" orientation="horizontal" style="contentBG2">
+      <stack name="stepStack" orientation="vertical">
+        <p>PART A ►</p>
+      </stack>
+      <button name="btn" content="Show Step 1">
+        <style>
+          <horizontalAlignment>right</horizontalAlignment>
+          <widthPercentage>40%</widthPercentage>
+        </style>
+        <onClick>
+          if btn.Text=="Show Step 1" then
+            btn.Text = "Hide Step 1";
+            contA.Style.Visibility = "visible";
+            stepStack:Child(1).Style.Bold = 1;
+            stepStack:Child(1).Text = "PART A ▼"
+          elseif btn.Text=="Hide Step 1" then
+            btn.Text = "Show Step 1";
+            contA.Style.Visibility = "collapsed";
+            stepStack:Child(1).Style.Bold = 0;
+            stepStack:Child(1).Text = "PART A ►"
+          end
+        </onClick>
+      </button>
+    </stack>
+    <stack name="contA" style="contentBG2">
+      <style>
+        <visibility>collapsed</visibility>
+      </style>
+        <!--CONTENT GOES HERE-->
+      <p style="sectionHeading">Multiple Choice Single Page</p>
+      <stack name="contentStack">
+        <p style="subSectionHeading">Question 1</p>
+        <table widths="10% 90%" grid="false">
+				  <row>
+					  <column>
+						  <image src="resources/question.png" inspect="false" />
+					  </column>
+					  <column>
+						  <p>A rightward force is applied to a book in order to move it across a desk at constant velocity. Consider frictional forces. Neglect air resistance. What does the free body diagram of the book look like?</p>
+					  </column>
+				  </row>
+			  </table>
+			  <table name="choicesTable" grid="false" widths="50% 50%">
+				  <row>
+					  <column>
+              <!--CAN BE AN IMAGE OR OTHER CONTENT-->
+						  <image src="resources/q.jpeg">
+							  <style>
+								  <widthPercentage>0.6</widthPercentage>
+								  <horizontalAlignment>center</horizontalAlignment>
+							  </style>
+						  </image>
+					  </column>
+					  <column>
+						  <image src="resources/q.jpeg">
+							  <style>
+								  <widthPercentage>0.6</widthPercentage>
+								  <horizontalAlignment>center</horizontalAlignment>
+							  </style>
+						  </image>
+					  </column>
+				  </row>
+				  <row>
+					  <column>
+						  <button name="btn" content="A" style="btnUnselected">
+							  <onClick>
+                  setElementColor(contentArray3, 1, color.rgb(232, 12, 46), color.transparent);
+                  setFontBlack(contentArray3, 1)
+                  selected = 1;
+							  </onClick>
+						  </button>
+					  </column>
+					  <column>
+						  <button name="btn" content="B" style="btnUnselected">
+							  <onClick>
+                  setElementColor(contentArray3, 2, color.rgb(232, 12, 46), color.transparent);
+                  setFontBlack(contentArray3, 2)
+                  selected = 2;
+							  </onClick>
+						  </button>
+					  </column>
+				  </row>
+				  <row>
+					  <column>
+						  <image src="resources/q.jpeg">
+							  <style>
+								  <widthPercentage>0.6</widthPercentage>
+								  <horizontalAlignment>center</horizontalAlignment>
+							  </style>
+						  </image>
+					  </column>
+					  <column>
+						  <image src="resources/q.jpeg">
+							  <style>
+								  <widthPercentage>0.6</widthPercentage>
+								  <horizontalAlignment>center</horizontalAlignment>
+							  </style>
+						  </image>
+					  </column>
+				  </row>
+				  <row>
+					  <column>
+						  <button name="btn" content="C" style="btnUnselected">
+							  <onClick>
+                  setElementColor(contentArray3, 3, color.rgb(232, 12, 46), color.transparent);
+                  setFontBlack(contentArray3, 3)
+                  selected = 3;
+							  </onClick>
+						  </button>
+					  </column>
+					  <column>
+						  <button name="btn" content="D" style="btnUnselected">
+							  <onClick>
+                  setElementColor(contentArray3, 4, color.rgb(232, 12, 46), color.transparent);
+                  setFontBlack(contentArray3, 4)
+                  selected = 4;
+							  </onClick>
+						  </button>
+					  </column>
+				  </row>
+			  </table>
+        <button name="btn" content="Check Answer">
+				  <onClick>
+            <!--THIS IS WHERE THE ANSWER IS SET-->
+            local answer = 1;
+            if selected == answer then
+            btn.Style.BackgroundColor = color.green;
+            setElementColor(contentArray3, selected, color.green, color.transparent);
+            btn.Text = "Correct!"
+            else
+            btn.Style.BackgroundColor = color.rgb(232, 12, 46);
+            btn.Text = "Try Again!"
+            end
+				  </onClick>
+			  </button>
+      </stack>
+      </stack>
+    <stack name="partB" orientation="horizontal" style="contentBG">
+      <stack name="stepStack" orientation="vertical">
+        <p>PART B ►</p>
+      </stack>
+      <button name="btn" content="Show Step 2">
+        <style>
+          <horizontalAlignment>right</horizontalAlignment>
+          <widthPercentage>40%</widthPercentage>
+        </style>
+        <onClick>
+          if btn.Text=="Show Step 2" then
+            btn.Text = "Hide Step 2";
+            contB.Style.Visibility = "visible";
+            stepStack:Child(1).Style.Bold = 1;
+            stepStack:Child(1).Text = "PART B ▼"
+
+          elseif btn.Text=="Hide Step 2" then
+            btn.Text = "Show Step 2";
+            contB.Style.Visibility = "collapsed";
+            stepStack:Child(1).Style.Bold = 0;
+            stepStack:Child(1).Text = "PART B ►"
+          end
+        </onClick>
+      </button>
+    </stack>
+    <stack name="contB" style="contentBG">
+      <style>
+        <visibility>collapsed</visibility>
+      </style>
+        <!--CONTENT GOES HERE-->
+      <p style="sectionHeading">Multiple Choice Single Page</p>
+      <stack name="contentStack">
+        <p style="subSectionHeading">Question 1</p>
+        <table widths="10% 90%" grid="false">
+				  <row>
+					  <column>
+						  <image src="resources/question.png" inspect="false" />
+					  </column>
+					  <column>
+						  <p>A rightward force is applied to a book in order to move it across a desk at constant velocity. Consider frictional forces. Neglect air resistance. What does the free body diagram of the book look like?</p>
+					  </column>
+				  </row>
+			  </table>
+			  <table name="choicesTable" grid="false" widths="50% 50%">
+				  <row>
+					  <column>
+						  <image src="resources/q.jpeg">
+							  <style>
+								  <widthPercentage>0.6</widthPercentage>
+								  <horizontalAlignment>center</horizontalAlignment>
+							  </style>
+						  </image>
+					  </column>
+					  <column>
+						  <image src="resources/q.jpeg">
+							  <style>
+								  <widthPercentage>0.6</widthPercentage>
+								  <horizontalAlignment>center</horizontalAlignment>
+							  </style>
+						  </image>
+					  </column>
+				  </row>
+				  <row>
+					  <column>
+						  <button name="btn" content="A" style="btnUnselected">
+							  <onClick>
+                  setElementColor(contentArray4, 1, color.rgb(232, 12, 46), color.transparent);
+                  setFontBlack(contentArray4, 1)
+                  selected = 1;
+							  </onClick>
+						  </button>
+					  </column>
+					  <column>
+						  <button name="btn" content="B" style="btnUnselected">
+							  <onClick>
+                  setElementColor(contentArray4, 2, color.rgb(232, 12, 46), color.transparent);
+                  setFontBlack(contentArray4, 2)
+                  selected = 2;
+							  </onClick>
+						  </button>
+					  </column>
+				  </row>
+				  <row>
+					  <column>
+						  <image src="resources/q.jpeg">
+							  <style>
+								  <widthPercentage>0.6</widthPercentage>
+								  <horizontalAlignment>center</horizontalAlignment>
+							  </style>
+						  </image>
+					  </column>
+					  <column>
+						  <image src="resources/q.jpeg">
+							  <style>
+								  <widthPercentage>0.6</widthPercentage>
+								  <horizontalAlignment>center</horizontalAlignment>
+							  </style>
+						  </image>
+					  </column>
+				  </row>
+				  <row>
+					  <column>
+						  <button name="btn" content="C" style="btnUnselected">
+							  <onClick>
+                  setElementColor(contentArray4, 3, color.rgb(232, 12, 46), color.transparent);
+                  setFontBlack(contentArray4, 3)
+                  selected = 3;
+							  </onClick>
+						  </button>
+					  </column>
+					  <column>
+						  <button name="btn" content="D" style="btnUnselected">
+							  <onClick>
+                  setElementColor(contentArray4, 4, color.rgb(232, 12, 46), color.transparent);
+                  setFontBlack(contentArray4, 4)
+                  selected = 4;
+							  </onClick>
+						  </button>
+					  </column>
+				  </row>
+			  </table>
+        <button name="btn" content="Check Answer">
+				  <onClick>
+            local answer = 1;
+            if selected == answer then
+            btn.Style.BackgroundColor = color.green;
+            setElementColor(contentArray4, selected, color.green, color.transparent);
+            btn.Text = "Correct!"
+            else
+            btn.Style.BackgroundColor = color.rgb(232, 12, 46);
+            btn.Text = "Try Again!"
+            end
+				  </onClick>
+			  </button>
+      </stack>
+    </stack>
+  </sectionNoTitle>
+</document>

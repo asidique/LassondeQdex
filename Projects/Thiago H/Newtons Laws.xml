@@ -1,0 +1,890 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="GBB7183B0_6C33_4FE1_B4C4_D5B389EB8889">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>LA-PHYS-Newton’s Laws</title>
+    <creator>Thiago</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/lassondeLogo.png" />
+  </metadata>
+
+
+  <include src="plotTools.xml" />
+  <include src="curriculumThemePack/curriculumStyles.xml" />
+
+
+  <!--                                      Header & Footer                                           -->
+  <style name="backgroundColor">
+    <background color="232 12 46" />
+  </style>
+  <style name="fontColor">
+    <foreground color="255 255 255" />
+  </style>
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="fontColor"></p>
+      <p style="fontColor rightText"></p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>20</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--                                      Header & Footer END                                         -->
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <!-- Section 1 -->
+  <section>
+    <title>
+      <style>
+        <textAlignment>right</textAlignment>
+        <marginTop>100</marginTop>
+      </style>
+      <size scale="xlarge">1.1</size>
+    </title>
+    <p style="chapterTitle">Newton’s Laws</p>
+
+    <p style="title">INTRODUCTION</p>
+    <p>
+      Sir Isaac Newton's three laws of motion describe the motion
+      of massive bodies and how they interact. While Newton’s laws may
+      seem obvious to us today, more than three
+      centuries ago they were considered to be revolutionary.
+      Newton was one of the most influential scientists of all time.
+    </p>
+  </section>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <!-- Section 2 -->
+  <sectionNoTitle>
+  <stack name="wrapTitle2">
+    <style>
+      <widthPercentage>0.93</widthPercentage>
+      <horizontalAlignment>center</horizontalAlignment>
+    </style>
+    <p style="titleStyle">
+      <style>
+        <marginTop>30</marginTop>       
+        <size scale="large" />
+        <foreground color="91 90 90" />
+      </style>
+      <b>First Law of Motion</b>
+    </p>
+    <p>
+      <style>
+        <marginBottom>35</marginBottom>
+      </style>
+      Also known as 'The law of Inertia'
+    </p>
+  </stack>
+
+
+    <stack style="questionAnswer">
+    <stack>
+      <style>
+        <marginTop>50</marginTop>
+        <widthPercentage>0.80</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <p>
+        "In the non-existence of an unbalenced force, an object in motion will continue in motion."
+      </p>
+    </stack>
+
+
+    <stack>
+      <style>
+        <marginTop>50</marginTop>
+        <widthPercentage>0.80</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      
+      <p>
+        <b>Newton 1st law states:</b>
+      </p>
+
+      <p>
+        <style>
+          <textAlignment>justify</textAlignment>
+        </style>
+        - A stationary object will move only if there is any unbalenced force acting on it.
+      </p>
+      <p>
+        <style>
+          <textAlignment>justify</textAlignment>
+          <marginBottom>60</marginBottom>
+        </style>
+        - A moving object will change direction or speed only if there is any unbalenced force acting on it.
+      </p>
+    </stack>
+
+    </stack>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Simulation Plot -->
+
+    <stack name="wrapTitle1">
+      <style>
+        <widthPercentage>0.93</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <p style="titleStyle">
+        <style>
+          <marginTop>100</marginTop>
+          <marginBottom>35</marginBottom>
+          <size scale="large" />
+          <foreground color="91 90 90" />
+        </style>
+        <b>Simulation</b>
+      </p>
+    </stack>
+
+    <stack>
+      <style>
+        <horizontalAlignment>center</horizontalAlignment>
+        <widthPercentage>0.80</widthPercentage>
+      </style>
+      <p>
+        <style>      
+          <textAlignment>justify</textAlignment>
+        </style>
+        Use the sliders to controll the amount of friction in the simulation. </p>
+    <p>
+      <style>
+        <textAlignment>justify</textAlignment>
+      </style>
+      <b>Note</b>: Friction is the force resisting the relative
+      motion of solid surfaces, fluid layers,
+      and material elements sliding against each other. In this simulation
+      the unbalenced force acting on the object is friction.
+    </p>     
+    </stack>
+
+   
+    
+    
+      <drawing name="aPlot">
+        <style>
+          <widthPercentage>0.88</widthPercentage>
+        </style>
+        <axis dim="x" auto="fixed" min="-1" max="5" />
+        <axis dim="y" auto="fixed" min="-2.2" max="2.2" />
+        <series name="arcSeries" manual="true">
+          <style>
+            <foreground color="black" />
+          </style>
+        </series>
+        <series name="firstBall" manual="true" draw="radialFill" capacity="360">
+          <style>
+            <foreground color="red" />
+          </style>
+        </series>
+
+      </drawing>
+
+      <script>
+        <![CDATA[
+        
+        rateFriction.zeroFriction.Style.ForegroundColor = color.rgb(194, 194, 194);
+        rateFriction.lowFriction.Style.ForegroundColor = color.rgb(194, 194, 194);
+        rateFriction.highFriction.Style.ForegroundColor = color.rgb(194, 194, 194);
+      
+    
+      
+    local plotArc = aPlot.arcSeries;
+    local plotBALL = aPlot.ball;
+    local curTime = 0;
+    local startSpeed = 10;
+    local friction = 0;
+    
+    for x = -10, 10, 0.05 do
+      y = 0
+      plotArc:Add(x,y)
+      end
+      plotArc:Update()
+      
+
+
+    local function drawArc()
+    
+    y = 0.1
+    a = -curTime+5
+   
+    x = curTime - (friction/4)*(curTime)*(curTime/4)
+    
+    
+    
+    
+    
+    if curTime > 0.1 then
+      
+    plotTools.drawCircle(aPlot.firstBall, vector({x,y}), 0.1)  
+    
+    aPlot.firstBall:Update()
+    
+    if (curTime - (friction/4)*(curTime)*(curTime/4)) <= ((friction/4)*(curTime)*(curTime/4)) then 
+    sliderA.Style.Visibility = "visible";
+    arcSim:Stop()
+    end
+    
+    
+    end
+    
+    
+    if curTime >= 7 then
+    sliderA.Style.Visibility = "visible";
+    arcSim:Stop()
+    end
+    
+    
+    end
+    ]]>
+      </script>
+
+    <stack name="rateFriction" orientation="horizontal">
+      <p name="zeroFriction" style="centerText">Zero</p>
+      <p name="lowFriction" style="centerText">Low</p>
+      <p name="highFriction" style="centerText">High</p>
+    </stack>
+
+ 
+
+    <slider name="sliderA" min="0" max="3" value="1">
+      <style>
+        <widthPercentage>0.88</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <onValueChanged>
+
+        friction = value
+
+        if value == 0 then
+        rateFriction.zeroFriction.Style.ForegroundColor = color.red;
+        rateFriction.lowFriction.Style.ForegroundColor = color.rgb(194, 194, 194);
+        rateFriction.highFriction.Style.ForegroundColor = color.rgb(194, 194, 194);
+        end
+
+        if value &gt;= 0.2 then
+        rateFriction.zeroFriction.Style.ForegroundColor = color.rgb(194, 194, 194);
+        rateFriction.lowFriction.Style.ForegroundColor = color.red;
+        rateFriction.highFriction.Style.ForegroundColor = color.rgb(194, 194, 194);
+        end
+
+        if value &gt;= 2 then
+        rateFriction.zeroFriction.Style.ForegroundColor = color.rgb(194, 194, 194);
+        rateFriction.lowFriction.Style.ForegroundColor = color.rgb(194, 194, 194);
+        rateFriction.highFriction.Style.ForegroundColor = color.red;
+        end
+        
+       
+      </onValueChanged>
+    </slider>
+
+    <button content="Launch">
+      <style>
+        <horizontalAlignment>center</horizontalAlignment>
+        <widthPercentage>0.60</widthPercentage>
+        <marginTop>40</marginTop>
+        <marginBottom>50</marginBottom>
+      </style>
+      <onClick>
+        sliderA.Style.Visibility = "hidden";
+        aPlot.firstBall:Clear()
+        arcSim:Start()
+      </onClick>
+    </button>
+
+
+
+
+
+
+      <simulation name="arcSim" period="0.01">
+        <onUpdate>
+          curTime = time;
+          drawArc()
+        </onUpdate>
+      </simulation>
+
+  
+
+
+  </sectionNoTitle>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <!--Section  3-->
+  <sectionNoTitle>
+  <stack name="wrapTitle2">
+    <style>
+      <widthPercentage>0.93</widthPercentage>
+      <horizontalAlignment>center</horizontalAlignment>
+    </style>
+    <p style="titleStyle">
+      <style>
+        <marginTop>30</marginTop>
+        <marginBottom>35</marginBottom>
+        <size scale="large" />
+        <foreground color="91 90 90" />
+      </style>
+      <b>Second Law of Motion</b>
+    </p>
+  </stack>
+
+    <stack style="questionAnswer">
+      <p style="title">Remark</p>
+
+      <p>Before getting into the Newton's second law, we must first understand what is acceleration.</p>
+      <p>
+        <style>
+          <marginBottom>40</marginBottom>
+        </style>
+        <b>Acceleration </b>: The rate of change in the velocity of an object.
+      </p>
+    </stack>
+
+
+
+
+
+    <stack>
+      <style>
+        <marginTop>50</marginTop>
+        <widthPercentage>0.80</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <p>
+        <b>  Newton's second law of motion states: </b>
+      </p>
+      <p>
+        - The greater the mass of an object, the more force it will take to accelerate the object.
+      </p>
+    
+
+
+
+
+
+
+
+    <p style="centerText">
+      <style>
+        <marginTop>30</marginTop>
+      </style>
+      $ Force = Mass \cdot Acceleration $</p>
+    <p style="centerText">
+      <style>
+        <marginBottom>30</marginBottom>
+      </style>
+      $ F = m \cdot a $ </p>
+    <p style="centerText">
+      <style>
+        <marginBottom>60</marginBottom>
+      </style>
+      Where <b>F</b> is measured in Newtons, <b>m</b> is measured in kg, and <b>a</b> is measured in m/s (meter/secod). </p>
+    </stack>
+
+
+
+
+
+
+    <button style="large" name="explainButton" content="Simulation">
+      <style>
+        <widthPercentage>0.60</widthPercentage>
+        <marginBottom>80</marginBottom>
+      </style>
+      <onClick>
+        if  explainButton.Text == "Hide Simulation" then
+        simulationStack.Style.Visibility = "collapsed"
+        explainButton.Text = "Simulation"
+        else
+        simulationStack.Style.Visibility = "visible"
+        explainButton.Text = "Hide Simulation"
+        end
+      </onClick>
+    </button>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Simulation Plot -->
+    <stack name="simulationStack" style="collapsed">
+    <p style="centerText"> Use the sliders to control the force applied and the weight of the ball. </p>
+    <xyPlot name="aPlot">
+      <style>
+        <widthPercentage>0.88</widthPercentage>
+      </style>
+      <axis dim="x" auto="fixed" min="-3" max="5" />
+      <axis dim="y" auto="fixed" min="-1" max="6" />
+      <series name="arcSeries" manual="true" draw="lineSegments" />
+      <series name="filled_circle_series" manual="true" draw="radialFill" capacity="360" />
+    </xyPlot>
+
+    <script>
+      <![CDATA[
+      
+    
+      
+    local plotArc = aPlot.arcSeries;
+    local plotBALL = aPlot.ball;
+    local curTime = 0;
+    local a = 1;
+    local startSpeed = 10;
+
+    local function drawArc()
+     y = startSpeed*curTime + 0.5*-9.8*(curTime^2)*a
+  --  y = startSpeed*curTime + 0.5*-9.8*(curTime^2)
+    
+    if y >= 0 then   
+    plotTools.drawCircle(aPlot.filled_circle_series, vector({curTime,y}), 0.1)  
+    plotArc:Add(curTime, y)
+    plotArc:Update()
+    aPlot.filled_circle_series:Update()
+    else
+    arcSim:Stop()
+    wrapSliderMain.wrapSlider1.sliderA.Style.Visibility = "visible";
+    wrapSliderMain.wrapSlider2.sliderB.Style.Visibility = "visible";
+    end
+    
+    end
+    ]]>
+    </script>
+
+
+
+
+
+
+
+    <!-- This stack wraps both sliders -->
+    <stack name="wrapSliderMain" orientation="horizontal">
+      <style>
+        <widthPercentage>0.90</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <stack name="wrapSlider1">
+        <p name="result" style="centerText"></p>
+
+
+        <!-- Slider controls the startSpeed -->
+        <slider name="sliderA" min="0" max="20" value="1">
+          <onValueChanged>
+            startSpeed = value
+            result.Text = string.format("Force applied: %d", value)
+          </onValueChanged>
+        </slider>
+
+      </stack>
+
+
+
+
+      <stack name="wrapSlider2">
+        <p name="result1" style="centerText"></p>
+
+        <!-- Slider controls the a variable -->
+        <slider name="sliderB" min="1" max="4" value="1">
+          <onValueChanged>
+            a = value
+            result1.Text = string.format("Ball's Weight: %.2f kg", value)
+          </onValueChanged>
+        </slider>
+
+      </stack>
+    </stack>
+
+    <stack orientation="horizontal">
+      <style>
+        <horizontalAlignment>center</horizontalAlignment>
+        <widthPercentage>0.85</widthPercentage>
+        <marginBottom>50</marginBottom>
+      </style>
+
+      <button name="button1" content="Launch">
+        <onClick>
+          plotArc:Clear()
+          aPlot.filled_circle_series:Clear()
+          arcSim:Start()
+          wrapSliderMain.wrapSlider1.sliderA.Style.Visibility = "hidden"
+          wrapSliderMain.wrapSlider2.sliderB.Style.Visibility = "hidden"
+        </onClick>
+      </button>
+
+      <button name="explainButton" content="Conclusion">
+        <style>
+          <foreground color="black" />
+          <background color="white" />
+        </style>
+        <onClick>
+          if  explainButton.Text == "Hide Conclusion" then
+          explanation.Style.Visibility = "collapsed"
+          explainButton.Text = "Conclusion"
+          else
+          explanation.Style.Visibility = "visible"
+          explainButton.Text = "Hide Conclusion"
+          end
+        </onClick>
+      </button>
+
+    </stack>
+
+
+
+    <simulation name="arcSim" period="0.01" duration="5">
+      <onUpdate>
+        curTime = time;
+        drawArc()
+      </onUpdate>
+    </simulation>
+    
+    
+    
+    
+    
+    
+    
+
+
+    <stack name="explanation" style="collapsed">
+      <style>
+        <marginBottom>50</marginBottom>
+      </style>
+      <stack name="wrapTitle2">
+        <style>
+          <widthPercentage>0.93</widthPercentage>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <p style="titleStyle">
+          <style>
+            <marginTop>30</marginTop>
+            <marginBottom>20</marginBottom>
+            <size scale="large" />
+            <foreground color="91 90 90" />
+          </style>
+          <b>Conclusion:</b>
+        </p>
+        <stack style="questionAnswer">
+        <p style="centerText">
+          <style>
+            <marginTop>30</marginTop>
+            <marginBottom>30</marginBottom>
+          </style>
+          The heavier the ball, the more force it will take to throw it in the air ! </p>
+        </stack>
+        </stack>
+
+    </stack>
+    </stack>
+    
+    
+    
+    
+    
+  </sectionNoTitle>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!--Section  4-->
+  <sectionNoTitle>
+    <stack name="wrapTitle2">
+      <style>
+        <widthPercentage>0.93</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <p style="titleStyle">
+        <style>
+          <marginTop>30</marginTop>
+          <size scale="large" />
+          <foreground color="91 90 90" />
+        </style>
+        <b>Third Law of Motion</b>
+      </p>
+      <p>
+        <style>
+          <marginBottom>35</marginBottom>
+        </style>
+        Also known as 'The law of action and reaction'
+      </p>
+    </stack>
+
+
+
+
+
+
+
+
+    <stack>
+      <style>
+        <marginTop>50</marginTop>
+        <widthPercentage>0.80</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <p>
+        <b>  Newton's third law of motion states: </b>
+      </p>
+      <p>
+        - For every action there is an equal and opposite reaction.
+      </p>
+      <p>
+        - Whenever an object pushes another object, it gets pushed back in the opposite direction equally hard.
+      </p>
+      </stack>
+
+
+
+<!-- Simulation -->
+    <drawing name="aPlot">
+      <style>
+        <widthPercentage>0.88</widthPercentage>
+      </style>
+      <axis dim="x" auto="fixed" min="-1" max="5" />
+      <axis dim="y" auto="fixed" min="-2.2" max="2.2" />
+      <series name="arcSeries" manual="true">
+        <style>
+          <foreground color="black" />
+        </style>
+      </series>
+      <series name="firstBall" manual="true" draw="radialFill" capacity="360" />
+      <series name="secondBall" manual="true" draw="radialFill" capacity="360" />
+    </drawing>
+
+    <script>
+      <![CDATA[
+      
+    
+      
+    local plotArc = aPlot.arcSeries;
+    local plotBALL = aPlot.ball;
+    local curTime = 0;
+    local startSpeed = 10;
+    
+    for x = -10, 10, 0.05 do
+      y = 0
+      plotArc:Add(x,y)
+      end
+      plotArc:Update()
+      
+
+
+    local function drawArc()
+    
+    y = 0.1
+    a = -curTime+5
+    b = 2.8
+    
+    if a <=3 then
+    x = 3
+    b = -curTime+4.8
+    else
+    x = -curTime+5
+    end
+    
+      
+    plotTools.drawCircle(aPlot.firstBall, vector({x,y}), 0.1)  
+    
+    plotTools.drawCircle(aPlot.secondBall, vector({b,y}), 0.1)  
+    
+    aPlot.firstBall:Update()
+    
+    aPlot.secondBall:Update()
+    
+    
+    
+    
+    end
+    ]]>
+    </script>
+
+
+    <stack orientation="horizontal">
+      <style>
+        <horizontalAlignment>center</horizontalAlignment>
+        <widthPercentage>0.85</widthPercentage>
+        <marginBottom>50</marginBottom>
+      </style>
+
+      <button content="Launch">
+        <onClick>
+          aPlot.firstBall:Clear()
+          arcSim:Start()
+        </onClick>
+      </button>
+
+      <button name="explainButton" content="Conclusion">
+        <style>
+          <foreground color="black" />
+          <background color="white" />
+        </style>
+        <onClick>
+          if  explainButton.Text == "Hide Conclusion" then
+          explanation.Style.Visibility = "collapsed"
+          explainButton.Text = "Conclusion"
+          else
+          explanation.Style.Visibility = "visible"
+          explainButton.Text = "Hide Conclusion"
+          end
+        </onClick>
+      </button>
+
+    </stack>
+
+
+    <stack name="explanation" style="collapsed">
+      <style>
+        <marginBottom>50</marginBottom>
+      </style>
+      <stack name="wrapTitle2">
+        <style>
+          <widthPercentage>0.93</widthPercentage>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <p style="titleStyle">
+          <style>
+            <marginTop>30</marginTop>
+            <marginBottom>20</marginBottom>
+            <size scale="large" />
+            <foreground color="91 90 90" />
+          </style>
+          <b>Conclusion:</b>
+        </p>
+        <stack style="questionAnswer">
+          <p>
+            <style>
+              <textAlignment>justify</textAlignment>
+              <marginTop>30</marginTop>
+              <marginBottom>30</marginBottom>
+            </style>
+            The force exerted by object 1 (blue ball) upon object 2 (green ball) is equal in
+            magnitude and opposite in
+            direction to the force exerted by object 2 upon object 1.
+            Since object 1 was in motion and object 2 was at rest at the moment of the collision,
+            object 1 came to rest and object 2 came to motion at the same speed as object 1 (previously).
+            Note: Both objects have the same mass.
+
+          </p>
+        </stack>
+      </stack>
+
+    </stack>
+   
+
+
+
+
+
+
+
+
+
+    <simulation name="arcSim" period="0.01" duration="7">
+      <onUpdate>
+        curTime = time;
+        drawArc()
+      </onUpdate>
+    </simulation>
+    
+    
+    
+    
+    
+    
+    
+    </sectionNoTitle>
+
+</document>

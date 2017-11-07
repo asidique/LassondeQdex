@@ -1,0 +1,855 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="GC8FEE853_4F69_43F8_A234_88A4B8D54198">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>LA-ALGE-1.9 Properties of Matrix Multiplication</title>
+    <creator>jason_wang</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/lassondeLogo.png" />
+  </metadata>
+
+
+  <include src="resources/curriculumStylesLassonde.xml" />
+  <include src="resources/Utilities.xml" />
+
+  <!--                                      Header & Footer START                                         -->
+  <header style="themeColour">
+    <stack style="center" orientation="horizontal">
+      <p></p>
+    </stack>
+  </header>
+  <footer style="themeColour">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="themeColourTitle">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--                                      Header & Footer END                                         -->
+
+
+
+  <!-- Cover Page -->
+  <!-- This is the standard way title pages are created. A great website to get copyright free images .. www.pexels.com
+  *** The style: "pageLayout" is defined in curriculumStylesLassonde.xml. It simply sets the content to the center and adjusts the width to 80% ***-->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">1.9 Properties of Matrix Multiplication</title>
+    <p style="sectionHeading">Introduction</p>
+    <image src="resources/cubic.jpg" />
+    <stack orientation="vertical" style="contentBG">
+      <p style="justifiedText">
+        In this Module, we are going to learn Identity matrix and the properties of matrix multiplication with simulations and examples.
+      </p>
+    </stack>
+  </section>
+
+
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Matrix Multiplication Dimension</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">When is matrix multiplication defined?</p>
+      <p style="justifiedText">Matrix multiplication is defined when the number of columns in the first matrix is equal to the number of rows in the second matrix.</p>
+      <p>For example,</p>
+      <p>
+        Matrix $A_{m,n}$ has <b>m</b> rows and <b>n</b> columns.
+      </p>
+      <p>
+        Matrix $B_{n,k}$ has <b>n</b> rows and <b>k</b> columns.
+      </p>
+      <p>$A_{m,n}B_{n,k}$ is valid because the number of columns in A is equal to the number of rows in B.</p>
+    </stack>
+
+    <p style="sectionHeading">Practices</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Question 1</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>Is AB defined?</p>
+            <p><![CDATA[$A=\begin{bmatrix}2&3\\5&1\\8&9\end{bmatrix} \quad \quad B=\begin{bmatrix}1&5\\4&3\end{bmatrix}$]]></p>
+          </column>
+        </row>
+      </table>
+      <script>
+        local select = 0;
+        local ans = 1;
+      </script>
+      <stack orientation="vertical">
+        <button name="btn1" content="Defined" style="width70 btnUnselected">
+          <onClick>
+            selectBtn(btn1)
+            unselectBtn(btn2)
+            select = 1
+          </onClick>
+        </button>
+        <button name="btn2" content="Undefined" style="width70 btnUnselected">
+          <onClick>
+            selectBtn(btn2)
+            unselectBtn(btn1)
+            select = 2
+          </onClick>
+        </button>
+      </stack>
+      <stack name="hint" style="invisible">
+        <p style="centerText">Not quite there, try again!</p>
+      </stack>
+      <stack name="solution" style="invisible">
+        <p style="centerText">Correct!</p>
+      </stack>
+      <button name="checkBtn" content="Check Answer">
+        <onClick> if select == ans then solution.Style.Visibility = "visible"; hint.Style.Visibility = "collapsed"; else solution.Style.Visibility = "collapsed"; hint.Style.Visibility = "visible"; end </onClick>
+      </button>
+    </stack>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Question 2</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>Is CD defined?</p>
+            <p><![CDATA[$C=\begin{bmatrix}3&5&7\\2&3&5\end{bmatrix} \quad \quad D=\begin{bmatrix}1&3&5\\9&4&3\end{bmatrix}$]]></p>
+          </column>
+        </row>
+      </table>
+      <script>
+        local select = 0;
+        local ans = 2;
+      </script>
+      <stack orientation="vertical">
+        <button name="btn1" content="Defined" style="width70 btnUnselected">
+          <onClick>
+            selectBtn(btn1)
+            unselectBtn(btn2)
+            select = 1
+          </onClick>
+        </button>
+        <button name="btn2" content="Undefined" style="width70 btnUnselected">
+          <onClick>
+            selectBtn(btn2)
+            unselectBtn(btn1)
+            select = 2
+          </onClick>
+        </button>
+      </stack>
+      <stack name="hint" style="invisible">
+        <p style="centerText">Not quite there, try again!</p>
+      </stack>
+      <stack name="solution" style="invisible">
+        <p style="centerText">Correct!</p>
+      </stack>
+      <button name="checkBtn" content="Check Answer">
+        <onClick> if select == ans then solution.Style.Visibility = "visible"; hint.Style.Visibility = "collapsed"; else solution.Style.Visibility = "collapsed"; hint.Style.Visibility = "visible"; end </onClick>
+      </button>
+    </stack>
+  </sectionNoTitle>
+
+
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Identity Matrix</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Definition of Identity Matrix</p>
+      <p style="justifiedText">The $n \times n$ identity matrix, denoted $I_n$, is a matrix with n rows and n columns. All entries on the diagonal from top left to bottom right are all 1's, and the rest entries are 0.</p>
+      <p>For example:</p>
+      <p style="centeredText"><![CDATA[$I_3=\begin{bmatrix}1&0&0\\0&1&0\\0&0&1\end{bmatrix} \quad I_4=\begin{bmatrix}1&0&0&0\\0&1&0&0\\0&0&1&0\\0&0&0&1\end{bmatrix}$]]></p>
+    </stack>
+
+    <p style="sectionHeading">Multiplying by the Identity Matrix</p>
+
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Take a look at following simulation to see an example of matrix multiplication with identity matrix:</p>
+      <stack name="btnStack" orientation="auto">
+        <button name="reversebtn" content="Reverse Matrices">
+          <onClick>
+            reverseMatrices()
+          </onClick>
+        </button>
+        <button name="btn" content="Start Calculation">
+          <onClick>
+            if btn.Text == "Start Calculation" then
+            btn.Text = "Pause"
+            sim:Start()
+            elseif btn.Text == "Pause" then
+            btn.Text = "Resume"
+            sim:Pause()
+            elseif btn.Text == "Resume" then
+            btn.Text = "Pause"
+            sim:Play()
+            end
+          </onClick>
+        </button>
+      </stack>
+
+      <stack name="simStack" orientation="horizontal">
+        <p>
+          <style>
+            <widthPercentage>0.05</widthPercentage>
+            <textAlignment>center</textAlignment>
+            <horizontalAlignment>center</horizontalAlignment>
+            <size scale="2.8" />
+            <marginTop>0</marginTop>
+          </style>
+          $\bigg[$
+        </p>
+        <table grid="false" widths="33% 34% 33%" name="table1">
+          <style>
+            <widthPercentage>0.2</widthPercentage>
+            <textAlignment>center</textAlignment>
+            <horizontalAlignment>center</horizontalAlignment>
+          </style>
+          <row>
+            <column>
+              <p style="centeredText"></p>
+            </column>
+            <column>
+              <p style="centeredText"></p>
+            </column>
+            <column>
+              <p style="centeredText"></p>
+            </column>
+          </row>
+          <row>
+            <column>
+              <p style="centeredText"></p>
+            </column>
+            <column>
+              <p style="centeredText"></p>
+            </column>
+            <column>
+              <p style="centeredText"></p>
+            </column>
+          </row>
+          <row>
+            <column>
+              <p style="centeredText"></p>
+            </column>
+            <column>
+              <p style="centeredText"></p>
+            </column>
+            <column>
+              <p style="centeredText"></p>
+            </column>
+          </row>
+        </table>
+        <p>
+          <style>
+            <widthPercentage>0.05</widthPercentage>
+            <textAlignment>center</textAlignment>
+            <horizontalAlignment>center</horizontalAlignment>
+            <size scale="2.8" />
+            <marginTop>0</marginTop>
+          </style>
+          $\bigg]$
+        </p>
+        <p>
+          <style>
+            <marginTop>35</marginTop>
+            <widthPercentage>0.05</widthPercentage>
+            <textAlignment>center</textAlignment>
+            <horizontalAlignment>center</horizontalAlignment>
+            <size points="40" />
+          </style>
+          ⋅
+        </p>
+        <p>
+          <style>
+            <widthPercentage>0.05</widthPercentage>
+            <textAlignment>center</textAlignment>
+            <horizontalAlignment>center</horizontalAlignment>
+            <size scale="2.8" />
+            <marginTop>0</marginTop>
+          </style>
+          $\bigg[$
+        </p>
+        <table grid="false" widths="33% 34% 33%" name="table2">
+          <style>
+            <widthPercentage>0.2</widthPercentage>
+            <textAlignment>center</textAlignment>
+            <horizontalAlignment>center</horizontalAlignment>
+          </style>
+          <row>
+            <column>
+              <p style="centeredText"></p>
+            </column>
+            <column>
+              <p style="centeredText"></p>
+            </column>
+            <column>
+              <p style="centeredText"></p>
+            </column>
+          </row>
+          <row>
+            <column>
+              <p style="centeredText"></p>
+            </column>
+            <column>
+              <p style="centeredText"></p>
+            </column>
+            <column>
+              <p style="centeredText"></p>
+            </column>
+          </row>
+          <row>
+            <column>
+              <p style="centeredText"></p>
+            </column>
+            <column>
+              <p style="centeredText"></p>
+            </column>
+            <column>
+              <p style="centeredText"></p>
+            </column>
+          </row>
+        </table>
+        <p>
+          <style>
+            <widthPercentage>0.05</widthPercentage>
+            <textAlignment>center</textAlignment>
+            <horizontalAlignment>center</horizontalAlignment>
+            <size scale="2.8" />
+            <marginTop>0</marginTop>
+          </style>
+          $\bigg]$
+        </p>
+        <p>
+          <style>
+            <marginTop>45</marginTop>
+            <widthPercentage>0.05</widthPercentage>
+            <textAlignment>center</textAlignment>
+            <horizontalAlignment>center</horizontalAlignment>
+          </style>=
+        </p>
+        <p>
+          <style>
+            <widthPercentage>0.05</widthPercentage>
+            <textAlignment>center</textAlignment>
+            <horizontalAlignment>center</horizontalAlignment>
+            <size scale="2.8" />
+            <marginTop>0</marginTop>
+          </style>
+          $\bigg[$
+        </p>
+        <table grid="false" widths="33% 34% 33%" name="table3">
+          <style>
+            <widthPercentage>0.2</widthPercentage>
+            <textAlignment>center</textAlignment>
+            <horizontalAlignment>center</horizontalAlignment>
+          </style>
+          <row>
+            <column>
+              <p style="centeredText"></p>
+            </column>
+            <column>
+              <p style="centeredText"></p>
+            </column>
+            <column>
+              <p style="centeredText"></p>
+            </column>
+          </row>
+          <row>
+            <column>
+              <p style="centeredText"></p>
+            </column>
+            <column>
+              <p style="centeredText"></p>
+            </column>
+            <column>
+              <p style="centeredText"></p>
+            </column>
+          </row>
+          <row>
+            <column>
+              <p style="centeredText"></p>
+            </column>
+            <column>
+              <p style="centeredText"></p>
+            </column>
+            <column>
+              <p style="centeredText"></p>
+            </column>
+          </row>
+        </table>
+        <p>
+          <style>
+            <widthPercentage>0.05</widthPercentage>
+            <textAlignment>center</textAlignment>
+            <horizontalAlignment>center</horizontalAlignment>
+            <size scale="2.8" />
+            <marginTop>0</marginTop>
+          </style>
+          $\bigg]$
+        </p>
+      </stack>
+      <p name="calc" style="centeredText"></p>
+      <p name="feedback" style="centeredText invisible">
+        <b>What can you conclude from the result?</b>
+      </p>
+      <button name="cnclbtn" content="Show Conclusion" style="width50 invisible">
+        <onClick>
+          cnclStack.Style.Visibility = "visible"
+          cnclbtn.Style.Visibility = "collapsed"
+        </onClick>
+      </button>
+
+      <simulation name="sim" period="0.8" duration="21.6">
+        <onUpdate>
+          nextStep()
+        </onUpdate>
+      </simulation>
+      <script>
+        <![CDATA[
+        -- Fill table data into a given table node. Table node structure must be row->col->p
+          function fillMatrixTable(tableName, m)
+            for i=1,#m do
+              for j=1, #m[1] do
+                tableName:Child(i):Child(j):Child(1).Text = string.format("%d", m[i][j])
+              end
+            end
+          end
+    
+          -- Clear table data for a given table node. Table node structure must be row->col->p.
+          -- @param r number of rows
+          -- @param c number of cols
+          function clearMatrixTable(tableName, r, c)
+             for i=1,r do
+              for j=1,c do
+                tableName:Child(i):Child(j):Child(1).Text = ""
+              end
+            end
+          end
+
+
+          --////////////
+          --// matrix //
+          --////////////
+
+          matrix = {};
+
+          --// matrix.mul ( m1, m2 )
+          -- Multiply two matrices; m1 columns must be equal to m2 rows
+          -- e.g. #m1[1] == #m2
+          function matrix.mul( m1, m2 )
+          -- multiply rows with columns
+          local mtx = {}
+          for i = 1,#m1 do
+          mtx[i] = {}
+          for j = 1,#m2[1] do
+          local num = m1[i][1] * m2[1][j]
+          for n = 2,#m1[1] do
+          num = num + m1[i][n] * m2[n][j]
+          end
+          mtx[i][j] = num
+          end
+          end
+          return mtx
+          end
+    
+          local matrix1 = {{1,0,0},{0,1,0},{0,0,1}}
+          local matrix2 = {{2,7,8},{3,5,7},{4,7,4}}
+          local matrix3 = matrix.mul(matrix1, matrix2)
+          local cellOne
+          local cellTwo
+          local cellThree
+          local reversed = false
+          
+          -- dimension:  mxn * nxk
+          local m = #matrix1
+          local n = #matrix2
+          local k = #matrix2[1]
+          
+          local step = 1
+          local totalStep = m * n * k
+          
+          fillMatrixTable(simStack.table1, matrix1)
+          fillMatrixTable(simStack.table2, matrix2)            
+          
+          local function resetSim()
+            sim:Stop()
+            step = 1
+            btnStack.btn.Text = "Start Calculation"
+          end
+          
+          local function clearHighlights()
+            if cellOne ~= nil then cellOne.Style.BackgroundColor = color.transparent end
+            if cellTwo ~= nil then cellTwo.Style.BackgroundColor = color.transparent end
+            if cellThree ~= nil then cellThree.Style.BackgroundColor = color.transparent end
+          end
+          
+          function reverseMatrices()
+            resetSim()
+            clearMatrixTable(simStack.table3,3,3)
+            clearHighlights()
+            calc.Text = ""
+            if reversed == false then
+              fillMatrixTable(simStack.table1, matrix2)
+              fillMatrixTable(simStack.table2, matrix1)
+            else
+              fillMatrixTable(simStack.table1, matrix1)
+              fillMatrixTable(simStack.table2, matrix2)
+            end
+            reversed = not reversed
+          end
+
+          function nextStep()
+          clearHighlights()
+          if step > totalStep then
+          resetSim()
+          feedback.Style.Visibility = "visible"
+          cnclbtn.Style.Visibility = "visible"
+          return
+          end
+          
+          if step == 1 then calc.Text = "" end
+          
+          local row = math.ceil(step/n)
+          local col = step % n
+          if col == 0 then col = n end
+        
+          local row1 = math.ceil(step/(n*k))
+          cellOne = simStack.table1:Child(row1):Child(col):Child(1)
+          cellOne.Style.BackgroundColor = color.sandyBrown
+
+          local col2 = row % k
+          if col2 == 0 then col2 = k end
+          cellTwo = simStack.table2:Child(col):Child(col2):Child(1)
+          cellTwo.Style.BackgroundColor = color.sandyBrown
+
+          cellThree = simStack.table3:Child(row1):Child(col2):Child(1)
+          cellThree.Style.BackgroundColor = color.sandyBrown
+          
+          local t = cellOne.Text .. " x " .. cellTwo.Text
+          
+          if col == n then
+            local sum = string.format("%d", matrix3[row1][col2])
+            cellThree.Text = sum
+            calc.Text = calc.Text .. t .. " = " .. sum .. "\n\n"
+          else
+            calc.Text = calc.Text .. t .. " + "
+          end
+          
+          step = step + 1
+          end
+        ]]>
+      </script>
+    </stack>
+
+    <stack name="cnclStack" style="mcStackLayout invisible">
+      <p style="subSectionHeading">Conclusion</p>
+      <p style="justifiedText">The product of any matrix with its identity matrix (appropriate dimension) is always the original matrix, and the multiplication order doesn't matter. In orther words:</p>
+      <p style="centeredText">$I \cdot A = A \cdot I = A$</p>
+    </stack>
+
+
+  </sectionNoTitle>
+
+
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Multiplicative Inverses</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Definition</p>
+      <p style="justifiedText">
+        When the product of two real numbers is the multiplicative identity, then these two numbers are called <b>multiplicative inverses</b>.
+      </p>
+      <p style="justifiedText">For example, $5 \; and \; \frac{1}{5}$ are multiplicative inverses, because $5 \times \frac{1}{5} = 1 \quad and \quad \frac{1}{5} \times 5 = 1$</p>
+      <p>All non-zero real numbers have multiplicative inverses, but what about matrix?</p>
+      <p>Consider following two matrices:</p>
+      <p style="centeredText"><![CDATA[$A=\begin{bmatrix}2 & 3 \\ 3 & 5\end{bmatrix} \quad B=\begin{bmatrix}5 & -3 \\ -3 & 2\end{bmatrix}$]]></p>
+      <p>If we multiply them, we can see that $AB=I_2 \quad and \quad BA=I_2$.</p>
+      <p>We can conclude that A and B are multiplicative inverses.</p>
+      <p style="subSectionHeading">However, not all matrices have multiplicative inverses.</p>
+    </stack>
+  </sectionNoTitle>
+  
+  <!--Properties of Matrix Multiplication-->
+
+  <!--QUESTION STEP BY STEP LAYOUT-->
+  <!--Setup StepsController with correct number of Steps-->
+  <sectionNoTitle style="pageLayout">
+    <script>
+      local stepsController = StepsController:new({stepsStack=stepsStack, numOfSteps=6,shown_message="Show More",hidden_message="Show Less", showStepCounter=false})
+    </script>
+    <p style="sectionHeading">Properties of Matrix Multiplication</p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="subSectionHeading">Note: A,B,C are $n \times n$ matrices, $\;I$ is the $n \times n$ identity matrix, and $\;O$ is the $n \times n$ zero matrix.</p>
+    </stack>
+    <stack name="stepsStack">
+      <!--Each step is a stack, and each step has alternating background colors-->
+      <!--Use Snippet to create any single step stack -->
+
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Multiplication commutativity does NOT hold!</p>
+          <stack name="cont" style="invisible">
+            <p style="centeredText">$AB \ne BA$</p>
+            <p>Prove by an counter example:</p>
+            <p>Consider matrices A and B</p>
+            <p style="centeredText"><![CDATA[$A=\begin{bmatrix}1&2\\3&4\end{bmatrix} \quad B=\begin{bmatrix}6&5\\2&3\end{bmatrix}$]]></p>
+            <table grid="false" widths="50% 50%">
+              <row>
+                <column>
+                  <p style="centeredText"><![CDATA[$\begin{matrix}AB&=&\begin{bmatrix}1&2\\3&4\end{bmatrix}\cdot \begin{bmatrix}6&5\\2&3\end{bmatrix}\hspace{1.5cm}\\[20pt]&=&\begin{bmatrix}1\cdot 6 + 2\cdot 2&1\cdot 5+2\cdot 3\\3\cdot 6+4\cdot 2&3\cdot 5+4\cdot 3\end{bmatrix}\\[20pt]&=&\begin{bmatrix}10&11\\26&27\end{bmatrix}\hspace{2.5cm}\end{matrix}$]]></p>
+                </column>
+                <column>
+                  <p style="centeredText"><![CDATA[$\begin{matrix}BA&=&\begin{bmatrix}6&5\\2&3\end{bmatrix} \cdot \begin{bmatrix}1&2\\3&4\end{bmatrix}\hspace{1.5cm}\\[20pt] &=&\begin{bmatrix}6\cdot 1+5\cdot 3&6\cdot2+5\cdot 4\\2\cdot1+3\cdot 3&2\cdot 2+3\cdot 4\end{bmatrix}\\[20pt] &=&\begin{bmatrix}21&32\\11&16\end{bmatrix}\hspace{2.5cm}\end{matrix}$]]></p>
+                </column>
+              </row>
+            </table>
+            <p style="centeredText">Therefore, $AB \ne BA$</p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(1)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Multiplication Associativity</p>
+          <stack name="cont" style="invisible">
+            <p style="centeredText">$(AB)C=A(BC)$</p>
+            <p style="justifiedText">Matrix multiplication grouping can be changed (remain the same order) without effect the final result. In other words: $(AB)C=A(BC)$</p>
+            <p>Consider 2x2 matrices A,B and C:</p>
+            <p style="centeredText"><![CDATA[$A=\begin{bmatrix}A_{1,1}&A_{1,2}\\A_{2,1}&A_{2,2}\end{bmatrix} \quad B=\begin{bmatrix}B_{1,1}&B_{1,2}\\B_{2,1}&B_{2,2}\end{bmatrix} \quad C=\begin{bmatrix}C_{1,1}&C_{1,2}\\C_{2,1}&C_{2,2}\end{bmatrix}$]]></p>
+            <p><![CDATA[$\begin{matrix}(AB)C &=& \begin{bmatrix}A_{1,1}B_{1,1}+A_{1,2}B_{2,1}&A_{1,1}B_{1,2}+A_{1,2}B_{2,2}\\A_{2,1}B_{1,1}+A_{2,2}B_{2,1}&A_{2,1}B_{1,2}+A_{2,2}B_{2,2}\end{bmatrix}\begin{bmatrix}C_{1,1}&C_{1,2}\\C_{2,1}&C_{2,2}\end{bmatrix} \\[20pt] &=& \begin{bmatrix}A_{1,1}B_{1,1}C_{1,1}+A_{1,2}B_{2,1}C_{1,1}+A_{1,1}B_{1,2}C_{2,1}+A_{1,2}B_{2,2}C_{2,1} & A_{1,1}B_{1,1}C_{1,2}+A_{1,2}B_{2,1}C_{1,2}+A_{1,1}B_{1,2}C_{2,2}+A_{1,2}B_{2,2}C_{2,2}\\A_{2,1}B_{1,1}C_{1,1}+A_{2,2}B_{2,1}C_{1,1}+A_{2,1}B_{1,2}C_{2,1}+A_{2,2}B_{2,2}C_{2,1}&A_{2,1}B_{1,1}C_{1,2}+A_{2,2}B_{2,1}C_{1,2}+A_{2,1}B_{1,2}C_{2,2}+A_{2,2}B_{2,2}C_{2,2}\end{bmatrix} \\[20pt] &=& \begin{bmatrix}A_{1,1}&A_{1,2}\\A_{2,1}&A_{2,2}\end{bmatrix}\begin{bmatrix}B_{1,1}C_{1,1}+B_{2,1}C_{1,1}+B_{1,2}C_{2,1}+B_{2,2}C_{2,1} & B_{1,1}C_{1,2}+B_{2,1}C_{1,2}+B_{1,2}C_{2,2}+B_{2,2}C_{2,2}\\B_{1,1}C_{1,1}+B_{2,1}C_{1,1}+B_{1,2}C_{2,1}+B_{2,2}C_{2,1}&B_{1,1}C_{1,2}+B_{2,1}C_{1,2}+B_{1,2}C_{2,2}+B_{2,2}C_{2,2}\end{bmatrix}\\[20pt]&=&A(BC)\end{matrix}$]]></p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(2)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Distributive Properties</p>
+          <stack name="cont" style="invisible">
+            <p style="centeredText">$A(B+C)=AB+AC$</p>
+            <p style="centeredText">$(B+C)A=BA+CA$</p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(3)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Multiplicative Identity</p>
+          <stack name="cont" style="invisible">
+            <p style="centeredText">$IA=AI=A$</p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(4)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Multiplicative Property of Zero</p>
+          <stack name="cont" style="invisible">
+            <p style="centeredText">$OA=AO=O$</p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(5)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Dimension Property</p>
+          <stack name="cont" style="invisible">
+            <p style="justifiedText">The dimension of the product of a $m \times n$ matrix and a $n \times k$ matrix is $m \times k$.</p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(6)
+          </onClick>
+        </button>
+      </stack>
+
+    </stack>
+  </sectionNoTitle>
+
+
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Practices</p>
+
+    <stack style="mcStackLayout">
+      <script>
+        local answers = {true, false, true, false}
+        local cqController = CQController:new({checkboxes={table:Child(2):Child(1).checkbox, table:Child(2):Child(2).checkbox, table:Child(4):Child(1).checkbox, table:Child(4):Child(2).checkbox}, checkBtn=checkBtn, answers=answers})
+      </script>
+      <p style="subSectionHeading">Question 1</p>
+      <table widths="20% 80%" grid="false">
+        <row>
+          <column>
+            <image src="resources/question.png" inspect="false" />
+          </column>
+          <column>
+            <p style="justifiedText">Which of the following matrix expressions are equivalent to $(AB)I_2$? </p>
+            <p>Select all that apply.</p>
+          </column>
+        </row>
+      </table>
+      <table name="table" grid="false" widths="50% 50%">
+        <row>
+          <column>
+            <p style="mcLayout">$AB$</p>
+          </column>
+          <column>
+            <p style="mcLayout">$BA$</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="checkbox" style="checkbox_style" content=" ">
+              <onClick>
+                cqController:toggleCheckbox(1)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="checkbox" style="checkbox_style" content=" ">
+              <onClick>
+                cqController:toggleCheckbox(2)
+              </onClick>
+            </button>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p style="mcLayout">$I_2(AB)$</p>
+          </column>
+          <column>
+            <p style="mcLayout">$I_2(BA)$</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="checkbox" style="checkbox_style" content=" ">
+              <onClick>
+                cqController:toggleCheckbox(3)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="checkbox" style="checkbox_style" content=" ">
+              <onClick>
+                cqController:toggleCheckbox(4)
+              </onClick>
+            </button>
+          </column>
+        </row>
+      </table>
+      <button name="checkBtn" content="Check Answer">
+        <onClick>
+          cqController:checkAnswer()
+        </onClick>
+      </button>
+    </stack>
+
+
+    <stack style="mcStackLayout">
+      <script>
+        local answers = {false, true, true, false}
+        local cqController = CQController:new({checkboxes={table:Child(2):Child(1).checkbox, table:Child(2):Child(2).checkbox, table:Child(4):Child(1).checkbox, table:Child(4):Child(2).checkbox}, checkBtn=checkBtn, answers=answers})
+      </script>
+      <p style="subSectionHeading">Question 2</p>
+      <table widths="20% 80%" grid="false">
+        <row>
+          <column>
+            <image src="resources/question.png" inspect="false" />
+          </column>
+          <column>
+            <p style="justifiedText">Which of the following matrix expressions are equivalent to $ABC$?</p>
+            <p>Select all that apply.</p>
+          </column>
+        </row>
+      </table>
+      <table name="table" grid="false" widths="50% 50%">
+        <row>
+          <column>
+            <p style="mcLayout">$A(CB)$</p>
+          </column>
+          <column>
+            <p style="mcLayout">$A(BC)$</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="checkbox" style="checkbox_style" content=" ">
+              <onClick>
+                cqController:toggleCheckbox(1)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="checkbox" style="checkbox_style" content=" ">
+              <onClick>
+                cqController:toggleCheckbox(2)
+              </onClick>
+            </button>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p style="mcLayout">$A(BC+A)-A^2$</p>
+          </column>
+          <column>
+            <p style="mcLayout">$A(B+C)$</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="checkbox" style="checkbox_style" content=" ">
+              <onClick>
+                cqController:toggleCheckbox(3)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="checkbox" style="checkbox_style" content=" ">
+              <onClick>
+                cqController:toggleCheckbox(4)
+              </onClick>
+            </button>
+          </column>
+        </row>
+      </table>
+      <button name="checkBtn" content="Check Answer">
+        <onClick>
+          cqController:checkAnswer()
+        </onClick>
+      </button>
+    </stack>
+
+
+  </sectionNoTitle>
+
+
+</document>

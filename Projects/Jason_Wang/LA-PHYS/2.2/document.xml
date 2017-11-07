@@ -1,0 +1,655 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="GB2DE076F_BC32_465A_81F7_3F4F7CDA55BB">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>LA-PHYS-2.2 Conservation of Momentum in 1-D</title>
+    <creator>jason_wang</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/lassondeLogo.png" />
+  </metadata>
+  
+  <include src="resources/curriculumStylesLassonde.xml" />
+  <include src="resources/Utilities.xml" />
+  <include src="resources/plotTools.xml" />
+  <include src="resources/simTools.xml" />
+
+  <!--                                      Header & Footer START                                         -->
+  <header style="themeColour">
+    <stack style="center" orientation="horizontal">
+      <p></p>
+    </stack>
+  </header>
+  <footer style="themeColour">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="themeColourTitle">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--                                      Header & Footer END                                         -->
+
+
+  <!-- Cover Page -->
+  <!-- This is the standard way title pages are created. A great website to get copyright free images .. www.pexels.com
+  *** The style: "pageLayout" is defined in curriculumStylesLassonde.xml. It simply sets the content to the center and adjusts the width to 80% ***-->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">2.2 Conservation of Momentum in 1-D</title>
+    <p style="sectionHeading">Introduction</p>
+    <image src="resources/collision.jpg" />
+    <stack orientation="vertical" style="contentBG">
+      <p style="justifiedText">
+        In mechanics, there are three fundamental quantities which are conserved. These are momentum, energy, and angular momentum. Conservation of momentum is mostly used for describing collisions between objects. Conservation of momentum applies only to an isolated system of objects. In this case an isolated system is one that is not acted on by force external to the system.
+      </p>
+    </stack>
+  </section>
+
+
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Simulation</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Play with the interactive simulation below and observe the velocity changes for these 2 balls, is the momentum of following system conserved?</p>
+      <!-- Replace with your contents here -->
+      <script>
+        <![CDATA[
+			local myPlot = {};
+			local mode = 1; -- 1: elastic, 2:inelastic, 3:explosion
+			local ball1, ball2, explosive;
+			local world = World:new({deltaT=0.05})
+			local explosiveV = 4;
+			explosive = drawing.explosive;
+			plotTools.drawSquare(explosive, vector({20,15}),0.2,1)
+			explosive.Visible = false
+			
+			function myPlot:updateMode()
+				if mode == 3 then
+					-- explosion mode
+					ball1.x = 20 - ball1.radius
+					ball2.x = 20 + ball2.radius
+					controlTable:Child(2):Child(1):Child(1).Value = 0
+					controlTable:Child(2):Child(2):Child(1).Value = 0
+					explosive.Visible = true
+				end
+				if mode == 1 or mode == 2 then
+					ball1.x = 10
+					ball2.x = 30
+					explosive.Visible = false
+				end
+				
+				ball1.velocity = {round(controlTable:Child(2):Child(1):Child(1).Value,1),0}
+				ball2.velocity = {round(controlTable:Child(2):Child(2):Child(1).Value,1),0}
+
+				if mode == 2 then
+					ball1.elastic = false
+					ball2.elastic = false
+				else 
+					ball1.elastic = true
+					ball2.elastic = true
+				end
+				world:updateTransform()
+			end
+			
+			function myPlot:updateBallsData()
+				ball1.mass = round(controlTable:Child(4):Child(1):Child(1).Value,1)
+				ball1.radius = ball1.mass/2
+				ball1.y = 15
+				ball2.mass = round(controlTable:Child(4):Child(2):Child(1).Value,1)
+				ball2.radius = ball2.mass/2
+				ball2.y = 15
+				
+				myPlot:updateMode()
+				
+			end
+			
+			ball1 = Ball:new({series=drawing.ball1})
+			ball2 = Ball:new({series=drawing.ball2})
+			world:add(ball1)
+			world:add(ball2)
+			myPlot:updateBallsData()
+			
+			]]>
+      </script>
+
+      <drawing name="drawing">
+        <axis dim="x" min="0" max="40" auto="fixed" />
+        <axis dim="y" min="0" max="30" auto="fixed" />
+        <series name="ball1" draw="radialFill" capacity="3000" style="forestGreenF" />
+        <series name="ball2" draw="radialFill" capacity="3000" style="dodgerBlueF" />
+        <series name="explosive" draw="radialFill" style="quanserRedF" />
+      </drawing>
+
+      <table name="controlTable" grid="false" widths="50% 50%">
+        <row>
+          <column>
+            <p style="centeredText forestGreenF">Initial Velocity: 3 m/s</p>
+          </column>
+          <column>
+            <p style="centeredText dodgerBlueF">Initial Velocity: -3 m/s</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <slider name="sld" min="-5" max="5" value="3">
+              <onValueChanged>
+                myPlot:setInitialVelocity(ball1,sld.Value)
+                controlTable:Child(1):Child(1):Child(1).Text = string.format("Initial Velocity: %d m/s", ball1.velocity[1]);
+              </onValueChanged>
+            </slider>
+          </column>
+          <column>
+            <slider name="sld" min="-5" max="5" value="-3">
+              <onValueChanged>
+                myPlot:setInitialVelocity(ball2,sld.Value)
+                controlTable:Child(1):Child(2):Child(1).Text = string.format("Initial Velocity: %d m/s", ball2.velocity[1]);
+              </onValueChanged>
+            </slider>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p style="centeredText forestGreenF">Mass: 2 kg</p>
+          </column>
+          <column>
+            <p style="centeredText dodgerBlueF">Mass: 2 kg</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <slider name="sld" min="1" max="5" value="2">
+              <onValueChanged>
+                myPlot:setMass(ball1,sld.Value)
+                controlTable:Child(3):Child(1):Child(1).Text = string.format("Mass: %d kg", ball1.mass);
+              </onValueChanged>
+            </slider>
+          </column>
+          <column>
+            <slider name="sld" min="1" max="5" value="2">
+              <onValueChanged>
+                myPlot:setMass(ball2,sld.Value)
+                controlTable:Child(3):Child(2):Child(1).Text = string.format("Mass: %d kg", ball2.mass);
+              </onValueChanged>
+            </slider>
+          </column>
+        </row>
+      </table>
+
+      <stack name="modeStack" orientation="horizontal">
+        <button name="elasticBtn" content="Elastic">
+          <style link="btnSelected">
+            <widthPercentage>0.33</widthPercentage>
+            <horizontalAlignment>center</horizontalAlignment>
+          </style>
+          <onClick>
+            if mode ~= 1 then
+            unselectBtn(modeStack:Child(mode))
+            mode = 1
+            selectBtn(modeStack:Child(mode))
+            myPlot:updateMode()
+            end
+          </onClick>
+        </button>
+        <button name="inelasticBtn" content="Inelastic">
+          <style link="btnUnselected">
+            <widthPercentage>0.33</widthPercentage>
+            <horizontalAlignment>center</horizontalAlignment>
+          </style>
+          <onClick>
+            if mode ~= 2 then
+            unselectBtn(modeStack:Child(mode))
+            mode = 2
+            selectBtn(modeStack:Child(mode))
+            myPlot:updateMode()
+            end
+          </onClick>
+        </button>
+        <button name="explosionBtn" content="Explosion">
+          <style link="btnUnselected">
+            <widthPercentage>0.33</widthPercentage>
+            <horizontalAlignment>center</horizontalAlignment>
+          </style>
+          <onClick>
+            if mode ~= 3 then
+            unselectBtn(modeStack:Child(mode))
+            mode = 3
+            selectBtn(modeStack:Child(mode))
+            myPlot:updateMode()
+            end
+          </onClick>
+        </button>
+      </stack>
+      <button name="btn" content="Start Simulation" style="width50">
+        <onClick>
+          <![CDATA[
+if btn.Text == "Start Simulation" then
+	btn.Text = "Stop Simulation"
+	controlTable.Style.Visibility = "collapsed"
+	modeStack.Style.Visibility = "collapsed"
+	myPlot:updateBallsData()
+	if mode == 3 then sim.Time = 0 end
+	sim:Play()
+else
+	btn.Text = "Start Simulation"
+	sim:Pause()
+	controlTable.Style.Visibility = "visible"
+	modeStack.Style.Visibility = "visible"
+	myPlot:init()
+end
+]]>
+        </onClick>
+      </button>
+
+      <table name="dataTable" grid="false" widths="10% 30% 30% 30%">
+        <row>
+          <column>
+            <p style="centeredText">$Ball$</p>
+          </column>
+          <column>
+            <p style="centeredText">$Mass$</p>
+          </column>
+          <column>
+            <p style="centeredText">$v$</p>
+          </column>
+          <column>
+            <p style="centeredText">$p$</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p style="forestGreenB"></p>
+          </column>
+          <column>
+            <p style="centeredText"></p>
+          </column>
+          <column>
+            <p style="centeredText"></p>
+          </column>
+          <column>
+            <p style="centeredText"></p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p style="dodgerBlueB"></p>
+          </column>
+          <column>
+            <p style="centeredText"></p>
+          </column>
+          <column>
+            <p style="centeredText"></p>
+          </column>
+          <column>
+            <p style="centeredText"></p>
+          </column>
+        </row>
+        <row>
+          <column columnSpan="4">
+            <p style="centeredText"></p>
+          </column>
+        </row>
+      </table>
+
+      <script>
+        <![CDATA[
+				function myPlot:init()
+					self:updateBallsData()
+					myPlot:updateTable()
+					world:initDrawing()
+				end
+				
+				function myPlot:updateTable()
+					local p1 = ball1.mass*ball1.velocity[1]
+					local p2 = ball2.mass*ball2.velocity[1]
+					dataTable:Child(2):Child(2):Child(1).Text = string.format("%d",ball1.mass)
+					dataTable:Child(2):Child(3):Child(1).Text = string.format("%.2f",ball1.velocity[1])
+					dataTable:Child(2):Child(4):Child(1).Text = string.format("%.2f",p1)
+					dataTable:Child(3):Child(2):Child(1).Text = string.format("%d",ball2.mass)
+					dataTable:Child(3):Child(3):Child(1).Text = string.format("%.2f",ball2.velocity[1])
+					dataTable:Child(3):Child(4):Child(1).Text = string.format("%.2f",p2)
+					dataTable:Child(4):Child(1):Child(1).FormattedText = string.format("∑p=%.2f",p1+p2)
+				end
+				
+				function myPlot:setInitialVelocity(ball, value, roundTo)
+					if roundTo == nil then roundTo = 1 end
+					local newV = round(value,roundTo)
+					if newV ~= ball.velocity[1] then
+						ball.velocity[1] = newV
+					end
+					myPlot:updateTable()
+				end
+				
+				function myPlot:setMass(ball, value, roundTo)
+					if roundTo == nil then roundTo = 1 end
+					local newM = round(value,roundTo)
+					if newM ~= ball.mass then
+						ball.mass = newM
+						ball.radius = ball.mass/2
+						if mode == 3 then
+							myPlot:updateBallsData()
+						else
+							ball:initDrawing()
+						end
+					end
+					myPlot:updateTable()
+				end
+			
+				myPlot:init()
+				
+				]]>
+      </script>
+      <simulation name="sim" period="0.01">
+        <onUpdate>
+          <![CDATA[
+				if mode == 3 and sim.Time > 2 then
+					explosive.Visible = false
+					ball2.velocity = {explosiveV, 0}
+					ball1.velocity = {-ball2.mass*explosiveV/ball1.mass,0}
+				end
+				world:update(true)
+				myPlot:updateTable()
+				]]>
+        </onUpdate>
+      </simulation>
+    </stack>
+  </sectionNoTitle>
+
+
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Conservation of Momentum</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Why is momentum conserved?</p>
+      <!-- Replace with your contents here -->
+      <p style="justifiedText">
+        Consider a collision between two objects, object A and object B. When the two objects collide, there is a force on A due to B ($F_{AB}$), but because of Newton's third law, there is an equal force in the opposite direction, on B due to A ($F_{BA}$).
+      </p>
+      <p style="centeredText"><![CDATA[$F_{AB}=-F_{BA}$]]></p>
+      <p style="justifiedText">The lengths of time which the objects are in contact must be equal: $t_{AB} = t_{BA}$</p>
+      <p style="justifiedText">Consequently, the impulse experienced by objects A and B must be equal in magnitude and opposite in direction.</p>
+      <p style="centeredText"><![CDATA[$F_{AB} \times t_{AB} = -F_{BA} \times t_{BA}$]]></p>
+      <p style="justifiedText">
+        <![CDATA[If we recall that impulse is equivalent to change in momentum, it follows that the change in momenta of the objects is equal but in the opposite directions. This can be equivalently expressed as the sum of the change in momenta being zero.]]>
+      </p>
+      <p style="centeredText"><![CDATA[$m_A \times \Delta v_A = -m_B \times \Delta v_B$]]></p>
+      <p style="centeredText"><![CDATA[$m_A \times \Delta v_A + m_B \times \Delta v_B = 0$]]></p>
+    </stack>
+
+    <stack style="mcStackLayout">
+      <!-- Replace with your contents here -->
+      <p style="subSectionHeading">Definition</p>
+      <p style="justified">Conservation of momentum is a fundamental law of physics which states that the momentum of a system is constant if there are no external forces acting on the system.</p>
+      <p style="justified">If momentum is conserved in a system, then the total initial momentum equals to the total final momentum:</p>
+      <p style="centeredText">
+        <![CDATA[
+$p_{1i}+p_{2i} + \dots + p_{ni} = p_{1f}+p_{2f} + \dots + p_{nf}$
+or
+$\Sigma p_i = \Sigma p_f$
+or
+$P_i = P_f$
+]]>
+      </p>
+    </stack>
+
+  </sectionNoTitle>
+
+
+  <!--QUESTION STEP BY STEP LAYOUT-->
+  <!--Setup StepsController with correct number of Steps-->
+  <sectionNoTitle style="pageLayout">
+    <script>
+      local stepsController = StepsController:new({stepsStack=stepsStack, numOfSteps=3, shown_message="Show Step", hidden_message="Hide Step", showStepCounter=true})
+    </script>
+    <p style="sectionHeading">Step by Step</p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="subSectionHeading">Question 1</p>
+      <p style="justifiedText">Consider two balls. Ball A has 10kg mass and travel $3m/s$ constant speed to the right. Ball B has 5kg mass and it doesn't move. At some point, ball B has a final velocity of $4m/s$. What's the final velocity for ball A?</p>
+      <drawing name="drawing">
+        <axis dim="x" min="0" max="40" auto="fixed" />
+        <axis dim="y" min="0" max="30" auto="fixed" />
+        <series name="ball1" draw="radialFill" capacity="3000" style="quanserRedF" />
+        <series name="ball2" draw="radialFill" capacity="3000" style="dodgerBlueF" />
+      </drawing>
+      <script>
+        <![CDATA[
+				local myPlot = {};
+				
+				local ball1, ball2, world;
+				
+				function myPlot:init()
+					ball1 = Ball:new({mass=10, radius=2, velocity={3,0}, x=16, y=15, series=drawing.ball1});
+					ball2 = Ball:new({mass=5,velocity={0,0}, x=24, y=15, series=drawing.ball2});
+					world = World:new({deltaT=0.05, balls={ball1,ball2}});
+					world:initDrawing()
+				end
+				
+				myPlot:init()
+			
+				]]>
+      </script>
+      <simulation name="sim" period="0.01">
+        <onUpdate>
+          <![CDATA[
+				world:update(true);
+				]]>
+        </onUpdate>
+      </simulation>
+      <button name="btn" content="Start Simulation" style="width50">
+        <onClick>
+          <![CDATA[
+if btn.Text == "Start Simulation" then
+	btn.Text = "Stop Simulation"
+	sim:Play();
+else
+	btn.Text = "Start Simulation";
+	sim:Pause();
+	myPlot:init();
+end
+]]>
+        </onClick>
+      </button>
+    </stack>
+    <stack name="stepsStack">
+      <!--Each step is a stack, and each step has alternating background colors-->
+      <!--Use Snippet to create any single step stack -->
+
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Find Total Initial Momentum</p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            <p style="centeredText"><![CDATA[$\begin{matrix}P_i &=& p_{1i}+p_{2i}\\[8pt] P_i &=& m_1{v_{1i}} + m_2{v_{2i}}\\[8pt] P_i &=& 10kg\times 3m/s + 5\times 0m/s\\[8pt] P_i &=& 30\,kg\,m/s\end{matrix}$ ]]></p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(1)
+          </onClick>
+        </button>
+      </stack>
+
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Find Total Final Momentum</p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            <p style="centeredText">
+              <![CDATA[
+$\begin{matrix}
+	P_f &=& p_{1f}+p_{2f}\\[8pt]
+	P_f &=& m_1{v_{1f}} + m_2{v_{2f}}\\[8pt]
+	P_f &=& 10kg\times v_{1f} + 5\times 4m/s\\[8pt]
+	P_f &=& 10kg\times v_{1f} + 20\,kg\,m/s
+\end{matrix}$ ]]>
+            </p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(2)
+          </onClick>
+        </button>
+      </stack>
+
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Solve for $v_{1f}$</p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            <p style="justifiedText">Set $P_i = P_f$ and solve for $v_{1f}$:</p>
+            <p style="centeredText">
+              <![CDATA[
+$\begin{matrix}
+30\,kg\,m/s &=& 10kg\times v_{1f} + 20\,kg\,m/s\\[8pt]
+v_{1f} &=& 1m/s
+\end{matrix}$
+]]>
+            </p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(3)
+          </onClick>
+        </button>
+      </stack>
+
+
+    </stack>
+  </sectionNoTitle>
+
+
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Practices</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Question 2</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p style="justifiedText">
+              A 2.50 kg ball moving at $70.0\,kg$ man while the man is standing on ice. How fast will the man/bail combination be moving after the ball is caught by the man?
+            </p>
+          </column>
+        </row>
+      </table>
+      <textField name="input" placeholder="Enter your answer here. (round to 2 decimal digits)" />
+      <p name="answer" style="invisible">0.26</p>
+      <stack name="answerStack" style="invisible">
+        <!--q3 solution-->
+        <p>Answer: 0.26 m/s</p>
+        <p style="centeredText">
+          <![CDATA[
+$m_b = 2.5kg$
+$m_b=70kg$
+$v_b=7.5m/s$
+$v_m=0$
+$v_{f}=?$
+				]]>
+        </p>
+        <p style="centeredText">
+          <![CDATA[
+$\begin{matrix}
+	P_{i}&=& P_{f}\\[8pt]
+	m_b v_b + m_m v_m &=& M v_{f}\\[8pt]
+	v_{f}&=&\frac{m_b v_b + m_m v_m}{m_b+m_m} \\[8pt]
+	v_{f}&=&0.26m/s
+\end{matrix}$
+				]]>
+        </p>
+      </stack>
+      <p name="feedback" style="invisible" />
+      <script>
+        local attempt = 0;
+        local max = 3;
+      </script>
+      <button name="btn" content="Check Answer" style="btnSelected">
+        <onClick>
+          if input.Text ~= answer.Text then
+          feedback.Style.Visibility = "visible"
+          feedback.Text = "Incorrect! Try again."
+          attempt = attempt + 1
+          if attempt &gt;= max then
+          answerStack.Style.Visibility = "visible"
+          end
+          else
+          feedback.Style.Visibility = "visible"
+          feedback.Text = "Correct, Good Job!"
+          end
+        </onClick>
+      </button>
+    </stack>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Question 3</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p style="justifiedText">
+              A $92.0kg$ football player running at $6.5m/s$ North collides with an $85.0kg$ football player running at $6.00m/s$ South. The $92.0kg$ football player continues moving at a velocity of $2.00m/s$ after the collision. What's the velocity of the $85.0kg$ football player after the collision?
+            </p>
+          </column>
+        </row>
+      </table>
+      <textField name="input" placeholder="Enter your answer here. (round to 2 decimal digits)" />
+      <p name="answer" style="invisible">-1.13</p>
+      <stack name="answerStack" style="invisible">
+        <!--q3 solution-->
+        <p>Answer: -1.13 m/s</p>
+        <p style="centeredText">
+          <![CDATA[
+$m_1=92.0kg$
+$v_{1i}=+6.50m/s$
+$m_2=85kg$
+$v_{2i}=-6.00m/s$
+$v_{1f}=+2.00m/s$
+$v_{2f}=?$
+				]]>
+        </p>
+        <p style="centeredText">
+          <![CDATA[
+$\begin{matrix}
+	P_{i} &=& P_{f}\\[8pt]
+	m_1 v_{1i} + m_2 v_{2i} &=& m_1 v_{1f} + m_2 v_{2f} \\[8pt]
+	v_{2f} &=& \frac{m_1 v_{1i} + m_2 v_{2i}}{m_2}\\[8pt]
+	v_{2f}&=& -1.13m/s
+\end{matrix}$
+				]]>
+        </p>
+      </stack>
+      <p name="feedback" style="invisible" />
+      <script>
+        local attempt = 0;
+        local max = 3;
+      </script>
+      <button name="btn" content="Check Answer" style="btnSelected">
+        <onClick>
+          if input.Text ~= answer.Text then
+          feedback.Style.Visibility = "visible"
+          feedback.Text = "Incorrect! Try again."
+          attempt = attempt + 1
+          if attempt &gt;= max then
+          answerStack.Style.Visibility = "visible"
+          end
+          else
+          feedback.Style.Visibility = "visible"
+          feedback.Text = "Correct, Good Job!"
+          end
+        </onClick>
+      </button>
+    </stack>
+  </sectionNoTitle>
+
+
+</document>

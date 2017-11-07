@@ -1,0 +1,511 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G892489CF_E690_430C_8CFA_2C9342B751F0">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>LA-ALGE-1.12 Matrix Inverses</title>
+    <creator>jason_wang</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/lassondeLogo.png" />
+  </metadata>
+
+  <include src="resources/curriculumStylesLassonde.xml" />
+  <include src="resources/Utilities.xml" />
+
+  <!--                                      Header & Footer START                                         -->
+  <header style="themeColour">
+    <stack style="center" orientation="horizontal">
+      <p></p>
+    </stack>
+  </header>
+  <footer style="themeColour">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="themeColourTitle">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--                                      Header & Footer END                                         -->
+
+  <!-- Cover Page -->
+  <!-- This is the standard way title pages are created. A great website to get copyright free images .. www.pexels.com
+  *** The style: "pageLayout" is defined in curriculumStylesLassonde.xml. It simply sets the content to the center and adjusts the width to 80% ***-->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">1.12 Matrix Inverses</title>
+    <p style="sectionHeading">Introduction</p>
+    <p>
+      <style>
+        <marginTop>80</marginTop>
+        <marginBottom>80</marginBottom>
+        <size points="100" />
+        <bold>true</bold>
+        <widthPercentage>0.8</widthPercentage>
+        <textAlignment>center</textAlignment>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      $A^{-1}=\frac{1}{|A|}$
+    </p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="justifiedText">
+        In this Module, we are going to introduce 2x2 Matrix Inverses, how to determine if a matrix can be inversed, and how to find the inverse matrix using determinant and adjugate.
+      </p>
+    </stack>
+  </section>
+
+  <!--Definition and Step-by-Step-->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">The Inverse of A Matrix</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Definition</p>
+      <p style="justifiedText">The inverse of a matrix A is $A^{-1}$ only when:</p>
+      <p style="centeredText">$AA^{-1} = A^{-1}A = I$</p>
+      <p style="centeredText">Where $\;I$ is the identity matrix</p>
+      <p style="subSectionHeading">
+        Note: Not all matrices can be inversed.
+      </p>
+    </stack>
+
+    <script>
+      local stepsController = StepsController:new({stepsStack=stepsStack, numOfSteps=6, showStepCounter=true})
+    </script>
+    <p style="sectionHeading">Step by Step</p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="subSectionHeading">Finding the Inverse of a 2x2 Matrix</p>
+      <p style="justifiedText">Consider a 2x2 matrix A:</p>
+      <p style="centeredText"><![CDATA[$A=\begin{bmatrix}5&2\\3&8\end{bmatrix}$]]></p>
+      <p style="justifiedText">Let's solve the inverse of matrix A step by step.</p>
+      <p style="centeredText"><![CDATA[$A^{-1} = \begin{bmatrix}5&2\\3&8\end{bmatrix}^{-1}$]]></p>
+    </stack>
+    <stack name="stepsStack">
+      <!--Each step is a stack, and each step has alternating background colors-->
+      <!--Use Snippet to create any single step stack -->
+
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Solve the Determinant of A</p>
+          <stack name="cont" style="invisible">
+            <p style="centeredText">$|A|=5\cdot 8 - 2\cdot 3 = 34$</p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(1)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Inverse the Determinant of A</p>
+          <stack name="cont" style="invisible">
+            <p style="centeredText">$\frac{1}{|A|}=\frac{1}{34}$</p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(2)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Swap Elements</p>
+          <stack name="cont" style="invisible">
+            <p style="justifiedText">Then we swap the elements from each diagonals of matrix A:</p>
+            <p style="centeredText"><![CDATA[$\begin{bmatrix}8&3\\2&5\end{bmatrix}$]]></p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(3)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Negate Elements</p>
+          <stack name="cont" style="invisible">
+            <p style="justifiedText">Negate the elements on the diagonal from left lower to right upper:</p>
+            <p style="centeredText"><![CDATA[$\begin{bmatrix}8&-3\\-2&5\end{bmatrix}$]]></p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(4)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Multiply Second and Fourth Steps</p>
+          <stack name="cont" style="invisible">
+            <p style="centeredText"><![CDATA[$\begin{matrix}A^{-1}&=&\frac{1}{34}\begin{bmatrix}8&-3\\-2&5\end{bmatrix}\\[20pt]&=&\begin{bmatrix}\frac{4}{17}&-\frac{3}{34}\\[10pt]-\frac{1}{17}&\frac{5}{34}\end{bmatrix}\end{matrix}$]]></p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(5)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Conclusion</p>
+          <stack name="cont" style="invisible">
+            <p style="justifiedText">In the case of a 2 x 2 matrix, the specific formula for the determinant is</p>
+            <p style="centeredText">
+              <![CDATA[
+$\begin{matrix}A^{-1}&=&\frac{1}{|A|}\begin{bmatrix}d&-b\\-c&a\end{bmatrix}\\[20pt]&=&\frac{1}{ad-bc}\begin{bmatrix}d&-b\\-c&a\end{bmatrix}\end{matrix}$
+]]>
+            </p>
+            <p>
+              <b>When will the Inverse of a matrix not exist?</b>
+            </p>
+            <button name="btn" style="width50" content="Show Answer">
+              <onClick>
+                btn.Style.Visibility = "collapsed"
+                answerS.Style.Visibility = "visible"
+              </onClick>
+            </button>
+            <stack name="answerS" style="invisible">
+              <p>
+                The Inverse of a matrix A is <b>undefined</b> if and only if:
+              </p>
+              <p style="centeredText">
+                <style>
+                  <size scale="1.5" />
+                </style>
+                $|A|=0$
+              </p>
+              <p>This would result:</p>
+              <p style="centeredText"><![CDATA[$A^{-1} = \frac{1}{0}\begin{bmatrix}d&-b\\-c&a\end{bmatrix},\;\;undefined$]]></p>
+            </stack>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(6)
+          </onClick>
+        </button>
+      </stack>
+
+    </stack>
+  </sectionNoTitle>
+
+  <!--Practices-->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Practices</p>
+    <stack style="mcStackLayout">
+      <script>
+        local answer = 3
+        local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=answer})
+      </script>
+      <p style="subSectionHeading">Question 1</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources/question.png" inspect="false" />
+          </column>
+          <column>
+            <p>Determine the Inverse of matrix A</p>
+            <p><![CDATA[$A=\begin{bmatrix}5&2\\3&4\end{bmatrix}$]]></p>          </column>
+        </row>
+      </table>
+      <table name="choicesTable" grid="false" widths="50% 50%">
+        <row>
+          <column>
+            <p style="mcLayout"><![CDATA[$\begin{bmatrix}\frac{5}{14}&\frac{2}{14}\\[8pt]\frac{3}{14}&\frac{4}{14}\end{bmatrix}$]]></p>
+          </column>
+          <column>
+            <p style="mcLayout"><![CDATA[$\begin{bmatrix}\frac{4}{14}&\frac{3}{14}\\[8pt]\frac{2}{14}&\frac{5}{14}\end{bmatrix}$]]></p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="A" style="btnUnselected">
+              <onClick>
+                mcController:select(1)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="B" style="btnUnselected">
+              <onClick>
+                mcController:select(2)
+              </onClick>
+            </button>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p style="mcLayout"><![CDATA[$\begin{bmatrix}\frac{4}{14}&-\frac{3}{14}\\[8pt]-\frac{2}{14}&\frac{5}{14}\end{bmatrix}$]]></p>
+          </column>
+          <column>
+            <p style="mcLayout">$Undefined$</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="C" style="btnUnselected">
+              <onClick>
+                mcController:select(3)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="D" style="btnUnselected">
+              <onClick>
+                mcController:select(4)
+              </onClick>
+            </button>
+          </column>
+        </row>
+      </table>
+      <button name="checkBtn" content="Check Answer">
+        <onClick>
+          mcController:checkAnswer()
+        </onClick>
+      </button>
+    </stack>
+    <stack style="mcStackLayout">
+      <script>
+        local answer = 4
+        local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=answer})
+      </script>
+      <p style="subSectionHeading">Question 2</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources/question.png" inspect="false" />
+          </column>
+          <column>
+            <p>Determine the Inverse of matrix B</p>
+            <p><![CDATA[$B=\begin{bmatrix}5&2\\10&4\end{bmatrix}$]]></p>
+          </column>
+        </row>
+      </table>
+      <table name="choicesTable" grid="false" widths="50% 50%">
+        <row>
+          <column>
+            <p style="mcLayout"><![CDATA[$\begin{bmatrix}0&0\\[8pt]0&0\end{bmatrix}$]]></p>
+          </column>
+          <column>
+            <p style="mcLayout"><![CDATA[$\begin{bmatrix}\frac{4}{20}&-\frac{10}{20}\\[8pt]-\frac{2}{20}&\frac{4}{20}\end{bmatrix}$]]></p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="A" style="btnUnselected">
+              <onClick>
+                mcController:select(1)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="B" style="btnUnselected">
+              <onClick>
+                mcController:select(2)
+              </onClick>
+            </button>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p style="mcLayout"><![CDATA[$\begin{bmatrix}\frac{4}{0}&-\frac{10}{0}\\[8pt]-\frac{2}{0}&\frac{4}{0}\end{bmatrix}$]]></p>
+          </column>
+          <column>
+            <p style="mcLayout">$Undefined$</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="C" style="btnUnselected">
+              <onClick>
+                mcController:select(3)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="D" style="btnUnselected">
+              <onClick>
+                mcController:select(4)
+              </onClick>
+            </button>
+          </column>
+        </row>
+      </table>
+      <button name="checkBtn" content="Check Answer">
+        <onClick>
+          mcController:checkAnswer()
+        </onClick>
+      </button>
+    </stack>
+  </sectionNoTitle>
+
+
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Represent Linear System with Matrix Equations</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Example</p>
+      <p style="justifiedText">Consider following linear system:</p>
+      <p style="centeredText"><![CDATA[$\begin{matrix}4x+2y&=&1\\3x+7y+4z&=&-4\\8x+2z&=&12\end{matrix}$]]></p>
+      <p style="justifiedText">We can transform the linear system above into a matrix equation using following format:</p>
+      <p style="centeredText"><![CDATA[$\begin{bmatrix}4&2&0\\3&7&4\\8&0&2\end{bmatrix}\begin{bmatrix}x\\y\\z\end{bmatrix}=\begin{bmatrix}1\\-4\\12\end{bmatrix}$]]></p>
+      <p style="justifiedText">Where the first matrix consists of all the coeficients, the second matrix is a 3x1 vector consists of all variables, and the third matrix is a 3x1 vector consists of all the constants.</p>
+    </stack>
+
+    <p style="sectionHeading">Solve Matrix Equations using Inverse Matrix</p>
+
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Example (continue)</p>
+      <p style="justifiedText">From the example above, we know how to represent a linear system into a matrix equation with the formula:</p>
+      <p style="centeredText">$A\hat{x}=\hat{b}$</p>
+      <p style="justifiedText">The goal is to solve x, y, z, or in other word, $\hat{x}$</p>
+      <p style="justifiedText">Recall from page 2, we just learnt $A^{-1}A=I$, and $IA=A$ due to the property of identity matrix.</p>
+      <p style="justifiedText">If we use  $A^{-1}$ to multiply both sides of the matrix equation, we can get:</p>
+      <p style="centeredText"><![CDATA[$\begin{matrix}A^{-1}A\hat{x}&=&A^{-1}\hat{b}\\I\hat{x}&=&A^{-1}\hat{b}\\ \hat{x}&=&A^{-1}\hat{b}\end{matrix}$]]></p>
+      <p style="justifiedText">Now, $\hat{x}$ will be solved if we solve the inverse of matrix A.</p>
+    </stack>
+  </sectionNoTitle>
+
+
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Practices</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Question 3</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p style="justifiedText">
+              Solve following linear system using matrix equations:
+            </p>
+            <p><![CDATA[$\begin{matrix}3x+5y&=&8\\4x+7y&=&3\end{matrix}$]]></p>
+          </column>
+        </row>
+      </table>
+      <textField name="x" placeholder="Enter [x] here" />
+      <textField name="y" placeholder="Enter [y] here" />
+      <p name="feedback" style="invisible centeredText" />
+      <script>
+        local attempt = 0;
+        local max = 3;
+      </script>
+      <button name="btn" content="Check Answer">
+        <onClick> 
+          local answer = {"41", "-23"} 
+          if x.Text ~= answer[1] or y.Text ~= answer[2] then 
+            feedback.Style.Visibility = "visible" 
+            feedback.Text = "Incorrect! Try again." 
+            attempt = attempt + 1
+            if attempt &gt;= max then
+              feedback.Text = "Answer = 41  -23"
+            end
+          else 
+            feedback.Style.Visibility = "visible"
+            feedback.Text = "Correct, Good Job!" 
+          end 
+        </onClick>
+      </button>
+    </stack>
+
+
+    <stack style="mcStackLayout">
+      <script>
+        local answer = 4
+        local mcController = MCController:new({choiceBtns={choicesTable:Child(1):Child(1).btn, choicesTable:Child(2):Child(1).btn, choicesTable:Child(3):Child(1).btn, choicesTable:Child(4):Child(1).btn}, checkBtn=checkBtn, answer=answer})
+      </script>
+      <p style="subSectionHeading">Question 4</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources/question.png" inspect="false" />
+          </column>
+          <column>
+            <p style="justifiedText">The prices of things at two supermarkets are different in different cities. Toilet paper in Duluth, Minnesota costs $\$3.99$ a package while toilet paper in New York City costs $\$8.95$ a package. In Duluth, toothpaste costs $\$1.95$ a tube, while in NYC, it costs $\$5.25$ a tube.</p>
+            <p style="justifiedText">
+              The data for this can be encoded in the following grocery matrix:
+            </p>
+            <p><![CDATA[$G=\begin{bmatrix}3.99&8.95\\1.95&5.25\end{bmatrix}$]]></p>
+            <p style="justifiedText">Which statement is true about the above matrix?</p>
+          </column>
+        </row>
+      </table>
+      <table name="choicesTable" grid="false" widths="20% 80%">
+        <row>
+          <column>
+            <button name="btn" content="A" style="btnUnselected">
+              <onClick>
+                mcController:select(1)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <p style="justifiedText">The following matrix can also be used to contain the same information as $\;G$.</p>
+            <p><![CDATA[$O=\begin{bmatrix}3.99&8.95\\5.25&1.95\end{bmatrix}$]]></p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="B" style="btnUnselected">
+              <onClick>
+                mcController:select(2)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <p style="justifiedText">The $2^{nd}$ column represents the price of toothpaste in the two cities.</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="C" style="btnUnselected">
+              <onClick>
+                mcController:select(3)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <p style="justifiedText">A change in the price of toilet paper in Duluth can be represented by the matrix:</p>
+            <p><![CDATA[$\begin{bmatrix}3.99&9.75\\1.95&5.25\end{bmatrix}$]]></p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="D" style="btnUnselected">
+              <onClick>
+                mcController:select(4)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <p>None of the above.</p>
+          </column>
+        </row>
+      </table>
+      <button name="checkBtn" content="Check Answer">
+        <onClick>
+          mcController:checkAnswer()
+        </onClick>
+      </button>
+    </stack>
+
+  </sectionNoTitle>
+
+
+
+</document>

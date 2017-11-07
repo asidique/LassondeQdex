@@ -1,0 +1,687 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G8E62BE39_8218_4215_A954_9E8C79231FD0">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>LA-CALC-3.10 Implicit Differentiation</title>
+    <creator>Thiago</creator>
+    <coverImage src="resources/LassondeLogo.png" />
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+  </metadata>
+
+  <include src="resources/curriculumStylesLassonde.xml" />
+  <include src="resources/Utilities.xml" />
+
+  <!--HEADER**********************************************-->
+  <header style="themeColour">
+    <stack style="center" orientation="horizontal">
+      <p></p>
+    </stack>
+  </header>
+  <footer style="themeColour">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="themeColourTitle">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--FOOTER**********************************************-->
+  <!-- Section 1 -->
+  <!--    SECTION 1    -->
+  <section style="pageLayout">
+    <title style="chapterTitle">Implicit Differentiation</title>
+    <p style="sectionHeading">Introduction</p>
+    <stack style="contentBG">
+      <p>
+        This module will cover implicit differentiation.
+        Until now you're probably familiar with explicit differentiation, which is finding the
+        derivative of a function such as $ y = f(x) = x^{2} $.
+        However we cannot use explicit differentiation for functions such as: $x^{2} + y^{2} = 10 $,
+        and that's when we use implicit differentiation.
+      </p>
+    </stack>
+
+  </section>
+
+
+  <sectionNoTitle name="section2" style="pageLayout">
+
+    <p style="sectionHeading">Implicit Differentiation</p>
+    <stack style="contentBG">
+      <p>
+        <b>Explicit</b> Differentiation Example: $y = f(x) = x^{2} $
+      </p>
+      <p>
+        <b>Implicit</b> Differentiation Example: $ x^{3} + y^{5} = 32 $
+      </p>
+      <p>
+        In implicit differentiation we must solve for $ \frac{dy}{dx} $
+      </p>
+      <p>
+        <style>
+          <marginBottom>40</marginBottom>
+        </style>
+        Every 'y' term must be multiplied by $ \frac{dy}{dx} $ when differentiated.
+      </p>
+    </stack>
+    <script>
+      local stepsController = StepsController:new({stepsStack=stepsStack, numOfSteps=3})
+    </script>
+    <p style="sectionHeading">Question Step-by-Step</p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="subSectionHeading">Step-by-Step Example</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>Find $ \frac{dy}{dx} [(x - y)^{2} = x + y - 1 ]$</p>
+          </column>
+        </row>
+      </table>
+    </stack>
+    <stack name="stepsStack">
+      <!--Each step is a stack, and each step has alternating background colors-->
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>  To Find $ \frac{dy}{dx} (x - y)^{2} $ Apply the Chain rule:</p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            <stack style="center">
+              <p>
+                $ 2(x - y)(1- \frac{dy}{dx}) = 1 + \frac{dy}{dx} $
+              </p>
+            </stack>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <onClick>
+            stepsController:toggleStep(1)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>  Now we need to solve for $ \frac{dy}{dx} $  </p>
+          <stack name="cont" style="invisible">
+            <stack orientation="horizontal">
+              <stack orientation="vertical">
+                <!--CONTENT GOES HERE-->
+                <p> $ (2x - 2y)( 1 - \frac{dy}{dx} ) = 1 + \frac{dy}{dx} $</p>
+                <p>
+                  $ (2x - 2y) + (2y - 2x) \frac{dy}{dx} = 1 + \frac{dy}{dx}  $
+                </p>              
+              </stack>
+            </stack>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <onClick>
+            stepsController:toggleStep(2)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <!--CONTENT GOES HERE-->
+          <p>Plug in and Simplify</p>
+          <stack name="cont" style="invisible">
+            <p> $ (2y - 2x - 1) \frac{dy}{dx} = 2y - 2x + 1 $</p>
+            <p>
+              $ \frac{dy}{dx} = \frac{2y - 2x + 1}{2y - 2x - 1} $
+            </p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <onClick>
+            stepsController:toggleStep(3)
+          </onClick>
+        </button>
+      </stack>
+    </stack>
+  </sectionNoTitle>
+
+
+  <!-- Section 3 -->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Examples</p>
+
+    <stack style="contentBG">
+      <p style="sectionHeading">Example 1</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>Find $ \frac{dy}{dx}[x^{2} + y^{2} = 36 ]$:</p>
+          </column>
+        </row>
+      </table>
+
+
+
+
+
+      <stack name="answerWrap" style="collapsed">
+        <p style="sectionHeading">ANSWER</p>
+        <table name="table" widths="10% 90%" grid="false">
+          <row>
+            <column>
+              <image src="resources\answer.png" inspect="false" />
+            </column>
+            <column>
+              <p>$ 2x + 2y\frac{dy}{dx} = 0 $</p>
+
+              <p>
+                $ 2y \frac{dy}{dx} = -2x  $
+              </p>
+              <p>$ \frac{dy}{dx} = - \frac{x}{y} $</p>
+            </column>
+          </row>
+        </table>
+      </stack>
+
+      <button name="button1" content="Show Answer">
+        <onClick>
+          if button1.Text == "Show Answer" then
+          answerWrap.Style.Visibility = "visible";
+          button1.Text = "Hide Answer"
+          else
+          answerWrap.Style.Visibility = "collapsed";
+          button1.Text = "Show Answer"
+          end
+        </onClick>
+      </button>
+    </stack>
+    <p>
+      <br />
+    </p>
+
+    <stack style="contentBG">
+      <p style="sectionHeading">Example 2</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p> Find $ \frac{dy}{dx}[sinx - x^{2}y + y = 10x ] $ :</p>
+          </column>
+        </row>
+      </table>
+
+
+
+
+
+      <stack name="answerWrap" style="collapsed">
+        <p style="sectionHeading">ANSWER</p>
+        <table name="table" widths="10% 90%" grid="false">
+          <row>
+            <column>
+              <image src="resources\answer.png" inspect="false" />
+            </column>
+            <column>
+              <p>$ cosx - (x^{2} \frac{dy}{dx} + 2xy) + \frac{dy}{dx} = 10 $</p>
+
+              <p>
+                $  - x^{2}\frac{dy}{dx} + \frac{dy}{dx} = 10 -cosx +2xy $
+              </p>
+              <p>$ \frac{dy}{dx} = \frac{10 - cosx + 2xy}{-x^{2} + 1} $</p>
+            </column>
+          </row>
+        </table>
+      </stack>
+
+      <button name="button1" content="Show Answer">
+        <onClick>
+          if button1.Text == "Show Answer" then
+          answerWrap.Style.Visibility = "visible";
+          button1.Text = "Hide Answer"
+          else
+          answerWrap.Style.Visibility = "collapsed";
+          button1.Text = "Show Answer"
+          end
+        </onClick>
+      </button>
+    </stack>
+    <p>
+      <br />
+    </p>
+
+    <stack style="contentBG">
+      <p style="sectionHeading">Example 3</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>Find $\frac{dy}{dx}[ x^{2} + y^{2} - 2x + 3y = 8 ] $:</p>
+          </column>
+        </row>
+      </table>
+
+
+
+
+
+      <stack name="answerWrap" style="collapsed">
+        <p style="sectionHeading">ANSWER</p>
+        <table name="table" widths="10% 90%" grid="false">
+          <row>
+            <column>
+              <image src="resources\answer.png" inspect="false" />
+            </column>
+            <column>
+              <p>$ 2x + 2y \frac{dy}{dx} - 2 + 3\frac{dy}{dx} = 0 $</p>
+
+              <p>
+                $ \frac{dy}{dx}(2y + 3) = -2x + 2  $
+              </p>
+
+              <p>$ \frac{dy}{dx} = - \frac{2x + 2}{2y + 3} $</p>
+            </column>
+          </row>
+        </table>
+      </stack>
+
+      <button name="button1" content="Show Answer">
+        <onClick>
+          if button1.Text == "Show Answer" then
+          answerWrap.Style.Visibility = "visible";
+          button1.Text = "Hide Answer"
+          else
+          answerWrap.Style.Visibility = "collapsed";
+          button1.Text = "Show Answer"
+          end
+        </onClick>
+      </button>
+    </stack>
+
+
+  </sectionNoTitle>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!--    Section 4    -->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Practice</p>
+    <stack style="contentBG">
+      <p style="sectionHeading">Question 1</p>
+
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p> Find $\frac{dy}{dx}[x^{2} + xy + y^{2} = 10 ] $  :</p>
+          </column>
+        </row>
+      </table>
+
+
+
+
+
+
+
+      <p name="answer" style="collapsed">A</p>
+      <script>
+        local selection = -1;
+        local deselectedColor = color.silver;
+        local selectedColor = color.rgb(232 ,12 ,46);
+
+        local function chooseButton(i)
+        if selection &gt; 0 then
+        stack.table:Child(selection):Child(1):Child(1).Style.BackgroundColor = deselectedColor;
+        end
+        stack.table:Child(i):Child(1):Child(1).Style.BackgroundColor = selectedColor;
+        selection = i;
+        end
+      </script>
+      <stack orientation="horizontal" name="stack">
+        <table name="table" widths="10% 90%" grid="false">
+          <style name="buttons">
+            <foreground color="white" />
+            <background color="silver" />
+          </style>
+          <row name="row">
+
+            <column>
+              <button content="A">
+                <onClick>final.Text="A"; chooseButton(1);</onClick>
+              </button>
+            </column>
+
+            <column>
+              <p>$ \frac{dy}{dx} = \frac{-2x - y}{x + 2y} $</p>
+            </column>
+
+          </row>
+
+          <row>
+
+            <column>
+              <button content="B">
+                <onClick>final.Text="B"; chooseButton(2);</onClick>
+              </button>
+            </column>
+
+            <column>
+              <p>$ \frac{dy}{dx} = 3x^{2} + y - 3 $</p>
+            </column>
+
+          </row>
+
+          <row>
+
+            <column>
+              <button content="C">
+                <onClick>final.Text="C"; chooseButton(3);</onClick>
+              </button>
+            </column>
+
+            <column>
+              <p> $ \frac{dy}{dx} = 2x^{2} - 3 + 2(y -x)$ </p>
+            </column>
+
+          </row>
+        </table>
+      </stack>
+
+      <p name="final" style="collapsed" />
+      <stack name="hint" style="collapsed">
+        <p style="centerText">  Not quite there, try again ! </p>
+      </stack>
+      <stack name="solution" style="collapsed">
+        <p style="centerText"> Correct!   </p>
+      </stack>
+
+
+
+
+
+      <button content="Check Answer">
+        <onClick>
+          if string.lower(final.Text) == string.lower(answer.Text) then
+          solution.Style.Visibility = "visible";
+          hint.Style.Visibility = "collapsed";
+          stack.table:Child(selection):Child(1):Child(1).Style.BackgroundColor = color.green;
+
+          else
+          solution.Style.Visibility = "collapsed";
+          hint.Style.Visibility = "visible";
+          stack.table:Child(selection):Child(1):Child(1).Style.BackgroundColor = selectedColor;
+          end
+        </onClick>
+      </button>
+
+    </stack>
+    <p>
+      <br />
+    </p>
+
+    <stack style="contentBG">
+
+
+      <p style="sectionHeading">Question 2</p>
+
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p> Find $\frac{dy}{dx}[ 3x + y^{3} - xy = x^{2} + y^{5} - 13x^{10}  ]  $  :</p>
+          </column>
+        </row>
+      </table>
+
+
+
+
+
+
+
+      <p name="answer" style="collapsed">C</p>
+      <script>
+        local selection = -1;
+        local deselectedColor = color.silver;
+        local selectedColor = color.rgb(232 ,12 ,46);
+
+        local function chooseButton(i)
+        if selection &gt; 0 then
+        stack.table:Child(selection):Child(1):Child(1).Style.BackgroundColor = deselectedColor;
+        end
+        stack.table:Child(i):Child(1):Child(1).Style.BackgroundColor = selectedColor;
+        selection = i;
+        end
+      </script>
+      <stack orientation="horizontal" name="stack">
+        <table name="table" widths="10% 90%" grid="false">
+          <style name="buttons">
+            <foreground color="white" />
+            <background color="silver" />
+          </style>
+          <row name="row">
+
+            <column>
+              <button content="A">
+                <onClick>final.Text="A"; chooseButton(1);</onClick>
+              </button>
+            </column>
+
+            <column>
+              <p>$ \frac{dy}{dx} = \frac{10y^{9} + 3 - 5x}{x + y^{9}} $</p>
+            </column>
+
+          </row>
+
+          <row>
+
+            <column>
+              <button content="B">
+                <onClick>final.Text="B"; chooseButton(2);</onClick>
+              </button>
+            </column>
+
+            <column>
+              <p>$ \frac{dy}{dx} = \frac{ x^{2} + 13x - 5y}{y - 2} $</p>
+            </column>
+
+          </row>
+
+          <row>
+
+            <column>
+              <button content="C">
+                <onClick>final.Text="C"; chooseButton(3);</onClick>
+              </button>
+            </column>
+
+            <column>
+              <p> $ \frac{dy}{dx} = \frac{2x-130x^{9} - 3 - y}{3y^{2} - x - 5y^{4} }$ </p>
+            </column>
+
+          </row>
+        </table>
+      </stack>
+
+      <p name="final" style="collapsed" />
+      <stack name="hint" style="collapsed">
+        <p style="centerText">  Not quite there, try again ! </p>
+      </stack>
+      <stack name="solution" style="collapsed">
+        <p style="centerText"> Correct!   </p>
+      </stack>
+
+
+
+
+
+      <button content="Check Answer">
+        <onClick>
+          if string.lower(final.Text) == string.lower(answer.Text) then
+          solution.Style.Visibility = "visible";
+          hint.Style.Visibility = "collapsed";
+          stack.table:Child(selection):Child(1):Child(1).Style.BackgroundColor = color.green;
+          else
+          solution.Style.Visibility = "collapsed";
+          hint.Style.Visibility = "visible";
+          stack.table:Child(selection):Child(1):Child(1).Style.BackgroundColor = selectedColor;
+          end
+        </onClick>
+      </button>
+
+    </stack>
+    <p>
+      <br />
+    </p>
+
+
+    <stack style="contentBG">
+
+
+      <p style="sectionHeading">Question 2</p>
+
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p> Find $\frac{dy}{dx}[ sin(xy) = x ]  $  :</p>
+          </column>
+        </row>
+      </table>
+
+
+
+
+
+
+
+      <p name="answer" style="collapsed">B</p>
+      <script>
+        local selection = -1;
+        local deselectedColor = color.silver;
+        local selectedColor = color.rgb(232 ,12 ,46);
+
+        local function chooseButton(i)
+        if selection &gt; 0 then
+        stack.table:Child(selection):Child(1):Child(1).Style.BackgroundColor = deselectedColor;
+        end
+        stack.table:Child(i):Child(1):Child(1).Style.BackgroundColor = selectedColor;
+        selection = i;
+        end
+      </script>
+      <stack orientation="horizontal" name="stack">
+        <table name="table" widths="10% 90%" grid="false">
+          <style name="buttons">
+            <foreground color="white" />
+            <background color="silver" />
+          </style>
+          <row name="row">
+
+            <column>
+              <button content="A">
+                <onClick>final.Text="A"; chooseButton(1);</onClick>
+              </button>
+            </column>
+
+            <column>
+              <p>$ \frac{dy}{dx} = \frac{sin(x) + cos(y)- 3y}{x} $</p>
+            </column>
+
+          </row>
+
+          <row>
+
+            <column>
+              <button content="B">
+                <onClick>final.Text="B"; chooseButton(2);</onClick>
+              </button>
+            </column>
+
+            <column>
+              <p>$ \frac{dy}{dx} = \frac{ sec(xy) - y}{x} $</p>
+            </column>
+
+          </row>
+
+          <row>
+
+            <column>
+              <button content="C">
+                <onClick>final.Text="C"; chooseButton(3);</onClick>
+              </button>
+            </column>
+
+            <column>
+              <p> $ \frac{dy}{dx} = \frac{sec(x)}{sin(y) }$ </p>
+            </column>
+
+          </row>
+        </table>
+      </stack>
+
+      <p name="final" style="collapsed" />
+      <stack name="hint" style="collapsed">
+        <p style="centerText">  Not quite there, try again ! </p>
+      </stack>
+      <stack name="solution" style="collapsed">
+        <p style="centerText"> Correct!   </p>
+      </stack>
+
+
+
+
+
+      <button content="Check Answer">
+        <onClick>
+          if string.lower(final.Text) == string.lower(answer.Text) then
+          solution.Style.Visibility = "visible";
+          hint.Style.Visibility = "collapsed";
+          stack.table:Child(selection):Child(1):Child(1).Style.BackgroundColor = color.green;
+          else
+          solution.Style.Visibility = "collapsed";
+          hint.Style.Visibility = "visible";
+          stack.table:Child(selection):Child(1):Child(1).Style.BackgroundColor = selectedColor;
+          end
+        </onClick>
+      </button>
+
+    </stack>
+
+
+  </sectionNoTitle>
+
+</document>

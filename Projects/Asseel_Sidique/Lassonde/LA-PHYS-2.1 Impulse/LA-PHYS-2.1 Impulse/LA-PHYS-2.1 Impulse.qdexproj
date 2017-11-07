@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <CustomProjectExtensionsPath>$(LocalAppData)\CustomProjectSystems\qdex\</CustomProjectExtensionsPath>
+    <ProjectGuid>38ff924a-2826-406b-8725-1d3c72e0c83c</ProjectGuid>
+  </PropertyGroup>
+  <Import Project="$(CustomProjectExtensionsPath)CustomProject.Default.props" />
+  <Import Project="$(CustomProjectExtensionsPath)CustomProject.props" />
+  <PropertyGroup>
+    <SchemaVersion>2.0</SchemaVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="document.xml">
+    </Content>
+    <Content Include="Equations\0623124ac5b6454fae7d76c13a3515d5.png" />
+    <Content Include="Equations\0afc64486a154470a363eded04c3128d.png" />
+    <Content Include="Equations\105246725c784fb19a3e5980bf9e47b5.png" />
+    <Content Include="Equations\116e3f9f6f51470fa81a318dab2e94ef.png" />
+    <Content Include="Equations\1364da8a6e5b405281dfa6c91fc1de60.png" />
+    <Content Include="Equations\1abdef2146544965a5b513f9f3753322.png" />
+    <Content Include="Equations\1b1f5ce558784935a99558e0420f7dcc.png" />
+    <Content Include="Equations\1df4e31762d44769b67e9df6edc2891b.png" />
+    <Content Include="Equations\23a01daf08c349c3bab1ef243de995a2.png" />
+    <Content Include="Equations\2686a9e66a164a55ac5d4aa92fc76883.png" />
+    <Content Include="Equations\2feb734c6a9d445b821d1192512011ba.png" />
+    <Content Include="Equations\3115e21a266848ec8494442773472e36.png" />
+    <Content Include="Equations\3575781d0e014b42930829c83cfb4bf1.png" />
+    <Content Include="Equations\362a0012df364f8f9ea8d5a198f137db.png" />
+    <Content Include="Equations\428c8ef375ac439e93f20407bfce81ba.png" />
+    <Content Include="Equations\50bb72ed1a324b5bb73872b86b484ad2.png" />
+    <Content Include="Equations\54824df176f54afeb5cf1c2c8113fa60.png" />
+    <Content Include="Equations\68e33c4138e746589ca3f9abc2a9d226.png" />
+    <Content Include="Equations\6d225f925e9443a2bd17bfdc5cb8fee0.png" />
+    <Content Include="Equations\8a46f74b3773459d80f5a5dc86322a9b.png" />
+    <Content Include="Equations\9654731e3425445c80172748837db8c7.png" />
+    <Content Include="Equations\a4c349444b0f44d2a38e2b5a813944b7.png" />
+    <Content Include="Equations\a68213c57eb746a89feb47a6a6940c47.png" />
+    <Content Include="Equations\ada5fdba36534c3b9a3398b153179607.png" />
+    <Content Include="Equations\bebe5709881b4f15950ac0566b66c740.png" />
+    <Content Include="Equations\bedc450052174d31b47aa5941afed28a.png" />
+    <Content Include="Equations\caea7eb660d54d358f78c5e095b55eba.png" />
+    <Content Include="Equations\d719a7197c914d9daa80209b7f5cd0c2.png" />
+    <Content Include="Equations\d87038871f554c949fd6cbe10539f8e5.png" />
+    <Content Include="Equations\e8f9cdd019174589a47c4723e9a0a074.png" />
+    <Content Include="Equations\f646ce095af84580a6372eec68a93c76.png" />
+    <Content Include="resources\astronaut.jpg" />
+    <Content Include="resources\lassonde.png" />
+    <Content Include="resources\lassondeLogo.png" />
+    <Content Include="resources\york.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="curriculumThemePack\curriculumStyles.xml" />
+    <None Include="plotTools.xml" />
+    <None Include="qdexLuaClass.xml" />
+    <None Include="source.xml" />
+  </ItemGroup>
+  <PropertyGroup>
+    <OutputPath>resources</OutputPath>
+  </PropertyGroup>
+  <Import Project="$(CustomProjectExtensionsPath)CustomProjectCs.targets" />
+  <!-- This next bit is required unless the macro used to Import your targets is defined in an MSBuild toolset. -->
+  <ProjectExtensions>
+    <ProjectCapabilities>
+      <ProjectConfigurationsDeclaredAsItems />
+    </ProjectCapabilities>
+  </ProjectExtensions>
+</Project>

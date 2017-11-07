@@ -1,0 +1,997 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G1F9C0C89_192E_4DD1_9289_F00E63A63B2F">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>MCV4U - The Derivative of Sine and Cos</title>
+    <creator>Asseel</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/cover.png" />
+  </metadata>
+  
+  <include src="resources/curriculumStyles.xml" />
+  <include src="resources/plotTools.xml" />
+  
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="whiteColor">Amanda Koon</p>
+      <p style="whiteColor rightText">MCV4U</p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/logo1.png" inspect="false" />
+      <p style="whiteColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/logo2.png" inspect="false" />
+    </stack>
+  </footer>
+
+
+  <!-- Section 1 -->
+  <section name="section1">
+    <title style="chapterTitle rightText">The Derivative of Sine  and Cos</title>
+    <stack orientation="vertical">
+      <style>
+        <horizontalAlignment>center</horizontalAlignment>
+        <widthPercentage>80%</widthPercentage>
+      </style>
+      <p style="header1">Introduction</p>
+      <p style="content1">A derivative of a function can be described as the rate of 
+      change of that function. In other words, it is the slope on the point on the curve. 
+      You may remember the term rise over run; a derivative is just that. It is the change 
+      in y over the change in x. The derivative can be represented by the formula:
+       </p>
+      <image src="resources/formula_1.png" style="centerText" inspect="0">
+        <style>
+          <size scale="small" points="10" />
+          <widthPercentage>40%</widthPercentage>
+        </style>
+      </image>
+      <p style="content1">In this module, we will be investigating the derivative of $ y = sin( x ) $ and $ y = cos( x )$ functions.</p>
+      <button name="nextPage" content="Start Investigation">
+        <onClick>
+          application.navigateTo(section2);
+        </onClick>
+      </button>
+    </stack>
+  </section>
+
+  <!-- Section 2 -->
+  <sectionNoTitle name="section2">
+    <script>
+      <![CDATA[
+      -- Function to translate point along sine function
+      function translateSinPoint(moveX, moveY)
+        section2.stack.sinOutput.sinPoint.Transform = matrixf.translation(moveX, moveY, 0);
+      end
+      
+        function round(num, numDecimalPlaces)
+          local mult = 10^(numDecimalPlaces or 0)
+          return math.floor(num * mult + 0.5) / mult
+        end
+      
+        char.textX(stack.sinOutput.xLabel, vector({4.8, -0.2}), 0.1, color.black);
+        char.textY(stack.sinOutput.yLabel, vector({0.1, 1.8}), 0.1, color.black);
+        char.textX(stack.deriveSinOutput.xLabel, vector({4.8, -0.2}), 0.1, color.black);
+        char.textY(stack.deriveSinOutput.yLabel, vector({0.1, 1.8}), 0.1, color.black);
+      tmpX = 0;
+      ]]>
+    </script>
+    <stack orientation="vertical" name="stack">
+      <style>
+        <horizontalAlignment>center</horizontalAlignment>
+        <widthPercentage>80%</widthPercentage>
+      </style>
+      <p style="bigTitle">Derivative of Sine</p>
+      <p style="content1">
+        In our first investigation, we will be
+        looking at the derivative of the $ sin $ function. The graph of $ y = sin( x ) $ is displayed first.
+        The graph of $ \frac{dy}{dx} $ is displayed second.
+        Click and drag slowly on the first graph to identify the slopes. The second graph will populate with the points to display the derivative of $ y = sin( x ) $.
+      </p>
+      
+      <button name="simButton" content="Start Simulation">
+        <style>
+          <visibility>hidden</visibility>
+        </style>
+        <onClick>
+          sinSim:Start();
+          section2.stack.simButton.Style.Visibility = "hidden";
+        </onClick>
+      </button>
+      <p name="sinLabel" style="header1 centerText">
+        <style>
+          <foreground color="transparent" />
+        </style>
+         $ y = sin(x) $ 
+      </p>
+      <xyPlot name="sinOutput" manual="true" zoom="disabled" pan="custom" tap="custom">
+        <style>
+          <aspectRatio>0.4</aspectRatio>
+        </style>
+        <onPan>
+          <![CDATA[
+          local x = state.Current.X * (5);
+          local y = -2 + state.Current.Y * (2 - -2);
+          if(round(x,2)%0.25 < 0.0090) then
+            section2.stack.deriveSinOutput.deriveSineLine:Add(x, math.cos(x*6.3))
+          end
+          if state.IsStart then
+            tmpX = state.Current.X
+          end
+                    
+          if not(tmpX == state.Current.X) then
+            translateSinPoint(x, math.sin((x*6.30)));
+            for j=(x-1.0), x+1.0, 0.5 do
+              local y1 = math.cos(j*6.3) + math.sin(x*6.30);
+              tangentLine:Add(j-0.75, y1);
+            end
+           
+            if(x>4.0) then
+              if section2.stack.simButton2.Style.Visibility == "Hidden" then
+                section2.stack.simButton2.Style.Visibility = "visible";
+              end
+            end
+            tmpX = state.Current.X;
+          end
+          
+ 
+  
+          
+          ]]>
+        </onPan>
+        <axis dim="x" name="xAxis" auto="none" max="5" min="0"></axis>
+        <axis dim="y" name="yAxis" auto="none" max="2" min="-2"></axis>
+        <series name="x" style="black thickLine">
+          <data>-10 0; 10 0;</data>
+        </series>
+        <series name="y" style="black thickLine">
+          <data>0 -10; 0 10;</data>
+        </series>
+        <series name="sineWave" style="sinColor" />
+        <series name="sinPoint" draw="points" style="purple">
+          <data>0 0</data>
+        </series>
+        <series name="tangentLine" style="cosColor" capacity="2" draw="lineSegments">
+          <style>
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        <series name="xLabel" />
+        <series name="yLabel" />
+      </xyPlot>
+      <simulation name="sinSim" duration="5" period="0.01" asynchronous="false">
+        <onActivePageChanged>
+          sinSim:Start();
+        </onActivePageChanged>
+        <onDuration>
+          section2.stack.simButton.Style.Visibility = "visible";
+          section2.stack.sinLabel.Style.ForegroundColor = color.quanserRed;
+        </onDuration>
+        <solver name="sinSolver">
+          <series>
+            <sine amplitude="1.0" name="sine" />
+            <probe ref="section2.stack.sinOutput.sineWave" />
+          </series>
+        </solver>
+      </simulation>          
+      
+      <button name="simButton2" content="Click to reveal function">
+        <style>
+          <visibility>hidden</visibility>
+        </style>
+        <onClick>
+          deriveSinSim:Start();
+        </onClick>
+      </button>
+      <stack name="stack2" orientation="horizontal">
+        <style>
+          <horizontalAlignment>center</horizontalAlignment>
+          <widthPercentage>100%</widthPercentage>
+          
+        </style>
+        <p style="hidden">
+          
+        </p>
+      <p name="dydxlabel" style="header1 centerText">
+        $ \frac{dy}{dx} $
+      </p>
+      <p style="header1 centerText black">
+        =
+      </p>
+      <stack name="hideStack" style="collapsed centerText header1">
+        <p name="cosLabel">
+           $ cos( x ) $
+        </p>
+      </stack>
+      <p name="qMark" style="header1 centerText black">
+        ?
+      </p>
+      </stack>
+      <xyPlot name="deriveSinOutput" manual="true" zoom="disabled" pan="custom" tap="custom">
+        <style>
+          <aspectRatio>0.4</aspectRatio>
+        </style>
+        <axis dim="x" name="xAxis" auto="none" max="5" min="0"></axis>
+        <axis dim="y" name="yAxis" auto="none" max="2" min="-2"></axis>
+        <series name="xLabel" />
+        <series name="yLabel" />
+        <series name="sineWave" style="cosColor" />
+        <series name="x" style="black thickLine">
+          <data>-10 0; 10 0;</data>
+        </series>
+        <series name="y" style="black thickLine">
+          <data>0 -10; 0 10;</data>
+        </series>
+        <series name="deriveSineLine" style="cosColor" capacity="60" draw="points">
+          <style>
+            <lineThickness>0.8</lineThickness>
+          </style>
+        </series>
+      </xyPlot>
+      <simulation name="deriveSinSim" duration="5" period="0.01" asynchronous="false">
+        <onActivePageChanged>
+          deriveSinSim:Stop();
+        </onActivePageChanged>
+        <onDuration>
+          section2.stack.stack2.hideStack.Style.Visibility = "visible";
+          section2.stack.stack2.qMark.Text = "";
+          section2.stack.conclusionButton.Style.Visibility = "visible";
+        </onDuration>
+        <solver name="sinSolver">
+          <series>
+            <sine amplitude="1.0" name="cos" phase="1.57" />
+            <probe ref="section2.stack.deriveSinOutput.sineWave" />
+          </series>
+        </solver>
+      </simulation>
+
+      <button name="conclusionButton" content="Show Conclusion" style="collapsed">
+        <onClick>
+          conclusion.Style.Visibility = "visible";
+        </onClick>
+      </button>
+      <stack name="conclusion" style="collapsed centerText backgroundColor2">
+        <style>
+          <horizontalAlignment>center</horizontalAlignment>
+          <widthPercentage>80%</widthPercentage>
+        </style>
+        <p style="centerText header1 black"> $ I\!f\; y = sin( x )\; then\; \frac{dy}{dx} = cos( x ) $. </p>
+      </stack>
+      <button name="reset" content="Reset">
+        <onClick>
+          deriveSinSim:Stop();
+          sinSim:Stop();
+          section2.stack.simButton.Style.Visibility = "collapsed";
+          section2.stack.sinLabel.Style.ForegroundColor = color.transparent;
+          section2.stack.stack2.hideStack.Style.Visibility = "collapsed";
+          section2.stack.conclusionButton.Style.Visibility = "collapsed";
+          conclusionButton.Style.Visibility = "collapsed";
+          conclusion.Style.Visibility = "collapsed";
+          section2.stack.stack2.qMark.Text = "?";
+          sinOutput.sineWave:Clear();
+          deriveSinOutput.sineWave:Clear();
+          deriveSinOutput.deriveSineLine:Clear();
+          sinSim:Start();
+        </onClick>
+      </button>
+    </stack>
+    <p style="lineBreak"></p>
+  </sectionNoTitle>
+  
+  <!-- Section 5 -->
+  <sectionNoTitle name="section5">
+    <script>
+      <![CDATA[
+      -- Function to translate point along sine function
+      function translateSinPoint2(moveX, moveY)
+        section5.stack.sinOutput.sinPoint.Transform = matrixf.translation(moveX, moveY, 0);
+      end
+      
+      --  function round(num, numDecimalPlaces)
+      --    local mult = 10^(numDecimalPlaces or 0)
+      --    return math.floor(num * mult + 0.5) / mult
+      --  end
+      
+        char.textX(section5.stack.sinOutput.xLabel, vector({4.8, -0.2}), 0.1, color.black);
+        char.textY(section5.stack.sinOutput.yLabel, vector({0.1, 1.8}), 0.1, color.black);
+        char.textX(section5.stack.deriveSinOutput.xLabel, vector({4.8, -0.2}), 0.1, color.black);
+        char.textY(section5.stack.deriveSinOutput.yLabel, vector({0.1, 1.8}), 0.1, color.black);
+      tmpX = 0;
+      ]]>
+    </script>
+    <stack orientation="vertical" name="stack">
+      <style>
+        <horizontalAlignment>center</horizontalAlignment>
+        <widthPercentage>80%</widthPercentage>
+      </style>
+      <p style="bigTitle">Derivative of Cos</p>
+      <p style="content1">
+        In our second investigation, we will be
+        looking at the derivative of the $ y = cos( x ) $. The graph of $ y = cos( x ) $ is displayed first.
+        The graph of $ \frac{dy}{dx} $ is displayed second.
+        Click and drag slowly on the first graph to identify the slopes. The second graph will populate with the points to display the derivative of $ y = cos( x ) $.
+      </p>
+      
+      <button name="simButton" content="Start Simulation">
+        <style>
+          <visibility>hidden</visibility>
+        </style>
+        <onClick>
+          sinSim:Start();
+          section5.stack.simButton.Style.Visibility = "hidden";
+        </onClick>
+      </button>
+      <p name="sinLabel" style="header1 centerText">
+        <style>
+          <foreground color="transparent" />
+        </style>
+         $ y = cos(x) $ 
+      </p>
+      <xyPlot name="sinOutput" manual="true" zoom="disabled" pan="custom" tap="custom">
+        <style>
+          <aspectRatio>0.4</aspectRatio>
+        </style>
+        <onPan>
+          <![CDATA[
+          local x = state.Current.X * (5);
+          local y = -2 + state.Current.Y * (2 - -2);
+          if(round(x,2)%0.25 < 0.0090) then
+            section5.stack.deriveSinOutput.deriveSineLine:Add(x, -math.sin(x*6.3))
+          end
+          if state.IsStart then
+            tmpX = state.Current.X
+          end
+                    
+          if not(tmpX == state.Current.X) then
+            translateSinPoint2(x, math.cos((x*6.30)));
+            for j=(x-1.0), x+1.0, 0.5 do
+              local y1 = -math.sin(j*6.3) + math.cos(x*6.30);
+              tangentLine:Add(j-0.75, y1);
+            end
+           
+            if(x>4.0) then
+              if section5.stack.simButton2.Style.Visibility == "Hidden" then
+                section5.stack.simButton2.Style.Visibility = "visible";
+              end
+            end
+            tmpX = state.Current.X;
+          end
+          
+ 
+  
+          
+          ]]>
+        </onPan>
+        <axis dim="x" name="xAxis" auto="none" max="5" min="0"></axis>
+        <axis dim="y" name="yAxis" auto="none" max="2" min="-2"></axis>
+        <series name="x" style="black thickLine">
+          <data>-10 0; 10 0;</data>
+        </series>
+        <series name="y" style="black thickLine">
+          <data>0 -10; 0 10;</data>
+        </series>
+        <series name="sineWave" style="cosColor" />
+        <series name="sinPoint" draw="points" style="purple">
+          <data>0 0</data>
+        </series>
+        <series name="tangentLine" style="sinColor" capacity="2" draw="lineSegments">
+          <style>
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        <series name="xLabel" />
+        <series name="yLabel" />
+      </xyPlot>
+      <simulation name="sinSim" duration="5" period="0.01" asynchronous="false">
+        <onActivePageChanged>
+          sinSim:Start();
+        </onActivePageChanged>
+        <onDuration>
+          section5.stack.simButton.Style.Visibility = "visible";
+          section5.stack.sinLabel.Style.ForegroundColor = color.quanserRed;
+        </onDuration>
+        <solver name="sinSolver">
+          <series>
+            <sine amplitude="1.0" name="sine" phase="1.57" />
+            <probe ref="section5.stack.sinOutput.sineWave" />
+          </series>
+        </solver>
+      </simulation>          
+      
+      <button name="simButton2" content="Click to reveal function">
+        <style>
+          <visibility>hidden</visibility>
+        </style>
+        <onClick>
+          deriveSinSim:Start();
+        </onClick>
+      </button>
+      <stack name="stack2" orientation="horizontal">
+        <style>
+          <horizontalAlignment>center</horizontalAlignment>
+          <widthPercentage>100%</widthPercentage>
+          
+        </style>
+        <p style="hidden">
+          
+        </p>
+      <p name="dydxlabel" style="header1 centerText">
+        $ \frac{dy}{dx} $
+      </p>
+      <p style="header1 centerText black">
+        =
+      </p>
+      <stack name="hideStack" style="collapsed centerText header1">
+        <p name="cosLabel">
+           $ -sin( x ) $
+        </p>
+      </stack>
+      <p name="qMark" style="header1 centerText black">
+        ?
+      </p>
+      </stack>
+      <xyPlot name="deriveSinOutput" manual="true" zoom="disabled" pan="custom" tap="custom">
+        <style>
+          <aspectRatio>0.4</aspectRatio>
+        </style>
+        <axis dim="x" name="xAxis" auto="none" max="5" min="0"></axis>
+        <axis dim="y" name="yAxis" auto="none" max="2" min="-2"></axis>
+        <series name="xLabel" />
+        <series name="yLabel" />
+        <series name="sineWave" style="sinColor" />
+        <series name="x" style="black thickLine">
+          <data>-10 0; 10 0;</data>
+        </series>
+        <series name="y" style="black thickLine">
+          <data>0 -10; 0 10;</data>
+        </series>
+        <series name="deriveSineLine" style="sinColor" capacity="60" draw="points">
+          <style>
+            <lineThickness>0.8</lineThickness>
+          </style>
+        </series>
+      </xyPlot>
+      <simulation name="deriveSinSim" duration="5" period="0.01" asynchronous="false">
+        <onActivePageChanged>
+          deriveSinSim:Stop();
+        </onActivePageChanged>
+        <onDuration>
+          section5.stack.stack2.hideStack.Style.Visibility = "visible";
+          section5.stack.stack2.qMark.Text = "";
+          section5.stack.conclusionButton.Style.Visibility = "visible";
+        </onDuration>
+        <solver name="sinSolver">
+          <series>
+            <sine amplitude="1.0" name="cos" phase="3.14" />
+            <probe ref="section5.stack.deriveSinOutput.sineWave" />
+          </series>
+        </solver>
+      </simulation>
+
+      <button name="conclusionButton" content="Show Conclusion" style="collapsed">
+        <onClick>
+          conclusion.Style.Visibility = "visible";
+        </onClick>
+      </button>
+      <stack name="conclusion" style="collapsed centerText backgroundColor2">
+        <style>
+          <horizontalAlignment>center</horizontalAlignment>
+          <widthPercentage>80%</widthPercentage>
+        </style>
+        <p style="centerText header1 black"> $ I\!f\; y = cos( x )\; then\; \frac{dy}{dx} = -sin( x ) $. </p>
+      </stack>
+      <button name="reset" content="Reset">
+        <onClick>
+          deriveSinSim:Stop();
+          sinSim:Stop();
+          section5.stack.simButton.Style.Visibility = "collapsed";
+          section5.stack.sinLabel.Style.ForegroundColor = color.transparent;
+          section5.stack.stack2.hideStack.Style.Visibility = "collapsed";
+          section5.stack.conclusionButton.Style.Visibility = "collapsed";
+          conclusionButton.Style.Visibility = "collapsed";
+          conclusion.Style.Visibility = "collapsed";
+          section5.stack.stack2.qMark.Text = "?";
+          sinOutput.sineWave:Clear();
+          deriveSinOutput.sineWave:Clear();
+          deriveSinOutput.deriveSineLine:Clear();
+          sinSim:Start();
+        </onClick>
+      </button>
+    </stack>
+    <p style="lineBreak"></p>
+  </sectionNoTitle>
+
+  <!-- Section 3 -->
+  <sectionNoTitle name="section3">
+    <stack orientation="vertical" name="stack">
+      <style>
+        <horizontalAlignment>center</horizontalAlignment>
+        <widthPercentage>80%</widthPercentage>
+      </style>
+      <p style="header1">Application</p>
+      <p style="content1">
+        The height of a rider on a Ferris wheel can be modelled by the equation $ h( t ) = 6sin( 3t ) + 8 $, where $ h $ is the height above ground in metres,
+        and $ \!t $ is time in minutes. Determine:
+      </p>
+      <stack name="q1" style="questionAnswer">
+    
+        <p style="title">PART A</p>
+        <table widths="10% 90%" grid="false">
+          <row>
+            <column>
+              <image src="resources/question.png" inspect="false" />
+            </column>
+            <column>
+              <p> The velocity function of the ride. </p>
+            </column>
+          </row>
+        </table>
+        <p style="title">ANSWER</p>
+        <table name="table" widths="10% 90%" grid="false">
+          <row>
+            <column>
+              <image src="resources/answer.png" inspect="false" />
+            </column>
+            <column>
+              <p style="collapsed">
+                 $ \\ v( t ) = h^\prime ( t ) 
+                 \\ v( t ) = 6( cos( 3t ))( 3 )                  
+                 \\ v( t ) = 18cos( 3 t ) $
+              </p>
+            </column>
+          </row>
+        </table>
+        <button content="Show Answer">
+          <onClick>
+            table:Child(1):Child(2):Child(1).Style.Visibility = "visible";
+          </onClick>
+        </button>
+      </stack>
+      <stack name="q2" style="questionAnswer">
+        <p style="title">PART B</p>
+        <table widths="10% 90%" grid="false">
+          <row>
+            <column>
+              <image src="resources\question.png" inspect="false" />
+            </column>
+            <column>
+              <p> The acceleration function of the ride. </p>
+            </column>
+          </row>
+        </table>
+        <p style="title">ANSWER</p>
+        <table name="table2" widths="10% 90%" grid="false">
+          <row>
+            <column>
+              <image src="resources\answer.png" inspect="false" />
+            </column>
+            <column>
+              <p style="hidden">
+                 $ \\ a( t ) = v^\prime ( t ) 
+                 \\ a( t ) = 18( -sin( 3t ))( 3 )                  
+                 \\ a( t ) = -54sin( 3 t ) $
+              </p>
+            </column>
+          </row>
+        </table>
+        <button content="Show Answer">
+          <onClick>
+            section3.stack.q2.table2:Child(1):Child(2):Child(1).Style.Visibility = "visible";
+          </onClick>
+        </button>
+      </stack>
+      <stack name="q3" style="questionAnswer">
+        <p style="title">PART C</p>
+        <table widths="10% 90%" grid="false">
+          <row>
+            <column>
+              <image src="resources\question.png" inspect="false" />
+            </column>
+            <column>
+              <p> What is $ v( 5 ) ? $. </p>
+            </column>
+          </row>
+        </table>
+        <p style="title">ANSWER</p>
+        <table name="table" widths="10% 90%" grid="false">
+          <row>
+            <column>
+              <image src="resources\answer.png" inspect="false" />
+            </column>
+            <column>
+              <p style="hidden">
+                 $ \\ v( 5 ) = 18cos( 3( 5 ) ) 
+                 \\ v( 5 ) = 18( cos( 15 ) )                  
+                 \\ v( 5 ) = 17.4 $
+              </p>
+            </column>
+          </row>
+        </table>
+        <button content="Show Answer">
+          <onClick>
+            section3.stack.q3.table:Child(1):Child(2):Child(1).Style.Visibility = "visible";
+          </onClick>
+        </button>
+      </stack>
+      <!-- This line can be removed after the curriculumStyles.xml fragment is included -->
+      <p style="invisible">This document is formatted improperly because the curriculumStyles.xml fragment was not included at the beginning of your document.</p>
+    </stack>
+  </sectionNoTitle>
+
+  <!-- Section 4 -->
+  <sectionNoTitle name="section4">
+    <stack orientation="vertical" name="stack">
+    <style>
+      <horizontalAlignment>center</horizontalAlignment>
+      <widthPercentage>80%</widthPercentage>
+    </style>
+    <p style="bigTitle">Practice</p>
+
+    <stack style="questionAnswer" name="q1">
+      <p style="title qNum"> 
+      </p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>$ y = 3sin( x ) $. Find $ \frac{dy}{dx} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <p name="answer" style="collapsed">B</p>
+      <script>
+        local selection = -1;
+        local deselectedColor = color.silver;
+        local selectedColor = color.rgb(50, 133, 184);
+
+        local function chooseButton(i)
+        if selection &gt; 0 then
+        stack2.table1:Child(selection):Child(2):Child(1).Style.BackgroundColor = deselectedColor;
+        end
+        stack2.table1:Child(i):Child(2):Child(1).Style.BackgroundColor = selectedColor;
+        selection = i;
+        end
+      </script>
+      <stack orientation="horizontal" name="stack2">
+        <table name="table1" widths="10% 20% 60% 10%" grid="false">
+          <style name="buttons">
+            <foreground color="white" />
+            <background color="silver" />
+          </style>
+          <row name="row">
+            <column>
+              <image src="resources/answer.png" inspect="false" />
+            </column>
+            <column>
+              <button content="A">
+                <onClick>final.Text="A"; chooseButton(1);</onClick>
+              </button>
+            </column>
+            <column>
+              <p> $ y^\prime = -3cos( x ) $</p>
+            </column>
+            <column name="column">
+              <image name="mark" src="resources/invisible.png" inspect="false" />
+            </column>
+          </row>
+          <row>
+            <column />
+            <column>
+              <button content="B">
+                <onClick>final.Text="B"; chooseButton(2);</onClick>
+              </button>
+            </column>
+            <column>
+              <p>$ y^\prime = 3cos( x ) $</p>
+            </column>
+            <column>
+              <image src="resources/invisible.png" inspect="false" />
+            </column>
+          </row>
+          <row>
+            <column />
+            <column>
+              <button content="C">
+                <onClick>final.Text="C"; chooseButton(3);</onClick>
+              </button>
+            </column>
+            <column>
+              <p>$ y^\prime = cos( 3x ) $</p>
+            </column>
+            <column>
+              <image src="resources/invisible.png" inspect="false" />
+            </column>
+          </row>
+          <!-- Insert the following code for each subsequent choice (Choice D, E, F, etc).  Delete if unnecessary.
+        <row>
+          <column />
+          <column>
+            <button content="Replace with Next Letter">
+              <onClick>final.Text="Replace with Next Letter"; chooseButton(Replace with Next Number);;</onClick>
+            </button>
+          </column>
+          <column>
+            <p>Enter Choice Here</p>
+          </column>
+          <column>
+            <image src="resources/invisible.png" inspect="false" />
+          </column>
+        </row> -->
+        </table>
+      </stack>
+      <p name="final" style="collapsed" />
+      <stack name="hint" style="collapsed">
+        <p> Sorry, that is incorrect. </p>
+      </stack>
+      <stack name="solution" style="collapsed">
+        <p> You are correct. </p>
+      </stack>
+      <button content="Check Answer">
+        <onClick>
+
+          if string.lower(final.Text) == string.lower(answer.Text) then
+          section4.stack.q1.stack2.table1.row.column.mark.ImageSource = "resources/right.png";
+          solution.Style.Visibility = "visible";
+          hint.Style.Visibility = "collapsed";
+          else
+          section4.stack.q1.stack2.table1.row.column.mark.ImageSource = "resources/wrong.png";
+          solution.Style.Visibility = "collapsed";
+          hint.Style.Visibility = "visible";
+          end
+
+        </onClick>
+      </button>
+    </stack>
+    <stack style="questionAnswer" name="q2">
+        <p style="title qNum"> 
+        </p>
+        <table widths="10% 90%" grid="false">
+          <row>
+            <column>
+              <image src="resources\question.png" inspect="false" />
+            </column>
+            <column>
+              <p>$ y = cos( 4x ) $. Find $ \frac{dy}{dx} $</p>
+            </column>
+          </row>
+        </table>
+        <p style="title">ANSWER</p>
+        <p name="answer" style="collapsed">C</p>
+        <script>
+          local selection = -1;
+          local deselectedColor = color.silver;
+          local selectedColor = color.rgb(50, 133, 184);
+
+          local function chooseButton(i)
+          if selection &gt; 0 then
+          stack2.table1:Child(selection):Child(2):Child(1).Style.BackgroundColor = deselectedColor;
+          end
+          stack2.table1:Child(i):Child(2):Child(1).Style.BackgroundColor = selectedColor;
+          selection = i;
+          end
+        </script>
+        <stack orientation="horizontal" name="stack2">
+          <table name="table1" widths="10% 20% 60% 10%" grid="false">
+            <style name="buttons">
+              <foreground color="white" />
+              <background color="silver" />
+            </style>
+            <row name="row">
+              <column>
+                <image src="resources/answer.png" inspect="false" />
+              </column>
+              <column>
+                <button content="A">
+                  <onClick>final.Text="A"; chooseButton(1);</onClick>
+                </button>
+              </column>
+              <column>
+                <p> $ y^\prime = -sin( 4x ) $</p>
+              </column>
+              <column name="column">
+                <image name="mark" src="resources/invisible.png" inspect="false" />
+              </column>
+            </row>
+            <row>
+              <column />
+              <column>
+                <button content="B">
+                  <onClick>final.Text="B"; chooseButton(2);</onClick>
+                </button>
+              </column>
+              <column>
+                <p>$ y^\prime = 4sin( x ) $</p>
+              </column>
+              <column>
+                <image src="resources/invisible.png" inspect="false" />
+              </column>
+            </row>
+            <row>
+              <column />
+              <column>
+                <button content="C">
+                  <onClick>final.Text="C"; chooseButton(3);</onClick>
+                </button>
+              </column>
+              <column>
+                <p>$ y^\prime = -4sin( 4x ) $</p>
+              </column>
+              <column>
+                <image src="resources/invisible.png" inspect="false" />
+              </column>
+            </row>
+            <!-- Insert the following code for each subsequent choice (Choice D, E, F, etc).  Delete if unnecessary.
+          <row>
+            <column />
+            <column>
+              <button content="Replace with Next Letter">
+                <onClick>final.Text="Replace with Next Letter"; chooseButton(Replace with Next Number);;</onClick>
+              </button>
+            </column>
+            <column>
+              <p>Enter Choice Here</p>
+            </column>
+            <column>
+              <image src="resources/invisible.png" inspect="false" />
+            </column>
+          </row> -->
+          </table>
+        </stack>
+        <p name="final" style="collapsed" />
+        <stack name="hint" style="collapsed">
+          <p> Sorry, that is incorrect. </p>
+        </stack>
+        <stack name="solution" style="collapsed">
+          <p> You are correct. </p>
+        </stack>
+        <button content="Check Answer">
+          <onClick>
+
+            if string.lower(final.Text) == string.lower(answer.Text) then
+            section4.stack.q2.stack2.table1.row.column.mark.ImageSource = "resources/right.png";
+            solution.Style.Visibility = "visible";
+            hint.Style.Visibility = "collapsed";
+            else
+            section4.stack.q2.stack2.table1.row.column.mark.ImageSource = "resources/wrong.png";
+            solution.Style.Visibility = "collapsed";
+            hint.Style.Visibility = "visible";
+            end
+
+          </onClick>
+        </button>
+      </stack>
+    <stack style="questionAnswer" name="q3">
+        <p style="title qNum"> 
+        </p>
+        <table widths="10% 90%" grid="false">
+          <row>
+            <column>
+              <image src="resources\question.png" inspect="false" />
+            </column>
+            <column>
+              <p>$ y = 2sin( x )cos( x ) $. Which of the following is NOT $ \frac{dy}{dx} $</p>
+            </column>
+          </row>
+        </table>
+        <p style="title">ANSWER</p>
+        <p name="answer" style="collapsed">A</p>
+        <script>
+          local selection = -1;
+          local deselectedColor = color.silver;
+          local selectedColor = color.rgb(50, 133, 184);
+
+          local function chooseButton(i)
+          if selection &gt; 0 then
+          stack2.table1:Child(selection):Child(2):Child(1).Style.BackgroundColor = deselectedColor;
+          end
+          stack2.table1:Child(i):Child(2):Child(1).Style.BackgroundColor = selectedColor;
+          selection = i;
+          end
+        </script>
+        <stack orientation="horizontal" name="stack2">
+          <table name="table1" widths="10% 20% 60% 10%" grid="false">
+            <style name="buttons">
+              <foreground color="white" />
+              <background color="silver" />
+            </style>
+            <row name="row">
+              <column>
+                <image src="resources/answer.png" inspect="false" />
+              </column>
+              <column>
+                <button content="A">
+                  <onClick>final.Text="A"; chooseButton(1);</onClick>
+                </button>
+              </column>
+              <column>
+                <p> $ sin( 2x ) $</p>
+              </column>
+              <column name="column">
+                <image name="mark" src="resources/invisible.png" inspect="false" />
+              </column>
+            </row>
+            <row>
+              <column />
+              <column>
+                <button content="B">
+                  <onClick>final.Text="B"; chooseButton(2);</onClick>
+                </button>
+              </column>
+              <column>
+                <p>$ 2( cos^2 ( x ) - sin^2 ( x ) ) $</p>
+              </column>
+              <column>
+                <image src="resources/invisible.png" inspect="false" />
+              </column>
+            </row>
+            <row>
+              <column />
+              <column>
+                <button content="C">
+                  <onClick>final.Text="C"; chooseButton(3);</onClick>
+                </button>
+              </column>
+              <column>
+                <p>$ 2cos( 2x ) $</p>
+              </column>
+              <column>
+                <image src="resources/invisible.png" inspect="false" />
+              </column>
+            </row>
+            <!-- Insert the following code for each subsequent choice (Choice D, E, F, etc).  Delete if unnecessary.
+          <row>
+            <column />
+            <column>
+              <button content="Replace with Next Letter">
+                <onClick>final.Text="Replace with Next Letter"; chooseButton(Replace with Next Number);;</onClick>
+              </button>
+            </column>
+            <column>
+              <p>Enter Choice Here</p>
+            </column>
+            <column>
+              <image src="resources/invisible.png" inspect="false" />
+            </column>
+          </row> -->
+          </table>
+        </stack>
+        <p name="final" style="collapsed" />
+        <stack name="hint" style="collapsed">
+          <p> Sorry, that is incorrect. </p>
+        </stack>
+        <stack name="solution" style="collapsed">
+          <p> You are correct. </p>
+        </stack>
+        <button content="Check Answer">
+          <onClick>
+
+            if string.lower(final.Text) == string.lower(answer.Text) then
+            section4.stack.q3.stack2.table1.row.column.mark.ImageSource = "resources/right.png";
+            solution.Style.Visibility = "visible";
+            hint.Style.Visibility = "collapsed";
+            else
+            section4.stack.q3.stack2.table1.row.column.mark.ImageSource = "resources/wrong.png";
+            solution.Style.Visibility = "collapsed";
+            hint.Style.Visibility = "visible";
+            end
+
+          </onClick>
+        </button>
+      </stack>
+    </stack>
+    <image style="collapsed tiny" src="resources/right.png" />
+    <image style="collapsed tiny" src="resources/wrong.png" />
+  </sectionNoTitle>
+
+</document>

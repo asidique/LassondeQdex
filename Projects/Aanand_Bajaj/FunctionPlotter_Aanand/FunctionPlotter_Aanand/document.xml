@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="GD13115EC_5205_41F3_B733_F48E583B7E3C">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>STRO – Circle Function Plotter</title>
+    <creator>admin</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/cover.jpg" />
+  </metadata>
+
+  <include src="curriculumThemePack/curriculumStyles.xml" />
+  <include src="plotTools.xml" />
+
+  <!--Header and Footer-->
+  <style name="backgroundColor">
+    <background color="50 133 184" />
+  </style>
+  <style name="fontColor">
+    <foreground color="255 255 255" />
+  </style>
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="fontColor">Amanda Koon</p>
+      <p style="fontColor rightText">MCR3U</p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/logo1.png" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/logo2.png" />
+    </stack>
+  </footer>
+
+  <!-- Circle/Ellipse -->
+  <section name="Circle">
+    <title>Circle Relation Plotter</title>
+    <stack style="questionAnswer">
+      <p style="title"> QUESTION 1</p>
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <equation>
+              $ r^2 = (x - a)^2 + (y - b)^2 $
+            </equation>
+            <style name="blackLine">
+              <foreground color="black" />
+            </style>
+            <style name="functionLine">
+              <foreground color="50 133 184" />
+              <lineThickness>3</lineThickness>
+            </style>
+            <xyPlot name="myPlot" pan="disabled" tap="disabled" zoom="disabled">
+              <axis dim="y" auto="fixed" min="-20" max="20"></axis>
+              <axis dim="x" auto="lockAspectRatio" min="-20" max="20"></axis>
+              <series name="xAxis" manual="true" style="blackLine" />
+              <series name="yAxis" manual="true" style="blackLine" />
+              <series name="circle_series" manual="true" style="functionLine" capacity="100000" />
+            </xyPlot>
+
+            <script>
+
+              <![CDATA[
+              
+              a = 0;
+              b = 0;
+              r = 5;
+              circleSeries = myPlot.circle_series;
+              graphRoundValue = 0.1;
+              labelRoundValue = 0.1;
+              
+              
+              local function redrawEllipse()
+                circleSeries:Clear();
+                plotTools.drawEllipse(myPlot.circle_series, vector({a, b}), r, r);
+                circleSeries:Update();
+              end
+              
+              local xAxis = myPlot.xAxis;
+              local yAxis = myPlot.yAxis;
+
+              xAxis:Add(-100,0)
+              xAxis:Add(100,0)
+
+              yAxis:Add(0,-100)
+              yAxis:Add(0,100)
+              
+              redrawEllipse();
+              ]]>
+            </script>
+
+            <p name="newEquation" style="centerText">
+              Your Equation: r<sup>2</sup>= (x-a)<sup>2</sup>+ (y-b)<sup>2</sup>
+            </p>
+            <p style="centerText" name="parameters">Centre: (a,b)</p>
+            <p style="centerText" name="radius">Radius: r</p>
+            <script>
+              <![CDATA[
+               i = r;
+               j = a;
+               k = b;
+              local function updateEquation()
+                newEquation.FormattedText = "Your Equation: "..i.."<sup>2</sup> = ".."(x - "..j..")".."<sup>2</sup> + ".."(y - "..k..")".."<sup>2</sup>"
+                parameters.FormattedText = "Centre: ("..j..","..k..")";
+                radius.FormattedText = "Radius: "..i;
+              end
+              
+              function updateRValue(value)
+                i = round(value,labelRoundValue);
+              end
+              
+              function updateAValue(value)
+                j = round(value,labelRoundValue);
+              end
+              
+              function updateBValue(value)
+                k = round(value,labelRoundValue)
+              end
+                
+              updateEquation()
+                            
+               function round(value,multiple)
+                result = 0;
+                
+                if value % multiple ~= 0 then
+                  result = multiple;
+                  division = math.floor((value/multiple)+1);
+                  result = division*multiple;
+                  return result;
+                else 
+                  return value;
+                end
+              end
+            ]]>
+            </script>
+
+            <!--slider for r-->
+            <stack orientation="horizontal">
+              <p name="rLabel">r = 5.00</p>
+              <slider name="rSlider" min="3" max="20" value="5">
+                <onValueChanged>
+                  <![CDATA[
+                  r = round(value,graphRoundValue);
+                  rLabel.Text = "r = "..round(value,labelRoundValue)
+                  redrawEllipse();
+                  updateRValue(value);
+                  updateEquation();
+                ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+            <!--slider for a-->
+            <stack orientation="horizontal">
+              <p name="aLabel">a = 0</p>
+              <slider name="aSlider" min="-20" max="20" value="0">
+                <onValueChanged>
+                  <![CDATA[
+                  a = round(value, graphRoundValue);
+                  aLabel.Text = "a = "..round(value,labelRoundValue)
+                  redrawEllipse();
+                  updateAValue(value);
+                  updateEquation();
+                ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+            <!--slider for b-->
+            <stack orientation="horizontal">
+              <p name="bLabel">b = 0</p>
+              <slider name="bSlider" min="-20" max="20" value="0">
+                <onValueChanged>
+                  <![CDATA[
+                  b = round(value, graphRoundValue);
+                  bLabel.Text = "b = "..round(value,labelRoundValue)
+                  redrawEllipse();
+                  updateBValue(value);
+                  updateEquation();
+                ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+          </column>
+        </row>
+      </table>
+
+    </stack>
+  </section>
+
+</document>

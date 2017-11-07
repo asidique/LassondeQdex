@@ -1,0 +1,36 @@
+Module 1 - Rate of Change
+1.	Introduction to differential calculus - Thiago
+2.	Calculating the slope of a secant line to a curve - Asseel
+
+Module 2 - Introduction to Limits
+1.	Introduction to limits
+2.	Estimating a limit numerically 
+3.	Estimating one sided limits from graphs 
+4.	Limit at a point of discontinuity 
+5.	Estimating two sided limit from graphs 
+5a.	Limits properties (DONE)
+6.	Limits and infinity - 
+7.	Visually determining vertical asymptotes - Asseel
+8.	Vertical asymptotes (Using Natural Log) - Asseel
+
+Module 3 - Derivatives
+1.	Defining derivative as a slope of a tangent 
+2.	Derivative intuition module 
+3.	Power rule 
+4.	Chain Rule 
+5.	Chain rule with triple composition 
+6.	Product rule 
+7.	Product rule for more than two functions  
+8.	Quotient rule 
+9.	Combining the chain and the product rule 
+10.	Implicit Differentiation 
+
+Module 4 - Applications of Derivatives
+1.	Motion along a line 
+2.	Identifying minima and maxima 
+3.	Finding critical points 
+4.	Concavity upwards and downwards 
+5.	Inflection points 
+6.	Graphing using derivatives
+7.	Optimizing with calculus
+`

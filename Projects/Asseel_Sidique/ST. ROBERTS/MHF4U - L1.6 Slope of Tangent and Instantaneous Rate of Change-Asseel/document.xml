@@ -1,0 +1,1088 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="GBE5EFAFF_08EC_4D88_AD03_41FD06E231EC">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>MHF4U - L1.6 Slope of Tangent and Instantaneous Rate of Change</title>
+    <creator>Asseel</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/cover.png" />
+  </metadata>
+
+  <include src="curriculumThemePack/curriculumStyles.xml" />
+  <include src="plotTools.xml" />
+ 
+
+  <!--Header and Footer-->
+  <style name="backgroundColor">
+    <background color="50 133 184" />
+  </style>
+  <style name="fontColor">
+    <foreground color="255 255 255" />
+  </style>
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="fontColor">Amanda Koon</p>
+      <p style="fontColor rightText">MHF4U</p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/logo1.png" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/logo2.png" />
+    </stack>
+  </footer>
+
+  <!-- Summary -->
+  <section name="summary">
+    <title>Introduction</title>
+    <stack orientation="vertical">
+      <style>
+        <widthPercentage>80%</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+    </style>
+    <p>The history of mathematics presents the development of calculus as being accredited to Sir Isaac Newton (1642-1727) an English physicist, mathematician and Gottfried Wilhelm Leibnitz (1646-1716) a German physicist, mathematician. </p>
+    <p>
+      <br />The introduction of calculus created an explosion in the development of the physical sciences and other areas of science as calculus provided a way of describing natural and physical laws in a mathematical format which is easily understood. The development of calculus also opened new areas of mathematics and science as individuals sought out new ways to apply the techniques of calculus.
+    </p>
+
+    <p>
+      <br />Calculus is the study of things that change and finding ways to represent these changes in a mathematical way. The symbol <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/4d9a0a04970e4bdc954fd18600c49c22.png" alt=" \bigtriangleup " scale="0.0175" baseline="0.194444" inspect="false" /> will be used to represent change. For example, the notation <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/dd8cab40800447f7be6a3f1998fac1b4.png" alt=" \bigtriangleup h " scale="0.0175" baseline="0.194444" inspect="false" /> is to be read the change in <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/6f30d21ee3064b829212b71d56a1affa.png" alt=" h " scale="0.0175" baseline="0" inspect="false" /> (height).
+    </p>
+    </stack>
+  </section>
+
+  <!-- Secant -->
+  <section name="slopeSecant">
+    <title>Slope of a Secant Line</title>
+    <stack style="highlightBox">
+      <p>A secant line is defined by a straight line passing through two points on a curve. In general, we can define these points as having coordinates <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/13f3f970b4e14b179bebc7f34684f51a.png" alt=" (x, f(x)) " scale="0.0175" baseline="0.25" inspect="false" /> and <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/a7a7d26c28b74d669232f5e134c3dfd4.png" alt=" (x + \bigtriangleup x, f(x + \bigtriangleup x)) " scale="0.0175" baseline="0.25" inspect="false" />. The slope of the secant line, given by <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/5d0956221a4d43ef92ee1b59b38ad6f0.png" alt=" m_{s} " scale="0.0175" baseline="0.149998" inspect="false" /> is given by:</p>
+    </stack>
+
+    <stack style="highlightBox">
+      <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/df3e704d10db4711bc2b9c3a56f9355f.png" alt=" m_{s} = \frac{ \bigtriangleup y}{ \bigtriangleup x} = \frac{f(x + \bigtriangleup x) - f(x)}{x + \bigtriangleup x - x} = \frac{f(x + \bigtriangleup x) - f(x)}{\bigtriangleup x } " scale="0.0175" baseline="0" inspect="true" /></p>
+    </stack>
+    
+    <stack style="highlightBox">
+      <p>The secant line represents the <b>Average Rate of Change</b> between two points on a function.
+    </p>
+    </stack>
+
+    <stack style="questionAnswer">
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <style name="blackLine">
+              <foreground color="black" />
+            </style>
+            <style name="functionLine">
+              <foreground color="50 133 184" />
+              <lineThickness>3</lineThickness>
+            </style>
+            <style name="secantLine">
+              <foreground color="red" />
+              <lineThickness>3</lineThickness>
+            </style>
+            <style name="point">
+              <foreground color="green" />
+              <lineThickness>1</lineThickness>
+            </style>
+            <xyPlot name="myPlot" pan="disabled" tap="disabled" zoom="disabled">
+              <axis dim="y" auto="fixed" min="-10" max="10"></axis>
+              <axis dim="x" auto="lockAspectRatio" min="-10" max="10"></axis>
+              <series name="xAxis" manual="true" style="blackLine" />
+              <series name="yAxis" manual="true" style="blackLine" />
+              <series name="curve" manual="true" style="functionLine" />
+              <series name="secant_series" style="secantLine"></series>
+              <series name="inter1_series" draw="points" style="point1"></series>
+              <series name="inter2_series" draw="points" style="point2"></series>
+            </xyPlot>
+
+            <script>
+
+              <![CDATA[
+              
+              local x, y;
+              local x2, y2;
+              local x3, y3;
+              local a = 1;
+              local b = 0;
+              local c = -4;
+              secantB = 0;
+             
+              
+              a2 = 1;
+              b2 = 1;
+              
+              xOne = -2;
+              xTwo = 2;
+              local fxOne, fxTwo;
+              
+              local slope;
+              local slope2;
+              
+
+              local curve = myPlot.curve;
+              local secant = myPlot.secant_series;
+              local inter1 = myPlot.inter1_series;
+              local inter2 = myPlot.inter2_series;
+              
+              graphRoundValue = 0.1;
+              labelRoundValue = 0.1;
+              
+              local function curveGraph(x)
+                  y = a*math.pow(x,2) + b*x + c;
+                  return y;
+              end
+              
+              local function secantGraph(x2)
+                  local y2;
+                  y2 = slope*x2 + secantB;
+                  return y2;
+              end
+              
+              --[[ convert secant to normal line --]]
+              local function convertSecant(x,x2)
+                  slope = (curveGraph(x + (x2 - x)) - curveGraph(x))/(x2 - x);
+                  secantB = fxOne - slope*xOne;
+              end
+              
+              local function redrawGraph()
+              curve:Clear()
+                for x = -10, 10, 0.1 do
+                  curveGraph(x);
+                  curve:Add(x,y);
+                end
+                curve:Update();
+              end
+             
+              
+              local function redrawSecant()
+               secant:Clear();
+
+                --[[ x1,fx1 and x2,fx2 --]]
+
+                
+                 fxOne = curveGraph(xOne);
+                 fxTwo = curveGraph(xTwo);
+                 
+                convertSecant(xOne,xTwo);
+
+                for x2 = -10, 10, 1 do        
+                  y2 = slope*x2 + secantB;
+                  secant:Add(x2,y2); 
+                end
+                
+                secant:Update();
+              end
+              
+              local function redrawPoints()
+                inter1:Clear();
+                inter2:Clear();
+               
+                inter1:Add(xOne,fxOne);
+                inter2:Add(xTwo,fxTwo);
+                 
+                inter1:Update();
+                inter2:Update();
+              end
+             
+                                          
+              local xAxis = myPlot.xAxis;
+              local yAxis = myPlot.yAxis;
+
+              xAxis:Add(-100,0)
+              xAxis:Add(100,0)
+
+              yAxis:Add(0,-100)
+              yAxis:Add(0,100)
+              
+              redrawGraph();
+              redrawSecant();
+              redrawPoints();
+              ]]>
+            </script>
+
+            <p name="xInter" style="centerText">
+              Intercepts: (x,y) and (x,y)
+            </p>
+            <p name="equation" style="centerText">
+              Equation of Secant Line:
+            </p>
+            <p name="slopeText" style="centerText">
+
+            </p>
+            <p name="test"></p>
+            <script>
+              <![CDATA[
+              
+              
+              local function updateEquation()  
+                if xOne == xTwo then
+                  equation.Text = "Equation of Secant Line: y = no line";
+                  slopeText.Text = "Slope: no slope";
+                else
+                  equation.Text = "Equation of Secant Line: y = "..slope.."x + "..secantB;
+                  slopeText.Text = "Slope:"..slope;
+                end
+              end
+            
+            local function updateIntercepts()
+                --[[ simple --]]
+                xInter.Text = "Intercepts: ("..xOne..","..fxOne..") and ("..xTwo..","..fxTwo..")";
+           
+              end
+              
+             
+               function round(value,multiple)
+                result = 0;
+                
+                if value % multiple ~= 0 then
+                  result = multiple;
+                  division = math.floor((value/multiple)+1);
+                  result = division*multiple;
+                  return result;
+                else 
+                  return value;
+                end
+              end
+              updateEquation();
+
+            ]]>
+            </script>
+
+            <!--slider for a-->
+            <stack orientation="horizontal">
+              <p name="aLabel">
+                <style>
+                  <foreground color="orange" />
+                </style>
+                x1 = -2
+              </p>
+              <slider name="aSlider" min="-10" max="10" value="-2">
+                <onValueChanged>
+                  <![CDATA[
+                  xOne = round(value,graphRoundValue);
+                  aLabel.Text = "x1 = "..round(value,labelRoundValue)
+                    redrawSecant();
+                    redrawPoints();
+                    updateEquation();
+                    updateIntercepts();
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+            <!--slider for b-->
+            <stack orientation="horizontal">
+              <p name="bLabel">
+                <style>
+                  <foreground color="green" />
+                </style>
+                x2 = 1
+              </p>
+              <slider name="bSlider" min="-10" max="10" value="1">
+                <onValueChanged>
+                  <![CDATA[
+                  xTwo = round(value,graphRoundValue);
+                  bLabel.Text = "x2 = "..round(value,labelRoundValue)
+                    redrawSecant();
+                    redrawPoints();
+                    updateEquation();
+                    updateIntercepts();
+
+                ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+          </column>
+        </row>
+      </table>
+    </stack>
+    
+  </section>
+
+  <!-- Tangent -->
+  <section name="slopeTangent">
+    <title>Slope of a Tangent Line</title>
+    
+    <stack>
+      
+    </stack>
+    <image src="curriculumThemePack\question.png" style="collapsed" inspect="false" />
+    <image src="curriculumThemePack\right.png" style="collapsed" inspect="false" />
+    <image src="curriculumThemePack\wrong.png" style="collapsed" inspect="false" />
+
+    <stack style="highlightBox">
+      <p>
+        As the point A approaches point B, the quantity <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/1acd832a241d4014a5d0ea8bb3896a0c.png" alt=" \bigtriangleup x " scale="0.0175" baseline="0.194444" inspect="false" /> approaches zero, the secant line approaches the <b>tangent line</b> at point B.  Additionally, <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/89f48717d2034a0c954361677ae5ed63.png" alt=" \bigtriangleup y " scale="0.0175" baseline="0.194444" inspect="false" /> also approaches zero as A gets closer to B.
+
+        <br />
+        <br />
+        One way to <b>approzimate</b> the slope of a tangent is to find the slope between the tangent point <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/0b5cbcbb1b7e48259eaecaa8c98bdfac.png" alt=" ( x, y ) " scale="0.0175" baseline="0.25" inspect="false" /> and another point that is very close to the tangent point, <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/d8bd9d4e0e0d43618fbb5cc0d4fe4ebe.png" alt=" ( x \pm 0.001 , y \pm 0.001 ) " scale="0.0175" baseline="0.25" inspect="false" />.
+      </p>
+    </stack>
+    
+    <stack style="highlightBox">
+      <p>The tangent line at point <b>A</b> represents the <b>Instantaneous Rate of Change</b> of the function at <b>A</b>.
+    </p>
+    </stack>
+
+    <stack style="questionAnswer">
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <style name="blackLine">
+              <foreground color="black" />
+            </style>
+            <style name="functionLine">
+              <foreground color="50 133 184" />
+              <lineThickness>3</lineThickness>
+            </style>
+            <style name="tangentLine">
+              <foreground color="red" />
+              <lineThickness>3</lineThickness>
+            </style>
+            <style name="point1">
+              <foreground color="green" />
+              <background color="green" />
+              <lineThickness>1</lineThickness>
+            </style>
+            <style name="point2">
+              <foreground color="purple" />
+              <background color="purple" />
+              <lineThickness>1</lineThickness>
+            </style>
+            <xyPlot name="myPlot" pan="disabled" tap="disabled" zoom="disabled">
+              <axis dim="y" auto="fixed" min="-10" max="10"></axis>
+              <axis dim="x" auto="fixed" min="-10" max="10"></axis>
+              <series name="xAxis" manual="true" style="blackLine" />
+              <series name="yAxis" manual="true" style="blackLine" />
+              <series name="curve" manual="true" style="functionLine" />
+              <series name="tangent_series" style="tangentLine"></series>
+              <series name="inter1_series" draw="points" style="point"></series>
+            </xyPlot>
+
+            <script>
+
+              <![CDATA[
+              
+              local x, y;
+              local x2, y2;
+              local a = 1;
+              local b = 0;
+              local c = -4;
+              tangentYInter = 0;
+              
+              
+              xOne = 0;
+              xTwo = 1;
+              local fxOne;
+              
+              local slope;
+              
+
+              local curve = myPlot.curve;
+              local tangent = myPlot.tangent_series;
+              local inter1 = myPlot.inter1_series;
+              
+              graphRoundValue = 0.1;
+              labelRoundValue = 0.1;
+              
+              local function curveGraph(x)
+                  y = a*math.pow(x,2) + b*x + c;
+                  return y;
+              end
+              
+              
+              --[[ get y-intercept of tangent --]]
+              local function convertTangent()
+                  tangentYInter = fxOne - (2*a*(xOne) + b)*(xOne)
+              end
+              
+              local function tangentGraph(x)
+                y = (2*a*xOne + b)*x + tangentYInter;
+                return y;
+              end
+              
+              local function redrawGraph()
+              curve:Clear()
+                for x = -10, 10, 0.1 do
+                  curveGraph(x);
+                  curve:Add(x,y);
+                end
+                curve:Update();
+              end
+              
+              local function redrawTangent()
+              tangent:Clear();
+                --[[ x1,fx1 and x2,fx2 --]]
+                 fxOne = curveGraph(xOne);
+                
+                convertTangent();
+                
+                while xOne == xTwo do
+                  xTwo = math.random();
+                end
+                
+                slope = (tangentGraph(xTwo) - tangentGraph(xOne))/(xTwo - xOne);
+
+                for x2 = -10, 10, 1 do        
+                  y2 = (2*a*xOne + b)*x2 + tangentYInter;
+                  tangent:Add(x2,y2); 
+                end
+                tangent:Update();
+              end
+              
+              local function redrawPoints()
+                inter1:Clear();
+                inter1:Add(xOne,fxOne);
+                inter1:Update();
+              end
+                                          
+              local xAxis = myPlot.xAxis;
+              local yAxis = myPlot.yAxis;
+
+              xAxis:Add(-100,0)
+              xAxis:Add(100,0)
+
+              yAxis:Add(0,-100)
+              yAxis:Add(0,100)
+              
+              redrawGraph();
+              redrawTangent();
+              redrawPoints();
+              ]]>
+            </script>
+
+            <p name="xInter" style="centerText">
+              Tangent Point: (x,y)
+            </p>
+            <p name="equation" style="centerText">
+              Equation of Secant Line:
+            </p>
+            <p name="slopeText" style="centerText">
+
+            </p>
+            <p name="test"></p>
+            <script>
+              <![CDATA[
+              
+              
+              local function updateEquation()
+                slope = round(slope,labelRoundValue);
+                tangentYInter = round(tangentYInter,labelRoundValue);
+                equation.Text = "Equation of Tangent Line: y = "..slope.."x + "..tangentYInter;
+                slopeText.Text = "Slope:"..slope;
+              end
+            
+            local function updateIntercepts()
+                --[[ simple --]]
+              xInter.Text = "Tangent Point: ("..xOne..","..fxOne..")";
+              end
+              
+             
+               function round(value,multiple)
+                result = 0;
+                
+                if value % multiple ~= 0 then
+                  result = multiple;
+                  division = math.floor((value/multiple)+1);
+                  result = division*multiple;
+                  return result;
+                else 
+                  return value;
+                end
+              end
+              updateEquation();
+
+            ]]>
+            </script>
+
+            <!--slider for a-->
+            <stack orientation="horizontal">
+              <p name="aLabel">x = 0</p>
+              <slider name="aSlider" min="-10" max="10" value="0">
+                <onValueChanged>
+                  <![CDATA[
+                  xOne = round(value,graphRoundValue);
+                  aLabel.Text = "x = "..round(value,labelRoundValue)
+                    redrawTangent();
+                    redrawPoints();
+                    updateEquation();
+                    updateIntercepts();
+                    
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+          </column>
+        </row>
+      </table>
+    </stack>
+
+  </section>
+  
+  <!--Question 1-->
+  <section>
+    <title>Example 1</title>
+    <onDocumentOpened>
+      local xLab = stack1.xy1.xLabel;
+      local yLab = stack1.xy1.yLabel;
+      
+      char.textX(xLab, {9, -1.5}, 1);
+      char.textY(yLab, {0.5, 8.5}, 1);
+    </onDocumentOpened>
+    <stack name="stack1" orientation="vertical">
+      <style>
+        <widthPercentage>80%</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      
+      <stack style="highlightBox">
+        <stack orientation="horizontal">
+          <p>Draw the function <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/5eba3c5c74a44f2597602781ffd9a53c.png" alt=" g( x ) = ( \frac{1}{4}x^3 ) " scale="0.0175" baseline="0.344841" inspect="false" /></p>
+          <button name="simStart" content="Start Drawing">
+            <style>
+              <widthPercentage>50%</widthPercentage>
+            </style>
+            <onClick>
+              sim1:Stop();
+              stack1.xy1.l1:Clear();
+              sim1:Play();
+            </onClick>
+          </button>    
+        </stack>
+      </stack>
+      
+      <xyPlot name="xy1" pan="disabled" tap="disabled" zoom="disabled">
+        <style>
+          <widthPercentage>60%</widthPercentage>
+        </style>
+        <axis dim="x" min="-12" max="12" auto="none"></axis>
+        <axis dim="y" min="-10" max="10" auto="none"></axis>
+        <series capacity="2" draw="line">
+          <style>
+            <foreground color="black" />
+            <lineThickness>1.5</lineThickness>
+          </style>
+          <data>
+            -18 0; 18 0
+          </data>
+        </series>
+        <series capacity="2" draw="line">
+          <style>
+            <foreground color="black" />
+            <lineThickness>1.5</lineThickness>
+          </style>
+          <data>
+            0 18; 0 -18
+          </data>
+        </series>
+        <series name="xLabel">
+          <style>
+            <foreground color="black" />
+          </style>
+        </series>
+        <series name="yLabel">
+          <style>
+            <foreground color="black" />
+          </style>
+        </series>
+        <series name="l1"></series> 
+        <series name="l2"></series>
+        <series name="l2point" draw="points">
+          <style>
+            <foreground color="green" />
+            <background color="green" />
+          </style>
+        </series>
+        <series name="l2point2" draw="points">
+          <style>
+            <foreground color="green" />
+            <background color="green" />
+          </style>
+        </series>
+      </xyPlot>
+      <simulation name="sim1" duration="4" loop="false" period="0.01" asynchronous="false">
+        <onDuration></onDuration>
+        <onUpdate>
+          local series = stack1.xy1.l1;
+          local x = (time * 5) - 10;
+          series:Add(x, math.pow(1/4*x, 3))
+        </onUpdate>
+      </simulation>
+      <stack style="highlightBox">
+        <stack orientation="horizontal">
+          <p>Draw the tangent to <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/ccc25054e07f40da838a6ccbc9ac60a4.png" alt=" g( x ) " scale="0.0175" baseline="0.25" inspect="false" /> at <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/935e6725f7f14b63836fb1b253bf20e9.png" alt=" x = 4 " scale="0.0175" baseline="0" inspect="false" /></p>
+          <button name="simStart" content="Start Drawing">
+            <style>
+              <widthPercentage>50%</widthPercentage>
+            </style>
+            <onClick>
+              sim2:Stop();
+              stack1.xy1.l2:Clear();
+              sim2:Play();
+            </onClick>
+          </button>    
+        </stack>
+      </stack>
+      <simulation name="sim2" duration="2" loop="false" period="0.01" asynchronous="false">
+        <onDuration>
+          stack1.xy1.l2point:Add(4, 1)
+        </onDuration>
+        <onUpdate>
+          local series = stack1.xy1.l2;
+          local x = (time*10) - 10;
+          series:Add(x+4, 1/2*x+0.95)
+        </onUpdate>
+      </simulation>
+      <stack style="highlightBox">
+        <stack orientation="horizontal">
+          <p>Find the approximate slope of the tangent</p>
+          <button name="btn3" content="Show Answer">
+            <style>
+              <widthPercentage>50%</widthPercentage>
+            </style>
+            <onClick>
+              ans.Style.Visibility = "visible";
+              stack1.xy1.l2point2:Add(10, 4);
+            </onClick>
+          </button>
+        </stack>
+        <stack name="ans" style="collapsed">
+          <p>To find the approximate slope, we can do so graphically using the point <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/79488082c8464f0ba527af475604ed23.png" alt=" ( 4, 1 ) " scale="0.0175" baseline="0.25" inspect="false" /> and another approximate point on the tangent <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/a8edd708f99046fd89ed5f3078e80636.png" alt=" ( 10,  4 ) " scale="0.0175" baseline="0.25" inspect="false" />. </p>
+          <p>The slope is determined by the formula <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/3e933176b0084566860e06368c1804b1.png" alt=" m_{t} = \frac{ \bigtriangleup y} { \bigtriangleup x} " scale="0.0175" baseline="0.480951" inspect="false" /></p>
+          <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/6ad192c640ef4d42899f82b2aa19f1a6.png" alt=" m_{t} = \frac{4 - 1}{10 - 4} " scale="0.0175" baseline="0" inspect="true" /> </p>
+          <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/c909b06a3e0b40e28127321cb52e6511.png" alt=" m_{t} = \frac{3}{6} " scale="0.0175" baseline="0" inspect="true" /> </p>
+          <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/f0aa86667142419b8395609b7f759515.png" alt=" m_{t} = \frac{1}{2} " scale="0.0175" baseline="0" inspect="true" /> </p>
+        </stack>
+        
+      </stack>
+    </stack>
+  </section>
+
+  <!--Question 2-->
+  <section name="section5">
+    <title>Example 2</title>
+    <script>
+      local xLab = section5.stack1.stack2.xy1.xLabel;
+      local yLab = section5.stack1.stack2.xy1.yLabel;
+
+
+      char.textX(xLab, {9, -1.5}, .6);
+      char.textY(yLab, {0.5, 18.5}, .6);
+
+      local series = section5.stack1.stack2.xy1.l1;
+      local tangent = section5.stack1.stack2.xy1.tangent;
+      for x=-10, 10, 0.1 do
+      series:Add(x, 6*math.pow(x,2) - 4);
+      tangent:Add(x-1.2, -24*x)
+      end
+    </script>
+    
+    <stack name="stack1" orientation="vertical">
+      <style>
+        <widthPercentage>80%</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      
+      <stack name="stack2" style="highlightBox">
+        <stack orientation="horizontal">
+          <p>For the function <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/fa988e7e0b524f75a6a812380d826206.png" alt=" f( x ) = 6x^2 - 4 " scale="0.0175" baseline="0.25" inspect="false" />, estimate the instantaneous rate of change at <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/029bc6a7ccbc4562ab90f367341ef9ad.png" alt=" x = -2 " scale="0.0175" baseline="0.083333" inspect="false" /> without graphing.</p>
+          <button name="btn1" content="Show Answer">
+            <style>
+              <widthPercentage>50%</widthPercentage>
+            </style>
+            <onClick>
+              ans3.Style.Visibility = "visible";
+            </onClick>
+          </button>    
+        </stack>
+        <stack name="ans3" style="collapsed">
+          <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/b8e620edf3114cf49ca99e8a6842afe1.png" alt=" m_{t} = \frac{ f( -2 ) - f( -2.001 ) }{ -2 - (-2.001) } " scale="0.0175" baseline="0" inspect="true" /> </p>
+          <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/fdfbea66303f422e81ab1210d30e6aa9.png" alt=" m_{t} = \frac{20 - 20.024}{0.001} " scale="0.0175" baseline="0" inspect="true" /></p>
+          <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/5e29286e49634b2aa59e960d4d6865c9.png" alt=" m_{t} = -24 " scale="0.0175" baseline="0" inspect="true" /></p>
+          <button content="Show Graph">
+            <onClick>
+              section5.stack1.stack2.xy1.Style.Visibility = "visible"
+
+            </onClick>
+          </button>
+        </stack>
+        <script>
+ 
+        </script>
+        <xyPlot name="xy1" pan="disabled" tap="disabled" zoom="disabled">
+          <style>
+            <visibility>collapsed</visibility>
+          </style>
+          <axis dim="x" min="-10" max="10" auto="none"></axis>
+          <axis dim="y" min="-5" max="20" auto="none"></axis>
+          <series capacity="2" draw="line">
+            <style>
+              <foreground color="black" />
+              <lineThickness>1.5</lineThickness>
+            </style>
+            <data>
+              -10 0; 10 0
+            </data>
+          </series>
+          <series capacity="2" draw="line">
+            <style>
+              <foreground color="black" />
+              <lineThickness>1.5</lineThickness>
+            </style>
+            <data>
+              0 90; 0 -10
+            </data>
+          </series>
+          <series name="xLabel">
+          <style>
+            <foreground color="black" />
+          </style>
+        </series>
+          <series name="yLabel">
+            <style>
+              <foreground color="black" />
+            </style>
+          </series>
+          <series name="tangent"></series>
+          <series name="l1"></series>
+        </xyPlot>
+      </stack>
+    </stack>
+  </section>    
+
+  <!--QUestion 3-->
+  <section name="section6">
+    <title>Example 3</title>
+    <onDocumentOpened>
+      local ser = stack1.stack2.xy1.l1;
+      
+      for x=0,3,0.1 do
+        ser:Add(x, 10-(4.9*math.pow(x,2)))
+      end
+    </onDocumentOpened>
+    <stack name="stack1" orientation="vertical">
+      <style>
+        <widthPercentage>80%</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      
+      <stack name="stack2" style="highlightBox">
+          <p>A diver is on a 10m platform, preparing to dive. The diver's height above the water, in metres with respect to time <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/41f5b4fe99ab4967ae6b5074098f8289.png" alt=" t " scale="0.0175" baseline="0" inspect="false" />, can be modelled by the equation <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/6e062d4a84ea477a89c2e6ea583574b6.png" alt=" h( t ) = 10 - 4.9t^2 " scale="0.0175" baseline="0.25" inspect="false" /></p>
+        <xyPlot name="xy1" pan="disabled" tap="disabled" zoom="disabled">
+          <style>
+            <widthPercentage>70%</widthPercentage>
+          </style>
+          <axis dim="x" min="0" max="2" auto="none"></axis>
+          <axis dim="y" min="0" max="12" auto="none"></axis>
+          <series capacity="2" draw="line">
+            <style>
+              <foreground color="black" />
+              <lineThickness>1.5</lineThickness>
+            </style>
+            <data>
+              -10 0; 10 0
+            </data>
+          </series>
+          <series capacity="2" draw="line">
+            <style>
+              <foreground color="black" />
+              <lineThickness>1.5</lineThickness>
+            </style>
+            <data>
+              0 90; 0 -10
+            </data>
+          </series>
+          <series name="xLabel">
+          <style>
+            <foreground color="black" />
+          </style>
+        </series>
+          <series name="yLabel">
+            <style>
+              <foreground color="black" />
+            </style>
+          </series>
+          <series name="l1"></series>
+        </xyPlot>
+      </stack>
+      <stack style="highlightBox">
+        <stack orientation="horizontal">
+          <p>a) Determine when the diver will enter the water</p>
+          <button content="Show Answer">
+            <onClick>
+              <!--Reveal Answer-->
+              ans.Style.Visibility = "visible"
+            </onClick>
+          </button>
+        </stack>
+        <stack orientation="vertical" name="ans" style="collapsed">
+            <p>The diver  enters the water at <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/22f7e40d0fd14808a27ec37c29f85da6.png" alt=" h( t ) = 0 " scale="0.0175" baseline="0.25" inspect="false" />. Plugging it in to the equation, we get: </p>
+            <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/e41318cd30914ab599439746afde0d4c.png" alt=" 0 = 10 - 4.9t^2 " scale="0.0175" baseline="0" inspect="true" /></p>
+            <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/3ffbed7a59aa4f8b8fa89e5632e31fa3.png" alt=" 10 = 4.9t^2 " scale="0.0175" baseline="0" inspect="true" /></p>
+            <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/c385ec9a67554ddaa642a51d756238f9.png" alt=" t = 1.4s " scale="0.0175" baseline="0" inspect="true" /></p>
+         </stack>
+      </stack>
+      <stack style="highlightBox">
+        <stack orientation="horizontal">
+          <p>b) Calculate the average rate of change in height for the entire dive. </p>
+          <button content="Show Answer">
+            <onClick>
+              <!--Reveal Answer-->
+              ans.Style.Visibility = "visible"
+            </onClick>
+          </button>
+        </stack>
+        <stack orientation="vertical" name="ans" style="collapsed">
+            <p>The average rate of change for the entire dive can be represented as <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/d20f49771a0c46b3a7996a8403f5427b.png" alt=" \frac{ \bigtriangleup h}{ \bigtriangleup t} " scale="0.0175" baseline="0.480951" inspect="false" /></p>
+            <p>The diver starts his dive at <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/769bd01db0914114a30454c664c85610.png" alt=" t = 0s " scale="0.0175" baseline="0" inspect="false" /> and finishes his dive at <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/d7cef24bbbbb475da44a6367afd24e7e.png" alt=" t = 1.4s " scale="0.0175" baseline="0" inspect="false" /></p>
+            <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/512c9e3c883e4469bce35ebf83a5e881.png" alt=" Average = \frac {0 - 10}{1.4 - 0} " scale="0.0175" baseline="0" inspect="true" /></p>
+            <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/af1e76b9f8f8451f92090a47f9b88cfa.png" alt=" Average = -7.1 m/s " scale="0.0175" baseline="0" inspect="true" /></p>
+          <p>Since height is in metres and time is in seconds, we can represent <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/d20f49771a0c46b3a7996a8403f5427b.png" alt=" \frac{ \bigtriangleup h}{ \bigtriangleup t} " scale="0.0175" baseline="0.480951" inspect="false" /> as <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/060f2206e51548409fb5e0f6ed707321.png" alt=" \frac{m}{s} " scale="0.0175" baseline="0.344841" inspect="false" /> </p>
+         </stack>
+      </stack>
+      <stack style="highlightBox">
+        <stack orientation="horizontal">
+          <p>c) Estimate the rate at which the diver's height above the water is changing as the diver enters the water. </p>
+          <button content="Show Answer">
+            <onClick>
+              <!--Reveal Answer-->
+              ans.Style.Visibility = "visible"
+            </onClick>
+          </button>
+        </stack>
+        <stack orientation="vertical" name="ans" style="collapsed">
+          <p>To answer this question we have to use two points. One at <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/4638740289f44656acd2da8a8a0e80f6.png" alt=" t = 1.428571s " scale="0.0175" baseline="0" inspect="false" /> and another point that is right next to it; like <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/687bd2ee41bf4684bf2c2dbf738d798f.png" alt=" t = 1.4001 " scale="0.0175" baseline="0" inspect="false" />. This way, we can 
+          calculate instantaneous rate of change. </p>
+          <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/fe6b86491f434fdcb90b56a8307617aa.png" alt=" IROC = \frac{ h ( 1.4001 ) - h( 1.428571s ) }{ 1.4001 - 1.428571s } " scale="0.0175" baseline="0" inspect="true" /></p>
+          <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/98a3d4ea70ed497987a6d74a65140c23.png" alt=" IROC = \frac{ 0.3946m - 0 } { -0.028471s } " scale="0.0175" baseline="0" inspect="true" /></p>
+          <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/ba9ce3f47c4b4f8eba41a2f30b4bfa67.png" alt=" IROC = -13.86 \frac{m}{s} " scale="0.0175" baseline="0" inspect="true" /></p>
+        </stack>
+      </stack>
+    </stack>
+  </section>
+
+  <!--Practice 1-->
+  <section name="section7">
+    <title>Practice Question</title>
+    <onDocumentOpened>
+      local xLab = stack1.stack2.myPlot.xLabel;
+      local yLab = stack1.stack2.myPlot.yLabel;
+
+      char.textX(xLab, {4.5, 0.2}, .2);
+      char.textY(yLab, {0.2, 4.5}, .2);
+    </onDocumentOpened>
+    <script>
+      local series = stack1.stack2.myPlot.l1;
+      
+      for x=0,5,0.1 do
+        series:Add(x, -1/4*math.pow(x,2) + 4);
+      end
+    </script>
+    <stack orientation="vertical" name="stack1">
+      <stack style="highlightBox">
+        <p>The motion of a ball falling from a vertical height of 4 metres is given by the function <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/3cf88ba74efc497e986d7969d85633d4.png" alt=" h( t ) = - \frac{1}{4} x^2 + 5 " scale="0.0175" baseline="0.344841" inspect="false" /> where <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/41f5b4fe99ab4967ae6b5074098f8289.png" alt=" t " scale="0.0175" baseline="0" inspect="false" /> is the time in secionds.</p>
+      </stack>
+      <stack style="highlightBox" name="stack2">
+        <style>
+          <widthPercentage>70%</widthPercentage>
+        </style>
+        <xyPlot name="myPlot" pan="disabled" tap="disabled" zoom="disabled">
+          <axis dim="y" auto="fixed" min="0" max="5"></axis>
+          <axis dim="x" auto="fixed" min="0" max="5"></axis>
+          <series capacity="2" draw="line">
+            <style>
+              <foreground color="black" />
+              <lineThickness>3</lineThickness>
+            </style>
+            <data>
+              -10 0; 10 0
+            </data>
+          </series>
+          <series capacity="2" draw="line">
+            <style>
+              <foreground color="black" />
+              <lineThickness>3</lineThickness>
+            </style>
+            <data>
+              0 90; 0 -10
+            </data>
+          </series>
+          <series name="xLabel" manual="true"></series>
+          <series name="yLabel" manual="true"></series>
+          <series name="l1" manual="true" style="functionLine" />
+          <series name="tang" style="tangentLine"></series>
+        </xyPlot>
+      </stack>
+      <stack style="questionAnswer">
+        <p style="title qNum"></p>
+        <table widths="10% 90%" grid="false">
+          <row>
+            <column>
+              <image src="curriculumThemePack\question.png" inspect="false" />
+            </column>
+            <column>
+              <p>When does the ball hit the floor?</p>
+            </column>
+          </row>
+        </table>
+        <p style="title">ANSWER</p>
+        <p name="answer1" style="collapsed">4</p>
+        <!-- If there is only one "blank" in the question, delete the next line: -->
+        <table name="table" widths="10% 80% 10%" grid="false">
+          <row>
+            <column>
+              <image src="curriculumThemePack\answer.png" inspect="false" />
+            </column>
+            <column>
+              <stack name="input">
+                <textField name="input1" placeholder="Answer Here" />
+              </stack>
+            </column>
+            <column>
+              <image name="mark" src="curriculumThemePack\invisible.png" inspect="false" />
+            </column>
+          </row>
+        </table>
+        <stack name="solution" style="collapsed">
+          <p> The ball hits the floor when <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/22f7e40d0fd14808a27ec37c29f85da6.png" alt=" h( t ) = 0 " scale="0.0175" baseline="0.25" inspect="false" />. So plugging that in, we get: </p>
+          <p> <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/cfa9c21bdff14b1b8a6e2dd39202a6f7.png" alt=" 0 =  - \frac{1}{4} x^2 + 5 " scale="0.0175" baseline="0" inspect="true" /></p>
+          <p> <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/c06e8ae8d9c842ca933a562517ba7386.png" alt=" 4 = \frac{1}{4} x^2 " scale="0.0175" baseline="0" inspect="true" /> </p>
+          <p> <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/58e049ad865f45e7beb94f889a2f13d7.png" alt=" 16 = x^2 " scale="0.0175" baseline="0" inspect="true" /></p>
+          <p> <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/454eab01334b4a8d9c28d021d3289f2f.png" alt=" x = 4 " scale="0.0175" baseline="0" inspect="true" /></p>
+        </stack>
+        <button content="Check Answer">
+          <onClick>
+            solution.Style.Visibility = "visible";
+            <!-- If there is only one "blank", the "if statement" needs to be reduced to: 
+                 if table:Child(1):Child(2).input.input1.Text == answer1.Text then -->
+            <!-- If there are extra "blanks", the "if statement" needs to be appended to include a check for each additional correct answer. Use 'and' in between each additional check. For example, 
+                 if table:Child(1):Child(2).input.input1.Text == answer1.Text and table:Child(1):Child(2).input.input2.Text == answer2.Text and table:Child(1):Child(2).input.input3.Text == answer3.Text and table:Child(1):Child(2).input.input4.Text == answer4.Text then -->
+            if table:Child(1):Child(2).input.input1.Text == answer1.Text then
+            table:Child(1):Child(3).mark.ImageSource = "curriculumThemePack/right.png";
+            else
+            table:Child(1):Child(3).mark.ImageSource = "curriculumThemePack/wrong.png";
+            end
+          </onClick>
+        </button>
+      </stack>
+      <!-- This line can be removed after the curriculumStyles.xml fragment is included -->
+      <stack style="questionAnswer">
+        <p style="title qNum"></p>
+        <table widths="10% 90%" grid="false">
+          <row>
+            <column>
+              <image src="curriculumThemePack\question.png" inspect="false" />
+            </column>
+            <column>
+              <p>What is the IROC at <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/ecd182b3581240ab84b4faa1ba306281.png" alt=" t = 2 " scale="0.0175" baseline="0" inspect="false" /> ?.</p>
+            </column>
+          </row>
+        </table>
+        <p style="title">ANSWER</p>
+        <p name="answer1" style="collapsed">-1</p>
+        <!-- If there is only one "blank" in the question, delete the next line: -->
+        <table name="table" widths="10% 80% 10%" grid="false">
+          <row>
+            <column>
+              <image src="curriculumThemePack\answer.png" inspect="false" />
+            </column>
+            <column>
+              <stack name="input">
+                <textField name="input1" placeholder="Answer Here" />
+              </stack>
+            </column>
+            <column>
+              <image name="mark" src="curriculumThemePack\invisible.png" inspect="false" />
+            </column>
+          </row>
+        </table>
+        <stack name="solution" style="collapsed">
+          <p> To find the IROC at <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/ecd182b3581240ab84b4faa1ba306281.png" alt=" t = 2 " scale="0.0175" baseline="0" inspect="false" />, use the formula for instantaneous rate of change. <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/e74f553c814a44eeb8e448a622ef546e.png" alt=" \frac{f( x ) - f( a )}{x - a} " scale="0.0175" baseline="0.428175" inspect="false" /></p>
+          <p> <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/fab0281dc4e743fe881e8f77e3734074.png" alt=" IROC = \frac{ 3.00 - 3.001 }{ 2.00 - 2.001 } " scale="0.0175" baseline="0" inspect="true" /></p>
+          <p> <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/e0cbfb4bd4ac40beaf9f42ee03127045.png" alt=" IROC = -1 " scale="0.0175" baseline="0" inspect="true" /> </p>
+        </stack>
+        <button content="Check Answer">
+          <onClick>
+            solution.Style.Visibility = "visible";
+            <!-- If there is only one "blank", the "if statement" needs to be reduced to: 
+                 if table:Child(1):Child(2).input.input1.Text == answer1.Text then -->
+            <!-- If there are extra "blanks", the "if statement" needs to be appended to include a check for each additional correct answer. Use 'and' in between each additional check. For example, 
+                 if table:Child(1):Child(2).input.input1.Text == answer1.Text and table:Child(1):Child(2).input.input2.Text == answer2.Text and table:Child(1):Child(2).input.input3.Text == answer3.Text and table:Child(1):Child(2).input.input4.Text == answer4.Text then -->
+            if table:Child(1):Child(2).input.input1.Text == answer1.Text then
+            table:Child(1):Child(3).mark.ImageSource = "curriculumThemePack/right.png";
+            else
+            table:Child(1):Child(3).mark.ImageSource = "curriculumThemePack/wrong.png";
+            end
+          </onClick>
+        </button>
+      </stack>
+      <!-- This line can be removed after the curriculumStyles.xml fragment is included -->
+      <stack style="questionAnswer">
+        <p style="title qNum"></p>
+        <table widths="10% 90%" grid="false">
+          <row>
+            <column>
+              <image src="curriculumThemePack\question.png" inspect="false" />
+            </column>
+            <column>
+              <p>What is the average speed of the ball?</p>
+            </column>
+          </row>
+        </table>
+        <p style="title">ANSWER</p>
+        <p name="answer1" style="collapsed">-1</p>
+        <!-- If there is only one "blank" in the question, delete the next line: -->
+        <table name="table" widths="10% 80% 10%" grid="false">
+          <row>
+            <column>
+              <image src="curriculumThemePack\answer.png" inspect="false" />
+            </column>
+            <column>
+              <stack name="input">
+                <textField name="input1" placeholder="Answer Here" />
+              </stack>
+            </column>
+            <column>
+              <image name="mark" src="curriculumThemePack\invisible.png" inspect="false" />
+            </column>
+          </row>
+        </table>
+        <stack name="solution" style="collapsed">
+          <p> The speed of the ball can be determined using the formula <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/e83f27d40b5d4b6dbe5fcb8c1b5ce087.png" alt=" \frac{ f( x ) - f( h ) }{ x - h } " scale="0.0175" baseline="0.428175" inspect="false" /> where x = 0 and h = 4</p>
+          <p> <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/26c3ac7ff24c4a02a376bd23a7ad004b.png" alt=" f( 0 ) = 5 " scale="0.0175" baseline="0" inspect="true" /></p>
+          <p> <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/a32e41b8076f476cb2b4a29d7dd1a088.png" alt=" f( 4 ) = 1 " scale="0.0175" baseline="0" inspect="true" /></p>
+          <p> <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/6f580c812f1c4c719798dbe258cf3dec.png" alt=" Average = \frac{ 5 - 1 }{ 0 - 4 } " scale="0.0175" baseline="0" inspect="true" /></p>
+          <p> <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/1ab981daead44b61a31948aee5adca56.png" alt=" Average = -1 \frac{m}{s} " scale="0.0175" baseline="0" inspect="true" /></p>
+        </stack>
+        <button content="Check Answer">
+          <onClick>
+            solution.Style.Visibility = "visible";
+            <!-- If there is only one "blank", the "if statement" needs to be reduced to: 
+                 if table:Child(1):Child(2).input.input1.Text == answer1.Text then -->
+            <!-- If there are extra "blanks", the "if statement" needs to be appended to include a check for each additional correct answer. Use 'and' in between each additional check. For example, 
+                 if table:Child(1):Child(2).input.input1.Text == answer1.Text and table:Child(1):Child(2).input.input2.Text == answer2.Text and table:Child(1):Child(2).input.input3.Text == answer3.Text and table:Child(1):Child(2).input.input4.Text == answer4.Text then -->
+            if table:Child(1):Child(2).input.input1.Text == answer1.Text then
+            table:Child(1):Child(3).mark.ImageSource = "curriculumThemePack/right.png";
+            else
+            table:Child(1):Child(3).mark.ImageSource = "curriculumThemePack/wrong.png";
+            end
+          </onClick>
+        </button>
+      </stack>
+    </stack>
+  </section>
+</document>

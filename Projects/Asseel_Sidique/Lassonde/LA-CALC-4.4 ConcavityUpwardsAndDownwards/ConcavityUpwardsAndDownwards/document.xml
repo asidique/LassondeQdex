@@ -1,0 +1,1014 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="GC2024E38_CCD1_457B_9115_080945C59626">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>LA-CALC-4.4 Concavity</title>
+    <creator>Asseel</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/LassondeLogo.png" />
+  </metadata>
+
+  <include src="resources/curriculumStylesLassonde.xml" />
+  
+  <!--                                      Header & Footer END                                         -->
+  <header style="themeColour">
+    <stack style="center" orientation="horizontal">
+      <p></p>
+    </stack>
+  </header>
+  <footer style="themeColour">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="themeColourTitle">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment> 
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--                                      Header & Footer END                                         -->
+  
+  <script>
+    local concaveUpSeries = section11.stack1.stack2.xy1.graph;
+    local concaveDownSeries = section11.stack1.stack2.xy2.graph;
+    tmpX = 0;
+    
+    concaveUpSeries:Clear()
+    
+    for x = -5, 5, 0.1 do
+      y = -x^2 + 5
+      concaveUpSeries:Add(x,y)
+      y = y+4;
+      concaveDownSeries:Add(x, -y)
+    end
+    
+    function translateSimPoint1(moveX, moveY)
+      section2.stack1.graphStack.xy1.point.Transform = matrixf.translation(moveX, moveY, 0);
+    end        
+    function translateSimPoint2(moveX, moveY)
+      section2.stack1.graphStack.xy2.point.Transform = matrixf.translation(moveX, moveY, 0);
+    end
+    function translateSimPoint3(moveX, moveY)
+      section2.stack1.graphStack.xy3.point.Transform = matrixf.translation(moveX, moveY, 0);
+    end
+    
+    function translateSimPoint11(moveX, moveY)
+      section3.stack1.graphStack.xy1.point.Transform = matrixf.translation(moveX, moveY, 0);
+    end        
+    function translateSimPoint22(moveX, moveY)
+      section3.stack1.graphStack.xy2.point.Transform = matrixf.translation(moveX, moveY, 0);
+    end
+    function translateSimPoint33(moveX, moveY)
+      section3.stack1.graphStack.xy3.point.Transform = matrixf.translation(moveX, moveY, 0);
+    end
+   
+  </script>
+    
+  <!-- Section 1 INTRODUCTION AND APPLICATION-->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">4.4 Concavity</title>
+      <p style="sectionHeading">Introduction</p>
+      <image src="resources/stock2.jpeg" />
+      <stack orientation="vertical" style="contentBG">
+        <p>Concavity can be defined as the <b>directionality</b> of a curve. A curve on a graph can be either 
+        <b>upwards</b> or <b>downwards</b>. 
+        Remembering how derivatives and slopes of graphs work will help with the understanding of concavity. 
+        Check out the graphs below to understand what an upwards and downwards curve looks like.</p>    
+      </stack>
+  </section>
+  
+  <sectionNoTitle name="section11" style="pageLayout">
+  <p style="sectionHeading">Concave Upwards and Concave Downwards</p>
+  <stack name="stack1" orientation="vertical" style="contentBG">
+    <p>Below is an example of what a graph that is concaving downwards (left) and a graph that is concaving upwards (right) look like.</p>
+      <stack name="stack2" orientation="horizontal">
+        <xyPlot name="xy1" onPan="" manual="false" onTap="" onZoom="">
+          <style>
+            <aspectRatio>0.5</aspectRatio>
+          </style>
+          <axis name="x" dim="x" min="-5" max="5" auto="none"></axis>
+          <axis name="y" dim="y" min="-10" max="10" auto="none"></axis>
+          <series name="graph" manual="false" draw="line">
+          </series>
+        </xyPlot>
+        <xyPlot name="xy2" onPan="" manual="false" onTap="" onZoom="">
+            <style>
+              <aspectRatio>0.5</aspectRatio>
+            </style>
+            <axis name="x" dim="x" min="-5" max="5" auto="none"></axis>
+            <axis name="y" dim="y" min="-10" max="10" auto="none"></axis>
+            <series name="graph" manual="false" draw="line">
+            </series>
+          </xyPlot>
+      </stack>
+      <stack name="stack3" orientation="horizontal">
+        <p style="centerText"><b>Concave Downwards</b></p>
+        <p style="centerText"><b>Concave Upwards</b></p>
+      </stack>
+    </stack>
+    <p style="sectionHeading">Application</p>
+    <stack style="contentBG">
+      <p>Understanding concavity is a fundamental tool that helps with the understanding of <b>extreme value functions and optimization theory</b>. Optimization theory has many applications in the real world with impacts in Mechanics,
+      Economics, Electrical Engineering and even making video game graphics!</p>
+    </stack>
+  </sectionNoTitle>
+  
+    
+    
+  <!-- SECTION 2 CONCAVE DOWN -->
+  <sectionNoTitle name="section2" style="pageLayout">
+    <p style="sectionHeading">Concave Downwards</p>
+    <stack name="stack11" orientation="vertical" style="contentBG">
+      <p>The definition of concave downwards can be represented in mathematical terms as: </p>
+      <stack>
+        <style>
+          <textAlignment>center</textAlignment>
+        </style>
+        <equation>
+          If the slope of $ f( x ) $ is decreasing, $ f'( x ) $ is decreasing and $ f''( x ) &lt; 0 $ then $ f( x ) $ is concaving downwards
+        </equation>
+      </stack>
+      <p>To better understand the definition, see the simulation below to visualize how to determine if a function is concaving downwards</p>
+    </stack>
+    <p style="sectionHeading">Simulation Instructions</p>
+    <stack name="stack1" orientation="vertical" style="contentBG">
+      <p>Press start to begin the simulation and watch as the function plots the position of the bird's motion. You can run your fingers accross the graphs to determine the slopes. Press start simulation at anytime to reset the simulation. </p>
+      <video name="vid" src="resources/angrybirds_2.mp4">
+        <style>
+          <widthPercentage>80%</widthPercentage>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <onDocumentOpened>
+          vid.ControlsEnabled = false;
+        </onDocumentOpened>
+      </video>
+      <button name="simButton" content="Start Simulation">
+        <onClick>
+          <!--START SIM-->
+          section2.stack1.vid:Stop();
+          section2.stack1.graphStack.angrybirdSim:Stop();
+          section2.stack1.graphStack.angrybirdSim2:Stop();
+          section2.stack1.graphStack.angrybirdSim3:Stop();
+          section2.stack1.vid:SeekToTime(0);
+          section2.stack1.vid:Play();
+          section2.stack1.graphStack.angrybirdSim:Play();
+          section2.stack1.graphStack.angrybirdSim2:Play();
+          section2.stack1.graphStack.angrybirdSim3:Play();
+        </onClick>
+      </button>
+      <stack name="graphStack" orientation="auto">
+        <xyPlot name="xy1" manual="true" zoom="disabled" tap="custom" pan="custom">
+          <title>f(x)</title>
+          <style>
+            <horizontalAlignment>center</horizontalAlignment>
+          </style>
+          <onPan>
+            <![CDATA[
+              local simPoint = point;
+              local slope = slope;
+            
+              local x = (state.Current.X * 5) - 1;
+              local y = state.Current.Y;
+          
+              if state.IsStart then
+                tmpX = state.Current.X
+              end
+          
+              if not(tempX == state.Current.X) then
+                if (x > 0 and x < 3.15) then
+                  translateSimPoint1(x*1.06, math.sin(x)*6);
+                  slope:Add((x*1.06)-0.3, (math.sin(x-0.3)*6.2)+0.1)
+                  slope:Add((x*1.06)+0.3, (math.sin(x+0.3)*6.2)+0.1)
+                end
+              end
+              ]]>
+
+          </onPan>
+          <axis name="x" dim="x" major="true" auto="none" min="-1" max="4">
+            <title>Time (s)</title>
+          </axis>
+          <axis name="y" dim="y" major="true" auto="none" min="-1" max="7">
+            <title>Height</title>
+          </axis>
+          <series name="simFunc" draw="line">
+            <style>
+              <foreground color="purple" />
+              <background color="purple" />
+            </style>
+          </series>
+          <series name="point" draw="points" capacity="1">
+            <style>
+              <background color="lightBlue" />
+              <foreground color="lightBlue" />
+            </style>
+            <data>0 0</data>
+          </series>
+          <series name="slope" draw="lineSegments" capacity="2">
+            <style>
+              <lineThickness>1.5</lineThickness>
+            </style>
+          </series>
+          <series name="xline" draw="line" capacity="2">
+            <style>
+              <foreground color="black" />
+              <lineThickness>1.5</lineThickness>
+            </style>
+            <data>
+              -20 0; 20 0
+            </data>
+          </series>
+          <series name="yline" draw="line" capacity="2">
+            <style>
+              <foreground color="black" />
+              <lineThickness>1.5</lineThickness>
+            </style>
+            <data>
+              0 -20; 0 20
+            </data>
+          </series>
+        </xyPlot>    
+        <xyPlot name="xy2" manual="true" zoom="disabled" tap="custom" pan="custom">
+          <title>f'(x)</title>
+          <style>
+            <horizontalAlignment>center</horizontalAlignment>
+          </style>
+          <onPan>
+            <![CDATA[
+              local simPoint = point;
+              local slope = slope;
+            
+              local x = (state.Current.X * 5) - 1;
+              local y = state.Current.Y;
+          
+              if state.IsStart then
+                tmpX = state.Current.X
+              end
+          
+              if not(tempX == state.Current.X) then
+                if (x > 0 and x < 3.15) then
+                  translateSimPoint2(x*1.06, math.sin(x+1.57)*6);
+                  slope:Add((x*1.06)-0.3, (math.sin(x-0.3+1.57)*6.2)+0.1)
+                  slope:Add((x*1.06)+0.3, (math.sin(x+0.3+1.57)*6.2)+0.1)
+                end
+              end
+              ]]>
+
+          </onPan>
+          <axis name="x" dim="x" major="true" auto="none" min="-1" max="4">
+            <title>Time (s)</title>
+          </axis>
+          <axis name="y" dim="y" major="true" auto="none" min="-7" max="7">
+            <title>Velocity</title>
+          </axis>
+          <series name="simFunc" draw="line">
+            <style>
+              <foreground color="green" />
+              <background color="green" />
+            </style>
+          </series>
+          <series name="point" draw="points" capacity="1">
+            <style>
+              <foreground color="lightBlue" />
+              <background color="lightBlue" />
+            </style>
+            <data>0 0</data>
+          </series>
+          <series name="slope" draw="lineSegments" capacity="2">
+            <style>
+              <lineThickness>1.5</lineThickness>
+              <foreground color="red" />
+            </style>
+          </series>
+          <series name="xline" draw="line" capacity="2">
+            <style>
+              <foreground color="black" />
+              <lineThickness>1.5</lineThickness>
+            </style>
+            <data>
+              -20 0; 20 0
+            </data>
+          </series>
+          <series name="yline" draw="line" capacity="2">
+            <style>
+              <foreground color="black" />
+              <lineThickness>1.5</lineThickness>
+            </style>
+            <data>
+              0 -20; 0 20
+            </data>
+          </series>
+        </xyPlot>
+        <xyPlot name="xy3" manual="true" zoom="disabled" tap="custom" pan="custom">
+            <title>f''(x)</title>
+            <style>
+              <horizontalAlignment>center</horizontalAlignment>
+            </style>
+            <onPan>
+            <![CDATA[
+              local simPoint = point;
+              local slope = slope;
+            
+              local x = (state.Current.X * 5) - 1;
+              local y = state.Current.Y;
+          
+              if state.IsStart then
+                tmpX = state.Current.X
+              end
+          
+              if not(tempX == state.Current.X) then
+                if (x > 0 and x < 3.15) then
+                  translateSimPoint3(x*1.06, math.sin(x+3.14)*6);
+                  slope:Add((x*1.06)-0.3, (math.sin(x-0.3+3.14)*6.2)+0.1)
+                  slope:Add((x*1.06)+0.3, (math.sin(x+0.3+3.14)*6.2)+0.1)
+                end
+              end
+              ]]>
+
+          </onPan>
+            <axis name="x" dim="x" major="true" auto="none" min="-1" max="4">
+              <title>Time (s)</title>
+            </axis>
+            <axis name="y" dim="y" major="true" auto="none" min="-7" max="7">
+              <title>Acceleration</title>
+            </axis>
+            <series name="deriv" capacity="50"></series>
+            <series name="simFunc" draw="line">
+              <style>
+                <foreground color="red" />
+                <background color="red" />
+              </style>
+            </series>
+            <series name="point" draw="points" capacity="1">
+              <style>
+                <foreground color="lightBlue" />
+                <background color="lightBlue" />
+              </style>
+              <data>0 0</data>
+            </series>
+            <series name="slope" draw="lineSegments" capacity="2">
+              <style>
+                <lineThickness>1.5</lineThickness>
+                <foreground color="purple" />
+              </style>
+            </series>
+            <series name="xline" draw="line" capacity="2">
+            <style>
+              <foreground color="black" />
+              <lineThickness>1.5</lineThickness>
+            </style>
+            <data>
+              -20 0; 20 0
+            </data>
+          </series>
+            <series name="yline" draw="line" capacity="2">
+              <style>
+                <foreground color="black" />
+                <lineThickness>1.5</lineThickness>
+              </style>
+              <data>
+                0 -20; 0 20
+              </data>
+            </series>
+            </xyPlot>
+        <simulation name="angrybirdSim" duration="3.35">
+          <solver>
+            <series>
+              <sine amplitude="6" frequency="0.15" />
+              <probe ref="section2.stack1.graphStack.xy1.simFunc" />
+            </series>
+          </solver>
+        </simulation>
+        <simulation name="angrybirdSim2" duration="3.35">
+          <solver>
+            <series>
+              <sine amplitude="6" frequency="0.15" phase="1.57" />
+              <probe ref="section2.stack1.graphStack.xy2.simFunc" />
+            </series>
+          </solver>
+        </simulation>
+        <simulation name="angrybirdSim3" duration="3.35">
+          <solver>
+            <series>
+              <sine amplitude="6" frequency="0.15" phase="3.14" />
+              <probe ref="section2.stack1.graphStack.xy3.simFunc" />
+            </series>
+          </solver>
+        </simulation>
+      </stack>
+    </stack>
+    <p style="sectionHeading">Explanation</p>
+    <stack orientation="vertical" style="contentBG">
+      <p>In the simulation, an angry bird is shot in a parabola like motion. The height of the bird's motion can be displayed as a function. Since gravity
+      is acting on the bird, it forces the bird to fall (height to decrease). Therefore, the graph has a concave downwards trend. </p>
+      <p style="subSectionHeading">Identifying Concave Downwards</p>
+      <p>In order to succesfully identify whether a function is concaving downwards in a given domain, it must follow the definition shown above. Notice in our simulation: 
+      the slope of f(x) is decreasing, the graph of f'(x) is decreasing in value and f''(x) is less than 0. </p>
+    </stack>
+  <p><br /></p>
+  </sectionNoTitle>
+<!-- SECTION 3 CONCAVE UP -->
+  <sectionNoTitle name="section3" style="pageLayout">
+    <p style="sectionHeading">Concave Upwards</p>
+    <stack name="stack11" orientation="vertical" style="contentBG">
+      <p>The definition of concave upwards can be represented in mathematical terms as: </p>
+      <stack>
+        <style>
+          <textAlignment>center</textAlignment>
+        </style>
+        <equation>
+          If the slope of $ f( x ) $ is increasing, $ f'( x ) $ is increasing and $ f''( x ) &gt; 0 $ then $ f( x ) $ is concaving upwards
+        </equation>
+      </stack>
+      <p>To better understand the definition, see the simulation below to visualize how to determine if a function is concaving upwards.</p>
+    </stack>
+    <p style="sectionHeading">Simulation Instructions</p>
+    <stack name="stack1" orientation="vertical" style="contentBG">
+      <p>Press start to begin the simulation and watch as the function plots the position of the rockets motion. You can run your fingers accross the graphs to determine the slopes. Press start simulation at anytime to reset the simulation. </p>
+      <video name="vid" src="resources/lunar_2.mp4">
+        <style>
+          <widthPercentage>80%</widthPercentage>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <onDocumentOpened>
+          vid.ControlsEnabled = false;
+        </onDocumentOpened>
+      </video>
+      <button name="simButton" content="Start Simulation">
+        <onClick>
+          <!--START SIM-->
+          section3.stack1.graphStack.angrybirdSim:Stop();
+          section3.stack1.graphStack.angrybirdSim2:Stop();
+          section3.stack1.graphStack.angrybirdSim3:Stop();
+          section3.stack1.vid:SeekToTime(1);
+          section3.stack1.vid:Play();
+          section3.stack1.graphStack.angrybirdSim:Play();
+          section3.stack1.graphStack.angrybirdSim2:Play();
+          section3.stack1.graphStack.angrybirdSim3:Play();
+        </onClick>
+      </button>
+      <stack name="graphStack" orientation="auto">
+        <xyPlot name="xy1" manual="true" zoom="disabled" tap="custom" pan="custom">
+          <title>f(x)</title>
+          <style>
+            <horizontalAlignment>center</horizontalAlignment>
+          </style>
+          <onPan>
+            <![CDATA[
+              local simPoint = point;
+              local slope = slope;
+            
+              local x = (state.Current.X * 5) - 1;
+              local y = state.Current.Y;
+          
+              if state.IsStart then
+                tmpX = state.Current.X
+              end
+          
+              if not(tempX == state.Current.X) then
+                if (x > 0 and x < 3.15) then
+                  translateSimPoint11(x*1.06, math.sin(x+3.14)*6);
+                  slope:Add((x*1.06)-0.3, (math.sin(x-0.3+3.14)*6.2))
+                  slope:Add((x*1.06)+0.3, (math.sin(x+0.3+3.14)*6.2))
+                end
+              end
+              ]]>
+
+          </onPan>
+          <axis name="x" dim="x" major="true" auto="none" min="-1" max="4">
+            <title>Time (s)</title>
+          </axis>
+          <axis name="y" dim="y" major="true" auto="none" min="-7" max="1">
+            <title>Height</title>
+          </axis>
+          <series name="simFunc" draw="line">
+            <style>
+              <foreground color="purple" />
+              <background color="purple" />
+            </style>
+          </series>
+          <series name="point" draw="points" capacity="1">
+            <style>
+              <background color="lightBlue" />
+              <foreground color="lightBlue" />
+            </style>
+            <data>0 0</data>
+          </series>
+          <series name="slope" draw="lineSegments" capacity="2">
+            <style>
+              <lineThickness>1.5</lineThickness>
+            </style>
+          </series>
+          <series name="xline" draw="line" capacity="2">
+            <style>
+              <foreground color="black" />
+              <lineThickness>1.5</lineThickness>
+            </style>
+            <data>
+              -20 0; 20 0
+            </data>
+          </series>
+          <series name="yline" draw="line" capacity="2">
+            <style>
+              <foreground color="black" />
+              <lineThickness>1.5</lineThickness>
+            </style>
+            <data>
+              0 -20; 0 20
+            </data>
+          </series>
+        </xyPlot>    
+        <xyPlot name="xy2" manual="true" zoom="disabled" tap="custom" pan="custom">
+          <title>f'(x)</title>
+          <style>
+            <horizontalAlignment>center</horizontalAlignment>
+          </style>
+          <onPan>
+            <![CDATA[
+              local simPoint = point;
+              local slope = slope;
+            
+              local x = (state.Current.X * 5) - 1;
+              local y = state.Current.Y;
+          
+              if state.IsStart then
+                tmpX = state.Current.X
+              end
+          
+              if not(tempX == state.Current.X) then
+                if (x > 0 and x < 3.15) then
+                  translateSimPoint22(x*1.06, math.sin(x+1.57+3.14)*6);
+                  slope:Add((x*1.06)-0.3, (math.sin(x-0.3+1.57+3.14)*6.2))
+                  slope:Add((x*1.06)+0.3, (math.sin(x+0.3+1.57+3.14)*6.2))
+                end
+              end
+              ]]>
+
+          </onPan>
+          <axis name="x" dim="x" major="true" auto="none" min="-1" max="4">
+            <title>Time (s)</title>
+          </axis>
+          <axis name="y" dim="y" major="true" auto="none" min="-7" max="7">
+            <title>Velocity</title>
+          </axis>
+          <series name="simFunc" draw="line">
+            <style>
+              <foreground color="green" />
+              <background color="green" />
+            </style>
+          </series>
+          <series name="point" draw="points" capacity="1">
+            <style>
+              <foreground color="lightBlue" />
+              <background color="lightBlue" />
+            </style>
+            <data>0 0</data>
+          </series>
+          <series name="slope" draw="lineSegments" capacity="2">
+            <style>
+              <lineThickness>1.5</lineThickness>
+              <foreground color="red" />
+            </style>
+          </series>
+          <series name="xline" draw="line" capacity="2">
+            <style>
+              <foreground color="black" />
+              <lineThickness>1.5</lineThickness>
+            </style>
+            <data>
+              -20 0; 20 0
+            </data>
+          </series>
+          <series name="yline" draw="line" capacity="2">
+            <style>
+              <foreground color="black" />
+              <lineThickness>1.5</lineThickness>
+            </style>
+            <data>
+              0 -20; 0 20
+            </data>
+          </series>
+        </xyPlot>
+        <xyPlot name="xy3" manual="true" zoom="disabled" tap="custom" pan="custom">
+            <title>f''(x)</title>
+            <style>
+              <horizontalAlignment>center</horizontalAlignment>
+            </style>
+            <onPan>
+            <![CDATA[
+              local simPoint = point;
+              local slope = slope;
+            
+              local x = (state.Current.X * 5) - 1;
+              local y = state.Current.Y;
+          
+              if state.IsStart then
+                tmpX = state.Current.X
+              end
+          
+              if not(tempX == state.Current.X) then
+                if (x > 0 and x < 3.15) then
+                  translateSimPoint33(x*1.06, math.sin(x+3.14+3.14)*6);
+                  slope:Add((x*1.06)-0.3, (math.sin(x-0.3+3.14+3.14)*6.2))
+                  slope:Add((x*1.06)+0.3, (math.sin(x+0.3+3.14+3.14)*6.2))
+                end
+              end
+              ]]>
+
+          </onPan>
+            <axis name="x" dim="x" major="true" auto="none" min="-1" max="4">
+              <title>Time (s)</title>
+            </axis>
+            <axis name="y" dim="y" major="true" auto="none" min="-7" max="7">
+              <title>Acceleration</title>
+            </axis>
+            <series name="deriv" capacity="50"></series>
+            <series name="simFunc" draw="line">
+              <style>
+                <foreground color="red" />
+                <background color="red" />
+              </style>
+            </series>
+            <series name="point" draw="points" capacity="1">
+              <style>
+                <foreground color="lightBlue" />
+                <background color="lightBlue" />
+              </style>
+              <data>0 0</data>
+            </series>
+            <series name="slope" draw="lineSegments" capacity="2">
+              <style>
+                <lineThickness>1.5</lineThickness>
+                <foreground color="purple" />
+              </style>
+            </series>
+            <series name="xline" draw="line" capacity="2">
+            <style>
+              <foreground color="black" />
+              <lineThickness>1.5</lineThickness>
+            </style>
+            <data>
+              -20 0; 20 0
+            </data>
+          </series>
+            <series name="yline" draw="line" capacity="2">
+              <style>
+                <foreground color="black" />
+                <lineThickness>1.5</lineThickness>
+              </style>
+              <data>
+                0 -20; 0 20
+              </data>
+            </series>
+            </xyPlot>
+        <simulation name="angrybirdSim" duration="3.35">
+          <solver>
+            <series>
+              <sine amplitude="6" frequency="0.15" phase="3.14" />
+              <probe ref="section3.stack1.graphStack.xy1.simFunc" />
+            </series>
+          </solver>
+        </simulation>
+        <simulation name="angrybirdSim2" duration="3.35">
+          <solver>
+            <series>
+              <sine amplitude="6" frequency="0.15" phase="4.71" />
+              <probe ref="section3.stack1.graphStack.xy2.simFunc" />
+            </series>
+          </solver>
+        </simulation>
+        <simulation name="angrybirdSim3" duration="3.35">
+          <solver>
+            <series>
+              <sine amplitude="6" frequency="0.15" phase="6.28" />
+              <probe ref="section3.stack1.graphStack.xy3.simFunc" />
+            </series>
+          </solver>
+        </simulation>
+      </stack>
+    </stack>
+    <p style="sectionHeading">Explanation</p>
+    <stack style="contentBG">
+      <p>In the simulation, a rocket is falling to the ground. It then ignites it's thrusters and 
+      accelerates upwards; defeating the force of gravity. The rockets height can be represented as a function that concaves upwards. </p>
+      <p style="subSectionHeading">Identifying Concave Upwards</p>
+      <p>In order to succesfully identify whether a function is concaving upwards in a given domain, it must follow the definition shown above. Notice in our simulation: 
+      the slope of f(x) is increasing, the graph of f'(x) is increasing in value and f''(x) is greater than 0. </p>
+    </stack>
+  <p><br /></p> 
+  </sectionNoTitle>
+  
+  
+  <sectionNoTitle name="section5" style="pageLayout">
+    <p style="sectionHeading">Determining Concavity Algebraically</p>
+    <stack orientation="vertical" style="contentBG">
+      <p>In the previous examples, we were able to determine the concavity of a function based on 
+      the look of the graph, and the trends of its derivative. Now we will
+      explore how to determine the concavity of a function without a graph. We will use the second 
+      derivative of a function to determine where a graph is concaving upwards and downwards.</p>
+      <p style="subSectionHeading">QUESTION</p>
+      <p> Determine the domain of the function $ f( x ) = -x^4 + 6x^2-2x-3 $ where the graph concaves upwards without the use of a graph. </p>
+
+      
+    </stack>
+    <!--Each step is a stack, and each step has alternating background colors-->
+    <stack orientation="horizontal" style="contentBG2">
+      <stack name="stepStack" orientation="vertical">
+        <p>STEP 1: Find the second derivative of the function.</p>
+        <stack name="cont">
+          <style>
+            <visibility>collapsed</visibility>
+          </style>
+          <!--CONTENT GOES HERE-->
+          <p style="leftText">
+            <![CDATA[
+            $ \newline f'( x ) = -4x^3 + 12x - 2  \newline
+              f''( x ) = -12x^2 + 12 $
+            ]]>
+          </p>
+        </stack>
+      </stack>
+      <button name="btn" content="Show Step 1">
+        <style>
+          <horizontalAlignment>right</horizontalAlignment>
+          <widthPercentage>40%</widthPercentage>
+        </style>
+        <onClick>
+          if btn.Text=="Show Step 1" then
+            btn.Text = "Hide Step 1";
+            stepStack.cont.Style.Visibility = "visible";
+            stepStack:Child(1).Style.Bold = 1;
+          elseif btn.Text=="Hide Step 1" then
+            btn.Text = "Show Step 1";
+            stepStack.cont.Style.Visibility = "collapsed";
+            stepStack:Child(1).Style.Bold = 0;
+          end
+        </onClick>
+      </button>
+    </stack>
+    <stack orientation="horizontal" style="contentBG">
+      <stack name="stepStack" orientation="vertical">
+        <p>STEP 2: Find the roots of the second derivative.</p>
+        <stack name="cont">
+          <style>
+            <visibility>collapsed</visibility>
+          </style>
+          <stack orientation="horizontal">
+            <stack orientation="vertical">
+              <!--CONTENT GOES HERE-->
+              <p style="leftText">
+                <![CDATA[
+                $ \newline 0 = -12x^2+12 \newline
+                12x^2 = 12 \newline
+                x = \pm 1 $
+                ]]>
+              </p>         
+            </stack>
+          </stack>
+        </stack>
+      </stack>
+      <button name="btn" content="Show Step 2">
+        <style>
+          <horizontalAlignment>right</horizontalAlignment>
+          <widthPercentage>40%</widthPercentage>
+        </style>
+        <onClick>
+          if btn.Text=="Show Step 2" then
+          btn.Text = "Hide Step 2";
+          stepStack.cont.Style.Visibility = "visible";
+          stepStack:Child(1).Style.Bold = 1;
+          elseif btn.Text=="Hide Step 2" then
+          btn.Text = "Show Step 2";
+          stepStack.cont.Style.Visibility = "collapsed";
+          stepStack:Child(1).Style.Bold = 0;
+          end
+        </onClick>
+      </button>
+    </stack>
+    <stack orientation="horizontal" style="contentBG2">
+      <stack name="stepStack" orientation="vertical">
+        <!--CONTENT GOES HERE-->
+        <p>STEP 3: Set intervals using the roots.</p>
+        <stack name="cont">
+          <style>
+            <visibility>collapsed</visibility>
+          </style>
+          <p style="leftText">
+            The intervals would be:
+            <![CDATA[
+            $ \newline ( -\infty , -1) \newline
+            ( -1 , 1 ) \newline
+            ( 1 , \infty ) $
+            ]]>
+          </p>
+        </stack>
+      </stack>
+      <button name="btn" content="Show Step 3">
+        <style>
+          <horizontalAlignment>right</horizontalAlignment>
+          <widthPercentage>40%</widthPercentage>
+        </style>
+        <onClick>
+          if btn.Text=="Show Step 3" then
+          btn.Text = "Hide Step 3";
+          stepStack.cont.Style.Visibility = "visible";
+          stepStack:Child(1).Style.Bold = 1;
+          elseif btn.Text=="Hide Step 3" then
+          btn.Text = "Show Step 3";
+          stepStack.cont.Style.Visibility = "collapsed";
+          stepStack:Child(1).Style.Bold = 0;
+          end
+        </onClick>
+      </button>
+    </stack>
+    <stack orientation="horizontal" style="contentBG">
+      <stack name="stepStack" orientation="vertical">
+        <!--CONTENT GOES HERE-->
+        <p>STEP 4: Plug in values inside the intervals to determine whether $ f''( x ) $ is positive or negative.</p>
+        <stack name="cont">
+          <style>
+            <visibility>collapsed</visibility>
+          </style>
+          <p style="leftText">
+            The intervals would be:
+            <![CDATA[
+            $ \newline f''( -2 ) = -12( -2 )^2 + 12 \newline
+              f''( - 2 ) = -36 \newline \newline
+              f''( 0 ) = -12( 0 )^2 + 12 \newline
+              f''( 0 ) = 12 \newline \newline
+              f''( 2 ) = -12( 2 )^2 + 12 \newline
+              f''( 2 ) = -36 $
+            ]]>
+          </p>  
+        </stack>
+      </stack>
+      <button name="btn" content="Show Step 4">
+        <style>
+          <horizontalAlignment>right</horizontalAlignment>
+          <widthPercentage>40%</widthPercentage>
+        </style>
+        <onClick>
+          if btn.Text=="Show Step 4" then
+            btn.Text = "Hide Step 4";
+            stepStack.cont.Style.Visibility = "visible";
+            stepStack:Child(1).Style.Bold = 1;
+          elseif btn.Text=="Hide Step 4" then
+            btn.Text = "Show Step 4";
+            stepStack.cont.Style.Visibility = "collapsed";
+            stepStack:Child(1).Style.Bold = 0;
+          end
+        </onClick>
+      </button>
+    </stack>
+    <stack orientation="horizontal" style="contentBG2">
+      <stack name="stepStack" orientation="vertical">
+        <!--CONTENT GOES HERE-->
+        <p>STEP 5: Analyze the data. </p>
+        <stack name="cont">
+          <style>
+            <visibility>collapsed</visibility>
+          </style>
+          <p style="leftText">
+            Based on the second derivative, we know that: $ ( -\infty , -1) $ is concaving downwards (since the second derivative is negative in that interval). $ ( -1 , 1 ) $ is concaving upwards since the second derivative is 
+            positive in that interval and $ ( 1 , \infty ) $ is concaving downwards because the second derivative is negative in that interval.
+          </p>
+        </stack>
+      </stack>
+      <button name="btn" content="Show Step 5">
+        <style>
+          <horizontalAlignment>right</horizontalAlignment>
+          <widthPercentage>40%</widthPercentage>
+        </style>
+        <onClick>
+          if btn.Text=="Show Step 5" then
+            btn.Text = "Hide Step 5";
+            stepStack.cont.Style.Visibility = "visible";
+            stepStack:Child(1).Style.Bold = 1;
+          elseif btn.Text=="Hide Step 5" then
+            btn.Text = "Show Step 5";
+            stepStack.cont.Style.Visibility = "collapsed";
+            stepStack:Child(1).Style.Bold = 0;
+          end
+        </onClick>
+      </button>
+    </stack>
+    <stack orientation="horizontal" style="contentBG">
+        <stack name="stepStack" orientation="vertical">
+          <!--CONTENT GOES HERE-->
+          <p>STEP 6: Sketch the Graph </p>
+          <stack name="cont">
+            <style>
+              <visibility>collapsed</visibility>
+            </style>
+            <script>
+              <![CDATA[
+              local series = stack2.xy1.funcLine;
+        
+              for x = -5, 5, 0.1 do
+                series:Add(x, -math.pow(x,4)+6*math.pow(x,2)-2*x-3)
+              end
+        
+              ]]>
+            </script>
+            <stack name="stack2">
+              <xyPlot name="xy1" pan="disabled" zoom="disabled" tap="disabled">
+                <axis dim="x" min="-5" max="5" auto="none"></axis>
+                <axis dim="y" min="-10" max="14" auto="none"></axis>
+                <series name="xline" draw="line" capacity="2">
+                    <style>
+                      <foreground color="black" />
+                      <lineThickness>1.5</lineThickness>
+                    </style>
+                    <data>
+                      -20 0; 20 0
+                    </data>
+                  </series>
+                <series name="yline" draw="line" capacity="2">
+                  <style>
+                    <foreground color="black" />
+                    <lineThickness>1.5</lineThickness>
+                  </style>
+                  <data>
+                    0 -20; 0 20
+                  </data>
+                </series>
+                <series name="funcLine">
+          
+                </series>
+              </xyPlot>          
+            </stack>
+          </stack>
+        </stack>
+        <button name="btn" content="Show Step 6">
+          <style>
+            <horizontalAlignment>right</horizontalAlignment>
+            <widthPercentage>40%</widthPercentage>
+          </style>
+          <onClick>
+            if btn.Text=="Show Step 6" then
+              btn.Text = "Hide Step 6";
+              stepStack.cont.Style.Visibility = "visible";
+              stepStack:Child(1).Style.Bold = 1;
+            elseif btn.Text=="Hide Step 6" then
+              btn.Text = "Show Step 6";
+              stepStack.cont.Style.Visibility = "collapsed";
+              stepStack:Child(1).Style.Bold = 0;
+            end
+          </onClick>
+        </button>
+      </stack>
+    <stack name="stack2" style="collapsed">
+        <xyPlot name="xy1" pan="disabled" zoom="disabled" tap="disabled">
+          <axis dim="x" min="-5" max="5" auto="none"></axis>
+          <axis dim="y" min="-10" max="14" auto="none"></axis>
+          <series name="xline" draw="line" capacity="2">
+              <style>
+                <foreground color="black" />
+                <lineThickness>1.5</lineThickness>
+              </style>
+              <data>
+                -20 0; 20 0
+              </data>
+            </series>
+          <series name="yline" draw="line" capacity="2">
+            <style>
+              <foreground color="black" />
+              <lineThickness>1.5</lineThickness>
+            </style>
+            <data>
+              0 -20; 0 20
+            </data>
+          </series>
+          <series name="funcLine">
+          
+          </series>
+        </xyPlot>          
+      </stack>
+    <p><br /></p>
+  </sectionNoTitle>
+  
+  
+    
+  <!-- EXTRA HELP -->
+  <sectionNoTitle>
+    <stack orientation="vertical">
+      <style>
+        <horizontalAlignment>center</horizontalAlignment>
+        <widthPercentage>80%</widthPercentage>
+      </style>
+      <p style="sectionHeading">STILL NEED MORE HELP?</p>
+      <p>Check out these resources on concavity: </p>
+      <web url="https://www.khanacademy.org/math/ap-calculus-ab/analyzing-functions-with-calculus-ab/concavity-ab/v/concavity-concave-upwards-and-concave-downwards-intervals"></web>
+      <web url="https://www.khanacademy.org/math/ap-calculus-ab/analyzing-functions-with-calculus-ab/concavity-ab/v/analyzing-concavity-algebraically"></web>
+    </stack>
+
+  </sectionNoTitle>
+
+</document>
+
+
+             

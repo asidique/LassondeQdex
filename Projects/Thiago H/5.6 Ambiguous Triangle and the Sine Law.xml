@@ -1,0 +1,2623 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G6904A81A_CE56_4452_BB4C_DBDAABA04A2E">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>5.6 Ambiguous Triangle and the Sine Law</title>
+    <creator>Thiago</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/calculator.png" />
+  </metadata>
+
+
+  <include src="curriculumThemePack/curriculumStyles.xml" />
+  <include src="plotTools.xml" />
+
+
+
+  <!--                                      Header & Footer                                           -->
+  <style name="backgroundColor">
+    <background color="50 133 184" />
+  </style>
+  <style name="fontColor">
+    <foreground color="255 255 255" />
+  </style>
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="fontColor">Ms. Koon</p>
+      <p style="fontColor rightText">MCR3U</p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/logo1.png" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/logo2.png" />
+    </stack>
+  </footer>
+  <!--                                      Header & Footer END                                         -->
+  
+  
+  
+
+  <!--                      Section 1                       -->
+
+  <section>
+
+    
+    
+    
+    
+    <title>
+      <style>
+        <textAlignment>right</textAlignment>
+        <marginTop>80</marginTop>
+      </style>
+      <size scale="xlarge">5.6</size>
+    </title>
+
+    <p style="chapterTitle">Ambiguous Triangle and the Sine Law</p>
+
+    <p style="title">
+      <style>
+        <widthPercentage>0.97</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <size scale="large"> Background Information </size>
+    </p>
+
+
+    <table grid="false" widths="20% 80%">
+
+
+      <row>
+        <column>
+          <image src="resources/questionImage.png" />
+        </column>
+        <column>
+          <p>
+            Can a triangle be formed given AB = 4 cm, BC = 10 cm, and ABC = 30° ?</p>
+          
+          <button name="button1" style="large" content="Launch Simulation">
+            <style>
+              <marginTop>80</marginTop>
+              <widthPercentage>0.60</widthPercentage>
+            </style>
+            <onClick>
+              button1.Style.Visibility = "hidden"
+              aPlot.Style.Visibility = "visible"
+              arcSim:Start()
+             
+            </onClick>
+          </button>
+          
+        </column>
+      </row>
+    </table>
+
+
+
+
+
+
+
+ 
+      <drawing name="aPlot" style="collapsed">
+        <style>
+          <widthPercentage>0.80</widthPercentage>
+        </style>
+        <axis dim="x" auto="fixed" min="-2" max="15" />
+        <axis dim="y" auto="fixed" min="-2" max="6" />
+        <series name="myA" />
+        <series name="myB" />
+        <series name="myC" />
+        <series name="numberSeries" />
+        <series name="myPlot1">
+          <style>
+            <foreground color="55 135 184" />
+          </style>
+        </series>
+        <series name="myPlot2">
+          <style>
+            <foreground color="55 135 184" />
+          </style>
+        </series>
+        <series name="myPlot3">
+          <style>
+            <foreground color="55 135 184" />
+          </style>
+        </series>
+        <series name="myPlot4">
+          <style>
+            <foreground color="0 0 0" />
+          </style>
+        </series>
+      </drawing>
+
+      <script>
+        <![CDATA[
+    
+        
+        
+    local myPoint1 = aPlot.myPlot1;
+    local myPoint2 = aPlot.myPlot2;
+    local myPoint3 = aPlot.myPlot3;
+    local myPoint4 = aPlot.myPlot4;
+    local curTime = 0;
+
+    local function drawArc()
+    
+    
+    if curTime >= 0 then      
+    myPoint1:Add(10.87,1)
+    myPoint1:Add(8.66, 5) 
+    myPoint1:Update()
+   
+    
+    if curTime >= 1 then
+    myPoint2:Add(0, 0)
+    myPoint2:Add(8.66, 5)
+    myPoint2:Update()
+    
+    
+    if curTime >= 3 then
+    myPoint4:Add(0, 0)
+    myPoint4:Add(20, 0)
+    myPoint4:Update()
+    char.num3(aPlot.numberSeries, vector({0.7, 0.1}), 0.2, color.black)
+    char.num0(aPlot.numberSeries, vector({0.9, 0.1}), 0.2, color.black)
+    
+    if curTime >= 3.3 then
+    textContent.Style.Visibility = "visible";
+        
+    char.textA(aPlot.myA, vector({11.10,1}), 0.2, color.black)
+    char.textB(aPlot.myB, vector({8.66,5.10}), 0.2, color.black)
+    char.textC(aPlot.myC, vector({-0.30,-0.5}), 0.2, color.black)
+    end
+    end
+    end
+    end
+    end
+    ]]>
+      </script>
+
+      
+
+      <simulation name="arcSim" period="0.01" duration="10">
+        <onUpdate>
+          curTime = time;
+          drawArc()
+        </onUpdate>
+      </simulation>
+
+
+    <p name="textContent" style="collapsed">
+      <style>
+        <textAlignment>justify</textAlignment>
+        <widthPercentage>0.90</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+        <marginBottom>80</marginBottom>
+      </style>
+      As you can see, it is sometimes impossible to form a triangle with the given information. A "triangle" with two adjacent sides and an opposite angle given are known as a SSA triangle.
+    When solving triangles using sine law, this configuration may result in 0, 1 or 2 triangles. This is known as the <b>ambiguous case</b>. 
+    </p>
+
+  </section>
+
+
+
+
+
+
+
+
+
+
+
+  <!--                      Section 2                        -->
+
+  <sectionNoTitle>
+
+    <stack name="wrapTitle">
+      <style>
+        <widthPercentage>0.89</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <p style="titleStyle">
+        <style>
+          <marginTop>50</marginTop>
+          <size scale="large" />
+          <foreground color="50 135 184" />
+        </style>
+        <b>Explanation</b>
+      </p>
+    </stack>
+
+    <p>
+      <style>
+        <textAlignment>center</textAlignment>
+        <horizontalAlignment>center</horizontalAlignment>
+        <marginTop>40</marginTop>
+        <size scale="large" />
+      </style>
+      When the given angle, <b>C is acute</b>, 4 cases arise</p>
+
+    
+    
+    <style name="myWidth">
+      <widthPercentage>0.93</widthPercentage>
+      <marginTop>40</marginTop>
+      <horizontalAlignment>center</horizontalAlignment>
+    </style>
+
+
+
+    <stack style="borderOutside myWidth">
+      <stack style="borderInside">
+        
+
+
+        <p>
+          Case 1: <u><b>C is acute</b> </u> and <u>AB &gt; BC</u>
+        </p>
+
+
+
+        <drawing name="myAnimation" style="collapsed">
+          <style>
+            <widthPercentage>0.80</widthPercentage>
+          </style>
+          <axis dim="x" auto="fixed" min="-3" max="15" />
+          <axis dim="y" auto="fixed" min="-3" max="6" />
+          <series name="myA" capacity="8" />
+          <series name="myB" />
+          <series name="myC" />
+          <series name="mySeries" manual="true" capacity="2">
+            <style>
+              <foreground color="55 135 184" />
+            </style>
+          </series>
+          <series>
+            <data>-1 -1; -1 1; 1 1; 1 -1; -1 -1</data>
+            <colors>transparent; transparent; transparent; transparent; transparent</colors>
+          </series>
+
+          <series>
+            <data>0 0 ; 20 0</data>
+            <colors>black; black</colors>
+          </series>
+
+          <series name="lineBC" capacity="2">
+            <style>
+              <foreground color="55 135 184" />
+            </style>
+          </series>
+
+
+        </drawing>
+
+        <script>
+          local plotC = myAnimation.mySeries;
+          local myLine1 = myAnimation.lineBC;
+         
+          char.textB(myAnimation.myB, vector({3,3.5}), 0.2, color.black)
+          char.textC(myAnimation.myC, vector({-0.30,-0.5}), 0.2, color.black)
+        </script>
+
+
+        <simulation name="circleSim">
+          <onUpdate>
+            curTime = time;
+          </onUpdate>
+          <solver>
+            <series>
+              <clock />
+              <system>
+                <input name="data" width="1" />
+                <onOutputs>
+
+                  plotC:Clear()
+
+                  if time &gt;= 0.2 then
+
+                  myLine1:Add(0,0)
+                  myLine1:Add(3,3)
+
+                  end
+
+
+
+
+                  if time &gt;= 1 then
+
+
+
+                  val1 = -1.4*(data[1]) + 14
+
+                  if val1 &gt; -8 then
+                  val2 = -1*data[1]/2
+
+
+
+                  else
+                  simulationResult.Style.Visibility = "visible"
+                  val1 = 1.4*(data[1]) - 27
+                  val2 = (data[1]/2) - 14.3
+                  end
+
+                  plotC:Add(3,3)
+                  plotC:Add(val1, val2)
+                  plotC:Update()               
+                  end
+
+                  if time &gt;= 28.6 then
+                  simulationConclusion.Style.Visibility = "visible"
+                  simulationResult.Text = "C is acute and AB &gt; BC"
+                char.textA(myAnimation.myA, vector({val1+0.5,val2+0.5}), 0.2, color.black)
+                circleSim:Stop()
+                end
+
+
+              </onOutputs>
+              </system>
+            </series>
+          </solver>
+        </simulation>
+        
+
+        <p name="simulationResult" style="hidden centerText">AB &gt; BC</p>
+        
+        <p name="simulationConclusion" style="collapsed">
+          <style>
+            <textAlignment>center</textAlignment>
+            <foreground color="255 0 0" />
+          </style>
+          ONE SOLUTION
+        </p>
+
+        <button name="button11" style="large" content="Show Case">
+          <style>
+            <marginTop>50</marginTop>
+            <widthPercentage>0.60</widthPercentage>
+          </style>
+          <onClick>
+            circleSim:Start()
+            myAnimation.Style.Visibility = "visible"
+          </onClick>
+        </button>
+
+
+      </stack>
+    </stack>
+
+
+
+
+
+
+
+    <p>
+      <style>
+        <textAlignment>center</textAlignment>
+        <horizontalAlignment>center</horizontalAlignment>
+        <marginTop>70</marginTop>
+        <marginBottom>35</marginBottom>
+      
+      </style>
+     Next, we will explore the cases where <u>C is acute</u> and <u>AB &lt; BC</u>
+    </p>
+
+    <stack style="borderOutside myWidth">
+      <stack style="borderInside">
+
+
+
+
+        <p>
+          Case 2: <u><b>C is acute</b></u>, <u>AB &lt; BC</u> and <u>AB = h</u>
+        </p>
+
+   
+        <drawing name="myAnimation" style="collapsed">
+          <style>
+            <widthPercentage>0.80</widthPercentage>
+          </style>
+          <axis dim="x" auto="fixed" min="-4" max="15" />
+          <axis dim="y" auto="fixed" min="-2" max="6" />
+          <series name="myA" capacity="8" />
+          <series name="myB" />
+          <series name="myC" />
+          <series name="mySeries" manual="true" capacity="2">
+            <style>
+              <foreground color="55 135 184" />
+            </style>
+          </series>
+          <series>
+            <data>-1 -1; -1 1; 1 1; 1 -1; -1 -1</data>
+            <colors>transparent; transparent; transparent; transparent; transparent</colors>
+          </series>
+
+          <series>
+            <data>0 0 ; 20 0</data>
+            <colors>black; black</colors>
+          </series>
+
+          <series name="lineBC" capacity="2">
+            <style>
+              <foreground color="55 135 184" />
+            </style>
+          </series>
+
+
+        </drawing>
+
+        <script>
+          local plotC = myAnimation.mySeries;
+          local myLine1 = myAnimation.lineBC;
+          char.textB(myAnimation.myB, vector({5,3.5}), 0.2, color.black)
+          char.textC(myAnimation.myC, vector({-0.30,-0.5}), 0.2, color.black)
+        </script>
+
+
+        <simulation name="circleSim">
+          <onUpdate>
+            curTime = time;
+          </onUpdate>
+          <solver>
+            <series>
+              <clock />
+              <system>
+                <input name="data" width="1" />
+                <onOutputs>
+
+                  plotC:Clear()
+
+                  if time &gt;= 0.2 then
+
+                  myLine1:Add(0,0)
+                  myLine1:Add(5,3)
+                 
+                  end
+
+<!--             
+                 val1 = math.sin(data[1]) + 5
+
+                  if val1 &gt; 5 then
+                  val2 = 0.4*(math.sin(data[1]))
+
+
+
+                  else
+                  val2 = -0.4*(math.sin(data[1]))
+                  end-->
+
+
+                  if time &gt;= 1 then
+
+                  simulationResult.Style.Visibility = "visible"
+
+                  val1 = math.sin(data[1]) + 5
+
+                  if val1 &gt; 5 then
+                  val2 = 0.4*(math.sin(data[1]))
+
+
+
+                  else
+                  val2 = -0.4*(math.sin(data[1]))
+                  end
+
+                  plotC:Add(5,3)
+                  plotC:Add(val1, val2)
+                  plotC:Update()
+                  
+                  end
+
+                  if time &gt;= 9.30 then
+                  simulationConclusion.Style.Visibility = "visible"
+                  button2.Style.Visibility = "visible"
+                  simulationResult.Text = "C is acute, AB &lt; BC and AB = h"
+                  circleSim:Stop()
+                  char.textA(myAnimation.myA, vector({val1+0.1,val2-0.5}), 0.2, color.black)
+                  end
+
+
+                </onOutputs>
+              </system>
+            </series>
+          </solver>
+        </simulation>
+
+        <p name="simulationResult" style="hidden centerText">As demonstrated, no other triangles can be formed. </p>
+
+        <p name="simulationConclusion" style="collapsed">
+          <style>
+            <textAlignment>center</textAlignment>
+            <foreground color="255 0 0" />
+          </style>
+          ONE SOLUTION
+        </p>
+        
+        <button name="button2" style="large hidden" content="h/BC = sinC">
+          <style>
+            <marginTop>50</marginTop>
+            <widthPercentage>0.60</widthPercentage>
+          </style>
+          <onClick>
+            if button2.Text == "h/BC = sinC"  then
+            button2.Text = "h = BC sinC"
+            else
+            button2.Text = "h/BC = sinC"
+            end
+          </onClick>
+        </button>
+
+        <button name="button1" style="large" content="Show Case">
+          <style>            
+            <widthPercentage>0.60</widthPercentage>
+          </style>
+          <onClick>
+            circleSim:Start()
+            myAnimation.Style.Visibility = "visible"
+          </onClick>
+        </button>
+
+
+      </stack>
+    </stack>
+
+
+    <p name="ThisPTagIsTheMaringBetweenTheStackAndFooter">
+      <style>
+        <marginTop>50</marginTop>
+      </style>
+    </p> 
+    
+    
+    
+
+  </sectionNoTitle>
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+
+  <!--                      Section 3                        -->
+
+
+
+  <sectionNoTitle>
+    
+    <stack name="wrapTitle">
+      <style>
+        <widthPercentage>0.89</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <p style="titleStyle">
+        <style>
+          <marginTop>50</marginTop>
+          <size scale="large" />
+          <foreground color="50 135 184" />
+        </style>
+        <b>Explanation</b>
+      </p>
+    </stack>
+
+
+
+    <style name="myWidth">
+      <widthPercentage>0.93</widthPercentage>
+      <marginTop>40</marginTop>
+      <horizontalAlignment>center</horizontalAlignment>
+    </style>
+
+
+
+    <stack style="borderOutside myWidth">
+      <stack style="borderInside">
+
+
+
+
+        <p>
+          Case 3: <u>
+            <b>C is acute</b>
+          </u>, <u>AB &lt; BC</u> and <u>AB &lt; h</u>
+        </p>
+
+
+        <drawing name="myAnimation" style="collapsed">
+          <style>
+            <widthPercentage>0.80</widthPercentage>
+          </style>
+          <axis dim="x" auto="fixed" min="-4" max="15" />
+          <axis dim="y" auto="fixed" min="-2" max="6" />
+          <series name="myA" capacity="8" />
+          <series name="myB" />
+          <series name="myC" />
+          <series name="mySeries" manual="true" capacity="2">
+            <style>
+              <foreground color="55 135 184" />
+            </style>
+          </series>
+          <series>
+            <data>-1 -1; -1 1; 1 1; 1 -1; -1 -1</data>
+            <colors>transparent; transparent; transparent; transparent; transparent</colors>
+          </series>
+
+          <series>
+            <data>0 0 ; 20 0</data>
+            <colors>black; black</colors>
+          </series>
+
+          <series name="lineBC" capacity="2">
+            <style>
+              <foreground color="55 135 184" />
+            </style>
+          </series>
+
+          <series name="lineH" draw="lineSegments">
+            <style>
+              <foreground color="55 135 184" />
+            </style>
+          </series>
+
+        </drawing>
+
+        <script>
+          local plotC = myAnimation.mySeries;
+          local myLine1 = myAnimation.lineBC;
+          local myLine2 = myAnimation.lineH;
+          char.textB(myAnimation.myB, vector({5,3.5}), 0.2, color.black)
+          char.textC(myAnimation.myC, vector({-0.30,-0.5}), 0.2, color.black)
+          
+          for x = 0, 3, 0.1 do
+          y = 5
+          myLine2:Add(y,x)
+          end
+          myLine2:Update()
+
+        </script>
+
+
+        <simulation name="circleSim">
+          <onUpdate>
+            curTime = time;
+          </onUpdate>
+          <solver>
+            <series>
+              <clock />
+              <system>
+                <input name="data" width="1" />
+                <onOutputs>
+
+                  plotC:Clear()
+
+                  if time &gt;= 0.2 then
+
+                  myLine1:Add(0,0)
+                  myLine1:Add(5,3)
+                  
+
+                  end
+
+
+
+                  if time &gt;= 1 then
+
+                  val1 = -1.15*(data[1]/2) + 7
+
+                  if val1 &gt; 4.5 then
+                  val2 = 0.2*(math.sin(data[1]/2)) + 0.4
+
+                  if val1 &lt; 5.1 then
+                  simulationResult.Style.Visibility = "visible"
+                  end
+
+                  else
+                  val2 = -0.2*(math.sin(data[1]/2.5)) + 0.8
+                  end
+
+                  plotC:Add(5,3)
+                  plotC:Add(val1, val2)
+                  plotC:Update()
+                  end
+
+                  if time &gt;= 9.5 then
+                  simulationResult.Text = "C is acute, AB &lt; BC and AB &lt; h"
+                  simulationConclusion.Style.Visibility = "visible"
+                  simulationResult.Style.Visibility = "visible"
+
+                  <!--      char.textA(myAnimation.myA, vector({val1 - 0.5,val2 +0.7}), 0.2, color.black) -->
+                  plotC:Clear()
+                  circleSim:Stop()
+                  end
+
+                </onOutputs>
+              </system>
+            </series>
+          </solver>
+        </simulation>
+
+        <p name="simulationResult" style="hidden centerText"> AB &lt; h </p>
+        
+        <p name="simulationConclusion" style="collapsed">
+          <style>
+            <textAlignment>center</textAlignment>
+            <foreground color="255 0 0" />
+          </style>
+          NO SOLUTION
+        </p>
+
+
+        <button name="button1" style="large" content="Show Case">
+          <style>
+            <marginTop>50</marginTop>
+            <widthPercentage>0.60</widthPercentage>
+          </style>
+          <onClick>
+            circleSim:Start()
+            myAnimation.Style.Visibility = "visible"
+          </onClick>
+        </button>
+
+
+      </stack>
+    </stack>
+
+
+
+
+
+
+    <style name="myWidth">
+      <widthPercentage>0.93</widthPercentage>
+      <marginTop>40</marginTop>
+      <horizontalAlignment>center</horizontalAlignment>
+    </style>
+
+
+
+    <stack style="borderOutside myWidth">
+      <stack style="borderInside">
+
+
+
+
+        <p>
+          Case 4: <u>
+            <b>C is acute</b>
+          </u>, <u>AB &lt; BC</u> and <u>AB &gt; h</u>
+        </p>
+
+        <p name="marginBottom">
+          <style>
+            <marginBottom>80</marginBottom>
+          </style>
+        </p>
+
+
+        <drawing name="myAnimation2" style="collapsed">
+          <style>
+            <widthPercentage>0.80</widthPercentage>
+          </style>
+          <axis dim="x" auto="fixed" min="0" max="11" />
+          <axis dim="y" auto="fixed" min="-2" max="6" />
+          <series name="myA" capacity="8" />
+          <series name="myB" />
+          <series name="myC" />
+          <series name="mySeries" manual="true" capacity="2">
+            <style>
+              <foreground color="55 135 184" />
+            </style>
+          </series>
+          <series>
+            <data>-1 -1; -1 1; 1 1; 1 -1; -1 -1</data>
+            <colors>transparent; transparent; transparent; transparent; transparent</colors>
+          </series>
+
+          <series>
+            <data>0 0 ; 20 0</data>
+            <colors>black; black</colors>
+          </series>
+
+          <series name="lineBC" capacity="2">
+            <style>
+              <foreground color="55 135 184" />
+            </style>
+          </series>
+
+          <series name="lineH" draw="lineSegments">
+            <style>
+              <foreground color="55 135 184" />
+            </style>
+          </series>
+
+        </drawing>
+
+        <script>
+          local plotC = myAnimation2.mySeries;
+          local myLine1 = myAnimation2.lineBC;
+          local myLine2 = myAnimation2.lineH;
+          local myLine11 = acutePlot.lineBC;
+          local myLine22 = acutePlot.lineH;
+
+          char.textB(myAnimation2.myB, vector({5,3.5}), 0.2, color.black)
+          char.textC(myAnimation2.myC, vector({0,-0.5}), 0.2, color.black)
+          char.textB(acutePlot.myB, vector({5,3.5}), 0.2, color.black)
+          char.textC(acutePlot.myC, vector({0,-0.5}), 0.2, color.black)
+
+
+          for x = 0, 3, 0.1 do
+          y = 5
+          myLine2:Add(y,x)
+          myLine22:Add(y,x)
+          end
+          myLine2:Update()
+          myLine22:Update()
+        </script>
+
+
+        <simulation name="circleSim">
+          <onUpdate>
+            curTime = time;
+          </onUpdate>
+          <solver>
+            <series>
+              <clock />
+              <system>
+                <input name="data" width="1" />
+                <onOutputs>
+
+                  plotC:Clear()
+
+                  if time &gt;= 0.2 then
+
+                  myLine1:Add(0,0)
+                  myLine1:Add(5,3)
+                  myLine11:Add(0,0)
+                  myLine11:Add(5,3)
+
+                  
+
+                  end
+
+
+
+                  if time &gt;= 1 then
+
+                  val1 = -1.15*(data[1]/2) + 10
+
+                  if val1 &gt; 5 then
+                  val2 = -0.4*(data[1]/3)
+
+                  else
+                  val2 = math.cos(data[1]/3) - 0.3
+                  end
+
+                  plotC:Add(5,3)
+                  plotC:Add(val1, val2)
+                  plotC:Update()
+                  end
+
+                  if time &gt;= 15.07 then
+                  showAcuteButton.Style.Visibility = "visible"
+                  simulationConclusion.Style.Visibility = "visible"
+                  simulationResult.Style.Visibility = "visible"
+                  simulationResult.Text = "C is acute, AB &lt; BC and AB &gt; h"
+                  char.textA(myAnimation2.myA, vector({val1 ,val2 -0.5}), 0.2, color.black)
+                  char.textA(acutePlot.myA, vector({9 , -0.5}), 0.2, color.black)
+                  circleSim:Stop()
+                  end
+
+                </onOutputs>
+              </system>
+            </series>
+          </solver>
+        </simulation>
+
+
+        <drawing name="acutePlot" style="collapsed">
+          <style>
+            <widthPercentage>0.80</widthPercentage>
+          </style>
+          <axis dim="x" auto="fixed" min="0" max="11" />
+          <axis dim="y" auto="fixed" min="-2" max="6" />
+          <series name="myA" capacity="8" />
+          <series name="myB" />
+          <series name="myC" />
+          <series name="lineH" draw="lineSegments">
+            <style>
+              <foreground color="55 135 184" />
+            </style>
+          </series>
+          <series name="lineBC" capacity="2">
+            <style>
+              <foreground color="55 135 184" />
+            </style>
+          </series>
+          <series name="lineAB" capacity="2">
+            <style>
+              <foreground color="55 135 184" />
+            </style>
+            <data>5 3 ; 9 0</data>
+          </series>
+          <series>
+            <data>0 0 ; 20 0</data>
+            <colors>black; black</colors>
+          </series>
+        </drawing>
+
+
+        <p name="simulationResult" style="collapsed">
+          <style>
+            <textAlignment>center</textAlignment>
+          </style>
+        </p>
+        
+        <p name="simulationConclusion" style="collapsed">
+          <style>
+            <textAlignment>center</textAlignment>
+            <foreground color="255 0 0" />
+          </style>
+          2 SOLUTIONS
+        </p>
+
+        <button name="showAcuteButton" style="collapsed" content="Show acute triangle">
+          <style>
+            <widthPercentage>0.60</widthPercentage>
+          </style>
+          <onClick>
+            if showAcuteButton.Text == "Show acute triangle" then
+            acutePlot.Style.Visibility = "visible"
+            button1.Style.Visibility = "hidden"
+            myAnimation2.Style.Visibility = "collapsed"
+            showAcuteButton.Text = "Show obtuse triangle"
+            else
+            acutePlot.Style.Visibility = "collapsed"
+            button1.Style.Visibility = "visible"
+            myAnimation2.Style.Visibility = "visible"
+            showAcuteButton.Text = "Show acute triangle"
+            end
+          </onClick>
+        </button>
+
+
+        <button name="button1" style="large" content="Show Case">
+          <style>
+            <widthPercentage>0.60</widthPercentage>
+          </style>
+          <onClick>
+            circleSim:Start()
+            marginBottom.Style.Visibility = "collapsed"
+            myAnimation2.Style.Visibility = "visible"
+            showAcuteButton.Style.Visibility = "collapsed"
+          </onClick>
+        </button>
+
+
+      </stack>
+    </stack>
+
+    <p name="ThisPTagIsTheMaringBetweenTheStackAndFooter">
+      <style>
+        <marginTop>50</marginTop>
+      </style>
+    </p>
+
+  </sectionNoTitle>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!--                      Section 4                        -->
+
+  <sectionNoTitle>
+
+
+    <style name="myWidth">
+      <widthPercentage>0.93</widthPercentage>
+      <marginTop>40</marginTop>
+      <horizontalAlignment>center</horizontalAlignment>
+    </style>
+
+
+  <stack name="wrapTitle">
+    <style>
+      <widthPercentage>0.89</widthPercentage>
+      <horizontalAlignment>center</horizontalAlignment>
+    </style>
+    <p style="titleStyle">
+      <style>
+        <marginTop>50</marginTop>
+        <size scale="large" />
+        <foreground color="50 135 184" />
+      </style>
+      <b>Explanation</b>
+    </p>
+  </stack>
+
+    <p>
+      <style>
+        <textAlignment>center</textAlignment>
+        <horizontalAlignment>center</horizontalAlignment>
+        <marginTop>40</marginTop>
+        <size scale="large" />
+      </style>
+      When the given angle, <b>C is obtuse</b>, 2 cases can arise.
+    </p>
+
+
+
+    <stack style="borderOutside myWidth">
+      <stack style="borderInside">
+
+        <p>
+          Case 1: <u>
+            <b>C is obtuse</b>
+          </u>, <u>AB &gt; BC</u> 
+        </p>
+
+        <drawing name="myAnimation" style="collapsed">
+          <style>
+            <widthPercentage>0.80</widthPercentage>
+          </style>
+          <axis dim="x" auto="fixed" min="-4" max="15" />
+          <axis dim="y" auto="fixed" min="-2" max="6" />
+          <series name="myA" capacity="8" />
+          <series name="myB" />
+          <series name="myC" />
+          <series name="mySeries" manual="true" capacity="2">
+            <style>
+              <foreground color="55 135 184" />
+            </style>
+          </series>
+          <series>
+            <data>-1 -1; -1 1; 1 1; 1 -1; -1 -1</data>
+            <colors>transparent; transparent; transparent; transparent; transparent</colors>
+          </series>
+
+          <series>
+            <data>2 0 ; 20 0</data>
+            <colors>black; black</colors>
+          </series>
+
+          <series name="lineBC" capacity="2">
+            <style>
+              <foreground color="55 135 184" />
+            </style>
+          </series>
+        </drawing>
+
+        <script>
+          local plotC = myAnimation.mySeries;
+          local myLine1 = myAnimation.lineBC;
+          char.textB(myAnimation.myB, vector({-1,3.5}), 0.2, color.black)
+          char.textC(myAnimation.myC, vector({2,-0.5}), 0.2, color.black)
+        </script>
+
+
+        <simulation name="circleSim">
+          <onUpdate>
+            curTime = time;
+          </onUpdate>
+          <solver>
+            <series>
+              <clock />
+              <system>
+                <input name="data" width="1" />
+                <onOutputs>
+
+                  plotC:Clear()
+
+                  if time &gt;= 0.2 then
+
+                  myLine1:Add(2,0)
+                  myLine1:Add(-1,3)
+
+
+                  end
+
+
+
+                  if time &gt;= 1 then
+
+                  val1 = -1*(data[1]/2) + 8
+
+                  if val1 &gt; 3.7 then
+                  val2 = -1*(data[1]/5)
+
+                  else
+                  val1 = 1*(data[1]/1.5) - 1
+                  val2 = 1*(data[1]/3.7) - 4
+                  end
+
+                  plotC:Add(-1,3)
+                  plotC:Add(val1, val2)
+                  plotC:Update()
+                  end
+
+                  if time &gt;= 9.5 then
+                  simulationResult.Style.Visibility = "visible"            
+                  simulationResult.Text = "AB &gt; BC"
+                  end
+
+                  if time &gt;= 14.80 then
+                  simulationResult.Text = "C is obtuse, AB &gt; BC"
+                  simulationResult2.Style.Visibility = "visible"
+                  simulationResult2.Text = "1 SOLUTION"
+                  char.textA(myAnimation.myA, vector({val1 ,val2 -0.5}), 0.2, color.black)
+                  circleSim:Stop()
+                  end
+
+                </onOutputs>
+              </system>
+            </series>
+          </solver>
+        </simulation>
+
+        <p name="simulationResult" style="hidden centerText">  </p>
+        <p name="simulationResult2" style="collapsed centerText">
+          <style>
+            <textAlignment>center</textAlignment>
+            <foreground color="255 0 0" />
+          </style>
+        </p>
+
+
+        <button name="button1" style="large" content="Show Case">
+          <style>
+            <marginTop>50</marginTop>
+            <widthPercentage>0.60</widthPercentage>
+          </style>
+          <onClick>
+            circleSim:Start()
+            myAnimation.Style.Visibility = "visible"
+          </onClick>
+        </button>
+
+
+      </stack>
+    </stack>
+
+
+
+
+
+    <stack style="borderOutside myWidth">
+      <stack style="borderInside">
+
+        <p>
+          Case 2: <u>
+            <b>C is obtuse</b>
+          </u>, <u>AB &lt; BC</u>
+        </p>
+
+        <drawing name="myAnimation" style="collapsed">
+          <style>
+            <widthPercentage>0.80</widthPercentage>
+          </style>
+          <axis dim="x" auto="fixed" min="-4" max="15" />
+          <axis dim="y" auto="fixed" min="-2" max="6" />
+          <series name="myA" capacity="8" />
+          <series name="myB" />
+          <series name="myC" />
+          <series name="mySeries" manual="true" capacity="2">
+            <style>
+              <foreground color="55 135 184" />
+            </style>
+          </series>
+          <series>
+            <data>-1 -1; -1 1; 1 1; 1 -1; -1 -1</data>
+            <colors>transparent; transparent; transparent; transparent; transparent</colors>
+          </series>
+
+          <series>
+            <data>2 0 ; 20 0</data>
+            <colors>black; black</colors>
+          </series>
+
+          <series name="lineBC" capacity="2">
+            <style>
+              <foreground color="55 135 184" />
+            </style>
+          </series>
+        </drawing>
+
+        <script>
+          local plotC = myAnimation.mySeries;
+          local myLine1 = myAnimation.lineBC;
+          char.textB(myAnimation.myB, vector({-1,3.5}), 0.2, color.black)
+          char.textC(myAnimation.myC, vector({2,-0.5}), 0.2, color.black)
+        </script>
+
+
+        <simulation name="circleSim">
+          <onUpdate>
+            curTime = time;
+          </onUpdate>
+          <solver>
+            <series>
+              <clock />
+              <system>
+                <input name="data" width="1" />
+                <onOutputs>
+
+                  plotC:Clear()
+
+                  if time &gt;= 0.2 then
+
+                  myLine1:Add(2,0)
+                  myLine1:Add(-1,3)
+
+
+                  end
+
+                 if time &gt;= 1 then
+
+                  plotC:Add(-1,3)
+                  plotC:Add(3, 1)
+                  plotC:Update()
+                  end
+
+                  if time &gt;= 1.5 then
+                  simulationResultB.Style.Visibility = "visible"
+                  simulationResultB.Text = "C is obtuse, AB &lt; BC"
+                  simulationResult2B.Style.Visibility = "visible"
+                  simulationResult2B.Text = "NO SOLUTION"
+                  char.textA(myAnimation.myA, vector({3.5, 1}), 0.2, color.black)
+                  circleSim:Stop()
+                  end
+
+
+
+                </onOutputs>
+              </system>
+            </series>
+          </solver>
+        </simulation>
+
+        <p name="simulationResultB" style="hidden centerText"> AB &lt; BC </p>
+        <p name="simulationResult2B" style="collapsed centerText">
+          <style>
+            <textAlignment>center</textAlignment>
+            <foreground color="255 0 0" />
+          </style>
+        </p>
+
+
+        <button name="button1" style="large" content="Show Case">
+          <style>
+            <marginTop>50</marginTop>
+            <widthPercentage>0.60</widthPercentage>
+          </style>
+          <onClick>
+            circleSim:Start()
+            myAnimation.Style.Visibility = "visible"
+          </onClick>
+        </button>
+
+
+      </stack>
+    </stack>
+
+
+    <p name="ThisPTagIsTheMaringBetweenTheStackAndFooter">
+      <style>
+        <marginTop>50</marginTop>
+      </style>
+    </p>
+
+  </sectionNoTitle>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  <!--                      Section 5                        -->
+
+
+  <sectionNoTitle>
+
+    <stack name="wrapTitle">
+      <style>
+        <widthPercentage>0.93</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <p style="titleStyle">
+        <style>
+          <marginTop>50</marginTop>
+          <size scale="large" />
+          <foreground color="50 135 184" />
+        </style>
+        <b>Examples</b>
+      </p>
+    </stack>
+
+
+
+    <stack style="questionAnswer">
+      <p style="title">EXAMPLE 1</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="curriculumThemePack\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>
+              <style>
+                <textAlignment>justify</textAlignment>
+                <widthPercentage>0.95</widthPercentage>
+              </style>
+              Determine if it is possible to draw the triangles with the following
+              information.
+            </p>
+            <p>
+              <style>
+                <widthPercentage>0.95</widthPercentage>
+              </style>
+              a)  $ \angle A = 35°, a = 9 cm, b = 19 cm $
+            </p>          
+          </column>
+        </row>
+      </table>
+
+      <script>
+        char.textA(questionPlot.myAB, vector({-0.5 ,0}), 0.2, color.black)
+        char.textB(questionPlot.myAB, vector({10.5 ,0}), 0.2, color.black)
+
+
+        char.textA(questionPlotb.myAB, vector({-0.5 ,0}), 0.2, color.black)
+        char.textB(questionPlotb.myAB, vector({7.5 ,0}), 0.2, color.black)
+
+
+        for y = 0, 2, 0.1 do
+        x = 7
+        questionPlotb.height:Add(x,y)
+        end
+        questionPlotb.height:Update()
+
+
+        char.textA(questionPlotc.myAB, vector({-0.5 ,0}), 0.2, color.black)
+        char.textB(questionPlotc.myAB, vector({7.1 ,-0.3}), 0.2, color.black)
+        char.num1(questionPlotc.myAB, vector({7.3 ,-0.4}), 0.16, color.black)
+        char.textB(questionPlotc.myAB, vector({3 ,-0.3}), 0.2, color.black)
+        char.num2(questionPlotc.myAB, vector({3.2 ,-0.4}), 0.16, color.black)
+        char.textC(questionPlotc.myAB, vector({5 ,2.2}), 0.2, color.black)
+
+
+        for y = 0, 2, 0.1 do
+        x = 5
+        questionPlotc.height:Add(x,y)
+        end
+        questionPlotc.height:Update()
+
+
+      </script>
+
+      <drawing name="questionPlot">
+        <style>
+          <widthPercentage>0.70</widthPercentage>
+          <aspectRatio>0.50</aspectRatio>
+        </style>
+        <axis dim="x" auto="fixed" min="-2" max="12" />
+        <axis dim="y" auto="fixed" min="-1" max="4" />
+
+        <series name="myAB" />
+        
+        <series>
+          <style>
+            <foreground color="55 135 184" />
+          </style>
+          <data>0 0; 3 2; 10 0; 0 0</data>
+        </series>
+      </drawing>
+
+
+
+      <stack orientation="horizontal">
+        <style>
+          <marginBottom>30</marginBottom>
+        </style>
+        <stack>
+          <script>
+            local i = 0;
+          </script>
+        <button name="myButton" style="large" content="Method 1">
+          <onClick>
+            i = i+1;
+            if i == 1 then
+            line1.Style.Visibility = "visible"
+            end
+            if i == 2 then
+            line2.Style.Visibility = "visible"
+            end
+            if i == 3 then
+            myButton.Text = "Hide Answer"
+            line3.Style.Visibility = "visible"
+            end
+            if i == 4 then
+            myButton.Text = "Method 1"
+            line1.Style.Visibility = "hidden"
+            line2.Style.Visibility = "hidden"
+            line3.Style.Visibility = "hidden"
+            i = 0
+            return i
+            end
+            return i;
+          </onClick>
+        </button>
+          <p name="line1" style="centerText hidden"> $ h = b sinA $  </p>
+          <p name="line2" style="centerText hidden"> $ = 19 sin35° $ </p>
+          <p name="line3" style="centerText hidden"> $ 10.898 &gt; a $  </p>
+        </stack>
+
+        <stack>
+          <script>
+            local i = 0;
+          </script>
+          <button name="myButton" style="large" content="Method 2">
+            <onClick>
+              i = i+1;
+              if i == 1 then
+              line1.Style.Visibility = "visible"
+              end
+              if i == 2 then
+              line2.Style.Visibility = "visible"
+              end
+              if i == 3 then
+              myButton.Text = "Hide Answer"
+              line3.Style.Visibility = "visible"
+              end
+              if i == 4 then
+              myButton.Text = "Method 2"
+              line1.Style.Visibility = "hidden"
+              line2.Style.Visibility = "hidden"
+              line3.Style.Visibility = "hidden"
+              i = 0
+              return i
+              end
+              return i;
+            </onClick>
+          </button>
+          <p name="line1" style="centerText hidden"> $ \frac{sin35}{9} = \frac{sinB}{19} $ </p>
+          <p name="line2" style="centerText hidden"> $ sinB &gt; 1 $ </p>
+          <p name="line3" style="centerText hidden">$ \angle B = \phi $ </p>
+        </stack>
+  
+      </stack>
+      <stack>
+        <style>
+          <widthPercentage>0.80</widthPercentage>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <button style="large" name="answerButton" content="Final Answer">
+          <style>
+            <widthPercentage>0.50</widthPercentage>
+          </style>
+          <onClick>
+            if answerButton.Text == "Final Answer" then
+            contenteWrap.Style.Visibility = "visible"
+            answerButton.Text = "Hide Answer"
+            else
+            answerButton.Text = "Final Answer"
+            contenteWrap.Style.Visibility = "hidden"
+            end
+          </onClick>
+        </button>
+
+        <stack style="hidden" name="contenteWrap" orientation="horizontal">
+          <style>
+            <marginBottom>30</marginBottom>
+          </style>
+          <p style="centerText">No triangle can be formed.</p>
+        </stack>
+      </stack>
+
+      
+      
+      
+
+
+      <stack>
+        <style>
+          <widthPercentage>0.87</widthPercentage>
+          <horizontalAlignment>right</horizontalAlignment>
+        </style>
+        <p>  b)  $ \angle A = 30°, a = 3.85 m, b = 7.7 m $  </p>
+      </stack>
+
+      <drawing name="questionPlotb">
+        <style>
+          <widthPercentage>0.70</widthPercentage>
+          <aspectRatio>0.50</aspectRatio>
+        </style>
+        <axis dim="x" auto="fixed" min="-2" max="12" />
+        <axis dim="y" auto="fixed" min="-1" max="4" />
+
+        <series name="myAB" />
+
+
+        <series name="height" draw="lineSegments">
+          <style>
+            <foreground color="55 135 184" />
+          </style>
+        </series>
+        
+        <series>
+          <style>
+            <foreground color="55 135 184" />
+          </style>
+          <data>0 0; 7 2; 0 0; 7 0</data>
+        </series>
+      </drawing>
+
+
+      <stack orientation="horizontal">
+        <style>
+          <marginBottom>30</marginBottom>
+        </style>
+        <stack>
+          <script>
+            local i = 0;
+          </script>
+          <button name="myButton" style="large" content="Step 1">
+            <onClick>
+              i = i+1;
+              if i == 1 then
+              line1.Style.Visibility = "visible"
+              end
+              if i == 2 then
+              line2.Style.Visibility = "visible"
+              end
+              if i == 3 then
+              line3.Style.Visibility = "visible"
+              end
+              if i == 4 then
+              myButton.Text = "Hide Answer"
+              line4.Style.Visibility = "visible"
+              end
+              if i == 5 then
+              myButton.Text = "Step 1"
+              line1.Style.Visibility = "hidden"
+              line2.Style.Visibility = "hidden"
+              line3.Style.Visibility = "hidden"
+              line4.Style.Visibility = "hidden"
+              i = 0
+              return i
+              end
+              return i;
+            </onClick>
+          </button>
+          <p name="line1" style="centerText hidden"> $ h = 7.7 sin30 $  </p>
+          <p name="line2" style="centerText hidden"> $ = 3.85m $ </p>
+          <p name="line3" style="centerText hidden"> $ = a $  </p>
+          <p name="line4" style="centerText hidden"> 1 triangle can be formed  </p>
+        </stack>
+
+        <stack>
+          <script>
+            local i = 0;
+          </script>
+          <button name="myButton" style="large" content="Step 2">
+            <onClick>
+              i = i+1;
+              if i == 1 then
+              line1.Style.Visibility = "visible"
+              end
+              if i == 2 then
+              line2.Style.Visibility = "visible"
+              end
+              if i == 3 then
+              myButton.Text = "Hide Answer"
+              line3.Style.Visibility = "visible"
+              end
+              if i == 4 then
+              myButton.Text = "Step 2"
+              line1.Style.Visibility = "hidden"
+              line2.Style.Visibility = "hidden"
+              line3.Style.Visibility = "hidden"
+              i = 0
+              return i
+              end
+              return i;
+            </onClick>
+          </button>
+          <p name="line1" style="centerText hidden"> $ \angle B = 90  $ </p>
+          <p name="line2" style="centerText hidden"> $ \angle C = 180 - 90 - 30 $ </p>
+          <p name="line3" style="centerText hidden">$  = 60 $ </p>
+        </stack>
+      </stack>
+
+      <stack>
+        <style>
+          <marginBottom>30</marginBottom>
+        </style>
+        <script>
+          local i = 0;
+        </script>
+        <button name="myButton" style="large" content="Final Step">
+          <style>
+            <widthPercentage>0.50</widthPercentage>
+            
+          </style>
+          <onClick>
+            i = i+1;
+            if i == 1 then
+            line1.Style.Visibility = "visible"
+            end
+            if i == 2 then
+            line2.Style.Visibility = "visible"
+            end
+            if i == 3 then
+            myButton.Text = "Hide Answer"
+            line3.Style.Visibility = "visible"
+            end
+            if i == 4 then
+            myButton.Text = "Final Step"
+            line1.Style.Visibility = "hidden"
+            line2.Style.Visibility = "hidden"
+            line3.Style.Visibility = "hidden"
+            i = 0
+            return i
+            end
+            return i;
+          </onClick>
+        </button>
+        <p name="line1" style="centerText hidden"> $ c^{2}+a^{2} = b^{2}  $ </p>
+        <p name="line2" style="centerText hidden"> $ c^{2}=7.7^{2}-3.85^{2} $ </p>
+        <p name="line3" style="centerText hidden">$ c = 6.7m $ </p>
+      </stack>
+
+
+
+      <stack>
+        <style>
+          <widthPercentage>0.87</widthPercentage>
+          <horizontalAlignment>right</horizontalAlignment>
+        </style>
+        <p>  c)  $ \angle A = 29.3°, a = 12.8 mm, b =  20.5 mm $  </p>
+      </stack>
+
+      <drawing name="questionPlotc">
+        <style>
+          <widthPercentage>0.70</widthPercentage>
+          <aspectRatio>0.50</aspectRatio>
+        </style>
+        <axis dim="x" auto="fixed" min="-2" max="9" />
+        <axis dim="y" auto="fixed" min="-0.7" max="3" />
+
+        <series name="myAB" />
+
+        <series name="height" draw="lineSegments">
+          <style>
+            <foreground color="55 135 184" />
+          </style>
+        </series>
+        
+        <series>
+          <style>
+            <foreground color="55 135 184" />
+          </style>
+          <data>0 0; 5 2; 3 0; 5 2; 7 0; 0 0</data>
+        </series>
+      </drawing>
+      
+      <stack orientation="horizontal">
+
+        <stack>
+          <button name="answerButton" content="Step 1" style="large">
+            <onClick>
+              if answerButton.Text == "Step 1" then
+              contenteWrap.Style.Visibility = "visible"
+              answerButton.Text = "Hide Answer"
+              else
+              answerButton.Text = "Step 1"
+              contenteWrap.Style.Visibility = "hidden"
+              end
+            </onClick>
+          </button>
+          <stack style="hidden" name="contenteWrap">
+            <p style="centerText">$ \frac{sinB_{1}}{20.5} = \frac{sin29.3}{12.8} $</p>
+            <p style="centerText">$ \angle B_{1} = 51.6 $</p>
+            <p style="centerText">$ \angle C = 180 - 51.6 - 29.3 $</p>
+            <p style="centerText">$ = 99.1 $</p>
+            <p style="centerText">$ \frac{c}{sin99.1} = \frac{12.8}{sin29.3} $</p>
+            <p style="centerText">$ c = 25.8mm $</p>
+            <p style="centerText"> 2 triangles can be formed</p>
+          </stack>
+        </stack>
+
+        <stack>
+          <button name="answerButton" content="Step 2" style="large">
+            <onClick>
+              if answerButton.Text == "Step 2" then
+              contenteWrap.Style.Visibility = "visible"
+              answerButton.Text = "Hide Answer"
+              else
+              answerButton.Text = "Step 2"
+              contenteWrap.Style.Visibility = "hidden"
+              end
+            </onClick>
+          </button>
+          <stack style="hidden" name="contenteWrap">
+            <p style="centerText">$ \angle B_{2} = 180 - 51.6 $</p>
+            <p style="centerText">$ = 128.4 $</p>
+            <p style="centerText">$ \angle C = 180 - 128.4 - 29.3 $</p>
+            <p style="centerText">$ = 22.3 $</p>
+            <p style="centerText">$ \frac{c}{sin22.3} = \frac{12.8}{sin29.3} $</p>
+            <p style="centerText">$ c = 9.9mm $</p>
+          </stack>
+        </stack>
+      </stack>
+
+      <stack>
+        <style>
+          <widthPercentage>0.80</widthPercentage>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <button style="large" name="answerButton" content="Final Answer">
+          <style>
+            <widthPercentage>0.50</widthPercentage>
+          </style>
+          <onClick>
+            if answerButton.Text == "Final Answer" then
+            contenteWrap.Style.Visibility = "visible"
+            answerButton.Text = "Hide Answer"
+            else
+            answerButton.Text = "Final Answer"
+            contenteWrap.Style.Visibility = "hidden"
+            end
+          </onClick>
+        </button>
+
+        <stack style="hidden" name="contenteWrap" orientation="horizontal">
+          <style>
+            <marginBottom>30</marginBottom>
+          </style>
+
+          <stack>
+            <p style="centerText">$ \angle B_{1} = 51.6 $</p>
+            <p style="centerText">$ \angle C = 99.1  $</p>
+            <p style="centerText">$ c = 25.8 mm $</p>
+          </stack>
+          <stack>
+            <p style="centerText">$ \angle B_{2} = 128.4 $</p>
+            <p style="centerText">$ \angle C = 22.3 $</p>
+            <p style="centerText">$ C = 9.9 mm $</p>
+          </stack>  
+        </stack>
+      </stack>
+
+
+    </stack>
+  </sectionNoTitle>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+
+<!--                 PRACTICE PROBLEMS                  -->
+
+
+  <sectionNoTitle>
+
+    <stack name="wrapTitle">
+      <style>
+        <widthPercentage>0.93</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <p style="titleStyle">
+        <style>
+          <marginTop>50</marginTop>
+          <size scale="large" />
+          <foreground color="50 135 184" />
+        </style>
+        <b>Practice Problems</b>
+      </p>
+      <p>Diagrams are not drawn to scale.</p>
+    </stack>
+
+  <stack style="questionAnswer">
+    <p style="title qNum"></p>
+    <table grid="false" widths="10% 90%">
+      <row>
+        <column>
+          <image src="curriculumThemePack\question.png" inspect="false" />
+        </column>
+        <column>
+          <p>Given AB = 10 cm, BC = 12 cm, A = 40°. ABC is a SSA Triangle.</p>
+        </column>
+      </row>
+    </table>
+
+
+
+    <script>
+      char.textA(myPlot.myA, vector({9,-0.5}), 0.2, color.black)
+      char.textB(myPlot.myB, vector({3,2.3}), 0.2, color.black)
+      char.textC(myPlot.myC, vector({0,-0.5}), 0.2, color.black)
+    </script>
+
+
+      <drawing name="myPlot">
+        <style>
+          <widthPercentage>0.80</widthPercentage>
+        </style>
+        <axis dim="x" auto="fixed" min="-4" max="15" />
+        <axis dim="y" auto="fixed" min="-2" max="4" />
+        <series name="myA" capacity="8" />
+        <series name="myB" />
+        <series name="myC" />
+        <series>
+          <style>
+            <foreground color="55 135 184" />
+          </style>
+          <data>0 0; 3 2; 9 0</data>
+        </series>
+        <series>
+          <style>
+            <foreground color="0 0 0" />
+          </style>
+          <data>0 0 ; 20 0</data>
+        </series>
+      </drawing>
+  
+    
+    
+    
+    <p style="title">ANSWER</p>
+    <p name="answer" style="collapsed">True</p>
+    <script>
+      local deselectedBack = color.silver;
+      local selectedBack = color.rgb(50, 133, 184);
+
+      local function chooseButton(i)
+      if i == 0 then
+      table:Child(1):Child(2).trueButt.Style.BackgroundColor = selectedBack;
+      table:Child(1):Child(3).falseButt.Style.BackgroundColor = deselectedBack;
+      elseif i == 1 then
+      table:Child(1):Child(2).trueButt.Style.BackgroundColor = deselectedBack;
+      table:Child(1):Child(3).falseButt.Style.BackgroundColor = selectedBack;
+      end
+      end
+    </script>
+    <table name="table" grid="false" widths="10% 40% 40%">
+      <style name="buttons">
+        <foreground color="white" />
+        <background color="silver" />
+      </style>
+      <row name="row">
+        <column>
+          <image src="curriculumThemePack\answer.png" inspect="false" />
+        </column>
+        <column>
+          <button content="True" style="TF" name="trueButt">
+            <onClick>final.Text = "True"; chooseButton(0);</onClick>
+          </button>
+        </column>
+        <column>
+          <button content="False" style="TF" name="falseButt">
+            <onClick>final.Text = "False"; chooseButton(1);</onClick>
+          </button>
+        </column>
+      </row>
+    </table>
+    <p name="final" style="collapsed" />
+    <stack name="solution" style="collapsed">
+      <p style="centerText">Correct! ABC is a SSA triangle. </p>
+    </stack>
+    <stack name="hint" style="collapsed">
+      <p style="centerText"> Not quite there. Try again! </p>
+    </stack>
+    <button content="Check Answer">
+      <onClick>
+        if string.lower(final.Text) == string.lower(answer.Text) then
+        solution.Style.Visibility = "visible";
+        hint.Style.Visibility = "collapsed";
+        else
+        solution.Style.Visibility = "collapsed";
+        hint.Style.Visibility = "visible";
+        end
+      </onClick>
+    </button>
+  </stack>
+
+
+
+
+
+
+
+
+
+
+
+    <stack style="questionAnswer">
+      <p style="title">QUESTION 2
+      </p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="curriculumThemePack\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>Given AB = 2.7 m, BC = 2 m, C = 110°. How many solutions are possible ?</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <p name="answer" style="collapsed">B</p>
+      <script>
+        local selection = -1;
+        local deselectedColor = color.silver;
+        local selectedColor = color.rgb(50, 133, 184);
+
+        local function chooseButton(i)
+        if selection &gt; 0 then
+        stack.table:Child(selection):Child(2):Child(1).Style.BackgroundColor = deselectedColor;
+        end
+        stack.table:Child(i):Child(2):Child(1).Style.BackgroundColor = selectedColor;
+        selection = i;
+        end
+      </script>
+      <stack orientation="horizontal" name="stack">
+        <table name="table" widths="10% 20% 60% 10%" grid="false">
+          <style name="buttons">
+            <foreground color="white" />
+            <background color="silver" />
+          </style>
+          <row name="row">
+            <column>
+              <image src="curriculumThemePack\answer.png" inspect="false" />
+            </column>
+            <column>
+              <button content="A">
+                <onClick>final.Text="A"; chooseButton(1);</onClick>
+              </button>
+            </column>
+            <column>
+              <p>0</p>
+            </column>
+            <column name="column">
+              <image name="mark" src="curriculumThemePack/invisible.png" inspect="false" />
+            </column>
+          </row>
+          <row>
+            <column />
+            <column>
+              <button content="B">
+                <onClick>final.Text="B"; chooseButton(2);</onClick>
+              </button>
+            </column>
+            <column>
+              <p>1</p>
+            </column>
+            <column>
+              <image src="curriculumThemePack/invisible.png" inspect="false" />
+            </column>
+          </row>
+          <row>
+            <column />
+            <column>
+              <button content="C">
+                <onClick>final.Text="C"; chooseButton(3);</onClick>
+              </button>
+            </column>
+            <column>
+              <p>2</p>
+            </column>
+            <column>
+              <image src="curriculumThemePack/invisible.png" inspect="false" />
+            </column>
+          </row>
+          <!-- Insert the following code for each subsequent choice (Choice D, E, F, etc).  Delete if unnecessary.
+          <row>
+            <column />
+            <column>
+              <button content="Replace with Next Letter">
+                <onClick>final.Text="Replace with Next Letter"; chooseButton(Replace with Next Number);;</onClick>
+              </button>
+            </column>
+            <column>
+              <p>Enter Choice Here</p>
+            </column>
+            <column>
+              <image src="curriculumThemePack/invisible.png" inspect="false" />
+            </column>
+          </row> -->
+        </table>
+      </stack>
+      <p name="final" style="collapsed" />
+      <stack name="hint" style="collapsed">
+        <p style="centerText">  Not quite there. Try again! </p>
+      </stack>
+      <stack name="solution" style="collapsed">
+        <p style="centerText"> Correct! There is only 1 possible solution. </p>
+      </stack>
+      <button content="Check Answer">
+        <onClick>
+          if string.lower(final.Text) == string.lower(answer.Text) then
+          solution.Style.Visibility = "visible";
+          hint.Style.Visibility = "collapsed";
+          else
+          solution.Style.Visibility = "collapsed";
+          hint.Style.Visibility = "visible";
+          end
+        </onClick>
+      </button>
+    </stack>
+
+
+
+
+
+
+
+
+
+
+
+    <stack style="questionAnswer">
+      <p style="title">
+        QUESTION 3
+      </p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="curriculumThemePack\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>Given AB = 3.8 m, BC = 6 m, C = 45°. How many solutions are possible ?</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <p name="answer" style="collapsed">A</p>
+      <script>
+        local selection = -1;
+        local deselectedColor = color.silver;
+        local selectedColor = color.rgb(50, 133, 184);
+
+        local function chooseButton(i)
+        if selection &gt; 0 then
+        stack.table:Child(selection):Child(2):Child(1).Style.BackgroundColor = deselectedColor;
+        end
+        stack.table:Child(i):Child(2):Child(1).Style.BackgroundColor = selectedColor;
+        selection = i;
+        end
+      </script>
+      <stack orientation="horizontal" name="stack">
+        <table name="table" widths="10% 20% 60% 10%" grid="false">
+          <style name="buttons">
+            <foreground color="white" />
+            <background color="silver" />
+          </style>
+          <row name="row">
+            <column>
+              <image src="curriculumThemePack\answer.png" inspect="false" />
+            </column>
+            <column>
+              <button content="A">
+                <onClick>final.Text="A"; chooseButton(1);</onClick>
+              </button>
+            </column>
+            <column>
+              <p>0</p>
+            </column>
+            <column name="column">
+              <image name="mark" src="curriculumThemePack/invisible.png" inspect="false" />
+            </column>
+          </row>
+          <row>
+            <column />
+            <column>
+              <button content="B">
+                <onClick>final.Text="B"; chooseButton(2);</onClick>
+              </button>
+            </column>
+            <column>
+              <p>1</p>
+            </column>
+            <column>
+              <image src="curriculumThemePack/invisible.png" inspect="false" />
+            </column>
+          </row>
+          <row>
+            <column />
+            <column>
+              <button content="C">
+                <onClick>final.Text="C"; chooseButton(3);</onClick>
+              </button>
+            </column>
+            <column>
+              <p>2</p>
+            </column>
+            <column>
+              <image src="curriculumThemePack/invisible.png" inspect="false" />
+            </column>
+          </row>
+          <!-- Insert the following code for each subsequent choice (Choice D, E, F, etc).  Delete if unnecessary.
+          <row>
+            <column />
+            <column>
+              <button content="Replace with Next Letter">
+                <onClick>final.Text="Replace with Next Letter"; chooseButton(Replace with Next Number);;</onClick>
+              </button>
+            </column>
+            <column>
+              <p>Enter Choice Here</p>
+            </column>
+            <column>
+              <image src="curriculumThemePack/invisible.png" inspect="false" />
+            </column>
+          </row> -->
+        </table>
+      </stack>
+      <p name="final" style="collapsed" />
+      <stack name="hint" style="collapsed">
+        <p style="centerText">  Not quite there. Try again! </p>
+      </stack>
+      <stack name="solution" style="collapsed">
+        <p style="centerText"> Correct! There is no possible solution. </p>
+      </stack>
+      <button content="Check Answer">
+        <onClick>
+          if string.lower(final.Text) == string.lower(answer.Text) then
+          solution.Style.Visibility = "visible";
+          hint.Style.Visibility = "collapsed";
+          else
+          solution.Style.Visibility = "collapsed";
+          hint.Style.Visibility = "visible";
+          end
+        </onClick>
+      </button>
+    </stack>
+
+
+
+
+
+
+
+
+
+
+    <stack style="questionAnswer">
+      <p style="title">
+        QUESTION 4
+      </p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="curriculumThemePack\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>Given AB = 11 cm, BC = 13 cm, C = 52°. How many solutions are possible ?</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <p name="answer" style="collapsed">C</p>
+      <script>
+        local selection = -1;
+        local deselectedColor = color.silver;
+        local selectedColor = color.rgb(50, 133, 184);
+
+        local function chooseButton(i)
+        if selection &gt; 0 then
+        stack.table:Child(selection):Child(2):Child(1).Style.BackgroundColor = deselectedColor;
+        end
+        stack.table:Child(i):Child(2):Child(1).Style.BackgroundColor = selectedColor;
+        selection = i;
+        end
+      </script>
+      <stack orientation="horizontal" name="stack">
+        <table name="table" widths="10% 20% 60% 10%" grid="false">
+          <style name="buttons">
+            <foreground color="white" />
+            <background color="silver" />
+          </style>
+          <row name="row">
+            <column>
+              <image src="curriculumThemePack\answer.png" inspect="false" />
+            </column>
+            <column>
+              <button content="A">
+                <onClick>final.Text="A"; chooseButton(1);</onClick>
+              </button>
+            </column>
+            <column>
+              <p>0</p>
+            </column>
+            <column name="column">
+              <image name="mark" src="curriculumThemePack/invisible.png" inspect="false" />
+            </column>
+          </row>
+          <row>
+            <column />
+            <column>
+              <button content="B">
+                <onClick>final.Text="B"; chooseButton(2);</onClick>
+              </button>
+            </column>
+            <column>
+              <p>1</p>
+            </column>
+            <column>
+              <image src="curriculumThemePack/invisible.png" inspect="false" />
+            </column>
+          </row>
+          <row>
+            <column />
+            <column>
+              <button content="C">
+                <onClick>final.Text="C"; chooseButton(3);</onClick>
+              </button>
+            </column>
+            <column>
+              <p>2</p>
+            </column>
+            <column>
+              <image src="curriculumThemePack/invisible.png" inspect="false" />
+            </column>
+          </row>
+          <!-- Insert the following code for each subsequent choice (Choice D, E, F, etc).  Delete if unnecessary.
+          <row>
+            <column />
+            <column>
+              <button content="Replace with Next Letter">
+                <onClick>final.Text="Replace with Next Letter"; chooseButton(Replace with Next Number);;</onClick>
+              </button>
+            </column>
+            <column>
+              <p>Enter Choice Here</p>
+            </column>
+            <column>
+              <image src="curriculumThemePack/invisible.png" inspect="false" />
+            </column>
+          </row> -->
+        </table>
+      </stack>
+      <p name="final" style="collapsed" />
+      <stack name="hint" style="collapsed">
+        <p style="centerText">  Not quite there. Try again! </p>
+      </stack>
+      <stack name="solution" style="collapsed">
+        <p style="centerText"> Correct! There are only 2 possible solutions. </p>
+      </stack>
+      <button content="Check Answer">
+        <onClick>
+          if string.lower(final.Text) == string.lower(answer.Text) then
+          solution.Style.Visibility = "visible";
+          hint.Style.Visibility = "collapsed";
+          else
+          solution.Style.Visibility = "collapsed";
+          hint.Style.Visibility = "visible";
+          end
+        </onClick>
+      </button>
+    </stack>
+
+
+  </sectionNoTitle>
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  <sectionNoTitle>
+
+    <stack style="questionAnswer">
+      <p style="title">QUESTION 5</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="curriculumThemePack\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>
+              <style>
+                <textAlignment>justify</textAlignment>
+                <widthPercentage>0.95</widthPercentage>
+              </style>
+              A lighthouse at point A is 10 km from a yacht at point C and 8 km from a sailboat at point B. From the yacht, the lighthouse and the sailboat are separated by an angle of 48°. </p>
+            <p>
+              <style>
+                <widthPercentage>0.95</widthPercentage>
+              </style>
+              <b>a)</b> Sketch possible diagrams for this situation.</p>
+            <p>
+              <style>
+                <widthPercentage>0.95</widthPercentage>
+              </style>
+          <b>b)</b> Determine the distance from the yacht to the sailboat, to the nearest tenth of a kilometre.</p>
+          </column>
+        </row>
+      </table>
+
+      <button name="answerButton" content="Show Answer">
+        <onClick>
+          if answerButton.Text == "Show Answer" then
+          answerWrap.Style.Visibility = "visible"
+          answerButton.Text = "Hide Answer"
+          else
+          answerButton.Text = "Show Answer"
+          answerWrap.Style.Visibility = "collapsed"
+          end
+        </onClick>
+      </button>
+
+     
+
+
+      <stack name="answerWrap" style="collapsed">
+
+
+        <script>
+          local myLine2 = myPlot.lineH;
+          for x = 0, 3, 0.1 do
+          y = 7
+          myLine2:Add(y,x)
+          end
+          myLine2:Update()
+          char.num1(myPlot.number1, vector({1, 1.5}), 0.2, color.black)
+          char.num0(myPlot.number0, vector({1.2, 1.5}), 0.2, color.black)
+          char.num8(myPlot.number8Second, vector({9.2, 1.5}), 0.2, color.black)
+          char.num4(myPlot.number4, vector({-0.7, 0.1}), 0.2, color.black)
+          char.num8(myPlot.number8, vector({-0.5, 0.1}), 0.2, color.black)
+          char.textA(myPlot.myA, vector({7,3.3}), 0.2, color.black)
+          char.textB(myPlot.myB, vector({11,-0.5}), 0.2, color.black)
+          char.textC(myPlot.myC, vector({-2,-0.5}), 0.2, color.black)
+
+        </script>
+
+        <drawing name="myPlot">
+          <style>
+            <widthPercentage>0.80</widthPercentage>
+          </style>
+          <axis dim="x" auto="fixed" min="-4" max="15" />
+          <axis dim="y" auto="fixed" min="-2" max="6" />
+          <series name="number1" />
+          <series name="number0" />
+          <series name="number8Second" />
+          <series name="number4" />
+          <series name="number8" />
+          <series name="myA" capacity="8" />
+          <series name="myB" />
+          <series name="myC" />
+          <series name="lineH" draw="lineSegments">
+            <style>
+              <foreground color="55 135 184" />
+            </style>
+          </series>
+          <series>
+            <style>
+              <foreground color="55 135 184" />
+            </style>
+            <data>-2 0; 7 3; 11 0</data>
+          </series>
+          <series>
+            <style>
+              <foreground color="0 0 0" />
+            </style>
+            <data>-2 0 ; 20 0</data>
+          </series>
+          <series>
+            <style>
+              <foreground color="55 135 184" />
+            </style>
+            <data>7 3; 2 0</data>
+          </series>
+        </drawing>
+        
+        
+        
+        
+      <p style="title">ANSWER</p>
+      <table name="table" widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="curriculumThemePack\answer.png" inspect="false" />
+          </column>
+          <column>
+            
+            
+            <!-- This will be the 2 boxes of the answer  -->
+            
+            <stack orientation="horizontal">
+              
+              <stack style="borderOutside myWidth">
+                <stack style="borderInside">
+
+                  <p> $ \triangle BAC : $ </p>
+                  
+                  <p> $ \frac{sinB}{10} = \frac{sin48°}{8} $ </p>
+                  <p> $ sinB = \frac{10sin48°}{8} $  </p>
+                  <p> $ \angle B = 68.3°  $ </p>
+                  <p> $ \angle A = 63.7°  $ </p>
+                  <p> $ \frac{CB}{sin63.7°} = \frac{8}{sin48°} $</p>
+                  <p> $ CB = 9.7 km  $ </p>
+                </stack>
+              </stack>
+
+              <stack style="borderOutside myWidth">
+                <stack style="borderInside">
+                  
+                  <p> $ \triangle B'A'C : $ </p>
+
+                  <p> $ \frac{sinB}{10} = \frac{sin48°}{8} $ </p>
+                  <p> $ sinB = \frac{10sin48°}{8} $  </p>
+                  <p> $ \angle B' = 180° - 68.3° = 111.7°  $ </p>
+                  <p> $ \angle A' = 20.3°  $ </p>
+                  <p> $ \frac{CB'}{sin20.3°} = \frac{8}{sin48°} $</p>
+                  <p> $ CB' = 3.7 km  $ </p>
+                </stack>
+              </stack>
+            </stack>
+
+            <!-- END This will be the 2 boxes of the answer  -->
+            
+            
+          </column>
+        </row>
+      </table>
+
+        <p>
+          <style>
+            <textAlignment>center</textAlignment>
+            <marginBottom>35</marginBottom>
+          </style>
+         The yacht is either 9.7 km or 3.7 km from the sailboat.  </p>
+        
+      </stack>
+      
+      
+      
+      
+      
+    </stack>
+  </sectionNoTitle>
+
+
+
+
+
+
+
+
+
+  <!--   Section     FEEDBACK    -->
+  <sectionNoTitle>
+
+    <web url="&#xD;&#xA;https://docs.google.com/forms/d/e/1FAIpQLSfMt3I_3_pFpOgLCo_Kq7jS-H8Nwo-sReXK79URnBW3_zCiwA/viewform?usp=sf_link" />
+
+
+  </sectionNoTitle>
+
+
+
+
+
+
+</document>

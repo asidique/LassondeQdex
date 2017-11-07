@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G0EFA11DD_CE36_4CD1_A3CC_DE8F015E61ED">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>MHF4U 5.2 – Graphs of Reciprocal Trigonometric Functions</title>
+    <creator>heilb1314</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/calculator.png" />
+  </metadata>
+
+  <include src="resources/curriculumStylesKoon.xml" />
+  <include src="resources/UtilitiesKoon.xml" />
+  <include src="resources/plotTools.xml" />
+
+  <!-- Header & Footer -->
+  <header style="themeColourTitleB">
+    <stack style="centeredText" orientation="horizontal">
+      <p style="whiteF">Ms. Koon</p>
+      <p style="whiteF alignRight">MHF4U</p>
+    </stack>
+  </header>
+  <footer style="themeColourTitleB">
+    <stack orientation="horizontal">
+      <image src="resources/logo1.png" style="tiny" />
+      <p style="whiteF">
+        <style>
+          <numbering counter="pages" suffix="true" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+        </style>
+      </p>
+      <image src="resources/logo2.png" style="tiny" />
+    </stack>
+  </footer>
+  <!-- Header & Footer END -->
+
+
+  <!-- Cover Page -->
+  <!-- This is the standard way title pages are created. A great website to get copyright free images .. www.pexels.com
+  *** The style: "pageLayout" is defined in curriculumStylesLassonde.xml. It simply sets the content to the center and adjusts the width to 80% ***-->
+  <section name="section1" style="pageLayout">
+    <title style="chaptNumTitle">
+      <size scale="xlarge">5.2</size>
+    </title>
+    <p style="chapterTitle">Graphs of Reciprocal Trigonometric Functions</p>
+    <p style="sectionHeading">Introduction</p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="justifiedText">
+        <![CDATA[This module helps you to develop the graphs of y = csc(x), y = sec(x) and y = cot(x) from their parent sinusoidal functions:  y = sin(x), y = cos(x) and y = tan(x).  You will continue to use the features of functions to describe the properties of these reciprocal trigonometric functions.  The function plotters are to be used with a handout distributed in class.
+        ]]>
+      </p>
+    </stack>
+  </section>
+
+  <!--csc(x)-->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">The graph of y = csc(x)</p>
+    <stack style="mcStackLayout">
+      <script>
+        <![CDATA[
+          local x, y
+          local s = plot.sin
+          local c = plot.csc
+          local d = plot.dash
+          local xy = plot.xy
+          
+          xy:Add(-3.16, 0)
+          xy:Add(6.3, 0)
+          xy:Add(0, -5)
+          xy:Add(0, 5)
+          xy:Update()
+
+          for x = -math.pi, 2*math.pi, 0.01 do
+            y = math.sin(x)
+            s:Add(x, y)
+            c:Add(x, 1/y)
+          end
+          s:Update()
+          c:Update()
+          c.Visible = false
+          for i=-1,2 do
+            plotTools.drawDashLine(d, vector({i*math.pi,-5}), vector({i*math.pi,5}))
+          end
+
+          ]]>
+      </script>
+      <xyPlot name="plot" pan="disabled" tap="disabled" zoom="disabled">
+        <axis dim="x" min="-3.16" max="6.3" auto="fixed"></axis>
+        <axis dim="y" min="-5" max="5" auto="fixed"></axis>
+        <series name="xy" manual="true" draw="lineSegments" style="axes" />
+        <series name="dash" manual="true" draw="lineSegments" />
+        <series name="sin" manual="true" />
+        <series name="csc" manual="true" />
+      </xyPlot>
+      <stack name="btnStack" orientation="horizontal">
+        <button name="btn1" content="y=sin(x)" style="btnSelected">
+          <onClick>
+            s.Visible = not s.Visible
+            toggleBtn(btn1, s.Visible)
+          </onClick>
+        </button>
+        <button name="btn2" content="y=csc(x)" style="btnUnselected">
+          <onClick>
+            c.Visible = not c.Visible
+            toggleBtn(btn2, c.Visible)
+          </onClick>
+        </button>
+      </stack>
+    </stack>
+  </sectionNoTitle>
+
+  <!--sec(x)-->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">The graph of y = sec(x)</p>
+    <stack style="mcStackLayout">
+      <script>
+        <![CDATA[
+          local x, y;
+          local s = plot.cos;
+          local c = plot.sec;
+          local d = plot.dash;
+          local xy = plot.xy
+          
+          xy:Add(-3.16, 0)
+          xy:Add(6.3, 0)
+          xy:Add(0, -5)
+          xy:Add(0, 5)
+          xy:Update()
+
+          for x = -math.pi, 2*math.pi, 0.01 do
+            y = math.cos(x)
+            s:Add(x, y)
+            c:Add(x, 1/y)
+          end
+          s:Update()
+          c:Update()
+          c.Visible = false
+          for i=-1,2 do
+            plotTools.drawDashLine(d, vector({i*math.pi,-5}), vector({i*math.pi,5}))
+          end
+          ]]>
+      </script>
+      <xyPlot name="plot" pan="disabled" tap="disabled" zoom="disabled">
+        <axis dim="x" min="-3.16" max="6.3" auto="fixed"></axis>
+        <axis dim="y" min="-5" max="5" auto="fixed"></axis>
+        <series name="xy" manual="true" draw="lineSegments" style="axes" />
+        <series name="dash" manual="true" draw="lineSegments" />
+        <series name="cos" manual="true" />
+        <series name="sec" manual="true" />
+      </xyPlot>
+      <stack name="btnStack" orientation="horizontal">
+        <button name="btn1" content="y=cos(x)" style="btnSelected">
+          <onClick>
+            s.Visible = not s.Visible
+            toggleBtn(btn1, s.Visible)
+          </onClick>
+        </button>
+        <button name="btn2" content="y=sec(x)" style="btnUnselected">
+          <onClick>
+            c.Visible = not c.Visible
+            toggleBtn(btn2, c.Visible)
+          </onClick>
+        </button>
+      </stack>
+    </stack>
+  </sectionNoTitle>
+  
+  <!--cot(x)-->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">The graph of y = tan(x)</p>
+    <stack style="mcStackLayout">
+      <script>
+        <![CDATA[
+          local x, y
+          local s = plot.tan
+          local c = plot.cot
+          local d = plot.dash
+          local xy = plot.xy
+          
+          xy:Add(-6.3, 0)
+          xy:Add(12.6, 0)
+          xy:Add(0, -5)
+          xy:Add(0, 5)
+          xy:Update()
+
+          for x = -2*math.pi, 4*math.pi, 0.01 do
+            y = math.tan(x)
+            s:Add(x, y)
+            c:Add(x, 1/y)
+          end
+          s:Update()
+          c:Update()
+          c.Visible = false
+          for i=-2,4 do
+            plotTools.drawDashLine(d, vector({i*math.pi,-5}), vector({i*math.pi,5}))
+          end
+          ]]>
+      </script>
+      <xyPlot name="plot" pan="disabled" tap="disabled" zoom="disabled">
+        <axis dim="x" min="-6.3" max="12.6" auto="fixed"></axis>
+        <axis dim="y" min="-5" max="5" auto="fixed"></axis>
+        <series name="xy" manual="true" draw="lineSegments" style="axes" />
+        <series name="dash" manual="true" draw="lineSegments" />
+        <series name="tan" manual="true" />
+        <series name="cot" manual="true" />
+      </xyPlot>
+      <stack name="btnStack" orientation="horizontal">
+        <button name="btn1" content="y=tan(x)" style="btnSelected">
+          <onClick>
+            s.Visible = not s.Visible
+            toggleBtn(btn1, s.Visible)
+          </onClick>
+        </button>
+        <button name="btn2" content="y=cot(x)" style="btnUnselected">
+          <onClick>
+            c.Visible = not c.Visible
+            toggleBtn(btn2, c.Visible)
+          </onClick>
+        </button>
+      </stack>
+    </stack>
+  </sectionNoTitle>
+
+</document>

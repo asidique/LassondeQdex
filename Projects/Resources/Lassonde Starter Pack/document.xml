@@ -1,0 +1,30 @@
+  <!-- Meta Data -->
+  <metadata>
+    <title><!--YOUR TITLE HERE--></title>
+    <creator><!--YOUR NAME HERE--></creator>
+    <abstract><!--ABSTRACT INFORMATION--></abstract>
+    <coverImage src="resources/LassondeLogo.png" />
+  </metadata>
+  
+  <include src="resources/curriculumStylesLassonde.xml" />
+  <include src="resources/plotTools.xml" />
+
+  <header style="themeColour">
+    <stack style="center" orientation="horizontal">
+      <p></p>
+    </stack>
+  </header>
+  <footer style="themeColour">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="themeColourTitle">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment> 
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>

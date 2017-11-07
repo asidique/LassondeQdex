@@ -1,0 +1,1520 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G67C0706C_B468_4392_AB2F_719081130424">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>LA-PHYS-1.4 Projectile Motion</title>
+    <creator>Asseel</creator>
+    <coverImage src="resources/LassondeLogo.png" />
+    <abstract>This document talks about what we've learned thus far in our physics modules with vectors and applies it in real world examples. By the end of this module, we will be able to mathematically describe projectile motion and obtain useful data from it.</abstract>
+  </metadata>
+
+  <include src="resources/curriculumStylesLassonde.xml" />
+  <include src="resources/plotTools.xml" />
+
+  <header style="themeColour">
+    <stack style="center" orientation="horizontal">
+      <p></p>
+    </stack>
+  </header>
+  <footer style="themeColour">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="themeColourTitle">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+
+  <script>
+    function round(num, numDecimalPlaces)
+      local mult = 10^(numDecimalPlaces or 0)
+      return math.floor(num * mult + 0.5) / mult
+    end
+  </script>
+  <!-- Section 1 -->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle right">1.4 Projectile Motion</title>
+    <stack>
+      <p style="sectionHeading">Introduction</p>
+      <video src="resources/archer_1.mp4" name="vid1">
+        <onDocumentOpened>
+          vid1:Stop();
+          vid1.ControlsEnabled = false;
+          vid1.Loop=true;
+          vid1:Play();
+        </onDocumentOpened>
+        
+      </video>
+      <stack style="contentBG">
+        <p>
+          <b>Projectile Motion</b> is the motion of an object that is moving as a result of earth's gravity. In the earlier modules, we learned that accelerations can be represented by vectors and we can break
+          vectors a part to determine the net vector. All of what we've learned so far will be useful in this module. In the video above, see a game that uses projectile motion (in this case, the arrow). Using the same
+          magnitude of force but different angles, the archer is able to nail the target.
+        </p>
+      </stack>
+    </stack>
+  <p><br /></p></section>
+
+  <!-- Section 2 -->
+  <sectionNoTitle name="game">
+    <p style="sectionHeading">Projectile Motion</p>
+    <script>
+      <![CDATA[
+      
+      function round(value,multiple)
+        local remainder = value % multiple;
+        if remainder * 2 >= multiple then
+            return value - remainder + multiple;
+        else
+            return value - remainder;
+        end
+      end
+      --Configurable Parameters--
+      local rockMass = 0.1;   --Kg
+      local grav = 9.81; --m/s^2
+      --Local Variables--
+      local initPosX, initPosY;
+      --local posx = -0.8;
+      local posx = 0;
+      local posy = 0;
+      local released;
+      local releaseVelX;
+      local releaseVelY;
+      local rock = plot.rockSeries;
+      local ground = plot.groundSeries;
+      local arc = plot.arcSeries; 
+      local tran = plot.tran;
+      local guide = plot.guideLine;
+      local releaseTime;
+      local maxheight = 0.0; 
+      local gameScore = 0
+      local gameAttempts = 0
+      --Functions
+      function init()
+        released = false;
+        --releaseVelX = 0;
+        --releaseVelY = 0;
+        posx = 0;
+        posy = 0;
+        --plot:Reset();
+        --plot.XAxis.Scaling = "fixed"
+        --plot.XAxis:SetRange(-1.5, 7.5);
+        --plot.XAxis.Scaling = "growAndShrink"
+        --plot:Reset();
+        maxheight = 0;
+      end
+      
+      function resetFrame()
+        --cannonAngle = math.rad(release.Value);
+        posx = 0;
+        posy = 0;
+        updatePlot()
+        plot.XAxis.Scaling = "growAndShrink"
+        plot.XAxis:SetRange(-1.5, 7.5);
+        plot.YAxis.Scaling = "lockAspectRatio"
+        plot.YAxis:SetRange(-1, 5.75);
+        plot.XAxis:Reset();
+        plot.YAxis:Reset();
+      end
+      function updatePlot()
+        
+        drawGuides();
+        guide:Update();
+
+        drawRock();
+        rock:Update();
+        
+        drawTran();
+        tran:Update();
+        
+        --plot.guideLine.Transform = matrixf.scaling(posx/7.2, posx/7.2, 1)
+        
+        if released then
+          drawArc();
+          arc:Update();
+        end
+        
+        --[[
+        if posx > plot.XAxis.Max then
+          plot.XAxis:SetRange(plot.XAxis.Min + 0.2, plot.XAxis.Max + 0.2)
+        end
+        if posy > plot.YAxis.Max then
+          plot.YAxis:SetRange(plot.YAxis.Min + 0.2, plot.YAxis.Max + 0.2)
+        end
+        if posy < plot.YAxis.Min then
+          plot.YAxis:SetRange(plot.YAxis.Min - 0.5, plot.YAxis.Max - 0.5)
+        end
+        --]]
+        
+        if not released then
+          
+          arc:Clear();
+          arc:Update();
+        end
+        
+        labelStack.dist.FormattedText = string.format("Distance: <br/>%.2f m",posx);
+        if posy > maxheight then
+          labelStack.height.FormattedText = string.format("Max Height: <br/>%.2f m",posy);
+          maxheight = posy;
+        end
+      end
+      
+      function drawGuides()
+        guidefactor = posx/7.3;
+        guide:Add(-1.50 * guidefactor, -1.00 * guidefactor)
+        guide:Add(7.50 * guidefactor, 05.75 * guidefactor)
+      end
+      function drawRock()
+        local startY = 0.25;
+        posy = posy+startY;
+        rock:Add(posx -0.05, posy+0.05);
+        rock:Add(posx -0.05, posy+0.12);
+        rock:Add(posx +0.01, posy+0.05);
+        rock:Add(posx -0.05, posy-0.02);
+        rock:Add(posx -0.05, posy+0.05);
+        rock:Add(posx -0.3, posy+0.05);
+        rock:Add(posx - 0.35, posy+0.09);
+        rock:Add(posx - 0.3, posy+0.05);
+        rock:Add(posx - 0.35, posy);
+      end
+      
+      --[[function drawGround()
+        ground:Add(plot.XAxis.Min,0);   
+        ground:Add(plot.XAxis.Max + 0.2,0);
+        ground:Add(plot.XAxis.Max + 0.2, plot.YAxis.Min);
+        ground:Add(plot.XAxis.Min, plot.YAxis.Min);
+        ground:Update()
+      end--]]
+      
+      function drawArc()       
+        arc:Add(posx, posy);
+      end
+      
+      function drawTran()
+        tran:Add(4.99, 5);
+        tran:Add(5, 5);
+      end
+      
+      function draw_target(x,trace);
+      target_min = x-.2
+      target_max = x+.2
+      target_height = 0.3;
+      target_y = 0.25;
+      trace:Clear();
+      trace:Add(target_min,target_y);
+      trace:Add(target_max,target_y);
+      trace:Add(target_min,target_y+target_height);
+      trace:Add(target_max,target_y+target_height);
+      trace:Add(x, target_y+0.1);
+      trace:Add((x)+0.05, target_y);
+      trace:Add((x)+0.05, -0.4);
+      trace:Add((x)-0.05, -0.4);
+      trace:Add((x)-0.05, target_y);
+      trace:Add(x, target_y+0.1);
+      trace:Update();
+      end
+      
+      drawRock()
+      
+      function rotateCannon(value)
+        cannonAngle = math.rad(value);
+        local xxx = 0.25;
+        local yyy = -0.5;
+        --plot.cannonSeries.Transform = matrixf.rotationAboutAxis(0, 0, 1, math.rad(value));
+        plot.cannonRim1.Transform = matrixf.translation(-xxx, -yyy, 0) * matrixf.rotationAboutAxis(0, 0, 1, math.rad(value)) * matrixf.translation(xxx, yyy, 0);
+      end
+    ]]>
+    </script>
+
+    <style name="paragraphs">
+      <!--size scale="0.8" /-->
+    </style>
+
+    <style name="labels">
+      <size scale="0.8" />
+    </style>
+
+    <style name="series">
+      <lineThickness>2</lineThickness>
+    </style>
+
+    <style name="rockColour">
+      <foreground color="darkGray" />
+      <lineThickness>2</lineThickness>
+    </style>
+
+    <style name="arcColour">
+      <foreground color="darkGray" />
+      <lineThickness>0.5</lineThickness>
+    </style>
+
+    <style name="transparent">
+      <foreground color="transparent" />
+      <lineThickness>0.1</lineThickness>
+    </style>
+
+    <style name="target_style">
+      <foreground color="black" />
+      <lineThickness>3</lineThickness>
+    </style>
+
+    <style name="ground_style">
+      <foreground color="107 142 35" />
+    </style>
+
+    <stack style="pageLayout contentBG">
+      <p>To start this module off, try playing our projectile motion game down below. This is to help get an idea of how things work.</p>
+      <p>
+        Use your finger or a stylus to angle the bow. Press <i>Release</i> to launch the arrow at the target before time runs out.
+      </p>
+    </stack>
+    
+
+    <button name="sim_button" content="Release">
+      <style>
+        <foreground color="white" />
+        <background color="46 139 87" />
+      </style>
+      <onClick>
+        if sim_button.Text == "Release" then
+        if timerSim:IsStopped() then
+        startButton:Click();
+        end
+        sim_button.Text = "Stop";
+        resetFrame();
+        sim:Start();
+        else
+        sim_button.Text = "Release";
+        sim:Stop();
+        end
+      </onClick>
+    </button>
+
+    <table name="gameLabels" grid="false">
+      <style>
+        <marginBottom>0</marginBottom>
+      </style>
+      <row>
+        <column>
+          <p name="scoreLabel">
+            Score: 0 of 0 attempts
+          </p>
+        </column>
+        <column>
+          <p name="timeLabel">
+            <style>
+              <textAlignment>right</textAlignment>
+            </style>
+            1:00
+          </p>
+        </column>
+      </row>
+    </table>
+
+    <drawing name="plot" style="visible" pan="custom" manual="true">
+      <style>
+        <marginBottom>-10</marginBottom>
+        <!--aspectRatio>0.5</aspectRatio-->
+      </style>
+     
+      <onPan>
+        <![CDATA[
+          newX = (((state.Current.X - 0) * (7.5 - -1.5)) / (1 - 0)) + -1.5
+          newY = (((state.Current.Y - 0) * (5.75 - -1)) / (1 - 0)) + -1
+          theAngle = math.deg(math.atan(newY/newX))
+          fyi.FormattedText = string.format("%0.1f %0.1f %0.1f", newX, newY, theAngle)
+          if theAngle > 0 then
+          rotateCannon(theAngle);
+            
+            labelStack.angle.Text = "Angle: " .. tostring(round(theAngle,1));
+          end
+          --rotateCannon(state.Current.Y * math.rad(80));]]>
+      </onPan>
+      <axis dim="x" auto="fixed" min="-1.50" max="7.5" />
+      <axis dim="y" auto="growAndShrink" />
+       
+      <series name="skySeries" draw="radialFill" ignore="true">
+        <style>
+          <!--REPRESENTS THE SKY (BACKGROUND)/-->
+          <foreground color="255 255 255 65" />
+        </style>
+        <data>-5 -0.25; -5 14; 18 14; 18 -0.25</data>
+      </series>
+      <series name="groundSeries" manual="true" capacity="4" draw="radialFill" ignore="true" style="ground_style">
+        <data>-5 -0.25; -5 -3; 18 -3; 18 -0.25</data>
+      </series>
+      <series name="trees" ignore="true" draw="segmentedFill">
+        <!--data src="resources/Trees2.csv" />
+          <colors src="resources/Trees_color.csv" /-->
+      </series>
+      <!--HERE IS WHERE THE OBJECTS ARE DRAWN-->
+      <series name="arcSeries" manual="true" style="arcColour" draw="lineSegments" />
+      <series name="tran" manual="true" capacity="2" style="transparent" />
+      <series name="target" manual="true" capacity="10" style="target_style" draw="segmentedFill" ignore="false" />
+      <series name="rockSeries" manual="true" capacity="9" style="grey" draw="line" ignore="false">
+        <style>
+          <lineThickness>2</lineThickness>
+        </style>
+      </series>
+      <series name="cannonSeries" draw="segmentedFill" />
+      <series name="cannonRim1" draw="line">
+        <style>
+          <lineThickness>2.0</lineThickness>
+        </style>
+      </series>
+      <series name="cannonRim2" draw="radialFill" />
+      <series name="cannonFrame1" draw="radialFill" />
+      <series name="cannonFrame2" draw="radialFill" />
+      <series name="timer2" draw="radialFill" manual="true" />
+      <series name="timer" draw="radialFill" manual="true" />
+      <series name="frame">
+        <data>
+          -1.50 -1.00; 7.5 5.75
+        </data>
+        <colors>transparent; transparent</colors>
+      </series>
+      <series name="guideLine" ignore="false">
+        <style>
+          <foreground color="transparent" />
+        </style>
+        <data>
+          -1.50 -1.00; 7.5 5.75
+        </data>
+      </series>
+    </drawing>
+
+
+    <script>
+      <![CDATA[
+      plotTools.drawArc(plot.timer2, 0, 360, {6.75, 5}, 0.35, color.silver);
+      plot.trees.Transform = matrixf.translation(0, -0.25, 0);
+      cloudposX = -1;
+      cloudposY = 10;
+     
+      local cannon = plot.cannonSeries
+      local cannonRim1 = plot.cannonRim1;
+      --function plotTools.drawCircle(series, centre, radius, customColor)    
+      plotTools.drawSquare(cannon, {-0.5, 0.5}, 0.3, 0.3, color.red);
+      --function plotTools.drawSquare(series, centre, width, height, customColor)
+      plotTools.drawSquare(cannon, {-0.5, 0.15}, 0.2, 1.0, color.red);
+      local bowPosX = -0.10;
+      local bowPosY = 0.35;
+      
+      cannonRim1:Add(-1.5, 0.5, color.transparent);
+      cannonRim1:Add(bowPosX, bowPosY, color.transparent);
+      cannonRim1:Add(bowPosX, bowPosY, color.black);
+      cannonRim1:Add(bowPosX-0.075, bowPosY+0.55, color.black);
+      cannonRim1:Add(bowPosX+0.035, bowPosY, color.black);
+      cannonRim1:Add(bowPosX-0.075, bowPosY-0.55, color.black);
+      cannonRim1:Add(bowPosX, bowPosY, color.black);
+      cannonRim1:Add(bowPosX, bowPosY, color.transparent);
+      cannonRim1:Add(-1.5, 0.5, color.transparent);
+      
+      --cannon:Add(0.5, -0.11, color.red);
+      --plotTools.drawArc(cannon, 270, 90, {0, 0}, 0.175, color.red)
+      --cannon:Add(0.5, 00.11, color.red);
+      --plotTools.drawEllipse(plot.cannonRim1, {0.5, 0}, 0.060, 0.14, color.rgb(168, 168, 168))
+      --plotTools.drawEllipse(plot.cannonRim2, {0.5, 0}, 0.045, 0.11, color.rgb(061, 061, 061))
+      
+      --plot.cannonFrame1:Add(-0.295, -0.25, color.gray);
+      --plotTools.drawArc(plot.cannonFrame1, 145, 35, {0, 0}, 0.105, color.gray);
+      --plot.cannonFrame1:Add(00.295, -0.25, color.gray);
+      
+      --plotTools.drawCircle(plot.cannonFrame2, {0, 0}, 0.075, color.rgb(77, 77, 77));
+      
+      function drawTime(timeLeft)
+        plot.timer:Clear()
+        local endAngle = -6*timeLeft+450;
+        local startAngle = -(0*60 - 450);
+        plot.timer:Add(6.75, 5, color.white);
+        plotTools.drawArc(plot.timer, 449.9, endAngle, {6.75, 5}, 0.3, color.white);
+        plot.timer:Update()
+        fyi1.Text = string.format('%.2f',timeLeft);
+      end
+ 
+      
+      function createTarget()
+        target_x = math.random(1,6)
+        local trace = plot.target
+        draw_target(target_x, trace);
+        labelStack.t_label.FormattedText = string.format("Target: <br/>%.2f m", target_x);
+      end
+      
+      function checkTarget()
+        if posx >= target_min and posx <= target_max then 
+          gameScore = gameScore + 1
+          createTarget();
+        end
+        gameLabels:Child(1):Child(1).scoreLabel.FormattedText = string.format("Score: %d of %d attempts", gameScore, gameAttempts);
+      end
+      
+      function countDown(currentTime)
+        local minutes = math.floor(currentTime/60);
+        local seconds = currentTime-(minutes*60);
+        gameLabels:Child(1):Child(2):Child(1).FormattedText = string.format("%d:%2.0f", minutes, seconds)
+        drawTime(countTime);
+        countTime = countTime - 1;
+      end
+      
+      function resetScore()
+        gameScore = 0
+        gameAttempts = 0
+        gameLabels:Child(1):Child(1).scoreLabel.FormattedText = string.format("Score: %d of %d attempts", gameScore, gameAttempts);
+      end
+        
+      drawTime(60)
+      createTarget()
+      rotateCannon(45);
+      ]]>
+    </script>
+
+    <include src="resources/Trees.xml" />
+
+    <stack name="labelStack" orientation="horizontal">
+      <style>
+        <marginTop>0</marginTop>
+        <marginLeft>10</marginLeft>
+        <marginRight>10</marginRight>
+        <marginBottom>20</marginBottom>
+        <background color="107 142 35" />
+      </style>
+      <style name="labels">
+        <foreground color="white" />
+      </style>
+      <label name="t_label">
+        Target: <br />0.00 m
+      </label>
+      <label name="dist">
+        Distance: <br />0.00 m
+      </label>
+      <label name="height">
+        Max Height: <br />0.00 m
+      </label>
+      <label name="angle">
+        Angle: <br />
+      </label>
+    </stack>
+
+    <!--p name="guideLabel"></p-->
+
+    <simulation name="sim" period="0.01">
+      <onStateChanged>
+        --Initialize the external variables--
+        if sim.Time == 0 then
+        init();
+        updatePlot();
+        else
+        --cannonAngle = math.rad(release.Value);
+        end
+      </onStateChanged>
+      <onUpdate>
+        <![CDATA[
+
+            if not released then
+              released = true;
+              initPosX = posx;
+              initPosY = posy;
+              releaseTime = time;
+            
+              --Find the release velocity components
+            
+              local rockVel = 8  --m/s;
+              local relAngle = cannonAngle;
+              releaseVelX = math.cos(relAngle) * rockVel;
+              releaseVelY = math.sin(relAngle) * rockVel;
+              
+            end
+            
+            
+            if released then
+              local curTime = time - releaseTime;
+              local lastpos = posy;
+              
+              
+              
+              posy = initPosY + (releaseVelY * curTime) - ((grav/2) * curTime^2);
+              if posy > target_y-0.3 and posy <= target_height+target_y-0.1 then
+                  checkTarget()
+                end
+                
+              if posy <= -0.6 and lastpos > posy then
+                posy = -0.6;
+                sim:Stop();
+                sim_button.Text = "Release";
+                gameAttempts = gameAttempts + 1
+              else
+                posx = initPosX + (releaseVelX * curTime);  
+              end
+            else
+              --This can be changed to reflect any offsets in the position of the rock--
+              posx = 0
+              posy = 0
+            end
+            
+            --guideLabel.FormattedText = string.format("Guide factor = %0.2f", posx/7.3 )
+            updatePlot();
+            ]]>
+      </onUpdate>
+      <onDuration>
+        sim_button.Text = "Release";
+      </onDuration>
+    </simulation>
+
+    <simulation name="timerSim" period="1">
+      <onStateChanged>
+        countTime = 60;
+        countDown(countTime);
+      </onStateChanged>
+      <onUpdate>
+        if countTime &gt; -0.5 then
+        countDown(countTime);
+        else
+        startButton:Click()
+        end
+      </onUpdate>
+    </simulation>
+
+    <button name="startButton" content="Start" style="collapsed">
+      <onClick>
+        if startButton.Text == "Start" then
+        timerSim:Start();
+        startButton.Text = "Stop"
+        else
+        timerSim:Stop();
+        startButton.Text = "Start"
+        gameScore = 0
+        gameAttempts = 0
+        end
+      </onClick>
+    </button>
+
+    <label name="releaseSlide" style="collapsed">Release Angle (deg): 45</label>
+    <slider name="release" min="0" max="80" value="45" style="collapsed">
+      <onValueChanged>
+
+        plot.arcSeries:Clear();
+        cannonAngle = math.rad(value)
+        releaseSlide.Text = string.format('Release Angle (deg): %.2f',value);
+        rotateCannon(value);
+
+        if sim:IsStopped() then
+        resetFrame();
+        end
+      </onValueChanged>
+    </slider>
+
+    <label name="fyi1" style="collapsed" />
+    <slider min="0" max="60" value="60" style="collapsed">
+      <onValueChanged>
+        drawTime(value);
+        fyi1.Text = string.format('%.2f',value);
+      </onValueChanged>
+    </slider>
+
+    <label name="fyi" style="collapsed" />
+
+    <!--
+      <p>For fun, press the button below to change the gravitational pull used in the simulation. Note how gravity affects the maximum height and distance of the projectile.</p>
+      <button name="moon" content="Go to the Moon!">
+        <onClick>
+          if moon.Text == "Go to the Moon!" then
+          grav = 1.622;
+          moon.Text = "Go back to Earth!";
+          else
+          grav = 9.81;
+          moon.Text = "Go to the Moon!";
+          end
+        </onClick>
+      </button>-->
+
+  <p><br /></p>
+  </sectionNoTitle>
+  
+  <!-- Section 3 -->
+  <sectionNoTitle name="section3" style="pageLayout">
+    <p style="sectionHeading">What is a Projectile?</p>
+    <stack name="content" style="contentBG">
+      <p>As mentioned in the introdution, a projectile is an object that is being acted on by only gravity. Some examples of projectile motion include: a basketball shot, a rock dropped off a cliff, and a cannon firing. All of these
+      examples are assumed to have no wind-resistance. If an object is moving without the force of gravity acting on it, it is not considered a projectile.</p>
+      <stack orientation="horizontal">
+        <image src="resources/Basketball_1.png"></image>
+        <image src="resources/Cliff_1.png"></image>
+      </stack>
+      <stack orientation="horizontal">
+        <image src="resources/Cannon_1.png"></image>
+        <image src="resources/UFO_1.png"></image>
+      </stack>
+      <p>There are different types of projectile motions as well. Projectiles can be vertically launched, horizontally launched, both, or none. Solving projectile motion problems no matter what
+       the initial condition is, it will always be helpful to break into x and y components.</p>
+    </stack>
+  <p><br /></p></sectionNoTitle>
+  
+  <sectionNoTitle name="section4" style="pageLayout">
+    <p style="sectionHeading">Solving Projectile Problems</p>
+    <stack name="content" style="contentBG">
+      <p>The following is an example of how to solve a horizontal projectile motion problem.</p>
+      <stack name="stack2" style="contentBG">
+      <style>
+        <marginTop>10</marginTop>
+        <marginBottom>10</marginBottom>
+      </style>
+      <p style="subSectionHeading">Question 1</p>
+      <p>A pool ball leaves a 0.60 meter high table with an initial horizontal velocity of 2.4 m/s. Predict the time
+      required for the pool ball to fall to the ground and the horizontal distance between the table's edge and the ball's landing location.</p>
+    </stack>
+    <stack orientation="horizontal" style="contentBG2">
+      <stack name="stepStack" orientation="vertical">
+        <p>Sketch a diagram</p>
+        <stack name="cont">
+          <style>
+            <visibility>collapsed</visibility>
+          </style>
+          <p>This step is used to visualize the problem and to label our given and missing variables.</p>
+          <drawing name="xy1" pan="disabled" tap="disabled" zoom="disabled">
+            <axis dim="x" min="-10" max="25" auto="fixed"></axis>
+            <axis dim="y" min="-5" max="25" auto="fixed"></axis>
+            <series name="table" draw="segmentedFill" capacity="5">
+              <style>
+                <foreground color="green" />
+              </style>
+            </series>
+            <series name="ball" draw="radialFill" capacity="720">
+            </series>
+            <series name="ballTrail" draw="lineSegments">
+              <style>
+                <foreground color="red" />
+              </style>
+            </series>
+            <series name="horizontalLine" capacity="2"></series>
+            <series name="horizontalLabel" capacity="8">
+              <style>
+                <lineThickness>2</lineThickness>
+              </style>
+            </series>
+          </drawing>
+          <script>
+            plotTools.drawCircle(xy1.ball, ({10, 20}), 1, color.red);
+             ballPosX = 10;
+             ballPosY = 20;
+             initialVelocityX11 = 2.4;
+             gravity = -4.8;
+             timer = 0;
+             xy1.table:Add(10, 19.5);
+             xy1.table:Add(10, 0);
+             xy1.table:Add(0, 0);
+             xy1.table:Add(0, 19.5);
+             xy1.table:Add(10, 19.5);
+          </script>
+          <simulation name="sim1" duration="3" loop="0" asynchronous="false" period="0.05">
+            <onUpdate>
+              timer = time;
+              if timer &lt; 1.5 then
+                ballX = ballPosX+2.4*timer*initialVelocityX11;
+                ballY = ballPosY+gravity*timer^2
+                plotTools.drawCircle(xy1.ball, ({ballX,ballY}), 1, color.red);
+                xy1.ballTrail:Add(ballX, ballY);
+                xy1.ballTrail:Update();
+                xy1.ball:Update();
+              elseif timer &gt; 1.5 then
+                xy1.horizontalLine:Add(10, 0);
+                xy1.horizontalLine:Add(20, 0);
+                char.textX(xy1.horizontalLabel, ({15, -0.2}), 0.5, color.black);
+                xy1.horizontalLine:Update();
+                xy1.horizontalLabel:Update();
+              end
+            </onUpdate>
+          </simulation>
+          <button name="btn1" content="Start Simulation">
+            <onClick>
+              sim1:Stop();
+              xy1.ball:Clear();
+              xy1.ballTrail:Clear();
+              xy1.horizontalLine:Clear();
+              xy1.horizontalLabel:Clear();
+              sim1:Start();
+            </onClick>
+          </button>
+        </stack>
+      </stack>
+      <button name="btn" content="Show Step 1">
+        <style>
+          <horizontalAlignment>right</horizontalAlignment>
+          <widthPercentage>40%</widthPercentage>
+        </style>
+        <onClick>
+          if btn.Text=="Show Step 1" then
+          btn.Text = "Hide Step 1";
+          stepStack.cont.Style.Visibility = "visible";
+          stepStack:Child(1).Style.Bold = 1;
+          elseif btn.Text=="Hide Step 1" then
+          btn.Text = "Show Step 1";
+          stepStack.cont.Style.Visibility = "collapsed";
+          stepStack:Child(1).Style.Bold = 0;
+          end
+        </onClick>
+      </button>
+    </stack>
+    <stack orientation="horizontal" style="contentBG">
+      <stack name="stepStack" orientation="vertical">
+        <p>Break into components and identify given variables.</p>
+        <stack name="cont">
+          <style>
+            <visibility>collapsed</visibility>
+          </style>
+          <stack orientation="horizontal">
+            <stack orientation="vertical">
+              <p>X-COMPONENT</p>
+              <p>$ v_{i} = 2.4 \frac{m}{s} $</p>
+              <p>$ a = 0 \frac{m}{s^2} $</p>
+              <p>$ v_{f} = ? \frac{m}{s} $</p>
+              <p>$ t = ? s $</p>
+              <p>$ x = ? m $</p>            
+            </stack>
+            <stack orientation="vertical">
+              <p>Y-COMPONENT</p>
+              <p>$ v_{i} = 0 \frac{m}{s} $</p>
+              <p>$ a = -9.8 \frac{m}{s^2} $</p>
+              <p>$ v_{f} = ? \frac{m}{s} $</p>
+              <p>$ t = ? s $</p>
+              <p>$ y = 0.6 m $</p>
+            </stack>
+          </stack>
+        </stack>
+      </stack>
+      <button name="btn" content="Show Step 2">
+        <style>
+          <horizontalAlignment>right</horizontalAlignment>
+          <widthPercentage>40%</widthPercentage>
+        </style>
+        <onClick>
+          if btn.Text=="Show Step 2" then
+          btn.Text = "Hide Step 2";
+          stepStack.cont.Style.Visibility = "visible";
+          stepStack:Child(1).Style.Bold = 1;
+          elseif btn.Text=="Hide Step 2" then
+          btn.Text = "Show Step 2";
+          stepStack.cont.Style.Visibility = "collapsed";
+          stepStack:Child(1).Style.Bold = 0;
+          end
+        </onClick>
+      </button>
+    </stack>
+    <stack orientation="horizontal" style="contentBG2">
+      <stack name="stepStack" orientation="vertical">
+        <p>Solve for time in the y-component</p>
+        <stack name="cont">
+          <style>
+            <visibility>collapsed</visibility>
+          </style>
+          <p>We first use the y-component since we have enough data to solve for time. We can use the equation: $ y = v_{iy}t + \frac{1}{2}a_{y}t^2 $</p>
+          <p>$ 0.6m = 0 + \frac{1}{2}*-9.8*t^2 $</p>
+          <p>$ 1.2m = -9.8*t^2 $</p>
+          <p>$ \frac{1.2m}{-9.8} = t^2 $</p>
+          <p>$ t = 0.350s $</p>
+          <p>This is the time required for the ball to fall to the ground.</p>
+        </stack>
+      </stack>
+      <button name="btn" content="Show Step 3">
+        <style>
+          <horizontalAlignment>right</horizontalAlignment>
+          <widthPercentage>40%</widthPercentage>
+        </style>
+        <onClick>
+          if btn.Text=="Show Step 3" then
+          btn.Text = "Hide Step 3";
+          stepStack.cont.Style.Visibility = "visible";
+          stepStack:Child(1).Style.Bold = 1;
+          elseif btn.Text=="Hide Step 3" then
+          btn.Text = "Show Step 3";
+          stepStack.cont.Style.Visibility = "collapsed";
+          stepStack:Child(1).Style.Bold = 0;
+          end
+        </onClick>
+      </button>
+    </stack>
+    <stack orientation="horizontal" style="contentBG">
+      <stack name="stepStack" orientation="vertical">
+        <p>Solve for horizontal distance in the x-component</p>
+        <stack name="cont">
+          <style>
+            <visibility>collapsed</visibility>
+          </style>
+          <p>Now that we have the time, we can use it in the x-component to solve for horizontal distance.</p>
+          <p>We can use the same formula to solve this: $ x = v_{ix}t + \frac{1}{2}a_{x}t^2 $</p>
+          <p>$ x = 2.4(0.350) + 0 $</p>
+          <p>$ x = 0.84m $</p>
+          <p>Now we have found the horizontal distance.</p>
+        </stack>
+      </stack>
+      <button name="btn" content="Show Step 4">
+        <style>
+          <horizontalAlignment>right</horizontalAlignment>
+          <widthPercentage>40%</widthPercentage>
+        </style>
+        <onClick>
+          if btn.Text=="Show Step 4" then
+          btn.Text = "Hide Step 4";
+          stepStack.cont.Style.Visibility = "visible";
+          stepStack:Child(1).Style.Bold = 1;
+          elseif btn.Text=="Hide Step 4" then
+          btn.Text = "Show Step 4";
+          stepStack.cont.Style.Visibility = "collapsed";
+          stepStack:Child(1).Style.Bold = 0;
+          end
+        </onClick>
+      </button>
+    </stack>
+    </stack>
+  <p><br /></p></sectionNoTitle>
+  
+    
+  <sectionNoTitle name="section5" style="pageLayout">
+    <p style="sectionHeading">Solving Projectile Problems</p>
+    <stack name="content" style="contentBG">
+      <p>The following is an example of how to solve a non-horizontal projectile motion problem. A little more steps are required here since our inital conditions change for both the x and y components.</p>
+      <stack name="stack2" style="contentBG">
+      <style>
+        <marginTop>10</marginTop>
+        <marginBottom>10</marginBottom>
+      </style>
+      <p style="subSectionHeading">Question 2</p>
+      <p>A football is kicked with an initial velocity of 25 m/s at an angle of 45-degrees with the horizontal. Determine the time of flight, the horizontal displacement, and the peak height of the football.</p>
+    </stack>
+    <stack orientation="horizontal" style="contentBG2">
+      <stack name="stepStack" orientation="vertical">
+        <p>Sketch a diagram</p>
+        <stack name="cont">
+          <style>
+            <visibility>collapsed</visibility>
+          </style>
+          <p>This step is used to visualize the problem and to label our given and missing variables.</p>
+          <drawing name="xy1" pan="disabled" tap="disabled" zoom="disabled">
+            <axis dim="x" min="-2" max="35" auto="fixed"></axis>
+            <axis dim="y" min="-5" max="35" auto="fixed"></axis>
+            <series name="table" capacity="5">
+              <style>
+                <foreground color="gray" />
+                <lineThickness>4</lineThickness>
+              </style>
+            </series>
+            <series name="ball" draw="radialFill" capacity="720">
+            </series>
+            <series name="ballTrail" draw="lineSegments">
+              <style>
+                <foreground color="red" />
+              </style>
+            </series>
+            <series name="horizontalLine" capacity="2"></series>
+            <series name="horizontalLabel" capacity="8">
+              <style>
+                <lineThickness>2</lineThickness>
+              </style>
+            </series>
+          </drawing>
+          <simulation name="sim1" duration="3" loop="0" asynchronous="false" period="0.05">
+            <onActivePageChanged>
+              plotTools.drawCircle(xy1.ball, ({0, 0}), 1, color.red);
+              ballPosX2 = 0;
+              ballPosY2 = 0;
+              initialVelocityX22 = 6.7;
+              initialVelocityY = 9.7;
+              gravity = -4.8;
+              timer = 0;
+              xy1.table:Add(28, 0);
+              xy1.table:Add(28, 8);
+              xy1.table:Add(35, 8);
+              xy1.table:Add(35, 0);
+            </onActivePageChanged>
+            <onUpdate>
+              timer = time;
+              if timer &lt; 2 then
+              ballX2 = ballPosX2+2.4*timer*initialVelocityX22;
+              ballY2 = ballPosY2+initialVelocityY*time+gravity*timer^2
+              plotTools.drawCircle(xy1.ball, ({ballX2,ballY2}), 1, color.red);
+              xy1.ballTrail:Add(ballX2, ballY2);
+              xy1.ballTrail:Update();
+              xy1.ball:Update();
+              elseif timer &gt; 2 then
+                xy1.horizontalLine:Add(0, 0);
+                xy1.horizontalLine:Add(30, 0);
+                char.textX(xy1.horizontalLabel, ({17.5, -0.2}), 0.5, color.black);
+                xy1.horizontalLine:Update();
+                xy1.horizontalLabel:Update();
+              end
+            </onUpdate>
+          </simulation>
+          <button name="btn1" content="Start Simulation">
+            <onClick>
+              sim1:Stop();
+              xy1.ball:Clear();
+              xy1.ballTrail:Clear();
+              xy1.horizontalLine:Clear();
+              xy1.horizontalLabel:Clear();
+              sim1:Start();
+            </onClick>
+          </button>
+        </stack>
+      </stack>
+      <button name="btn" content="Show Step 1">
+        <style>
+          <horizontalAlignment>right</horizontalAlignment>
+          <widthPercentage>40%</widthPercentage>
+        </style>
+        <onClick>
+          if btn.Text=="Show Step 1" then
+          btn.Text = "Hide Step 1";
+          stepStack.cont.Style.Visibility = "visible";
+          stepStack:Child(1).Style.Bold = 1;
+          elseif btn.Text=="Hide Step 1" then
+          btn.Text = "Show Step 1";
+          stepStack.cont.Style.Visibility = "collapsed";
+          stepStack:Child(1).Style.Bold = 0;
+          end
+        </onClick>
+      </button>
+    </stack>
+    <stack orientation="horizontal" style="contentBG">
+      <stack name="stepStack" orientation="vertical">
+        <p>Break into components and identify given variables.</p>
+        <stack name="cont">
+          <style>
+            <visibility>collapsed</visibility>
+          </style>
+          <stack orientation="horizontal">
+            <stack orientation="vertical">
+              <p>X-COMPONENT</p>
+              <p>$ v_{i} = 25cos(45^\circ) \frac{m}{s} $</p>
+              <p>$ a = 0 \frac{m}{s^2} $</p>
+              <p>$ v_{f} = ? \frac{m}{s} $</p>
+              <p>$ t = ? s $</p>
+              <p>$ x = ? m $</p>            
+            </stack>
+            <stack orientation="vertical">
+              <p>Y-COMPONENT</p>
+              <p>$ v_{i} = 25sin(45^\circ) \frac{m}{s} $</p>
+              <p>$ a = -9.8 \frac{m}{s^2} $</p>
+              <p>$ v_{f} = ? \frac{m}{s} $</p>
+              <p>$ t = ? s $</p>
+              <p>$ y = 0 m $</p>
+            </stack>
+          </stack>
+        </stack>
+      </stack>
+      <button name="btn" content="Show Step 2">
+        <style>
+          <horizontalAlignment>right</horizontalAlignment>
+          <widthPercentage>40%</widthPercentage>
+        </style>
+        <onClick>
+          if btn.Text=="Show Step 2" then
+          btn.Text = "Hide Step 2";
+          stepStack.cont.Style.Visibility = "visible";
+          stepStack:Child(1).Style.Bold = 1;
+          elseif btn.Text=="Hide Step 2" then
+          btn.Text = "Show Step 2";
+          stepStack.cont.Style.Visibility = "collapsed";
+          stepStack:Child(1).Style.Bold = 0;
+          end
+        </onClick>
+      </button>
+    </stack>
+    <stack orientation="horizontal" style="contentBG2">
+      <stack name="stepStack" orientation="vertical">
+        <p>Solve for time in the y-component</p>
+        <stack name="cont">
+          <style>
+            <visibility>collapsed</visibility>
+          </style>
+          <p>We first use the y-component since we have enough data to solve for time. We can use the equation: $ y = v_{iy}t + \frac{1}{2}a_{y}t^2 $</p>
+          <p>$ 0 = 17.68 + \frac{1}{2}*-9.8*t^2 $</p>
+          <p>$ -17.68 = -4.9*t^2 $</p>
+          <p>$ \frac{17.68}{4.9} = t^2 $</p>
+          <p>$ t = 3.61s $</p>
+          <p>This is the time of the flight of the ball until it hits the ground.</p>
+        </stack>
+      </stack>
+      <button name="btn" content="Show Step 3">
+        <style>
+          <horizontalAlignment>right</horizontalAlignment>
+          <widthPercentage>40%</widthPercentage>
+        </style>
+        <onClick>
+          if btn.Text=="Show Step 3" then
+          btn.Text = "Hide Step 3";
+          stepStack.cont.Style.Visibility = "visible";
+          stepStack:Child(1).Style.Bold = 1;
+          elseif btn.Text=="Hide Step 3" then
+          btn.Text = "Show Step 3";
+          stepStack.cont.Style.Visibility = "collapsed";
+          stepStack:Child(1).Style.Bold = 0;
+          end
+        </onClick>
+      </button>
+    </stack>
+    <stack orientation="horizontal" style="contentBG">
+      <stack name="stepStack" orientation="vertical">
+        <p>Solve for horizontal distance in the x-component</p>
+        <stack name="cont">
+          <style>
+            <visibility>collapsed</visibility>
+          </style>
+          <p>Now that we have the time, we can use it in the x-component to solve for horizontal distance.</p>
+          <p>We can use the same formula to solve this: $ x = v_{ix}t + \frac{1}{2}a_{x}t^2 $</p>
+          <p>$ x = 17.7(3.61) + 0 $</p>
+          <p>$ x = 63.8m $</p>
+          <p>Now we have found the horizontal distance the ball travels.</p>
+        </stack>
+      </stack>
+      <button name="btn" content="Show Step 4">
+        <style>
+          <horizontalAlignment>right</horizontalAlignment>
+          <widthPercentage>40%</widthPercentage>
+        </style>
+        <onClick>
+          if btn.Text=="Show Step 4" then
+          btn.Text = "Hide Step 4";
+          stepStack.cont.Style.Visibility = "visible";
+          stepStack:Child(1).Style.Bold = 1;
+          elseif btn.Text=="Hide Step 4" then
+          btn.Text = "Show Step 4";
+          stepStack.cont.Style.Visibility = "collapsed";
+          stepStack:Child(1).Style.Bold = 0;
+          end
+        </onClick>
+      </button>
+    </stack>
+    <stack orientation="horizontal" style="contentBG2">
+      <stack name="stepStack" orientation="vertical">
+        <p>Solve the peak height of the ball.</p>
+        <stack name="cont">
+          <style>
+            <visibility>collapsed</visibility>
+          </style>
+          <p>The peak height of a porabola occurs at half of the total fleight time. So to determine the max height, we have to use t = 1/2t.</p>
+          <p>We can use this formula to solve this: $ y = v_{iy}t + \frac{1}{2}a_{y}t^2 $</p>
+          <p>$ y = 17.7(1.803) - 4.8*(1.803^2) $</p>
+          <p>$ y = 15.9m $</p>
+          <p>Now we have found the maximum height of the ball.</p>
+        </stack>
+      </stack>
+      <button name="btn" content="Show Step 4">
+        <style>
+          <horizontalAlignment>right</horizontalAlignment>
+          <widthPercentage>40%</widthPercentage>
+        </style>
+        <onClick>
+          if btn.Text=="Show Step 4" then
+          btn.Text = "Hide Step 4";
+          stepStack.cont.Style.Visibility = "visible";
+          stepStack:Child(1).Style.Bold = 1;
+          elseif btn.Text=="Hide Step 4" then
+          btn.Text = "Show Step 4";
+          stepStack.cont.Style.Visibility = "collapsed";
+          stepStack:Child(1).Style.Bold = 0;
+          end
+        </onClick>
+      </button>
+    </stack>
+    </stack>
+  <p><br /></p></sectionNoTitle>
+
+  <sectionNoTitle name="section6" style="pageLayout">
+    <p style="sectionHeading">Bowman Example</p>
+    <stack style="contentBG">
+      <p>In the introduction, we showed a clip of a bowman shooting an arrow. Using the same steps as the previous examples, we are able to determine information from the bowmans shot. See the clip below.</p>
+      <video src="resources/bowman.mp4"></video>
+    </stack>
+  <p><br /></p></sectionNoTitle>
+  
+  <sectionNoTitle name="section8" style="pageLayout">
+    <p style="sectionHeading">Projectile Calculator</p>
+    <stack style="contentBG">
+      <p>Use the calculator below to solve projectile motion problems. Simply input the initial conditions and the calculator will output useful data such as the horizontal displacement and time.</p>
+    </stack>
+    <p style="sectionHeading">Initial Conditions</p>
+    <stack style="contentBG" orientation="vertical" name="stack2">
+      <table style="center" widths="70% 30%" grid="false" name="tb1">
+        <row name="r1">
+          <column name="c1">
+            <p name="d1">Initial Velocity ( $ \frac{m}{s} $ ):</p>
+            <p name="d2">Angle of Initial Velocity (from Horizontal, $ \theta $):</p>
+            <p name="d3">Initial Y Displacement ($ m $):</p>
+            <p name="d4">Gravity ($ \frac{m}{s^2} $):</p>
+          </column>
+          <column name="c2">
+            <textField placeholder="    0.00    " name="initialVelocity">
+              <style>
+                  <textAlignment>center</textAlignment>
+              </style>
+            </textField>
+            <textField placeholder="    0.00    " name="velocityAngle">
+              <style>
+                  <textAlignment>center</textAlignment>
+              </style>
+            </textField>
+            <textField placeholder="    0.00    " name="ydisplacement">
+              <style>
+                  <textAlignment>center</textAlignment>
+              </style>
+            </textField>
+            <textField placeholder="     -9.8    " name="gravity">
+              <style>
+                  <textAlignment>center</textAlignment>
+              </style>
+            </textField>
+         </column>
+        </row>
+      </table>
+      <button style="center" content="Solve">
+        <onClick>
+          <![CDATA[
+          projectilePosY = tonumber(section8.stack2.tb1.r1.c2.ydisplacement.Text);
+          cliffHeight = tonumber(section8.stack2.tb1.r1.c2.ydisplacement.Text);
+          gravity = tonumber(section8.stack2.tb1.r1.c2.gravity.Text);
+          initialVelocity = tonumber(section8.stack2.tb1.r1.c2.initialVelocity.Text);
+          angle = tonumber(section8.stack2.tb1.r1.c2.velocityAngle.Text);
+          initialVelocityX = initialVelocity*math.cos(angle*math.pi/180);
+          initialVelocityY = initialVelocity*math.sin(angle*math.pi/180);
+          updateProjectilePos();    
+          updateCliffPos();
+          graphSeries:Clear();
+          section8.stack3.sim1:Stop();
+          if (initialVelocity ~= 0) and (graphY > -1) then
+            section8.stack3.sim1:Start();
+          end
+          updateSolution();
+          
+          stack4.Style.Visibility = "visible";
+          ]]>
+        </onClick>
+      </button>
+    </stack>
+    <stack orientation="vertical" name="stack3">
+      <drawing manual="false" name="plot1">
+        <style>
+          <aspectRatio>0.6</aspectRatio>
+          
+        </style>
+        <axis dim="x" auto="lockAspectRatio" min="-3" max="10"></axis>
+        <axis dim="y" auto="lockAspectRatio" min="-3" max="10"></axis>
+        <series name="projectile" draw="segmentedFill" capacity="5"></series>
+        <series name="cliff" draw="segmentedFill" capacity="5"></series>
+        <series name="graphLine" draw="lineSegments"></series>
+      </drawing>
+      <script>
+        <![CDATA[
+          --Projectile is a square with points: (-1, -1) - (-1, 1) - (1, 1) - (1, -1)
+          projectileSeries = section8.stack3.plot1.projectile;
+          projectilePosX = 0;
+          projectilePosY = 0;
+          projectileWidth = 1;
+          
+          cliffSeries = section8.stack3.plot1.cliff;
+          cliffPosX = 0;
+          cliffPosY = 0;
+          cliffHeight = 0;
+          
+          graphSeries = section8.stack3.plot1.graphLine;
+          graphX = 0;
+          graphY = 0;
+          
+          initialVelocity = 0;
+          initialVelocityX = 0;
+          initialVelocityY = 0;
+          
+          gravity = -9.8;
+          
+          timeLapse = 0;
+          
+          xDisplacement = 0;
+          
+          finalVelocityX = 0;
+          
+          finalVelocityY = 0;
+          
+          maxY = 0;
+    
+          function updateProjectilePos() 
+            projectileSeries:Add(projectilePosX - projectileWidth, projectilePosY - projectileWidth);
+            projectileSeries:Add(projectilePosX - projectileWidth, projectilePosY + projectileWidth);
+            projectileSeries:Add(projectilePosX + projectileWidth, projectilePosY + projectileWidth);
+            projectileSeries:Add(projectilePosX + projectileWidth, projectilePosY - projectileWidth);
+            projectileSeries:Add(projectilePosX - projectileWidth, projectilePosY - projectileWidth);
+            projectileSeries:Update();
+          end
+          
+          function updateCliffPos()
+            cliffSeries:Add(cliffPosX - 2, cliffPosY);
+            if cliffHeight == 0 then
+              cliffSeries:Add(cliffPosX - 2, cliffPosY + cliffHeight);
+              cliffSeries:Add(cliffPosX + 2, cliffPosY + cliffHeight);
+            else
+            cliffSeries:Add(cliffPosX - 2, cliffPosY + cliffHeight - projectileWidth);
+            cliffSeries:Add(cliffPosX + 2, cliffPosY + cliffHeight - projectileWidth);
+            end
+            cliffSeries:Add(cliffPosX + 2, cliffPosY);
+            cliffSeries:Add(cliffPosX - 2, cliffPosY);
+            cliffSeries:Update();
+          end
+          
+          function updateSolution()
+            section8.stack4.stack1.stackk1.d1.Text = "Displacement = " .. string.sub(tostring(xDisplacement), 0, 5);
+            section8.stack4.stack1.stackk1.d2.Text = "Initial Velocity = " .. string.sub(tostring(initialVelocityX), 0, 5);
+            section8.stack4.stack1.stackk1.d3.Text = "Final Velocity = " .. string.sub(tostring(finalVelocityX), 0, 5);
+            section8.stack4.stack1.stackk1.d5.Text = "Time = " .. string.sub(tostring(timeLapse), 0, 5);
+            
+            section8.stack4.stack1.stackk2.d1.Text = "Displacement = " .. string.sub(tostring(cliffHeight), 0, 5);
+            section8.stack4.stack1.stackk2.d2.Text = "Initial Velocity = " .. string.sub(tostring(initialVelocityY), 0, 5);
+            section8.stack4.stack1.stackk2.d3.Text = "Final Velocity = " .. string.sub(tostring(finalVelocityY), 0, 5);
+            section8.stack4.stack1.stackk2.d4.Text = "Acceleration = " .. string.sub(tostring(gravity), 0, 5);
+            section8.stack4.stack1.stackk2.d5.Text = "Time = " .. string.sub(tostring(timeLapse), 0, 5);;     
+            section8.stack4.stack1.stackk2.d6.Text = "Max Height = " .. string.sub(tostring(maxY), 0, 5);
+            end
+          ]]>
+      </script>
+    
+      <simulation name="sim1" duration="10" period="0.01">
+        <onUpdate>
+          <![CDATA[
+          graphX = projectilePosX;
+          graphY = projectilePosY;  
+          
+          if (initialVelocity ~= 0) and (graphY + initialVelocityY*time + 0.5*gravity*time*time > -0.0000001) then
+            graphSeries:Add(graphX + initialVelocityX*time, graphY + initialVelocityY*time + 0.5*gravity*time*time);
+            graphSeries:Update();
+            projectileSeries:Add(projectilePosX - projectileWidth + initialVelocityX*time, projectilePosY - projectileWidth + initialVelocityY*time + 0.5*gravity*time*time);
+            projectileSeries:Add(projectilePosX - projectileWidth + initialVelocityX*time, projectilePosY + projectileWidth + initialVelocityY*time + 0.5*gravity*time*time);
+            projectileSeries:Add(projectilePosX + projectileWidth + initialVelocityX*time, projectilePosY + projectileWidth + initialVelocityY*time + 0.5*gravity*time*time);
+            projectileSeries:Add(projectilePosX + projectileWidth + initialVelocityX*time, projectilePosY - projectileWidth + initialVelocityY*time + 0.5*gravity*time*time);
+            projectileSeries:Add(projectilePosX - projectileWidth + initialVelocityX*time, projectilePosY - projectileWidth + initialVelocityY*time + 0.5*gravity*time*time);
+            projectileSeries:Update();
+          else
+            timeLapse = time;
+            xDisplacement = graphX + initialVelocityX*timeLapse;
+            finalVelocityX = initialVelocityX;
+            finalVelocityY = initialVelocityY + gravity*timeLapse;
+            maxY = graphY + initialVelocityY*timeLapse/2 + 0.5*gravity*time/2*time/2;
+            updateSolution()
+            sim1:Pause();
+          end
+            
+          ]]>
+        </onUpdate>
+      </simulation>
+    </stack>
+  
+    <stack orientation="vertical" name="stack4" style="contentBG">
+      <style>
+        <visibility>collapsed</visibility>
+      </style>
+      <p style="subSectionHeading">SOLUTION</p>
+      <stack orientation="horizontal" name="stack1">
+        <stack orientation="vertical" name="stackk1">
+          <p>X - Component</p>
+          <p name="d1">Displacement = 0</p>
+          <p name="d2">Initial Velocity = 0</p>
+          <p name="d3">Final Velocity = 0</p>
+          <p name="d4">Acceleration = 0</p>
+          <p name="d5">Time = 0</p>
+        </stack>
+        <stack orientation="vertical" name="stackk2">
+          <p>Y - Component</p>
+          <p name="d1">Displacement = 0</p>
+          <p name="d2">Initial Velocity = 0</p>
+          <p name="d3">Final Velocity = 0</p>
+          <p name="d4">Acceleration = 0</p>
+          <p name="d5">Time = 0</p>
+          <p name="d6">Max Height = 0</p>
+        </stack>
+      </stack>
+      
+    </stack>
+  <p><br /></p></sectionNoTitle>
+  
+  <sectionNoTitle name="section9" style="pageLayout">
+    <p style="sectionHeading">Practice Questions</p>
+    <stack orientation="vertical" name="btnStack1" style="contentBG">
+      <p style="subSectionHeading">Question 1</p>
+      <p>A cannon fires a ball with an initial velocity of 25m/s 53° above the horizontal. The cannon is sitting on top of a 60m cliff.</p>
+      <p>1. Determine the time it takes the ball to hit the ground </p>
+      <stack orientation="horizontal">
+        <table name="tb1" widths="30% 40%" grid="0">
+          <row name="r1">
+            <column>
+              <p> $ t =  $</p>
+            </column>
+            <column name="c1">
+              <textInput name="X" placeholder="0.00"></textInput>
+            </column>
+          </row>
+        </table>
+        <button name="btn1" content="Check Answer">
+          <style>
+            <horizontalAlignment>left</horizontalAlignment>
+            <widthPercentage>80%</widthPercentage>
+          </style>
+          <onClick>
+            if tb1.r1.c1.X.Text == "6" or tb1.r1.c1.X.Text == "6.1" or tb1.r1.c1.X.Text == "6.09" then
+              btn1.Style.BackgroundColor = color.rgb(0, 255, 0);
+              btn1.Text = "Correct!"
+            else
+              btn1.Text = "Try Again!"
+            end
+          </onClick>
+        </button>
+      </stack>     
+      <p>2. Determine the horizontal distance when the ball hits the ground. </p>
+      <stack orientation="horizontal">
+        <table name="tb1" widths="30% 40%" grid="0">
+          <row name="r1">
+            <column>
+              <p> $ \Delta x =  $</p>
+            </column>
+            <column name="c1">
+              <textInput name="X" placeholder="0.00"></textInput>
+            </column>
+          </row>
+        </table>
+        <button name="btn1" content="Check Answer">
+          <style>
+            <horizontalAlignment>left</horizontalAlignment>
+            <widthPercentage>80%</widthPercentage>
+          </style>
+          <onClick>
+            if tb1.r1.c1.X.Text == "91" or tb1.r1.c1.X.Text == "91.6" or tb1.r1.c1.X.Text == "92" then
+              btn1.Style.BackgroundColor = color.rgb(0, 255, 0);
+              btn1.Text = "Correct!"
+            else
+              btn1.Text = "Try Again!"
+            end
+          </onClick>
+        </button>
+      </stack>  
+      <p>3. Determine the maximum height that is reached by the ball. </p>
+      <stack orientation="horizontal">
+        <table name="tb1" widths="30% 40%" grid="0">
+          <row name="r1">
+            <column>
+              <p> $ \Delta y_{max} =  $</p>
+            </column>
+            <column name="c1">
+              <textInput name="X" placeholder="0.00"></textInput>
+            </column>
+          </row>
+        </table>
+        <button name="btn1" content="Check Answer">
+          <style>
+            <horizontalAlignment>left</horizontalAlignment>
+            <widthPercentage>80%</widthPercentage>
+          </style>
+          <onClick>
+            if tb1.r1.c1.X.Text == "75.36" or tb1.r1.c1.X.Text == "75.4" or tb1.r1.c1.X.Text == "75"  then
+              btn1.Style.BackgroundColor = color.rgb(0, 255, 0);
+              btn1.Text = "Correct!"
+            else
+              btn1.Text = "Try Again!"
+            end
+          </onClick>
+        </button>
+      </stack>
+    </stack>
+    <p><br /></p>
+    <stack orientation="vertical" name="btnStack2" style="contentBG">
+      <p style="subSectionHeading">Question 2</p>
+      <p>A projectile is fired into the air from the edge of a 125m high cliff at an angle of 30.2° above the horizontal. The projectile hits a target 455m away from the base of the cliff.</p>
+      <p>1. Determine initial velocity of the projectile </p>
+      <stack orientation="horizontal">
+        <table name="tb1" widths="30% 40%" grid="0">
+          <row name="r1">
+            <column>
+              <p> $ v_{0} =  $</p>
+            </column>
+            <column name="c1">
+              <textInput name="X" placeholder="0.00"></textInput>
+            </column>
+          </row>
+        </table>
+        <button name="btn1" content="Check Answer">
+          <style>
+            <horizontalAlignment>left</horizontalAlignment>
+            <widthPercentage>80%</widthPercentage>
+          </style>
+          <onClick>
+            if tb1.r1.c1.X.Text == "59" then
+              btn1.Style.BackgroundColor = color.rgb(0, 255, 0);
+              btn1.Text = "Correct!"
+            else
+              btn1.Text = "Try Again!"
+            end
+          </onClick>
+        </button>
+      </stack>     
+      <p>2. Determine the time the projectile is in flight. </p>
+      <stack orientation="horizontal">
+        <table name="tb1" widths="30% 40%" grid="0">
+          <row name="r1">
+            <column>
+              <p> $ t =  $</p>
+            </column>
+            <column name="c1">
+              <textInput name="X" placeholder="0.00"></textInput>
+            </column>
+          </row>
+        </table>
+        <button name="btn1" content="Check Answer">
+          <style>
+            <horizontalAlignment>left</horizontalAlignment>
+            <widthPercentage>80%</widthPercentage>
+          </style>
+          <onClick>
+            if tb1.r1.c1.X.Text == "8.92" or tb1.r1.c1.X.Text == "8.9" or tb1.r1.c1.X.Text == "9" then
+              btn1.Style.BackgroundColor = color.rgb(0, 255, 0);
+              btn1.Text = "Correct!"
+            else
+              btn1.Text = "Try Again!"
+            end
+          </onClick>
+        </button>
+      </stack>  
+      <p>3. Determine the maximum height that is reached by the projectile. </p>
+      <stack orientation="horizontal">
+        <table name="tb1" widths="30% 40%" grid="0">
+          <row name="r1">
+            <column>
+              <p> $ \Delta y_{max} =  $</p>
+            </column>
+            <column name="c1">
+              <textInput name="X" placeholder="0.00"></textInput>
+            </column>
+          </row>
+        </table>
+        <button name="btn1" content="Check Answer">
+          <style>
+            <horizontalAlignment>left</horizontalAlignment>
+            <widthPercentage>80%</widthPercentage>
+          </style>
+          <onClick>
+            if tb1.r1.c1.X.Text == "159.8" or tb1.r1.c1.X.Text == "160" then
+              btn1.Style.BackgroundColor = color.rgb(0, 255, 0);
+              btn1.Text = "Correct!"
+            else
+              btn1.Text = "Try Again!"
+            end
+          </onClick>
+        </button>
+      </stack>
+    </stack>
+  <p><br /></p></sectionNoTitle>
+
+  <sectionNoTitle name="section7" style="pageLayout">
+    <p style="sectionHeading">Extra Resources</p>
+    <web url="https://www.khanacademy.org/science/physics/two-dimensional-motion/two-dimensional-projectile-mot/v/projectile-at-an-angle"></web>
+  <p><br /></p></sectionNoTitle>
+</document>

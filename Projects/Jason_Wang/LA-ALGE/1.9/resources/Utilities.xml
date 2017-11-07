@@ -1,0 +1,355 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<fragment xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd">
+  <script>
+    <![CDATA[
+    
+    ---------------------------
+    -- Start Color Constants --
+    ---------------------------
+    gray0 = color.rgb(230, 230, 230)
+    gray1 = color.rgb(225, 225, 225)
+    gray2 = color.rgb(200, 200, 200)
+    themeColor = color.rgb(232, 12, 46)
+    
+    ---------------------------
+    -- End Color Constants --
+    ---------------------------
+    
+    ---------------------------
+    -- Start Utility Methods --
+    ---------------------------
+    
+    function round(value,multiple)
+      local remainder = value % multiple;
+      if remainder * 2 >= multiple then
+          return value - remainder + multiple;
+      else
+          return value - remainder;
+      end
+    end
+    
+    function selectBtn(btn, str, foreground, background)
+      btn.Style.ForegroundColor = foreground or color.white
+      btn.Style.BackgroundColor = background or themeColor
+      if str ~= nil then btn.Text = str; end
+    end
+
+    function unselectBtn(btn, str, foreground, background)
+      btn.Style.ForegroundColor = foreground or color.black
+      btn.Style.BackgroundColor = background or color.transparent
+      if str ~= nil then btn.Text = str; end
+    end
+    
+    -------------------------
+    -- End Utility Methods --
+    -------------------------
+    
+    -----------------------
+    -- Start TabsManager --
+    -----------------------
+    
+    ------------------------------------------------------
+    -- TabsManager is a Class for Tabular Page Layout.
+    -- Follow exactly as TabPageSection Snippet in your xml
+    -- init TabsManager requires:
+    -- tabs stack
+    -- contents stack
+    -- initial selected tab index (default=1)
+    -- total number of tabs
+    -- call initStyle() right after creating TabsManager
+    ------------------------------------------------------
+    
+    TabsManager = {tStack,cStack,selectedTabIndex=1,numOfTabs}
+    function TabsManager:new(o)
+      o = o or {}
+      if o.tStack == nil or o.cStack == nil then error("Tabs Stack and Contents Stack must be provided!") end
+      setmetatable(o, self)
+      self.__index = self
+      return o
+    end
+    
+    function TabsManager:getCurrentTab()
+      return self.tStack:Child(self.selectedTabIndex)
+    end
+    
+    function TabsManager:getCurrentContent()
+      return self.cStack:Child(self.selectedTabIndex)
+    end
+    
+    function TabsManager:initStyle()
+      for i=1, self.numOfTabs do
+        if self.selectedTabIndex == i then
+          self:selectTab(i)
+        else
+          self:unselectTab(i)
+        end
+      end
+    end
+    
+    function TabsManager:changeTab(n)
+      if self.selectedTabIndex == n then return end
+      self:unselectTab(self.selectedTabIndex)
+      self:selectTab(n)
+    end
+    
+    function TabsManager:selectTab(n)
+      self.selectedTabIndex = n
+      local t = self:getCurrentTab()
+      t.Style.BackgroundColor = gray1
+      t:Child(1).Style.BackgroundColor = gray1
+      self:getCurrentContent().Style.Visibility = "visible"
+    end
+    
+    function TabsManager:unselectTab(n)
+      local t = self.tStack:Child(n)
+      t.Style.BackgroundColor = gray2
+      t:Child(1).Style.BackgroundColor = gray2
+      self.cStack:Child(n).Style.Visibility = "collapsed"
+    end
+      
+    ---------------------
+    -- End TabsManager --
+    ---------------------
+    
+    
+    -----------------------------------
+    -- Start Step by Step Controller --
+    -----------------------------------
+    
+    StepsController = {stepsStack,numOfSteps,shown_message,hidden_message, showStepCounter=true}
+    function StepsController:new(o)
+      o = o or {}
+      if o.stepsStack == nil or o.numOfSteps == nil or o.numOfSteps < 1 then
+        error("stepsStack and numOfSteps must be provided, and numOfSteps must be greater than 0!")
+      end
+      
+      -- initial setup
+      o.shown_message = o.shown_message or "Show Step"
+      o.hidden_message = o.hidden_message or "Hide Step"
+      
+      for i=1,o.numOfSteps do
+        local c = o.stepsStack:Child(i)
+        if i % 2 == 1 then
+          c.Style.BackgroundColor = gray2
+        else
+          c.Style.BackgroundColor = gray1
+        end
+        if o.showStepCounter then
+          c.btn.Text = string.format("%s %d", o.shown_message, i)
+        else
+          c.btn.Text = o.shown_message
+        end
+      end
+      
+      setmetatable(o, self)
+      self.__index = self
+      return o
+    end
+    
+    function StepsController:toggleStep(n)
+      local c = self.stepsStack:Child(n)
+      if c.stepStack.cont.Style.Visibility == "Collapsed" then
+        c.stepStack.cont.Style.Visibility = "visible"
+        c.stepStack:Child(1).Style.Bold = 1
+        if self.showStepCounter then
+          c.btn.Text = string.format("%s %d", self.hidden_message, n)
+        else
+          c.btn.Text = self.hidden_message
+        end
+      else
+        c.stepStack.cont.Style.Visibility = "collapsed"
+        c.stepStack:Child(1).Style.Bold = 0
+        if self.showStepCounter then
+          c.btn.Text = string.format("%s %d", self.shown_message, n)
+        else
+          c.btn.Text = self.shown_message
+        end
+      end
+    end
+    
+    ---------------------------------
+    -- End Step by Step Controller --
+    ---------------------------------
+    
+    -------------------------------------
+    -- Start Multi Question Controller --
+    -------------------------------------
+    
+    MQController = {mqStack,numOfSteps}
+    function MQController:new(o)
+      o = o or {}
+      if o.mqStack == nil or o.numOfSteps == nil or o.numOfSteps < 1 then
+        error("mqStack and numOfSteps must be provided, and numOfSteps must be greater than 0!")
+      end
+      
+      -- initial setup
+      for i=1,o.numOfSteps do
+        local c = o.mqStack:Child(i)
+        if i % 2 == 1 then
+          c.Style.BackgroundColor = gray2
+        else
+          c.Style.BackgroundColor = gray1
+        end
+      end
+      
+      setmetatable(o, self)
+      self.__index = self
+      return o
+    end
+    
+    function MQController:toggleStep(n, textShown, textHidden)
+      local c = self.mqStack:Child(n)
+      local t1 = textShown or string.format("Show Part %d", n)
+      local t2 = textHidden or string.format("Hide Part %d", n)
+      if c.content.Style.Visibility == "Collapsed" then
+        c.content.Style.Visibility = "visible"
+        c.header.title.Style.Bold = 1
+        c.header.btn.Text = t2
+      else
+        c.content.Style.Visibility = "collapsed"
+        c.header.title.Style.Bold = 0
+        c.header.btn.Text = t1
+      end
+    end
+    
+    -----------------------------------
+    -- End Multi Question Controller --
+    -----------------------------------
+    
+    ------------------------
+    -- Start MCController --
+    ------------------------
+    
+    MCController = {choiceBtns, checkBtn, answer}
+    function MCController:new(o)
+      o = o or {}
+      if o.choiceBtns == nil or o.checkBtn == nil or o.answer == nil then
+        error("choiceBtns, checkBtns, and answer must be provided for MCController!")
+      end
+      
+      setmetatable(o, self)
+      self.__index = self
+      return o
+    end
+    
+    function MCController:select(n)
+      if n == self.selectedIndex then return end
+      local btn = self.choiceBtns[n]
+      selectBtn(btn)
+      if self.selectedIndex ~= nil then
+        local selectedBtn = self.choiceBtns[self.selectedIndex]
+        selectedBtn.Style.BackgroundColor = gray0
+        selectedBtn.Style.ForegroundColor = color.black
+      end
+      self.selectedIndex = n
+    end
+    
+    function MCController:checkAnswer()
+      if self.selectedIndex ~= self.answer then
+        self.checkBtn.Text = "Try Again!"
+        self.checkBtn.Style.BackgroundColor = themeColor
+      else
+        self.checkBtn.Text = "Correct!"
+        self.checkBtn.Style.BackgroundColor = color.green
+        selectBtn(self.choiceBtns[self.selectedIndex],nil,nil,color.green)
+      end
+    end
+    
+    ----------------------
+    -- End MCController --
+    ----------------------
+    
+    ------------------------
+    -- Start CQController --
+    ------------------------
+    
+    CQController = {checkboxes, checkBtn, answers}
+    function CQController:new(o)
+      o = o or {}
+      if o.checkboxes == nil or o.checkBtn == nil or o.answers == nil then
+        error("checkboxes, checkBtn, and answers must be provided for CQController!")
+      end
+      
+      if #o.checkboxes ~= #o.answers then
+        error("The number of checkboxes and answers must be the same!")
+      end
+      
+      o.userAnswers = {}
+      for i=1,#o.answers do
+        o.checkboxes[i].Style.SquareBorder = true
+        unselectBtn(o.checkboxes[i],nil,color.white,gray0)
+        o.userAnswers[i] = false
+      end
+      
+      setmetatable(o, self)
+      self.__index = self
+      return o
+    end
+    
+    function CQController:toggleCheckbox(n)
+      self.userAnswers[n] = not self.userAnswers[n]
+      local cb = self.checkboxes[n]
+      if self.userAnswers[n] then
+        selectBtn(cb, "■", cb.Style.ForegroundColor, color.dimGray)
+      else
+        unselectBtn(cb, " ", color.white, gray0)
+      end
+    end
+    
+    function CQController:checkAnswer()
+      local ans = true
+      for i=1,#self.answers do
+        local cb = self.checkboxes[i]
+        if self.userAnswers[i] == self.answers[i] then
+          if self.userAnswers[i] == true then
+            cb.Style.BackgroundColor = color.green
+          else
+            cb.Style.BackgroundColor = gray0
+          end
+        else
+          cb.Style.BackgroundColor = themeColor
+          ans = false
+        end
+      end
+      if ans then
+        self.checkBtn.Text = "Correct!"
+        self.checkBtn.Style.BackgroundColor = color.green
+      else
+        self.checkBtn.Text = "Try Again!"
+        self.checkBtn.Style.BackgroundColor = themeColor
+      end
+    end
+    
+    ----------------------
+    -- End CQController --
+    ----------------------
+    
+    -------------------------------
+    -- Start Table Utility Class --
+    -------------------------------
+    
+    Table = {}
+    
+    local function equals( a, b )
+      if (a == nil or b == nil or #a ~= #b) then
+        return false
+      end
+
+      for i=1, #a do
+        if (a[i] ~= b[i]) then
+          return false
+        end
+      end
+
+      return true
+    end
+    
+    Table.equals = equals
+    
+    -----------------------------
+    -- End Table Utility Class --
+    -----------------------------
+    
+    ]]>
+  </script>
+</fragment>

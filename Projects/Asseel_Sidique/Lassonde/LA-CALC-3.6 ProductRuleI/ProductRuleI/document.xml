@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G1E6D788A_6EDF_4087_98BD_EF02C20B63CF">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>LA-CALC-3.6 Product Rule I</title>
+    <creator>Thiago</creator>
+    <coverImage src="resources/LassondeLogo.png" />
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+  </metadata>
+
+  <include src="resources/curriculumStylesLassonde.xml" />
+  <include src="resources/Utilities.xml" />
+
+  <!--HEADER**********************************************-->
+  <header style="themeColour">
+    <stack style="center" orientation="horizontal">
+      <p></p>
+    </stack>
+  </header>
+  <footer style="themeColour">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="themeColourTitle">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--FOOTER**********************************************-->
+
+
+
+
+  <!--    SECTION 1    -->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">Introduction to Product Rule</title>
+    <p style="sectionHeading">Introduction</p>
+    <stack style="contentBG">
+      <p>
+        In calculus, the product rule is a formula used to find the derivatives of products of two or more functions,
+        e.g., the function $ F (x) = x^{2} \cdot sin(x) $, which can be
+        interpreted as two functions: $f(x) = x^{2}$ and $g(x) = sin(x)$.
+      </p>
+    </stack>
+  </section>
+
+  <sectionNoTitle name="section2" style="pageLayout">
+    <script>
+      local stepsController = StepsController:new({stepsStack=stepsStack, numOfSteps=3})
+    </script>
+    <p style="sectionHeading">Question Step-by-Step</p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="subSectionHeading">Step-by-Step Example</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>Let $F(x) = x^{2} \cdot sin(x) $, find F'(x):</p>
+          </column>
+        </row>
+      </table>
+    </stack>
+    <stack name="stepsStack">
+      <!--Each step is a stack, and each step has alternating background colors-->
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>  Divide $ F(x) $ into 2 functions: </p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            <stack orientation="horizontal" style="center">
+              <stack>
+                <p style="centerText">$ f(x) = x^{2} $</p>
+                <p style="centerText">$ f'(x) = 2x $</p>
+              </stack>
+              <stack>
+                <p style="centerText">$ g(x) = sin(x) $</p>
+                <p style="centerText">$ g'(x) = cos(x) $</p>
+              </stack>
+            </stack>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <onClick>
+            stepsController:toggleStep(1)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Apply the Product Rule:</p>
+          <stack name="cont" style="invisible">
+            <stack orientation="horizontal">
+              <stack orientation="vertical">
+                <!--CONTENT GOES HERE-->
+                <p> $ F'(x) = f'(x) \cdot g(x) + f(x) \cdot g'(x) $</p>
+              </stack>
+            </stack>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <onClick>
+            stepsController:toggleStep(2)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <!--CONTENT GOES HERE-->
+          <p>Plug in and Simplify</p>
+          <stack name="cont" style="invisible">
+            <p> $ F'(x) = 2x \cdot sin(x) + x^{2} \cdot cos(x) $</p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <onClick>
+            stepsController:toggleStep(3)
+          </onClick>
+        </button>
+      </stack>
+    </stack>
+  </sectionNoTitle>
+
+  <!-- Section 3 -->
+  <sectionNoTitle name="section3" style="pageLayout">
+    <p style="sectionHeading">Examples</p>
+
+    <stack style="contentBG">
+      <p style="subSectionHeading">Example 1</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>$ F(x) = e^{x} \cdot cos(x) $, find $ F '(x) $:</p>
+          </column>
+        </row>
+      </table>
+
+      <stack name="answerWrap" style="collapsed">
+        <p style="subSectionHeading">Answer</p>
+        <table name="table" widths="10% 90%" grid="false">
+          <row>
+            <column>
+              <image src="resources\answer.png" inspect="false" />
+            </column>
+            <column>
+              <p>$ F'(x) = f'(x) \cdot g(x) + f(x) \cdot g'(x) $</p>
+
+              <p>
+                $ F'(x) = e^{x} \cdot cos(x) + e^{x} \cdot (-sin(x))  $
+              </p>
+              <p>$ F'(x) = e^{x}(cos(x) - sin(x)) $</p>
+            </column>
+          </row>
+        </table>
+      </stack>
+
+      <button name="button1" content="Show Answer">
+        <onClick>
+          if button1.Text == "Show Answer" then
+          answerWrap.Style.Visibility = "visible";
+          button1.Text = "Hide Answer"
+          else
+          answerWrap.Style.Visibility = "collapsed";
+          button1.Text = "Show Answer"
+          end
+        </onClick>
+      </button>
+    </stack>
+    <p>
+      <br />
+    </p>
+    <stack style="contentBG">
+      <p style="subSectionHeading">Example 2</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>$ F(x) = (x^{2} - 1)(x + 5) $, find $ F '(x) $:</p>
+          </column>
+        </row>
+      </table>
+
+      <stack name="answerWrap" style="collapsed">
+        <p style="subSectionHeading">Answer</p>
+        <table name="table" widths="10% 90%" grid="false">
+          <row>
+            <column>
+              <image src="resources\answer.png" inspect="false" />
+            </column>
+            <column>
+              <p>$ F'(x) = f'(x) \cdot g(x) + f(x) \cdot g'(x) $</p>
+
+              <p>
+                $ F'(x) = 2x \cdot (x+5) + (x^{2} - 1) \cdot (1)  $
+              </p>
+              <p>$ F'(x) = 3x^{2} + 10x - 1 $</p>
+            </column>
+          </row>
+        </table>
+      </stack>
+
+      <button name="button1" content="Show Answer">
+        <onClick>
+          if button1.Text == "Show Answer" then
+          answerWrap.Style.Visibility = "visible";
+          button1.Text = "Hide Answer"
+          else
+          answerWrap.Style.Visibility = "collapsed";
+          button1.Text = "Show Answer"
+          end
+        </onClick>
+      </button>
+    </stack>
+    <p>
+      <br />
+    </p>
+    <stack style="contentBG">
+      <p style="subSectionHeading">Example 3</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>$ F(x) = x^{2} \cdot ln(x) $, find $ F '(x) $:</p>
+          </column>
+        </row>
+      </table>
+
+
+
+
+
+      <stack name="answerWrap" style="collapsed">
+        <p style="subSectionHeading">Answer</p>
+        <table name="table" widths="10% 90%" grid="false">
+          <row>
+            <column>
+              <image src="resources\answer.png" inspect="false" />
+            </column>
+            <column>
+              <p>$ F'(x) = f'(x) \cdot g(x) + f(x) \cdot g'(x) $</p>
+
+              <p>
+                $ F'(x) = 2x \cdot ln(x) + x^{2} \cdot \frac{1}{x}  $
+              </p>
+              <p>$ F'(x) = 2xln(x) + x $</p>
+              <p>$ F'(x) = x(2ln(x) + 1) $</p>
+            </column>
+          </row>
+        </table>
+      </stack>
+
+      <button name="button1" content="Show Answer">
+        <onClick>
+          if button1.Text == "Show Answer" then
+          answerWrap.Style.Visibility = "visible";
+          button1.Text = "Hide Answer"
+          else
+          answerWrap.Style.Visibility = "collapsed";
+          button1.Text = "Show Answer"
+          end
+        </onClick>
+      </button>
+    </stack>
+    <p>
+      <br />
+    </p>
+  </sectionNoTitle>
+
+  <!--    Section 4    -->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Practice</p>
+
+
+    <stack style="contentBG">
+
+
+      <p style="subSectionHeading">Question 1</p>
+
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>The following table lists the values of functions $ g$ and $ h$, and of their derivatives, $ g ′ $ and $ h ′ $, for $ x=0 $.</p>
+          </column>
+        </row>
+      </table>
+
+      <table grid="false">
+        <head>
+          <column>
+            <p>x</p>
+          </column>
+          <column>
+            <p>g(x)</p>
+          </column>
+          <column>
+            <p>h(x)</p>
+          </column>
+          <column>
+            <p>g'(x)</p>
+          </column>
+          <column>
+            <p>h'(x)</p>
+          </column>
+        </head>
+        <row>
+          <column>
+            <p>0</p>
+          </column>
+          <column>
+            <p>-3</p>
+          </column>
+          <column>
+            <p>-1</p>
+          </column>
+          <column>
+            <p>5</p>
+          </column>
+          <column>
+            <p>3</p>
+          </column>
+        </row>
+
+
+      </table>
+
+      <p>Let $ F(x)= g(x) \cdot h(x) $, find $ F'(0)$.</p>
+
+      <table name="table1" grid="false" widths="10% 90%">
+        <row name="row1">
+          <column>
+            <p>$ F'(0) = $</p>
+          </column>
+          <column name="column2">
+            <textInput name="userInput" spelling="false">
+              <placeholder>Insert answer here</placeholder>
+            </textInput>
+          </column>
+        </row>
+      </table>
+
+      <p name="answerLabel" style="collapsed centerText">  </p>
+
+      <button style="large" content="Check Answer">
+
+        <style>
+          <horizontalAlignment>center</horizontalAlignment>
+          <widthPercentage>0.6</widthPercentage>
+        </style>
+
+        <onClick>
+
+          answerNumber = tonumber(table1.row1.column2.userInput.Text)
+
+          if answerNumber == -14 then
+          answerLabel.Text = "Correrct!"
+          else
+          answerLabel.Text = "Incorrect. Try again!"
+          end
+
+          answerLabel.Style.Visibility = "visible"
+        </onClick>
+      </button>
+
+    </stack>
+  </sectionNoTitle>
+
+</document>

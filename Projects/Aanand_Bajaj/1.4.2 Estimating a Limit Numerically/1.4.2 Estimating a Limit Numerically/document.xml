@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="GF0873EA6_7CDF_4675_B1B4_3C6D09C0868A">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>MCV4U - 1.4.2 Estimating Limit Numerically</title>
+    <creator>AanandB</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/cover.jpg" />
+  </metadata>
+
+  <include src="curriculumThemePack/curriculumStyles.xml" />
+  <include src="plotTools.xml" />
+
+  <!--Header and Footer-->
+  <style name="backgroundColor">
+    <background color="50 133 184" />
+  </style>
+  <style name="fontColor">
+    <foreground color="255 255 255" />
+  </style>
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="fontColor">Amanda Koon</p>
+      <p style="fontColor rightText">MCR3U</p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/logo1.png" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/logo2.png" />
+    </stack>
+  </footer>
+
+  <!--Intro-->
+  <section>
+    <title>
+      <style>
+        <textAlignment>right</textAlignment>
+        <marginTop>100</marginTop>
+      </style>
+      <size scale="xlarge">1.4.2</size>
+    </title>
+    <p style="chapterTitle">Estimating a Limit Numerically</p>
+
+    <p style="title">INTRODUCTION</p>
+    <p>
+      When estimating a limit of a function as x approaches a constant, algebraic tools can usually be used to solve the limit. In this lesson, we will take a look at some examples of solving limits without graphs or tables.
+    </p>
+  </section>
+
+  <!--Summary-->
+  <sectionNoTitle>
+    <stack>
+      <style>
+        <widthPercentage>0.8</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <style>
+        <counter name="decBullet" format="decimal" />
+      </style>
+
+      <style name="numberedBullet">
+        <increment counter="decBullet" />
+        <numbering counter="decBullet" mode="flat" />
+      </style>
+      <p style="titleMargin">
+        <b>Summary</b>
+      </p>
+
+      <p>If given a limit problem, we should use the following steps:</p>
+
+      <stack style="questionAnswer">
+
+        <p style="title">Example 1</p>
+        <p>solve: $ \lim_{x\rightarrow 2} (12x^2 - 3x + 8) $</p>
+        <p>$ (12(2)^2 - 3(2) + 8) = 50 $</p>
+      </stack>
+
+      <p> Some limit questions can be tricky as they require more work.</p>
+      <stack style="questionAnswer">
+        <p style="title">Example 2</p>
+        <p>Evaluate $\lim\limits_{x \to -5} \frac{x^2 - 25}{x^2 + 2x - 15}$</p>
+        <p>Substituting $ x = -5 $ yields $\frac{0}{0}$. Factor the rational expressions and evaluate:</p>
+        <p>$ = \lim\limits_{x \to -5} \frac{x^2 - 25}{x^2 + 2x - 15} $</p>
+        <p>$ = \lim\limits_{x \to -5} \frac{(x + 5)(x - 5)}{(x - 3)(x + 5)} $</p>
+        <p>$ = \lim\limits_{x \to -5} \frac{(x - 5)}{(x - 3)} $</p>
+        <p>$ = \frac{-5 - 5}{- 5 - 3} $</p>
+        <p>$ = \frac{5}{4} $</p>
+      </stack>
+
+      <stack style="questionAnswer">
+        <p style="title">Example 3</p>
+        <p>Evaluate $\lim\limits_{x \to 4} \frac{3 - \sqrt{x + 5}}{x - 4}$</p>
+        <p>Substituting $ x = 4 $ yields $\frac{0}{0}$. Eliminate the square root term by multiplying the conjugate of the numerator over itself. Thus we get: </p>
+        <p>$ = \lim\limits_{x \to 4} \frac{3 - \sqrt{x + 5}}{x - 4} \times \frac{3 + \sqrt{x + 5}}{3 + \sqrt{x + 5}}$</p>
+        <p>$ = \lim\limits_{x \to 4} \frac{9 - (x+5)}{(x - 4)(3 + \sqrt{x + 5})}$</p>
+        <p>$ = \lim\limits_{x \to 4} \frac{4 - x}{(x - 4)(3 + \sqrt{x + 5})}$</p>
+        <p>$ = \lim\limits_{x \to 4} \frac{- (x - 4)}{(x - 4)(3 + \sqrt{x + 5})}$</p>
+        <p>$ = \lim\limits_{x \to 4} \frac{-1)}{(x - 4)(3 + \sqrt{x + 5})}$</p>
+        <p>$ = \frac{-1)}{3 + \sqrt{4 + 5}}$</p>
+        <p>$ = -\frac{1}{6}$</p>
+
+      </stack>
+    </stack>
+
+    <p>
+      <style>
+        <marginBottom>120</marginBottom>
+      </style>
+    </p>
+  </sectionNoTitle>
+
+  <!--Practice-->
+  <sectionNoTitle>
+    <stack>
+      <style>
+        <widthPercentage>0.8</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <style>
+        <counter name="decBullet" format="decimal" />
+      </style>
+
+      <style name="numberedBullet">
+        <increment counter="decBullet" />
+        <numbering counter="decBullet" mode="flat" />
+      </style>
+      <p style="titleMargin">
+        <b>Practice</b>
+      </p>
+
+      <!--Question 1 -->
+      <stack style="questionAnswer">
+        <p style="title qNum"></p>
+        <table name="table" grid="false">
+          <row>
+            <column>
+              <p name="equation" style="center">$ \lim\limits_{x \to 2} \frac{x^2 - 7x + 10}{x^2 - 4} = \frac{a}{b}$</p>
+            </column>
+          </row>
+        </table>
+        <p style="title">ANSWER</p>
+        <table name="answers" widths="20% 80%" grid="false">
+          <!-- Row 1 -->
+          <row>
+            <column>
+              <p>a = </p>
+            </column>
+            <column>
+              <textField name="input1" placeholder="insert answer here" />
+            </column>
+          </row>
+
+          <!-- Row 2 -->
+          <row>
+            <column>
+              <p>b = </p>
+            </column>
+            <column>
+              <textField name="input2" placeholder="insert answer here" />
+            </column>
+          </row>
+
+        </table>
+        <button content="Check Answer">
+          <onClick>
+            <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                
+                if a == -3 and b == 4 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+          </onClick>
+        </button>
+        <!-- Answer Stack -->
+        <stack name="solutions">
+          <p name="answer" style="collapsed"></p>
+          <p name="answer2" style="collapsed">
+            The answer is $ \lim\limits_{x \to 2} \frac{x^2 - 7x + 10}{x^2 - 4} = \frac{-3}{4} $.
+            <br />
+            <br />
+            Explanation:
+            <br />
+            $ = \lim\limits_{x \to 2} \frac{(x-2)(x-5)}{(x-2)(x+2)} $
+            <br />
+            $ = \lim\limits_{x \to 2} \frac{(x-5)}{(x+2)} $
+            <br />
+            $ = \frac{-3}{4} $
+          </p>
+        </stack>
+      </stack>
+
+      <!--Question 2 -->
+      <stack style="questionAnswer">
+        <p style="title qNum"></p>
+        <table name="table" grid="false">
+          <row>
+            <column>
+              <p name="equation" style="center">$ \lim\limits_{x \to 0} \frac{x^2}{\sqrt{x^2 + 12} - \sqrt{12}} = a\sqrt{b}$</p>
+            </column>
+          </row>
+        </table>
+        <p style="title">ANSWER</p>
+        <table name="answers" widths="20% 80%" grid="false">
+          <!-- Row 1 -->
+          <row>
+            <column>
+              <p>a = </p>
+            </column>
+            <column>
+              <textField name="input1" placeholder="insert answer here" />
+            </column>
+          </row>
+
+          <!-- Row 2 -->
+          <row>
+            <column>
+              <p>b = </p>
+            </column>
+            <column>
+              <textField name="input2" placeholder="insert answer here" />
+            </column>
+          </row>
+
+        </table>
+        <button content="Check Answer">
+          <onClick>
+            <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                
+                if a == 2 and b == 12 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+          </onClick>
+        </button>
+        <!-- Answer Stack -->
+        <stack name="solutions">
+          <p name="answer" style="collapsed"></p>
+          <p name="answer2" style="collapsed">
+            The answer is: $ \lim\limits_{x \to 0} \frac{x^2}{\sqrt{x^2 + 12} - \sqrt{12}} = 2\sqrt{12} $.
+            <br />
+            <br />
+            Explanation:
+            <br />
+            $ = \lim\limits_{x \to 0} \frac{x^2}{\sqrt{x^2 + 12} - \sqrt{12}} \times \frac{\sqrt{x^2 + 12} + \sqrt{12}}{\sqrt{x^2 + 12} + \sqrt{12}} $
+            <br />
+            $ = \lim\limits_{x \to 0} \frac{x^2(\sqrt{x^2 + 12} + \sqrt{12})}{(x^2 + 12) - 12} $
+            <br />
+            $ = \lim\limits_{x \to 0} \frac{x^2(\sqrt{x^2 + 12} + \sqrt{12})}{x^2} $
+            <br />
+            $ = \lim\limits_{x \to 0} \sqrt{x^2 + 12} + \sqrt{12} $
+            <br />
+            $ = 2\sqrt{12} $
+          </p>
+        </stack>
+      </stack>
+
+      <!--Question 3 -->
+      <stack style="questionAnswer">
+        <p style="title qNum"></p>
+        <table name="table" grid="false">
+          <row>
+            <column>
+              <p name="equation" style="center">$ \lim\limits_{x \to 0} \frac{3}{x} (\frac{1}{5 + x} - \frac{1}{5 - x}) = \frac{a}{b} $</p>
+            </column>
+          </row>
+        </table>
+        <p style="title">ANSWER</p>
+        <table name="answers" widths="20% 80%" grid="false">
+          <!-- Row 1 -->
+          <row>
+            <column>
+              <p>a = </p>
+            </column>
+            <column>
+              <textField name="input1" placeholder="insert answer here" />
+            </column>
+          </row>
+
+        </table>
+        <button content="Check Answer">
+          <onClick>
+            <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                b = tonumber(answers:Child(2):Child(2):Child(1).Text);
+                
+                if a == -6 and b == 25 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+          </onClick>
+        </button>
+        <!-- Answer Stack -->
+        <stack name="solutions">
+          <p name="answer" style="collapsed"></p>
+          <p name="answer2" style="collapsed">
+            The answer is: $ \lim\limits_{x \to 0} \frac{3}{x} (\frac{1}{5 + x} - \frac{1}{5 - x}) = \frac{-6}{25} $.
+            <br />
+            <br />
+            Explanation:
+            <br />
+            $ = \lim\limits_{x \to 0} \frac{3}{x} (\frac{(5 - x) - (5 + x)}{(5 + x)(5 - x)}) $
+            <br />
+            $ = \lim\limits_{x \to 0} \frac{3}{x} (\frac{-2x}{25 - x^2}) $
+            <br />
+            $ = \lim\limits_{x \to 0} \frac{-6}{25 - x^2} $
+            <br />
+            $ = \frac{-6}{25} $
+          </p>
+        </stack>
+      </stack>
+
+      <p>
+        <style>
+          <marginBottom>120</marginBottom>
+        </style>
+      </p>
+    </stack>
+  </sectionNoTitle>
+
+</document>

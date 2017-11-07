@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{3509FA56-3B69-4017-88D1-3C70D67D8588}") = "1.11", "1.11\1.11.qdexproj", "{5F3898BF-0AD6-4E7A-A34C-8C33F64613E7}"
+EndProject
+Project("{3509FA56-3B69-4017-88D1-3C70D67D8588}") = "2.4", "2.4\2.4.qdexproj", "{9865F3C8-E2E6-48F9-BA74-798A99E06F00}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5F3898BF-0AD6-4E7A-A34C-8C33F64613E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F3898BF-0AD6-4E7A-A34C-8C33F64613E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F3898BF-0AD6-4E7A-A34C-8C33F64613E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F3898BF-0AD6-4E7A-A34C-8C33F64613E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9865F3C8-E2E6-48F9-BA74-798A99E06F00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9865F3C8-E2E6-48F9-BA74-798A99E06F00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9865F3C8-E2E6-48F9-BA74-798A99E06F00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9865F3C8-E2E6-48F9-BA74-798A99E06F00}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

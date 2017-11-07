@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G67DBD3D9_894A_455B_AABB_42E76BAE107F">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>SPH4U - Dynamics - Friction</title>
+    <creator>admin</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/lassondeLogo.png" />
+  </metadata>
+
+
+  <include src="curriculumThemePack/curriculumStyles.xml" />
+  <include src="plotTools.xml" />
+
+  <!--Header & Footer-->
+  <style name="backgroundColor">
+    <background color="232 12 46" />
+  </style>
+  <style name="fontColor">
+    <foreground color="255 255 255" />
+  </style>
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="fontColor"></p>
+      <p style="fontColor rightText"></p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>20</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--Header & Footer END-->
+
+  <!--intro-->
+  <section>
+    <title>
+      <style>
+        <textAlignment>right</textAlignment>
+        <marginTop>100</marginTop>
+      </style>
+      <size scale="xlarge">SPH4U</size>
+    </title>
+    <p style="chapterTitle">Friction</p>
+
+    <p style="title">INTRODUCTION</p>
+    <p>
+      Ever seen a car parked on a hill? What makes this possible is a force called static friction. In this lesson, we will discuss what friction is, the math behind it, and how to apply it in practical examples.
+    </p>
+    <!--<button content="Go to qdex logo">
+      <onClick>
+        application.navigateTo(simulation)
+      </onClick>
+    </button>-->
+  </section>
+
+  <!--Summary-->
+  <sectionNoTitle>
+    <stack>
+      <style>
+        <widthPercentage>0.93</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <style>
+        <counter name="decBullet" format="decimal" />
+      </style>
+      <p style="titleMargin">
+        Summary
+      </p>
+      <stack style="questionAnswer">
+        <p style="title">Static and Kinetic Friction</p>
+        <p>
+          The force of <b>static friction </b> $ F_{s} $ is a force between two surfaces that prevents those surfaces from sliding or slipping across each other. This is the same force that allows you to accelerate forward when you run. Basically, when you're running, your planted foot can grip the ground and push backward, which causes the ground the push forward on your foot.
+          <br />
+          <br />
+          The force that keeps a car in the same place when it is parked on a hill is called static friction. However, if the car is parked on too steep a hill, then the car will probably start sliding. This is because even though the two surfaces are sliding past each other, there can be a frictional force called <b>kinetic frictional force.</b>
+          The force of <b>kinetic friction </b> $ F_{k} $ always opposes the sliding motion and reduces the speed at which surfaces slide across each other.
+        </p>
+      </stack>
+      <p>
+        <style>
+          <marginBottom>120</marginBottom>
+        </style>
+      </p>
+    </stack>
+  </sectionNoTitle>
+
+  <!--Math-->
+  <sectionNoTitle>
+    <stack>
+      <style>
+        <widthPercentage>0.93</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <style>
+        <counter name="decBullet" format="decimal" />
+      </style>
+      <p style="titleMargin">
+        Mathematics
+      </p>
+      <!--Formula for Kinetic Frictional Force-->
+      <stack style="questionAnswer">
+        <p style="title">Formula for Kinetic Frictional Force</p>
+        <p>
+          If you press your hands together and rub them together, the force of kinetic friction will be larger than if you just pressed your hands together without rubbing.
+          <br />
+          <br />
+          Secondly, the type of surface sliding across each other will change the kinetic frictional force. The roughness of two surfaces sliding across each toher is quantified by a coefficient called <b>coefficient of kinetic friction </b> $ \mu_{k} $. The harder it is to slide two surfaces across each other, the higher the coefficient $ \mu_{k} $. <br />
+        </p>
+        <p>Thus, we can form the following equation: </p>
+        <equation>$ F_{k} = \mu_{k} \times F_{n} $</equation>
+      </stack>
+
+      <!--Formula for Static Frictional Force-->
+      <stack style="questionAnswer">
+        <p style="title">Formula for Static Frictional Force</p>
+        <p>
+          Imagine that you are pushing a very heavy box across a concrete floor. You may push harder and harder on the box and not move it at all. This means that static friction responds to what you do. Static friction increases to be equal to and in the opposite direction of your push. Once you start pushing the box, however, it is easier to maintain that motion than it was to initially push the box.
+
+          <br />
+          <br />
+          This means that <b>kinetic frictional force (what is preventing the box from moving faster) is less than the maximum static frictional force (what is preventing the box from moving in the first place). </b>
+          <br />
+          <br />
+
+          If the box is made heavier (increasing the normal force $ F_{n} $) you would need to push even harder initially. Secondly, if the concrete floor is changed to an ice floor, (reducing the coefficient of static friction $ \mu_{s} $) you find it easier to get the crate to move.
+          <br />
+        </p>
+        <p>Thus, we can form the following equation: </p>
+        <equation>$ F_{s max} = \mu_{s} \times F_{n} $</equation>
+      </stack>
+
+      <p>
+        <style>
+          <marginBottom>120</marginBottom>
+        </style>
+      </p>
+    </stack>
+  </sectionNoTitle>
+
+  <!--Application Example-->
+  <sectionNoTitle>
+    <stack>
+      <style>
+        <widthPercentage>0.93</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <style>
+        <counter name="decBullet" format="decimal" />
+      </style>
+      <p style="titleMargin">
+        Application Example
+      </p>
+      <stack style="questionAnswer">
+        <p style="title">Example: Push the Fridge</p>
+        <p>
+          An initially stationary 110kg fridge sits on the floor. The coefficient of static friction between fridge and floor is 0.60. The coefficient of kinetic friction between fridge and floor is 0.40. The person pushing on the fridge tries to budge the fridge using the following forces: <br />
+        </p>
+        <p>
+          1) $ F_{push} = 400 N $ <br />
+          2) $ F_{push} = 600 N $ <br />
+          3) $ F_{push} = 800 N $ <br />
+          <br />
+        </p>
+
+        <!--Step by Step-->
+        <stack>
+          <p>For each individual case above, determine the magnitude of the frictional force that will exist between the bottom of the fridge and the floor. </p>
+          <!--Wrap 1-->
+          <stack style="collapsed" name="wrap1">
+            <p>
+              To start, we will solve for the maximum possible amount of <b>static</b> frictional force.
+            </p>
+
+            <p>
+              <br />
+              Start with the formula for the maximum static frictional force.
+            </p>
+            <equation>$ F_{smax} = \mu_{s} F_{n} $</equation>
+            <p>
+              <br />
+              $ F_{n} $ will be equal to the force of gravity in this case.
+              <br />
+            </p>
+            <equation>$ F_{s max} = (\mu_{s})(mg) $</equation>
+            <p>
+              <br />
+              Then, we plug in the coefficient of static friction, mass, and value of g.
+            </p>
+            <equation>$ F_{s max} = (0.60)(110 kg)(9.8 \frac{m}{s^{2}}) $</equation>
+            <p>This gives us $ F_{s max} = 647 N $</p>
+          </stack>
+
+          <!--Wrap 2-->
+          <stack style="collapsed" name="wrap2">
+            <p>
+              Now that we know that the maximum amount of static friction is $ 647 N $, we know that any force the person exerts below this force will get matched by the force of static friction. In other words: <br />
+            </p>
+
+            <p>
+              1) If the person pushes with $ F_{push} = 400 N $ there will be a matching static friction force of $ F_{s} = 600 N $ preventing the refrigerator from budging. There is no kinetic friction as the fridge will not be moving. <br />
+            </p>
+
+            <p>
+              2) If the person pushes with $ F_{push} = 600 N $ there will be a matching static friction force of $ F_{s} = 600 N $ preventing the fridge from budging. Again, there is no kinetic friction as the fridge will not be moving. <br />
+            </p>
+
+            <p>3) If the person pushes with $ F_{push} = 800 $, the force is above the maximum force of static friction, so the fridge will start to slide. Now that the fridge is sliding there will be a kinetic frictional force exerted on it. We can find the force of kinetic friction in the next step. </p>
+          </stack>
+
+          <!--Wrap 3-->
+          <stack style="collapsed" name="wrap3">
+            <p>
+              Start with the formula of kinetic frictional force.
+            </p>
+            <equation>
+              $ F_{k} = \mu_{k}F_{n} $
+            </equation>
+
+            <p>
+              <br />
+              Then, we plug in the coefficient of kinetic friction, mass, and value of g.
+            </p>
+            <equation>
+              $ F_{k} = (0.40)(110 kg)(9.8 \frac{m}{s^{2}})$
+            </equation>
+            <equation>
+              $ F_{k} = 431 N $
+            </equation>
+            <p>
+              <br /> Therefore, if a person pushes with $ F_{push} = 800 $ there will be a kinetic frictional force of $ F_{k} = 431 N $ exerted on the fridge. There will be no static frictional force since the fridge is sliding.
+            </p>
+          </stack>
+          <script>
+            local x = 0;
+
+          </script>
+
+          <button style="large" name="button1" content="Step 1">
+            <style>
+              <widthPercentage>0.6</widthPercentage>
+              <marginTop>30</marginTop>
+            </style>
+            <onClick>
+              if x == 0 then
+              wrap1.Style.Visibility = "visible";
+              button1.Text = "Step 2"
+              x = x+1
+              return x;
+              end
+
+              if x == 1 then
+              wrap2.Style.Visibility = "visible";
+              button1.Text = "Final Step"
+              x = x+1
+              return x;
+              end
+
+
+              if x == 2 then
+              wrap3.Style.Visibility = "visible";
+              button1.Text = "Hide Answer"
+              x = x+1
+              return x;
+              end
+
+              if x == 3 then
+              wrap1.Style.Visibility = "collapsed";
+              wrap2.Style.Visibility = "collapsed";
+              wrap3.Style.Visibility = "collapsed";
+              button1.Text = "Step 1"
+              x = 0
+              return x;
+              end
+
+
+            </onClick>
+          </button>
+        </stack>
+      </stack>
+    </stack>
+    <p>
+      <style>
+        <marginBottom>120</marginBottom>
+      </style>
+    </p>
+  </sectionNoTitle>
+
+  <!--Simulation Example-->
+  <sectionNoTitle name="simulation">
+    <stack>
+      <style>
+        <widthPercentage>0.93</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <style>
+        <counter name="decBullet" format="decimal" />
+      </style>
+      <p style="titleMargin">
+        Friction Simulation
+      </p>
+      <!--Simulation-->
+      <stack name="simulationStack" style="questionAnswer">
+        <stack name="plotStack" orientation="horizontal">
+          <xyPlot name="boxPlot">
+            <style name="blackLine">
+              <foreground color="black" />
+            </style>
+            <axis name="YAxis" dim="y" auto="fixed" min="0" max="120" major="true"></axis>
+            <axis dim="x" auto="lockAspectRatio" min="0" max="120" major="true"></axis>
+            <series name="box" draw="radialFill">
+              <data>
+                -20 100; -10 110; 0 100; -10 90
+              </data>
+            </series>
+
+            <series name="floor" manual="true" draw="radialFill">
+              <data>-20 0; -20 100; 80 0; -20 0</data>
+            </series>
+          </xyPlot>
+          <script>
+            <![CDATA[
+              xProper = 0;
+              yProper = 0;
+              z = 0;
+              curTime = 0;
+              speed = boxPlot.YAxis.Max/100;
+              friction = 0;
+              counter = 0;
+              
+              squareSeries = plotStack.boxPlot.box;
+              floorSeries = plotStack.boxPlot.floor;
+              
+              ]]>
+          </script>
+        </stack>
+        <!--slider for push force-->
+        <table name="pushSliderTable" grid="false" widths="20% 20% 60%">
+          <row>
+            <column>
+              <p>$ F_{push} = $</p>
+            </column>
+            <column>
+              <p name="speedLabel"></p>
+            </column>
+            <column>
+              <slider name="speedSlider" min="100" max="500" value="100">
+                <onValueChanged>
+                  <![CDATA[
+              
+                  function round(value,multiple)
+                  result = 0;
+                
+                    if value % multiple ~= 0 then
+                       result = multiple;
+                       division = math.floor((value/multiple)+1);
+                       result = division*multiple;
+                       return result;
+                    else 
+                       return value;
+                    end
+                  end
+                  pushForce = round(value,1)
+                  speed = (round(value,1)/1000);
+                  pushSliderTable:Child(1):Child(2):Child(1).Text = ""..pushForce.." N"
+                ]]>
+                </onValueChanged>
+              </slider>
+            </column>
+          </row>
+        </table>
+
+        <!--slider for static friction coefficient -->
+        <table name="frictionSliderTable" grid="false" widths="20% 20% 60%">
+          <row>
+            <column>
+              <p>$ \mu_{s} = $</p>
+            </column>
+            <column>
+              <p name="frictionLabel">0.5</p>
+            </column>
+            <column>
+              <slider name="frictionSlider" min="0" max="1" value="0.5">
+                <onValueChanged>
+                  <![CDATA[
+              
+                  function round(value,multiple)
+                    result = 0;
+                
+                    if value % multiple ~= 0 then
+                      result = multiple;
+                      division = math.floor((value/multiple)+1);
+                      result = division*multiple;
+                      return result;
+                    else 
+                      return value;
+                    end
+                  end
+                  staticForce = round(value,0.1);
+                  frictionSliderTable:Child(1):Child(2):Child(1).Text = ""..staticForce
+                  
+                ]]>
+                </onValueChanged>
+              </slider>
+            </column>
+          </row>
+        </table>
+        <!--slider for kinetic friction coefficient -->
+        <table name="kineticFrictionSliderTable" grid="false" widths="20% 20% 60%">
+          <row>
+            <column>
+              <p>$ \mu_{k} = $</p>
+            </column>
+            <column>
+              <p name="frictionLabel">0.4</p>
+            </column>
+            <column>
+              <slider name="frictionSlider" min="0" max="1" value="0.4">
+                <onValueChanged>
+                  <![CDATA[
+              
+                  function round(value,multiple)
+                    result = 0;
+                
+                    if value % multiple ~= 0 then
+                      result = multiple;
+                      division = math.floor((value/multiple)+1);
+                      result = division*multiple;
+                      return result;
+                    else 
+                      return value;
+                    end
+                  end
+                  kineticForce = round(value,0.1);
+                  kineticFrictionSliderTable:Child(1):Child(2):Child(1).Text = ""..kineticForce
+                  
+                ]]>
+                </onValueChanged>
+              </slider>
+            </column>
+          </row>
+        </table>
+
+        <p name="acc"></p>
+        <button name="simButton" content="Push">
+          <onClick>
+            <![CDATA[
+            if simButton.Text == "Push" then 
+              coefficientStaticFriction = frictionSliderTable:Child(1):Child(3):Child(1).Value;
+              coefficientKineticFriction = kineticFrictionSliderTable:Child(1):Child(3):Child(1).Value;
+              appliedForce = pushSliderTable:Child(1):Child(3):Child(1).Value;
+              mass = 10; 
+              g = 9.8;
+              
+              kineticFriction = coefficientKineticFriction * (mass*g)
+              staticFriction = coefficientStaticFriction * (mass*g)
+              
+              if appliedForce > kineticFriction then
+                netForce = appliedForce - kineticFriction;
+              else 
+                netForce = 0;
+              end
+              
+              acceleration = netForce/mass;
+              acc.Text = "acceleration "..acceleration.." friction = "..kineticFriction
+              
+              simButton.Text = "Restart";
+              
+              if appliedForce > staticFriction then
+                sim:Start()
+              else 
+              
+              end
+            else 
+              simButton.Text = "Push";
+              sim:Stop();
+              xProper = 0;
+              yProper = 0;
+              squareSeries.Transform = matrixf.translation(xProper,yProper,0);
+              coefficientStaticFriction = 0;
+              coefficientKineticFriction = 0;
+              appliedForce = 0;
+              kineticFriction = 0;
+              staticFriction = 0;
+              acceleration = 0;
+              netForce = 0;
+            end
+            ]]>
+          </onClick>
+        </button>
+        <simulation name="sim" duration="10" period="0.01">
+          <onUpdate>
+            <![CDATA[
+            curTime = time;
+            counter = counter + 0.01;
+            squareSeries.Transform = matrixf.translation(xProper,yProper,0)
+            if xProper <= 100 then
+              xProper = xProper + (acceleration*counter);
+              yProper = yProper - (acceleration*counter);
+            else
+              sim:Stop()
+              acceleration = 0;
+              counter = 0;
+              squareSeries.Transform = matrixf.translation(xProper,yProper,0);
+              coefficientStaticFriction = 0;
+              coefficientKineticFriction = 0;
+              appliedForce = 0;
+              kineticFriction = 0;
+              staticFriction = 0;
+              acceleration = 0;
+              netForce = 0;
+            end
+            ]]>
+          </onUpdate>
+        </simulation>
+      </stack>
+    </stack>
+    <p>
+      <style>
+        <marginBottom>120</marginBottom>
+      </style>
+    </p>
+  </sectionNoTitle>
+
+</document>

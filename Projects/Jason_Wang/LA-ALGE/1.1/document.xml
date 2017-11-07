@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G927E3328_9D82_4B52_A135_438A065BC347">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>LA-ALGE-1.1 Intro to Matrices</title>
+    <creator>jason_wang</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/lassondeLogo.png" />
+  </metadata>
+
+  <include src="resources/curriculumStylesLassonde.xml" />
+  <include src="resources/Utilities.xml" />
+
+  <!--                                      Header & Footer START                                         -->
+  <header style="themeColour">
+    <stack style="center" orientation="horizontal">
+      <p></p>
+    </stack>
+  </header>
+  <footer style="themeColour">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="themeColourTitle">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--                                      Header & Footer END                                         -->
+
+
+
+  <!-- Section 1 -->
+  <!-- This is the standard way title pages are created. A great website to get copyright free images .. www.pexels.com
+  *** The style: "pageLayout" is defined in curriculumStylesLassonde.xml. It simply sets the content to the center and adjusts the width to 80% ***-->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">1.1 Intro to Matrices</title>
+    <p style="sectionHeading">Introduction</p>
+    <image src="resources/cubic.jpg" />
+    <stack orientation="vertical" style="contentBG">
+      <p style="justifiedText">
+        In mathematics, a matrix is a rectangular array of numbers, symbols, or expressions, arranged in rows and columns. In this Module, we are going to learn the dimensions of matrices and how to define the elements of matrices.
+      </p>
+    </stack>
+  </section>
+
+  <!--section 2 Interactive Matrix-->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Interactive Matrix</p>
+    <stack name="matrixStack" style="contentBG">
+      <script>
+        local row = 3;
+        local col = 3;
+      </script>
+      <p style="justifiedText">Play with the controllers below, and see the change of the matrix.</p>
+      <script>
+        <![CDATA[
+        local function updateMatrix()
+          matrixString = "";
+          for i=0, row-1 do
+            for j=1, col do
+              local num = i*col+j;
+              matrixString = matrixString .. string.format("a<sub>%d,%d</sub>",i+1,j);
+              if j ~= col then matrixString = matrixString .. "<![CDATA[        ]]"..">"; end
+            end
+            if i ~= row-1 then matrixString = matrixString .. "<![CDATA[\n\n]]"..">"; else matrixString = matrixString; end
+          end
+          matrix.FormattedText = matrixString;
+          table:Child(2):Child(2):Child(1).Text = string.format("%d x %d", row, col);
+        end
+        updateMatrix();
+        ]]>
+      </script>
+      <table grid="false" widths="33% 34% 33%" name="table">
+        <row>
+          <column>
+            <p style="centeredText">
+              <b>Row</b>
+            </p>
+          </column>
+          <column>
+            <p style="centeredText">
+              <b>Dimension</b>
+            </p>
+          </column>
+          <column>
+            <p style="centeredText">
+              <b>Column</b>
+            </p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <script>
+              -- local current = 3
+              local upperLimit = 5
+              local lowerLimit = 1
+            </script>
+            <button name="upControl" content="↑">
+              <onClick>
+                row = row + 1
+                if row == upperLimit then
+                upControl.Style.Visibility = "hidden"
+                elseif row == lowerLimit + 1 then
+                downControl.Style.Visibility = "visible"
+                end
+                upDownLabelLimit.Text = string.format("%d", row)
+                updateMatrix();
+              </onClick>
+            </button>
+            <p name="upDownLabelLimit" style="centeredText">3</p>
+            <button name="downControl" content="↓">
+              <onClick>
+                row = row - 1
+                if row == lowerLimit then
+                downControl.Style.Visibility = "hidden"
+                elseif row == upperLimit - 1 then
+                upControl.Style.Visibility = "visible"
+                end
+                upDownLabelLimit.Text = string.format("%d", row)
+                updateMatrix()
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <p style="centeredText">3 x 3</p>
+          </column>
+          <column>
+            <script>
+              -- local current = 3
+              local upperLimit = 5
+              local lowerLimit = 1
+            </script>
+            <button name="upControl" content="↑">
+              <onClick>
+                col = col + 1
+                if col == upperLimit then
+                upControl.Style.Visibility = "hidden"
+                elseif col == lowerLimit + 1 then
+                downControl.Style.Visibility = "visible"
+                end
+                upDownLabelLimit.Text = string.format("%d", col)
+                updateMatrix()
+              </onClick>
+            </button>
+            <p name="upDownLabelLimit" style="centeredText">3</p>
+            <button name="downControl" content="↓">
+              <onClick>
+                col = col - 1
+                if col == lowerLimit then
+                downControl.Style.Visibility = "hidden"
+                elseif col == upperLimit - 1 then
+                upControl.Style.Visibility = "visible"
+                end
+                upDownLabelLimit.Text = string.format("%d", col)
+                updateMatrix()
+              </onClick>
+            </button>
+          </column>
+        </row>
+      </table>
+
+      <p name="matrix" style="centeredText"></p>
+
+    </stack>
+    
+  </sectionNoTitle>
+  
+
+  <!--section 3 Matrix Dimension-->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Matrix Dimensions</p>
+    <stack style="contentBG">
+      <p style="subSectionHeading">Definition</p>
+      <p style="justifiedText">
+        <b>A matrix</b> is a rectangular arrangement of numbers into rows and columns. The dimensions of a matrix tells its size: the number of rows and columns of the matrix follows the order and format like below:
+      </p>
+      <table grid="false" widths="45% 10% 45%">
+        <row>
+          <column>
+            <p style="quanserRedF alignRight">Rows</p>
+          </column>
+          <column>
+            <p style="boldText centeredText">x</p>
+          </column>
+          <column>
+            <p style="dodgerBlueF alignLeft">Columns</p>
+          </column>
+        </row>
+      </table>
+      <p>
+        For example, the following matrix has <b>2</b> rows and <b>3</b> columns, and its dimension is $2\times 3$.
+      </p>
+      <p style="centeredText"><![CDATA[$M = \begin{bmatrix}2&3&5 \\[6pt] 3&2&9 \end{bmatrix}$]]></p>
+    </stack>
+
+    <p style="sectionHeading">Practices</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Practice 1</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>What are the dimensions of Matrix D:</p>
+            <p>
+              <![CDATA[$D = \begin{bmatrix}-5&3&5\\[6pt]8&0&2\\[6pt]12&42&2\\[6pt]-7&2&1\end{bmatrix}$]]>
+            </p>
+          </column>
+        </row>
+      </table>
+      <table name="table" grid="false" widths="40% 5% 40%">
+        <row>
+          <column>
+            <textField name="row" placeholder="Enter number of Rows" style="centeredText"></textField>
+          </column>
+          <column>
+            <p>x</p>
+          </column>
+          <column>
+            <textField name="col" placeholder="Enter number of Columns" style="centeredText"></textField>
+          </column>
+        </row>
+      </table>
+      <p name="warning" style="invisible">Try to answer the question first.</p>
+      <p name="answer" style="invisible">Answer: 4 x 3</p>
+      <button name="checkAnswer" content="Check Answer">
+        <onClick>
+          if table:Child(1):Child(1).row.Text == "" or table:Child(1):Child(3).col.Text == "" then
+          warning.Style.Visibility = "visible";
+          else
+          warning.Style.Visibility = "collapsed";
+          answer.Style.Visibility = "visible";
+          end
+        </onClick>
+      </button>
+
+    </stack>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Practice 2</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>What are the dimensions of Matrix E:</p>
+            <p>
+              <![CDATA[$E = \begin{bmatrix}-13\\[6pt]22\\[6pt]16\\[6pt]-7\end{bmatrix}$]]>
+            </p>
+          </column>
+        </row>
+      </table>
+      <table name="table" grid="false" widths="40% 5% 40%">
+        <row>
+          <column>
+            <textField name="row" placeholder="Enter number of Rows" style="centeredText"></textField>
+          </column>
+          <column>
+            <p>x</p>
+          </column>
+          <column>
+            <textField name="col" placeholder="Enter number of Columns" style="centeredText"></textField>
+          </column>
+        </row>
+      </table>
+      <p name="warning" style="invisible">Try to answer the question first.</p>
+      <p name="answer" style="invisible">Answer: 4 x 1</p>
+      <button name="checkAnswer" content="Check Answer">
+        <onClick>
+          if table:Child(1):Child(1).row.Text == "" or table:Child(1):Child(3).col.Text == "" then
+          warning.Style.Visibility = "visible";
+          else
+          warning.Style.Visibility = "collapsed";
+          answer.Style.Visibility = "visible";
+          end
+        </onClick>
+      </button>
+    </stack>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Practice 3</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>What are the dimensions of Matrix E:</p>
+            <p>
+              <![CDATA[$E = \begin{bmatrix}-1&0&2&6&8\\[6pt]2&8&9&2&6 \end{bmatrix}$]]>
+            </p>
+          </column>
+        </row>
+      </table>
+      <table name="table" grid="false" widths="40% 5% 40%">
+        <row>
+          <column>
+            <textField name="row" placeholder="Enter number of Rows" style="centeredText"></textField>
+          </column>
+          <column>
+            <p>x</p>
+          </column>
+          <column>
+            <textField name="col" placeholder="Enter number of Columns" style="centeredText"></textField>
+          </column>
+        </row>
+      </table>
+      <p name="warning" style="invisible">Try to answer the question first.</p>
+      <p name="answer" style="invisible">Answer: 2 x 5</p>
+      <button name="checkAnswer" content="Check Answer">
+        <onClick>
+          if table:Child(1):Child(1).row.Text == "" or table:Child(1):Child(3).col.Text == "" then
+          warning.Style.Visibility = "visible";
+          else
+          warning.Style.Visibility = "collapsed";
+          answer.Style.Visibility = "visible";
+          end
+        </onClick>
+      </button>
+    </stack>   
+  
+  </sectionNoTitle>
+  
+
+  <!--section 4 Matrix element-->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Matrix Elements</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Definition</p>
+      <p style="justified">
+        A <b>matrix element</b> is simply a matrix entry. Each element in a matrix is identified by naming the row and column in which it appears.
+      </p>
+      <p>For example, consider matrix A:</p>
+      <p style="centeredText"><![CDATA[$A=\begin{bmatrix}12&35&28\\[6pt]11&81&70\\[6pt]-18&15&33\end{bmatrix}$]]></p>
+      <p>The element $a_{2,1}$ represent the entry in the second row and the first column, which in this case $a_{2,1} = 11$</p>
+      <p>In general, the element in row <b>i</b> and column <b>j</b> of matrix <b>A</b> is denoted as $a_{i,j}$.</p>
+    </stack>
+
+    <p style="sectionHeading">Practices</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Practice 1</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>
+              <![CDATA[$B = \begin{bmatrix}-13&64&88&21\\[6pt]22&21&23&54\\[6pt]16&-23&0&65\\[6pt]-7&2&84&91\end{bmatrix} \\[20pt] b_{2,3}=\underline{\hspace{1.0cm}}?$]]>
+            </p>
+          </column>
+        </row>
+      </table>
+      <textField name="userAnswer" placeholder="Enter your answer here"></textField>
+      <p name="warning" style="invisible">Try to answer the question first.</p>
+      <p name="answer" style="invisible">Answer: 23</p>
+      <button name="checkAnswer" content="Check Answer">
+        <onClick>
+          if userAnswer.Text == "" then
+          warning.Style.Visibility = "visible";
+          else
+          warning.Style.Visibility = "collapsed";
+          answer.Style.Visibility = "visible";
+          end
+        </onClick>
+      </button>
+    </stack>
+
+
+    <stack style="mcStackLayout">
+      <script>
+        local answer = 3
+        local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=answer})
+      </script>
+      <p style="subSectionHeading">Question 2</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources/question.png" inspect="false" />
+          </column>
+          <column>
+            <p style="justifiedText">Matrix C is a $2\times 3$ matrix with $c_{1,2}=6$. Which could be matrix C?</p>
+          </column>
+        </row>
+      </table>
+      <table name="choicesTable" grid="false" widths="50% 50%">
+        <row>
+          <column>
+            <p style="mcLayout"><![CDATA[$\begin{bmatrix}1&3\\[6pt]6&-3\\[6pt]5&-4\end{bmatrix}$]]></p>
+          </column>
+          <column>
+            <p style="mcLayout"><![CDATA[$\begin{bmatrix}2&6\\[6pt]7&-3\\[6pt]-3&8\end{bmatrix}$]]></p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="A" style="btnUnselected">
+              <onClick>
+                mcController:select(1)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="B" style="btnUnselected">
+              <onClick>
+                mcController:select(2)
+              </onClick>
+            </button>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p style="mcLayout"><![CDATA[$\begin{bmatrix}2&6&5\\[6pt]7&-5&1\end{bmatrix}$]]></p>
+          </column>
+          <column>
+            <p style="mcLayout"><![CDATA[$\begin{bmatrix}2&-10&8\\[6pt]6&-3&2\end{bmatrix}$]]></p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="C" style="btnUnselected">
+              <onClick>
+                mcController:select(3)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="D" style="btnUnselected">
+              <onClick>
+                mcController:select(4)
+              </onClick>
+            </button>
+          </column>
+        </row>
+      </table>
+      <button name="checkBtn" content="Check Answer">
+        <onClick>
+          mcController:checkAnswer()
+        </onClick>
+      </button>
+    </stack>
+
+  </sectionNoTitle>
+
+</document>

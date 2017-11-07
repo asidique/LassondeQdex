@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="GBC9F7985_644A_4C09_A267_156202A6BBB2">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>LA-PHYS-1.7 Frames of Reference</title>
+    <creator>AanandB</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/lassondeLogo.png" />
+  </metadata>
+
+  <include src="curriculumThemePack/curriculumStylesLassonde.xml" />
+  <include src="resources/Utilities.xml" />
+  <include src="plotTools.xml" />
+
+  <!--Header & Footer-->
+  <header style="themeColour">
+    <stack style="center" orientation="horizontal">
+      <p></p>
+    </stack>
+  </header>
+  <footer style="themeColour">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="themeColourTitle">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--Header & Footer END-->
+
+  <!--Styles-->
+
+  <style name="groundButtonColor">
+    <foreground color="white" />
+    <background color="gray" />
+  </style>
+
+  <style name="trainButtonColor">
+    <foreground color="white" />
+    <background color="red" />
+  </style>
+
+  <style name="carButtonColor">
+    <foreground color="white" />
+    <background color="blue" />
+  </style>
+
+  <style name="personButtonColor">
+    <foreground color="white" />
+    <background color="green" />
+  </style>
+
+  <style name="button_disabled">
+    <foreground color="red" />
+    <background color="white" />
+  </style>
+  <style name="button_enabled">
+    <foreground color="white" />
+    <background color="red" />
+  </style>
+  <style name="setButtons">
+    <foreground color="white" />
+    <background color="gainsboro" />
+  </style>
+
+  <!--Intro-->
+  <section style="pageLayout">
+    <title style="chapterTitle">1.6 Frames of Reference</title>
+    <p style="sectionHeading">Introduction</p>
+    <image src="resources/camera.jpg" />
+    <stack orientation="vertical" style="contentBG">
+      <p style="justifiedText">
+        Different observers view an activity in different ways. This is why in a physics problems, certain velocities are dependant on specific frames of reference. In this lesson the different frames of reference and go over some examples.
+      </p>
+    </stack>
+  </section>
+
+  <!--Summary-->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Summary</p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="subSectionHeading">The Concept</p>
+      <p>Imagine you threw and caught a ball while you were on a train moving at a constant velocity past a station. To you, the ball appears to simply travel vertically up and then down under the influence of gravity. However, to an observer stood on the station platform the ball would appear to travel in a parabola, with a constant horizontal component of velocity equal to the velocity of the train. </p>
+      <image src="resources\observer_train.png" style="medium" />
+      <p>Different observers see different things because the two observers are in different frames of reference. A frame of reference is a set of coordinates that can be used to determine positions and velocities of objects in that frame. </p>
+      <p>
+        <br />
+        The train frame of reference example is inertial (frames of reference are not accelerating relative to each other). Therefore, the laws of physics are same in all inertial frames.
+      </p>
+    </stack>
+  </sectionNoTitle>
+
+  <!--1D and 2D-->
+  <sectionNoTitle style="pageLayout">
+    <script>
+      local tabsManager = TabsManager:new({tStack=tabs, cStack=contents, selectedTabIndex=1, numOfTabs=2})
+      tabsManager:initStyle()
+    </script>
+    <p style="sectionHeading">Frames of Reference in 1D and 2D</p>
+    <!--This stack only contains the tabs themselves and not the content. The content is held in a stack directly underneat the tabs.-->
+    <stack name="tabs" orientation="horizontal" style="contentBG2">
+      <stack style="contentBG">
+        <button content="1 Dimension" style="tab">
+          <onClick>
+            tabsManager:changeTab(1)
+          </onClick>
+        </button>
+      </stack>
+      <stack style="contentBG">
+        <button content="2 Dimensions" style="tab">
+          <onClick>
+            tabsManager:changeTab(2)
+          </onClick>
+        </button>
+      </stack>
+
+    </stack>
+    <stack name="contents" orientation="vertical" style="contentBG">
+      <stack orientation="vertical">
+        <!--ADD YOUR CONTENT HERE-->
+        <p style="subSectionHeading">Frames of Reference in 1D</p>
+
+        <p>Consider two particles, A and B. Let let the lab be where all measurements are made and it is stationary. In the lab frame denoted by S, A moves left-to-right with speed $ u_{A} = 5 m/s $ and B moves left-to-right with speed $  u_{B} = 3 m/s $. Illustrated below. </p>
+
+        <image src="resources\1D.png" style="medium" />
+
+        <p>If you are the particle, in your view you are not moving. Therefore, in the frame of A (denoted by $S'$), A has a speed of $ 0 m/s $. The speed of frame A relative to the laboratory is $ u_{A} $. </p>
+
+        <p>
+          <br />
+          We can transform from one frame to another by adding or subtracting their relative velocity. To transform from laboratory frame to frame A, we have to subtract $ u_{A} $ from velocities of particles. Speed of A relative to A then becomes 5 - 5 = 0. Speed of B relative to A can be calculated as $ u'_{B} = u_{B} - u_{A} = 3 - 5 = -2 m/s. $ This means that in the frame of A, B moves left with speed 2 m/s. Illustrated below.
+          <br />
+        </p>
+
+        <image src="resources\1D2.png" style="medium" />
+
+        <p>We can also use B's frame of reference (denoted by $S''$). The speed of particle A relative to particle B would be $ u''_{A} = u_{A} - u_{B} = 5 - 3 = 2$. This means from particle B's frame of reference, particle A is moving 2 meters per second to the right. </p>
+        <image src="resources\1D3.png" style="medium" />
+
+        <p>
+          <b>Notice that the relative speed between the two particles is the same regardless of frame of reference.</b>
+        </p>
+      </stack>
+      <stack orientation="vertical">
+        <!--ADD YOUR CONTENT HERE-->
+        <p style="subSectionHeading">Frames of Reference in 2D</p>
+        <p>Objects do not move in one dimension along the same line. This is demonstrated by two objects, C and D moving in different directions in a reference frame $ S $ as shown below: </p>
+
+        <image src="resources\2D.png" style="medium" />
+
+        <p>To move into the C reference frame (S') we must subtract $ u_{C} $ from all velocities in frame S. This gives us $ u'_{C} = u_{C} - u_{C} = 0 $ and $ u'_{D} = u_{D} - u_{C} $. In this case, it is a simple vector subtraction as shown below: </p>
+
+        <image src="resources\2D1.png" style="medium" />
+
+        <p>For example, if object C is moving at 5 m/s at an angle $ 45^{\circ} $ to the x axis in the S frame, and object D is moving at 4 m/s at an angle $ 30^{\circ} $ to the x axis in the S frame, then the relative velocity of D in the C frame of reference is $ u'_{D} = 1.54 m/s $ at an angle $ -87^{\circ} $ to the x axis (using sine rule). </p>
+      </stack>
+    </stack>
+  </sectionNoTitle>
+
+  <!--Simulation-->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Simulation</p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="subSectionHeading">Train, Car, Person Frame of Reference Example</p>
+      <p>In this example, assume the train is moving at 100 k/h, car is moving at 60 k/h, and the person is moving at 5 k/h. Press a button (frame of reference) to see the speed of each object relative to a specific frame of reference. </p>
+      <stack name="plotStack" orientation="horizontal">
+        <xyPlot name="boxPlot" pan="disabled" tap="disabled" zoom="disabled">
+          <style name="blackLine">
+            <foreground color="black" />
+          </style>
+          <style name="trainColor">
+            <foreground color="red" />
+            <background color="red" />
+          </style>
+
+          <style name="carColor">
+            <foreground color="blue" />
+            <background color="blue" />
+          </style>
+
+          <style name="personColor">
+            <foreground color="green" />
+            <background color="green" />
+          </style>
+          <axis name="YAxis" dim="y" auto="fixed" min="0" max="110" major="false"></axis>
+          <axis dim="x" auto="lockAspectRatio" min="0" max="110" major="false"></axis>
+          <series name="train" draw="radialFill" style="trainColor">
+            <data>
+              -20 100; -10 100; -10 90; -20 90
+            </data>
+          </series>
+          <series name="car" draw="radialFill" style="carColor">
+            <data>
+              -20 60; -10 60; -10 50; -20 50
+            </data>
+          </series>
+
+          <series name="person" draw="radialFill" style="personColor">
+            <data>
+              -20 20; -10 20; -10 10; -20 10
+            </data>
+          </series>
+        </xyPlot>
+        <script>
+          <![CDATA[
+              xTrain = 0;
+              yTrain = 0;
+              
+              xCar = 0;
+              yCar = 0;
+              
+              xPerson = 0;
+              yPerson = 0;
+                            
+              trainSpeed = 100/60;
+              carSpeed = 60/60;
+              personSpeed = 5/60;
+              
+              relTrainSpeed = 0;
+              relCarSpeed = 0;
+              relPersonSpeed = 0;
+              
+              -- 0 is ground, 1 is train, 2 is car, 3 is person
+              typePicked = 0;
+              
+              trainSeries = plotStack.boxPlot.train;
+              carSeries = plotStack.boxPlot.car;
+              personSeries = plotStack.boxPlot.person;
+              
+        ]]>
+        </script>
+      </stack>
+      <p name="stuff" style="center">
+        <b>Pick a Frame of Reference, then click "Start Simulation"</b>
+      </p>
+
+      <script>
+        <![CDATA[
+          local priorSelection = -1;
+
+          function chooseButton(i)
+          if priorSelection > 0 then
+          framesStack:Child(priorSelection).Style.BackgroundColor = color.gainsboro;
+          end
+          
+          if i == 1 then
+            framesStack:Child(i).Style.BackgroundColor = "gray";
+            priorSelection = i;
+          elseif i == 2 then
+            framesStack:Child(i).Style.BackgroundColor = "red";
+            priorSelection = i;
+          elseif i == 3 then
+            framesStack:Child(i).Style.BackgroundColor = "blue";
+            priorSelection = i;
+          elseif i == 4 then
+            framesStack:Child(i).Style.BackgroundColor = "green";
+            priorSelection = i;
+          end
+          ]]>
+        end
+      </script>
+      <stack orientation="horizontal" name="framesStack">
+        <button name="groundButton" content="Ground" style="setButtons">
+          <onClick>
+            <![CDATA[
+              chooseButton(1)
+              typePicked = 0;
+              ]]>
+          </onClick>
+        </button>
+        <button name="trainButton" content="Train" style="setButtons">
+          <onClick>
+            <![CDATA[
+              chooseButton(2)
+              typePicked = 1;
+              ]]>
+          </onClick>
+        </button>
+        <button name="carButton" content="Car" style="setButtons">
+          <onClick>
+            <![CDATA[
+              chooseButton(3)
+              typePicked = 2;
+              ]]>
+          </onClick>
+        </button>
+        <button name="personButton" content="Person" style="setButtons">
+          <onClick>
+            <![CDATA[
+              chooseButton(4)
+              typePicked = 3;
+              ]]>
+          </onClick>
+        </button>
+      </stack>
+
+      <style name="button_style">
+        <foreground color="white" />
+        <background color="red" />
+      </style>
+      <button name="simButton" content="Start Simulation" style="button_style">
+        <onClick>
+          <![CDATA[
+            if simButton.Text == "Start Simulation" then 
+              
+              if typePicked == 0 then
+                relTrainSpeed = trainSpeed;
+                relCarSpeed = carSpeed;
+                relPersonSpeed = personSpeed;
+              elseif typePicked == 1 then
+                relTrainSpeed = trainSpeed - trainSpeed;
+                relCarSpeed = carSpeed - trainSpeed;
+                relPersonSpeed = personSpeed - trainSpeed;
+              elseif typePicked == 2 then
+                relTrainSpeed = trainSpeed - carSpeed;
+                relCarSpeed = carSpeed - carSpeed;
+                relPersonSpeed = personSpeed - carSpeed;
+              elseif typePicked == 3 then
+                relTrainSpeed = trainSpeed - personSpeed;
+                relCarSpeed = carSpeed - personSpeed;
+                relPersonSpeed = personSpeed - personSpeed;
+              end
+              
+              simButton.Text = "Restart";
+             
+              sim:Start()
+            elseif simButton.Text == "Restart" then
+              xTrain = 0;
+              yTrain = 0;
+              
+              xCar = 0;
+              yCar = 0;
+              
+              xPerson = 0;
+              yPerson = 0;
+              trainSeries.Transform = matrixf.translation(xTrain,yTrain,0);
+              carSeries.Transform = matrixf.translation(xCar,yCar,0);
+              personSeries.Transform = matrixf.translation(xPerson,yPerson,0);
+              sim:Stop();
+              simButton.Text = "Start Simulation";
+              
+              
+
+            end
+            ]]>
+        </onClick>
+      </button>
+
+      <simulation name="sim" duration="5" period="0.01">
+        <onUpdate>
+          <![CDATA[
+            trainSeries.Transform = matrixf.translation(xTrain,yTrain,0);
+            carSeries.Transform = matrixf.translation(xCar,yCar,0);
+            personSeries.Transform = matrixf.translation(xPerson,yPerson,0);
+            if (xTrain <= 100) or (xCar <= 100) or (xPerson <= 100) then
+              xTrain = xTrain + (relTrainSpeed);
+              xCar = xCar + (relCarSpeed);
+              xPerson = xPerson + (relPersonSpeed);
+            else
+              sim:Stop()
+              relTrainSpeed = 0;
+              relCarSpeed = 0;
+              relPersonSpeed = 0;
+              trainSeries.Transform = matrixf.translation(xTrain,yTrain,0);
+              carSeries.Transform = matrixf.translation(xCar,yCar,0);
+              personSeries.Transform = matrixf.translation(xPerson,yPerson,0);
+            end
+            ]]>
+        </onUpdate>
+      </simulation>
+    </stack>
+  </sectionNoTitle>
+
+  <!--Inertial and Non-->
+  <sectionNoTitle style="pageLayout">
+    <script>
+      local tabsManager = TabsManager:new({tStack=tabs, cStack=contents, selectedTabIndex=1, numOfTabs=2})
+      tabsManager:initStyle()
+    </script>
+    <p style="sectionHeading">Inertial and Non-Inertial Frames of Reference</p>
+    <stack style="contentBG" orientation="vertical">
+      <style>
+        <marginBottom>20</marginBottom>
+      </style>
+      <p style="subSectionHeading">Review of Newton's Laws</p>
+      <p>(1) The Law of Inertia: force acting on it will move with uniform motion (that is, with constant speed and direction).</p>
+      <p>(2) The Force Law: If a force acts on a body, it will not move uniformly, but will be accelerated in the direction of the force at a rate proportional to the force, and inversely proportional to its inertia, or mass.</p>
+      <p>
+        <br />
+        However, Newton was not always correct because we often find ourselves in a situation in which bodies appear to be accelerating under the influence of some force, even though no such force is actually acting on them.
+      </p>
+    </stack>
+    <!--This stack only contains the tabs themselves and not the content. The content is held in a stack directly underneat the tabs.-->
+    <stack name="tabs" orientation="horizontal" style="contentBG2">
+      <stack style="contentBG">
+        <button content="Inertial" style="tab">
+          <onClick>
+            tabsManager:changeTab(1)
+          </onClick>
+        </button>
+      </stack>
+      <stack style="contentBG">
+        <button content="Non-Inertial" style="tab">
+          <onClick>
+            tabsManager:changeTab(2)
+          </onClick>
+        </button>
+      </stack>
+
+    </stack>
+    <stack name="contents" orientation="vertical" style="contentBG">
+      <stack orientation="vertical">
+        <!--ADD YOUR CONTENT HERE-->
+        <p style="subSectionHeading">Inertial Frames of Reference</p>
+
+        <p>
+          A frame of reference is simply a portion of the world around us which we use to measure the motion of <b>moving bodies.</b>
+        </p>
+
+        <image src="resources\car.jpg" style="medium" />
+
+        <p>The concept that a uniformly moving frame of reference such as the railway car should not change the laws of motion, was actually first proposed, albeit in a slightly different form, decades prior to Newton's stating his Laws, by Galileo Galilei </p>
+
+        <image src="resources\telescope.jpg" style="medium" />
+
+        <p>
+          <br />
+          Now, let's suppose that in the everyday world, Newton's Laws of Motion are correct, and most particularly, that the Law of Inertia is correct. If so, then in any frame of reference that is moving absolutely uniformly relative to the everyday world, the Law of Inertia will still be correct. All frames of reference, in which the Law of Inertia is correct, are called inertial frames. Frames of reference in which the Law of Inertia is not correct, are called non-inertial frames.
+          <br />
+        </p>
+
+      </stack>
+      <stack orientation="vertical">
+        <!--ADD YOUR CONTENT HERE-->
+        <p>
+          How in the world can you find yourself in a situation where the Law of Inertia would appear to be false? Visualize a moving railway car. It is moving uniformly and we will use the railway car as the frame of reference. As the car moves along the tracks, any object observed from the railway car will not be observed correctly, it will have an error equal to the motion of the railway car. However, since the railway car is moving uniformly, the error will also be uniform and unchanging. <br />
+        </p>
+        <p>
+          This only holds true if the railway car (the frame of reference) is moving uniformly. If the motion is not constant, then the error introduced into measurements of the moving object (from the railway car) would be changing with time. <b>This means if a frame of reference has a non-uniform, or accelerated motion, then the Law of Inertia will appear to be wrong, and you must be in a non-inertial frame of reference. </b>
+        </p>
+
+        <image src="resources\train.jpg" style="medium" />
+      </stack>
+    </stack>
+  </sectionNoTitle>
+
+  <!--Extra resources-->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Extra Resources</p>
+    <stack style="contentBG" orientation="vertical">
+      <web name="myWebView" url="https://www.khanacademy.org/science/physics/one-dimensional-motion/displacement-velocity-time/v/introduction-to-reference-frames" />
+    </stack>
+  </sectionNoTitle>
+</document>

@@ -1,0 +1,614 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G76B16C5C_6108_49A2_ABA5_6A24ED19AA2E">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>LA - PHYS-Energy and Momentum - Impulse and Momentum</title>
+    <creator>AanandB</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/lassondeLogo.png" />
+  </metadata>
+
+  <include src="curriculumThemePack/curriculumStyles.xml" />
+  <include src="plotTools.xml" />
+  <include src="qdexLuaClass.xml" />
+
+  <!--Header & Footer-->
+  <style name="backgroundColor">
+    <background color="232 12 46" />
+  </style>
+  <style name="fontColor">
+    <foreground color="255 255 255" />
+  </style>
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="fontColor"></p>
+      <p style="fontColor rightText"></p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>20</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--Header & Footer END-->
+
+  <!--intro-->
+  <section>
+    <title>
+      <style>
+        <textAlignment>right</textAlignment>
+        <marginTop>100</marginTop>
+      </style>
+      <size scale="xlarge">SPH4U</size>
+    </title>
+    <p style="chapterTitle">Impulse and Momentum</p>
+
+    <p style="title">INTRODUCTION</p>
+    <p>
+      We use the concepts of impulse and momentum in our everyday life. For instance, we say a sports team has a lot of "momentum." In physics, the concept is the same, but we need to measure this momentum precisely. In this module, we will talk about impulse and momentum, how they relate to real life, and go over some questions.
+    </p>
+    <button content="click">
+      <onClick>
+        <![CDATA[
+        application.navigateTo(sim2);
+        ]]>
+      </onClick>
+    </button>
+  </section>
+
+  <!--Intro to What is Impulse & Momentum-->
+  <sectionNoTitle>
+    <stack>
+      <style>
+        <widthPercentage>0.8</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <style>
+        <counter name="decBullet" format="decimal" />
+      </style>
+      <p style="titleMargin">
+        What is Impulse and Momentum?
+      </p>
+
+      <stack style="questionAnswer">
+        <style>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <p style="title">What is momentum?</p>
+        <p>
+          <b>Momentum</b> is the measurement of mass in motion: how much mass is in how much motion. It is usually given the symbol <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/ada5fdba36534c3b9a3398b153179607.png" alt=" \mathbf{p} = m \times v " scale="0.0175" baseline="0.194444" inspect="false" />, where <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/3115e21a266848ec8494442773472e36.png" alt=" m " scale="0.0175" baseline="0" inspect="false" /> is mass and <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/bedc450052174d31b47aa5941afed28a.png" alt=" v " scale="0.0175" baseline="0" inspect="false" /> is velocity. The standard units for momentum are kg <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/362a0012df364f8f9ea8d5a198f137db.png" alt=" \times m/s " scale="0.0175" baseline="0.25" inspect="false" />, and momentum is always a vector quantity.
+        </p>
+
+        <p>
+          <br />
+          This simple relationship means that doubling the mass or velocity of an object will double its momentum. Further, the useful thing about momentum is its relationship to force. Recalling from kinematic equations, change in velocity <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/e8f9cdd019174589a47c4723e9a0a074.png" alt=" \triangle v " scale="0.0175" baseline="0.194444" inspect="false" /> can also be written as <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/50bb72ed1a324b5bb73872b86b484ad2.png" alt=" a \times \triangle v " scale="0.0175" baseline="0.194444" inspect="false" />.
+          <br />
+        </p>
+
+        <p>
+          <br />
+          We can then see that any change in momentum following an acceleration can be written as: <br />
+          <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/8a46f74b3773459d80f5a5dc86322a9b.png" alt=" \triangle \mathbf{p} = m \times \triangle v " scale="0.0175" baseline="0.194444" inspect="false" /> <br />
+          <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/a4c349444b0f44d2a38e2b5a813944b7.png" alt=" \triangle \mathbf{p} = m \times a \times \triangle t " scale="0.0175" baseline="0.194444" inspect="false" /> <br />
+          <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/bebe5709881b4f15950ac0566b66c740.png" alt=" \triangle \mathbf{p} = \text{F} \times \triangle t " scale="0.0175" baseline="0.194444" inspect="false" />
+          <br />
+        </p>
+      </stack>
+
+      <stack>
+        <style>
+          <background color="206 220 226" />
+          <horizontalAlignment>center</horizontalAlignment>
+          <widthPercentage>0.96</widthPercentage>
+          <marginBottom>20</marginBottom>
+          <marginTop>20</marginTop>
+        </style>
+
+
+        <p style="title">Mathematics behind Momentum</p>
+        <p>When we see that a big football player is running fast, we say the player has a lot of "momentum." If we see a smaller football player running at the same speed, we usually say that person has "less momentum." In physics, we take into account both velocity and mass to form the momentum equation, <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/ada5fdba36534c3b9a3398b153179607.png" alt=" \mathbf{p} = m \times v " scale="0.0175" baseline="0.194444" inspect="false" />. </p>
+
+        <p>
+          <br />
+          We know that <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/428c8ef375ac439e93f20407bfce81ba.png" alt=" \text{F} = m \times a " scale="0.0175" baseline="0.083333" inspect="false" />. This means that we can substitute <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/9654731e3425445c80172748837db8c7.png" alt="a" scale="0.0175" baseline="0" inspect="false" /> with <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/68e33c4138e746589ca3f9abc2a9d226.png" alt=" \frac{\triangle v}{\triangle t} " scale="0.0175" baseline="0.480951" inspect="false" />.
+          <br />
+        </p>
+        <p>We can then simplify to <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/a68213c57eb746a89feb47a6a6940c47.png" alt=" F = \frac{\triangle(m \times v)}{\triangle t} " scale="0.0175" baseline="0.480951" inspect="false" />, assuming mass doesn't change.</p>
+        <p>We can then substitute <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/3575781d0e014b42930829c83cfb4bf1.png" alt=" \mathbf{p} " scale="0.0175" baseline="0.194444" inspect="false" /> in, and we end up getting <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/105246725c784fb19a3e5980bf9e47b5.png" alt=" F = \frac{\triangle \mathbf{p}}{\triangle t} " scale="0.0175" baseline="0.480951" inspect="false" /></p>
+        <p>
+          <br />
+          Remember, momentum, impulse, velocity, and force are all <b>vector quantities.</b>
+          <br />
+        </p>
+
+      </stack>
+
+      <stack style="questionAnswer">
+        <style>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <p style="title">
+          What is impulse?
+        </p>
+        <p>
+          <b>Impulse</b> is a term that quantifies the overall effect of a force acting over time. It is usually given the symbol <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/caea7eb660d54d358f78c5e095b55eba.png" alt=" \text{J} " scale="0.0175" baseline="0" inspect="false" /> and expressed in newton-seconds.
+        </p>
+
+        <p>
+          <br />
+          For a constant force, <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/0afc64486a154470a363eded04c3128d.png" alt=" \text{J} = \text{F} \times \triangle t " scale="0.0175" baseline="0.194444" inspect="false" />
+          <br />
+        </p>
+
+        <p>
+          <br />
+          As seen earlier, this is exactly equivalent to change in momentum <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/1364da8a6e5b405281dfa6c91fc1de60.png" alt=" \triangle \mathbf{p} " scale="0.0175" baseline="0.194444" inspect="false" />. This equivalence is known as impulse-momentum theorem. Because of this theorem, we can make a direct connection between how a force acts on an object over time and the motion of the object.
+          <br />
+        </p>
+
+        <p>
+          <br />
+          One of the reasons why impulse is important and useful is that in the real world, forces are often not constant. Forces due to things like people and engines tend to build up from zero over time and may vary depending on many factors. Working out the overall effect of all these forces directly would be quite difficult.
+          <br />
+        </p>
+
+        <p>
+          <br />
+          When we calculate impulse, we are multiplying force by time. This is equivalent to finding the area under a force-time curve. This is useful because the area can be just as easily found for a complicated shape - variable force - as for a simple rectangle - constant force. It is only the overall <b>net impulse</b> that matters for understanding the motion of an object following an impulse.
+          <br />
+        </p>
+      </stack>
+
+    </stack>
+    <p>
+      <style>
+        <marginBottom>120</marginBottom>
+      </style>
+    </p>
+  </sectionNoTitle>
+  
+  <!--Simulation Example 1-->
+  <sectionNoTitle>
+    <stack>
+      <style>
+        <widthPercentage>0.8</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <style>
+        <counter name="decBullet" format="decimal" />
+      </style>
+      <p style="titleMargin">
+        Momentum Collision Example
+      </p>
+
+      <stack style="questionAnswer">
+        <style>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+
+        <p style="title">Example</p>
+
+        <p>
+          Imagine a ball, <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/23a01daf08c349c3bab1ef243de995a2.png" alt="B_{S}" scale="0.0175" baseline="0.149998" inspect="false" />, is thrown East towards another <b>larger</b> ball, <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/d87038871f554c949fd6cbe10539f8e5.png" alt=" B_{L}" scale="0.0175" baseline="0.149998" inspect="false" />  at 9 m/s. Then upon impact, the <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/6d225f925e9443a2bd17bfdc5cb8fee0.png" alt=" B_{S} " scale="0.0175" baseline="0.149998" inspect="false" /> gets stuck on <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/d87038871f554c949fd6cbe10539f8e5.png" alt=" B_{L} " scale="0.0175" baseline="0.149998" inspect="false" />. What is the resulting velocity of the entire ending object (<image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/0623124ac5b6454fae7d76c13a3515d5.png" alt=" B_{S} \text{ and } B_{L})" scale="0.0175" baseline="0.25" inspect="false" />?
+        </p>
+
+        <p>
+          <br />
+          The mass of <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/23a01daf08c349c3bab1ef243de995a2.png" alt="B_{S}" scale="0.0175" baseline="0.149998" inspect="false" /> is 1kg and the mass of the <b>stationary ball </b> <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/54824df176f54afeb5cf1c2c8113fa60.png" alt="B_{L}" scale="0.0175" baseline="0.149998" inspect="false" /> is 2 kg.
+          <br />
+        </p>
+
+        <!--Simulation stack-->
+
+        <stack name="simulationStack" style="questionAnswer">
+          <p>As you can see in the simulation below, after the ball hits the other ball, the resulting object moves more slowly. This is because the larger ball was stationary.</p>
+          <stack name="plotStack" orientation="horizontal">
+            <xyPlot name="myPlot" pan="disabled" tap="disabled" zoom="disabled">
+              <style name="blackLine">
+                <foreground color="black" />
+              </style>
+              <axis name="YAxis" dim="y" auto="fixed" min="-30" max="130" major="false"></axis>
+              <axis name="XAxis" dim="x" auto="lockAspectRatio" min="0" max="100" major="false"></axis>
+              <series name="smallBall" draw="radialFill" />
+              <series name="bigBall" draw="radialFill" capacity="10000" />
+
+            </xyPlot>
+            <script>
+              <![CDATA[
+              startXSmallBall = -80;
+              startXBigBall = 80;
+              
+              smallBallSize = 5;
+              bigBallSize = 10;
+              
+              xSmallBall = 0;
+              ySmallBall = 0;
+              
+              xBigBall = 0;
+              yBigBall = 0;
+                            
+              smallBallSpeed = 9;
+              resultantSpeed = 3
+              largeBallSpeed = 0;
+              
+              smallBallSeries = plotStack.myPlot.smallBall;
+              bigBallSeries = plotStack.myPlot.bigBall;
+              
+              -- plotTools.drawCircle[Series],[Centre],[Radius])
+              plotTools.drawCircle(smallBallSeries, vector({startXSmallBall,50}), smallBallSize)
+              plotTools.drawCircle(bigBallSeries, vector({startXBigBall,50}), bigBallSize)
+   
+              stopXBall = (startXBigBall - (startXSmallBall)) - bigBallSize;
+              myMax = myPlot.XAxis.Max;
+              stopSim = myMax - (startXSmallBall);
+   
+              
+              
+              ]]>
+            </script>
+          </stack>
+          <style name="button_style">
+            <foreground color="white" />
+            <background color="red" />
+          </style>
+          <button name="simButton" content="Start Simulation" style="button_style">
+            <onClick>
+              <![CDATA[
+            if simButton.Text == "Start Simulation" then 
+
+              simButton.Text = "Restart";
+             
+              sim:Start()
+            elseif simButton.Text == "Restart" then
+              xSmallBall = 0;
+              ySmallBall = 0;
+              
+              xBigBall = 0;
+              yBigBall = 0;
+              
+              smallBallSeries.Transform = matrixf.translation(xSmallBall,ySmallBall,0);
+              bigBallSeries.Transform = matrixf.translation(xBigBall,yBigBall,0);
+              sim:Stop();
+              simButton.Text = "Start Simulation";
+              
+            end
+            ]]>
+            </onClick>
+          </button>
+
+          <simulation name="sim" duration="5" period="0.01">
+            <onUpdate>
+              <![CDATA[
+            smallBallSeries.Transform = matrixf.translation(xSmallBall,ySmallBall,0);
+            bigBallSeries.Transform = matrixf.translation(xBigBall,yBigBall,0);
+            if (xSmallBall < stopXBall) then
+              xSmallBall = xSmallBall + (smallBallSpeed);
+            elseif ((xSmallBall >= stopXBall) and (xSmallBall <=stopSim)) then
+              xSmallBall = xSmallBall + (resultantSpeed);
+              xBigBall = xBigBall + (resultantSpeed);
+            else
+              sim:Stop()
+            end
+            ]]>
+            </onUpdate>
+          </simulation>
+
+        </stack>
+      </stack>
+
+      <stack style="questionAnswer">
+        <style>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+
+        <p style="title">Solving Problem</p>
+
+        <p>We are trying to find the resulting speed after the collision of the combined object. However, firstly, we need to find the combined momentum before the collision.</p>
+
+        <p>
+          <br />
+          Combined momentum would be: <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/1df4e31762d44769b67e9df6edc2891b.png" alt=" m_{B_{S}} \times v_{B_{S}} + m_{B_{L}} \times v_{B_{L}}" scale="0.0175" baseline="0.250555" inspect="false" />
+          <br />
+        </p>
+        <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/1b1f5ce558784935a99558e0420f7dcc.png" alt=" 1 kg \times 9 m/s + 2 kg \times 0 = 9 kg m/s " scale="0.0175" baseline="0.25" inspect="false" />. <br /> This is the momentum before the smaller ball hits the bigger ball. </p>
+        <p>
+          <br />
+          We assume no new net forces acting on any object in this system, which means momentum is conserved. Let's move on to solve the problem. We know that the new object (smaller ball combined with larger ball) has a different mass. The mass is simply 3 kg (1 kg + 2 kg). Since we know momentum is conserved:
+          <br />
+        </p>
+        <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/2feb734c6a9d445b821d1192512011ba.png" alt=" 3 kg \times v_{newObject} = 9 kg m/s " scale="0.0175" baseline="0" inspect="true" /></p>
+        <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/116e3f9f6f51470fa81a318dab2e94ef.png" alt=" v_{newObject} = 3 m/s " scale="0.0175" baseline="0.286108" inspect="false" /> EAST </p>
+      </stack>
+    </stack>
+    <p>
+      <style>
+        <marginBottom>120</marginBottom>
+      </style>
+    </p>k
+  </sectionNoTitle>
+
+  <!--Momentum in Space-->
+  <sectionNoTitle>
+    <stack>
+      <style>
+        <widthPercentage>0.8</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <style>
+        <counter name="decBullet" format="decimal" />
+      </style>
+      <p style="titleMargin">
+        Momentum in Space!
+      </p>
+
+      <stack style="questionAnswer">
+        <style>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <p style="title">Space and Momentum</p>
+        <image src="resources\astronaut.jpg" style="medium" />
+        <p>Most people are familiar with seeing astronauts working in orbit. They appear to effortlessly push around freely floating objects. Because astronauts and the objects they are working with are both in free-fall, they do not have to contend with the force of gravity. However, heavy moving objects still posses the same momentum that they do on earth, and it can be just as difficult to change this momentum.</p>
+        <p>
+          <br />
+          Suppose that an emergency occurs on a space station and an astronaut needs to manually move a free-floating 4,000 kg space capsule away from a docking area. On earth, the astronaut knows she can hold a 50 kg weight above herself for 3 seconds. How quickly could she get the capsule moving?
+          <br />
+        </p>
+
+        <p>
+          <br />
+          We first calculate the total impulse that the astronaut can apply. Note that the astronaut is pushing vertically in both cases so we don't need to keep track of direction of force:
+          <br />
+        </p>
+
+        <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/d719a7197c914d9daa80209b7f5cd0c2.png" alt=" \text{J} = (mg) \times \triangle t " scale="0.0175" baseline="0" inspect="true" /></p>
+        <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/2686a9e66a164a55ac5d4aa92fc76883.png" alt=" \text{J} = (50 \text{kg} \times 9.81 m/s^{2}) \times 3 \text{s} = 1471.5 N_{s}" scale="0.0175" baseline="0" inspect="true" /></p>
+
+        <p>
+          <br />
+          Using impulse-momentum theorem, we can find velocity of spacecraft:
+          <br />
+        </p>
+
+        <p>
+          <br />
+          <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/f646ce095af84580a6372eec68a93c76.png" alt=" \frac{1471.5 N_{s}}{4000 kg} = \text{0.37} m/s " scale="0.0175" baseline="0.480951" inspect="false" />
+          <br />
+        </p>
+      </stack>
+    </stack>
+    <p>
+      <style>
+        <marginBottom>120</marginBottom>
+      </style>
+    </p>
+  </sectionNoTitle>
+
+  <!--Simulation Example 2-->
+  <sectionNoTitle name="sim2">
+
+    <stack>
+      <style>
+        <widthPercentage>0.8</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <style>
+        <counter name="decBullet" format="decimal" />
+      </style>
+      <p style="titleMargin">
+        Billiards Example
+      </p>
+      <stack name="simStack">
+        <xyPlot name="drawing">
+          <axis name="YAxis" auto="lockAspectRatio" dim="y" major="false"></axis>
+          <axis name="XAxis" auto="fixed" dim="x" min="-20" max="120" major="false"></axis>
+          <series name="background" draw="radialFill" />
+          <series draw="radialFill" />
+          <series draw="radialFill" />
+          <series draw="radialFill" />
+          <series draw="radialFill" />
+          <series draw="radialFill" />
+          <series draw="radialFill" />
+          <series draw="radialFill" />
+          <series draw="radialFill" />
+          <series draw="radialFill" />
+          <series draw="radialFill" />
+          <series name="cue" draw="radialFill" />
+
+        </xyPlot>
+
+        <script>
+          <![CDATA[
+        
+        -- plotClass? world?
+        plot = simStack:Child(1);
+        plotMinX = plot.XAxis.Min;
+        plotMinY = -60;
+        plotMaxX = plot.XAxis.Max;
+        plotMaxY = 60;
+        plotWidth = plotMaxX - plotMinX;
+        plotHeight = plotWidth;
+        
+        local world = World:new({minX=plotMinX,minY=plotMinY,maxX=plotMaxX,maxY=plotMaxY,balls={},objects = {},deltaT=0.02})
+        
+        -- can make in a loop
+        local ball1 = Ball:new({x=50,y=-10,radius=5,mass=0.5,velocity={0,0},series=simStack:Child(1):Child(4)});
+        local ball2 = Ball:new({x=50,y=20,radius=5,mass=0.5,velocity={0,0},series=simStack:Child(1):Child(5)});
+        local ball3 = Ball:new({x=50,y=30,radius=5,mass=0.5,velocity={0,0},series=simStack:Child(1):Child(6)});
+        local ball4 = Ball:new({x=40,y=30,radius=5,mass=0.5,velocity={0,0},series=simStack:Child(1):Child(7)});
+        local ball5 = Ball:new({x=30,y=40,radius=5,mass=0.5,velocity={0,0},series=simStack:Child(1):Child(8)});
+        local ball6 = Ball:new({x=70,y=40,radius=5,mass=0.5,velocity={0,0},series=simStack:Child(1):Child(9)});
+        local ball7 = Ball:new({x=50,y=40,radius=5,mass=0.5,velocity={0,0},series=simStack:Child(1):Child(10)});
+        local ball8 = Ball:new({x=60,y=30,radius=5,mass=0.5,velocity={0,0},series=simStack:Child(1):Child(11)});
+        local ball9 = Ball:new({x=40,y=40,radius=5,mass=0.5,velocity={0,0},series=simStack:Child(1):Child(12)});
+        local ball10 = Ball:new({x=60,y=40,radius=5,mass=0.5,velocity={0,0},series=simStack:Child(1):Child(13)});
+                
+        local cue = WorldObject:new({x=ball1.x, y = 0,height=60, width=2.5, mass=2, velocity={0,5},series=simStack:Child(1).cue, impact = 0});
+        cue.y = ball1.y - (cue.height/2) - ball1.radius*2;
+        
+        -- loop?
+        world:addBall(ball1);
+        world:addBall(ball2);
+        world:addBall(ball3);
+        world:addBall(ball4);
+        world:addBall(ball5);
+        world:addBall(ball6);
+        world:addBall(ball7);
+        world:addBall(ball8);
+        world:addBall(ball9);
+        world:addBall(ball10);
+        world:addObject(cue);
+               
+        -- set initial variables
+        world:setInitialVariables();
+        
+        -- in loop
+        -- table
+        plotTools.drawSquare(simStack:Child(1).background,vector({50,0}),plotWidth,plotHeight,color.rgb(0,128,0));
+
+        plotTools.drawCircle(ball1.series, vector({0,0}),ball1.radius,color.white);
+        plotTools.drawCircle(ball2.series, vector({0,0}),ball2.radius);
+        plotTools.drawCircle(ball3.series, vector({0,0}),ball3.radius);
+        plotTools.drawCircle(ball4.series, vector({0,0}),ball4.radius);
+        plotTools.drawCircle(ball5.series, vector({0,0}),ball5.radius);
+        plotTools.drawCircle(ball6.series, vector({0,0}),ball6.radius);
+        plotTools.drawCircle(ball7.series, vector({0,0}),ball7.radius, color.black);
+        plotTools.drawCircle(ball8.series, vector({0,0}),ball8.radius, color.yellow);
+        plotTools.drawCircle(ball9.series, vector({0,0}),ball9.radius, color.blue);
+        plotTools.drawCircle(ball10.series, vector({0,0}),ball10.radius, color.brown);
+        
+        plotTools.drawSquare(cue.series, vector({0,0}), cue.width, cue.height,color.rgb(141,73,25));
+
+        world:drawAllObjects();
+        
+        -- distance is given in meters
+        function calculateCueVelocity(dist)
+          -- convert to meters
+          local velocity = ((10*0.01)/(ball1.mass))*dist;
+          return velocity*20;
+        end
+        
+        ]]>
+        </script>
+
+        <!--Table for sliders!-->
+        <style name="column">
+          <!--pale green-->
+          <background color="152 251 152" />
+        </style>
+        <script>
+          <![CDATA[
+        -- initial
+        function setInitialSliderTable() 
+          sliderTable:Child(1):Child(2):Child(1).Text = ""..cue.x;
+          sliderTable:Child(2):Child(2):Child(1).Text = ""..cue.velocity[2];
+          sliderTable:Child(1):Child(3):Child(1):Child(1).Value = cue.x;
+          sliderTable:Child(2):Child(3):Child(1):Child(1).Value = cue.velocity[2];
+        end
+                
+        ]]>
+        </script>
+        <table name="sliderTable" widths="30% 20% 50%">
+          <!--Row 1 = for move Cue-->
+          <!--Row 2 = for velocity of Cue-->
+          <row>
+            <column style="column">
+              <p>Position of Cue Stick</p>
+            </column>
+            <column>
+              <p></p>
+            </column>
+            <column>
+              <stack>
+                <slider name="moveCueSlider" min="20" max="80" value="50">
+                  <onValueChanged>
+                    <![CDATA[
+                value = round(value,1);
+                sliderTable:Child(1):Child(2):Child(1).Text = ""..value;
+          
+                -- set coordinates of cue stick and cue ball objects in world
+                ball1.x = value;
+                cue.x = value;
+                cue.series.Transform = matrixf.translation(ball1.x, cue.y, 0);
+                ball1.series.Transform = matrixf.translation(cue.x, ball1.y, 0);
+          
+                ]]>
+                  </onValueChanged>
+                </slider>
+              </stack>
+            </column>
+          </row>
+          <row>
+            <column style="column">
+              <p>Distance of Cue Stick from Ball(<image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/1abdef2146544965a5b513f9f3753322.png" alt=" cm " scale="0.0175" baseline="0" inspect="false" />)</p>
+            </column>
+            <column>
+              <p></p>
+            </column>
+            <column>
+              <stack>
+                <slider name="powerCue" min="0" max="50" value="5">
+                  <onValueChanged>
+                    <![CDATA[
+                  value = round(value,1);
+                  sliderTable:Child(2):Child(2):Child(1).Text = ""..value;
+          
+                  cue.velocity[2] = calculateCueVelocity(value);
+                  cue.y = cue.initY - value;
+                  cue:drawObject();
+                  ]]>
+                  </onValueChanged>
+                </slider>
+              </stack>
+            </column>
+          </row>
+        </table>
+        <button name="simButton" content="Hit Ball!">
+          <onClick>
+            <![CDATA[
+          if simButton.Text == "Hit Ball!" then
+            sim:Start();
+            sliderTable:Child(1):Child(3):Child(1).Style.Visibility = "hidden";
+            sliderTable:Child(2):Child(3):Child(1).Style.Visibility = "hidden";
+            simButton.Text = "Stop Playing";
+          elseif simButton.Text == "Stop Playing" then
+            sim:Stop();
+            world:restartWorld();
+            world:drawAllObjects();
+            setInitialSliderTable();
+            sliderTable:Child(1):Child(3):Child(1).Style.Visibility = "visible";
+            sliderTable:Child(2):Child(3):Child(1).Style.Visibility = "visible";
+            simButton.Text = "Hit Ball!";
+          end
+          ]]>
+          </onClick>
+        </button>
+
+
+        <simulation name="sim" duration="60" period="0.02">
+          <onUpdate>
+            <![CDATA[
+              
+              world:update(true,sim.Period);
+              --hard coded, should change in the near future
+              ball1:handleCollisionWithRectangle(cue);
+          ]]>
+          </onUpdate>
+        </simulation>
+
+      </stack>
+
+    </stack>
+  </sectionNoTitle>
+
+
+</document>

@@ -1,0 +1,1578 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G3E987B57_A563_428A_A5D4_C6D9214E80CD">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>LA-PHYS-1.1 Kinematic Equations</title>
+    <creator>Asseel</creator>
+    <abstract>This document introduces the Kinematic Equations and simple Newtonian/Classical mechanics. The equations of motions are also introduced, along with some useful examples.</abstract>
+    <coverImage src="resources/LassondeLogo.png" />
+  </metadata>
+
+  <include src="resources/curriculumStylesLassonde.xml" />
+  <include src="resources/plotTools.xml" />
+  
+  <!--Used for rounding numbers-->
+  <script>
+    function round(num, numDecimalPlaces)
+      local mult = 10^(numDecimalPlaces or 0)
+      return math.floor(num * mult + 0.5) / mult
+    end
+    
+  
+  </script>
+  <!--HEADER**********************************************-->
+  <header style="themeColour">
+    <stack style="center" orientation="horizontal">
+      <p></p>
+    </stack>
+  </header>
+  <footer style="themeColour">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="themeColourTitle">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment> 
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--FOOTER**********************************************-->
+
+  <!-- Section 1 INTRODUCTION-->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">1.1 Kinematic Equations</title>
+    <stack orientation="vertical">
+      <p style="sectionHeading">Introduction</p>
+      <image src="resources/BirdProjectile.png" />
+      <stack style="contentBG">
+        <p>
+          <b>Kinematic Equations</b> is a tool set that can be used to describe an objects motion. It falls under the branch of <b>Classical Mechanics</b> and is sometimes also referred to as Newtonian Mechanics.
+          In this module, we will be exploring the 5 equations used to describe motion, looking at tips and tricks to remembering the variables and tackling some simple problems using kinematic equations.
+        </p>
+      </stack>
+    </stack>
+  </section>
+  
+  <sectionNoTitle name="section2">
+    <onDocumentOpened>
+     <!--This section is used to initialize the colors of the tabs and display the first tab-->
+      section2.stack1.btnStack.btnStack1.Style.BackgroundColor = color.rgb(225, 225, 225); 
+      section2.stack1.btnStack.btnStack2.Style.BackgroundColor = color.rgb(200, 200, 200);
+      section2.stack1.btnStack.btnStack3.Style.BackgroundColor = color.rgb(200, 200, 200);
+      section2.stack1.btnStack.btnStack4.Style.BackgroundColor = color.rgb(200, 200, 200);
+      
+      section2.stack1.contentStack.contentStack1.Style.Visibility = "visible";
+      section2.stack1.contentStack.contentStack2.Style.Visibility = "collapsed";
+      section2.stack1.contentStack.contentStack3.Style.Visibility = "collapsed";
+      section2.stack1.contentStack.contentStack4.Style.Visibility = "collapsed";
+      
+      <!--Initialize Graph Labels X, and Y -->
+      char.textX(section2.stack1.contentStack.contentStack1.graph.xLabel, {9.5, 0.5}, 0.5);
+      char.textY(section2.stack1.contentStack.contentStack1.graph.yLabel, {0.5, 9.0}, 0.5);
+      char.textX(section2.stack1.contentStack.contentStack2.graphStack.graph.xLabel, {9.5, 0.5}, 0.5);
+      char.textY(section2.stack1.contentStack.contentStack2.graphStack.graph.yLabel, {0.5, 9.5}, 0.5);
+      char.textX(section2.stack1.contentStack.contentStack2.graphStack.graph2.xLabel, {9.5, 0.5}, 0.5);
+      char.textY(section2.stack1.contentStack.contentStack2.graphStack.graph2.yLabel, {0.5, 3.5}, 0.5);
+
+      
+      <!--Initialize Graph Data for contentStack3-->
+      for xx=0, 10, 0.1 do
+        section2.stack1.contentStack.contentStack3.graphStack.graph.plot:Add(xx, math.pow(xx,2)/10)
+        section2.stack1.contentStack.contentStack3.graphStack.graph2.plot:Add(xx, xx/5)
+        section2.stack1.contentStack.contentStack3.graphStack.graph3.plot:Add(xx, 0.2)
+      end
+      
+      <!--Initialize some local vars used later on-->
+      oldX = 0;
+      oldY = 0;
+      x1 = 0;
+      x2 = 0;
+      y1 = 0;
+      y2 = 0;
+    </onDocumentOpened>
+    <stack name="stack1" style="pageLayout" orientation="vertical">
+      <p style="sectionHeading">Laying the Foundation</p>
+      <stack style="contentBG">
+        <p>
+          When it comes to kinematics, the variables in question are: displacement, velocity, acceleration and time. Click on each tab below to find out the definition for each variable.
+        </p>
+      </stack>
+      <stack name="btnStack" orientation="horizontal" style="contentBG">
+        <style>
+          <marginTop>25</marginTop>
+        </style>
+        <stack name="btnStack1">
+          <button name="btn1" content="Displacement" style="button">
+            <style>
+              <widthPercentage>110%</widthPercentage>
+            </style>
+            <onClick>
+              section2.stack1.btnStack.btnStack1.Style.BackgroundColor = color.rgb(225, 225, 225); 
+              section2.stack1.btnStack.btnStack2.Style.BackgroundColor = color.rgb(200, 200, 200);
+              section2.stack1.btnStack.btnStack3.Style.BackgroundColor = color.rgb(200, 200, 200);
+              section2.stack1.btnStack.btnStack4.Style.BackgroundColor = color.rgb(200, 200, 200);
+              
+              section2.stack1.contentStack.contentStack1.Style.Visibility = "visible";
+              section2.stack1.contentStack.contentStack2.Style.Visibility = "collapsed";
+              section2.stack1.contentStack.contentStack3.Style.Visibility = "collapsed";
+              section2.stack1.contentStack.contentStack4.Style.Visibility = "collapsed";
+            </onClick>
+          </button>
+        </stack>
+        <stack name="btnStack2">
+          <button name="btn2" content="Velocity" style="button">
+            <onClick>
+              section2.stack1.btnStack.btnStack1.Style.BackgroundColor = color.rgb(200, 200, 200);
+              section2.stack1.btnStack.btnStack2.Style.BackgroundColor = color.rgb(225, 225, 225);
+              section2.stack1.btnStack.btnStack3.Style.BackgroundColor = color.rgb(200, 200, 200);
+              section2.stack1.btnStack.btnStack4.Style.BackgroundColor = color.rgb(200, 200, 200);
+              
+              section2.stack1.contentStack.contentStack1.Style.Visibility = "collapsed";
+              section2.stack1.contentStack.contentStack2.Style.Visibility = "visible";
+              section2.stack1.contentStack.contentStack3.Style.Visibility = "collapsed";
+              section2.stack1.contentStack.contentStack4.Style.Visibility = "collapsed";
+            </onClick>
+          </button>
+        </stack>
+        <stack name="btnStack3">
+          <button name="btn3" content="Acceleration" style="button">
+            <onClick>
+              section2.stack1.btnStack.btnStack1.Style.BackgroundColor = color.rgb(200, 200, 200);
+              section2.stack1.btnStack.btnStack2.Style.BackgroundColor = color.rgb(200, 200, 200);
+              section2.stack1.btnStack.btnStack3.Style.BackgroundColor = color.rgb(225, 225, 225);
+              section2.stack1.btnStack.btnStack4.Style.BackgroundColor = color.rgb(200, 200, 200);
+              
+              section2.stack1.contentStack.contentStack1.Style.Visibility = "collapsed";
+              section2.stack1.contentStack.contentStack2.Style.Visibility = "collapsed";
+              section2.stack1.contentStack.contentStack3.Style.Visibility = "visible";
+              section2.stack1.contentStack.contentStack4.Style.Visibility = "collapsed";
+            </onClick>
+          </button> 
+        </stack>
+        <stack name="btnStack4">
+          <button name="btn4" content="Time" style="button">
+            <onClick>
+              section2.stack1.btnStack.btnStack1.Style.BackgroundColor = color.rgb(200, 200, 200);
+              section2.stack1.btnStack.btnStack2.Style.BackgroundColor = color.rgb(200, 200, 200);
+              section2.stack1.btnStack.btnStack3.Style.BackgroundColor = color.rgb(200, 200, 200);
+              section2.stack1.btnStack.btnStack4.Style.BackgroundColor = color.rgb(225, 225, 225);
+              
+              section2.stack1.contentStack.contentStack1.Style.Visibility = "collapsed";
+              section2.stack1.contentStack.contentStack2.Style.Visibility = "collapsed";
+              section2.stack1.contentStack.contentStack3.Style.Visibility = "collapsed";
+              section2.stack1.contentStack.contentStack4.Style.Visibility = "visible";
+            </onClick>
+          </button>
+        </stack>
+      </stack>
+      <stack name="contentStack" orientation="vertical" style="contentBG">
+        <stack name="contentStack1" orientation="vertical">
+          <p>
+            <b>Displacement</b> is described as the change in position of an object. In mathematical terms, displacement is the change in position in a defined frame of reference.
+            In other words, displacement is the change of an objects final position versus its initial position. NOTE: This is not to be confused with distance, which can be described as the
+            total change of an objects position. Distance is a scalar value, which means it only has a value. Displacement on the other hand consists of a scale and a direction. You can represent
+            displacement as a <b>Vector</b> as it contains a point and direction as well.
+            </p>
+
+          <p>
+            To put this into context, picture a soccer game. The soccer ball is kicked from the middle of the field
+            and it moves into the goal on the opposing side. If we freeze time and calculate the soccer ball's total displacement at that time, we will have a displacement of about 50 metres. (Half the length of a soccer field).
+            Now, we un-freeze the game and the ball is brought back to midfield after the goal was scored. If we freeze again, we see that the ball is where it first began; in the middle of the field. At this point in time, the
+            displacement of the ball is 0.
+          </p>
+          
+          <image src="resources/soccerfield.png"></image>
+
+          <p>Use this interactive simulation below to track your fingers displacement. Simply pan your fingers accross the graph and once you release
+          your finger, you will be given your total displacement from the first point you touched as well as the angle relative to the x-axis. </p>
+          
+            
+          <drawing name="graph" zoom="custom" pan="custom" manual="true">
+            <onPan>
+              local x = xDim.Min + state.Current.X * (xDim.Max - xDim.Min);
+              local y = yDim.Min + state.Current.Y * (yDim.Max - yDim.Min);
+              local drawSeries =  section2.stack1.contentStack.contentStack1.graph.draw;
+
+              if state.IsStart then
+                section2.stack1.contentStack.contentStack1.graph.draw:Clear();
+                section2.stack1.contentStack.contentStack1.graph.points:Clear();
+                section2.stack1.contentStack.contentStack1.graph.points:Add(x, y);
+                x1 = x;
+                y1 = y;
+                section2.stack1.contentStack.contentStack1.stack2.displacementResult.Text = "Displacement: 0m";
+              elseif (oldX == x and oldY == y) then
+                section2.stack1.contentStack.contentStack1.graph.points:Add(x, y);
+                x2 = x;
+                y2 = y;
+                stack2.displacementResult.Text = "Displacement: " .. round(math.sqrt(math.pow(x1 - x2, 2)+math.pow(y1-y2,2)),2) .. "m" .. " Angle: " .. math.abs(round(math.asin((y1-y2)/math.sqrt(math.pow(x1 - x2, 2)+math.pow(y1-y2,2)))*180/math.pi,2)) .. " Degrees";
+              end
+              
+              drawSeries:Add(x, y);
+              
+              oldX = x;
+              oldY = y;
+              
+            </onPan>
+            
+            <axis name="xDim" dim="x" min="-10" max="10" auto="fixed"></axis>
+            <axis name="yDim" dim="y" min="-10" max="10" auto="fixed"></axis>
+            <series name="xAxis">
+              <style>
+                <foreground color="black" />
+                <lineThickness>1.5</lineThickness>
+              </style>
+              <data>
+                -20 0; 20 0
+              </data>
+            </series>
+            <series name="yAxis">
+              <style>
+                <foreground color="black" />
+                <lineThickness>1.5</lineThickness>
+              </style>
+              <data>
+                0 -20; 0 20
+              </data>
+            </series>
+            <series name="xLabel">
+              <style>
+                <foreground color="black" />
+              </style>
+            </series>
+            <series name="yLabel">
+              <style>
+                <foreground color="black" />
+              </style>
+            </series>
+            <series name="draw" draw="lineSegments">
+              <style>
+                <foreground color="black" />
+              </style>
+            </series>
+            <series name="points" capacity="2" draw="line">
+              <style>
+                <lineThickness>2</lineThickness>
+              </style>
+            </series>
+          </drawing>
+          <stack name="stack2" orientation="horizontal">
+            <button name="displacementResult" content="Displacement: 0m">
+              <onClick>
+                <!--Click to change form of results.-->
+              </onClick>
+            </button>
+            <button content="Reset Graph">
+              <onClick>
+                section2.stack1.contentStack.contentStack1.graph.draw:Clear();
+                section2.stack1.contentStack.contentStack1.graph.points:Clear();
+                section2.stack1.contentStack.contentStack1.stack2.displacementResult.Text = "Displacement: 0m";
+              </onClick>
+            </button>
+          </stack>
+        </stack>
+        <stack name="contentStack2" orientation="vertical">
+          <p>
+            <b>Velocity</b> is described as the change in an objects displacement over time. This is sometimes confused with speed. Although velocity and speed may seem to the same,
+            the describe different concepts. Velocity has direction and magnitude where as speed is only a scalar and only has magnitude. Velocity is the change of an objects displacement over time and can be seen
+            in the units used to describe velocity: $ \frac{m}{s} $. Velocity can also be represented as a vector.
+          </p>
+
+          <p>
+            To help understand the concept of velocity, we will look at an application. Below are two graphs: Position vs. Time and Velocity vs. Time.
+          </p>
+          <p>In this application, we will track an arbitrary person A leaving there house to go for a run. At $ y = 0 $ is the house. First, person A leaves the house with a constant velocity of $ 2 \frac{m}{s} $. After 2 minutes, person A
+          runs faster and obtains a velocity of $ 3 \frac{m}{s} $. Person A then takes a break for 4 minutes and then sprints $ 4 \frac{m}{s} $ back to his house.</p>
+          <stack name="graphStack" orientation="horizontal">
+            <xyPlot name="graph" zoom="custom" pan="custom" manual="true">
+            <axis name="xDim" dim="x" min="0" max="10" auto="fixed">
+              <title>Time</title>
+            </axis>
+            <axis name="yDim" dim="y" min="0" max="10" auto="fixed">
+              <title>Position</title>
+            </axis>
+            <series name="xAxis">
+              <style>
+                <foreground color="black" />
+                <lineThickness>3</lineThickness>
+              </style>
+              <data>
+                -20 0; 20 0
+              </data>
+            </series>
+            <series name="yAxis">
+              <style>
+                <foreground color="black" />
+                <lineThickness>3</lineThickness>
+              </style>
+              <data>
+                0 -20; 0 20
+              </data>
+            </series>
+            <series name="xLabel">
+              <style>
+                <foreground color="black" />
+              </style>
+            </series>
+            <series name="yLabel">
+              <style>
+                <foreground color="black" />
+              </style>
+            </series>
+            <series name="plot">
+              <data>
+                0 0; 2 2; 4 8; 8 8; 10 0;
+              </data>
+            </series>
+          </xyPlot>
+          <xyPlot name="graph2" zoom="custom" pan="custom" manual="true">
+            <axis name="xDim" dim="x" min="0" max="10" auto="fixed">
+              <title>Time</title>
+            </axis>
+            <axis name="yDim" dim="y" min="-6" max="4" auto="fixed">
+              <title>Velocity</title>
+            </axis>
+            <series name="xAxis">
+              <style>
+                <foreground color="black" />
+                <lineThickness>3</lineThickness>
+              </style>
+              <data>
+                -20 0; 20 0
+              </data>
+            </series>
+            <series name="yAxis">
+              <style>
+                <foreground color="black" />
+                <lineThickness>3</lineThickness>
+              </style>
+              <data>
+                0 -20; 0 20
+              </data>
+            </series>
+            <series name="xLabel">
+              <style>
+                <foreground color="black" />
+              </style>
+            </series>
+            <series name="yLabel">
+              <style>
+                <foreground color="black" />
+              </style>
+            </series>
+            <series name="plot" draw="lineSegments">
+              <data>
+                0 1; 2 1; 2 1; 2 3; 2 3; 4 3; 4 3; 4 0; 4 0; 5 0; 5 0; 8 0; 8 0; 8 -4; 8 -4; 10 -4; 50 0
+              </data>
+            </series>
+          </xyPlot>
+          </stack>
+          <p>As you can see, the velocity graph is determined by the change of the position over time. When person A was at rest, his displacement was 8 metres from his house but has 0 velocity since they were not changing their displacement.
+          Since person A sprinted back home in the opposite direction he started in, we track his velocity to be negative (since velocity has direction). </p>
+          <p>In the simulation below is an object undergoing constant velocity to the right.</p>
+          <drawing name="simGraph">
+            <style>
+              <aspectRatio>0.7</aspectRatio>
+              <widthPercentage>70%</widthPercentage>
+            </style>
+            <axis dim="x" min="-10" max="10" auto="none"></axis>
+            <axis dim="y" min="-5" max="10" auto="none"></axis>
+            <series name="box" draw="segmentedFill" manual="true" capacity="5">
+            </series>
+          </drawing>
+          <simulation name="sim1" duration="5" loop="true" period="0.01" asynchronous="false">
+            <onDocumentOpened>
+              sim1:Start();
+            </onDocumentOpened>
+            <onUpdate>
+              local series = simGraph.box;
+              local size = 2;
+              local startingPosX = -12
+              local startingPosY = 0
+              series:Add((startingPosX+size) + time*4.4, startingPosY); <!--Bottom Right-->
+              series:Add(startingPosX + time*4.4, startingPosY); <!--Bottom Left-->
+              series:Add(startingPosX + time*4.4, startingPosY+size); <!--Top Left-->
+              series:Add((startingPosX+size) + time*4.4, startingPosY+size); <!--Top Right-->
+              series:Add(startingPosX+size + time*4.4, startingPosY); <!--BOttom right again to close loop-->
+              series:Update();
+            </onUpdate>
+          </simulation>
+        </stack>
+        <stack name="contentStack3" orientation="vertical">
+          <p>
+            <b>Acceleration</b> is described as the change in velocity over time. When an object is speeding up or slowing down, they are undergoing acceleration.
+            If an object has the same speed and does not change, then it does not have any acceleration. Acceleration is also a vector, just like displacement and velocity, so it has
+            magnitude and direction. An example of acceleration is gravity. Gravity always pushes us towards the center of the earth. If we were to jump in the air; the moment our feet leave the ground,
+            the acceleration due to gravity will start pushing us down. Since acceleration is the derivative of velocity, the units are $ \frac{m}{s^2} $
+          </p>
+          <p>To further explain acceleration, we will use it in an application.</p>
+          <p>See the graphs below: Position vs. Time, Velocity vs. Time and Acceleration vs. Time.</p>
+          <p>In this application, we will track a rocket ship lifting off from a platform. The rocket begins lift off at $ t = 0 $ and constantly accelerates at $ 0.2 \frac{m}{s^2} $ upwards.</p>
+          <stack name="graphStack" orientation="horizontal">
+            <xyPlot name="graph" tap="custom" zoom="custom" pan="custom" manual="true">
+            <axis name="xDim" dim="x" min="0" max="10" auto="fixed">
+              <title>Time</title>
+            </axis>
+            <axis name="yDim" dim="y" min="0" max="10" auto="fixed">
+              <title>Position</title>
+            </axis>
+            <series name="xAxis">
+              <style>
+                <foreground color="black" />
+                <lineThickness>3</lineThickness>
+              </style>
+              <data>
+                -20 0; 20 0
+              </data>
+            </series>
+            <series name="yAxis">
+              <style>
+                <foreground color="black" />
+                <lineThickness>3</lineThickness>
+              </style>
+              <data>
+                0 -20; 0 20
+              </data>
+            </series>
+            <series name="xLabel">
+              <style>
+                <foreground color="black" />
+              </style>
+            </series>
+            <series name="yLabel">
+              <style>
+                <foreground color="black" />
+              </style>
+            </series>
+            <series name="plot"></series>
+          </xyPlot>
+          <xyPlot name="graph2" tap="custom" zoom="custom" pan="custom" manual="true">
+            <axis name="xDim" dim="x" min="0" max="10" auto="fixed">
+              <title>Time</title>
+            </axis>
+            <axis name="yDim" dim="y" min="0" max="3" auto="fixed">
+              <title>Velocity</title>
+            </axis>
+            <series name="xAxis">
+              <style>
+                <foreground color="black" />
+                <lineThickness>3</lineThickness>
+              </style>
+              <data>
+                -20 0; 20 0
+              </data>
+            </series>
+            <series name="yAxis">
+              <style>
+                <foreground color="black" />
+                <lineThickness>3</lineThickness>
+              </style>
+              <data>
+                0 -20; 0 20
+              </data>
+            </series>
+            <series name="xLabel">
+              <style>
+                <foreground color="black" />
+              </style>
+            </series>
+            <series name="yLabel">
+              <style>
+                <foreground color="black" />
+              </style>
+            </series>
+            <series name="plot" draw="line">
+            </series>
+          </xyPlot>
+          <xyPlot name="graph3" tap="custom" zoom="custom" pan="custom" manual="true">
+            <axis name="xDim" dim="x" min="0" max="10" auto="fixed">
+              <title>Time</title>
+            </axis>
+            <axis name="yDim" dim="y" min="0" max="1" auto="fixed">
+              <title>Acceleration</title>
+            </axis>
+            <series name="xAxis">
+              <style>
+                <foreground color="black" />
+                <lineThickness>3</lineThickness>
+              </style>
+              <data>
+                -20 0; 20 0
+              </data>
+            </series>
+            <series name="yAxis">
+              <style>
+                <foreground color="black" />
+                <lineThickness>3</lineThickness>
+              </style>
+              <data>
+                0 -20; 0 20
+              </data>
+            </series>
+            <series name="xLabel">
+              <style>
+                <foreground color="black" />
+              </style>
+            </series>
+            <series name="yLabel">
+              <style>
+                <foreground color="black" />
+              </style>
+            </series>
+            <series name="plot" draw="line"></series>
+          </xyPlot>
+          </stack>
+          <p>As we can see in the graphs above, even though the rocket is speeding up, our acceleration is constant. This is to show that constant acceleration, even though graphically it is a straight line, represents an object speeding up.
+          Furthermore, acceleration can also represent an object slowing down. An example of this is a speeding car coming to a stop at a red light. It also undergoes acceleration but in the opposite direction of travel.</p>
+          <p>To help visualize this concept, below is a simulation of an object accelerating.</p>
+          <drawing name="simGraph">
+            <style>
+              <aspectRatio>0.7</aspectRatio>
+              <widthPercentage>70%</widthPercentage>
+            </style>
+            <axis dim="x" min="-10" max="10" auto="none"></axis>
+            <axis dim="y" min="-5" max="10" auto="none"></axis>
+            <series name="box" draw="segmentedFill" manual="true" capacity="5">
+            </series>
+          </drawing>
+          <simulation name="sim1" duration="3" loop="true" period="0.01" asynchronous="false">
+            <onDocumentOpened>
+              sim1:Start();
+            </onDocumentOpened>
+            <onUpdate>
+              local series = simGraph.box;
+              local size = 2;
+              local startingPosX = -12
+              local startingPosY = 0
+              simGraph.box:Add((startingPosX+size) + (time)^3, startingPosY); <!--Bottom Right-->
+              simGraph.box:Add(startingPosX + time^3, startingPosY); <!--Bottom Left-->
+              simGraph.box:Add(startingPosX + time^3, startingPosY+size); <!--Top Left-->
+              simGraph.box:Add((startingPosX+size) + time^3, startingPosY+size); <!--Top Right-->
+              simGraph.box:Add(startingPosX+size + time^3, startingPosY); <!--BOttom right again to close loop-->
+              simGraph.box:Update();
+            </onUpdate>
+          </simulation>
+          <p>
+            <i> NOTE: Kinematic Equations can only be used under situations with constant acceleration or constant velocity. More information will be provided later in this module.</i>
+          </p>
+        </stack>
+        <stack name="contentStack4" orientation="vertical">
+          <p>
+            <b>Time</b> is used to measure all of the motions described in the other tabs. Notice how on car speedometer, you can see how fast $ MPH $ (miles per hour) or $ KM/H $ (kilometres per hour) your car is going.
+            Time is used in the x-axis most of the time. Note that in most examples, time is used in seconds $ ( s ) $ but does not necessarily have to. You can convert in to minutes, hours, or even years to get the unit
+            that you are looking for.
+          </p>
+
+          <p>In Kinematic Equations, delta time $ ( \bigtriangleup t ) $ is used to describe the change in time. We usually start at some time called $ t = 0s $ as our initial time and an end point $ ( example \; t = 4s ) $ as our final time.</p>
+
+          <p>Unlike the motions we described in the other tabs, time is a scalar value, so it has no direction. In addition to this, a negative time does not exist. </p>
+        </stack>
+      </stack>
+    </stack>
+  </sectionNoTitle>
+  
+  <sectionNoTitle name="section3">
+    <stack name="stack1" style="pageLayout" orientation="vertical">
+      <p style="sectionHeading">The Equations</p>
+      <stack name="contentStack">
+        <style>
+          <horizontalAlignment>center</horizontalAlignment>
+         </style>
+        <table grid="false">
+          <style>
+          <horizontalAlignment>center</horizontalAlignment>
+          <widthPercentage>70%</widthPercentage>
+         </style>
+          <row>
+            <column style="contentBG2">
+              <p style="centerText">
+                <bold>
+                  Equation
+                </bold>
+              </p>
+            </column>
+            <column style="contentBG2">
+              <p style="centerText">
+                <bold>
+                  Missing Variable
+                </bold>
+              </p>
+            </column>
+          </row>
+          <row>
+            <column style="contentBG">
+              <p style="centerText">$ v = u + at $</p>
+            </column>
+            <column style="contentBG">
+              <p style="centerText">$ s $ - Displacement</p>
+            </column>
+          </row>
+          <row>
+            <column style="contentBG2">
+              <p style="centerText">$ s = ( \frac{v+u}{2} )t $</p>
+            </column>
+            <column style="contentBG2">
+              <p style="centerText">$ a $ - Acceleration</p>
+            </column>
+          </row>
+          <row>
+            <column style="contentBG">
+              <p style="centerText">$ s = ut + \frac{1}{2}at^2 $</p>
+            </column>
+            <column style="contentBG">
+              <p style="centerText">$ \! v $ - Final Velocity</p>
+            </column>
+          </row>
+          <row>
+            <column style="contentBG2">
+              <p style="centerText">$ s = vt + \frac{1}{2}at^2 $</p>
+            </column>
+            <column style="contentBG2">
+              <p style="centerText">$ u $ - Initial Velocity</p>
+            </column>
+          </row>
+          <row>
+            <column style="contentBG">
+              <p style="centerText">$ v^2 = u^2 + 2as $</p>
+            </column>
+            <column style="contentBG">
+              <p style="centerText">$ \! t $ - Time</p>
+            </column>
+          </row>
+        </table>
+      </stack>
+      <p style="sectionHeading">When are these Equations used?</p>
+      <stack name="contentStack2" style="contentBG">
+        <p>
+          <b>Constant Acceleration</b> or <b>Constant Velocity</b> are a prerequisite to using these equations. Eitherwise, these equations will not
+          produce the right data.
+        </p>
+        <p>There are 5 equations; which one do you use? Notice that the equations all have one variable missing. Depending on what information is given to you
+        in a problem, you can easily identify which equation(s) to use by finding out what variables are not given. In some cases, more than one equation is required
+        to solve a problem.</p>
+      </stack>
+    </stack>
+  </sectionNoTitle>
+  
+  <sectionNoTitle name="section4">
+    <stack name="stack1" style="pageLayout">
+      <p style="sectionHeading">Different Notations for Kinematic Equations</p>
+      <stack name="contentStack" style="contentBG">
+        <p>Variables used in the kinematic equations can differ from textbook to textbook. Here is a list of the variety of variable names you may come accross. </p>
+        <table>
+          <row>
+            <column>
+              <p>$ s $</p>
+            </column>
+            <column>
+              <p>$ \bigtriangleup d / \bigtriangleup x / \bigtriangleup y $</p>
+            </column>
+          </row>
+          <row>
+            <column>
+              <p>$ u $</p>
+            </column>
+            <column>
+              <p>$ v_i / v_0 $</p>
+            </column>
+          </row>
+          <row>
+            <column>
+              <p>$ v $</p>
+            </column>
+            <column>
+              <p>$ v_f $</p>
+            </column>
+          </row>
+          <row>
+            <column>
+              <p>$ a $</p>
+            </column>
+            <column>
+              <p>This variable is consistent</p>
+            </column>
+          </row>
+          <row>
+            <column>
+              <p>$ t $</p>
+            </column>
+            <column>
+              <p>This variable is consistent</p>
+            </column>
+          </row>
+        </table>
+        <p>Displacement can be referred to as $ \bigtriangleup x / \bigtriangleup y $ when we deal with components. We will explore this later on in the module.</p>
+      </stack>
+      <p style="sectionHeading">Remembering the Variables</p>
+      <stack name="contentStack3" style="contentBG">
+        <p>Use the acronym <b>SUVAT</b> to remember these variables.</p>
+        <p>S - Displacement</p>
+        <p>U - Initial Velocity</p>
+        <p>V - Final Velocity</p>
+        <p>A - Acceleration</p>
+        <p>T - Time</p>
+      </stack>
+    </stack>
+  </sectionNoTitle>
+  
+  <sectionNoTitle name="section5">
+    <stack style="pageLayout" name="stack1">
+      <p style="sectionHeading">Breaking Into Components</p>
+      <stack style="contentBG" name="contentStack1">
+        <p>On the previous page, we showed that displacement can be named either $ \bigtriangleup x / \bigtriangleup y $. Sometimes in a physics problem, we have to seperate the problem
+        into the $ x $ and $ y $ axis. This allows us to find unknown variables in one axis and use them in another. Nonetheless, the equations remain the same with the exception that displacement is
+        replaced with either $ \bigtriangleup x / \bigtriangleup y $. Check out the example below to see why we break up problems into components and how to use the kinematic equations when we do so.</p>
+      </stack>
+      <p style="sectionHeading">Example 1</p>
+
+      <stack style="contentBG" name="contentStack2">
+        <drawing name="simGraph">
+          <axis dim="x" max="10" min="0" auto="fixed"></axis>
+          <axis dim="y" max="10" min="0" auto="fixed"></axis>
+          <series name="line" draw="lineSegments" manual="true"></series>
+          <series name="triangle" draw="segmentedFill" manual="true" capacity="3"></series>
+          <series name="platform" draw="segmentedFill" manual="true" capacity="5"></series>
+        </drawing>
+        <simulation name="sim1" duration="5" loop="false" period="0.01" asynchronous="false">
+          <onActivePageChanged>
+            local platformSeries = simGraph.platform;
+            local series = simGraph.triangle;
+            local startingPosX = 1.5;
+            local startingPosY = 6;
+            local shapeSize = 1;
+            <!--INITIALIZE DRAWING OF PLATFORM-->
+            platformSeries:Add(0, 0);
+            platformSeries:Add(0, 6);
+            platformSeries:Add(3, 6);
+            platformSeries:Add(3, 0);
+            platformSeries:Add(0, 0);
+
+            <!--INITIALIZE DRAWING OF TRIANGLE-->
+            series:Add(startingPosX, startingPosY);
+            series:Add((startingPosX + (shapeSize/3)), startingPosY + shapeSize);
+            series:Add((startingPosX + (shapeSize*2/3)), startingPosY);
+
+            series:Update();
+            platformSeries:Update();
+          </onActivePageChanged>
+          <onUpdate>
+            local series = simGraph.triangle;
+            local startingPosX = 1.5;
+            local startingPosY = 6;
+            local shapeSize = 1;
+            local platformSeries = simGraph.platform;
+            local graphSeries = simGraph.line;
+
+            <!--Conditional used to stop triangle once it passes ground-->
+            if (startingPosY + 5*time - (2.2*time^2)) &gt; 0 then
+            time6 = time;
+            end
+
+            <!--UPDATE LINE BEHIND TRI-->
+            graphSeries:Add(startingPosX+0.4 + 1.9*time6, startingPosY+0.25+5*time6-(2.2*time6^2));
+
+            <!--TRIANGLE UPDATE-->
+            series:Add(startingPosX + 1.9*time6, startingPosY + 5*time6 - (2.2*time6^2));
+            series:Add((startingPosX + 1.9*time6 + (shapeSize/3)), startingPosY + 5*time6 - (2.2*time6^2) + shapeSize);
+            series:Add((startingPosX + 1.9*time6 + (shapeSize*2/3)), startingPosY + 5*time6 - (2.2*time6^2));
+            graphSeries:Update();
+            series:Update();
+            platformSeries:Update();
+          </onUpdate>
+        </simulation>
+        <button content="Start Simulation" name="btn1" style="center">
+          <onClick>
+            sim1:Stop();
+            simGraph.line:Clear();
+            sim1:Start();
+          </onClick>
+        </button>
+        <p>A <foreground color="blue">rock</foreground> is flung off a <foreground color="green">cliff</foreground> with an initial velocity of $ 16 \frac{m}{s} $ 45° North of East. The height of the cliff is $ 10m $. Assuming gravity is $ 9.8 \frac{m}{s^2} $, find:</p>
+        <stack orientation="horizontal">
+          <p>a) The time it takes the rock to hit the ground.</p>  
+          <button name="btn1" content="Show Answer">
+            <style>
+              <widthPercentage>70%</widthPercentage>
+            </style>
+            <onClick>
+              if btn1.Text == "Show Answer" then
+                section5.stack1.contentStack2.ans1.Style.Visibility = "visible"
+                btn1.Text = "Hide Answer"
+              elseif btn1.Text == "Hide Answer" then
+                btn1.Text = "Show Answer";
+                section5.stack1.contentStack2.ans1.Style.Visibility = "collapsed"
+              end
+            </onClick>
+          </button>
+        </stack>
+        <stack name="ans1" style="collapsed">
+          <p> In order to find the time it takes the rock to hit the ground, we must only look at the y-axis. With this in mind, we should list what information is given to us:</p>
+          <p> $ \bigtriangleup y = 10m $</p>
+          <p> $ a = -9.8 \frac{m}{s} $</p>
+          <p> $ u = 16sin( 45 ) $</p>
+          <p> $ t = ? $</p>
+          <p> With this information, it seems we are missing $ \! v $ so we need to use the kinematic equation that does not have the final velocity variable. This equation goes
+          something like this: $ \bigtriangleup y = ut + \frac{1}{2}at^2 $</p>
+          <p>Solving for time, we have $ t = 0.57s $</p>
+        </stack>
+        <stack orientation="horizontal">
+          <p>b) The distance the rock falls away from the cliff.</p>
+          <button name="btn1" content="Show Answer">
+            <style>
+              <widthPercentage>70%</widthPercentage>
+            </style>
+            <onClick>
+              if btn1.Text == "Show Answer" then
+                section5.stack1.contentStack2.ans2.Style.Visibility = "visible"
+                btn1.Text = "Hide Answer"
+              elseif btn1.Text == "Hide Answer" then
+                btn1.Text = "Show Answer";
+                section5.stack1.contentStack2.ans2.Style.Visibility = "collapsed"
+              end
+            </onClick>
+          </button>
+        </stack>
+        <stack name="ans2" style="collapsed">
+          <p>To find the distance the rock falls away from the cliff, we must look at the x-axis. Now that we have determined the time for the rock to hit the ground, we can use the same
+          value for $ \! t $ in our x component.</p>
+          <p>We are trying to find displacement and we already know our initial velocity, acceleration (which is 0) and time. We can use the equation: $ \bigtriangleup x = ut + \frac{1}{2}at^2 $</p>
+          <p>Solving for $ \bigtriangleup x $ we get: $ \bigtriangleup x = 6.45m $</p>
+        </stack>
+      </stack>
+    </stack>
+    <p>
+      <br />
+    </p>
+  </sectionNoTitle>
+
+  <!--QUESTIONS-->
+  <sectionNoTitle name="q1" style="pageLayout">
+      <onDocumentOpened>
+        selected = 0;
+        contentArray2 = {contentStack.choicesTable:Child(2):Child(1).btn, contentStack.choicesTable:Child(2):Child(2).btn, contentStack.choicesTable:Child(4):Child(1).btn, contentStack.choicesTable:Child(4):Child(2).btn};
+        function setFontBlack(array, a)
+        for i, p in ipairs(array) do
+        if i == a then
+        p.Style.ForegroundColor = color.white;
+        else
+        p.Style.ForegroundColor = color.black;
+        end
+        end
+        end
+
+        function setElementColor(array, a, colActive, colInactive)
+        for i, p in ipairs(array) do
+        if i == a then
+        p.Style.BackgroundColor = colActive or color.rgb(225, 225, 225);
+        else
+        p.Style.BackgroundColor = colInactive or color.rgb(200, 200, 200);
+        end
+        end
+        end
+
+        function setElementVisible(array, a)
+        for i, p in ipairs(array) do
+        if i == a then
+        p.Style.Visibility = "visible"
+        else
+        p.Style.Visibility = "collapsed";
+        end
+        end
+        end
+      </onDocumentOpened>
+      <p style="sectionHeading">Question 1</p>
+      <stack name="contentStack" style="contentBG center">
+        <stack orientation="horizontal" name="graphStack1" style="contentBG center">
+          <drawing name="simGraph">
+            <axis dim="x" min="0" max="10" auto="none"></axis>
+            <axis dim="y" min="0" max="10" auto="none"></axis>
+            <series name="box" draw="segmentedFill" manual="true" capacity="5"></series>
+            <series name="triangle" draw="segmentedFill" manual="true" capacity="3"></series>
+          </drawing>
+        </stack>
+        <simulation name="sim1" duration="3" loop="true" period="0.01" asynchronous="false">
+          <onActivePageChanged>
+            local series = q1.contentStack.graphStack1.simGraph.box;
+            local triSeries = q1.contentStack.graphStack1.simGraph.triangle;
+            local startingPointX = 1.5;
+            local startingPointY = 5;
+            local size = 1;
+            <!--INITIALIZE CLIFF DRAWING-->
+            series:Add(0, 0);
+            series:Add(0, 5);
+            series:Add(3, 5);
+            series:Add(3, 0);
+            series:Add(0, 0);
+            series:Update();
+            triSeries:Add(startingPointX, startingPointY);
+            triSeries:Add(startingPointX + size/3, startingPointY + size)
+            triSeries:Add(startingPointX + size*2/3, startingPointY);
+            triSeries:Update();
+            sim1:Start();
+          </onActivePageChanged>
+          <onUpdate>
+            local triSeries = q1.contentStack.graphStack1.simGraph.triangle;
+            local startingPointX = 1.5;
+            local startingPointY = 5;
+            local size = 1;
+            if (startingPointY + 5*time - (2.2*time^2)) &gt; 0 then
+            time2 = time;
+            end
+            triSeries:Add(startingPointX + 0*time2, startingPointY + 5*time2 - (2.2*time2^2));
+            triSeries:Add((startingPointX + 0*time2 + (size/3)), startingPointY + 5*time2 - (2.2*time2^2) + size);
+            triSeries:Add((startingPointX + 0*time2 + (size*2/3)), startingPointY + 5*time2 - (2.2*time2^2));
+            triSeries:Update();
+
+          </onUpdate>
+        </simulation>
+        <table widths="10% 90%" grid="false">
+          <row>
+            <column>
+              <image src="resources/question.png" />
+              </column>
+            <column>
+              <p>A projectile is shot straight up with an initial velocity of $ u = 20 \frac{m}{s} $ and then hits the ground. What equation would you use to find how long this object is in the air?</p>
+            </column>
+          </row>
+        </table>
+        <table name="choicesTable" grid="false" widths="50% 50%">
+          <row>
+            <column>
+              <!--IMAGE HERE-->
+              <p style="centerText">$ \bigtriangleup y = ut + \frac{1}{2}at^2 $</p>
+            </column>
+            <column>
+              <!--IMAGE HERE-->
+              <p style="centerText">$ \bigtriangleup y = vt + \frac{1}{2}at^2 $</p>
+            </column>
+          </row>
+          <row>
+            <column>
+              <button name="btn" content="A" style="btnUnselected">
+                <onClick>
+                  setElementColor(contentArray2, 1, color.rgb(232, 12, 46), color.transparent);
+                  setFontBlack(contentArray2, 1)
+                  selected = 1;
+                </onClick>
+              </button>
+            </column>
+            <column>
+              <button name="btn" content="B" style="btnUnselected">
+                <onClick>
+                  setElementColor(contentArray2, 2, color.rgb(232, 12, 46), color.transparent);
+                  setFontBlack(contentArray2, 2)
+                  selected = 2;
+                </onClick>
+              </button>
+            </column>
+          </row>
+          <row>
+            <column>
+              <!--IMAGE HERE-->
+              <p style="centerText">$ \bigtriangleup y = \frac{v+u}{2}t $</p>
+            </column>
+            <column>
+              <!--IMAGE HERE-->
+              <p style="centerText">$  v^2 = u^2 + 2as $</p>
+            </column>
+          </row>
+          <row>
+            <column>
+              <button name="btn" content="C" style="btnUnselected">
+                <onClick>
+                  setElementColor(contentArray2, 3, color.rgb(232, 12, 46), color.transparent);
+                  setFontBlack(contentArray2, 3)
+                  selected = 3;
+                </onClick>
+              </button>
+            </column>
+            <column>
+              <button name="btn" content="D" style="btnUnselected">
+                <onClick>
+                  setElementColor(contentArray2, 4, color.rgb(232, 12, 46), color.transparent);
+                  setFontBlack(contentArray2, 4)
+                  selected = 4;
+                </onClick>
+              </button>
+            </column>
+          </row>
+        </table>
+        <button name="btn" content="Check Answer">
+          <onClick>
+            local answer = 1;
+            if selected == answer then
+            btn.Style.BackgroundColor = color.green;
+            setElementColor(contentArray2, selected, color.green, color.transparent);
+            btn.Text = "Correct!"
+            else
+            btn.Style.BackgroundColor = color.rgb(232, 12, 46);
+            btn.Text = "Try Again!"
+            end
+          </onClick>
+        </button>
+      </stack>
+  </sectionNoTitle>
+  <sectionNoTitle name="q2" style="pageLayout">
+    <onDocumentOpened>
+      selected = 0;
+      contentArray3 = {contentStack.choicesTable:Child(2):Child(1).btn, contentStack.choicesTable:Child(2):Child(2).btn, contentStack.choicesTable:Child(4):Child(1).btn, contentStack.choicesTable:Child(4):Child(2).btn};
+    </onDocumentOpened>
+    <p style="sectionHeading">Question 2</p>
+    <stack name="contentStack" style="contentBG center">
+      <stack orientation="horizontal" name="graphStack1" style="contentBG center">
+        <drawing name="simGraph">
+          <axis dim="x" min="0" max="10" auto="none"></axis>
+          <axis dim="y" min="0" max="10" auto="none"></axis>
+          <series name="box" draw="segmentedFill" manual="true" capacity="5"></series>
+          <series name="triangle" draw="segmentedFill" manual="true" capacity="3"></series>
+        </drawing>
+      </stack>
+      <simulation name="sim1" duration="3" loop="true" period="0.01" asynchronous="false">
+        <onActivePageChanged>
+          local series = q2.contentStack.graphStack1.simGraph.box;
+          local triSeries = q2.contentStack.graphStack1.simGraph.triangle;
+          local startingPointX = 1.5;
+          local startingPointY = 5;
+          local size = 1;
+          <!--INITIALIZE CLIFF DRAWING-->
+          series:Add(0, 0);
+          series:Add(0, 5);
+          series:Add(3, 5);
+          series:Add(3, 0);
+          series:Add(0, 0);
+          series:Update();
+          triSeries:Add(startingPointX, startingPointY);
+          triSeries:Add(startingPointX + size/3, startingPointY + size)
+          triSeries:Add(startingPointX + size*2/3, startingPointY);
+          triSeries:Update();
+          sim1:Start();
+        </onActivePageChanged>
+        <onUpdate>
+          local triSeries = q2.contentStack.graphStack1.simGraph.triangle;
+          local startingPointX = 1.5;
+          local startingPointY = 5;
+          local size = 1;
+          if (startingPointY + 5*time - (2.2*time^2)) &gt; 0 then
+          time2 = time;
+          end
+          triSeries:Add(startingPointX + 0*time2, startingPointY + 5*time2 - (2.2*time2^2));
+          triSeries:Add((startingPointX + 0*time2 + (size/3)), startingPointY + 5*time2 - (2.2*time2^2) + size);
+          triSeries:Add((startingPointX + 0*time2 + (size*2/3)), startingPointY + 5*time2 - (2.2*time2^2));
+          triSeries:Update();
+
+        </onUpdate>
+      </simulation>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources/question.png" />
+          </column>
+          <column>
+            <p>Given the initial velocity $ u $, a projectile is shot straight up in the sky. Which equation would you use to determine it's maximum height?</p>
+          </column>
+        </row>
+      </table>
+      <table name="choicesTable" grid="false" widths="50% 50%">
+        <row>
+          <column>
+            <!--IMAGE HERE-->
+            <p style="centerText">$ \bigtriangleup y = ut + \frac{1}{2}at^2 $</p>
+          </column>
+          <column>
+            <!--IMAGE HERE-->
+            <p style="centerText">$ \bigtriangleup y = vt + \frac{1}{2}at^2 $</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="A" style="btnUnselected">
+              <onClick>
+                setElementColor(contentArray3, 1, color.rgb(232, 12, 46), color.transparent);
+                setFontBlack(contentArray3, 1)
+                selected = 1;
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="B" style="btnUnselected">
+              <onClick>
+                setElementColor(contentArray3, 2, color.rgb(232, 12, 46), color.transparent);
+                setFontBlack(contentArray3, 2)
+                selected = 2;
+              </onClick>
+            </button>
+          </column>
+        </row>
+        <row>
+          <column>
+            <!--IMAGE HERE-->
+            <p style="centerText">$ \bigtriangleup y = \frac{v+u}{2}t $</p>
+          </column>
+          <column>
+            <!--IMAGE HERE-->
+            <p style="centerText">$  v^2 = u^2 + 2as $</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="C" style="btnUnselected">
+              <onClick>
+                setElementColor(contentArray3, 3, color.rgb(232, 12, 46), color.transparent);
+                setFontBlack(contentArray3, 3)
+                selected = 3;
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="D" style="btnUnselected">
+              <onClick>
+                setElementColor(contentArray3, 4, color.rgb(232, 12, 46), color.transparent);
+                setFontBlack(contentArray3, 4)
+                selected = 4;
+              </onClick>
+            </button>
+          </column>
+        </row>
+      </table>
+      <button name="btn" content="Check Answer">
+        <onClick>
+          local answer = 4;
+          if selected == answer then
+          btn.Style.BackgroundColor = color.green;
+          setElementColor(contentArray3, selected, color.green, color.transparent);
+          btn.Text = "Correct!"
+          else
+          btn.Style.BackgroundColor = color.rgb(232, 12, 46);
+          btn.Text = "Try Again!"
+          end
+        </onClick>
+      </button>
+    </stack>
+  </sectionNoTitle>
+  <sectionNoTitle name="q3" style="pageLayout">
+    <onDocumentOpened>
+      selected = 0;
+      contentArray4 = {contentStack.choicesTable:Child(2):Child(1).btn, contentStack.choicesTable:Child(2):Child(2).btn, contentStack.choicesTable:Child(4):Child(1).btn, contentStack.choicesTable:Child(4):Child(2).btn};
+    </onDocumentOpened>
+    <p style="sectionHeading">Question 3</p>
+    <stack name="contentStack" style="contentBG center">
+      <stack orientation="horizontal" name="graphStack1" style="contentBG center">
+        <drawing name="simGraph">
+          <axis dim="x" min="0" max="10" auto="none"></axis>
+          <axis dim="y" min="0" max="10" auto="none"></axis>
+          <series name="box" draw="segmentedFill" manual="true" capacity="5"></series>
+          <series name="triangle" draw="segmentedFill" manual="true" capacity="3"></series>
+        </drawing>
+      </stack>
+      <simulation name="sim1" duration="3" loop="true" period="0.01" asynchronous="false">
+        <onActivePageChanged>
+          local series = q3.contentStack.graphStack1.simGraph.box;
+          local triSeries = q3.contentStack.graphStack1.simGraph.triangle;
+          local startingPointX = 1.5;
+          local startingPointY = 5;
+          local size = 1;
+          <!--INITIALIZE CLIFF DRAWING-->
+          series:Add(0, 0);
+          series:Add(0, 5);
+          series:Add(3, 5);
+          series:Add(3, 0);
+          series:Add(0, 0);
+          series:Update();
+          triSeries:Add(startingPointX, startingPointY);
+          triSeries:Add(startingPointX + size/3, startingPointY + size)
+          triSeries:Add(startingPointX + size*2/3, startingPointY);
+          triSeries:Update();
+          sim1:Start();
+        </onActivePageChanged>
+        <onUpdate>
+          local triSeries = q3.contentStack.graphStack1.simGraph.triangle;
+          local startingPointX = 1.5;
+          local startingPointY = 5;
+          local size = 1;
+          if (startingPointY + 5*time - (2.2*time^2)) &gt; 0 then
+          time2 = time;
+          end
+          triSeries:Add(startingPointX + 2.3*time2, startingPointY + 0*time2 - (2.2*time2^2));
+          triSeries:Add((startingPointX + 2.3*time2 + (size/3)), startingPointY + 0*time2 - (2.2*time2^2) + size);
+          triSeries:Add((startingPointX + 2.3*time2 + (size*2/3)), startingPointY + 0*time2 - (2.2*time2^2));
+          triSeries:Update();
+
+        </onUpdate>
+      </simulation>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources/question.png" />
+          </column>
+          <column>
+            <p>A bullet is accelerating $ 20 \frac{m}{s^2} $ to the right for 10 seconds. The bullet initially starts at rest. What equation would you use to determine is final velocity?</p>
+          </column>
+        </row>
+      </table>
+      <table name="choicesTable" grid="false" widths="50% 50%">
+        <row>
+          <column>
+            <!--IMAGE HERE-->
+            <p style="centerText">
+              $  v^2 = u^2 + 2as $
+            </p>
+          </column>
+          <column>
+            <!--IMAGE HERE-->
+            <p style="centerText">$ \bigtriangleup y = vt + \frac{1}{2}at^2 $</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="A" style="btnUnselected">
+              <onClick>
+                setElementColor(contentArray4, 1, color.rgb(232, 12, 46), color.transparent);
+                setFontBlack(contentArray4, 1)
+                selected = 1;
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="B" style="btnUnselected">
+              <onClick>
+                setElementColor(contentArray4, 2, color.rgb(232, 12, 46), color.transparent);
+                setFontBlack(contentArray4, 2)
+                selected = 2;
+              </onClick>
+            </button>
+          </column>
+        </row>
+        <row>
+          <column>
+            <!--IMAGE HERE-->
+            <p style="centerText">$ v = u + at  $</p>
+          </column>
+          <column>
+            <!--IMAGE HERE-->
+            <p style="centerText">$ \bigtriangleup y = ut + \frac{1}{2}at^2 $</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="C" style="btnUnselected">
+              <onClick>
+                setElementColor(contentArray4, 3, color.rgb(232, 12, 46), color.transparent);
+                setFontBlack(contentArray4, 3)
+                selected = 3;
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="D" style="btnUnselected">
+              <onClick>
+                setElementColor(contentArray4, 4, color.rgb(232, 12, 46), color.transparent);
+                setFontBlack(contentArray4, 4)
+                selected = 4;
+              </onClick>
+            </button>
+          </column>
+        </row>
+      </table>
+      <button name="btn" content="Check Answer">
+        <onClick>
+          local answer = 3;
+          if selected == answer then
+          btn.Style.BackgroundColor = color.green;
+          setElementColor(contentArray4, selected, color.green, color.transparent);
+          btn.Text = "Correct!"
+          else
+          btn.Style.BackgroundColor = color.rgb(232, 12, 46);
+          btn.Text = "Try Again!"
+          end
+        </onClick>
+      </button>
+    </stack>
+  </sectionNoTitle>
+  
+  <!--MORE QUESTIONS (SIMULATION QUESTIONS)-->
+  <!--For this section, have user identify 4 simulations with 4 physics questions. The goal is to match the question with the proper simulation-->
+  <sectionNoTitle name="section7">
+    <stack name="stack1" style="pageLayout">
+      <p style="sectionHeading">PRACTICE QUESTIONS</p>
+      <stack style="contentBG">
+        <p>Match the following questions with the correct simulations.</p>
+        <p>A) A canon sits 10m on top of a cliff. If the canon fires a projectile with an initial velocity of $ u = 25 \frac{m}{s} $ to the right, determine how far the projectile will land from the canon.</p>
+        <p>B) An archer shoots an arrow to the right and it lands $ s = 25m $ away from her. It takes 5 seconds for the arrow to hit the ground. Determine the initial velocity of the archer.</p>
+        <p>C) A tennis ball is hit directly up with an initial velocity of $ u = 50 \frac{m}{s} $. The wind blows the tennis ball with an acceleration of $ a = 2 \frac{m}{s} $ to the right. What is the time it takes the ball to hit the ground?</p>
+        <p>D) A diver jumps off a cliff with an initial velocity of $ u = 10 \frac{m}{s} $ 45° North of East. Determine the maximum height the diver obtained through this dive if he landed $ s = 23m $ away from this starting position</p>
+      </stack>
+      <stack orientation="horizontal" name="graphStack11" style="contentBG">
+        <drawing name="simGraph">
+          <style>
+            <aspectRatio>0.7</aspectRatio>
+            <widthPercentage>70%</widthPercentage>
+          </style>
+          <axis dim="x" min="0" max="10" auto="none"></axis>
+          <axis dim="y" min="0" max="10" auto="none"></axis>
+          <series name="box" draw="segmentedFill" manual="true" capacity="5"></series>
+          <series name="triangle" draw="segmentedFill" manual="true" capacity="3"></series>
+        </drawing>
+        <drawing name="simGraph2">
+          <style>
+            <aspectRatio>0.7</aspectRatio>
+            <widthPercentage>70%</widthPercentage>
+          </style>
+          <axis dim="x" min="0" max="10" auto="none"></axis>
+          <axis dim="y" min="0" max="10" auto="none"></axis>
+          <series name="box" draw="segmentedFill" manual="true" capacity="5"></series>
+          <series name="triangle" draw="segmentedFill" manual="true" capacity="3"></series>
+        </drawing>
+      </stack>
+      <stack orientation="horizontal" name="btnStack1" style="contentBG">
+        <stack orientation="horizontal">
+          <button name="btn1" content="A">
+            <onClick>
+              btn1.Text = "X"
+            </onClick>
+          </button>
+          <button name="btn2" content="B">
+            <onClick>
+              btn2.Text = "X"
+            </onClick>
+          </button>
+          <button name="btn3" content="C">
+            <onClick>
+              btn3.Text = "X"
+            </onClick>
+          </button>
+          <button name="btn4" content="D">
+            <onClick>
+              btn4.Style.BackgroundColor = color.green;
+            </onClick>
+          </button>
+        </stack>
+        <stack orientation="horizontal">
+          <button name="btn1" content="A">
+            <onClick>
+              btn1.Style.BackgroundColor = color.green;
+            </onClick>
+          </button>
+          <button name="btn2" content="B">
+            <onClick>
+              btn2.Text = "X"
+            </onClick>
+          </button>
+          <button name="btn3" content="C">
+            <onClick>
+              btn3.Text = "X"
+            </onClick>
+          </button>
+          <button name="btn4" content="D">
+            <onClick>
+              btn4.Text = "X"
+            </onClick>
+          </button>
+        </stack>     
+      </stack>
+      <stack orientation="horizontal" name="graphStack2" style="contentBG">
+        <drawing name="simGraph">
+          <style>
+            <aspectRatio>0.7</aspectRatio>
+            <widthPercentage>70%</widthPercentage>
+          </style>
+          <axis dim="x" min="0" max="10" auto="none"></axis>
+          <axis dim="y" min="0" max="10" auto="none"></axis>
+          <series name="box" draw="segmentedFill" manual="true" capacity="5"></series>
+          <series name="triangle" draw="segmentedFill" manual="true" capacity="3"></series>
+        </drawing>
+        <drawing name="simGraph2">
+          <style>
+            <aspectRatio>0.7</aspectRatio>
+            <widthPercentage>70%</widthPercentage>
+          </style>
+          <axis dim="x" min="0" max="10" auto="none"></axis>
+          <axis dim="y" min="0" max="10" auto="none"></axis>
+          <series name="box" draw="segmentedFill" manual="true" capacity="5"></series>
+          <series name="triangle" draw="segmentedFill" manual="true" capacity="3"></series>
+        </drawing>
+      </stack>
+      <stack orientation="horizontal" name="btnStack2" style="contentBG">
+        <stack orientation="horizontal">
+          <button name="btn1" content="A">
+            <onClick>
+              btn1.Text = "X"
+            </onClick>
+          </button>
+          <button name="btn2" content="B">
+            <onClick>
+              btn2.Style.BackgroundColor = color.green;
+            </onClick>
+          </button>
+          <button name="btn3" content="C">
+            <onClick>
+              btn3.Text = "X"
+            </onClick>
+          </button>
+          <button name="btn4" content="D">
+            <onClick>
+              btn4.Text = "X"
+            </onClick>
+          </button>
+        </stack>
+        <stack orientation="horizontal">
+          <button name="btn1" content="A">
+            <onClick>
+              btn1.Text = "X"
+            </onClick>
+          </button>
+          <button name="btn2" content="B">
+            <onClick>
+              btn2.Text = "X"
+            </onClick>
+          </button>
+          <button name="btn3" content="C">
+            <onClick>
+              btn3.Style.BackgroundColor = color.green;
+            </onClick>
+          </button>
+          <button name="btn4" content="D">
+            <onClick>
+              btn4.Text = "X"
+            </onClick>
+          </button>
+        </stack>     
+      </stack>
+      <simulation name="sim1" duration="5" loop="true" period="0.01" asynchronous="false">
+          <onActivePageChanged>
+            local series = section7.stack1.graphStack11.simGraph.box;
+            local triSeries = section7.stack1.graphStack11.simGraph.triangle;
+            local startingPointX = 1.5;
+            local startingPointY = 5;
+            local size = 1;
+            <!--INITIALIZE CLIFF DRAWING-->
+            series:Add(0, 0);
+            series:Add(0, 5);
+            series:Add(3, 5);
+            series:Add(3, 0);
+            series:Add(0, 0);
+            series:Update();
+            triSeries:Add(startingPointX, startingPointY);
+            triSeries:Add(startingPointX + size/3, startingPointY + size)
+            triSeries:Add(startingPointX + size*2/3, startingPointY);
+            triSeries:Update();
+            sim1:Start();
+          </onActivePageChanged>
+          <onUpdate>
+            local triSeries = section7.stack1.graphStack11.simGraph.triangle;
+            local startingPointX = 1.5;
+            local startingPointY = 5;
+            local size = 1;
+            if (startingPointY + 5*time - (2.2*time^2)) &gt; 0 then
+              time3 = time;
+            end
+            triSeries:Add(startingPointX + 1.9*time3, startingPointY + 5*time3 - (2.2*time3^2));
+            triSeries:Add((startingPointX + 1.9*time3 + (size/3)), startingPointY + 5*time3 - (2.2*time3^2) + size);
+            triSeries:Add((startingPointX + 1.9*time3 + (size*2/3)), startingPointY + 5*time3 - (2.2*time3^2));
+            triSeries:Update();
+            
+          </onUpdate>
+        </simulation>
+      <simulation name="sim2" duration="5" loop="true" period="0.01" asynchronous="false">
+            <onActivePageChanged>
+              local series = graphStack11.simGraph2.box;
+              local triSeries = graphStack11.simGraph2.triangle;
+              local startingPointX = 1.5;
+              local startingPointY = 5;
+              local size = 1;
+              <!--INITIALIZE CLIFF DRAWING-->
+              series:Add(0, 0);
+              series:Add(0, 5);
+              series:Add(3, 5);
+              series:Add(3, 0);
+              series:Add(0, 0);
+              series:Update();
+              triSeries:Add(startingPointX, startingPointY);
+              triSeries:Add(startingPointX + size/3, startingPointY + size)
+              triSeries:Add(startingPointX + size*2/3, startingPointY);
+              triSeries:Update();
+              sim2:Start();
+            </onActivePageChanged>
+            <onUpdate>
+              local triSeries = graphStack11.simGraph2.triangle;
+              local startingPointX = 1.5;
+              local startingPointY = 5;
+              local size = 1;
+              
+              if (startingPointY - (2.2*time^2)) &gt; 0 then
+                time3 = time;
+              end
+              triSeries:Add(startingPointX + 4.2*time3, startingPointY - (2.2*time3^2));
+              triSeries:Add((startingPointX + 4.2*time3 + (size/3)), startingPointY - (2.2*time3^2) + size);
+              triSeries:Add((startingPointX + 4.2*time3 + (size*2/3)), startingPointY - (2.2*time3^2));
+              triSeries:Update();
+            
+            </onUpdate>
+          </simulation>
+      <simulation name="sim3" duration="5" loop="true" period="0.01" asynchronous="false">
+            <onActivePageChanged>
+              local triSeries = graphStack2.simGraph.triangle;
+              local startingPointX = 0;
+              local startingPointY = 3;
+              local size = 1;
+              <!--INITIALIZE CLIFF DRAWING-->
+              triSeries:Add(startingPointX, startingPointY);
+              triSeries:Add(startingPointX + size/3, startingPointY + size)
+              triSeries:Add(startingPointX + size*2/3, startingPointY);
+              triSeries:Update();
+              sim3:Play();
+            </onActivePageChanged>
+            <onUpdate>
+              local triSeries = graphStack2.simGraph.triangle;
+              local startingPointX = 0;
+              local startingPointY = 3;
+              local size = 1;
+              if (startingPointY - (2.2*time^2)) &gt; 0 then
+                time4 = time;
+              end
+              triSeries:Add(startingPointX + 4.9*time4, startingPointY - (2.2*time4^2));
+              triSeries:Add((startingPointX + 4.9*time4 + (size/3)), startingPointY - (2.2*time4^2) + size);
+              triSeries:Add((startingPointX + 4.9*time4 + (size*2/3)), startingPointY - (2.2*time4^2));
+              triSeries:Update();
+            </onUpdate>
+          </simulation>
+      <simulation name="sim4" duration="5" loop="true" period="0.01" asynchronous="false">
+            <onActivePageChanged>
+              local triSeries = graphStack2.simGraph2.triangle;
+              local startingPointX = 0;
+              local startingPointY = 0;
+              local size = 1;
+              <!--INITIALIZE CLIFF DRAWING-->
+              triSeries:Add(startingPointX, startingPointY);
+              triSeries:Add(startingPointX + size/3, startingPointY + size)
+              triSeries:Add(startingPointX + size*2/3, startingPointY);
+              triSeries:Update();
+              sim4:Play();
+            </onActivePageChanged>
+            <onUpdate>
+              local triSeries = graphStack2.simGraph2.triangle;
+              local startingPointX = 0;
+              local startingPointY = 3;
+              local size = 1;
+              if (startingPointY + 5.9*time - (2.2*time^2)) &gt; 0 then
+                time5 = time;
+              end
+              triSeries:Add(startingPointX + 1.3*time5, startingPointY + (5.9*time5) - (2.2*time5^2));
+              triSeries:Add((startingPointX + 1.3*time5 + (size/3)), startingPointY + (5.9*time5) - (2.2*time5^2) + size);
+              triSeries:Add((startingPointX + 1.3*time5 + (size*2/3)), startingPointY + (5.9*time5) - (2.2*time5^2));
+              triSeries:Update();
+            
+            </onUpdate>
+          </simulation>
+    </stack>
+  </sectionNoTitle>
+
+  <sectionNoTitle name="section8" style="pageLayout">
+    <p style="sectionHeading">EXTRA RESOURCES</p>
+    <web url="https://www.khanacademy.org/science/physics/one-dimensional-motion/kinematic-formulas/a/what-are-the-kinematic-formulas"></web>
+    <web url="https://www.khanacademy.org/science/physics/one-dimensional-motion/kinematic-formulas/v/choosing-kinematic-equations"></web>
+  </sectionNoTitle>
+</document>

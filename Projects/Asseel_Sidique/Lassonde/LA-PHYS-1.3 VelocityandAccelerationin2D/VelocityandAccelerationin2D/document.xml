@@ -1,0 +1,1212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G68A90C73_FE7A_4C9E_932B_71BE7ED30F6C">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>LA-PHYS-1.3 Velocity and Acceleration in 2D</title>
+    <creator>Asseel</creator>
+    <abstract>Introduces the concept of adding vectors that represent velocity and acceleration in two dimenstions.</abstract>
+    <coverImage src="resources/LassondeLogo.png" />
+  </metadata>
+
+  <include src="resources/curriculumStylesLassonde.xml" />
+  <include src="resources/plotTools.xml" />
+
+  <header style="themeColour">
+    <stack style="center" orientation="horizontal">
+      <p></p>
+    </stack>
+  </header>
+  <footer style="themeColour">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="themeColourTitle">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+
+
+  <!-- Section 1 -->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">1.3 Velocity and Acceleration in 2D</title>
+    <p style="sectionHeading">Introduction</p>
+    <image src="resources/2dvelocity.png"></image>
+    <stack name="content1" style="contentBG">
+      <p>
+        There is more than one direction to move in physics. Consider the image above:
+        a rocket blasts off into the sky with an acceleration nearly upwards and it also faces wind resistance
+        blowing in another direction. The average acceleration of the rocket takes into consideration this external
+        wind force as it will affect the net acceleration. We break up forces into components to help identify what the values
+        in each dimension are: the x-axis and y-axis.
+      </p>
+    </stack>
+  <p><br /></p>
+  </section>
+
+  <sectionNoTitle name="section2" style="pageLayout">
+    <script>
+      counter = 0;
+      netArray = {};
+    </script>
+    <p style="sectionHeading">Simulation Instructions</p>
+    <stack style="contentBG">
+      <p>
+        Input a vector using point form or polar form and click "Add" to add the vector to the net vector tool.
+        Once you do that, you will see a net vector (bold) and your vector that you have added. Add more vectors to see
+        how the net vector changes and play around with adding vectors in different directions. Click "Switch Form" to change
+        from one form to another and click "Reset" to clear the vectors.
+      </p>
+    </stack>
+    <p style="sectionHeading">Net Vector Tool</p>
+    <stack name="content1" style="contentBG">
+      <p>
+        Use the simulation below to identify how adding vectors together in different directions
+        affect the net vector. This can be applied to physics when we're talking about velocity and acceleration.
+      </p>
+    <table name="tb1" grid="0">
+      <row name="r1">
+        <column name="c1">
+          <xyPlot name="xy1" pan="disabled" tap="disabled" zoom="disabled">
+            <axis dim="x" min="-10" max="10" auto="fixed"></axis>
+            <axis dim="y" min="-10" max="10" auto="fixed"></axis>
+            <series capacity="2" draw="line">
+              <style>
+                <foreground color="black" />
+                <lineThickness>1.5</lineThickness>
+              </style>
+              <data>
+                -10 0; 10 0
+              </data>
+            </series>
+            <series capacity="2" draw="line">
+              <style>
+                <foreground color="black" />
+                <lineThickness>1.5</lineThickness>
+              </style>
+              <data>
+                0 10; 0 -10
+              </data>
+            </series>
+            <series capacity="5" draw="line" name="v1">
+              <style>
+                <lineThickness>1.5</lineThickness>
+              </style>
+            </series>
+            <series capacity="5" draw="line" name="v2">
+              <style>
+                <lineThickness>1.5</lineThickness>
+              </style>
+            </series>
+            <series capacity="5" draw="line" name="v3">
+              <style>
+                <lineThickness>1.5</lineThickness>
+              </style>
+            </series>
+            <series capacity="5" draw="line" name="v4">
+              <style>
+                <lineThickness>1.5</lineThickness>
+              </style>
+            </series>
+            <series capacity="5" draw="line" name="v5">
+              <style>
+                <lineThickness>1.5</lineThickness>
+              </style>
+            </series>
+            <series capacity="5" draw="line" name="v6">
+              <style>
+                <lineThickness>1.5</lineThickness>
+              </style>
+            </series>
+            <series capacity="5" draw="line" name="v7">
+              <style>
+                <lineThickness>1.5</lineThickness>
+              </style>
+            </series>
+            <series capacity="5" draw="line" name="v8">
+              <style>
+                <lineThickness>1.5</lineThickness>
+              </style>
+            </series>
+            <series capacity="5" draw="line" name="v9">
+              <style>
+                <lineThickness>1.5</lineThickness>
+              </style>
+            </series>
+            <series capacity="5" draw="line" name="v10">
+              <style>
+                <lineThickness>1.5</lineThickness>
+              </style>
+            </series>
+            <series capacity="5" draw="line" name="net">
+              <style>
+                <lineThickness>2.5</lineThickness>
+                <foreground color="cornflowerBlue" />
+              </style>
+            </series>
+
+        </xyPlot>
+        </column>
+      </row> 
+    </table>
+    <stack orientation="vertical" name="GUIStack">
+      <stack name="stack1" orientation="horizontal">
+        <table name="tb1" widths="18% 30% 18% 30% 18%" grid="0">
+          <row name="r1">
+            <column>
+              <p>$ ( $</p>
+            </column>
+            <column name="c1">
+              <textInput name="X" placeholder="0-10"></textInput>
+            </column>
+            <column>
+              <p>, </p>
+            </column>
+            <column name="c2">
+              <textInput name="Y" placeholder="0-10"></textInput>
+            </column>
+            <column>
+              <p>$ ) $</p>
+            </column>
+          </row>
+        </table>
+      </stack>
+      <stack name="stack2" orientation="horizontal">
+        <style>
+          <visibility>hidden</visibility>
+        </style>
+        <table name="tb1" widths="25% 25% 25% 25%" grid="0">
+          <row name="r1">
+            <column>
+              <p>$ M $</p>
+            </column>
+            <column name="c1" style="center">
+              <textInput name="X" placeholder="0"></textInput>
+            </column>
+            <column>
+              <p>$ \theta $</p>
+            </column>
+            <column name="c2" style="center">
+              <textInput name="Y" placeholder="0"></textInput>
+            </column>
+          </row>
+        </table>
+      </stack>
+      <stack orientation="horizontal" name="pointStack" style="centerText">
+        <p name="pointCollection1"></p>
+        <p name="pointCollection2"></p>
+        <p name="pointCollection3"></p>
+        <p name="pointCollection4"></p>
+        <p name="pointCollection5"></p>
+        <p name="pointCollection6"></p>
+        <p name="pointCollection7"></p>
+        <p name="pointCollection8"></p>
+        <p name="pointCollection9"></p>
+        <p name="pointCollection10"></p>
+      </stack>
+      <stack orientation="horizontal">
+        <button name="btn1" content="Add Vector">
+        <style>
+          <horizontalAlignment>center</horizontalAlignment>
+          <marginTop>0</marginTop>
+          <marginBottom>0</marginBottom>
+        </style>
+        <onClick>
+          counter = counter + 1;
+          local x = 0;
+          local y = 0;
+          <!--IF THE FORM IS POLAR-->
+          if section2.content1.GUIStack.stack2.Style.Visibility == "Visible" then
+          local m = tonumber(section2.content1.GUIStack.stack2.tb1.r1.c1.X.Text);
+          local a = tonumber(section2.content1.GUIStack.stack2.tb1.r1.c2.Y.Text);
+          x = math.cos(a*math.pi/180)*m;
+          y = math.sin(a*math.pi/180)*m;
+          else <!--IF THE FORM IS NOT POLAR-->
+          x = tonumber(section2.content1.GUIStack.stack1.tb1.r1.c1.X.Text);
+          y = tonumber(section2.content1.GUIStack.stack1.tb1.r1.c2.Y.Text);
+          end
+
+          local width = 1;
+          local angle = math.atan2(x,y);
+          local lineLength = math.sqrt(x^2+y^2);
+          local tPointOnLine;
+          local pointOnLine;
+
+          function round(num, numDecimalPlaces)
+            local mult = 10^(numDecimalPlaces or 0)
+            return math.floor(num * mult + 0.5) / mult
+          end
+
+          tPoint = width / (2 * lineLength);
+          pointOnLine = vector({x, y}) - tPoint * vector({x, y});
+          local normal = vector({-y,x});
+          local leftP = pointOnLine + tPoint * normal;
+          local rightP = pointOnLine - tPoint * normal;
+          netArray[counter] = x;
+          netArray[10+counter] = y;
+          if counter == 1 then
+          <!--function plotTools.drawArrow(series, start, finish, customColor)-->
+          section2.content1.tb1.r1.c1.xy1.v1:Add(0, 0);
+          section2.content1.tb1.r1.c1.xy1.v1:Add(x, y);
+          section2.content1.tb1.r1.c1.xy1.v1:Add(rightP[1], rightP[2]);
+          section2.content1.tb1.r1.c1.xy1.v1:Add(x, y);
+          section2.content1.tb1.r1.c1.xy1.v1:Add(leftP[1], leftP[2]);
+          section2.content1.tb1.r1.c1.xy1.v1:Update();
+          section2.content1.GUIStack.pointStack.pointCollection1.Text = tostring(round(x, 2)) .. "," .. tostring(round(y, 2))
+          elseif counter == 2 then
+          section2.content1.tb1.r1.c1.xy1.v2:Add(0, 0);
+          section2.content1.tb1.r1.c1.xy1.v2:Add(x, y);
+          section2.content1.tb1.r1.c1.xy1.v2:Add(rightP[1], rightP[2]);
+          section2.content1.tb1.r1.c1.xy1.v2:Add(x, y);
+          section2.content1.tb1.r1.c1.xy1.v2:Add(leftP[1], leftP[2]);
+          section2.content1.tb1.r1.c1.xy1.v2:Update();
+          section2.content1.GUIStack.pointStack.pointCollection2.Text = tostring(round(x, 2)) .. "," .. tostring(round(y, 2))
+          elseif counter == 3 then
+          section2.content1.tb1.r1.c1.xy1.v3:Add(0, 0);
+          section2.content1.tb1.r1.c1.xy1.v3:Add(x, y);
+          section2.content1.tb1.r1.c1.xy1.v3:Add(rightP[1], rightP[2]);
+          section2.content1.tb1.r1.c1.xy1.v3:Add(x, y);
+          section2.content1.tb1.r1.c1.xy1.v3:Add(leftP[1], leftP[2]);
+          section2.content1.tb1.r1.c1.xy1.v3:Update();
+          section2.content1.GUIStack.pointStack.pointCollection3.Text = tostring(round(x, 2)) .. "," .. tostring(round(y, 2))
+          elseif counter == 4 then
+          section2.content1.tb1.r1.c1.xy1.v4:Add(0, 0);
+          section2.content1.tb1.r1.c1.xy1.v4:Add(x, y);
+          section2.content1.tb1.r1.c1.xy1.v4:Add(rightP[1], rightP[2]);
+          section2.content1.tb1.r1.c1.xy1.v4:Add(x, y);
+          section2.content1.tb1.r1.c1.xy1.v4:Add(leftP[1], leftP[2]);
+          section2.content1.tb1.r1.c1.xy1.v4:Update();
+          section2.content1.GUIStack.pointStack.pointCollection4.Text = tostring(round(x, 2)) .. "," .. tostring(round(y, 2))
+          elseif counter == 5 then
+          section2.content1.tb1.r1.c1.xy1.v5:Add(0, 0);
+          section2.content1.tb1.r1.c1.xy1.v5:Add(x, y);
+          section2.content1.tb1.r1.c1.xy1.v5:Add(rightP[1], rightP[2]);
+          section2.content1.tb1.r1.c1.xy1.v5:Add(x, y);
+          section2.content1.tb1.r1.c1.xy1.v5:Add(leftP[1], leftP[2]);
+          section2.content1.tb1.r1.c1.xy1.v5:Update();
+          section2.content1.GUIStack.pointStack.pointCollection5.Text = tostring(round(x, 2)) .. "," .. tostring(round(y, 2))
+          elseif counter == 6 then
+          section2.content1.tb1.r1.c1.xy1.v6:Add(0, 0);
+          section2.content1.tb1.r1.c1.xy1.v6:Add(x, y);
+          section2.content1.tb1.r1.c1.xy1.v6:Add(rightP[1], rightP[2]);
+          section2.content1.tb1.r1.c1.xy1.v6:Add(x, y);
+          section2.content1.tb1.r1.c1.xy1.v6:Add(leftP[1], leftP[2]);
+          section2.content1.tb1.r1.c1.xy1.v6:Update();
+          section2.content1.GUIStack.pointStack.pointCollection6.Text = tostring(round(x, 2)) .. "," .. tostring(round(y, 2))
+          elseif counter == 7 then
+          section2.content1.tb1.r1.c1.xy1.v7:Add(0, 0);
+          section2.content1.tb1.r1.c1.xy1.v7:Add(x, y);
+          section2.content1.tb1.r1.c1.xy1.v7:Add(rightP[1], rightP[2]);
+          section2.content1.tb1.r1.c1.xy1.v7:Add(x, y);
+          section2.content1.tb1.r1.c1.xy1.v7:Add(leftP[1], leftP[2]);
+          section2.content1.tb1.r1.c1.xy1.v7:Update();
+          section2.content1.GUIStack.pointStack.pointCollection7.Text = tostring(round(x, 2)) .. "," .. tostring(round(y, 2))
+          elseif counter == 8 then
+          section2.content1.tb1.r1.c1.xy1.v8:Add(0, 0);
+          section2.content1.tb1.r1.c1.xy1.v8:Add(x, y);
+          section2.content1.tb1.r1.c1.xy1.v8:Add(rightP[1], rightP[2]);
+          section2.content1.tb1.r1.c1.xy1.v8:Add(x, y);
+          section2.content1.tb1.r1.c1.xy1.v8:Add(leftP[1], leftP[2]);
+          section2.content1.tb1.r1.c1.xy1.v8:Update();
+          section2.content1.GUIStack.pointStack.pointCollection8.Text = tostring(round(x, 2)) .. "," .. tostring(round(y, 2))
+          elseif counter == 9 then
+          section2.content1.tb1.r1.c1.xy1.v9:Add(0, 0);
+          section2.content1.tb1.r1.c1.xy1.v9:Add(x, y);
+          section2.content1.tb1.r1.c1.xy1.v9:Add(rightP[1], rightP[2]);
+          section2.content1.tb1.r1.c1.xy1.v9:Add(x, y);
+          section2.content1.tb1.r1.c1.xy1.v9:Add(leftP[1], leftP[2]);
+          section2.content1.tb1.r1.c1.xy1.v9:Update();
+          section2.content1.GUIStack.pointStack.pointCollection9.Text = tostring(round(x, 2)) .. "," .. tostring(round(y, 2))
+          elseif counter == 10 then
+          section2.content1.tb1.r1.c1.xy1.v10:Add(0, 0);
+          section2.content1.tb1.r1.c1.xy1.v10:Add(x, y);
+          section2.content1.tb1.r1.c1.xy1.v10:Add(rightP[1], rightP[2]);
+          section2.content1.tb1.r1.c1.xy1.v10:Add(x, y);
+          section2.content1.tb1.r1.c1.xy1.v10:Add(leftP[1], leftP[2]);
+          section2.content1.tb1.r1.c1.xy1.v10:Update();
+          section2.content1.GUIStack.pointStack.pointCollection10.Text = tostring(round(x, 2)) .. "," .. tostring(round(y, 2))
+          end
+
+          local netVecX = 0;
+          local netVecY = 0;
+
+          for i=1, counter do
+          if netArray[i] ~= nil then
+          netVecX = netVecX + tonumber(netArray[i]);
+          netVecY = netVecY + tonumber(netArray[i+10]);
+          end
+          end
+          width = 1;
+          angle = math.atan2(netVecX,netVecY);
+          lineLength = math.sqrt(netVecX^2+netVecY^2);
+
+          tPoint = width / (2 * lineLength);
+          pointOnLine = vector({netVecX, netVecY}) - tPoint * vector({netVecX, netVecY});
+          normal = vector({-netVecY,netVecX});
+          leftP = pointOnLine + tPoint * normal;
+          rightP = pointOnLine - tPoint * normal;
+
+          section2.content1.tb1.r1.c1.xy1.net:Add(0, 0);
+          section2.content1.tb1.r1.c1.xy1.net:Add(netVecX, netVecY);
+          section2.content1.tb1.r1.c1.xy1.net:Add(leftP[1], leftP[2]);
+          section2.content1.tb1.r1.c1.xy1.net:Add(netVecX, netVecY);
+          section2.content1.tb1.r1.c1.xy1.net:Add(rightP[1], rightP[2]);
+          section2.content1.tb1.r1.c1.xy1.net:Update();
+        </onClick>
+      </button>
+        <button name="btn2" content="Switch Form">
+        <style>
+          <horizontalAlignment>center</horizontalAlignment>
+          <marginTop>0</marginTop>
+          <marginBottom>0</marginBottom>
+        </style>
+        <onClick>
+          if section2.content1.GUIStack.stack1.Style.Visibility == "Visible" then
+          section2.content1.GUIStack.stack1.Style.Visibility = "hidden";
+          section2.content1.GUIStack.stack2.Style.Visibility = "visible";
+          elseif section2.content1.GUIStack.stack1.Style.Visibility == "Hidden" then
+          section2.content1.GUIStack.stack1.Style.Visibility = "visible";
+          section2.content1.GUIStack.stack2.Style.Visibility = "hidden";
+          end
+        </onClick>
+      </button>
+        <button name="btn3" content="Reset">
+        <style>
+          <horizontalAlignment>center</horizontalAlignment>
+          <marginTop>0</marginTop>
+          <marginBottom>0</marginBottom>
+        </style>
+        <onClick>
+          section2.content1.tb1.r1.c1.xy1.v1:Clear();
+          section2.content1.tb1.r1.c1.xy1.v2:Clear();
+          section2.content1.tb1.r1.c1.xy1.v3:Clear();
+          section2.content1.tb1.r1.c1.xy1.v4:Clear();
+          section2.content1.tb1.r1.c1.xy1.v5:Clear();
+          section2.content1.tb1.r1.c1.xy1.v6:Clear();
+          section2.content1.tb1.r1.c1.xy1.v7:Clear();
+          section2.content1.tb1.r1.c1.xy1.v8:Clear();
+          section2.content1.tb1.r1.c1.xy1.v9:Clear();
+          section2.content1.tb1.r1.c1.xy1.v10:Clear();
+          section2.content1.tb1.r1.c1.xy1.net:Clear();
+          section2.content1.tb1.r1.c1.xy1.v1:Update();
+          section2.content1.tb1.r1.c1.xy1.v2:Update();
+          section2.content1.tb1.r1.c1.xy1.v3:Update();
+          section2.content1.tb1.r1.c1.xy1.v4:Update();
+          section2.content1.tb1.r1.c1.xy1.v5:Update();
+          section2.content1.tb1.r1.c1.xy1.v6:Update();
+          section2.content1.tb1.r1.c1.xy1.v7:Update();
+          section2.content1.tb1.r1.c1.xy1.v8:Update();
+          section2.content1.tb1.r1.c1.xy1.v9:Update();
+          section2.content1.tb1.r1.c1.xy1.v10:Update();
+          section2.content1.tb1.r1.c1.xy1.net:Update();
+          section2.content1.GUIStack.pointStack.pointCollection1.Text = "";
+          section2.content1.GUIStack.pointStack.pointCollection2.Text = "";
+          section2.content1.GUIStack.pointStack.pointCollection3.Text = "";
+          section2.content1.GUIStack.pointStack.pointCollection4.Text = "";
+          section2.content1.GUIStack.pointStack.pointCollection5.Text = "";
+          section2.content1.GUIStack.pointStack.pointCollection6.Text = "";
+          section2.content1.GUIStack.pointStack.pointCollection7.Text = "";
+          section2.content1.GUIStack.pointStack.pointCollection8.Text = "";
+          section2.content1.GUIStack.pointStack.pointCollection9.Text = "";
+          section2.content1.GUIStack.pointStack.pointCollection10.Text = "";
+          counter = 0;
+          netArray = {};
+        </onClick>
+      </button>
+        <button name="btn4" content="Hide Points">
+        <style>
+          <marginTop>0</marginTop>
+          <marginBottom>0</marginBottom>
+        </style>
+        <onClick>
+          if section2.content1.GUIStack.pointStack.Style.Visibility == "Visible" then
+          section2.content1.GUIStack.pointStack.Style.Visibility = "hidden";
+          btn4.Text = "Show Points";
+          else
+          section2.content1.GUIStack.pointStack.Style.Visibility = "visible";
+          btn4.Text = "Hide Points";
+          end
+        </onClick>
+      </button>
+
+
+
+      </stack>
+      <p>
+        <br />
+      </p>
+    </stack> 
+    
+    </stack>
+
+    <p>
+      <br />
+    </p>
+  
+  </sectionNoTitle>
+  
+  
+  
+  
+  <sectionNoTitle name="section3" style="pageLayout">
+    <p style="sectionHeading">Velocity in 2D</p>
+    <stack name="stack1" style="contentBG">
+      <p>Now that we had a chance to play with vectors, lets look into how the 
+      math part of it works. 2D Vectors are made of up of a point and direction. We will
+      use vector components to determine the net vector and break the problem up into x and y components.</p>
+    </stack>
+    <stack name="stack2" style="contentBG">
+      <style>
+        <marginTop>50</marginTop>
+      </style>
+      <p style="subSectionHeading">Question</p>
+      <p>
+        A family drives from Toronto, Ontario, to Alliston, Ontario. The family first drives 124KM [20° West of North] and then
+        drives 150KM [60° East of North]. The drive takse 1.5 hours to complete. Determine the average velocity of the drive.
+      </p>
+    </stack>
+    <stack orientation="horizontal" style="contentBG2">
+      <stack name="stepStack" orientation="vertical">
+        <p>Draw the problem on a graph (Optional)</p>
+        <stack name="cont">
+          <style>
+            <visibility>collapsed</visibility>
+          </style>
+          <p>This step is used to visualize the problem. Having an idea of the direction of the vectors can help us determine whether we are on the right track or not.</p>
+
+          <p>This step is optional so feel free to move on to the next one if you feel confident about solving this problem.</p>
+
+
+          <xyPlot name="xy1" pan="disabled" tap="disabled" zoom="disabled">
+            <axis dim="x" min="-150" max="190" auto="none"></axis>
+            <axis dim="y" min="-50" max="300" auto="none"></axis>
+            <series capacity="2" draw="line">
+              <style>
+                <foreground color="black" />
+                <lineThickness>1.5</lineThickness>
+              </style>
+              <data>
+                -300 0; 300 0
+              </data>
+            </series>
+            <series capacity="2" draw="line">
+              <style>
+                <foreground color="black" />
+                <lineThickness>1.5</lineThickness>
+              </style>
+              <data>
+                0 300; 0 -100
+              </data>
+            </series>
+            <series draw="line" name="line1">
+              <style>
+                <lineThickness>2</lineThickness>
+              </style>
+            </series>
+            <series draw="line" name="line2">
+              <style>
+                <lineThickness>2</lineThickness>
+              </style>
+            </series>
+            <series draw="lineSegments" name="line3">
+              <style>
+                <foreground color="red" />
+                <lineThickness>2</lineThickness>
+              </style>
+            </series>
+            <series draw="lineSegments" name="line4">
+              <style>
+                <foreground color="red" />
+                <lineThickness>2</lineThickness>
+              </style>
+            </series>
+          </xyPlot>
+          
+          <simulation name="sim1" duration="9" loop="0" asynchronous="false" period="0.05">
+            <onUpdate>
+              if time &lt;= 3 then
+                xy1.line1:Add(42.41/3 * -time, 	(-2.74)*42.41/3 * -time);
+              elseif time &lt;= 6 then
+                xy1.line2:Add(129.9/3 * (time-3), 	(0.577)*129.9/3 * (time-3));
+              elseif time &lt;= 9 then
+                xy1.line3:Add(172.31/3 * (time-6), (-0.240)*172.31/3 * (time-6));
+                xy1.line4:Add(172.31/3 * (time-6) - 42, (-0.240)*172.31/3 * (time-6) +(2.74)*42);
+
+              end
+            </onUpdate>
+          </simulation>
+          
+          <button name="btn1" content="Start Simulation">
+            <onClick>
+              sim1:Stop();
+              xy1.line1:Clear();
+              xy1.line2:Clear();
+              xy1.line3:Clear();
+              xy1.line4:Clear();
+              sim1:Start();
+            </onClick>
+          </button>
+
+          <p>The graph shows the velocity vectors from head to tail and displays the net vector in dotted lines. The average velocity 
+          in this problem is also represented by that dotted line.</p>
+
+        </stack>
+      </stack>
+      <button name="btn" content="Show Step 1">
+        <style>
+          <horizontalAlignment>right</horizontalAlignment>
+          <widthPercentage>40%</widthPercentage>
+        </style>
+        <onClick>
+          if btn.Text=="Show Step 1" then
+          btn.Text = "Hide Step 1";
+          stepStack.cont.Style.Visibility = "visible";
+          stepStack:Child(1).Style.Bold = 1;
+          elseif btn.Text=="Hide Step 1" then
+          btn.Text = "Show Step 1";
+          stepStack.cont.Style.Visibility = "collapsed";
+          stepStack:Child(1).Style.Bold = 0;
+          end
+        </onClick>
+      </button>
+    </stack>
+    <stack orientation="horizontal" style="contentBG">
+      <stack name="stepStack" orientation="vertical">
+        <p>Break the vectors into components</p>
+        <stack name="cont">
+          <style>
+            <visibility>collapsed</visibility>
+          </style>
+          <p>In this problem and in the graph in step 1, we see that there are two vectors. We must break
+          these two vectors into their x and y components in order to determine the net vector. </p>
+          <p>The first vector is 124KM [20° West of North]. Relative to the positive x-axis, this angle
+          can be represented as 124 units with an angle of 110°. To find the x and y components, we have to use cos and sin respectively.</p>
+          <p><b>Vector 1</b></p>
+          <p>$ x-comp \; = \; 124*cos*110^\circ \; $</p>
+          <p>$ x-comp \; = \; -42.41 $</p>
+          <p>$ y-comp \; = \; 124*sin*110^\circ \; $</p>
+          <p>$ y-comp \; = \; 116.52 $</p>
+        
+          <p><b>Vector 2</b></p>
+          <p>$ x-comp \; = \; 150*cos*30^\circ \; $</p>
+          <p>$ x-comp \; = \; 129.90 $</p>
+          <p>$ y-comp \; = \; 150*sin*30^\circ \; $</p>
+          <p>$ y-comp \; = \; 75 $</p>
+        </stack>
+      </stack>
+      <button name="btn" content="Show Step 2">
+        <style>
+          <horizontalAlignment>right</horizontalAlignment>
+          <widthPercentage>40%</widthPercentage>
+        </style>
+        <onClick>
+          if btn.Text=="Show Step 2" then
+          btn.Text = "Hide Step 2";
+          stepStack.cont.Style.Visibility = "visible";
+          stepStack:Child(1).Style.Bold = 1;
+          elseif btn.Text=="Hide Step 2" then
+          btn.Text = "Show Step 2";
+          stepStack.cont.Style.Visibility = "collapsed";
+          stepStack:Child(1).Style.Bold = 0;
+          end
+        </onClick>
+      </button>
+    </stack>
+    <stack orientation="horizontal" style="contentBG2">
+      <stack name="stepStack" orientation="vertical">
+        <p>Add the components into one vector </p>
+        <stack name="cont">
+          <style>
+            <visibility>collapsed</visibility>
+          </style>
+          <p>Using the information we found in step 2, we simply subtract the x-components and the y-components to obtain our
+          new vector.</p>
+          <p>$ x \; = \; 129.90 - (-42.41)  $</p>
+          <p>$ x \; = \; 172.31 $</p>
+          <p>$ y \; = \; 75.00 - 116.52 $</p>
+          <p>$ y \; = \; -41.52 $</p>
+        </stack>
+      </stack>
+      <button name="btn" content="Show Step 3">
+        <style>
+          <horizontalAlignment>right</horizontalAlignment>
+          <widthPercentage>40%</widthPercentage>
+        </style>
+        <onClick>
+          if btn.Text=="Show Step 3" then
+          btn.Text = "Hide Step 3";
+          stepStack.cont.Style.Visibility = "visible";
+          stepStack:Child(1).Style.Bold = 1;
+          elseif btn.Text=="Hide Step 3" then
+          btn.Text = "Show Step 3";
+          stepStack.cont.Style.Visibility = "collapsed";
+          stepStack:Child(1).Style.Bold = 0;
+          end
+        </onClick>
+      </button>
+    </stack>
+    <stack orientation="horizontal" style="contentBG">
+      <stack name="stepStack" orientation="vertical">
+        <p>Determine the magnitude and direction of the net vector</p>
+        <stack name="cont">
+          <style>
+            <visibility>collapsed</visibility>
+          </style>
+          <p>We are going to find the magnitude and direction of the net vector to determine the average velocity.</p>
+          <p>
+            <b>Magnitude</b>
+          </p>
+          <p>Using pythagoras's thereom, the magnitude can be found by using the formula: </p>
+          <p>$ \sqrt{x^2+y^2} $</p>
+          <p>$ \sqrt{87.49^2+191.52^2} $</p>
+          <p>$ Magnitude \; = \; 177.24 $</p>
+
+          <p>
+            <b>Direction</b>
+          </p>
+          <p>To find the direction of the vector, use the trigonometric formula: </p>
+          <p> $ \theta \; = \; tan^-1 \frac{y}{x} $</p>
+          <p> $ \theta \; = 13.55^\circ \; [South \; of\; East] $</p>
+        </stack>
+      </stack>
+      <button name="btn" content="Show Step 4">
+        <style>
+          <horizontalAlignment>right</horizontalAlignment>
+          <widthPercentage>40%</widthPercentage>
+        </style>
+        <onClick>
+          if btn.Text=="Show Step 4" then
+          btn.Text = "Hide Step 4";
+          stepStack.cont.Style.Visibility = "visible";
+          stepStack:Child(1).Style.Bold = 1;
+          elseif btn.Text=="Hide Step 4" then
+          btn.Text = "Show Step 4";
+          stepStack.cont.Style.Visibility = "collapsed";
+          stepStack:Child(1).Style.Bold = 0;
+          end
+        </onClick>
+      </button>
+    </stack>
+    <stack orientation="horizontal" style="contentBG2">
+      <stack name="stepStack" orientation="vertical">
+        <p>Determine the Average Velocity</p>
+        <stack name="cont">
+          <style>
+            <visibility>collapsed</visibility>
+          </style>
+          <p>Now that we have our net vector, finding the average velocity is easy.</p>
+          <p>Velocity is a measurement of distance over time, so we will need the time given in the problem which will be represented as $ t \; = \; 1.5h $</p>
+          <p>You can convert hours into minutes or any other unit if you would like. In this case, we will answer with hours.</p>
+          <p>$ Average \; Velocity \; = \; \frac{177.24 \; 13.55^\circ \; [South \; of \; East]}{1.5h} \; $</p>
+          <p>$ Average \; Velocity \; = 118.17 \frac{KM}{H} \; 13.55^\circ \; [South \; of \; East] $</p>
+        </stack>
+      </stack>
+      <button name="btn" content="Show Step 5">
+        <style>
+          <horizontalAlignment>right</horizontalAlignment>
+          <widthPercentage>40%</widthPercentage>
+        </style>
+        <onClick>
+          if btn.Text=="Show Step 5" then
+          btn.Text = "Hide Step 5";
+          stepStack.cont.Style.Visibility = "visible";
+          stepStack:Child(1).Style.Bold = 1;
+          elseif btn.Text=="Hide Step 5" then
+          btn.Text = "Show Step 5";
+          stepStack.cont.Style.Visibility = "collapsed";
+          stepStack:Child(1).Style.Bold = 0;
+          end
+        </onClick>
+      </button>
+    </stack>
+  <p><br /></p></sectionNoTitle>
+  <sectionNoTitle name="section4" style="pageLayout">
+    <p style="sectionHeading">Acceleration in 2D</p>
+    <stack name="stack1" style="contentBG">
+      <p>You will notice an extreme similarity between adding velocity vectors and acceleration vectors. Go through this next
+      problem to see how.</p>
+    </stack>
+    <stack name="stack2" style="contentBG">
+      <style>
+        <marginTop>50</marginTop>
+      </style>
+      <p style="subSectionHeading">Question</p>
+      <p>
+        Over a 15 minute period, a car travels on a road with many turns. The car's initial velocity is $ 50.0 \frac{km}{h} \; [West \; 60^\circ \; North] $
+        The truck's final velocity is $ 80.0 \frac{km}{h} \; [East \; 60^\circ \; North] $. Calculate the truck's average acceleration in $ \frac{km}{h^2} $.
+      </p>
+    </stack>
+    <stack orientation="horizontal" style="contentBG2">
+      <stack name="stepStack" orientation="vertical">
+        <p>Draw the problem on a graph (Optional)</p>
+        <stack name="cont">
+          <style>
+            <visibility>collapsed</visibility>
+          </style>
+          <p>This step is used to visualize the problem. Having an idea of the direction of the vectors can help us determine whether we are on the right track or not.</p>
+
+          <p>This step is optional so feel free to move on to the next one if you feel confident about solving this problem.</p>
+
+
+          <xyPlot name="xy1" pan="disabled" tap="disabled" zoom="disabled">
+            <axis dim="x" min="-80" max="80" auto="none"></axis>
+            <axis dim="y" min="-20" max="120" auto="none"></axis>
+            <series capacity="2" draw="line">
+              <style>
+                <foreground color="black" />
+                <lineThickness>1.5</lineThickness>
+              </style>
+              <data>
+                -300 0; 300 0
+              </data>
+            </series>
+            <series capacity="2" draw="line">
+              <style>
+                <foreground color="black" />
+                <lineThickness>1.5</lineThickness>
+              </style>
+              <data>
+                0 300; 0 -100
+              </data>
+            </series>
+            <series draw="line" name="line1">
+              <style>
+                <lineThickness>2</lineThickness>
+              </style>
+            </series>
+            <series draw="line" name="line2">
+              <style>
+                <lineThickness>2</lineThickness>
+              </style>
+            </series>
+            <series draw="lineSegments" name="line3">
+              <style>
+                <lineThickness>2</lineThickness>
+                <foreground color="red" />
+
+              </style>
+            </series>
+            <series draw="lineSegments" name="line4">
+              <style>
+                <lineThickness>2</lineThickness>
+                <foreground color="red" />
+              </style>
+            </series>
+          </xyPlot>
+          
+          <simulation name="sim1" duration="9" loop="0" asynchronous="false" period="0.05">
+            <onUpdate>
+              if time &lt;= 3 then
+                xy1.line1:Add(-25/3 * time, 	(-1.732)*-25/3 * time);
+              elseif time &lt;= 6 then
+                xy1.line2:Add(40/3 * (time-3), 	(1.732)*40/3 * (time-3));
+              elseif time &lt;= 9 then
+                xy1.line3:Add(65/3 * (time-6), (0.399)*65/3 * (time-6));
+                xy1.line4:Add(65/3 * (time-6) - 25, (0.399)*65/3 * (time-6) + (-1.732*-25));
+              end
+            </onUpdate>
+          </simulation>
+          
+          <button name="btn1" content="Start Simulation">
+            <onClick>
+              sim1:Stop();
+              xy1.line1:Clear();
+              xy1.line2:Clear();
+              xy1.line3:Clear();
+              xy1.line4:Clear();
+              sim1:Start();
+            </onClick>
+          </button>
+          <p>The graph shows the acceleration vectors and the net vector in dotted lines. The average acceleration 
+          in this problem is also represented by that dotted line.</p>
+        </stack>
+      </stack>
+      <button name="btn" content="Show Step 1">
+        <style>
+          <horizontalAlignment>right</horizontalAlignment>
+          <widthPercentage>40%</widthPercentage>
+        </style>
+        <onClick>
+          if btn.Text=="Show Step 1" then
+          btn.Text = "Hide Step 1";
+          stepStack.cont.Style.Visibility = "visible";
+          stepStack:Child(1).Style.Bold = 1;
+          elseif btn.Text=="Hide Step 1" then
+          btn.Text = "Show Step 1";
+          stepStack.cont.Style.Visibility = "collapsed";
+          stepStack:Child(1).Style.Bold = 0;
+          end
+        </onClick>
+      </button>
+    </stack>
+    <stack orientation="horizontal" style="contentBG">
+      <stack name="stepStack" orientation="vertical">
+        <p>Break the vectors into components</p>
+        <stack name="cont">
+          <style>
+            <visibility>collapsed</visibility>
+          </style>
+          <p>In this problem and in the graph in step 1, we see that there are two vectors. We must break
+          these two vectors into their x and y components in order to determine the net vector. </p>
+          <p>The first vector is 50KM [West 60° North]. Relative to the positive x-axis, this angle
+          can be represented as 50 units with an angle of 120°. To find the x and y components, we have to use cos and sin respectively.</p>
+          <p><b>Vector 1</b></p>
+          <p>$ x-comp \; = \; 50*cos*120^\circ \; $</p>
+          <p>$ x-comp \; = \; -25.00 $</p>
+          <p>$ y-comp \; = \; 50*sin*120^\circ \; $</p>
+          <p>$ y-comp \; = \; 43.3 $</p>
+        
+          <p><b>Vector 2</b></p>
+          <p>$ x-comp \; = \; 80*cos*60^\circ \; $</p>
+          <p>$ x-comp \; = \; 40 $</p>
+          <p>$ y-comp \; = \; 80*sin*60^\circ \; $</p>
+          <p>$ y-comp \; = \; 69.28 $</p>
+        </stack>
+      </stack>
+      <button name="btn" content="Show Step 2">
+        <style>
+          <horizontalAlignment>right</horizontalAlignment>
+          <widthPercentage>40%</widthPercentage>
+        </style>
+        <onClick>
+          if btn.Text=="Show Step 2" then
+          btn.Text = "Hide Step 2";
+          stepStack.cont.Style.Visibility = "visible";
+          stepStack:Child(1).Style.Bold = 1;
+          elseif btn.Text=="Hide Step 2" then
+          btn.Text = "Show Step 2";
+          stepStack.cont.Style.Visibility = "collapsed";
+          stepStack:Child(1).Style.Bold = 0;
+          end
+        </onClick>
+      </button>
+    </stack>
+    <stack orientation="horizontal" style="contentBG2">
+      <stack name="stepStack" orientation="vertical">
+        <p>Add the components into one vector </p>
+        <stack name="cont">
+          <style>
+            <visibility>collapsed</visibility>
+          </style>
+          <p>Using the information we found in step 2, we simply subtract the x-components and the y-components to obtain our
+          new vector.</p>
+          <p>$ x \; = \; 40.00 \; - \; (-25.00) $</p>
+          <p>$ x \; = \; 65.00 $</p>
+          <p>$ y \; = \; 69.28 - 43.30 $</p>
+          <p>$ y \; = \; 25.98 $</p>
+        </stack>
+      </stack>
+      <button name="btn" content="Show Step 3">
+        <style>
+          <horizontalAlignment>right</horizontalAlignment>
+          <widthPercentage>40%</widthPercentage>
+        </style>
+        <onClick>
+          if btn.Text=="Show Step 3" then
+          btn.Text = "Hide Step 3";
+          stepStack.cont.Style.Visibility = "visible";
+          stepStack:Child(1).Style.Bold = 1;
+          elseif btn.Text=="Hide Step 3" then
+          btn.Text = "Show Step 3";
+          stepStack.cont.Style.Visibility = "collapsed";
+          stepStack:Child(1).Style.Bold = 0;
+          end
+        </onClick>
+      </button>
+    </stack>
+    <stack orientation="horizontal" style="contentBG">
+      <stack name="stepStack" orientation="vertical">
+        <p>Determine the magnitude and direction of the net vector</p>
+        <stack name="cont">
+          <style>
+            <visibility>collapsed</visibility>
+          </style>
+          <p>We are going to find the magnitude and direction of the net vector to determine the average velocity.</p>
+          <p>
+            <b>Magnitude</b>
+          </p>
+          <p>Using pythagoras's thereom, the magnitude can be found by using the formula: </p>
+          <p>$ \sqrt{x^2+y^2} $</p>
+          <p>$ \sqrt{65.00^2+25.98^2} $</p>
+          <p>$ Magnitude \; = \; 70.00 $</p>
+
+          <p>
+            <b>Direction</b>
+          </p>
+          <p>To find the direction of the vector, use the trigonometric formula: </p>
+          <p> $ \theta \; = \; tan^-1 \frac{y}{x} $</p>
+          <p> $ \theta \; = 21.8^\circ \; [North \; of\; East] $</p>
+        </stack>
+      </stack>
+      <button name="btn" content="Show Step 4">
+        <style>
+          <horizontalAlignment>right</horizontalAlignment>
+          <widthPercentage>40%</widthPercentage>
+        </style>
+        <onClick>
+          if btn.Text=="Show Step 4" then
+          btn.Text = "Hide Step 4";
+          stepStack.cont.Style.Visibility = "visible";
+          stepStack:Child(1).Style.Bold = 1;
+          elseif btn.Text=="Hide Step 4" then
+          btn.Text = "Show Step 4";
+          stepStack.cont.Style.Visibility = "collapsed";
+          stepStack:Child(1).Style.Bold = 0;
+          end
+        </onClick>
+      </button>
+    </stack>
+    <stack orientation="horizontal" style="contentBG2">
+      <stack name="stepStack" orientation="vertical">
+        <p>Determine the Average Velocity</p>
+        <stack name="cont">
+          <style>
+            <visibility>collapsed</visibility>
+          </style>
+          <p>Now that we have our net vector, finding the average acceleration is easy.</p>
+          <p>Velocity is a measurement of distance over time, so we will need the time given in the problem which will be represented as $ t \; = \; 1.5h $</p>
+          <p>You can convert hours into minutes or any other unit if you would like. In this case, we will answer with hours.</p>
+          <p>$ Average \; Acceleration \; = \; \frac{70 \; \frac{KM}{H} \; 21.8^\circ \; [North \; of \; East]}{0.25h} \; $</p>
+          <p>$ Average \; Acceleration \; = 280 \frac{KM}{H^2} \; 21.8^\circ \; [North \; of \; East] $</p>
+        </stack>
+      </stack>
+      <button name="btn" content="Show Step 5">
+        <style>
+          <horizontalAlignment>right</horizontalAlignment>
+          <widthPercentage>40%</widthPercentage>
+        </style>
+        <onClick>
+          if btn.Text=="Show Step 5" then
+          btn.Text = "Hide Step 5";
+          stepStack.cont.Style.Visibility = "visible";
+          stepStack:Child(1).Style.Bold = 1;
+          elseif btn.Text=="Hide Step 5" then
+          btn.Text = "Show Step 5";
+          stepStack.cont.Style.Visibility = "collapsed";
+          stepStack:Child(1).Style.Bold = 0;
+          end
+        </onClick>
+      </button>
+    </stack>
+  <p><br /></p></sectionNoTitle>
+  
+  <sectionNoTitle name="section5" style="pageLayout">
+    <p style="sectionHeading">Practice Questions</p>
+    <p style="subSectionHeading">Question 1 </p>
+    <stack orientation="vertical" name="btnStack1" style="contentBG">
+      <p>
+        A speed boat is moving at $ 6.4 \frac{m}{s} \; [W 35^\circ N] $ when it starts accelerating at $ 2.5 \frac{m}{s^2} $ for 4.0 s. Calculate the final velocity
+        of the boat.
+      </p>
+      <xyPlot name="plot">
+        <axis dim="x" min="-10" max="2"></axis>
+        <axis dim="y" min="-6" max="6"></axis>
+        <series name="xAxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>2</lineThickness>
+          </style>
+          <data>
+            -10 0; 10 0;
+          </data>
+        </series>
+        <series name="yAxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>2</lineThickness>
+          </style>
+          <data>
+            0 -10; 0 10;
+          </data>
+        </series>
+        <series name="fx">
+          <style>
+            <foreground color="orange" />
+            <lineThickness>2</lineThickness>
+          </style>
+        </series>
+        <series name="fx2">
+          <style>
+            <foreground color="orange" />
+            <lineThickness>2</lineThickness>
+          </style>
+        </series>
+        <series name="fx3" draw="lineSegments">
+          <style>
+            <foreground color="orange" />
+            <lineThickness>2</lineThickness>
+          </style>
+        </series>
+      </xyPlot>
+      <simulation duration="8" name="sim" loop="true">
+        <onActivePageChanged>
+          sim:Start();
+        </onActivePageChanged>
+        <onDuration>
+          plot.fx:Clear();
+          plot.fx2:Clear();
+          plot.fx3:Clear();
+          sim:Start();
+        </onDuration>
+        <onUpdate>
+          <![CDATA[
+          timer = time;
+          
+          if timer < 2 then
+            x = -timer*3
+            plot.fx:Add(x, -1/2*x);
+          elseif timer < 4 then
+            x = -6 - ((timer-2)/2 * 3)
+            plot.fx2:Add(x, 2*x+15);
+          elseif timer < 6 then
+            x = -((timer-4)/2 * 9)
+            plot.fx3:Add(x, 1/3*x);
+          end
+          ]]>
+            
+        </onUpdate>
+        
+      </simulation>
+      <p>Determine the final velocity (round to one decimal place). </p>
+      <stack orientation="horizontal">
+        <table name="tb1" widths="30% 40%" grid="0">
+          <row name="r1">
+            <column>
+              <p> $ V_{f} =  $</p>
+            </column>
+            <column name="c1">
+              <textInput name="X" placeholder="0"></textInput>
+            </column>
+          </row>
+        </table>
+        <button name="btn1" content="Check Answer">
+          <style>
+            <horizontalAlignment>left</horizontalAlignment>
+            <widthPercentage>80%</widthPercentage>
+          </style>
+          <onClick>
+            if tb1.r1.c1.X.Text == "7.3" then
+              btn1.Style.BackgroundColor = color.rgb(0, 255, 0);
+              btn1.Text = "Correct!"
+            else
+              btn1.Text = "Try Again!"
+            end
+          </onClick>
+        </button>
+      </stack>      
+    </stack>
+    <p style="subSectionHeading">Question 2</p>
+    <stack orientation="vertical" name="btnStack2" style="contentBG">
+      <p>
+        An airplane is travelling $ 100 \frac{km}{h} \; [S] $. The plane makes an emergency landing with by changing its velocity to
+        $ 50 \frac{km}{h} \; [E] $.
+      </p>
+      <xyPlot name="plot">
+        <axis dim="x" min="-1" max="5" auto="fixed"></axis>
+        <axis dim="y" min="-5" max="1" auto="fixed"></axis>
+        <series name="xAxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>2</lineThickness>
+          </style>
+          <data>
+            -10 0; 10 0;
+          </data>
+        </series>
+        <series name="yAxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>2</lineThickness>
+          </style>
+          <data>
+            0 -10; 0 10;
+          </data>
+        </series>
+        <series name="fx">
+          <style>
+            <foreground color="red" />
+            <lineThickness>2</lineThickness>
+          </style>
+        </series>
+        <series name="fx2">
+          <style>
+            <foreground color="red" />
+            <lineThickness>2</lineThickness>
+          </style>
+        </series>
+        <series name="fx3" draw="lineSegments">
+          <style>
+            <foreground color="red" />
+            <lineThickness>2</lineThickness>
+          </style>
+        </series>
+      </xyPlot>
+      <simulation duration="8" name="sim" loop="true">
+        <onActivePageChanged>
+          sim:Start();
+        </onActivePageChanged>
+        <onDuration>
+          plot.fx:Clear();
+          plot.fx2:Clear();
+          plot.fx3:Clear();
+          sim:Start();
+        </onDuration>
+        <onUpdate>
+          <![CDATA[
+          timer = time;
+          
+          if timer < 2 then
+            x = -timer/2*3
+            plot.fx:Add(0, x);
+          elseif timer < 4 then
+            x = ((timer-2)/2 * 3)
+            plot.fx2:Add(x, -3);
+          elseif timer < 6 then
+            x = ((timer-4)/2 * 3)
+            plot.fx3:Add(x, -x);
+          end
+          ]]>
+
+        </onUpdate>
+      </simulation>
+      <p> Find the average velocity of the plane (round to one decimal place).</p>
+      <stack orientation="horizontal">
+        <table name="tb1" widths="30% 40%" grid="0">
+          <row name="r1">
+            <column>
+              <p> $ V_{av} =  $</p>
+            </column>
+            <column name="c1">
+              <textInput name="X" placeholder="0"></textInput>
+            </column>
+          </row>
+        </table>
+        <button name="btn1" content="Check Answer">
+          <style>
+            <horizontalAlignment>left</horizontalAlignment>
+            <widthPercentage>80%</widthPercentage>
+          </style>
+          <onClick>
+            if tb1.r1.c1.X.Text == "111.8" then
+            btn1.Style.BackgroundColor = color.rgb(0, 255, 0);
+            btn1.Text = "Correct!"
+            else
+            btn1.Text = "Try Again!"
+            end
+          </onClick>
+        </button>
+      </stack>
+    </stack>
+  <p><br /></p></sectionNoTitle>
+  <sectionNoTitle name="section6" style="pageLayout">
+    <p style="sectionHeading">Extra Resources</p>
+    <web url="https://www.khanacademy.org/science/physics/two-dimensional-motion"></web>
+  <p><br /></p>
+  </sectionNoTitle>
+</document>

@@ -1,0 +1,647 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="GDB890D18_44D1_4BD0_A2D1_1EAAFA1F3AEC">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>LA-PHYS-2.10 The Wave Nature of Light</title>
+    <creator>Thiago</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/lassondeLogo.png" />
+  </metadata>
+
+
+  <include src="plotTools.xml" />
+  <include src="curriculumThemePack/curriculumStyles.xml" />
+
+
+  <!--                                      Header & Footer                                           -->
+  <style name="backgroundColor">
+    <background color="232 12 46" />
+  </style>
+  <style name="fontColor">
+    <foreground color="255 255 255" />
+  </style>
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="fontColor"></p>
+      <p style="fontColor rightText"></p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>20</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--                                      Header & Footer END                                         -->
+
+
+
+
+
+
+
+
+
+  <!-- Section 1 -->
+  <section>
+    <title>
+      <style>
+        <textAlignment>right</textAlignment>
+        <marginTop>100</marginTop>
+      </style>
+      <size scale="xlarge">2.10</size>
+    </title>
+    <p style="chapterTitle">The Wave Nature of Light</p>
+
+    <p style="title">INTRODUCTION</p>
+    <p>
+      Light is a transverse, electromagnetic wave that can be seen by humans.
+      The wave nature of light was first illustrated through experiments on diffraction and interference.
+      Like all electromagnetic waves, light can travel through a vacuum.
+
+    </p>
+  </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- Section 2 -->
+  <sectionNoTitle>
+    <stack name="wrapTitle2">
+      <style>
+        <widthPercentage>0.93</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <p style="titleStyle">
+        <style>
+          <marginTop>30</marginTop>
+          <size scale="large" />
+          <foreground color="91 90 90" />
+        </style>
+        <b>Wave Properties of Light</b>
+      </p>
+      <p>
+        <style>
+          <marginBottom>35</marginBottom>
+        </style>
+        Light is an electromagnetic wave
+      </p>
+    </stack>
+
+
+    <style name="imageS">
+      <widthPercentage>0.5</widthPercentage>
+      <marginTop>50</marginTop>
+      <horizontalAlignment>center</horizontalAlignment>
+    </style>
+
+
+    <image style="imageS" src="resources/wave.jpg" />
+
+
+
+    <stack style="questionAnswer">
+      <style>
+        <marginTop>50</marginTop>
+      </style>
+
+      <p>
+        <style>
+          <marginTop>40</marginTop>
+        </style>
+        <b>Wavelength ($ \lambda $)</b> : distance between the crests of the waves.
+      </p>
+
+      <p>
+        <b>Frequency ($ \nu $)</b> : number of waves that pass a certain point per second.
+      </p>
+
+      <p>
+        <b>Amplitude (A)</b> : maximum disturbance of a wave from its undisturbed position.
+      </p>
+
+      <p>
+        <style>
+          <marginBottom>40</marginBottom>
+        </style>
+        <b>Period of a wave (T)</b> : The time it takes to produce one complete wave.
+      </p>
+
+
+
+
+    </stack>
+  </sectionNoTitle>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- Section 3 -->
+  <sectionNoTitle>
+    <stack name="wrapTitle2">
+      <style>
+        <widthPercentage>0.93</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <p style="titleStyle">
+        <style>
+          <marginBottom>35</marginBottom>
+          <marginTop>30</marginTop>
+          <size scale="large" />
+          <foreground color="91 90 90" />
+        </style>
+        <b>Frequency ($ \nu $)</b>
+      </p>
+    </stack>
+
+    <stack style="questionAnswer">
+      <p>
+        <style>
+          <marginTop>40</marginTop>
+        </style>
+        Frequency refers to the number of wave cycles completed
+        per second.
+      </p>
+      <p>
+        Frequency is referred to using the symbol, $ \nu $
+        which is pronounced "nu"
+      </p>
+      <p>
+        Frequency has units of per second ($ s^{-1} $) or hertz (Hz).
+      </p>
+      <p>
+        <style>
+          <marginBottom>40</marginBottom>
+        </style>
+        Hertz and $s^{-1} $ are interchangeable.
+      </p>
+    </stack>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <stack name="wrapTitle1">
+      <style>
+        <widthPercentage>0.93</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <p style="titleStyle">
+        <style>
+          <marginBottom>35</marginBottom>
+          <marginTop>30</marginTop>
+          <size scale="large" />
+          <foreground color="91 90 90" />
+        </style>
+        <b>Simulation</b>
+      </p>
+    </stack>
+    <stack style="questionAnswer">
+      <stack>
+        <style>
+          <widthPercentage>0.8</widthPercentage>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <p>
+          <style>
+            <marginTop>40</marginTop>
+            <marginBottom>30</marginBottom>
+          </style>
+          The simulation will show two
+          waves with different frequencies.
+        </p>
+      </stack>
+
+
+      <script>
+        local plotDot = wrapStack.myPlotWave.dotPlot;
+        local plotDot2 = wrapStack.myPlotWave2.dotPlot2;
+      </script>
+
+
+      <simulation name="mySim" period="0.1" duration="30">
+        <solver name="sineSolver">
+
+          <series>
+            <clock />
+            <system>
+              <input name="data" width="1" />
+              <onOutputs>
+
+
+
+                a = data[1]
+                b = 24*math.cos(126*a*(math.pi/180)) + 65
+                plotDot:Clear()
+                plotDot:Add(a,b)
+
+                plotDot:Update()
+
+
+
+
+                var1 = data[1]
+                var2 = 15*math.cos(126*var1) + 65
+                plotDot2:Clear()
+                plotDot2:Add(var1,var2)
+
+                plotDot2:Update()
+
+
+
+
+              </onOutputs>
+            </system>
+          </series>
+        </solver>
+      </simulation>
+
+
+
+      <stack name="wrapStack" orientation="horizontal">
+
+        <drawing name="myPlotWave">
+          <style>
+            <widthPercentage>0.78</widthPercentage>
+            <foreground color="55 135 184" />
+          </style>
+          <title>High Frequency</title>
+          <axis dim="x" max="25" min="-0.05" auto="fixed" />
+          <axis dim="y" max="100" min="30" auto="fixed" />
+          <series name="dotPlot" manual="true" draw="points" />
+
+
+
+          <series name="mySeries" manual="true">
+            <style>
+              <widthPercentage>0.78</widthPercentage>
+              <foreground color="55 135 184" />
+            </style>
+          </series>
+        </drawing>
+
+
+
+
+        <drawing name="myPlotWave2">
+          <style>
+            <widthPercentage>0.78</widthPercentage>
+            <foreground color="55 135 184" />
+          </style>
+          <title>Low Frequency</title>
+          <axis dim="x" max="25" min="-0.05" auto="fixed" />
+          <axis dim="y" max="100" min="30" auto="fixed" />
+          <series name="dotPlot2" manual="true" draw="points" />
+
+          <series name="mySeries" manual="true">
+            <style>
+              <widthPercentage>0.78</widthPercentage>
+              <foreground color="55 135 184" />
+            </style>
+          </series>
+        </drawing>
+
+      
+    </stack>
+
+      <script>
+
+        <![CDATA[
+
+
+      local x, y;
+      local c = 0;
+      local cosPlot = wrapStack.myPlotWave.mySeries;
+      local cosPlot2 = wrapStack.myPlotWave2.mySeries;
+
+     
+
+      cosPlot:Clear()
+      cosPlot2:Clear()
+      
+
+      for x = -20, 100, 0.1 do
+      y =  24*math.cos(126*x*(math.pi/180)) + 65
+      aVar = 15*math.cos(126*x) + 65
+      cosPlot:Add(x,y)
+      cosPlot2:Add(x,aVar)
+      end
+      cosPlot:Update()
+      cosPlot2:Update()
+
+      ]]>
+      </script>
+
+
+
+      <button style="large" name="startSimulationButton" content="Start Simulation">
+        <style>
+          <widthPercentage>0.6</widthPercentage>
+          <marginTop>35</marginTop>
+          <marginBottom>35</marginBottom>
+        </style>
+        <onClick>
+          if startSimulationButton.Text == "Start Simulation" then
+          mySim:Start()
+          startSimulationButton.Text = "Stop Simulation"
+          else
+          mySim:Stop()
+          startSimulationButton.Text = "Start Simulation"
+          end
+
+        </onClick>
+      </button>
+    </stack>
+
+    <p>
+      <style>
+        <marginBottom>50</marginBottom>
+      </style>
+    </p>
+
+  </sectionNoTitle>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- Section 4 -->
+  <sectionNoTitle>
+    <stack name="wrapTitle1">
+      <style>
+        <widthPercentage>0.93</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <p style="titleStyle">
+        <style>
+          <marginBottom>35</marginBottom>
+          <marginTop>30</marginTop>
+          <size scale="large" />
+          <foreground color="91 90 90" />
+        </style>
+        <b>Simulation</b>
+      </p>
+    </stack>
+
+    <stack style="questionAnswer">
+
+      <p style="centerText">
+        <style>
+          <marginTop>50</marginTop>
+        </style>
+        Select a type of electromagnetic wave.</p>
+
+      <script>
+
+        local x,y;
+        local a = 1;
+        local k = 15;
+        local d = 2.5;
+        local wave = table.row.column2.simOutput.mySeries;
+
+
+        local function drawWave()
+
+
+
+        y = a*math.sin(k*math.pi/180*(curTime*5)) + d
+        wave:Add(curTime*5,y)
+
+        wave:Update()
+
+        if curTime &gt;= 6 then
+        mySim:Stop()
+        startSimulationButton.Text = "Start Simulation"
+        end
+
+        end
+
+      </script>
+
+    
+
+      <table name="table" widths="25% 75%" grid="false">
+        <style>
+          <marginTop>30</marginTop>
+        </style>
+        <row name="row">
+          <!-- This column holds all buttons -->
+          <column name="column1">
+
+            <button style="large" content="Radio">
+              <style>
+                <horizontalAlignment>center</horizontalAlignment>
+              </style>
+              <onClick>               
+                if k &gt; 0 then
+                k = 15
+                return k;
+                end
+              </onClick>
+            </button>
+
+
+            <button style="large" content="Microwave">
+              <style>
+                <horizontalAlignment>center</horizontalAlignment>
+              </style>
+              <onClick>
+                if k &gt; 0 then
+                k = 20
+                return k;
+                end
+              </onClick>
+            </button>
+
+
+            <button style="large" content="Infrared">
+              <style>
+                <horizontalAlignment>center</horizontalAlignment>
+              </style>
+              <onClick>
+                if k &gt; 0 then
+                k = 30
+                return k;
+                end
+              </onClick>
+            </button>
+
+
+            <button style="large" content="Visible">
+              <style>
+                <horizontalAlignment>center</horizontalAlignment>
+              </style>
+              <onClick>
+                if k &gt; 0 then
+                k = 52
+                return k;
+                end
+              </onClick>
+            </button>
+
+
+            <button style="large" content="Ultraviolet">
+              <style>
+                <horizontalAlignment>center</horizontalAlignment>
+              </style>
+              <onClick>
+                if k &gt; 0 then
+                k = 105
+                return k;
+                end
+              </onClick>
+            </button>
+
+
+            <button style="large" content="X-ray">
+              <style>
+                <horizontalAlignment>center</horizontalAlignment>
+              </style>
+              <onClick>
+                if k &gt; 0 then
+                k = 240
+                return k;
+                end
+              </onClick>
+            </button>
+
+
+            <button style="large" content="Gamma ray">
+              <style>
+                <horizontalAlignment>center</horizontalAlignment>
+              </style>
+              <onClick>
+                if k &gt; 0 then
+                k = 372
+                return k;
+                end
+              </onClick>
+            </button>
+
+          </column>
+
+
+          <!-- This column holds the wave plot -->
+          <column name="column2">
+
+            <drawing name="simOutput">
+              <style>
+                <widthPercentage>0.85</widthPercentage>
+              </style>            
+              <axis dim="x" min="-0.05" max="28" auto="fixed" />
+              <axis dim="y" min="-0.01" max="5" auto="fixed" />
+              <series name="mySeries" manual="true" />
+            </drawing>
+
+          </column>
+        </row>
+      </table>
+
+
+      <simulation name="mySim" period="0.01">
+        <onUpdate>
+          curTime = time;
+          drawWave()
+        </onUpdate>
+      </simulation>
+
+      <button style="large" name="startSimulationButton" content="Start Simulation">
+        <style>
+          <marginBottom>50</marginBottom>
+        </style>
+        <onClick>
+          if startSimulationButton.Text == "Start Simulation" then
+          wave:Clear()
+          mySim:Start()
+          startSimulationButton.Text = "Stop Simulation"
+          else
+          mySim:Stop()
+          startSimulationButton.Text = "Start Simulation"
+          end
+
+        </onClick>
+      </button>
+      
+    </stack>
+
+  </sectionNoTitle>
+
+
+</document>

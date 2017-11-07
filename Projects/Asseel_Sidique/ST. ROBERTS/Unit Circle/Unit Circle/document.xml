@@ -1,0 +1,843 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G11477353_27EB_4594_A84D_B7A3F56EFDC8">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>MCR3U - 6.1 Unit Circle</title>
+    <creator>Asseel</creator>
+    <abstract>This module is to explore the Unit Circle, visualize quadrants, and to identify the functions of sin, cos and tan. </abstract>
+    <coverImage src="resources/cover.png" />
+  </metadata>
+  
+  <include src="resources/curriculumStyles.xml" />
+  <include src="resources/plotTools.xml" />
+  
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="whiteColor">Amanda Koon</p>
+      <p style="whiteColor rightText">MCR3U</p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/logo1.png" inspect="false" />
+      <p style="whiteColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/logo2.png" inspect="false" />
+    </stack>
+  </footer>
+  
+  <section name="section1">
+    <!-- Title and instructions for the interaction -->
+    <title>Unit Circle Interaction</title>
+    <p>
+      Use a finger or stylus to rotate the line around the circle or drag the line across the plot and observe how the sine, cosine,
+      and tangent values change.
+    </p>
+
+    <!-- CONTENT -->
+    <!-- Setting initial values for the sin, cos, and tan functions-->
+    <stack name="values" orientation="horizontal">
+      <onDocumentOpened>
+        section1.stack1.unitCircle.tanLine.Visible = false;
+      </onDocumentOpened>
+      <stack name="degrees">
+        <p style="centerText">
+          <b>Degrees</b>
+        </p>
+        <p name="sinVal" style="centerText sinColor">sin(0) = 0.000</p>
+        <p name="cosVal" style="centerText cosColor">cos(0) = 1.000</p>
+        <p name="tanVal" style="centerText tanColor">tan(0) = 0.000</p>
+        <table grid="false">
+          <style>
+            <horizontalAlignment>center</horizontalAlignment>
+            <widthPercentage>80%</widthPercentage>
+          </style>
+          <row>
+            <column style="sinColor2">
+              <p style="centerText">$ sin $</p>
+            </column>
+            <column style="cosColor2">
+              <p style="centerText">$ cos $</p>
+            </column>
+          </row>
+          <row>
+            <column>
+              <toggle name="toggleS1" value="true">
+                <style>
+                  <horizontalAlignment>center</horizontalAlignment>
+                </style>
+                <onValueChanged>
+                  section1.stack1.unitCircle.sinLine.Visible = not section1.stack1.unitCircle.sinLine.Visible;
+                </onValueChanged>
+              </toggle>
+            </column>
+            <column>
+              <toggle name="toggleS2" value="true">
+                <style>
+                  <horizontalAlignment>center</horizontalAlignment>
+                </style>
+                <onValueChanged>
+                  section1.stack1.unitCircle.cosLine.Visible = not section1.stack1.unitCircle.cosLine.Visible;
+                </onValueChanged>
+              </toggle>
+            </column>
+          </row>
+        </table>
+      </stack>
+      <stack name="radians">
+        <p style="centerText">
+          <b>Radians (Gr. 12)</b>
+        </p>
+        <p name="sinValRad" style="centerText sinColor">sin(0) = 0.000</p>
+        <p name="cosValRad" style="centerText cosColor">cos(0) = 1.000</p>
+        <p name="tanValRad" style="centerText tanColor">tan(0) = 0.000</p>
+        <table grid="false">
+          <style>
+            <horizontalAlignment>center</horizontalAlignment>
+            <widthPercentage>80%</widthPercentage>
+          </style>
+          <row>
+            <column style="sinColor2">
+              <p style="centerText">$ sin $</p>
+            </column>
+            <column style="cosColor2">
+              <p style="centerText">$ cos $</p>
+            </column>
+            <column style="tanColor2">
+              <p style="centerText">$ tan $</p>
+            </column>
+          </row>
+          <row>
+            <column>
+              <toggle name="toggleS1" value="true">
+                <style>
+                  <horizontalAlignment>center</horizontalAlignment>
+                </style>
+                <onValueChanged>
+                  section1.stack1.mygraphs.sin.Visible = not section1.stack1.mygraphs.sin.Visible;
+                  section1.stack1.mygraphs.sinPoint.Visible = not section1.stack1.mygraphs.sinPoint.Visible;
+                </onValueChanged>
+              </toggle>
+            </column>
+            <column>
+              <toggle name="toggleS2" value="true">
+                <style>
+                  <horizontalAlignment>center</horizontalAlignment>
+                </style>
+                <onValueChanged>
+                  section1.stack1.mygraphs.cos.Visible = not section1.stack1.mygraphs.cos.Visible;
+                  section1.stack1.mygraphs.cosPoint.Visible = not section1.stack1.mygraphs.cosPoint.Visible;
+                </onValueChanged>
+              </toggle>
+            </column>
+            <column>
+              <toggle name="toggleS3" value="true">
+                <style>
+                  <horizontalAlignment>center</horizontalAlignment>
+                </style>
+                <onValueChanged>
+                  section1.stack1.mygraphs.tan1.Visible = not section1.stack1.mygraphs.tan1.Visible;
+                  section1.stack1.mygraphs.tan2.Visible = not section1.stack1.mygraphs.tan2.Visible;
+                  section1.stack1.mygraphs.tan3.Visible = not section1.stack1.mygraphs.tan3.Visible;
+                  section1.stack1.mygraphs.tanPoint.Visible = not section1.stack1.mygraphs.tanPoint.Visible;
+                </onValueChanged>
+              </toggle>
+            </column>
+          </row>
+        </table>
+      </stack>
+    </stack>
+
+    <stack orientation="auto" name="stack1">
+      <script>
+        <![CDATA[
+        --UNIT CIRCLE 
+        --Defining plots 
+        plotCosLine = unitCircle.cosLine;
+        plotTanLine = unitCircle.tanLine;
+        plotSinLine = unitCircle.sinLine;
+        plotLine = unitCircle.circleLine;
+        
+        --Drawing unit circle
+        plotTools.drawCircle(unitCircle.circle, vector({0,0}), 1)  
+        
+        --UNIT CIRCLE FUNCTIONS
+        --Function to rotate line using plot gestures
+        function rotateLine(value)
+          unitCircle.circleLine.Transform = matrixf.rotationAboutAxis(0, 0, 1,math.rad(value)); 
+        end
+        
+        
+        --Function to plot cosine line (horizontal line along x-axis)
+        function drawCosLine (value)
+        plotCosLine:Clear()
+        plotCosLine:Add(0,0)
+        plotCosLine:Add(value, 0)
+        end
+        
+        --Function to plot sine line (vertical line along y-axis) 
+        function drawSinLine(cosX, sinY)
+        plotSinLine:Clear()
+        plotSinLine:Add(cosX,0)
+        plotSinLine:Add(cosX, sinY)
+        end
+        
+        --Function to plot tangent line (tangent line to point on circle) (TAN LINE VOID)
+        function drawTanLine(cosX, sinY) 
+          if sinY > 0 then 
+          slope = - cosX / (math.sqrt(1-math.pow(cosX,2)))
+          else
+          slope = cosX / (math.sqrt(1-math.pow(cosX,2)))
+          end
+        
+        yint = sinY - (slope*cosX)
+        xint = - (yint/slope)
+        
+          plotTanLine:Clear()
+          plotTanLine:Add(cosX, sinY) 
+          plotTanLine:Add(xint, 0)     
+        end
+        
+        -- Function to plot angle (updates depending on the location of the line)
+        function drawArc(value)
+         unitCircle.arcAngle:Clear()
+         plotTools.drawArc(unitCircle.arcAngle, 0, value, vector({0,0}), 0.2, color.black)
+         unitCircle.arcAngle:Update()
+        end
+        
+        --GRAPH FUNCTIONS 
+        -- Function to translate line on graph using plot gestures
+        function translateLine(value)
+          mygraphs.line.Transform = matrixf.translation(value, 0, 0);
+        end
+        
+        -- Function to translate point along sine function 
+        function translateSinPoint(moveX, moveY) 
+          mygraphs.sinPoint.Transform = matrixf.translation(moveX, moveY, 0);
+        end
+        
+        -- Function to translate point along cosine function
+        function translateCosPoint(moveX, moveY) 
+          mygraphs.cosPoint.Transform = matrixf.translation(moveX, moveY, 0);
+        end
+        
+        -- Function to translate point along tangent function
+        function translateTanPoint(moveX, moveY)
+          mygraphs.tanPoint.Transform = matrixf.translation(moveX, moveY, 0);
+        end
+      ]]>
+      </script>
+
+      <!-- Creating the unit circle plot -->
+      <drawing name="unitCircle" pan="custom" manual="true">
+        <axis dim="x" min="-2" max="2" auto="fixed" />
+        <axis dim="y" auto="lockAspectRatio" />
+        
+        <onPan>
+          <![CDATA[
+        local xCircle = -2 + state.Current.X * (2 - -2);
+        local yCircle = -2 + state.Current.Y * (2 - -2);
+
+        --Calculating angle based on plot gestures
+        angle = math.deg(math.atan(yCircle/xCircle));
+        
+        -- Adjusting the angle to account for different quadrants          
+        if xCircle < 0 then 
+        degrees = angle + 180;
+        elseif xCircle > 0 and yCircle < 0 then 
+        degrees = angle + 360;
+        else
+        degrees = angle; 
+        end 
+        
+        -- Calculating the sine, cosine, and tangent values
+        cosAngle = math.cos(math.rad(degrees));
+        sinAngle = math.sin(math.rad(degrees));
+        tanAngle = math.tan(math.rad(degrees));
+        
+        if state.IsStart then
+            tempX2 = state.Current.X;
+        end
+        
+        if not(state.Current.X == tempX) then
+          --UNIT CIRCLE TRANSFORMATIONS
+          rotateLine(degrees);
+          drawArc(degrees);
+       
+          --Cos line update
+          drawCosLine(cosAngle)
+             
+          -- Sin Line update
+          drawSinLine(cosAngle,sinAngle);        
+        
+          -- Tan line update
+          drawTanLine(math.cos(math.rad(degrees)), math.sin(math.rad(degrees)))
+        
+          --PLOT TRANSFORMATIONS
+          translateLine(degrees);
+          translateSinPoint(degrees, sinAngle)
+          translateCosPoint(degrees, cosAngle-1)
+          translateTanPoint(degrees, tanAngle)
+        
+          -- OUTPUTTING VALUES
+          values.degrees.sinVal.Text = string.format("sin(%0.0f°) = %0.3f", degrees, sinAngle)
+          values.degrees.cosVal.Text = string.format("cos(%0.0f°) = %0.3f", degrees, cosAngle)
+        
+          -- Set tan(90) and tan(270) to output undefined
+          if degrees > 89.5 and degrees < 91.5 then
+          values.degrees.tanVal.Text = string.format("tan(%0.0f°) = undefined", degrees)
+          elseif degrees > 269.5 and degrees < 270.5 then
+          values.degrees.tanVal.Text = string.format("tan(%0.2f°) = undefined", degrees)
+          elseif degrees == -90 or degrees == 270 then 
+          values.degrees.tanVal.Text = string.format("tan(%0.0f°) = undefined", degrees)
+          else 
+          values.degrees.tanVal.Text = string.format("tan(%0.0f°) = %0.3f°", degrees, tanAngle)
+          end
+        
+          values.radians.sinValRad.Text = string.format("sin(%0.2f) = %0.3f", math.rad(degrees), sinAngle)
+          values.radians.cosValRad.Text = string.format("cos(%0.2f) = %0.3f", math.rad(degrees), cosAngle)
+        
+          -- Set tan(90) and tan(270) to output undefined
+          if degrees > 89.5 and degrees < 91.5 then
+          values.radians.tanValRad.Text = string.format("tan(%0.2f) = undefined", math.rad(degrees))
+          elseif degrees > 269.5 and degrees < 270.5 then
+          values.radians.tanValRad.Text = string.format("tan(%0.2f) = undefined", math.rad(degrees))
+          elseif degrees == -90 or degrees == 270 then 
+          values.radians.tanValRad.Text = string.format("tan(%0.2f) = undefined", math.rad(degrees))
+          else 
+          values.radians.tanValRad.Text = string.format("tan(%0.2f) = %0.3f", math.rad(degrees), tanAngle)
+          end
+        end
+        
+       
+        ]]>
+        </onPan>
+        
+        <series name="circle" style="black" />
+        <series name="xAxis">
+          <data>0 -1.2; 0 1.2</data>
+          <colors>black; black</colors>
+        </series>
+        <series name="yAxis">
+          <data>-1.2 0; 1.2 0</data>
+          <colors>black; black</colors>
+        </series>
+        <series name="circleLine" style="thickLine green" manual="true">
+          <data>0 0; 1 0</data>
+        </series>
+        <series name="tanLine" style="thickLine tanColor" />
+        <series name="cosLine" style="thickLine cosColor" />
+        <series name="sinLine" style="thickLine sinColor" />
+        <series name="arcAngle" manual="true" />
+      </drawing>
+
+      <script>
+        <![CDATA[
+        tmpX2 = 0;
+        --DRAW FUNCTIONS ON GRAPH
+        -- Drawing sin, cos, and tan graphs
+        local sinX, sinY;
+        local cosX, cosY;
+        local tanX, tanY;
+        local plotSin = mygraphs.sin;
+        local plotCos = mygraphs.cos;
+        local plotTan1 = mygraphs.tan1;
+        local plotTan2 = mygraphs.tan2;
+        local plotTan3 = mygraphs.tan3;
+
+        for cosX = 0, 360, 1 do
+        cosY = math.cos(math.rad(cosX))
+        plotCos:Add(cosX, cosY)
+        end
+
+        for sinX = 0, 360, 1 do
+        sinY = math.sin(math.rad(sinX))
+        plotSin:Add(sinX, sinY)
+        end
+
+        for tanX = 0, 90, 1 do
+        tanY = math.tan(math.rad(tanX))
+        plotTan1:Add(tanX, tanY)
+        end
+        
+        for tanX = 91, 270, 1 do 
+        tanY = math.tan(math.rad(tanX))
+        plotTan2:Add(tanX, tanY)
+        end
+        
+        for tanX = 271, 360, 1 do
+        tanY = math.tan(math.rad(tanX))
+        plotTan3:Add(tanX, tanY)
+        end
+
+        plotSin:Update()
+        plotCos:Update()
+        plotTan1:Update()
+        plotTan2:Update()
+        plotTan3:Update()
+        ]]>
+      </script>
+
+      <!--Creating the graph plot-->
+      <xyPlot name="mygraphs" pan="custom" manual="true">
+
+        <axis dim="x" min="0" max="360" auto="fixed" />
+        <axis dim="y" min="-1" max="1" auto="fixed" />
+        
+        <onPan>
+          <![CDATA[
+                   
+            --Determining the translation of the line by plot gestures and recalculating sin, cos, and tan values
+            local xGraph = state.Current.X * (360 - 0) + 0
+            
+            cosAngle = math.cos(math.rad(xGraph));
+            sinAngle = math.sin(math.rad(xGraph));
+            tanAngle = math.tan(math.rad(xGraph));
+            
+            
+            if state.IsStart then
+               tempX2 = state.Current.X;
+            end
+        
+            if not(state.Current.X == tempX) then
+              --TRANSFORMATIONS
+              --Plot transformations  
+              translateLine(xGraph);
+              translateCosPoint(xGraph, cosAngle-1);
+              translateSinPoint(xGraph, sinAngle);
+              translateTanPoint(xGraph, tanAngle);
+            
+              --Unit circle transformations
+              rotateLine(xGraph);
+              drawArc(xGraph);        
+              drawCosLine(cosAngle);     
+              drawSinLine(cosAngle, sinAngle);
+              drawTanLine(cosAngle, sinAngle);
+        
+              --OUTPUTTING VALUES
+              values.degrees.sinVal.Text = string.format("sin(%0.0f°) = %0.3f", xGraph, sinAngle)
+              values.degrees.cosVal.Text = string.format("cos(%0.0f°) = %0.3f", xGraph, cosAngle)
+            
+              -- Set tan(90) and tan(270) to output undefined
+              if xGraph > 89.5 and xGraph < 91.5 then
+              values.degrees.tanVal.Text = string.format("tan(%0.0f°) = undefined", xGraph)
+              elseif xGraph > 269.5 and xGraph < 270.5 then
+              values.degrees.tanVal.Text = string.format("tan(%0.2f°) = undefined", xGraph)
+              elseif xGraph == -90 or xGraph == 270 then 
+              values.degrees.tanVal.Text = string.format("tan(%0.0f°) = undefined", xGraph)
+              else 
+              values.degrees.tanVal.Text = string.format("tan(%0.0f°) = %0.3f", xGraph, tanAngle)
+              end
+            
+              values.radians.sinValRad.Text = string.format("sin(%0.2f) = %0.3f", math.rad(xGraph), sinAngle)
+              values.radians.cosValRad.Text = string.format("cos(%0.2f) = %0.3f", math.rad(xGraph), cosAngle)
+            
+              -- Set tan(90) and tan(270) to output undefined
+              if xGraph > 89.5 and xGraph < 91.5 then
+              values.radians.tanValRad.Text = string.format("tan(%0.2f) = undefined", math.rad(xGraph))
+              elseif xGraph > 269.5 and xGraph < 270.5 then
+              values.radians.tanValRad.Text = string.format("tan(%0.2f) = undefined", math.rad(xGraph))
+              elseif degrees == -90 or degrees == 270 then 
+              values.radians.tanValRad.Text = string.format("tan(%0.2f) = undefined", math.rad(xGraph))
+              else 
+              values.radians.tanValRad.Text = string.format("tan(%0.2f) = %0.3f", math.rad(xGraph), tanAngle)
+              end
+            end
+          
+ 
+        
+
+         ]]>
+        </onPan>
+        <series name="xAxis" style="thickLine black">
+          <data>
+            0 0; 1000 0;
+          </data>
+        </series>
+        <series name="yAxis" style="thickLine black">
+          <style>
+            <lineThickness>4</lineThickness>
+          </style>
+          <data>
+            0 -5; 0 5;
+          </data>
+        </series>
+        <!--plotTools.drawArrow(series, start, finish, customColor)-->
+        <series name="arrow" />
+        <series name="sin" style="sinColor" />
+        <series name="cos" style="cosColor" />
+        <series name="tan1" style="tanColor" />
+        <series name="tan2" style="tanColor" />
+        <series name="tan3" style="tanColor" />
+        <series name="line" style="thickLine green">
+          <data>0 1; 0 -1</data>
+        </series>
+        <series name="sinPoint" draw="points" style="sinColor">
+          <data>0 0</data>
+        </series>
+        <series name="cosPoint" draw="points" style="cosColor">
+          <data>0 1</data>
+        </series>
+        <series name="tanPoint" draw="points" style="tanColor">
+          <data>0 0</data>
+        </series>
+      </xyPlot>
+    </stack>
+  </section>
+  
+  <section name="values">
+    <title>Unit Circle Interaction Part 2</title>
+    <p>
+      Use a finger or stylus to rotate the line around the circle and observe the lengths of the adjacent, opposite and hypotenuse change.
+    </p>
+  
+    <stack name="degrees" orientation="vertical">
+      <onDocumentOpened>
+        values.unitCircle2.tanLine.Visible = false;
+      </onDocumentOpened>
+      <table name="sub" grid="false">
+        <style>
+          <horizontalAlignment>center</horizontalAlignment>
+          <widthPercentage>80%</widthPercentage>
+        </style>
+        <row name="r1">
+          <column name="c1">
+            <p name="degreeVal" style="centerText">x = 0°</p>
+          </column>
+          <column name="c2">
+            <p style="centerText">$ x = angle $</p>
+          </column>
+        </row>
+        <row name="r2">
+          <column name="c1">
+            <p name="sinVal" style="centerText sinColor">sin(0) = 0.000</p>
+          </column>
+          <column name="c2">
+            <p style="centerText">$ sin(x) = opposite/hypotenuse $</p>
+          </column>
+        </row>
+        <row name="r3">
+          <column name="c1">
+            <p name="cosVal" style="centerText cosColor">cos(0) = 1.000</p>
+          </column>
+          <column name="c2">
+            <p style="centerText">$ cos(x) = adjacent/hypotenuse $</p>
+          </column>
+        </row>
+        
+        <row name="r4">
+          <column name="c1">
+            <p name="tanVal" style="centerText tanColor">tan(0) = 0.000</p>
+          </column>
+          <column name="c2">
+            <p style="centerText">$ tan(x) = adjacent/opposite $</p>
+          </column>
+        </row>      
+        <row name="r5">
+          <column name="c1">
+            <p name="radiusVal" style="centerText green">R = 1.000</p>
+          </column>
+          <column name="c2">
+            <p style="centerText">$ R = \sqrt{opposite^2 + adjacent^2} $</p>
+          </column>
+        </row>          
+      </table>
+      <table grid="false">
+          <style>
+            <horizontalAlignment>center</horizontalAlignment>
+            <widthPercentage>80%</widthPercentage>
+          </style>
+          <row>
+            <column style="sinColor2">
+              <p style="centerText">$ OPP $</p>
+            </column>
+            <column style="cosColor2">
+              <p style="centerText">$ ADJ $</p>
+            </column>
+          </row>
+          <row>
+            <column>
+              <toggle name="toggleS1" value="true">
+                <style>
+                  <horizontalAlignment>center</horizontalAlignment>
+                </style>
+                <onValueChanged>
+                  values.unitCircle2.sinLine.Visible = not values.unitCircle2.sinLine.Visible;
+                  values.unitCircle2.OPP.Visible = not values.unitCircle2.OPP.Visible;
+                </onValueChanged>
+              </toggle>
+            </column>
+            <column>
+              <toggle name="toggleS2" value="true">
+                <style>
+                  <horizontalAlignment>center</horizontalAlignment>
+                </style>
+                <onValueChanged>
+                  values.unitCircle2.cosLine.Visible = not values.unitCircle2.cosLine.Visible;
+                  values.unitCircle2.ADJ.Visible = not values.unitCircle2.ADJ.Visible;
+                </onValueChanged>
+              </toggle>
+            </column>
+          </row>
+        </table>
+    </stack>
+    <script>
+        <![CDATA[
+        tempX = 0;
+        --UNIT CIRCLE 
+        --Defining plots 
+        plotCosLine2 = unitCircle2.cosLine;
+        plotTanLine2 = unitCircle2.tanLine;
+        plotSinLine2 = unitCircle2.sinLine;
+        plotLine2 = unitCircle2.circleLine;
+        num = unitCircle2.num;
+        ADJ = unitCircle2.ADJ;
+        OPP = unitCircle2.OPP;
+        HYP = unitCircle2.HYP;
+        
+        --Drawing unit circle
+        plotTools.drawCircle(unitCircle2.circle, vector({0,0}), 1)  
+        
+        --UNIT CIRCLE FUNCTIONS
+        --Function to rotate line using plot gestures
+        function rotateLine2(value)
+          unitCircle2.circleLine.Transform = matrixf.rotationAboutAxis(0, 0, 1,math.rad(value)); 
+        end
+        
+        
+        --Function to plot cosine line (horizontal line along x-axis)
+        function drawCosLine2(value)
+          plotCosLine2:Clear()
+          plotCosLine2:Add(0,0)
+          plotCosLine2:Add(value, 0)
+        end
+        
+        --Function to plot sine line (vertical line along y-axis) 
+        function drawSinLine2(cosX, sinY)
+          plotSinLine2:Clear()
+          plotSinLine2:Add(cosX,0)
+          plotSinLine2:Add(cosX, sinY)
+        end
+        
+        --Function to plot tangent line (tangent line to point on circle) (TAN LINE VOID)
+        function drawTanLine2(cosX, sinY) 
+          if sinY > 0 then 
+          slope = - cosX / (math.sqrt(1-math.pow(cosX,2)))
+          else
+          slope = cosX / (math.sqrt(1-math.pow(cosX,2)))
+        end
+        
+        yint = sinY - (slope*cosX)
+        xint = - (yint/slope)
+          plotTanLine2:Clear()
+          plotTanLine2:Add(cosX, sinY) 
+          plotTanLine2:Add(xint, 0)     
+        end
+        
+        -- Function to plot angle (updates depending on the location of the line)
+        function drawArc2(value)
+         unitCircle2.arcAngle:Clear()
+         plotTools.drawArc(unitCircle2.arcAngle, 0, value, vector({0,0}), 0.2, color.black)
+         unitCircle2.arcAngle:Update()
+        end
+        
+        -- Function to plot labels
+        function plotLabels(value, cosX, sinY)
+          num:Clear();
+          ADJ:Clear();
+          OPP:Clear();
+          HYP:Clear();
+
+          if value <= 90 then
+            char.textA(ADJ, vector({(math.cos(math.rad(value))/2), -0.1}), 0.05, color.orange);
+            char.textD(ADJ, vector({(math.cos(math.rad(value))/2)+0.05, -0.1}), 0.05, color.orange);
+            char.textJ(ADJ, vector({(math.cos(math.rad(value))/2)+0.1, -0.1}), 0.05, color.orange);
+            char.textO(OPP, vector({math.cos(math.rad(value))+0.1, math.sin(math.rad(value))/2}), 0.05, color.red);
+            char.textP(OPP, vector({0.06+math.cos(math.rad(value))+0.1,  math.sin(math.rad(value))/2}), 0.05, color.red);
+            char.textP(OPP, vector({0.1+math.cos(math.rad(value))+0.1, math.sin(math.rad(value))/2}), 0.05, color.red);
+            char.textX(num, vector({math.cos(math.rad(value/2))/4, (math.sin(math.rad(value/2))/4)}), 0.05, color.black);
+            char.textR(HYP, vector({-0.1+math.cos(math.rad(value))/2, 0.1+(math.sin(math.rad(value)))/2}), 0.05, color.green);
+
+          elseif value <= 180 then
+            char.textA(ADJ, vector({(math.cos(math.rad(value))/2), -0.1}), 0.05, color.orange);
+            char.textD(ADJ, vector({(math.cos(math.rad(value))/2)+0.05, -0.1}), 0.05, color.orange);
+            char.textJ(ADJ, vector({(math.cos(math.rad(value))/2)+0.1, -0.1}), 0.05, color.orange);
+            char.textO(OPP, vector({math.cos(math.rad(value))-0.2,  math.sin(math.rad(value))/2}), 0.05, color.red);
+            char.textP(OPP, vector({0.06+math.cos(math.rad(value))-0.2, math.sin(math.rad(value))/2}), 0.05, color.red);
+            char.textP(OPP, vector({0.1+math.cos(math.rad(value))-0.2, math.sin(math.rad(value))/2}), 0.05, color.red);
+            char.textX(num, vector({math.cos(math.rad(value/2))/4, (math.sin(math.rad(value/2))/4)}), 0.05, color.black);
+            char.textR(HYP, vector({0.025+math.cos(math.rad(value))/2, 0.025+(math.sin(math.rad(value)))/2}), 0.05, color.green);
+
+          elseif value <= 270 then
+            char.textA(ADJ, vector({(math.cos(math.rad(value))/2), 0.1}), 0.05, color.orange);
+            char.textD(ADJ, vector({(math.cos(math.rad(value))/2)+0.05, 0.1}), 0.05, color.orange);
+            char.textJ(ADJ, vector({(math.cos(math.rad(value))/2)+0.1, 0.1}), 0.05, color.orange);
+            char.textO(OPP, vector({math.cos(math.rad(value))-0.2,  math.sin(math.rad(value))/2}), 0.05, color.red);
+            char.textP(OPP, vector({0.06+math.cos(math.rad(value))-0.2, math.sin(math.rad(value))/2}), 0.05, color.red);
+            char.textP(OPP, vector({0.1+math.cos(math.rad(value))-0.2,  math.sin(math.rad(value))/2}), 0.05, color.red);
+            char.textX(num, vector({math.cos(math.rad(value/2))/4, (math.sin(math.rad(value/2))/4)}), 0.05, color.black);
+            char.textR(HYP, vector({0.1+math.cos(math.rad(value))/2, -0.1+(math.sin(math.rad(value)))/2}), 0.05, color.green);
+          
+          elseif value <= 360 then
+            char.textA(ADJ, vector({(math.cos(math.rad(value))/2), 0.1}), 0.05, color.orange);
+            char.textD(ADJ, vector({(math.cos(math.rad(value))/2)+0.05, 0.1}), 0.05, color.orange);
+            char.textJ(ADJ, vector({(math.cos(math.rad(value))/2)+0.1, 0.1}), 0.05, color.orange);
+            char.textO(OPP, vector({math.cos(math.rad(value))+0.1, math.sin(math.rad(value))/2}), 0.05, color.red);
+            char.textP(OPP, vector({0.06+math.cos(math.rad(value))+0.1,  math.sin(math.rad(value))/2}), 0.05, color.red);
+            char.textP(OPP, vector({0.1+math.cos(math.rad(value))+0.1,  math.sin(math.rad(value))/2}), 0.05, color.red);
+            char.textX(num, vector({math.cos(math.rad(value/2))/4, (math.sin(math.rad(value/2))/4)}), 0.05, color.black);
+            char.textR(HYP, vector({-0.1+math.cos(math.rad(value))/2, -0.1+(math.sin(math.rad(value)))/2}), 0.05, color.green);
+           
+          end
+          
+         end
+         
+        --if value <= 270 and value >= 180 then
+        --char.textS(num, vector({math.cos(math.rad(value))/2, -0.1}), -0.05, color.green);
+        --char.textI(num, vector({0.75+math.cos(math.rad(value))/2, -0.1}), -0.05, color.green);
+        --char.textN(num, vector({0.1+math.cos(math.rad(value))/2, -0.1}), -0.05, color.green);
+        --end
+          
+        --GRAPH FUNCTIONS 
+        -- Function to translate line on graph using plot gestures
+        --function translateLine(value)
+        --  mygraphs.line.Transform = matrixf.translation(value, 0, 0);
+        --end
+        
+        -- Function to translate point along sine function 
+        --function translateSinPoint(moveX, moveY) 
+        --  mygraphs.sinPoint.Transform = matrixf.translation(moveX, moveY, 0);
+        --end
+        
+        -- Function to translate point along cosine function
+        --function translateCosPoint(moveX, moveY) 
+        --  mygraphs.cosPoint.Transform = matrixf.translation(moveX, moveY, 0);
+        --end
+        
+        -- Function to translate point along tangent function
+        --function translateTanPoint(moveX, moveY)
+        --  mygraphs.tanPoint.Transform = matrixf.translation(moveX, moveY, 0);
+        --end
+      ]]>
+      </script>
+    <drawing name="unitCircle2" pan="custom" manual="true">
+      <style>
+        <widthPercentage>80%</widthPercentage>
+      </style>
+      <onPan>
+        <![CDATA[
+        local xCircle = -2 + state.Current.X * (2 - -2);
+        local yCircle = -2 + state.Current.Y * (2 - -2);
+
+        --Calculating angle based on plot gestures
+        angle = math.deg(math.atan(yCircle/xCircle));
+        
+        -- Adjusting the angle to account for different quadrants          
+        if xCircle < 0 then 
+        degrees = angle + 180;
+        elseif xCircle > 0 and yCircle < 0 then 
+        degrees = angle + 360;
+        else
+        degrees = angle; 
+        end 
+        
+        
+        if state.IsStart then
+           tempX = state.Current.X;
+        end
+        
+        if not(state.Current.X == tempX) then
+          plotLabels(degrees, cosAngle, sinAngle)
+          tempX = state.Current.X;
+          
+
+          -- Calculating the sine, cosine, and tangent values
+          cosAngle = math.cos(math.rad(degrees));
+          sinAngle = math.sin(math.rad(degrees));
+          tanAngle = math.tan(math.rad(degrees));
+        
+          --UNIT CIRCLE TRANSFORMATIONS
+          rotateLine2(degrees);
+          drawArc2(degrees);
+       
+          --Cos line update
+          drawCosLine2(cosAngle)
+             
+          -- Sin Line update
+          drawSinLine2(cosAngle,sinAngle);        
+        
+          -- Tan line update
+          drawTanLine2(math.cos(math.rad(degrees)), math.sin(math.rad(degrees)))
+        
+          --PLOT TRANSFORMATIONS
+        
+          -- OUTPUTTING VALUES
+          values.degrees.sub.r1.c1.degreeVal.Text = string.format("x = %0.0f°", degrees);
+      
+          values.degrees.sub.r2.c1.sinVal.Text = string.format("sin(%0.0f°) = %0.3f/1.000", degrees, sinAngle)
+          values.degrees.sub.r3.c1.cosVal.Text = string.format("cos(%0.0f°) = %0.3f/1.000", degrees, cosAngle)
+
+        
+          -- Set tan(90) and tan(270) to output undefined
+          if degrees > 89.5 and degrees < 91.5 then
+          values.degrees.sub.r4.c1.tanVal.Text = string.format("tan(%0.0f°) = undefined", degrees)
+          elseif degrees > 269.5 and degrees < 270.5 then
+          values.degrees.sub.r4.c1.tanVal.Text = string.format("tan(%0.2f°) = undefined", degrees)
+          elseif degrees == -90 or degrees == 270 then 
+          values.degrees.sub.r4.c1.tanVal.Text = string.format("tan(%0.0f°) = undefined", degrees)
+          else 
+          values.degrees.sub.r4.c1.tanVal.Text = string.format("tan(%0.0f°) = %0.3f/%0.3f", degrees, sinAngle, cosAngle)
+          end
+        
+          --values.radians.sinValRad.Text = string.format("sin(%0.2f) = %0.3f", math.rad(degrees), sinAngle)
+          --values.radians.cosValRad.Text = string.format("cos(%0.2f) = %0.3f", math.rad(degrees), cosAngle)
+        
+          -- Set tan(90) and tan(270) to output undefined
+          --if degrees > 89.5 and degrees < 91.5 then
+          --values.radians.tanValRad.Text = string.format("tan(%0.2f) = undefined", math.rad(degrees))
+          --elseif degrees > 269.5 and degrees < 270.5 then
+          --values.radians.tanValRad.Text = string.format("tan(%0.2f) = undefined", math.rad(degrees))
+          --elseif degrees == -90 or degrees == 270 then 
+          --values.radians.tanValRad.Text = string.format("tan(%0.2f) = undefined", math.rad(degrees))
+          --else 
+          --values.radians.tanValRad.Text = string.format("tan(%0.2f) = %0.3f", math.rad(degrees), tanAngle)
+          --end
+        end
+        
+          
+      ]]>
+      </onPan>
+      <axis dim="x" min="-2" max="2" auto="fixed" />
+      <axis dim="y" auto="lockAspectRatio" />
+      <series name="circle" style="black" />
+      <series name="xAxis">
+        <data>0 -1.2; 0 1.2</data>
+        <colors>black; black</colors>
+      </series>
+      <series name="yAxis">
+        <data>-1.2 0; 1.2 0</data>
+        <colors>black; black</colors>
+      </series>
+      <series name="circleLine" style="thickLine green" manual="true">
+        <data>0 0; 1 0</data>
+      </series>
+      <series name="tanLine" style="thickLine tanColor" />
+      <series name="cosLine" style="thickLine cosColor" />
+      <series name="sinLine" style="thickLine sinColor" />
+      <series name="arcAngle" manual="true" />
+      <series name="OPP" />
+      <series name="ADJ" />
+      <series name="HYP" />
+      <series name="num" />
+    </drawing>
+    <p style="centerText">$ R = Hypotenuse (Radius), ADJ = Adjacent, OPP = Opposite, X = Angle $</p>
+  </section>
+
+</document>

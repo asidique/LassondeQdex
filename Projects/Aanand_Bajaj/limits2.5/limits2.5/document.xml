@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="GDEC1020A_696F_43A3_893A_D2B457A9B651">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>2.5 Limit Properties</title>
+    <creator>AanandB</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/lassondeLogo.png" />
+  </metadata>
+
+  <include src="curriculumThemePack/curriculumStyles.xml" />
+  <include src="plotTools.xml" />
+
+  <!--Header & Footer-->
+  <style name="backgroundColor">
+    <background color="232 12 46" />
+  </style>
+  <style name="fontColor">
+    <foreground color="255 255 255" />
+  </style>
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="fontColor"></p>
+      <p style="fontColor rightText"></p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>20</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+
+  <section>
+    <title>
+      <style>
+        <textAlignment>right</textAlignment>
+        <marginTop>100</marginTop>
+      </style>
+      <size scale="xlarge">2.5</size>
+    </title>
+    <p style="chapterTitle">Limit Properties</p>
+
+    <p style="title">INTRODUCTION</p>
+    <p>
+      When calculating limits, we can make use of some basic properties. Each can be proven using a formal definition of a limit. In this lesson, we will go over the different properties of limits and go through some examples.
+    </p>
+  </section>
+
+  <!--Introduction + What are limit properties-->
+  <sectionNoTitle>
+    <stack>
+      <style>
+        <widthPercentage>0.93</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <style>
+        <counter name="decBullet" format="decimal" />
+      </style>
+
+      <p style="titleMargin">
+        <b>Basic Limit Properties</b>
+      </p>
+
+      <stack style="questionAnswer">
+        <equation>$ \lim_{x\rightarrow c} k = k $</equation>
+        <p>The limit of a constant, k, as x approaches c, is the constant k.</p>
+      </stack>
+
+      <stack style="questionAnswer">
+        <equation>$ \lim_{x\rightarrow c} x = c $</equation>
+        <p>When x gets closer and closer to c, x gets closer to c. This is fairly intuitive.</p>
+      </stack>
+
+      <stack style="questionAnswer">
+        <equation>$ \lim_{x\rightarrow c} [k f(x)] = k \lim_{x\rightarrow c} f(x) $</equation>
+        <p>This property means that the limit of a constant times a function is equal to the constant times the limit of a function. </p>
+      </stack>
+
+      <stack style="questionAnswer">
+        <equation>$ \lim_{x\rightarrow c} [f(x) \pm g(x)] = \lim_{x\rightarrow c} f(x) \pm \lim_{x\rightarrow c} g(x) $</equation>
+        <p>The limit of a sum or difference is the sum of or difference of the limits. </p>
+      </stack>
+
+      <stack style="questionAnswer">
+        <equation>$ \lim_{x\rightarrow c} [f(x) \times g(x)] = \lim_{x\rightarrow c} f(x) \times \lim_{x\rightarrow c} g(x) $</equation>
+        <p>The limit of a product is the product of the limits. </p>
+      </stack>
+
+      <stack style="questionAnswer">
+        <equation>$ \lim_{x\rightarrow c} \frac{f(x)}{g(x)} = \frac{\lim_{x\rightarrow c} f(x)}{\lim_{x\rightarrow c} g(x)}q$</equation>
+        <p>The limit of a quotient is the quotient of the limits. </p>
+      </stack>
+
+      <p>
+        <style>
+          <marginBottom>120</marginBottom>
+        </style>
+      </p>
+    </stack>
+  </sectionNoTitle>
+
+  <sectionNoTitle>
+    <stack>
+      <style>
+        <widthPercentage>0.93</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <style>
+        <counter name="decBullet" format="decimal" />
+      </style>
+      <p style="titleMargin">Example</p>
+
+    </stack>
+  </sectionNoTitle>
+
+</document>

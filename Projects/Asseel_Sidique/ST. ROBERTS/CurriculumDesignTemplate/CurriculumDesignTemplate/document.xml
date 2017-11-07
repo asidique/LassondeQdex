@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G0AEA67B9_206F_4902_9DD3_58930025B112">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>Curriculum Design Template</title>
+    <creator>Sidique</creator>
+    <coverImage src="resources/cover.png" />
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+  </metadata>
+
+  <include src="resources/curriculumStyles.xml" />
+
+  <!--                                      Header & Footer START                                         -->
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="whiteColor">Amanda Koon</p>
+      <p style="whiteColor rightText">MHF4U</p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/logo1.png" inspect="false" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/logo2.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--                                      Header & Footer END                                         -->
+
+
+  <!-- Section 1 -->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">Curriculum Style Template</title>
+    <p style="sectionHeading">Introduction</p>
+    <image src="resources/spacex.jpg" />
+    <stack orientation="vertical" style="contentBG">
+      <p>This is an design template for modules created for St. Roberts Modules. All of the templates are similar to the 'Lassonde Design Template' module,
+      except the styles for the header and footer as well as some logos. This page is only to serve as an example. Simply use the layout for on this module in your
+    St. Robert's module and use 'Lassonde Design Template' for other design schemes such as tabular layout, multiple choice, etc...</p>
+    </stack>
+  </section>
+
+</document>

@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <CustomProjectExtensionsPath>$(LocalAppData)\CustomProjectSystems\qdex\</CustomProjectExtensionsPath>
+    <ProjectGuid>b5284466-491c-401b-add3-ce4c70298745</ProjectGuid>
+  </PropertyGroup>
+  <Import Project="$(CustomProjectExtensionsPath)CustomProject.Default.props" />
+  <Import Project="$(CustomProjectExtensionsPath)CustomProject.props" />
+  <PropertyGroup>
+    <SchemaVersion>2.0</SchemaVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="document.xml">
+    </Content>
+    <Content Include="Equations\0211e4c136ed4827b0728f191df7a993.png" />
+    <Content Include="Equations\05c7190e3650461aa0b03b5b944867dd.png" />
+    <Content Include="Equations\0f0e8f349c114e6ebc039c09a2d7e392.png" />
+    <Content Include="Equations\144a15752a8b4b3bb26317b39b7a9ff2.png" />
+    <Content Include="Equations\1975727f7492464187d2832de7177379.png" />
+    <Content Include="Equations\2a53d7bb154e4624a4f9d4523c0bce53.png" />
+    <Content Include="Equations\2a6b6924f424449988389eef013055de.png" />
+    <Content Include="Equations\2e7b10ba1efb46379c5a18268bd0c47f.png" />
+    <Content Include="Equations\3c756d6c099441cb9c16bcdb32c05f81.png" />
+    <Content Include="Equations\4ddd30981b1a45809ccc51a603736ac4.png" />
+    <Content Include="Equations\53a398fbb47f4467a242658d602d4f4b.png" />
+    <Content Include="Equations\593bcf56dca34b2386e9eec911539509.png" />
+    <Content Include="Equations\6478a528e9d948a89f9401401f092eb9.png" />
+    <Content Include="Equations\656f024efb5c454e93826aeb6ceedebc.png" />
+    <Content Include="Equations\67b22c4b27734f1d819fb0e3d4bd4ee2.png" />
+    <Content Include="Equations\6b60671a5b9c47e0a372b5fa02708118.png" />
+    <Content Include="Equations\7097d5ea43e24341a04ee410f67afc87.png" />
+    <Content Include="Equations\799af1cdc4cd43bfb5fb18761688fb03.png" />
+    <Content Include="Equations\809b7a88393f42b7909dd76877f493ec.png" />
+    <Content Include="Equations\87264794b3cd407985333cc8b91912bf.png" />
+    <Content Include="Equations\976b6cb60fcc4b0b916bb0e729b11f1d.png" />
+    <Content Include="Equations\a1485f157150493c91fd208d0362ece6.png" />
+    <Content Include="Equations\a1cae0dad6b740d1a49d606b31d72ba3.png" />
+    <Content Include="Equations\aa6f694bcbd94e30abd0f09f76ce2140.png" />
+    <Content Include="Equations\b3478f6b9b974df7b740b1817037c02d.png" />
+    <Content Include="Equations\b948a8563e2344b1af5fd63633cfa083.png" />
+    <Content Include="Equations\b94f3658d4fd4176b1493a224025a9a0.png" />
+    <Content Include="Equations\c2fa0cf0eb184b38adf28da50d502526.png" />
+    <Content Include="Equations\c451544c75a8472e8e9f8e2f719549c8.png" />
+    <Content Include="Equations\cef476bc86c64e7fa92ed7d2e7cf149c.png" />
+    <Content Include="Equations\d458b0b8cc4e47309fc2b7e10193cc0e.png" />
+    <Content Include="Equations\dd50bea830944d61ba970b6c2d05cdbc.png" />
+    <Content Include="Equations\e202440d61e94f3fb3b0e00cc0e47779.png" />
+    <Content Include="Equations\ee9869e909e446ba94b47ff5f871f73d.png" />
+    <Content Include="Equations\f3352495c2ae4fe29cf38ce161983960.png" />
+    <Content Include="Equations\f6a9576da5c644938e3eb2069ab3209a.png" />
+    <Content Include="resources\airplane_notext.jpg" />
+    <Content Include="resources\airplane_text.jpg" />
+    <Content Include="resources\airplane_text_components_2.jpg" />
+    <Content Include="resources\binoculars.jpg" />
+    <Content Include="resources\boat_notext.jpg" />
+    <Content Include="resources\boat_text.jpg" />
+    <Content Include="resources\boat_text1.jpg" />
+    <Content Include="resources\car_ballparabola.jpg" />
+    <Content Include="resources\car_ballup.jpg" />
+    <Content Include="resources\car_on_road_carobserver.jpg" />
+    <Content Include="resources\car_on_road_groundobserver.jpg" />
+    <Content Include="resources\lassonde.png" />
+    <Content Include="resources\lassondeLogo.png" />
+    <Content Include="resources\york.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="curriculumThemePack\curriculumStylesLassonde.xml" />
+    <None Include="curriculumThemePack\plotTools.xml" />
+    <None Include="curriculumThemePack\qdexLuaClass.xml" />
+    <None Include="curriculumThemePack\Utilities.xml" />
+  </ItemGroup>
+  <PropertyGroup>
+    <OutputPath>resources</OutputPath>
+  </PropertyGroup>
+  <Import Project="$(CustomProjectExtensionsPath)CustomProjectCs.targets" />
+  <!-- This next bit is required unless the macro used to Import your targets is defined in an MSBuild toolset. -->
+  <ProjectExtensions>
+    <ProjectCapabilities>
+      <ProjectConfigurationsDeclaredAsItems />
+    </ProjectCapabilities>
+  </ProjectExtensions>
+</Project>

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<fragment xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd">
+
+  <!--NI & Quanser Main Footer-->
+  <footer>
+    <table grid="false">
+      <row>
+        <column>
+          <style>
+            <textAlignment>right</textAlignment>
+          </style>
+          <image src="ni_logo_2c.png" style="medium" inspect="false" />
+        </column>
+        <column>
+          <image src="QuanserLogoSmall.png" style="medium" inspect="false" />
+        </column>
+      </row>
+    </table>
+  </footer>
+  
+</fragment>

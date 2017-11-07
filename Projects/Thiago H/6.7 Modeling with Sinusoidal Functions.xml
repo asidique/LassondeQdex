@@ -1,0 +1,2137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G1B70EA4A_456A_451A_A062_6DC7EE0BC16C">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>6.7 Modelling with Sinusoidal Functions</title>
+    <creator>Thiago</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/calculator.png" />
+  </metadata>
+
+  <!-- Section 1 -->
+
+  <include src="curriculumThemePack/curriculumStyles.xml" />
+
+  <!--                                      Header & Footer                                           -->
+
+  <style name="backgroundColor">
+
+    <background color="50 133 184" />
+
+  </style>
+
+  <style name="fontColor">
+
+    <foreground color="255 255 255" />
+
+  </style>
+
+  <header style="backgroundColor">
+
+    <stack style="center" orientation="horizontal">
+
+      <p style="fontColor">Ms. Koon</p>
+
+      <p style="fontColor rightText">MCR3U</p>
+
+    </stack>
+
+  </header>
+
+  <footer style="backgroundColor">
+
+    <stack orientation="horizontal">
+
+      <image style="tiny" src="resources/logo1.png" />
+
+      <p style="fontColor">
+
+        <style>
+
+          <numbering suffix="true" counter="pages" />
+
+          <textAlignment>center</textAlignment>
+
+          <marginTop>30</marginTop>
+
+          <foreground color="255 255 255" />
+
+        </style>
+
+      </p>
+
+      <image style="tiny" src="resources/logo2.png" />
+
+    </stack>
+
+  </footer>
+
+  <!--                                      Header & Footer END                                         -->
+
+
+
+
+
+
+  <include src="plotTools.xml" />
+  
+  
+  
+  
+
+
+  <!--                                      Section 1                                         -->
+  
+  
+  
+
+  <section>
+    <title>
+      <style>
+        <textAlignment>right</textAlignment>
+        <marginTop>80</marginTop>
+      </style>
+      <size scale="xlarge">6.7</size>
+    </title>
+    <p style="chapterTitle">  
+      Modelling with Sinusoidal Functions
+    </p>
+
+    <p style="title">
+      <size scale="large">Background Information</size></p>
+    <p>
+      The periodic nature of sinusoidal functions makes them useful in modelling many real-life situations that 
+      involve periodic motion (pendulum, spring-mass systems, ocean tides) and rotation (motors, alternating current, wheels).
+    </p>
+    
+    <!-- This line can be removed after the curriculumStyles.xml fragment is included -->
+    <p style="invisible">This document is formatted improperly because the curriculumStyles.xml fragment was not included at the beginning of your document.</p>
+  </section>
+  
+  
+  
+  
+  
+  
+  
+
+
+
+  <!--                                      Section 2                                        -->
+
+
+  <sectionNoTitle name="section2">
+
+
+    <stack name="wrapTitle">
+      <style>
+        <widthPercentage>0.93</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+    <p style="titleStyle">
+      <style>
+        <marginTop>50</marginTop>
+        <size scale="large" />
+        <foreground color="50 135 184" />
+      </style>
+      <b>Explanation of Equation</b>      
+    </p>
+    </stack>
+
+    <stack name="wrap">
+      <style>
+        <widthPercentage>0.93</widthPercentage>
+        <marginTop>60</marginTop>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+    <p>
+      <style>
+        <marginBottom>60</marginBottom>
+        <textAlignment>center</textAlignment>
+      </style>
+      A sinusoidal function can be written in the form of:
+    </p>
+    
+    <p style="centerText"> $ y = a sin[k(x - c)] + d $ </p>
+    <p style="centerText"><b>or</b></p>
+    <p style="centerText"> $ y = a cos[k(x - c)] + d $</p>
+
+
+    <p>
+      <style>
+        <marginTop>60</marginTop>
+        <widthPercentage>0.90</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+        <textAlignment>justify</textAlignment>
+      </style>
+      The parameters a, k, c, and d affect the amplitude, period, phase shift and vertical translation of the function respectively. 
+      In the following examples, you will learn how to adjust these parameters to model real-life situations using sinusoidal functions.
+    </p>
+
+    </stack>
+    
+
+
+
+    <button name="jumpToSimulation" content="Simulation" style="large">
+      <style>
+        <marginTop>80</marginTop>
+        <widthPercentage>0.55</widthPercentage>
+      </style>
+      
+      <onClick>
+        application.navigateTo(section3);
+      </onClick>
+    </button>
+
+  </sectionNoTitle>
+
+
+
+
+
+
+
+
+  <!--                                      Section 3                                        -->
+
+
+  <section name="section3">
+    
+    <title style="titleStyle">
+      <style>
+        <marginTop>50</marginTop>
+        <size scale="large" />
+        <foreground color="50 135 184" />
+        <textAlignment>center</textAlignment>
+      </style>
+      <b>Simulation</b>
+    </title>
+    
+    
+
+    <p>
+      <style>
+        <textAlignment>center</textAlignment>
+        <marginTop>20</marginTop>
+        <marginBottom>20</marginBottom>
+        <horizontalAlignment>center</horizontalAlignment>
+        <widthPercentage>0.75</widthPercentage>
+      </style>
+      The graph below shows the function $ y = a  sin(x) $ <br />
+      
+    </p>
+
+    <p>
+      <style>
+        <textAlignment>center</textAlignment>        
+        <marginBottom>20</marginBottom>
+        <horizontalAlignment>center</horizontalAlignment>
+        <widthPercentage>0.75</widthPercentage>
+      </style>
+      Use the slider below to adjust the “a” value and decide how it affects the amplitude of the graph.</p>
+    
+
+    <timePlot name="simOutput">
+      <style>
+        <widthPercentage>0.78</widthPercentage>
+      </style>
+      <axis dim="y" auto="fixed" min="-5" max="5" />
+    </timePlot>
+    <simulation name="mySim" period="0.01">
+
+      <solver name="sineSolver">
+        <series>         
+          <sine name="sineWave" amplitude="1.5"></sine>
+          <probe ref="section3.simOutput"></probe>
+        </series>
+      </solver>
+    </simulation>
+
+    <button style="large" name="startSimulationButton" content="Start Simulation">
+      <onClick>
+        if startSimulationButton.Text == "Start Simulation" then
+        mySim:Start()
+        myStack.Style.Visibility = "visible"
+        startSimulationButton.Text = "Stop Simulation"
+        else
+        mySim:Stop()
+        startSimulationButton.Text = "Start Simulation"
+        myStack.Style.Visibility = "collapsed"
+        end
+
+      </onClick>
+    </button>
+
+    <stack style="collapsed" name="myStack">
+
+      <p name="result">
+        <style>         
+          <textAlignment>center</textAlignment>
+        </style>
+
+      </p>
+      
+      <slider style="center" min="0" max="5" value="1.5">
+        <style>
+          <widthPercentage>0.77</widthPercentage>
+          <marginBottom>50</marginBottom>
+        </style>
+        <onValueChanged>
+          mySim.sineSolver.sineWave.Amplitude = vector({value})
+          result.Text = string.format("Amplitude = %d", value)
+        </onValueChanged>
+      </slider>
+
+      
+      
+    </stack>
+    
+    
+  </section>
+
+
+
+
+
+
+
+
+
+
+
+
+  <!--                                      Section 4                                        -->
+
+  <sectionNoTitle>
+
+    <stack>
+      <style>
+        <widthPercentage>0.93</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+    <p style="titleStyle">
+      <style>
+        <marginTop>50</marginTop>
+        <size scale="large" />
+        <foreground color="50 135 184" />
+      </style>
+      <b>Example</b> 
+    </p>
+    </stack>
+
+    <stack style="questionAnswer">
+      <p style="title">Example 1</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="curriculumThemePack\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>
+              <style>
+                <textAlignment>justify</textAlignment>
+                <widthPercentage>0.95</widthPercentage>
+              </style>
+              The alternating half-day cycles of the rise and fall of oceans are called tides.  Tides in Aberdeen, Scotland caused the water level to rise 4 m above mean sea level and drop to 1.0 m above mean sea level.  The tide completes one cycle approximately every 12 hours.
+            </p>
+          </column>
+        </row>
+
+      </table>
+
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+
+          </column>
+          <column>
+            <p>
+              <style>
+                <textAlignment>justify</textAlignment>
+                <widthPercentage>0.95</widthPercentage>
+              </style>
+              Assume the height of water with respect to mean sea level to be modeled by a cosine function.
+            </p>
+          </column>
+        </row>
+      </table>
+
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+
+          </column>
+          <column>
+            <p>
+              <style>
+                <textAlignment>justify</textAlignment>
+                <widthPercentage>0.95</widthPercentage>
+              </style>
+              The equation of Graph 1 is $ y = cos (10x) $ .  Create a graph (Graph 2) using the sliders to model the tides in Aberdeen, Scotland over a 24-hour period.
+            </p>
+          </column>
+        </row>
+      </table>
+
+      <style name="graphTitle">
+        <textAlignment>center</textAlignment>
+        <marginTop>30</marginTop>
+      </style>
+
+      <p style="graphTitle">
+        Graph 1
+      </p>
+
+      <xyPlot name="sinePlot">
+        <style>
+          <widthPercentage>0.77</widthPercentage>
+        </style>
+        <axis dim="x" min="-0.05" max="28" auto="fixed" />
+        <axis dim="y" min="-0.01" max="5" auto="fixed" />
+        <series name="mySine" manual="true" />
+        <!-- x-y AXIS -->
+        <style name="lineColor">
+          <foreground color="0 0 0" />
+        </style>
+
+        <series style="lineColor">
+          <data> 100 0; -100 0</data>
+        </series>
+        <series style="lineColor">
+          <data>0 100; 0 -100</data>
+        </series>
+        <!-- x-y AXIS END -->
+      </xyPlot>
+      <script>
+
+        <![CDATA[
+
+      local secondPlot = sinePlot.mySine;
+
+      
+      
+      local a = 1;
+      local k = 10;
+      local c = 0;
+      local d = 2;
+      
+      
+       for x = -2, 36, 0.1 do
+
+        y = math.cos(10*x*(math.pi/180)) + 2
+        secondPlot:Add(x,y)
+        end
+        secondPlot:Update()
+        
+        
+        
+        
+
+      local function drawLine()
+
+        secondPlot:Clear()
+        
+         equation.FormattedText = string.format("<b>Your Answer:</b> \t y = <b> %.1f </b> cos [<b> %.1f </b> (x - <b> %.1f </b>)] + <b> %.1f </b>", a, 360/k, c,d)
+        
+
+        for x = -2, 36, 0.1 do
+        y = a*math.cos((360/k)*math.pi/180*(x-c)) + d 
+        secondPlot:Add(x,y)
+        end
+        secondPlot:Update()
+      end
+      
+      
+      
+      function round(value,multiple)
+      result = 0;
+
+     if value % multiple ~= 0 then
+     result = multiple;
+     division = math.floor((value/multiple)+1);
+     result = division*multiple;
+     return result;
+     else 
+     return value;
+     end
+     end
+
+      ]]>
+
+      </script>
+
+
+
+
+
+
+
+
+
+
+
+
+      <p name="equation">
+        <style>
+          <textAlignment>center</textAlignment>
+        </style>
+      </p>
+        
+ 
+
+      <p name="aresult">
+        Amplitude (a)
+        <style>
+         
+          <textAlignment>center</textAlignment>
+          <marginBottom>10</marginBottom>
+          <marginTop>20</marginTop>
+        </style>
+      </p>
+
+      <slider name="aSlider" min="0" max="5" value="1">
+        <style>
+          <widthPercentage>0.77</widthPercentage>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <onValueChanged>
+          a = value
+          drawLine()
+          aresult.Text = string.format("Amplitude (a) = %.1f", value)       
+        </onValueChanged>
+      </slider>
+
+      <p name="kresult">
+        Period (360 / k)
+        <style>
+         
+          <textAlignment>center</textAlignment>
+          <marginBottom>10</marginBottom>
+          <marginTop>20</marginTop>
+        </style>
+      </p>
+
+
+      <slider name="kSlider" min="0" max="24" value="1">
+        <style>
+          <widthPercentage>0.77</widthPercentage>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <onValueChanged>
+
+          k = value
+          drawLine()
+
+          kresult.Text = string.format("Period (360 / k) = %.1f", value)
+        </onValueChanged>
+      </slider>
+
+      <p name="cresult">
+        Phase Shift (c)
+        <style>
+          
+          <textAlignment>center</textAlignment>
+          <marginBottom>10</marginBottom>
+          <marginTop>20</marginTop>
+        </style>
+      </p>
+
+      <slider name="cSlider" min="0" max="24" value="1">
+        <style>
+          <widthPercentage>0.77</widthPercentage>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <onValueChanged>
+
+          c = value
+          drawLine()
+
+          cresult.Text = string.format("Phase Shift (c) = %.1f", value)
+        </onValueChanged>
+      </slider>
+
+      <p name="dresult">
+        Vertical Translation (d)
+        <style>
+         
+          <textAlignment>center</textAlignment>
+          <marginBottom>10</marginBottom>
+          <marginTop>20</marginTop>
+        </style>
+      </p>
+
+      <slider name="dSlider" min="-2" max="5" value="1">
+        <style>
+          <widthPercentage>0.77</widthPercentage>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <onValueChanged>
+          d = value
+          drawLine()
+
+          dresult.Text = string.format("Vertical Translation (d) = %.1f", value)
+        </onValueChanged>
+      </slider>
+
+
+
+
+
+
+
+
+
+      <!--   Second Plot    -->
+
+      <p style="graphTitle">
+        <style>
+          <marginTop>50</marginTop>
+        </style>
+        Graph 2
+      </p>
+
+      <p>
+        <style>
+          <widthPercentage>0.75</widthPercentage>
+          <horizontalAlignment>center</horizontalAlignment>
+          <textAlignment>center</textAlignment>
+          <marginBottom>30</marginBottom>
+        </style>
+        The graph of y = 1.5 sin (30x) + 2.5 is shown.  Use the slider to determine an appropriate phase shift to model the tides of Aberdeen (i.e. re-create Graph 1) using a sine function.
+      </p>
+      
+      <xyPlot name="sinePlot2">
+        <style>
+          <widthPercentage>0.77</widthPercentage>
+        </style>
+        <axis dim="x" min="-0.05" max="28" auto="fixed" />
+        <axis dim="y" min="-0.01" max="5" auto="fixed" />
+        <series name="mySine2" manual="true" />
+        <!-- x-y AXIS -->
+        <style name="lineColor">
+          <foreground color="0 0 0" />
+        </style>
+
+        <series style="lineColor">
+          <data> 100 0; -100 0</data>
+        </series>
+        <series style="lineColor">
+          <data>0 100; 0 -100</data>
+        </series>
+        <!-- x-y AXIS END -->
+      </xyPlot>
+
+      <xyPlot name="sinePlot2A" style="collapsed">
+        <style>
+          <widthPercentage>0.77</widthPercentage>
+        </style>
+        <axis dim="x" min="-0.05" max="28" auto="fixed" />
+        <axis dim="y" min="-0.01" max="5" auto="fixed" />
+        <series name="mySine2A" manual="true" />
+        <!-- x-y AXIS -->
+        <style name="lineColor">
+          <foreground color="0 0 0" />
+        </style>
+
+        <series style="lineColor">
+          <data> 100 0; -100 0</data>
+        </series>
+        <series style="lineColor">
+          <data>0 100; 0 -100</data>
+        </series>
+        <!-- x-y AXIS END -->
+      </xyPlot>
+      <script>
+
+        <![CDATA[
+
+      local secondPlot = sinePlot2.mySine2;
+      local secondPlotA = sinePlot2A.mySine2A;
+
+      local a = 1.5;
+      local k = 30;
+      local c = 0;
+      local d = 2.5;
+      
+      for x = -10, 36, 0.1 do
+
+         y = a*math.sin(k*math.pi/180*(x-c)) + d
+        
+        secondPlot:Add(x,y)
+        secondPlotA:Add(x,y)
+        end
+        secondPlot:Update()
+        secondPlotA:Update()
+      
+
+      local function drawLine()
+
+        secondPlot:Clear()
+        secondPlotA:Clear()
+
+        for x = -10, 36, 0.1 do
+
+         y = a*math.sin(k*math.pi/180*(x-c)) + d
+        
+        secondPlot:Add(x,y)
+        secondPlotA:Add(x,y)
+        end
+        secondPlot:Update()
+        secondPlotA:Update()
+      end
+      
+      
+
+      ]]>
+
+      </script>
+<!--  
+      <button name="changeFunction" style="large" content="Show y = 1.5 sin (30x) + 2.5 on graph">
+        <onClick>
+          if changeFunction.Text == "Show y = 1.5 sin (30x) + 2.5 on graph" then
+          changeFunction.Text = "Show y = 1.5 cos (30x) + 2.5 on graph"
+          sinePlot2A.Style.Visibility= "visible"
+          sinePlot2.Style.Visibility= "collapsed"
+          else
+          changeFunction.Text = "Show y = 1.5 sin (30x) + 2.5 on graph"
+          sinePlot2A.Style.Visibility= "collapsed"
+          sinePlot2.Style.Visibility= "visible"
+          end
+        </onClick>
+      </button>
+-->
+      <p style="centerText" name="cresult2"></p>
+
+      <slider name="sliderC" min="-12" max="12" value="1">
+        <style>
+          <widthPercentage>0.77</widthPercentage>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <onValueChanged>
+          c = value
+          drawLine()
+          cresult2.Text = string.format("Phase Shift (c) = %0.2f", value)
+        </onValueChanged>
+      </slider>
+
+     
+
+
+      <p>
+        <style>
+          <marginBottom>50</marginBottom>
+          <textAlignment>center</textAlignment>
+        </style>
+        
+        What is the equation of graph 2 ?
+      </p>
+
+      
+      <p name="answerTitle" style="title collapsed">ANSWER</p>
+      <table style="collapsed" name="table" widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="curriculumThemePack\answer.png" inspect="false" />
+          </column>
+          <column>
+            <p name="answerLabel" style="collapsed">
+              The equation of graph 2 is : </p>
+            <p>
+              $ y = 1.5 sin [30 (x + 3)] + 2.5 $
+            </p>
+              <p>
+                <b>or</b></p>
+              <p>   $  y = 1.5 sin [30 (x-9)] + 2.5 $ </p>
+              
+          </column>
+        </row>
+      </table>
+      
+      <button name="answerButton" content="Check Your understanding">
+
+        <style>
+          <marginBottom>50</marginBottom>
+        </style>
+        
+        <onClick>
+
+
+          if answerButton.Text == "Check Your understanding" then
+          answerTitle.Style.Visibility = "visible";
+          table.Style.Visibility = "visible";
+          table:Child(1):Child(2):Child(1).Style.Visibility = "visible";
+          answerButton.Text = "Hide Answer"
+          else
+          table:Child(1):Child(2):Child(1).Style.Visibility = "collapsed";
+          table.Style.Visibility = "collapsed";
+          answerTitle.Style.Visibility = "collapsed";
+          answerButton.Text = "Check Your understanding";
+          end
+
+
+        </onClick>
+      </button>
+      
+      
+    </stack>
+
+  </sectionNoTitle>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!--                                      Section 5                                         -->
+  
+  
+  
+  
+  
+
+    <sectionNoTitle>
+
+
+      <stack>
+        <style>
+          <widthPercentage>0.93</widthPercentage>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+
+        <p style="titleStyle">
+          <style>
+            <marginTop>50</marginTop>
+            <size scale="large" />
+            <foreground color="50 135 184" />
+          </style>
+          <b>Example</b>
+        </p>
+      </stack>
+
+    <stack style="questionAnswer">
+      <p style="title">Example 2</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="curriculumThemePack\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>
+              <style>
+                <textAlignment>justify</textAlignment>
+                <widthPercentage>0.95</widthPercentage>
+              </style>
+              The wind turbine at the Canadian Exhibition
+              Place has a diameter of 48 m and has a
+              rotational speed of 21 revolutions per minute (rpm). The main shaft of the tower reaches a
+              height of 65 m (about 30 stories high).  Imagine one of the blade has a tip painted in red.
+            </p>
+          </column>
+        </row>
+
+      </table>
+
+      <stack orientation="horizontal">
+        <style>
+          <widthPercentage>0.90</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <image src="resources/wind1.png">
+        </image>
+        <image src="resources/wind2.png">       
+        </image>
+      </stack>
+
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+
+          </column>
+          <column>
+            <p>
+              <style>
+                <textAlignment>justify</textAlignment>
+                <widthPercentage>0.95</widthPercentage>
+              </style>
+              The position (above ground, in metres) of a painted tip on the wind turbine with respect to
+              time (in seconds) can be modelled using a sinusoidal function.  Use the interactive graph to
+              determine the required parameters.
+            </p>
+          </column>
+        </row>
+      </table>
+
+
+
+      
+      
+
+      <button name="showGraph" content="Show Interactive graph">
+        <onClick>
+          if showGraph.Text == "Show Interactive graph" then
+          graphWrap.Style.Visibility = "visible";
+          showGraph.Text = "Hide graph"
+          else
+          graphWrap.Style.Visibility = "collapsed";
+          showGraph.Text = "Show Interactive graph"
+          end
+        </onClick>
+      </button>
+
+      <stack name="graphWrap" style="collapsed">
+
+        <!-- Windmill Simulation -->
+
+        <script>
+          local plotC = simOutput.mySeries;
+          local plotC2 = simOutput.mySeries2;
+          local plotC3 = simOutput.mySeries3;
+          local plotC4 = simOutput.mySeries4;
+          local plotC5 = simOutput.mySeries5;
+          local plotC6 = simOutput.mySeries6;
+
+          local followSquare = simOutput.squareF;
+
+          plotTools.drawCircle(simOutput.filled_circle_series, vector({20, 65}), 4, color.rgb(55, 135, 184))
+
+          simOutput.body1.Style.ForegroundColor = color.rgb(55, 135, 184);
+
+
+          local plotDot = myPlotWave.dotPlot;
+
+
+        </script>
+
+
+        <drawing name="simOutput">
+          <series name="mySeries" manual="true" capacity="7" draw="segmentedFill" />
+          <series name="mySeries2" manual="true" capacity="7" draw="segmentedFill" />
+          <series name="mySeries3" manual="true" capacity="7" draw="segmentedFill" />
+          <series name="mySeries4" manual="true" capacity="7" draw="segmentedFill" />
+          <series name="mySeries5" manual="true" capacity="7" draw="segmentedFill" />
+          <series name="mySeries6" manual="true" capacity="7" draw="segmentedFill" />
+          
+          <series name="squareF" manual="true" />
+
+          <series name="filled_circle_series" manual="true" draw="radialFill" />
+
+          <series name="body1" draw="radialFill">
+            <data>23 65; 25 45; 30 30; 17 65; 14 45; 12 30; 12 30; 30 30</data>
+          </series>
+          <style>
+            <widthPercentage>0.78</widthPercentage>
+          </style>
+          <axis dim="x" max="60" min="-20" auto="fixed" />
+          <axis dim="y" max="100" min="30" auto="fixed" />
+        </drawing>
+
+        <simulation name="mySim" period="0.1" duration="50">
+          <solver name="sineSolver">
+
+            <series>
+              <clock />
+              <system>
+                <input name="data" width="1" />
+                <onOutputs>
+
+
+
+                  a = data[1]/2
+                  b = 24*math.cos(126*a*(math.pi/180)) + 65
+                  plotDot:Clear()
+                  plotDot:Add(a - 0.6, b - 1.8)
+                  plotDot:Add(a - 0.6, b + 1.8)
+                  plotDot:Add(a + 0.6, b + 1.8)
+                  plotDot:Add(a + 0.6, b - 1.8)
+                  plotDot:Add(a - 0.6, b - 1.8)
+                  plotDot:Update()
+
+
+                  followSquare:Clear()
+                  s = 24*math.sin(126*a*(math.pi/180))+20
+                  w = 24*math.cos(126*a*(math.pi/180)) + 65
+                  followSquare:Add(s - 2, w - 2)
+                  followSquare:Add(s - 2, w + 2)
+                  followSquare:Add(s + 2, w + 2)
+                  followSquare:Add(s + 2, w - 2)
+                  followSquare:Add(s - 2, w - 2)
+                  followSquare:Update()
+
+
+
+                  val1 = data[1]/2
+                  val2 = val1 + 0.5
+                  val3 = val2 + 0.4
+                  val4 = val3 + 0.5
+                  val5 = val4 + 0.5
+                  val6 = val5 + 0.5
+
+
+
+                  plotC:Add(20,65, color.teal)
+                  plotC:Add(24*math.sin(126*val1*(math.pi/180))+20, 24*math.cos(126*val1*(math.pi/180)) + 65, color.black)
+                  plotC:Update()
+
+                  plotC2:Add(20,65, color.teal)
+                  plotC2:Add(24*math.sin(126*val2*(math.pi/180))+20, 24*math.cos(126*val2*(math.pi/180)) + 65, color.black)
+                  plotC2:Update()
+
+                  plotC3:Add(20,65, color.teal)
+                  plotC3:Add(24*math.sin(126*val3*(math.pi/180))+20, 24*math.cos(126*val3*(math.pi/180)) + 65, color.black)
+                  plotC3:Update()
+
+                  plotC4:Add(20,65, color.teal)
+                  plotC4:Add(24*math.sin(126*val4*(math.pi/180))+20, 24*math.cos(126*val4*(math.pi/180)) + 65, color.black)
+                  plotC4:Update()
+
+                  plotC5:Add(20,65, color.teal)
+                  plotC5:Add(24*math.sin(126*val5*(math.pi/180))+20, 24*math.cos(126*val5*(math.pi/180)) + 65, color.black)
+                  plotC5:Update()
+
+                  plotC6:Add(20,65, color.teal)
+                  plotC6:Add(24*math.sin(126*val6*(math.pi/180))+20, 24*math.cos(126*val6*(math.pi/180)) + 65, color.black)
+                  plotC6:Update()
+
+
+                </onOutputs>
+              </system>
+            </series>
+          </solver>
+        </simulation>
+
+
+        <!-- Windmill Simulation  END -->
+
+
+
+
+
+
+        <xyPlot name="myPlotWave">
+          <style>
+            <widthPercentage>0.78</widthPercentage>
+            <foreground color="55 135 184" />
+          </style>
+          <axis dim="x" max="25" min="-0.05" auto="fixed" />
+          <axis dim="y" max="100" min="30" auto="fixed" />
+          <series name="dotPlot" manual="true" />
+          <!-- x-y AXIS -->
+          <style name="lineColor">
+            <foreground color="0 0 0" />
+          </style>
+
+          <series style="lineColor">
+            <data> 100 30.2; -100 30.2</data>
+          </series>
+          <series style="lineColor">
+            <data>0 100; 0 -100</data>
+          </series>
+          <!-- x-y AXIS END -->
+          <series name="mySeries" manual="true">
+            <style>
+              <widthPercentage>0.78</widthPercentage>
+              <foreground color="55 135 184" />
+            </style>
+          </series>
+        </xyPlot>
+
+        <script>
+
+          <![CDATA[
+
+
+      local x, y;
+      local c = 0;
+      local cosPlot = myPlotWave.mySeries;
+
+     
+
+      cosPlot:Clear()
+
+      for x = -20, 100, 0.1 do
+      y =  24*math.cos(126*x*(math.pi/180)) + 65
+      cosPlot:Add(x,y)
+      end
+      cosPlot:Update()
+
+      ]]>
+        </script>
+
+
+
+        <button style="large" name="startSimulationButton" content="Start Simulation">
+          <onClick>
+            if startSimulationButton.Text == "Start Simulation" then
+            mySim:Start()
+            startSimulationButton.Text = "Stop Simulation"
+            else
+            mySim:Stop()
+            startSimulationButton.Text = "Start Simulation"
+            end
+
+          </onClick>
+        </button>
+
+      <p style="centerText">
+        Were you able to find he following answers ?
+      </p>
+
+      
+
+      <stack orientation="horizontal">
+        <style>
+          <widthPercentage>0.77</widthPercentage>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+      <button style="large" name="result1" content="Amplitude">
+        <onClick>
+          if result1.Text == "Amplitude" then
+          result1.Text = "24 m (radius)"
+          else
+          result1.Text = "Amplitude"
+          end
+        </onClick>
+      </button>
+
+      <button style="large" name="result2" content="Period">
+        <onClick>
+          if result2.Text == "Period" then
+          result2.Text = "Related to 21 rpm"
+          elseif result2.Text == "Related to 21 rpm" then
+          result2.Text = "1/21 minute per rev"
+          elseif result2.Text == "1/21 minute per rev" then
+          result2.Text = "60/21 = 20/7 seconds"
+          else
+          result2.Text = "Period"
+          end
+        </onClick>
+      </button>
+      </stack>
+
+      <stack orientation="horizontal">
+        <style>
+          <widthPercentage>0.77</widthPercentage>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <button style="large" name="result3" content="k value">
+          <onClick>
+            if result3.Text == "k value" then
+            result3.Text = "360 / (20/7) = 126"
+            else
+            result3.Text = "k value"
+            end
+          </onClick>
+        </button>
+
+        <button style="large" name="result4" content="Vertical translation">
+          <onClick>
+            if result4.Text == "Vertical translation" then
+            result4.Text = "65 m up"
+            else
+            result4.Text = "Vertical translation"
+            end
+          </onClick>
+        </button>
+      </stack>
+
+
+
+        <p>
+          <style>
+            <textAlignment>justify</textAlignment>
+            <horizontalAlignment>center</horizontalAlignment>
+            <widthPercentage>0.77</widthPercentage>
+            <marginTop>80</marginTop>
+          </style>
+          Assume the tip of the blade is
+          at its lowest position initially.  Determine the equation of the
+          graph using a <b>cosine</b>  function.
+        </p>
+
+        
+        
+        
+        
+        
+        
+        
+
+        <!--  Third Graph  -->
+       
+
+
+        <xyPlot name="cosPlot2">
+          <style>
+            <widthPercentage>0.78</widthPercentage>
+          </style>
+          <axis dim="x" max="25" min="-0.05" auto="fixed" />
+          <axis dim="y" max="100" min="30" auto="fixed" />
+         
+          <!-- x-y AXIS -->
+          <style name="lineColor">
+            <foreground color="0 0 0" />
+          </style>
+
+          <series style="lineColor">
+            <data> 100 30.2; -100 30.2</data>
+          </series>
+          <series style="lineColor">
+            <data>0 100; 0 -100</data>
+          </series>
+          <!-- x-y AXIS END -->
+          <series name="mySine2A" manual="true">
+            <style>
+              <foreground color="55 135 184" />
+            </style>
+          </series>
+ 
+        </xyPlot>
+        <script>
+
+          <![CDATA[
+
+      local secondPlotA = cosPlot2.mySine2A;
+      local x, y;
+      local a = 0;
+      local c = 0;
+      
+  
+      
+
+      local function drawLine()
+
+        secondPlotA:Clear()
+
+        for  x = -20, 100, 0.1 do
+
+        y = 24*math.cos(126*(x-c)*(math.pi/180)) + 65
+        secondPlotA:Add(x,y)
+        end
+        secondPlotA:Update()
+      end
+      
+      
+
+      ]]>
+
+        </script>
+
+
+        <p style="centerText" name="cresult2">
+          <style>
+            <marginTop>20</marginTop>
+          </style>
+        </p>
+
+        
+        
+        
+
+        <slider name="sliderC" min="-2.85" max="2.85" value="1">
+          <style>
+            <widthPercentage>0.77</widthPercentage>
+            <horizontalAlignment>center</horizontalAlignment>
+          </style>
+          <onValueChanged>
+            <![CDATA[
+            c = value
+            drawLine()
+            cresult2.Text = string.format("Phase Shift (c) = %0.2f", value)
+            
+            inputEquation.Text = string.format("Equation on graph y = 24 cos[ 126 (x - %0.2f) ] + 65 ", value)
+            
+               ]]>
+          </onValueChanged>
+        </slider>
+
+        <p style="centerText" name="inputEquation">
+        </p>
+
+        <button style="collapsed large" name="equationResult" content="y =  24 cos[ 126 (x - 1.43) ] + 65">
+          <style>
+            <marginBottom>40</marginBottom>
+            <widthPercentage>0.77</widthPercentage>
+          </style>
+          <onClick>
+            equationResult.Style.Visibility = "collapsed"
+            displayAnswer.Style.Visibility = "visible"
+          </onClick>
+        </button>
+
+        <button name="displayAnswer" style="large" content="Check Answer">
+          <style>
+            <marginBottom>40</marginBottom>
+            <widthPercentage>0.77</widthPercentage>
+          </style>
+          <onClick>
+            equationResult.Style.Visibility = "visible"
+            displayAnswer.Style.Visibility = "collapsed"
+          </onClick>
+        </button>
+
+    
+      </stack>
+
+
+      
+
+    </stack>
+
+    </sectionNoTitle>
+
+
+
+
+
+
+<!-- Thiago END-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <style name="backgroundColor">
+    <background color="50 133 184" />
+  </style>
+  <style name="fontColor">
+    <foreground color="255 255 255" />
+  </style>
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="fontColor">Amanda Koon</p>
+      <p style="fontColor rightText">MCR3U</p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/logo1.png" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/logo2.png" />
+    </stack>
+  </footer>
+
+  <!--Practice-->
+  <section name="Practice">
+    <title style="centerText">Practice Problems</title>
+
+    <stack style="questionAnswer">
+      <p style="title"> QUESTION 1</p>
+      <table name="table" widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="curriculumThemePack\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>A ball is suspended from a spring 20 cm above ground and bounces down to the ground and back up repeatedly.  It takes 4 seconds to complete 5 cycles.</p>
+
+            <p>
+              Q: Find a sinusoidal function that represents the height of the ball in terms of time and graph one cycle of the sinusoid.
+            </p>
+
+            <p>Initial graph: y = 5 cos (180x) + 5 is in the form of y = a cos (kx) + d</p>
+            <style name="blackLine">
+              <foreground color="black" />
+            </style>
+            <xyPlot name="myPlot" pan="disabled" tap="disabled" zoom="disabled">
+              <axis dim="y" auto="fixed" min="0" max="25"></axis>
+              <axis dim="x" auto="fixed" min="-0.01" max="5"></axis>
+              <series name="xAxis" manual="true" style="blackLine" />
+              <series name="yAxis" manual="true" style="blackLine" />
+              <series name="cosinePlot" manual="true" />
+            </xyPlot>
+
+            <script>
+              <![CDATA[
+              local xAxis = myPlot.xAxis;
+              local yAxis = myPlot.yAxis;
+              xAxis:Add(-100,0)
+              xAxis:Add(100,0)
+              yAxis:Add(0,-100)
+              yAxis:Add(0,100)
+              
+                local cos = myPlot.cosinePlot;
+                 a = 5;
+                 c = math.pi;
+                 b = 5;
+      
+                local function redrawCosine()
+                  cos:Clear()
+                  for x = -10, 10, 0.01 do
+                    y = a*math.cos(c*x) + b
+                    cos:Add(x,y)
+                  end
+                  cos:Update()
+                end
+                
+                redrawCosine();
+              ]]>
+            </script>
+
+            <p name="newEquation">
+              <b>Your Answer: 5 cos (180x) + 5</b>
+            </p>
+            <script>
+              <![CDATA[
+              i = 5;
+              jValue = 1;
+              j = ((jValue*math.pi*180)/math.pi);
+              k = 5;
+              local function updateEquation()
+                newEquation.FormattedText = string.format("<b>Your Answer: y = %d</b>",i).."<b> cos ("..j.."x) + "..k.."</b>"
+              end
+              
+              function updateAValue(value)
+                i = round(value,1);
+              end
+              
+              function updateKValue(value)
+                j = round(math.floor(((value*math.pi*180)/math.pi)),90);
+              end
+              
+              function updateBValue(value)
+                k = round(value,1)
+              end
+                
+              updateEquation()
+                            
+               function round(value,multiple)
+                result = 0;
+                
+                if value % multiple ~= 0 then
+                  result = multiple;
+                  division = math.floor((value/multiple)+1);
+                  result = division*multiple;
+                  return result;
+                else 
+                  return value;
+                end
+              end
+            ]]>
+            </script>
+
+            <p name="aLabel">a = 5.00</p>
+            <slider name="aSlider" min="0" max="20" value="5">
+              <onValueChanged>
+                <![CDATA[
+                  a = round(value,1);
+                  aLabel.Text = "a = "..round(value,1)
+                  updateAValue(value);
+                  updateEquation();
+                  redrawCosine()
+                  ]]>
+              </onValueChanged>
+            </slider>
+
+            <p name="dLabel">d = 5.00</p>
+            <slider name="bSlider" min="0" max="20" value="5">
+              <onValueChanged>
+                <![CDATA[
+                  b = round(value,1)
+                  dLabel.Text = "d = "..round(value,1)
+                  updateBValue(value);
+                  updateEquation();
+                  redrawCosine()
+                ]]>
+              </onValueChanged>
+            </slider>
+
+            <p name="kLabel">k = 180</p>
+            <slider name="kSlider" min="1" max="10" value="1">
+              <onValueChanged>
+                <![CDATA[
+                  c = round(value*math.pi,(math.pi/2))
+                  redrawCosine()
+                  displayVal = round(((value*math.pi*180)/math.pi),90);
+                  kLabel.FormattedText = string.format("k = %d", (displayVal));
+                  updateKValue(value);
+                  updateEquation();
+                ]]>
+              </onValueChanged>
+            </slider>
+
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <button name="buttonCheck" content="Check Answer">
+        <onClick>
+          text = table:Child(1):Child(2):Child(5).Text
+          text = string.gsub(text, "Your Answer: ", "")
+
+          if text == "y = 10 cos (450x) + 10" then
+          answer.Text = "Correct! Great Job"
+          else
+          answer.Text = "Not quite, Try again!"
+          end
+        </onClick>
+      </button>
+      <p name="answer"></p>
+    </stack>
+  </section>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <!--Practice
+  <sectionNoTitle>
+
+    <stack>
+      <style>
+        <widthPercentage>0.93</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+
+      <p style="titleStyle">
+        <style>
+          <marginTop>50</marginTop>
+          <size scale="large" />
+          <foreground color="50 135 184" />
+        </style>
+        <b>Practice Problems</b>
+      </p>
+    </stack>
+
+
+    <style name="blackLine">
+      <foreground color="black" />
+    </style>
+
+    <stack style="questionAnswer">
+      <p style="title"> QUESTION 1</p>
+      <table name="table" widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="curriculumThemePack\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>A ball is suspended from a spring 20 cm above ground and bounces down to the ground and back up repeatedly.  It takes 4 seconds to complete 5 cycles.</p>
+
+            <p>
+              Q: Find a sinusoidal function that represents the height of the ball in terms of time and graph one cycle of the sinusoid.
+            </p>
+
+            <p>Initial graph: y = 5 cos (180x) + 5 is in the form of y = a cos (kx) + d</p>
+           
+
+          </column>
+        </row>
+      </table>
+            
+            
+            <xyPlot name="myPlot" pan="disabled" tap="disabled" zoom="disabled">
+              
+              <style>
+                <widthPercentage>0.85</widthPercentage>
+                <horizontalAlignment>center</horizontalAlignment>
+              </style>
+              <axis dim="y" auto="fixed" min="0" max="25"></axis>
+              <axis dim="x" auto="fixed" min="-0.01" max="5"></axis>
+              <series name="xAxis" manual="true" style="blackLine" />
+              <series name="yAxis" manual="true" style="blackLine" />
+              <series name="cosinePlot" manual="true">
+                <style>
+                  <foreground color="50 135 184" />
+                </style>
+              </series>
+            </xyPlot>
+
+            <script>
+              <![CDATA[
+              local xAxis = myPlot.xAxis;
+              local yAxis = myPlot.yAxis;
+              xAxis:Add(-100,0)
+              xAxis:Add(100,0)
+              yAxis:Add(0,-100)
+              yAxis:Add(0,100)
+              
+                local cos = myPlot.cosinePlot;
+                 a = 5;
+                 c = math.pi;
+                 b = 5;
+      
+                local function redrawCosine()
+                  cos:Clear()
+                  for x = -10, 10, 0.01 do
+                    y = a*math.cos(c*x) + b
+                    cos:Add(x,y)
+                  end
+                  cos:Update()
+                end
+                
+                redrawCosine();
+              ]]>
+            </script>
+
+            <p style="centerText" name="newEquation">
+              <style>
+                <marginTop>30</marginTop>
+                <marginBottom>30</marginBottom>
+              </style>
+              <b>Your Answer: 5 cos (180x) + 5</b>
+            </p>
+            <script>
+              <![CDATA[
+              i = 5;
+              jValue = 1;
+              j = ((jValue*math.pi*180)/math.pi);
+              k = 5;
+              local function updateEquation()
+                newEquation.FormattedText = string.format("<b>Your Answer: y = %d</b>",i).."<b> cos ("..j.."x) + "..k.."</b>"
+              end
+              
+              function updateAValue(value)
+                i = round(value,1);
+              end
+              
+              function updateKValue(value)
+                j = round(math.floor(((value*math.pi*180)/math.pi)),90);
+              end
+              
+              function updateBValue(value)
+                k = round(value,1)
+              end
+                
+              updateEquation()
+                            
+               function round(value,multiple)
+                result = 0;
+                
+                if value % multiple ~= 0 then
+                  result = multiple;
+                  division = math.floor((value/multiple)+1);
+                  result = division*multiple;
+                  return result;
+                else 
+                  return value;
+                end
+              end
+            ]]>
+            </script>
+
+            <p style="centerText" name="aLabel">a = 5.00</p>
+            <slider name="aSlider" min="0" max="20" value="5">
+              <style>
+                <widthPercentage>0.77</widthPercentage>
+                <horizontalAlignment>center</horizontalAlignment>
+              </style>
+              <onValueChanged>
+                <![CDATA[
+                  a = round(value,1);
+                  aLabel.Text = "a = "..round(value,1)
+                  updateAValue(value);
+                  updateEquation();
+                  redrawCosine()
+                  ]]>
+              </onValueChanged>
+            </slider>
+
+            <p style="centerText" name="dLabel">d = 5.00</p>
+            <slider name="bSlider" min="0" max="20" value="5">
+              <style>
+                <widthPercentage>0.77</widthPercentage>
+                <horizontalAlignment>center</horizontalAlignment>
+              </style>
+              <onValueChanged>
+                <![CDATA[
+                  b = round(value,1)
+                  dLabel.Text = "d = "..round(value,1)
+                  updateBValue(value);
+                  updateEquation();
+                  redrawCosine()
+                ]]>
+              </onValueChanged>
+            </slider>
+
+            <p style="centerText" name="kLabel">k = 180</p>
+            <slider name="kSlider" min="1" max="10" value="1">
+              <style>
+                <widthPercentage>0.77</widthPercentage>
+                <horizontalAlignment>center</horizontalAlignment>
+              </style>
+              <onValueChanged>
+                <![CDATA[
+                  c = round(value*math.pi,(math.pi/2))
+                  redrawCosine()
+                  displayVal = round(((value*math.pi*180)/math.pi),90);
+                  kLabel.FormattedText = string.format("k = %d", (displayVal));
+                  updateKValue(value);
+                  updateEquation();
+                ]]>
+              </onValueChanged>
+            </slider>
+
+         
+      <p style="title">ANSWER</p>
+      <button name="buttonCheck" content="Check Answer">
+        <onClick>
+          text = newEquation.Text
+          text = string.gsub(text, "Your Answer: ", "")
+
+          if text == "y = 10 cos (450x) + 10" then
+          answer.Text = "Correct! Great Job"
+          else
+          answer.Text = "Not quite, Try again!"
+          end
+        </onClick>
+      </button>
+      <p name="answer"></p>
+    </stack>
+  </sectionNoTitle>
+
+
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+  <section name="pracProb1">
+
+    <title>Practice Problem</title>
+
+    <style name="textCenter">
+
+      <horizontalAlignment>center</horizontalAlignment>
+
+    </style>
+
+    <stack style="questionAnswer">
+
+      <p style="title">Quetion 2</p>
+
+      <p>A very (un)lucky rider was at the highest position, 166 m above the ground, on the High Roller Ferris wheel in Las Vegas, when the power went out.  This Ferris wheel has a radius of 78 m and it travels one revolution every 30 minutes.</p>
+
+      <table widths="10% 90%" grid="false">
+
+        <row>
+
+          <column>
+
+            <image src="curriculumThemePack\question.png" inspect="false" />
+
+          </column>
+
+          <column>
+
+            <p>
+
+              Find a <b>sine</b> function to model the rider’s height, in metres, with respect to time, in minutes, once power is back on.
+
+            </p>
+
+          </column>
+
+        </row>
+
+      </table>
+
+      <p style="title">ANSWER</p>
+
+      <stack name="answer2a" style="collapsed">
+
+        <table name="table" widths="10% 90%" grid="false">
+
+          <row>
+
+            <column>
+
+              <image src="curriculumThemePack\answer.png" inspect="false" />
+
+            </column>
+
+            <column>
+
+              <p>
+
+                $ h(t) = 78sin[12(x + 7.5)] + 88 $, or
+
+                <br />$ h(t) = 78sin[12(x - 7.5)] + 88 $
+
+              </p>
+
+            </column>
+
+          </row>
+
+        </table>
+
+      </stack>
+
+      <button name="q2aButton" content="Show Answer">
+
+        <onClick>
+
+          if q2aButton.Text == "Show Answer" then
+
+          answer2a.Style.Visibility = "visible";
+
+          q2aButton.Text = "Hide Answer"
+
+          elseif q2aButton.Text =="Hide Answer" then
+
+          answer2a.Style.Visibility="collapsed";
+
+          q2aButton.Text = "Show Answer"
+
+          end
+
+        </onClick>
+
+      </button>
+
+      <table widths="10% 90%" grid="false">
+
+        <row>
+
+          <column>
+
+            <image src="curriculumThemePack\question.png" inspect="false" />
+
+          </column>
+
+          <column>
+
+            <p>How far would this rider have travel when he reached the lowest position? </p>
+
+          </column>
+
+        </row>
+
+      </table>
+
+      <p style="title">ANSWER</p>
+
+      <stack name="answer2b" style="collapsed">
+
+        <table name="table" widths="10% 90%" grid="false">
+
+          <row>
+
+            <column>
+
+              <image src="curriculumThemePack\answer.png" inspect="false" />
+
+            </column>
+
+            <column>
+
+              <p>
+
+                The rider was travelling along the circumference of the Ferris wheel.  The distance between the highest and lowest position is half the circumference.
+
+                <br /> <br />Thus, $ d = \frac{1}{2}\left ( 2\pi r \right ) = 78\pi $ meters.
+
+              </p>
+
+            </column>
+
+          </row>
+
+        </table>
+
+      </stack>
+
+      <button name="q2bButton" content="Show Answer">
+
+        <onClick>
+
+          if q2bButton.Text == "Show Answer" then
+
+          answer2b.Style.Visibility = "visible";
+
+          q2bButton.Text = "Hide Answer"
+
+          elseif q2bButton.Text =="Hide Answer" then
+
+          answer2b.Style.Visibility="collapsed";
+
+          q2bButton.Text = "Show Answer"
+
+          end
+
+        </onClick>
+
+      </button>
+
+    </stack>
+
+  </section>
+
+
+
+
+
+  <section name="pt3Page1">
+
+    <title>Extension</title>
+
+    <style name="sixty">
+
+      <widthPercentage>0.8</widthPercentage>
+
+    </style>
+
+    <style name="thirty">
+
+      <widthPercentage>0.30</widthPercentage>
+
+      <marginLeft>6</marginLeft>
+
+    </style>
+
+    <style name="one5P">
+
+      <widthPercentage>0.15</widthPercentage>
+
+      <marginLeft>23</marginLeft>
+
+    </style>
+
+    <style name="buttonStyle">
+
+      <size />
+
+      <foreground color="red" />
+
+      <background color="white" />
+
+    </style>
+
+    <stack style="questionAnswer">
+
+
+
+      <p style="title">Want to learn more?</p>
+
+      <stack name="articleButton" orientation="horizontal">
+
+        <stack style="one5P">
+
+          <p style="bullet"></p>
+
+        </stack>
+
+        <stack name="stack1" style="thirty">
+
+          <stack name="stackB1">
+
+            <button name="webViewButton1" content="Click here" style="buttonStyle">
+
+              <onClick>
+
+                if readArt.Text == "to read more about the turbine at the CNE" then
+
+                articleView.myArticle.Url="https://www.thestar.com/business/2012/06/15/wind_power_an_inside_look_at_how_the_turbine_at_exhibition_place_keeps_spinning.html/";
+
+                articleView.myArticle.Style.Visibility = "visible"
+
+                readArt.Text = "to hide the article"
+
+                elseif readArt.Text == "to hide the article" then
+
+                articleView.myArticle.Style.Visibility = "collapsed"
+
+                readArt.Text = "to read more about the turbine at the CNE"
+
+                end
+
+              </onClick>
+
+            </button>
+
+          </stack>
+
+        </stack>
+
+        <p name="readArt">to read more about the turbine at the CNE</p>
+
+      </stack>
+
+      <stack name="articleView">
+
+        <web name="myArticle" url="https://www.thestar.com/business/2012/06/15/wind_power_an_inside_look_at_how_the_turbine_at_exhibition_place_keeps_spinning.html/" style="collapsed" />
+
+      </stack>
+
+      <stack name="videoButton1" orientation="horizontal">
+
+        <stack style="one5P">
+
+          <p style="bullet"></p>
+
+        </stack>
+
+        <stack name="stack2" style="thirty">
+
+          <stack name="stackB2">
+
+            <button name="webViewButton2" content="Click here" style="buttonStyle">
+
+              <onClick>
+
+                if watchVid1.Text == "to learn why wind turbines have three blades" then
+
+                vid1View.vid1.Url="https://youtu.be/RNPIRfxUTQ4";
+
+                vid1View.vid1.Style.Visibility = "visible"
+
+                watchVid1.Text = "to hide the video"
+
+                elseif watchVid1.Text == "to hide the video" then
+
+                vid1View.vid1.Style.Visibility = "collapsed"
+
+                watchVid1.Text = "to learn why wind turbines have three blades"
+
+                end
+
+              </onClick>
+
+            </button>
+
+          </stack>
+
+        </stack>
+
+        <p name="watchVid1">to learn why wind turbines have three blades</p>
+
+      </stack>
+
+      <stack name="vid1View">
+
+        <web name="vid1" url="https://youtu.be/qx_M0nvDIGU/" style="collapsed" />
+
+      </stack>
+
+      <stack name="videoButton2" orientation="horizontal">
+
+        <stack style="one5P">
+
+          <p style="bullet"></p>
+
+        </stack>
+
+        <stack name="stack3" style="thirty">
+
+          <stack name="stackB3">
+
+            <button name="webViewButton3" content="Click here" style="buttonStyle">
+
+              <onClick>
+
+                if watchVid2.Text == "to learn about the physics of wind power" then
+
+                vid2View.vid2.Url="https://youtu.be/qx_M0nvDIGU/";
+
+                vid2View.vid2.Style.Visibility = "visible"
+
+                watchVid2.Text = "to hide the video"
+
+                elseif watchVid2.Text == "to hide the video" then
+
+                vid2View.vid2.Style.Visibility = "collapsed"
+
+                watchVid2.Text = "to learn about the physics of wind power"
+
+                end
+
+              </onClick>
+
+            </button>
+
+          </stack>
+
+        </stack>
+
+        <p name="watchVid2">to learn about the physics of wind power</p>
+
+      </stack>
+
+      <stack name="vid2View">
+
+        <web name="vid2" url="https://youtu.be/qx_M0nvDIGU/" style="collapsed" />
+
+      </stack>
+
+    </stack>
+
+  </section>
+
+
+
+  <!--   Section     FEEDBACK    -->
+  <sectionNoTitle>
+
+    <web url="&#xD;&#xA;https://docs.google.com/forms/d/e/1FAIpQLSeugJEmYx0fpXUYYB3Hm9dTqBTSM-ezE7Xsmxve8JyziHw4XA/viewform?usp=sf_link" />
+
+
+  </sectionNoTitle>
+
+  </document>

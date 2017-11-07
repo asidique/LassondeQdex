@@ -1,0 +1,550 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" id="GB325C277_E449_4814_9AAC_3B9E0EF2A986">
+
+  <metadata>
+    <title>Projectile Motion Game</title>
+    <creator>Quanser Consulting Inc.</creator>
+    <coverImage src="resources/canonCover.PNG" />
+    <contributor>Ursula Chen</contributor> <!-- Co-op student Jan 2016 - Aug 2016-->
+    <abstract>This document is designed for demonstration purposes only, to depict sample use cases for qdex in an educational environment. </abstract>
+  </metadata>
+
+  <include src="plotTools.xml" />
+
+  <style name="sectionHeadings">
+    <textAlignment>center</textAlignment>
+    <bold>false</bold>
+    <marginBottom>30</marginBottom>
+  </style>
+
+  <!-- Light grey for backgrounds -->
+  <style name="themeColour">
+    <background color="222 222 222" />
+  </style>
+
+  <!-- Codex Red for titling -->
+  <style name="themeColourDark">
+    <background color="black" />
+  </style>
+
+  <style name="themeColourTitle">
+    <foreground color="black" />
+  </style>
+  
+  <style name="logo">
+    <widthPercentage>0.06</widthPercentage>
+  </style>
+
+  <footer>
+    <style>
+      <background color="quanserRed" />
+    </style>
+    <image src="resources/footer_logo.png" style="logo" inspect="false" />
+  </footer>
+
+  <section name="game">
+      <title>Projectile Motion</title>
+      <script>
+        <![CDATA[
+      --Configurable Parameters--
+      local rockMass = 0.1;   --Kg
+      local grav = 9.81; --m/s^2
+
+      --Local Variables--
+      local initPosX, initPosY;
+      --local posx = -0.8;
+      local posx = 0;
+      local posy = 0;
+      local released;
+      local releaseVelX;
+      local releaseVelY;
+      local rock = plot.rockSeries;
+      local ground = plot.groundSeries;
+      local arc = plot.arcSeries; 
+      local tran = plot.tran;
+      local guide = plot.guideLine;
+      local releaseTime;
+      local maxheight = 0.0; 
+      local gameScore = 0
+      local gameAttempts = 0
+
+      --Functions
+      function init()
+        released = false;
+        --releaseVelX = 0;
+        --releaseVelY = 0;
+        posx = 0;
+        posy = 0;
+        --plot:Reset();
+        --plot.XAxis.Scaling = "fixed"
+        --plot.XAxis:SetRange(-1.5, 7.5);
+        --plot.XAxis.Scaling = "growAndShrink"
+        --plot:Reset();
+        maxheight = 0;
+      end
+      
+      function resetFrame()
+        --cannonAngle = math.rad(release.Value);
+        posx = 0;
+        posy = 0;
+        updatePlot()
+
+        plot.XAxis.Scaling = "growAndShrink"
+        plot.XAxis:SetRange(-1.5, 7.5);
+        plot.YAxis.Scaling = "lockAspectRatio"
+        plot.YAxis:SetRange(-1, 5.75);
+        plot.XAxis:Reset();
+        plot.YAxis:Reset();
+      end
+
+      function updatePlot()
+        
+        drawGuides();
+        guide:Update();
+        
+        drawRock();
+        rock:Update();
+        
+        drawTran();
+        tran:Update();
+        
+        --plot.guideLine.Transform = matrixf.scaling(posx/7.2, posx/7.2, 1)
+        
+        if released then
+          drawArc();
+          arc:Update();
+        end
+        
+        --[[
+        if posx > plot.XAxis.Max then
+          plot.XAxis:SetRange(plot.XAxis.Min + 0.2, plot.XAxis.Max + 0.2)
+        end
+        if posy > plot.YAxis.Max then
+          plot.YAxis:SetRange(plot.YAxis.Min + 0.2, plot.YAxis.Max + 0.2)
+        end
+        if posy < plot.YAxis.Min then
+          plot.YAxis:SetRange(plot.YAxis.Min - 0.5, plot.YAxis.Max - 0.5)
+        end
+        --]]
+        
+        if not released then
+          
+          arc:Clear();
+          arc:Update();
+        end
+        
+        labelStack.dist.FormattedText = string.format("Distance: <br/>%.2f m",posx);
+        if posy > maxheight then
+          labelStack.height.FormattedText = string.format("Max Height: <br/>%.2f m",posy);
+          maxheight = posy;
+        end
+      end
+      
+      function drawGuides()
+        guidefactor = posx/7.3;
+        guide:Add(-1.50 * guidefactor, -1.00 * guidefactor)
+        guide:Add(07.50 * guidefactor, 05.75 * guidefactor)
+      end
+
+      function drawRock()
+        rock:Add(posx - 0.05,posy - 0.05);
+        rock:Add(posx - 0.05,posy + 0.05);
+        rock:Add(posx,posy + 0.08);
+        rock:Add(posx + 0.05,posy);
+        rock:Add(posx,posy - 0.05);
+        rock:Add(posx - 0.05,posy - 0.05);
+      end
+      
+      --[[function drawGround()
+        ground:Add(plot.XAxis.Min,0);   
+        ground:Add(plot.XAxis.Max + 0.2,0);
+        ground:Add(plot.XAxis.Max + 0.2, plot.YAxis.Min);
+        ground:Add(plot.XAxis.Min, plot.YAxis.Min);
+        ground:Update()
+      end--]]
+      
+      function drawArc()       
+        arc:Add(posx, posy);
+      end
+      
+      function drawTran()
+        tran:Add(4.99, 5);
+        tran:Add(5, 5);
+      end
+      
+      function draw_target(x,trace);
+      target_min = x-.2
+      target_max = x+.2
+      trace:Clear();
+      trace:Add(target_min,-0.25);
+      trace:Add(target_max,-0.25);
+      trace:Add(target_min,-0.35);
+      trace:Add(target_max,-0.35);
+      trace:Update();
+      end
+      
+      drawRock()
+      
+      function rotateCannon(value)
+        cannonAngle = math.rad(value);
+        plot.cannonSeries.Transform = matrixf.rotationAboutAxis(0, 0, 1, math.rad(value));
+        plot.cannonRim1.Transform = matrixf.rotationAboutAxis(0, 0, 1, math.rad(value));
+        plot.cannonRim2.Transform = matrixf.rotationAboutAxis(0, 0, 1, math.rad(value));
+      end
+    ]]>
+      </script>
+
+      <style name="paragraphs">
+        <!--size scale="0.8" /-->
+      </style>
+
+      <style name="labels">
+        <size scale="0.8" />
+      </style>
+
+      <style name="series">
+        <lineThickness>2</lineThickness>
+      </style>
+
+      <style name="rockColour">
+        <foreground color="darkGray" />
+        <lineThickness>2</lineThickness>
+      </style>
+    
+      <style name="arcColour">
+        <foreground color="darkGray" />
+        <lineThickness>0.5</lineThickness>
+      </style>
+
+      <style name="transparent">
+        <foreground color="transparent" />
+        <lineThickness>0.1</lineThickness>
+      </style>
+
+      <style name="target_style">
+        <foreground color="black" />
+        <lineThickness>3</lineThickness>
+      </style>
+
+      <style name="ground_style">
+        <foreground color="107 142 35" />
+      </style>
+
+    <p>Use your finger or a stylus to angle the canon. Press <i>Release</i> to launch the canon at the target before time runs out.
+  </p>
+    
+    <button name="sim_button" content="Release">
+      <style>
+        <foreground color="white" />
+        <background color="46 139 87" />
+      </style>
+      <onClick>
+        if sim_button.Text == "Release" then
+        if timerSim:IsStopped() then
+        startButton:Click();
+        end
+        sim_button.Text = "Stop";
+        resetFrame();
+        sim:Start();
+        else
+        sim_button.Text = "Release";
+        sim:Stop();
+        end
+      </onClick>
+    </button>
+    
+    <table name="gameLabels" grid="false">
+      <style>
+        <marginBottom>0</marginBottom>
+      </style>
+      <row>
+        <column>
+          <p name="scoreLabel">
+            Score: 0 of 0 attempts
+          </p>
+        </column>
+        <column>
+          <p name="timeLabel">
+            <style>
+              <textAlignment>right</textAlignment>
+            </style>
+            1:00
+          </p>
+        </column>
+      </row>
+    </table>
+    
+    <drawing name="plot" style="visible" pan="custom" manual="true">
+        <style>
+          <marginBottom>-10</marginBottom>
+          <!--aspectRatio>0.5</aspectRatio-->
+        </style>
+        <axis dim="x" auto="growOnly" min="-1.50" max="7.5" />
+        <axis dim="y" auto="growAndShrink" />
+        <onPan>
+          <![CDATA[
+          
+          newX = (((state.Current.X - 0) * (7.5 - -1.5)) / (1 - 0)) + -1.5
+          newY = (((state.Current.Y - 0) * (5.75 - -1)) / (1 - 0)) + -1
+          theAngle = math.deg(math.atan(newY/newX))
+          fyi.FormattedText = string.format("%0.1f %0.1f %0.1f", newX, newY, theAngle)
+          if theAngle > 0 then
+          rotateCannon(theAngle);
+          end
+          --rotateCannon(state.Current.Y * math.rad(80));]]>
+        </onPan>
+        <series name="skySeries" draw="radialFill" ignore="true">
+          <style>
+            <!--foreground color="90 190 255 65" /-->
+            <foreground color="65 227 255 65" />
+          </style>  
+        <data>-5 -0.25; -5 14; 18 14; 18 -0.25</data>
+        </series>
+        <series name="groundSeries" manual="true" capacity="4" draw="radialFill" ignore="true" style="ground_style">
+          <data>-5 -0.25; -5 -3; 18 -3; 18 -0.25</data>
+        </series>
+        <series name="trees" ignore="true" draw="segmentedFill">
+          <!--data src="resources/Trees2.csv" />
+          <colors src="resources/Trees_color.csv" /-->
+        </series>
+        <series name="arcSeries" manual="true" style="arcColour" draw="lineSegments" />
+        <series name="tran" manual="true" capacity="2" style="transparent" />
+        <series name="target" manual="true" capacity="4" style="target_style" draw="segmentedFill" ignore="false" />
+        <series name="rockSeries" manual="true" capacity="6" style="rockColour" draw="radialFill" ignore="false" />
+        <series name="cannonSeries" draw="radialFill" />
+        <series name="cannonRim1" draw="radialFill" />
+        <series name="cannonRim2" draw="radialFill" />
+        <series name="cannonFrame1" draw="radialFill" />
+        <series name="cannonFrame2" draw="radialFill" />
+        <series name="timer2" draw="radialFill" manual="true" />
+        <series name="timer" draw="radialFill" manual="true" />
+        <series name="frame">
+          <data>
+          -1.50 -1.00; 7.5 5.75</data>
+          <colors>transparent; transparent</colors>
+        </series>
+        <series name="guideLine" ignore="false">
+          <style>
+            <foreground color="transparent" />
+          </style>
+          <data>
+          -1.50 -1.00; 7.5 5.75
+          </data>
+        </series>
+      </drawing>
+    
+    
+    <script>
+      <![CDATA[
+      plotTools.drawArc(plot.timer2, 0, 360, {6.75, 5}, 0.35, color.silver);
+      plot.trees.Transform = matrixf.translation(0, -0.25, 0);
+      
+      local cannon = plot.cannonSeries
+      cannon:Add(0.5, -0.11, color.red);
+      plotTools.drawArc(cannon, 270, 90, {0, 0}, 0.175, color.red)
+      cannon:Add(0.5, 00.11, color.red);
+      plotTools.drawEllipse(plot.cannonRim1, {0.5, 0}, 0.060, 0.14, color.rgb(168, 168, 168))
+      plotTools.drawEllipse(plot.cannonRim2, {0.5, 0}, 0.045, 0.11, color.rgb(061, 061, 061))
+      
+      plot.cannonFrame1:Add(-0.295, -0.25, color.gray);
+      plotTools.drawArc(plot.cannonFrame1, 145, 35, {0, 0}, 0.105, color.gray);
+      plot.cannonFrame1:Add(00.295, -0.25, color.gray);
+      
+      plotTools.drawCircle(plot.cannonFrame2, {0, 0}, 0.075, color.rgb(77, 77, 77));
+      
+      function drawTime(timeLeft)
+        plot.timer:Clear()
+        local endAngle = -6*timeLeft+450;
+        local startAngle = -(0*60 - 450);
+        plot.timer:Add(6.75, 5, color.white);
+        plotTools.drawArc(plot.timer, 449.9, endAngle, {6.75, 5}, 0.3, color.white);
+        plot.timer:Update()
+        fyi1.Text = string.format('%.2f',timeLeft);
+      end
+      
+      function createTarget()
+        target_x = math.random(1,6)
+        local trace = plot.target
+        draw_target(target_x, trace);
+        labelStack.t_label.FormattedText = string.format("Target: <br/>%.2f m", target_x);
+      end
+      
+      function checkTarget()
+        if posx >= target_min and posx <= target_max then 
+          gameScore = gameScore + 1
+          createTarget();
+        end
+        gameLabels:Child(1):Child(1).scoreLabel.FormattedText = string.format("Score: %d of %d attempts", gameScore, gameAttempts);
+      end
+      
+      function countDown(currentTime)
+        local minutes = math.floor(currentTime/60);
+        local seconds = currentTime-(minutes*60);
+        gameLabels:Child(1):Child(2):Child(1).FormattedText = string.format("%d:%2.0f", minutes, seconds)
+        drawTime(countTime);
+        countTime = countTime - 1;
+      end
+      
+      function resetScore()
+        gameScore = 0
+        gameAttempts = 0
+        gameLabels:Child(1):Child(1).scoreLabel.FormattedText = string.format("Score: %d of %d attempts", gameScore, gameAttempts);
+      end
+        
+      drawTime(60)
+      createTarget()
+      rotateCannon(45);
+      ]]>
+    </script>
+      
+    <include src="resources/Trees.xml" />
+
+    <stack name="labelStack" orientation="horizontal">
+      <style>
+        <marginTop>0</marginTop>
+        <marginLeft>10</marginLeft>
+        <marginRight>10</marginRight>
+        <marginBottom>20</marginBottom>
+        <background color="107 142 35" />
+      </style>
+      <style name="labels">
+        <foreground color="white" />
+      </style>
+       <label name="t_label">Target: <br />0.00 m</label>
+       <label name="dist">Distance: <br />0.00 m</label>
+       <label name="height">Max Height: <br />0.00 m</label>
+    </stack>
+    
+    <!--p name="guideLabel"></p-->
+
+    <simulation name="sim" period="0.01">
+        <onStateChanged>
+          --Initialize the external variables--
+          if sim.Time == 0 then
+          init();
+          updatePlot();
+          else
+          --cannonAngle = math.rad(release.Value);
+          end
+        </onStateChanged>
+        <onUpdate>
+          <![CDATA[
+            if not released then
+              released = true;
+              initPosX = posx;
+              initPosY = posy;
+              releaseTime = time;
+            
+              --Find the release velocity components
+            
+              local rockVel = 8  --m/s;
+              local relAngle = cannonAngle;
+              releaseVelX = math.cos(relAngle) * rockVel;
+              releaseVelY = math.sin(relAngle) * rockVel;
+            end
+            
+            if released then
+              local curTime = time - releaseTime;
+              local lastpos = posy;
+              
+              posy = initPosY + (releaseVelY * curTime) - ((grav/2) * curTime^2);
+              
+              if posy <= -0.20 and lastpos > posy then
+                posy = -0.20;
+                sim:Stop();
+                sim_button.Text = "Release";
+                gameAttempts = gameAttempts + 1
+                checkTarget()
+              else
+                posx = initPosX + (releaseVelX * curTime);
+              end
+            else
+              --This can be changed to reflect any offsets in the position of the rock--
+              posx = 0
+              posy = 0
+            end
+            
+            --guideLabel.FormattedText = string.format("Guide factor = %0.2f", posx/7.3 )
+            updatePlot();
+            ]]>
+        </onUpdate>
+        <onDuration>
+          sim_button.Text = "Release";
+        </onDuration>
+    </simulation>
+    
+    <simulation name="timerSim" period="1">
+      <onStateChanged>
+        countTime = 60;
+        countDown(countTime);
+      </onStateChanged>
+      <onUpdate>
+        if countTime &gt; -0.5 then
+        countDown(countTime);
+        else
+        startButton:Click()
+        end
+      </onUpdate>
+    </simulation>
+    
+    <button name="startButton" content="Start" style="collapsed">
+      <onClick>
+        if startButton.Text == "Start" then 
+       timerSim:Start();
+       startButton.Text = "Stop"
+       else
+       timerSim:Stop();
+       startButton.Text = "Start"
+       gameScore = 0
+       gameAttempts = 0
+       end
+      </onClick>
+    </button>
+
+    <label name="releaseSlide" style="collapsed">Release Angle (deg): 45</label>
+    <slider name="release" min="0" max="80" value="45" style="collapsed">
+        <onValueChanged>
+          
+          plot.arcSeries:Clear();
+          cannonAngle = math.rad(value)
+          releaseSlide.Text = string.format('Release Angle (deg): %.2f',value);
+          rotateCannon(value);
+          
+          if sim:IsStopped() then
+          resetFrame();
+          end
+        </onValueChanged>
+      </slider>
+    
+    <label name="fyi1" style="collapsed" />
+    <slider min="0" max="60" value="60" style="collapsed">
+        <onValueChanged>
+          drawTime(value);
+          fyi1.Text = string.format('%.2f',value);
+        </onValueChanged>
+      </slider>
+
+    <label name="fyi" style="collapsed" />
+
+    <!--
+
+      <p>For fun, press the button below to change the gravitational pull used in the simulation. Note how gravity affects the maximum height and distance of the projectile.</p>
+
+
+      <button name="moon" content="Go to the Moon!">
+        <onClick>
+          if moon.Text == "Go to the Moon!" then
+          grav = 1.622;
+          moon.Text = "Go back to Earth!";
+          else
+          grav = 9.81;
+          moon.Text = "Go to the Moon!";
+          end
+        </onClick>
+      </button>-->
+
+    </section>
+
+</document>
+

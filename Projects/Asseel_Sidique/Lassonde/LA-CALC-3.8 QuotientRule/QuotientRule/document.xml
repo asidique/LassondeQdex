@@ -1,0 +1,684 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G4232B168_54B7_4EED_B144_D3A8C55940CB">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>MCV4U – 14C Quotient Rule</title>
+    <creator>Asseel</creator>
+    <coverImage src="resources/cover.png" />
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+  </metadata>
+
+
+  <include src="resources/Utilities.xml" />
+  <include src="resources/curriculumStyles.xml" />
+
+  <!--                                      Header & Footer START                                         -->
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="whiteColor">Amanda Koon</p>
+      <p style="whiteColor rightText">MCV4U</p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/logo1.png" inspect="false" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/logo2.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--                                      Header & Footer END                                         -->
+
+  <!-- Section 1 -->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">Quotient Rule</title>
+    <p style="sectionHeading">Introduction</p>
+    <stack style="contentBG">
+      <p>
+        This module will cover the Quotient rule for derivatives.
+        The Quotient rule is a method of finding the derivative of a function that is the ratio of two differentiable functions. We will use the Quotient rule for functions such as:
+        $ F(x) = \frac{f(x)}{g(x)} $, where both $ f(x) $ and $ g(x) $ are differentiable and $ g(x) \neq 0 $.
+      </p>
+    </stack>
+
+  </section>
+
+  <sectionNoTitle name="section2" style="pageLayout">
+    <script>
+      local stepsController = StepsController:new({stepsStack=stepsStack, numOfSteps=3})
+    </script>
+    <p style="sectionHeading">Quotient Rule</p>
+    <stack style="contentBG">
+      <p style="centerText">
+        Let  $ F(x) = \frac{f(x)}{g(x)} $.
+      </p>
+      <p style="centerText">
+        In order to find F'(x), we have to apply the Quotient rule:
+      </p>
+      <p style="centerText">
+        <style>
+          <marginBottom>40</marginBottom>
+        </style>
+        $  F'(x) = \frac{f'(x) \cdot g(x) - f(x) \cdot g'(x)}{(g(x))^{2}} $
+      </p>    
+    </stack>
+    <p style="sectionHeading">Question Step-by-Step</p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="subSectionHeading">Step-by-Step Example</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>Let $F(x) = \frac{ 2sinx }{ 3x^{2} - 5 } $, find F'(x):</p>
+          </column>
+        </row>
+      </table>
+    </stack>
+    <stack name="stepsStack">
+      <!--Each step is a stack, and each step has alternating background colors-->
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>  Divide $ F(x) $ into 2 functions: </p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            <stack style="center">
+              <p style="centerText">$ f(x) = 2sinx $</p>
+              <p style="centerText">$ g(x) = 3x^{2} - 5 $</p>
+            </stack>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <onClick>
+            stepsController:toggleStep(1)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Apply the Quotient Rule:</p>
+          <stack name="cont" style="invisible">
+            <stack orientation="horizontal">
+              <stack orientation="vertical">
+                <!--CONTENT GOES HERE-->
+                <p style="centerText">$  F'(x) = \frac{f'(x) \cdot g(x) - f(x) \cdot g'(x)}{(g(x))^{2}} $</p>
+              </stack>
+            </stack>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <onClick>
+            stepsController:toggleStep(2)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <!--CONTENT GOES HERE-->
+          <p>Plug in and Simplify</p>
+          <stack name="cont" style="invisible">
+            <p> $ F'(x) = \frac{2cosx \cdot (3x^{2} - 5) - 2sinx \cdot 6x}{ (3x^{2} - 5)^{2}} $</p>
+            <p> $ F'(x) = \frac{ 6x^{2} \cdot cosx - 10 cosx - 12x \cdot sinx}{ (3x^{2} - 5)^{2}} $</p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <onClick>
+            stepsController:toggleStep(3)
+          </onClick>
+        </button>
+      </stack>
+    </stack>
+  </sectionNoTitle>
+
+  <!-- Section 3 -->
+  <sectionNoTitle name="section3" style="pageLayout">
+    <p style="sectionHeading">Examples</p>
+
+
+    <stack style="contentBG">
+      <p style="subSectionHeading">Example 1</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>$ F(x) = \frac{x+4}{2x-5} $, find $ F '(x) $:</p>
+          </column>
+        </row>
+      </table>
+
+
+
+
+
+      <stack name="answerWrap" style="collapsed">
+        <p style="subSectionHeading">Answer</p>
+        <table name="table" widths="10% 90%" grid="false">
+          <row>
+            <column>
+              <image src="resources\answer.png" inspect="false" />
+            </column>
+            <column>
+              <p>$ F'(x) = \frac{f'(x) \cdot g(x) - f(x) \cdot g'(x)}{(g(x))^{2}} $</p>
+              <p>
+                $ F'(x) = \frac{ 1 \cdot (2x -5) - (x+4) \cdot 2}{(2x-5)^{2}}  $
+              </p>
+              <p>$ F'(x) = \frac{ 2x - 5 - 2x - 8}{(2x-5)^{2}} $</p>
+              <p>$ F'(x) = \frac{ -13 }{(2x-5)^{2}} $</p>
+            </column>
+          </row>
+        </table>
+      </stack>
+
+      <button name="button1" content="Show Answer">
+        <onClick>
+          if button1.Text == "Show Answer" then
+          answerWrap.Style.Visibility = "visible";
+          button1.Text = "Hide Answer"
+          else
+          answerWrap.Style.Visibility = "collapsed";
+          button1.Text = "Show Answer"
+          end
+        </onClick>
+      </button>
+    </stack>
+
+
+
+
+
+
+
+
+
+
+
+    <stack style="contentBG">
+      <p style="subSectionHeading">Example 2</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>$ F(x) = \frac{5x-1}{6x^{2} + 2} $, find $ F '(x) $:</p>
+          </column>
+        </row>
+      </table>
+
+
+
+
+
+      <stack name="answerWrap" style="collapsed">
+        <p style="subSectionHeading">Answer</p>
+        <table name="table" widths="10% 90%" grid="false">
+          <row>
+            <column>
+              <image src="resources\answer.png" inspect="false" />
+            </column>
+            <column>
+              <p>$ F'(x) = \frac{f'(x) \cdot g(x) - f(x) \cdot g'(x)}{(g(x))^{2}} $</p>
+
+              <p>
+                $ F'(x) = \frac{ 5 \cdot (6x^{2} + 2) - (5x -1) \cdot 12x}{(6x^{2} + 2)^{2}}  $
+              </p>
+              <p>$ F'(x) = \frac{-30x^{2} + 12x + 10}{(6x^{2} + 2)^{2}} $</p>
+            </column>
+          </row>
+        </table>
+      </stack>
+
+      <button name="button1" content="Show Answer">
+        <onClick>
+          if button1.Text == "Show Answer" then
+          answerWrap.Style.Visibility = "visible";
+          button1.Text = "Hide Answer"
+          else
+          answerWrap.Style.Visibility = "collapsed";
+          button1.Text = "Show Answer"
+          end
+        </onClick>
+      </button>
+    </stack>
+
+
+
+
+
+
+
+
+
+
+
+    <stack style="contentBG">
+      <p style="subSectionHeading">Example 3</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>$ F(x) = \frac{ x^{2}}{sinx} $, find $ F '(x) $:</p>
+          </column>
+        </row>
+      </table>
+
+
+
+
+
+      <stack name="answerWrap" style="collapsed">
+        <p style="subSectionHeading">Answer</p>
+        <table name="table" widths="10% 90%" grid="false">
+          <row>
+            <column>
+              <image src="resources\answer.png" inspect="false" />
+            </column>
+            <column>
+              <p>$ F'(x) = \frac{f'(x) \cdot g(x) - f(x) \cdot g'(x)}{(g(x))^{2}} $</p>
+
+              <p>
+                $ F'(x) = \frac{ 2x \cdot sinx - x^{2} \cdot cosx}{(sinx)^{2}} $
+              </p>
+              <p>$ F'(x) = \frac{ x(2sinx - xcosx)}{(sinx)^{2}} $</p>
+            </column>
+          </row>
+        </table>
+      </stack>
+
+      <button name="button1" content="Show Answer">
+        <onClick>
+          if button1.Text == "Show Answer" then
+          answerWrap.Style.Visibility = "visible";
+          button1.Text = "Hide Answer"
+          else
+          answerWrap.Style.Visibility = "collapsed";
+          button1.Text = "Show Answer"
+          end
+        </onClick>
+      </button>
+    </stack>
+
+
+    <p>
+      <style>
+        <marginBottom>50</marginBottom>
+      </style>
+    </p>
+  </sectionNoTitle>
+
+  <!-- Section 4 -->
+  <sectionNoTitle name="section4" style="pageLayout">
+    <p style="sectionHeading">Practice</p>
+    <stack style="contentBG">
+
+      <p style="subSectionHeading">Question 1</p>
+
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p> Let $ F(x) = \frac{e^{x}}{x} $. Find $F'(x)$:</p>
+          </column>
+        </row>
+      </table>
+
+
+
+
+
+
+
+      <p name="answer" style="collapsed">C</p>
+      <script>
+        local selection = -1;
+        local deselectedColor = color.silver;
+        local selectedColor = color.rgb(50, 133, 184);
+
+        local function chooseButton(i)
+        if selection &gt; 0 then
+        stack.table:Child(selection):Child(1):Child(1).Style.BackgroundColor = deselectedColor;
+        end
+        stack.table:Child(i):Child(1):Child(1).Style.BackgroundColor = selectedColor;
+        selection = i;
+        end
+      </script>
+      <stack orientation="horizontal" name="stack">
+        <table name="table" widths="10% 90%" grid="false">
+          <style name="buttons">
+            <foreground color="white" />
+            <background color="silver" />
+          </style>
+          <row name="row">
+
+            <column>
+              <button content="A">
+                <onClick>final.Text="A"; chooseButton(1);</onClick>
+              </button>
+            </column>
+
+            <column>
+              <p>$ F'(x) = \frac{e^{x} \cdot x}{x^{2}} $</p>
+            </column>
+
+          </row>
+          <row>
+
+            <column>
+              <button content="B">
+                <onClick>final.Text="B"; chooseButton(2);</onClick>
+              </button>
+            </column>
+
+            <column>
+              <p>$ F'(x) = \frac{e^{x} }{x^{2}} $</p>
+            </column>
+
+          </row>
+          <row>
+
+            <column>
+              <button content="C">
+                <onClick>final.Text="C"; chooseButton(3);</onClick>
+              </button>
+            </column>
+
+            <column>
+              <p>$ F'(x) = \frac{e^{x}(x -1)}{x^{2}} $</p>
+            </column>
+
+          </row>
+
+        </table>
+      </stack>
+
+      <p name="final" style="collapsed" />
+      <stack name="hint" style="collapsed">
+        <p style="centerText">  Not quite there, try again ! </p>
+      </stack>
+      <stack name="solution" style="collapsed">
+        <p style="centerText"> Correct!  </p>
+      </stack>
+
+
+
+
+
+      <button content="Check Answer">
+        <onClick>
+          if string.lower(final.Text) == string.lower(answer.Text) then
+          solution.Style.Visibility = "visible";
+          stack.table:Child(selection):Child(1):Child(1).Style.BackgroundColor = color.rgb(0, 255, 0);
+
+          hint.Style.Visibility = "collapsed";
+          else
+          solution.Style.Visibility = "collapsed";
+          stack.table:Child(selection):Child(1):Child(1).Style.BackgroundColor = selectedColor;
+          hint.Style.Visibility = "visible";
+          end
+        </onClick>
+      </button>
+
+    </stack>
+    <p>
+      <br />
+    </p>
+    <stack style="contentBG">
+
+
+      <p style="subSectionHeading">Question 2</p>
+
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p> Let $ F(x) = \frac{x+2}{3x+1} $. Find $ F '(x)$:</p>
+          </column>
+        </row>
+      </table>
+
+
+
+
+
+
+
+      <p name="answer" style="collapsed">A</p>
+      <script>
+        local selection = -1;
+        local deselectedColor = color.silver;
+        local selectedColor = color.rgb(50, 133, 184);
+
+        local function chooseButton(i)
+        if selection &gt; 0 then
+        stack.table:Child(selection):Child(1):Child(1).Style.BackgroundColor = deselectedColor;
+        end
+        stack.table:Child(i):Child(1):Child(1).Style.BackgroundColor = selectedColor;
+        selection = i;
+        end
+      </script>
+      <stack orientation="horizontal" name="stack">
+        <table name="table" widths="10% 90%" grid="false">
+          <style name="buttons">
+            <foreground color="white" />
+            <background color="silver" />
+          </style>
+          <row name="row">
+
+            <column>
+              <button content="A">
+                <onClick>final.Text="A"; chooseButton(1);</onClick>
+              </button>
+            </column>
+
+            <column>
+              <p>$ F'(x) = \frac{-5}{(3x+1)^{2}} $</p>
+            </column>
+
+          </row>
+
+          <row>
+
+            <column>
+              <button content="B">
+                <onClick>final.Text="B"; chooseButton(2);</onClick>
+              </button>
+            </column>
+
+            <column>
+              <p>$ F'(x) = \frac{3x + 3}{(3x+1)^{2}} $</p>
+            </column>
+
+          </row>
+
+          <row>
+
+            <column>
+              <button content="C">
+                <onClick>final.Text="C"; chooseButton(3);</onClick>
+              </button>
+            </column>
+
+            <column>
+              <p>$ F'(x) = \frac{x^{2}}{(3x+1)^{2}} $</p>
+            </column>
+
+          </row>
+        </table>
+      </stack>
+
+      <p name="final" style="collapsed" />
+      <stack name="hint" style="collapsed">
+        <p style="centerText">  Not quite there, try again ! </p>
+      </stack>
+      <stack name="solution" style="collapsed">
+        <p style="centerText"> Correct! </p>
+      </stack>
+
+
+
+
+
+      <button content="Check Answer">
+        <onClick>
+          if string.lower(final.Text) == string.lower(answer.Text) then
+          solution.Style.Visibility = "visible";
+          stack.table:Child(selection):Child(1):Child(1).Style.BackgroundColor = color.rgb(0, 255, 0);
+
+          hint.Style.Visibility = "collapsed";
+          else
+          solution.Style.Visibility = "collapsed";
+          stack.table:Child(selection):Child(1):Child(1).Style.BackgroundColor = selectedColor;
+          hint.Style.Visibility = "visible";
+          end
+        </onClick>
+      </button>
+
+    </stack>
+    <p>
+      <br />
+    </p>
+    <stack style="contentBG">
+
+
+      <p style="subSectionHeading">Question 3</p>
+
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p> Let $ F(x) = \frac{sinx}{2x^{2}} $. Find $F'(x)$:</p>
+          </column>
+        </row>
+      </table>
+
+
+
+
+
+
+
+      <p name="answer" style="collapsed">B</p>
+      <script>
+        local selection = -1;
+        local deselectedColor = color.silver;
+        local selectedColor = color.rgb(50, 133, 184);
+
+        local function chooseButton(i)
+        if selection &gt; 0 then
+        stack.table:Child(selection):Child(1):Child(1).Style.BackgroundColor = deselectedColor;
+        end
+        stack.table:Child(i):Child(1):Child(1).Style.BackgroundColor = selectedColor;
+        selection = i;
+        end
+      </script>
+      <stack orientation="horizontal" name="stack">
+        <table name="table" widths="10% 90%" grid="false">
+          <style name="buttons">
+            <foreground color="white" />
+            <background color="silver" />
+          </style>
+          <row name="row">
+
+            <column>
+              <button content="A">
+                <onClick>final.Text="A"; chooseButton(1);</onClick>
+              </button>
+            </column>
+
+            <column>
+              <p>$ F'(x) = \frac{x \cdot cosx - 2x \cdot sinx}{4x^{4}}  $</p>
+            </column>
+
+          </row>
+
+          <row>
+
+            <column>
+              <button content="B">
+                <onClick>final.Text="B"; chooseButton(2);</onClick>
+              </button>
+            </column>
+
+            <column>
+              <p>$ F'(x) = \frac{2x(x \cdot cosx - 2sinx)}{4x^{4}} $</p>
+            </column>
+
+          </row>
+
+          <row>
+
+            <column>
+              <button content="C">
+                <onClick>final.Text="C"; chooseButton(3);</onClick>
+              </button>
+            </column>
+
+            <column>
+              <p>$ F'(x) = \frac{x^{2} \cdot sinx - 2x \cdot 2sinx}{4x^{4}}  $</p>
+            </column>
+
+          </row>
+        </table>
+      </stack>
+
+      <p name="final" style="collapsed" />
+      <stack name="hint" style="collapsed">
+        <p style="centerText">  Not quite there, try again ! </p>
+      </stack>
+      <stack name="solution" style="collapsed">
+        <p style="centerText"> Correct!  </p>
+      </stack>
+
+
+
+
+
+      <button content="Check Answer">
+        <onClick>
+          if string.lower(final.Text) == string.lower(answer.Text) then
+          solution.Style.Visibility = "visible";
+          stack.table:Child(selection):Child(1):Child(1).Style.BackgroundColor = color.rgb(0,255,0);
+
+          hint.Style.Visibility = "collapsed";
+          else
+          solution.Style.Visibility = "collapsed";
+          stack.table:Child(selection):Child(1):Child(1).Style.BackgroundColor = selectedColor;
+
+          hint.Style.Visibility = "visible";
+          end
+        </onClick>
+      </button>
+
+    </stack>
+
+
+    <p>
+      <style>
+        <marginBottom>50</marginBottom>
+      </style>
+    </p>
+
+  </sectionNoTitle>
+
+
+
+
+</document>

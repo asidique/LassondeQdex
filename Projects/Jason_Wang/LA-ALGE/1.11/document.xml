@@ -1,0 +1,598 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G6EEADF3E_0E95_4C53_BC98_5DAECD8F0E9C">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>LA-ALGE-1.11 Determinant of Matrix</title>
+    <creator>jason_wang</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/lassondeLogo.png" />
+  </metadata>
+
+  <include src="resources/curriculumStylesLassonde.xml" />
+  <include src="resources/Utilities.xml" />
+  <include src="resources/plotTools.xml" />
+
+  <!--                                      Header & Footer START                                         -->
+  <header style="themeColour">
+    <stack style="center" orientation="horizontal">
+      <p></p>
+    </stack>
+  </header>
+  <footer style="themeColour">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="themeColourTitle">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--                                      Header & Footer END                                         -->
+
+  <!-- Cover Page -->
+  <!-- This is the standard way title pages are created. A great website to get copyright free images .. www.pexels.com
+  *** The style: "pageLayout" is defined in curriculumStylesLassonde.xml. It simply sets the content to the center and adjusts the width to 80% ***-->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">1.11 Determinant of Matrix</title>
+    <p style="sectionHeading">Introduction</p>
+    <p>
+      <style>
+        <widthPercentage>0.8</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+        <textAlignment>center</textAlignment>
+        <size points="60" />
+        <marginTop>50</marginTop>
+        <marginBottom>50</marginBottom>
+      </style>
+      <![CDATA[$det(A)=\begin{vmatrix}a&b&c\\[6pt]d&e&f\\[6pt]g&h&i\end{vmatrix}$]]>
+    </p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="justifiedText">
+        In this Module, we are going to introduce the determinant of matrix and how to find it for 2x2 and 3x3 matrix.
+      </p>
+    </stack>
+  </section>
+
+  <!--2x2 determinant definition-->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Determinant of A Matrix</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Definition</p>
+      <p style="justifiedText">In linear algebra, the determinant is a useful value that can be computed from the elements of a square matrix. The determinant of a matrix $\;A$ is denoted $det(A)$, $det\;A$, or $|A|$. It can be viewed as the scaling factor of the transformation described by the matrix.</p>
+    </stack>
+
+    <p style="sectionHeading">Find Determinant of 2x2 Matrix</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Determinant Calculation Simulator</p>
+      <p style="justifiedText">Click the button below and see how the determinant of matrix A is calculated.</p>
+      <button name="btn" content="Start Calculation" style="width50">
+        <onClick> if btn.Text == "Start Calculation" then btn.Text = "Pause" sim:Start() elseif btn.Text == "Pause" then btn.Text = "Resume" sim:Pause() elseif btn.Text == "Resume" then btn.Text = "Pause" sim:Play() end </onClick>
+      </button>
+      <stack name="simStack" orientation="horizontal">
+        <p>
+          <style>
+            <widthPercentage>0.1</widthPercentage>
+            <textAlignment>right</textAlignment>
+            <horizontalAlignment>right</horizontalAlignment>
+            <size scale="2" />
+            <marginTop>25</marginTop>
+          </style>
+          $|A|$
+        </p>
+        <label>
+          <style>
+            <widthPercentage>0.05</widthPercentage>
+            <textAlignment>center</textAlignment>
+            <horizontalAlignment>center</horizontalAlignment>
+            <size scale="1.7" />
+            <marginTop>30</marginTop>
+          </style>
+          =
+        </label>
+        <p>
+          <style>
+            <widthPercentage>0.05</widthPercentage>
+            <textAlignment>center</textAlignment>
+            <horizontalAlignment>center</horizontalAlignment>
+            <size scale="1.7" />
+          </style>
+          $\bigg|$
+        </p>
+        <table name="table" grid="false" widths="50% 50%">
+          <style>
+            <widthPercentage>0.2</widthPercentage>
+            <textAlignment>center</textAlignment>
+            <horizontalAlignment>center</horizontalAlignment>
+          </style>
+          <row>
+            <column>
+              <p style="centeredText">5</p>
+            </column>
+            <column>
+              <p style="centeredText">2</p>
+            </column>
+          </row>
+          <row>
+            <column>
+              <p style="centeredText">4</p>
+            </column>
+            <column>
+              <p style="centeredText">7</p>
+            </column>
+          </row>
+        </table>
+        <p>
+          <style>
+            <widthPercentage>0.05</widthPercentage>
+            <textAlignment>center</textAlignment>
+            <horizontalAlignment>center</horizontalAlignment>
+            <size scale="1.7" />
+          </style>
+          $\bigg|$
+        </p>
+        <label>
+          <style>
+            <widthPercentage>0.05</widthPercentage>
+            <textAlignment>center</textAlignment>
+            <horizontalAlignment>center</horizontalAlignment>
+            <size scale="1.7" />
+            <marginTop>30</marginTop>
+          </style>
+          =
+        </label>
+        <p name="calc">
+          <style>
+            <widthPercentage>0.5</widthPercentage>
+            <textAlignment>left</textAlignment>
+            <horizontalAlignment>left</horizontalAlignment>
+            <marginTop>40</marginTop>
+          </style>
+        </p>
+      </stack>
+      <p></p>
+      <p name="feedback" style="centeredText invisible">
+        <b>What can you conclude from the result?</b>
+      </p>
+      <button name="cnclbtn" style="width50 invisible" content="Show Conclusion">
+        <onClick> cnclStack.Style.Visibility = "visible" cnclbtn.Style.Visibility = "collapsed" </onClick>
+      </button>
+      <stack name="cnclStack" style="invisible">
+        <p style="subSectionHeading">Conclusion</p>
+        <p style="justifiedText">In the case of a 2 x 2 matrix, the specific formula for the determinant is</p>
+        <p style="centeredText"><![CDATA[$|A|=\begin{vmatrix}a&b\\c&d\end{vmatrix}=ad-bc$]]></p>
+      </stack>
+      <simulation name="sim" duration="2.4" period="0.8">
+        <onUpdate> nextStep() </onUpdate>
+      </simulation>
+      <script>
+        <![CDATA[
+          local step = 1
+          local totalStep = 3
+          local cellOne = nil
+          local cellTwo = nil
+          
+          local function resetSim()
+            sim:Stop()
+            step = 1
+            btn.Text = "Start Calculation"
+          end
+          
+          local function clearHighlights()
+            if cellOne ~= nil then cellOne.Style.BackgroundColor = color.transparent end
+            if cellTwo ~= nil then cellTwo.Style.BackgroundColor = color.transparent end
+          end
+          
+          function nextStep()
+            clearHighlights()
+            if step > totalStep then
+              resetSim()
+              feedback.Style.Visibility = "visible"
+              cnclbtn.Style.Visibility = "visible"
+              return
+            end
+            
+            if step == 1 then 
+              simStack.calc.Text = "5 x 7 - "
+              cellOne = simStack.table:Child(1):Child(1):Child(1)
+              cellOne.Style.BackgroundColor = color.sandyBrown
+              cellTwo = simStack.table:Child(2):Child(2):Child(1)
+              cellTwo.Style.BackgroundColor = color.sandyBrown
+            elseif step == 2 then
+              simStack.calc.Text = simStack.calc.Text .. "2 x 4 = "
+              cellOne = simStack.table:Child(1):Child(2):Child(1)
+              cellOne.Style.BackgroundColor = color.sandyBrown
+              cellTwo = simStack.table:Child(2):Child(1):Child(1)
+              cellTwo.Style.BackgroundColor = color.sandyBrown
+            else
+              simStack.calc.Text = simStack.calc.Text .. "21"
+            end
+            step = step + 1
+          end
+          ]]>
+      </script>
+    </stack>
+
+  </sectionNoTitle>
+
+  <!--Practices-->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Practices</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Question 1</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p><![CDATA[$A=\begin{bmatrix}3&2\\1&5\end{bmatrix}$]]></p>
+            <p style="justifiedText">What's the determinant of matrix A?</p>
+          </column>
+        </row>
+      </table>
+      <textField name="input" placeholder="Enter your answer here" />
+      <p name="feedback" style="invisible" />
+      <script>
+        local attempt = 0;
+        local max = 3;
+      </script>
+      <button name="btn" content="Check Answer">
+        <onClick>
+          local answer = "13"
+          if input.Text ~= answer then 
+            feedback.Style.Visibility = "visible" 
+            feedback.Text = "Incorrect! Try again." 
+            attempt = attempt + 1
+            if attempt &gt;= max then
+              feedback.Text = "Answer = 13"
+            end
+          else 
+            feedback.Style.Visibility = "visible" 
+            feedback.Text = "Correct, Good Job!" 
+          end
+        </onClick>
+      </button>
+    </stack>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Question 2</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p><![CDATA[$B=\begin{bmatrix}7&3\\2&1\end{bmatrix}$]]></p>
+            <p style="justifiedText">What's the determinant of matrix B?</p>
+          </column>
+        </row>
+      </table>
+      <textField name="input" placeholder="Enter your answer here" />
+      <p name="feedback" style="invisible" />
+      <script>
+        local attempt = 0;
+        local max = 3;
+      </script>
+      <button name="btn" content="Check Answer">
+        <onClick>
+          local answer = "1"
+          if input.Text ~= answer then 
+            feedback.Style.Visibility = "visible" 
+            feedback.Text = "Incorrect! Try again." 
+            attempt = attempt + 1
+            if attempt &gt;= max then
+              feedback.Text = "Answer = 1"
+            end
+          else 
+            feedback.Style.Visibility = "visible" 
+            feedback.Text = "Correct, Good Job!" 
+          end
+        </onClick>
+      </button>
+    </stack>
+  </sectionNoTitle>
+
+
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Find Determinant of 2x2 Matrix</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Determinant Calculation Simulator</p>
+      <p style="justifiedText">Click the button below and see how the determinant of matrix A is calculated.</p>
+      <button name="btn" content="Start Calculation" style="width50">
+        <onClick> if btn.Text == "Start Calculation" then btn.Text = "Pause" sim:Start() elseif btn.Text == "Pause" then btn.Text = "Resume" sim:Pause() elseif btn.Text == "Resume" then btn.Text = "Pause" sim:Play() end </onClick>
+      </button>
+      <stack name="simStack" orientation="horizontal">
+        <p>
+          <style>
+            <widthPercentage>0.1</widthPercentage>
+            <textAlignment>right</textAlignment>
+            <horizontalAlignment>right</horizontalAlignment>
+            <size scale="2" />
+            <marginTop>40</marginTop>
+          </style>
+          $|A|$
+        </p>
+        <stack name="verticalStack" orientation="vertical">
+          <style>
+            <widthPercentage>0.9</widthPercentage>
+          </style>
+          <style name="signStyle">
+            <widthPercentage>0.1</widthPercentage>
+            <textAlignment>center</textAlignment>
+            <horizontalAlignment>center</horizontalAlignment>
+            <size scale="1.5" />
+          </style>
+          <stack name="s1" orientation="horizontal">
+            <p style="signStyle">
+              <style>
+                <marginTop>50</marginTop>
+              </style>
+              =
+            </p>
+            <p>
+              <style>
+                <widthPercentage>0.05</widthPercentage>
+                <textAlignment>center</textAlignment>
+                <horizontalAlignment>center</horizontalAlignment>
+                <size scale="2.3" />
+              </style>
+              $\bigg|$
+            </p>
+            <table name="table" grid="false" widths="33% 34% 33%">
+              <style>
+                <widthPercentage>0.2</widthPercentage>
+                <textAlignment>center</textAlignment>
+                <horizontalAlignment>center</horizontalAlignment>
+              </style>
+              <row>
+                <column>
+                  <p style="centeredText">1</p>
+                </column>
+                <column>
+                  <p style="centeredText">2</p>
+                </column>
+                <column>
+                  <p style="centeredText">3</p>
+                </column>
+              </row>
+              <row>
+                <column>
+                  <p style="centeredText">4</p>
+                </column>
+                <column>
+                  <p style="centeredText">5</p>
+                </column>
+                <column>
+                  <p style="centeredText">6</p>
+                </column>
+              </row>
+              <row>
+                <column>
+                  <p style="centeredText">7</p>
+                </column>
+                <column>
+                  <p style="centeredText">8</p>
+                </column>
+                <column>
+                  <p style="centeredText">9</p>
+                </column>
+              </row>
+            </table>
+            <p>
+              <style>
+                <widthPercentage>0.05</widthPercentage>
+                <textAlignment>center</textAlignment>
+                <horizontalAlignment>center</horizontalAlignment>
+                <size scale="2.3" />
+              </style>
+              $\bigg|$
+            </p>
+          </stack>
+          <stack name="s2" orientation="horizontal" style="invisible">
+            <style name="pStyle">
+              <widthPercentage>0.15</widthPercentage>
+              <textAlignment>center</textAlignment>
+              <horizontalAlignment>center</horizontalAlignment>
+            </style>
+            <p style="signStyle">=</p>
+            <p style="pStyle invisible"><![CDATA[$1 \cdot \begin{vmatrix}5&6\\8&9\end{vmatrix}$]]></p>
+            <p style="quanserRedF signStyle invisible">-</p>
+            <p style="pStyle invisible"><![CDATA[$2 \cdot \begin{vmatrix}4&6\\7&9\end{vmatrix}$]]></p>
+            <p style="dodgerBlueF signStyle invisible">+</p>
+            <p style="pStyle invisible"><![CDATA[$3 \cdot \begin{vmatrix}4&5\\7&8\end{vmatrix}$]]></p>
+          </stack>
+          <stack name="s3" orientation="horizontal" style="invisible">
+            <p style="signStyle">=</p>
+            <p>
+              <style>
+                <marginTop>15</marginTop>
+                <widthPercentage>0.9</widthPercentage>
+              </style>
+              <![CDATA[$1 \cdot (5\cdot 9 - 6 \cdot 8) - 2 \cdot (4\cdot 9 - 6\cdot 7) + 3 \cdot (4\cdot 8 - 5\cdot 7)$]]>
+            </p>
+          </stack>
+          <stack name="s4" orientation="horizontal" style="invisible">
+            <p style="signStyle">=</p>
+            <p>
+              <style>
+                <marginTop>15</marginTop>
+                <widthPercentage>0.9</widthPercentage>
+              </style>
+              0
+            </p>
+          </stack>
+        </stack>
+      </stack>
+
+      <p name="feedback" style="centeredText invisible">
+        <b>What can you conclude from the result?</b>
+      </p>
+      <button name="cnclbtn" style="width50 invisible" content="Show Conclusion">
+        <onClick> cnclStack.Style.Visibility = "visible" cnclbtn.Style.Visibility = "collapsed" </onClick>
+      </button>
+      <stack name="cnclStack" style="invisible">
+        <p style="subSectionHeading">Conclusion</p>
+        <p style="justifiedText">In the case of a 3 x 3 matrix, the specific formula for the determinant is</p>
+        <p style="centeredText"><![CDATA[$\begin{matrix}|A|&=&\begin{vmatrix}a&b&c\\d&e&f\\g&h&i\end{vmatrix}\hspace{3.5cm}\\[20pt]&=&a \cdot \begin{vmatrix}e&f\\h&i\end{vmatrix} - b \cdot \begin{vmatrix}d&f\\g&i\end{vmatrix} + c \cdot \begin{vmatrix}d&e\\g&h\end{vmatrix}\end{matrix}$]]></p>
+      </stack>
+      <simulation name="sim" duration="4.0" period="0.8">
+        <onUpdate> nextStep2() </onUpdate>
+      </simulation>
+      <script>
+        <![CDATA[
+        local step = 1
+        local totalStep = 5
+        local table = simStack.verticalStack.s1.table
+        local cellOne = nil
+        local cellTwo = nil
+          
+          local function resetSim()
+            sim:Stop()
+            step = 1
+            btn.Text = "Start Calculation"
+          end
+          
+          local function clearHighlights()
+            if cellOne ~= nil then cellOne.Style.BackgroundColor = color.transparent end
+            if cellTwo ~= nil then
+              for i=1,4 do
+                cellTwo[i].Style.BackgroundColor = color.transparent
+              end
+            end
+          end
+          
+          function nextStep2()
+            clearHighlights()
+            if step > totalStep then
+              resetSim()
+              feedback.Style.Visibility = "visible"
+              cnclbtn.Style.Visibility = "visible"
+              return
+            end
+            
+            if step < 4 then
+              -- if restarted, reset visibility of verticalStack
+              if step == 1 then
+                for i=2,6 do
+                  simStack.verticalStack.s2:Child(i).Style.Visibility = "collapsed"
+                end
+                for i=2,4 do
+                  simStack.verticalStack:Child(i).Style.Visibility = "collapsed"
+                end
+              end
+              cellOne = table:Child(1):Child(step):Child(1)
+              cellOne.Style.BackgroundColor = color.sandyBrown
+              local j
+              local k
+              if step == 1 then j = 2; k = 3; else j = 1; if step == 2 then k = 3; else k = 2; end end
+              cellTwo = {}
+              cellTwo[1] = table:Child(2):Child(j):Child(1)
+              cellTwo[2] = table:Child(2):Child(k):Child(1)
+              cellTwo[3] = table:Child(3):Child(j):Child(1)
+              cellTwo[4] = table:Child(3):Child(k):Child(1)
+              for i=1,4 do
+                cellTwo[i].Style.BackgroundColor = color.mediumSeaGreen
+              end
+              local s2 = simStack.verticalStack.s2
+              s2.Style.Visibility = "visible"
+              s2:Child(2*step).Style.Visibility = "visible"
+              if step < 3 then s2:Child(2*step+1).Style.Visibility = "visible"; end
+            elseif step < 5 then
+              simStack.verticalStack.s3.Style.Visibility = "visible"
+            else
+              simStack.verticalStack.s4.Style.Visibility = "visible"
+            end
+            step = step + 1
+          end
+            
+        ]]>
+      </script>
+    </stack>
+  </sectionNoTitle>
+
+
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Practices</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Question 3</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p><![CDATA[$A=\begin{bmatrix}2&3&2\\3&1&5\\6&7&2\end{bmatrix}$]]></p>
+            <p style="justifiedText">What's the determinant of matrix A?</p>
+          </column>
+        </row>
+      </table>
+      <textField name="input" placeholder="Enter your answer here" />
+      <p name="feedback" style="invisible" />
+      <script>
+        local attempt = 0;
+        local max = 3;
+      </script>
+      <button name="btn" content="Check Answer">
+        <onClick>
+          local answer = "36"
+          if input.Text ~= answer then 
+            feedback.Style.Visibility = "visible" 
+            feedback.Text = "Incorrect! Try again."
+            attempt = attempt + 1
+            if attempt &gt;= max then
+              feedback.Text = "Answer = 36"
+            end
+          else
+            feedback.Style.Visibility = "visible" 
+            feedback.Text = "Correct, Good Job!"
+          end
+        </onClick>
+      </button>
+    </stack>
+
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Question 4</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p><![CDATA[$B=\begin{bmatrix}5&7&3\\2&3&9\\7&2&1\end{bmatrix}$]]></p>
+            <p style="justifiedText">What's the determinant of matrix B?</p>
+          </column>
+        </row>
+      </table>
+      <textField name="input" placeholder="Enter your answer here" />
+      <p name="feedback" style="invisible" />
+      <script>
+        local attempt = 0;
+        local max = 3;
+      </script>
+      <button name="btn" content="Check Answer">
+        <onClick>
+          local answer = "301"
+          if input.Text ~= answer then 
+            feedback.Style.Visibility = "visible" 
+            feedback.Text = "Incorrect! Try again." 
+            attempt = attempt + 1
+            if attempt &gt;= max then
+              feedback.Text = "Answer = 301"
+            end
+          else 
+            feedback.Style.Visibility = "visible" 
+            feedback.Text = "Correct, Good Job!" 
+          end
+        </onClick>
+      </button>
+    </stack>
+
+  </sectionNoTitle>
+
+
+</document>

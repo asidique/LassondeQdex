@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="GB9894F82_1344_4C66_B28B_961ADCDD22E4">
+
+  <!-- thicker sine wave, thicker amplitude and period lines (color aswell) adding the equation -->
+  <metadata>
+    <title>Sine Wave Interaction</title>
+    <creator>Quanser Consulting Inc.</creator>
+    <contributor>Zachary Smith</contributor>
+    <coverImage src="resources/cover.png" />
+    <!-- High School co-op student Aug 2016 -->
+    <abstract>This app is an example of a simple math interaction that can be created using the qdex platform. Users can alter the coefficients of a sine wave and see the effect on a plot. </abstract>
+  </metadata>
+
+  <section>
+    <title>Sine Wave Interaction</title>
+
+    <!-- Style to increase the size of my equations -->
+    <style name="largeEquation">
+      <size scale="large" />
+      <textAlignment>center</textAlignment>
+    </style>
+
+    <p style="largeEquation">
+      y = a sin (bx + c) + d
+    </p>
+
+    <!-- Styles for the plot (set colours and line thickness) -->
+    <style name="axes">
+      <foreground color="black" />
+      <lineThickness>2</lineThickness>
+    </style>
+    <style name="sineStyle">
+      <foreground color="mediumAquamarine" />
+      <lineThickness>3</lineThickness>
+    </style>
+    <style name="thick">
+      <lineThickness>2</lineThickness>
+    </style>
+    <style name="gray">
+      <foreground color="gray" />
+    </style>
+
+    <xyPlot name="myPlot">
+      <axis dim="x" auto="fixed" min="-10" max="40" />
+      <axis dim="y" auto="fixed" min="-10" max="10" />
+      <series draw="lineSegments" style="axes">
+        <data>0 -20; 0 20; -20 0; 50 0</data>
+      </series>
+      <series name="sineWave" manual="true" style="sineStyle" />
+      <series name="period" manual="true" draw="lineSegments" style="gray thick" />
+      <series name="amplitude" manual="true" draw="lineSegments" style="gray thick" />
+      <series name="midpoint" manual="true" draw="lineSegments" style="gray" />
+    </xyPlot>
+
+    <script>
+      <![CDATA[
+      -- Defining the variables
+      local x, y, a, b, c, d;
+      local sine = myPlot.sineWave
+      local period = myPlot.period
+      local amp = myPlot.amplitude    
+      local mid = myPlot.midpoint
+  
+      -- Initialising the variables
+      a = 1.00
+      b = 1.00
+      c = 0.00
+      d = 0.00
+      
+      -- Function called when variables a-d are updated. Redraws plot and updates equation
+      function updatePlot()
+        
+        -- Drawng the sine wave
+        sine:Clear()
+        for x = -20, 60, 0.1 do
+          y = a*math.sin(b*x + c) + d
+          sine:Add(x,y)
+        end
+        sine:Update()
+        
+        -- Drawing the dotted midpoint line
+        mid:Clear()        
+        for x = -20, 60, 1 do
+          mid:Add(x,d)
+        end        
+        mid:Update()
+        
+        -- Drawing the amplitude line
+        ampx = (math.asin (1) - c) / b
+        ampy = a + d
+        amp:Clear()
+        amp:Add(ampx, ampy)
+        amp:Add(ampx, d)        
+        amp:Add(ampx + 0.6, ampy)
+        amp:Add(ampx - 0.6, ampy)      
+        amp:Add(ampx + 0.6, d)
+        amp:Add(ampx - 0.6, d)
+        amp:Update()        
+        
+        -- Drawing the period line
+        yp = a*math.sin(c) + d
+        xp = (2*math.pi)/b
+        period:Clear()
+        period:Add(0,yp)
+        period:Add(xp,yp)        
+        period:Add(xp, yp + 0.3)
+        period:Add(xp, yp - 0.3)        
+        period:Update()      
+        
+        -- Updating the equation
+        Equation.Text = string.format ("%0.2f sin (%0.2fx + %0.2f) + %0.2f", a, b, c, d)
+
+      end
+      
+      -- Calling plot initially so that sine wave is present on page load
+      updatePlot()
+      ]]>
+    </script>
+
+    <p name="Equation" style="largeEquation">
+      1.00sin (1.00x + 0.00) + 0.00
+    </p>
+
+    <table name="Table" grid="false" widths="12% 88%">
+      <row>
+        <column>
+          <p>
+            a: 1.00
+          </p>
+        </column>
+        <column>
+          <slider name="SA" min="-5" max="5" value="1.00">
+            <onValueChanged>
+              <![CDATA[
+               if value < 0.15 and value > -0.15 then
+               value = 0.00
+               elseif value < 1.15 and value > 0.85 then
+               value = 1.00               
+               end
+               Table:Child(1):Child(1):Child(1).Text = string.format("a: %0.2f", value);
+               a = value
+               updatePlot()
+               ]]>
+            </onValueChanged>
+          </slider>
+        </column>
+      </row>
+      <row>
+        <column>
+          <p>
+            b: 1.00
+          </p>
+        </column>
+        <column>
+          <slider name="SB" min="-3" max="3" value="1.00">
+            <onValueChanged>
+              <![CDATA[
+               if value < 0.1 and value > -0.1 then
+               value = 0.00
+               elseif value < 1.15 and value > 0.85 then
+               value = 1.00 
+               end
+               Table:Child(2):Child(1):Child(1).Text = string.format("b: %0.2f", value);
+               b = value
+               updatePlot()
+               ]]>
+            </onValueChanged>
+          </slider>
+        </column>
+      </row>
+      <row>
+        <column>
+          <p>
+            c: 0.00
+          </p>
+        </column>
+        <column>
+          <slider name="SC" min="-3" max="3" value="0.00">
+            <onValueChanged>
+              <![CDATA[
+             if value < 0.1 and value > -0.1 then
+             value = 0.00
+             end
+             Table:Child(3):Child(1):Child(1).Text = string.format("c: %0.2f", value);
+             c = value 
+             updatePlot()
+             ]]>
+            </onValueChanged>
+          </slider>
+        </column>
+      </row>
+      <row>
+        <column>
+          <p>
+            d: 0.00
+          </p>
+        </column>
+        <column>
+          <slider name="SD" min="-3" max="3" value="0.00">
+            <onValueChanged>
+              <![CDATA[
+              if value < 0.1 and value > -0.1 then
+              value = 0.00
+              end
+              Table:Child(4):Child(1):Child(1).Text = string.format("d: %0.2f", value);
+              d = value 
+              updatePlot()
+              ]]>
+            </onValueChanged>
+          </slider>
+        </column>
+      </row>
+    </table>
+
+  </section>
+</document>

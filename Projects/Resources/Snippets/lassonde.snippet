@@ -1,0 +1,1004 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets
+    xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <!--Lassonde Header and Footer-->
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>lassonde Header and Footer</Title>
+      <Author>Jason Wang</Author>
+      <Description>Create a header and footer for lassonde module</Description>
+      <Shortcut>las_hf</Shortcut>
+    </Header>
+    <Snippet>
+      <Code Language="XML">
+        <![CDATA[
+	<include src="resources/curriculumStylesLassonde.xml" />
+  <include src="resources/Utilities.xml" />
+  <include src="resources/plotTools.xml" />
+
+	<!--                                      Header & Footer START                                         -->
+	<header style="themeColour">
+		<stack style="center" orientation="horizontal">
+			<p></p>
+		</stack>
+	</header>
+	<footer style="themeColour">
+		<stack orientation="horizontal">
+			<image style="tiny" src="resources/lassonde.png" inspect="false" />
+			<p style="themeColourTitle">
+				<style>
+					<numbering suffix="true" counter="pages" />
+					<textAlignment>center</textAlignment>
+					<marginTop>30</marginTop>
+					<foreground color="255 255 255" />
+				</style>
+			</p>
+			<image style="tiny" src="resources/york.png" inspect="false" />
+		</stack>
+	</footer>
+	<!--                                      Header & Footer END                                         -->
+        ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <!--Cover Page-->
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>lassonde Cover page</Title>
+      <Author>Jason Wang</Author>
+      <Description>Create a Cover Page.</Description>
+      <Shortcut>las_cp</Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>chapter_title</ID>
+          <ToolTip>Replace with the title of the module.</ToolTip>
+          <Default>1.1 Title of the Module</Default>
+        </Literal>
+        <Literal>
+          <ID>image_file_name</ID>
+          <ToolTip>Replace with the image filename.</ToolTip>
+          <Default>introduction_image.jpg</Default>
+        </Literal>
+        <Literal>
+          <ID>introduction</ID>
+          <ToolTip>Replace with the content of the introduction.</ToolTip>
+          <Default>
+            This is where your introductory content goes. This is a great place to introduce the concepts being discussed in the module and highlight
+            some key terms in bold. Including a history of the topic or a high level view on the topic will be a great transition into the rest of the
+            document. In some cases, explain the picture you've included to give a visual attachment to the document.
+          </Default>
+        </Literal>
+      </Declarations>
+      <Code Language="XML">
+        <![CDATA[
+  <!-- Cover Page -->
+	<!-- This is the standard way title pages are created. A great website to get copyright free images .. www.pexels.com
+  *** The style: "pageLayout" is defined in curriculumStylesLassonde.xml. It simply sets the content to the center and adjusts the width to 80% ***-->
+	<section name="section1" style="pageLayout">
+		<title style="chapterTitle">$chapter_title$</title>
+		<p style="sectionHeading">Introduction</p>
+		<image src="resources/$image_file_name$" />
+		<stack orientation="vertical" style="contentBG">
+			<p style="justifiedText">
+				$introduction$
+			</p>
+		</stack>
+	</section>
+        ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <!--Standard Tabs Section-->
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>lassonde Tab page</Title>
+      <Author>Jason Wang</Author>
+      <Description>Create a tabulary page layout.</Description>
+      <Shortcut>TabLayout</Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>section_title</ID>
+          <ToolTip>Replace with the title of the section.</ToolTip>
+          <Default>Section Title</Default>
+        </Literal>
+        <Literal>
+          <ID>first_tab_title</ID>
+          <ToolTip>Replace with the title of the first tab.</ToolTip>
+          <Default>First Tab Title</Default>
+        </Literal>
+        <Literal>
+          <ID>second_tab_title</ID>
+          <ToolTip>Replace with the title of the second tab.</ToolTip>
+          <Default>Second Tab Title</Default>
+        </Literal>
+        <Literal>
+          <ID>third_tab_title</ID>
+          <ToolTip>Replace with the title of the third tab.</ToolTip>
+          <Default>Third Tab Title</Default>
+        </Literal>
+        <Literal>
+          <ID>fourth_tab_title</ID>
+          <ToolTip>Replace with the title of the fourth tab.</ToolTip>
+          <Default>Fourth Tab Title</Default>
+        </Literal>
+        <Literal>
+          <ID>first_tab_content</ID>
+          <ToolTip>Replace with the content of the first tab.</ToolTip>
+          <Default>First Tab Content</Default>
+        </Literal>
+        <Literal>
+          <ID>second_tab_content</ID>
+          <ToolTip>Replace with the content of the second tab.</ToolTip>
+          <Default>Second Tab Content</Default>
+        </Literal>
+        <Literal>
+          <ID>third_tab_content</ID>
+          <ToolTip>Replace with the content of the third tab.</ToolTip>
+          <Default>Third Tab Content</Default>
+        </Literal>
+        <Literal>
+          <ID>fourth_tab_content</ID>
+          <ToolTip>Replace with the content of the fourth tab.</ToolTip>
+          <Default>Fourth Tab Content</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="XML">
+        <![CDATA[
+  <sectionNoTitle style="pageLayout">
+    <script>
+      local tabsManager = TabsManager:new({tStack=tabs, cStack=contents, selectedTabIndex=1, numOfTabs=3})
+      tabsManager:initStyle()
+    </script>
+		<p style="sectionHeading">$section_title$</p>
+		<!--This stack only contains the tabs themselves and not the content. The content is held in a stack directly underneat the tabs.-->
+    <stack name="tabs" orientation="horizontal" style="contentBG2">
+      <stack style="contentBG">
+        <button content="$first_tab_title$" style="tab">
+          <onClick>
+            tabsManager:changeTab(1)
+          </onClick>
+        </button>
+      </stack>
+      <stack style="contentBG">
+        <button content="$second_tab_title$" style="tab">
+          <onClick>
+            tabsManager:changeTab(2)
+          </onClick>
+        </button>
+      </stack>
+      <stack style="contentBG">
+        <button content="$third_tab_title$" style="tab">
+          <onClick>
+            tabsManager:changeTab(3)
+          </onClick>
+        </button>
+      </stack>
+      <!-- uncomment this to enable fourth tab, also uncomment the fourth content and change the numOfTabs of the TabsManager
+      <stack style="contentBG">
+        <button content="$fourth_tab_title$" style="tab">
+          <onClick>
+            tabsManager:changeTab(4)
+          </onClick>
+        </button>
+      </stack>
+      -->
+    </stack>
+		<stack name="contents" orientation="vertical" style="contentBG">
+			<stack orientation="vertical">
+        $first_tab_content$
+			</stack>
+      <stack orientation="vertical">
+        $second_tab_content$
+			</stack>
+      <stack orientation="vertical">
+        $third_tab_content$
+			</stack>
+      <!-- uncomment it to enable fourth tab
+      <stack orientation="vertical">
+        $fourth_tab_content$
+			</stack>
+      -->
+		</stack>
+	</sectionNoTitle>
+        ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <!--One Step Stack for Step to Step Section-->
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>One-Step Stack</Title>
+      <Author>Jason Wang</Author>
+      <Description>This is a single step stack used in step-by-step stack.</Description>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>step_title</ID>
+          <ToolTip>Replace with the step title</ToolTip>
+          <Default>Step 1 title</Default>
+        </Literal>
+        <Literal>
+          <ID>step_content</ID>
+          <ToolTip>Replace with the step content</ToolTip>
+          <Default><![CDATA[<p>Step 1 Content</p>]]></Default>
+        </Literal>
+      </Declarations>
+      <Code Language="XML">
+        <![CDATA[
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>$step_title$</p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            $step_content$
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep()
+          </onClick>
+        </button>
+      </stack>
+        ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <!--Step by Step Section-->
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Step by Step Section</Title>
+      <Author>Jason Wang</Author>
+      <Description>A step by step section</Description>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>section_title</ID>
+          <ToolTip>Replace with the section title</ToolTip>
+          <Default>Question Step-by-Step</Default>
+        </Literal>
+        <Literal>
+          <ID>sub_title</ID>
+          <ToolTip>Replace with the section sub title</ToolTip>
+          <Default>Question 1</Default>
+        </Literal>
+        <Literal>
+          <ID>question</ID>
+          <ToolTip>Replace with the question</ToolTip>
+          <Default><![CDATA[Here is where you ask the question... make sure to add an image that relates to the question to help visualize the question.]]></Default>
+        </Literal>
+      </Declarations>
+      <Code Language="XML">
+        <![CDATA[
+	<!--QUESTION STEP BY STEP LAYOUT-->
+  <!--Setup StepsController with correct number of Steps-->
+	<sectionNoTitle style="pageLayout">
+    <script>
+      local stepsController = StepsController:new({stepsStack=stepsStack, numOfSteps=4, shown_message="Show Step", hidden_message="Hide Step", showStepCounter=true})
+    </script>
+		<p style="sectionHeading">$section_title$</p>
+		<stack orientation="vertical" style="contentBG">
+			<p style="subSectionHeading">$sub_title$</p>
+			<p style="justifiedText">$question$</p>
+		</stack>
+    <stack name="stepsStack">
+      <!--Each step is a stack, and each step has alternating background colors-->
+      <!--Use Snippet to create any single step stack -->
+      
+      
+    </stack>
+  </sectionNoTitle>
+        ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <!--Multiple Choices Stack-->
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Multiple Choice Stack</Title>
+      <Description>Create a multiple choice stack with two choices in a row, total 4 choices</Description>
+      <Author>Jason Wang</Author>
+      <Shortcut>las_mc</Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>answer</ID>
+          <ToolTip>Replace with the index of correct choice (1-4)</ToolTip>
+          <Default>1</Default>
+        </Literal>
+        <Literal>
+          <ID>stack_title</ID>
+          <ToolTip>Replace with stack title</ToolTip>
+          <Default>Question 1</Default>
+        </Literal>
+        <Literal>
+          <ID>stack_question</ID>
+          <ToolTip>Replace with multiple choice question</ToolTip>
+          <Default>Replace with your multiple choice questions here!</Default>
+        </Literal>
+        <Literal>
+          <ID>choice_1</ID>
+          <ToolTip>Replace with your first choice element, use style="mcLayout" on your element to center the choice</ToolTip>
+          <Default><![CDATA[<p style="mcLayout">1</p>]]></Default>
+        </Literal>
+        <Literal>
+          <ID>choice_2</ID>
+          <ToolTip>Replace with your second choice element</ToolTip>
+          <Default><![CDATA[<p style="mcLayout">2</p>]]></Default>
+        </Literal>
+        <Literal>
+          <ID>choice_3</ID>
+          <ToolTip>Replace with your third choice element</ToolTip>
+          <Default><![CDATA[<p style="mcLayout">3</p>]]></Default>
+        </Literal>
+        <Literal>
+          <ID>choice_4</ID>
+          <ToolTip>Replace with your fourth choice element</ToolTip>
+          <Default><![CDATA[<p style="mcLayout">4</p>]]></Default>
+        </Literal>
+      </Declarations>
+      <Code Language="XML">
+        <![CDATA[
+    <stack style="mcStackLayout">
+      <script>
+        local answer = $answer$
+        local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=answer})
+      </script>
+			<p style="subSectionHeading">$stack_title$</p>
+			<table widths="10% 90%" grid="false">
+				<row>
+					<column>
+						<image src="resources/question.png" inspect="false" />
+					</column>
+					<column>
+						<p style="justifiedText">$stack_question$</p>
+					</column>
+				</row>
+			</table>
+			<table name="choicesTable" grid="false" widths="50% 50%">
+				<row>
+					<column>
+            $choice_1$
+            <!-- uncomment following code if you want an image as your answer, replace the image src-->
+            <!--
+						<image src="resources/q.jpeg" style="mcLayout" />
+            -->
+					</column>
+					<column>
+						$choice_2$
+            <!-- uncomment following code if you want an image as your answer, replace the image src-->
+            <!--
+						<image src="resources/q.jpeg" style="mcLayout" />
+            -->
+					</column>
+				</row>
+				<row>
+					<column>
+						<button name="btn" content="A" style="btnUnselected">
+							<onClick>
+                mcController:select(1)
+							</onClick>
+						</button>
+					</column>
+					<column>
+						<button name="btn" content="B" style="btnUnselected">
+							<onClick>
+                mcController:select(2)
+              </onClick>
+						</button>
+					</column>
+				</row>
+				<row>
+					<column>
+						$choice_3$
+            <!-- uncomment following code if you want an image as your answer, replace the image src-->
+            <!--
+						<image src="resources/q.jpeg" style="mcLayout" />
+            -->
+					</column>
+					<column>
+						$choice_4$
+            <!-- uncomment following code if you want an image as your answer, replace the image src-->
+            <!--
+						<image src="resources/q.jpeg" style="mcLayout" />
+            -->
+					</column>
+				</row>
+				<row>
+					<column>
+						<button name="btn" content="C" style="btnUnselected">
+							<onClick>
+                mcController:select(3)
+              </onClick>
+						</button>
+					</column>
+					<column>
+						<button name="btn" content="D" style="btnUnselected">
+							<onClick>
+                mcController:select(4)
+              </onClick>
+						</button>
+					</column>
+				</row>
+			</table>
+			<button name="checkBtn" content="Check Answer">
+				<onClick>
+          mcController:checkAnswer()
+        </onClick>
+			</button>
+		</stack>
+        ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <!--Multiple Choices Stack (vertical choices layout)-->
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Multiple Choice Stack (Vertical)</Title>
+      <Description>Create a vertical multiple choice stack with 1 choices in a row, total 4 choices</Description>
+      <Author>Jason Wang</Author>
+      <Shortcut>las_mcv</Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>answer</ID>
+          <ToolTip>Replace with the index of correct choice (1-4)</ToolTip>
+          <Default>1</Default>
+        </Literal>
+        <Literal>
+          <ID>stack_title</ID>
+          <ToolTip>Replace with stack title</ToolTip>
+          <Default>Question 1</Default>
+        </Literal>
+        <Literal>
+          <ID>stack_question</ID>
+          <ToolTip>Replace with multiple choice question</ToolTip>
+          <Default>Replace with your multiple choice questions here!</Default>
+        </Literal>
+        <Literal>
+          <ID>choice_1</ID>
+          <ToolTip>Replace with your first choice element, use style="mcLayout" on your element to center the choice</ToolTip>
+          <Default><![CDATA[<p style="justifiedText">1</p>]]></Default>
+        </Literal>
+        <Literal>
+          <ID>choice_2</ID>
+          <ToolTip>Replace with your second choice element</ToolTip>
+          <Default><![CDATA[<p style="justifiedText">2</p>]]></Default>
+        </Literal>
+        <Literal>
+          <ID>choice_3</ID>
+          <ToolTip>Replace with your third choice element</ToolTip>
+          <Default><![CDATA[<p style="justifiedText">3</p>]]></Default>
+        </Literal>
+        <Literal>
+          <ID>choice_4</ID>
+          <ToolTip>Replace with your fourth choice element</ToolTip>
+          <Default><![CDATA[<p style="justifiedText">4</p>]]></Default>
+        </Literal>
+      </Declarations>
+      <Code Language="XML">
+        <![CDATA[
+    <stack style="mcStackLayout">
+      <script>
+        local answer = $answer$
+        local mcController = MCController:new({choiceBtns={choicesTable:Child(1):Child(1).btn, choicesTable:Child(2):Child(1).btn, choicesTable:Child(3):Child(1).btn, choicesTable:Child(4):Child(1).btn}, checkBtn=checkBtn, answer=answer})
+      </script>
+			<p style="subSectionHeading">$stack_title$</p>
+			<table widths="10% 90%" grid="false">
+				<row>
+					<column>
+						<image src="resources/question.png" inspect="false" />
+					</column>
+					<column>
+						<p style="justifiedText">$stack_question$</p>
+					</column>
+				</row>
+			</table>
+			<table name="choicesTable" grid="false" widths="20% 80%">
+				<row>
+          <column>
+						<button name="btn" content="A" style="btnUnselected">
+							<onClick>
+                mcController:select(1)
+							</onClick>
+						</button>
+					</column>
+					<column>
+            $choice_1$
+					</column>
+				</row>
+				<row>
+					<column>
+						<button name="btn" content="B" style="btnUnselected">
+							<onClick>
+                mcController:select(2)
+              </onClick>
+						</button>
+					</column>
+          <column>
+						$choice_2$
+					</column>
+				</row>
+				<row>
+          <column>
+						<button name="btn" content="C" style="btnUnselected">
+							<onClick>
+                mcController:select(3)
+              </onClick>
+						</button>
+					</column>
+					<column>
+						$choice_3$
+					</column>
+				</row>
+				<row>
+					<column>
+						<button name="btn" content="D" style="btnUnselected">
+							<onClick>
+                mcController:select(4)
+              </onClick>
+						</button>
+					</column>
+          <column>
+						$choice_4$
+					</column>
+				</row>
+			</table>
+			<button name="checkBtn" content="Check Answer">
+				<onClick>
+          mcController:checkAnswer()
+        </onClick>
+			</button>
+		</stack>
+        ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <!--Nested Questions Section-->
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Nested Questions Section</Title>
+      <Description>Create a nested questions section with multiple questions in step-by-step format.</Description>
+      <Author>Jason Wang</Author>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>nested_title</ID>
+          <ToolTip>Replace with your section title</ToolTip>
+          <Default>Nested Multiple Choice Section</Default>
+        </Literal>
+        <Literal>
+          <ID>main_question</ID>
+          <ToolTip>Replace with your main question</ToolTip>
+          <Default>Here is where you ask the question... make sure to add an image that relates to the question to help visualize the question.</Default>
+        </Literal>
+        <Literal>
+          <ID>part1_question</ID>
+          <ToolTip>Replace with your part 1 question</ToolTip>
+          <Default>A rightward force is applied to a book in order to move it across a desk at constant velocity. Consider frictional forces. Neglect air resistance. What does the free body diagram of the book look like?</Default>
+        </Literal>
+        <Literal>
+          <ID>part2_question</ID>
+          <ToolTip>Replace with your part 2 question</ToolTip>
+          <Default>A rightward force is applied to a book in order to move it across a desk at constant velocity. Consider frictional forces. Neglect air resistance. What does the free body diagram of the book look like?</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="XML">
+        <![CDATA[
+  <sectionNoTitle style="pageLayout">
+    <script>
+      local mqController = MQController:new({mqStack=mqStack, numOfSteps=2})
+    </script>
+		<p style="sectionHeading">$nested_title$</p>
+		<stack orientation="vertical" style="contentBG">
+			<p style="subSectionHeading">QUESTION 1</p>
+			<p>$main_question$</p>
+			<!-- Add an image or simulation relates to the question
+      <image src="resources/diagram1.jpeg" />
+      -->
+		</stack>
+    
+    <stack name="mqStack" orientation="vertical">
+      <stack orientation="vertical">
+        <stack name="header" orientation="horizontal">
+          <!--Step Title and Button-->
+          <p name="title">PART A</p>
+          <button name="btn" content="Show Part A" style="stepByStepBtn">
+            <onClick>
+              mqController:toggleStep(1)
+            </onClick>
+          </button>
+        </stack>
+        <stack name="content" style="invisible">
+          <!--Step Content-->
+          <stack>
+            <script>
+              local answer = 1
+              local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=answer})
+            </script>
+            <table widths="10% 90%" grid="false">
+              <row>
+                <column>
+                  <image src="resources/question.png" inspect="false" />
+                </column>
+                <column>
+                  <p style="justifiedText">$part1_question$</p>
+                </column>
+              </row>
+            </table>
+            <table name="choicesTable" grid="false" widths="50% 50%">
+              <row>
+                <column>
+                  <image src="resources/q.jpeg" style="mcLayout" />
+                </column>
+                <column>
+                  <image src="resources/q.jpeg" style="mcLayout" />
+                </column>
+              </row>
+              <row>
+                <column>
+                  <button name="btn" content="A" style="btnUnselected">
+                    <onClick>
+                      mcController:select(1)
+                    </onClick>
+                  </button>
+                </column>
+                <column>
+                  <button name="btn" content="B" style="btnUnselected">
+                    <onClick>
+                      mcController:select(2)
+                    </onClick>
+                  </button>
+                </column>
+              </row>
+              <row>
+                <column>
+                  <image src="resources/q.jpeg" style="mcLayout" />
+                </column>
+                <column>
+                  <image src="resources/q.jpeg" style="mcLayout" />
+                </column>
+              </row>
+              <row>
+                <column>
+                  <button name="btn" content="C" style="btnUnselected">
+                    <onClick>
+                      mcController:select(3)
+                    </onClick>
+                  </button>
+                </column>
+                <column>
+                  <button name="btn" content="D" style="btnUnselected">
+                    <onClick>
+                      mcController:select(4)
+                    </onClick>
+                  </button>
+                </column>
+              </row>
+            </table>
+            <button name="checkBtn" content="Check Answer">
+              <onClick>
+                mcController:checkAnswer()
+              </onClick>
+            </button>
+          </stack>
+        </stack>
+      </stack>
+      <stack orientation="vertical">
+        <stack name="header" orientation="horizontal">
+          <!--Step Title and Button-->
+          <p name="title">PART B</p>
+          <button name="btn" content="Show Part B" style="stepByStepBtn">
+            <onClick>
+              mqController:toggleStep(2)
+            </onClick>
+          </button>
+        </stack>
+        <stack name="content" style="invisible">
+          <!--Step Content-->
+          <stack>
+            <script>
+              local answer = 1
+              local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=answer})
+            </script>
+            <table widths="10% 90%" grid="false">
+              <row>
+                <column>
+                  <image src="resources/question.png" inspect="false" />
+                </column>
+                <column>
+                  <p style="justifiedText">$part2_question$</p>
+                </column>
+              </row>
+            </table>
+            <table name="choicesTable" grid="false" widths="50% 50%">
+              <row>
+                <column>
+                  <image src="resources/q.jpeg" style="mcLayout" />
+                </column>
+                <column>
+                  <image src="resources/q.jpeg" style="mcLayout" />
+                </column>
+              </row>
+              <row>
+                <column>
+                  <button name="btn" content="A" style="btnUnselected">
+                    <onClick>
+                      mcController:select(1)
+                    </onClick>
+                  </button>
+                </column>
+                <column>
+                  <button name="btn" content="B" style="btnUnselected">
+                    <onClick>
+                      mcController:select(2)
+                    </onClick>
+                  </button>
+                </column>
+              </row>
+              <row>
+                <column>
+                  <image src="resources/q.jpeg" style="mcLayout" />
+                </column>
+                <column>
+                  <image src="resources/q.jpeg" style="mcLayout" />
+                </column>
+              </row>
+              <row>
+                <column>
+                  <button name="btn" content="C" style="btnUnselected">
+                    <onClick>
+                      mcController:select(3)
+                    </onClick>
+                  </button>
+                </column>
+                <column>
+                  <button name="btn" content="D" style="btnUnselected">
+                    <onClick>
+                      mcController:select(4)
+                    </onClick>
+                  </button>
+                </column>
+              </row>
+            </table>
+            <button name="checkBtn" content="Check Answer">
+              <onClick>
+                mcController:checkAnswer()
+              </onClick>
+            </button>
+          </stack>
+        </stack>
+      </stack>
+    </stack>
+    
+	</sectionNoTitle>
+        ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <!--A Standard content Stack-->
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Content Stack</Title>
+      <Description>Create a content stack with a subSectionHeading, contentBG and 50 bottom margin.</Description>
+      <Author>Jason Wang</Author>
+      <Shortcut>las_stack</Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>subsection_title</ID>
+          <ToolTip>Replace with your subsection title</ToolTip>
+          <Default>A Subsection Title</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="XML">
+        <![CDATA[
+<stack style="mcStackLayout">
+  <p style="subSectionHeading">$subsection_title$</p>
+  <!-- Replace with your contents here -->
+</stack>
+        ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <!--A Standard Section with title and a content Stack-->
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Standard Section</Title>
+      <Description>Create a standard section with a heading followed by a stack with contentBG and subSectionHeading</Description>
+      <Author>Jason Wang</Author>
+      <Shortcut>las_section</Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>section_title</ID>
+          <ToolTip>Replace with your section title</ToolTip>
+          <Default>A Section Title</Default>
+        </Literal>
+        <Literal>
+          <ID>subsection_title</ID>
+          <ToolTip>Replace with your subsection title</ToolTip>
+          <Default>A Subsection Title</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="XML">
+        <![CDATA[
+<sectionNoTitle style="pageLayout">
+  <p style="sectionHeading">$section_title$</p>
+  <stack style="mcStackLayout">
+    <p style="subSectionHeading">$subsection_title$</p>
+    <!-- Replace with your contents here -->
+  </stack>
+</sectionNoTitle>
+        ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <!--A Checkbox button for Checkbox Question-->
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Checkbox</Title>
+      <Description>A Checkbox for Checkbox Question.</Description>
+      <Author>Jason Wang</Author>
+      <Shortcut>las_checkbox</Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>checkbox_question_controller</ID>
+          <ToolTip>Replace with the CQController variable name</ToolTip>
+          <Default>cqController</Default>
+        </Literal>
+        <Literal>
+          <ID>button_index</ID>
+          <ToolTip>Replace with current button index (index starts from 1)</ToolTip>
+          <Default>index</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="XML">
+        <![CDATA[
+        <button name="checkbox" style="choiceBox_style" content=" ">
+          <onClick>
+            $cqController$:toggleCheckbox($button_index$)
+          </onClick>
+        </button>
+        ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <!--A Checkbox Question Stack-->
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Checkbox Question Stack</Title>
+      <Description>A checkbox question stack.</Description>
+      <Author>Jason Wang</Author>
+      <Shortcut>las_cstack</Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>answers</ID>
+          <ToolTip>Replace with the correct answers table</ToolTip>
+          <Default>{true, false, false, true}</Default>
+        </Literal>
+        <Literal>
+          <ID>stack_title</ID>
+          <ToolTip>Replace with stack title</ToolTip>
+          <Default>Question 1</Default>
+        </Literal>
+        <Literal>
+          <ID>stack_question</ID>
+          <ToolTip>Replace with checkbox question</ToolTip>
+          <Default>Replace with your checkbox questions here!</Default>
+        </Literal>
+        <Literal>
+          <ID>choice_1</ID>
+          <ToolTip>Replace with your first choice element, use style="mcLayout" on your element to center the choice</ToolTip>
+          <Default><![CDATA[<p style="mcLayout">1</p>]]></Default>
+        </Literal>
+        <Literal>
+          <ID>choice_2</ID>
+          <ToolTip>Replace with your second choice element</ToolTip>
+          <Default><![CDATA[<p style="mcLayout">2</p>]]></Default>
+        </Literal>
+        <Literal>
+          <ID>choice_3</ID>
+          <ToolTip>Replace with your third choice element</ToolTip>
+          <Default><![CDATA[<p style="mcLayout">3</p>]]></Default>
+        </Literal>
+        <Literal>
+          <ID>choice_4</ID>
+          <ToolTip>Replace with your fourth choice element</ToolTip>
+          <Default><![CDATA[<p style="mcLayout">4</p>]]></Default>
+        </Literal>
+      </Declarations>
+      <Code Language="XML">
+        <![CDATA[
+    <stack style="mcStackLayout">
+      <script>
+        local answers = $answers$
+        local cqController = CQController:new({checkboxes={table:Child(2):Child(1).checkbox, table:Child(2):Child(2).checkbox, table:Child(4):Child(1).checkbox, table:Child(4):Child(2).checkbox}, checkBtn=checkBtn, answers=answers})
+      </script>
+			<p style="subSectionHeading">$stack_title$</p>
+			<table widths="20% 80%" grid="false">
+				<row>
+					<column>
+						<image src="resources/question.png" inspect="false" />
+					</column>
+					<column>
+						<p style="justifiedText">$stack_question$</p>
+					</column>
+				</row>
+			</table>
+			<table name="table" grid="false" widths="50% 50%">
+				<row>
+					<column>
+            $choice_1$
+					</column>
+					<column>
+						$choice_2$
+					</column>
+				</row>
+				<row>
+					<column>
+						<button name="checkbox" style="checkbox_style" content=" ">
+              <onClick>
+                cqController:toggleCheckbox(1)
+              </onClick>
+            </button>
+					</column>
+					<column>
+						<button name="checkbox" style="checkbox_style" content=" ">
+              <onClick>
+                cqController:toggleCheckbox(2)
+              </onClick>
+            </button>
+					</column>
+				</row>
+				<row>
+					<column>
+						$choice_3$
+					</column>
+					<column>
+						$choice_4$
+					</column>
+				</row>
+				<row>
+					<column>
+						<button name="checkbox" style="checkbox_style" content=" ">
+              <onClick>
+                cqController:toggleCheckbox(3)
+              </onClick>
+            </button>
+					</column>
+					<column>
+						<button name="checkbox" style="checkbox_style" content=" ">
+              <onClick>
+                cqController:toggleCheckbox(4)
+              </onClick>
+            </button>
+					</column>
+				</row>
+			</table>
+			<button name="checkBtn" content="Check Answer">
+				<onClick>
+          cqController:checkAnswer()
+        </onClick>
+			</button>
+		</stack>
+        ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

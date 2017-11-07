@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="GCBF19FA7_2229_4D13_9817_F423C336636F">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>2.3 Estimating One-Sided Limits Using Graphs</title>
+    <creator>admin</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/lassondeLogo.png" />
+  </metadata>
+
+  <include src="curriculumThemePack/curriculumStyles.xml" />
+  <include src="plotTools.xml" />
+
+  <!--Header & Footer-->
+  <style name="backgroundColor">
+    <background color="232 12 46" />
+  </style>
+  <style name="fontColor">
+    <foreground color="255 255 255" />
+  </style>
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="fontColor"></p>
+      <p style="fontColor rightText"></p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>20</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--Header & Footer END-->
+
+  <!--intro-->
+  <section>
+    <title>
+      <style>
+        <textAlignment>right</textAlignment>
+        <marginTop>100</marginTop>
+      </style>
+      <size scale="xlarge">2.3</size>
+    </title>
+    <p style="chapterTitle">Estimating One-Sided Limits Using Graphs</p>
+
+    <p style="title">INTRODUCTION</p>
+    <p>
+      When estimating limits of a function as x approaches a constant, you should always determine the limit of $ f(x) $ as x approaches a constant from both directions. In this lesson, we learn what one-sided limits are and how to find the value of a one-sided limit using a graph.
+    </p>
+  </section>
+
+  <!--Summary-->
+  <sectionNoTitle>
+    <stack>
+      <style>
+        <widthPercentage>0.93</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <style>
+        <counter name="decBullet" format="decimal" />
+      </style>
+
+      <p style="titleMargin">
+        <b>Summary</b>
+      </p>
+      <stack style="questionAnswer">
+        <p style="title">What are One-Sided Limits?</p>
+        <p>
+          Previously, we discussed what limits are: the value of f(x) when x approaches a constant value. When we discuss <b>one-sided limits</b> we will be discussing what happens to f(x) when we approach the function from the <b>LEFT or RIGHT.</b>
+          <br />
+        </p>
+        <p>To show whether x is approaching the constant from the left or right, the symbols "+" or "-" are denoted in the limit. For example: </p>
+        <equation>$ \lim_{x\rightarrow 2^{-}} x^2 + 1 $</equation>
+        <p>
+          What this equation means is "what is the value of $ x^2 + 1 $ as x approaches 2 <b>from the left.</b> Therefore, whenever the "-" is denoted as an exponent above the constant, it means that we are looking for the limit of f(x) from the left. On the other hand, whenever the "+" is denoted as an exponent above the constant, it means we are looking for limit of f(x) from the right.
+        </p>
+      </stack>
+
+      <stack style="questionAnswer">
+        <p style="title">Example</p>
+        <p>Let's now take a look at an example with a graph:</p>
+        <equation>$ \lim_{x\rightarrow 5^{-}} \frac{3}{x-5} $</equation>
+        <p>
+          This one-sided limit is asking us is "what is the limit of f(x) as x approaches 5 from the left?" <br />
+        </p>
+        <table name="table" grid="false">
+          <row>
+            <column>
+              <style name="blackLine">
+                <foreground color="black" />
+              </style>
+              <style name="redLine">
+                <foreground color="red" />
+              </style>
+              <style name="functionLine">
+                <foreground color="50 133 184" />
+                <lineThickness>2</lineThickness>
+              </style>
+              <style name="hole">
+                <foreground color="white" />
+              </style>
+              <xyPlot name="myPlot" pan="disabled" tap="disabled" zoom="disabled">
+                <axis dim="y" auto="fixed" min="-6" max="6"></axis>
+                <axis dim="x" auto="fixed" min="-2" max="10"></axis>
+                <series name="xAxis" manual="true" style="blackLine" />
+                <series name="yAxis" manual="true" style="blackLine" />
+                <series name="graph" manual="true" style="functionLine" />
+                <series name="graph2" manual="true" style="functionLine" />
+                <series name="asymptote" manual="true" style="redLine" draw="lineSegments" />
+              </xyPlot>
+
+              <script>
+
+                <![CDATA[
+              
+              local x, y;
+              local x2,y2;
+              local m, b;
+              local graph = myPlot.graph;
+              local graph2 = myPlot.graph2;
+              
+              local function redrawFunction()
+                graph:Clear();
+                graph2:Clear()
+                for x = -10, 4.9, 0.1 do
+                  y = 3/(x - 5)
+                  graph:Add(x,y);
+                end
+                
+                for x2 = 5.1,10, 0.1 do
+                  y2 = 3/(x2 - 5)
+                  graph2:Add(x2,y2);
+                end
+                
+                
+                graph:Update();
+                graph2:Update();
+              end
+              
+              
+              local xAxis = myPlot.xAxis;
+              local yAxis = myPlot.yAxis;
+              local asym = myPlot.asymptote;
+              
+              asym:Add(5,100)
+              asym:Add(5,-100)
+
+              xAxis:Add(-100,0)
+              xAxis:Add(100,0)
+
+              yAxis:Add(0,-100)
+              yAxis:Add(0,100)
+              
+              redrawFunction();
+              ]]>
+              </script>
+
+            </column>
+          </row>
+        </table>
+
+        <p>As we can see, as x approaches 5 from the left, the value of $ f(x) = \frac{3}{x-5} $ gets larger and larger in the negative direction. Thus, we can conclude that: </p>
+        <equation>
+          $ \lim_{x\rightarrow 5^{-}} \frac{3}{x-5} = -\infty $ <br />
+        </equation>
+
+        <p>But what about if we approach x = 5 from the right hand side? Then we would be looking for:</p>
+        <equation>$ \lim_{x\rightarrow 5^{+}} \frac{3}{x-5} $</equation>
+        <p>By looking at the graph above, we can determine that as we approach 5 from the right, f(x) gets larger and larger in the positive direction. Thus, we can conclude that: </p>
+        <equation>$ \lim_{x\rightarrow 5^{-}} \frac{3}{x-5} = +\infty $</equation>
+        <p>Therefore, we know the one-sided limits of this function as x approaches 5. The one-sided limits are quite different, which means:</p>
+        <equation>$ \lim_{x\rightarrow 5^{-}} \frac{3}{x-5} = \lim_{x\rightarrow 5^{-}} \frac{3}{x-5} $</equation>
+        <p>Since the one-sided limits do not equal each other, the limit of $ \lim_{x\rightarrow 5} \frac{3}{x-5} $ does not exist as the answers are different from both sides. </p>
+      </stack>
+      <p>
+        <style>
+          <marginBottom>120</marginBottom>
+        </style>
+      </p>
+    </stack>
+  </sectionNoTitle>
+
+  <!--Practice-->
+  <sectionNoTitle>
+    <stack>
+      <style>
+        <widthPercentage>0.93</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <style>
+        <counter name="decBullet" format="decimal" />
+      </style>
+      <p style="titleMargin">
+        <b>Practice</b>
+      </p>
+      <p style="title">Evaluate each of the following one-sided limits:</p>
+
+      <!--Question 1 -->
+      <stack style="questionAnswer">
+        <p style="title qNum"></p>
+        <table name="table" grid="false">
+          <row>
+            <column>
+              <p>
+                <![CDATA[
+                $ f(x) =
+                  \begin{pmatrix} x + 3; x \leq 1 \\
+                  x^2 - 2x; x > 1 \\
+                \end{pmatrix} $
+              ]]>
+              </p>
+              <equation>$ \lim_{x\rightarrow 1^{-}} f(x) $</equation>
+              <style name="blackLine">
+                <foreground color="black" />
+              </style>
+              <style name="redLine">
+                <foreground color="red" />
+              </style>
+              <style name="functionLine">
+                <foreground color="50 133 184" />
+                <lineThickness>2</lineThickness>
+              </style>
+              <xyPlot name="myPlot" pan="disabled" tap="disabled" zoom="disabled">
+                <axis dim="y" auto="fixed" min="-6" max="6"></axis>
+                <axis dim="x" auto="lockAspectRatio" min="-6" max="6"></axis>
+                <series name="xAxis" manual="true" style="blackLine" />
+                <series name="yAxis" manual="true" style="blackLine" />
+                <series name="graph" manual="true" style="functionLine" />
+                <series name="graph2" manual="true" style="functionLine" />
+                <series name="circle_series" manual="true" style="functionLine" draw="radialFill" />
+                <series name="circle_series2" manual="true" style="functionLine" />
+              </xyPlot>
+
+              <script>
+
+                <![CDATA[
+              
+              -- plotTools.drawCircle[Series],[Centre],[Radius])
+              plotTools.drawCircle(myPlot.circle_series, vector({1,4}), 0.4)
+              plotTools.drawCircle(myPlot.circle_series2, vector({1,-1}), 0.4)
+              
+              local x, y;
+              local x2,y2;
+              local m, b;
+              local graph = myPlot.graph;
+              local graph2 = myPlot.graph2;
+              
+              local function redrawFunction()
+                graph:Clear();
+                graph2:Clear()
+                for x = -10, 1, 0.1 do
+                  y = x + 3;
+                  graph:Add(x,y);
+                end
+                
+                for x2 = 1.4,10, 0.1 do
+                  y2 = math.pow(x2,2) - (2*x2);
+                  graph2:Add(x2,y2);
+                end
+                
+                
+                graph:Update();
+                graph2:Update();
+              end
+              
+              
+              local xAxis = myPlot.xAxis;
+              local yAxis = myPlot.yAxis;
+
+              xAxis:Add(-100,0)
+              xAxis:Add(100,0)
+
+              yAxis:Add(0,-100)
+              yAxis:Add(0,100)
+              
+              redrawFunction();
+              ]]>
+              </script>
+
+            </column>
+          </row>
+        </table>
+        <p style="title">ANSWER</p>
+        <table name="answers" widths="30% 70%" grid="false">
+          <!-- Row 1 -->
+          <row>
+            <column>
+              <p>$ \lim_{x\rightarrow 1^{-}} f(x) =  $ </p>
+            </column>
+            <column>
+              <textField name="input1" placeholder="insert answer here" />
+            </column>
+          </row>
+
+        </table>
+        <button content="Check Answer">
+          <onClick>
+            <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                
+                if a == 4 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+          </onClick>
+        </button>
+        <!-- Answer Stack -->
+        <stack name="solutions">
+          <p name="answer" style="collapsed"></p>
+          <p name="answer2" style="collapsed">The answer is: $ \lim_{x\rightarrow 1^{-}} f(x) = 4 $ </p>
+        </stack>
+      </stack>
+
+      <!--Question 2 -->
+      <stack style="questionAnswer">
+        <p style="title qNum"></p>
+        <table name="table" grid="false">
+          <row>
+            <column>
+              <p>
+                <![CDATA[
+                $ f(x) = |x + 4| $
+              ]]>
+              </p>
+              <equation>$ \lim_{x\rightarrow -4^{-}} f(x) $</equation>
+              <style name="blackLine">
+                <foreground color="black" />
+              </style>
+              <style name="redLine">
+                <foreground color="red" />
+              </style>
+              <style name="functionLine">
+                <foreground color="50 133 184" />
+                <lineThickness>2</lineThickness>
+              </style>
+              <xyPlot name="myPlot" pan="disabled" tap="disabled" zoom="disabled">
+                <axis dim="y" auto="fixed" min="-6" max="6"></axis>
+                <axis dim="x" auto="lockAspectRatio" min="-6" max="6"></axis>
+                <series name="xAxis" manual="true" style="blackLine" />
+                <series name="yAxis" manual="true" style="blackLine" />
+                <series name="graph" manual="true" style="functionLine" />
+              </xyPlot>
+
+              <script>
+
+                <![CDATA[
+             
+              
+              local x, y;
+              local m, b;
+              local graph = myPlot.graph;
+              
+              local function redrawFunction()
+                graph:Clear();
+                for x = -10, 10, 1 do
+                  y = math.abs(x + 4);
+                  graph:Add(x,y);
+                end
+
+                graph:Update();
+              end
+              
+              
+              local xAxis = myPlot.xAxis;
+              local yAxis = myPlot.yAxis;
+
+              xAxis:Add(-100,0)
+              xAxis:Add(100,0)
+
+              yAxis:Add(0,-100)
+              yAxis:Add(0,100)
+              
+              redrawFunction();
+              ]]>
+              </script>
+
+            </column>
+          </row>
+        </table>
+        <p style="title">ANSWER</p>
+        <table name="answers" widths="30% 70%" grid="false">
+          <!-- Row 1 -->
+          <row>
+            <column>
+              <p>$ \lim_{x\rightarrow -4^{-}} f(x) =  $ </p>
+            </column>
+            <column>
+              <textField name="input1" placeholder="insert answer here" />
+            </column>
+          </row>
+
+        </table>
+        <button content="Check Answer">
+          <onClick>
+            <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                
+                if a == 0 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+          </onClick>
+        </button>
+        <!-- Answer Stack -->
+        <stack name="solutions">
+          <p name="answer" style="collapsed"></p>
+          <p name="answer2" style="collapsed">The answer is: $ \lim_{x\rightarrow -4^{-}} f(x) = 0 $ </p>
+        </stack>
+      </stack>
+
+      <!--Question 3 -->
+      <stack style="questionAnswer">
+        <p style="title qNum"></p>
+        <table name="table" grid="false">
+          <row>
+            <column>
+              <p>
+                <![CDATA[
+                $ f(x) = \sqrt{x^2 - 25} $
+              ]]>
+              </p>
+              <equation>$ \lim_{x\rightarrow 5^{+}} f(x) $</equation>
+              <style name="blackLine">
+                <foreground color="black" />
+              </style>
+              <style name="redLine">
+                <foreground color="red" />
+              </style>
+              <style name="functionLine">
+                <foreground color="50 133 184" />
+                <lineThickness>2</lineThickness>
+              </style>
+              <xyPlot name="myPlot" pan="disabled" tap="disabled" zoom="disabled">
+                <axis dim="y" auto="fixed" min="-6" max="6"></axis>
+                <axis dim="x" auto="lockAspectRatio" min="-6" max="6"></axis>
+                <series name="xAxis" manual="true" style="blackLine" />
+                <series name="yAxis" manual="true" style="blackLine" />
+                <series name="graph" manual="true" style="functionLine" />
+              </xyPlot>
+
+              <script>
+
+                <![CDATA[
+             
+              
+              local x, y;
+              local m, b;
+              local graph = myPlot.graph;
+              
+              local function redrawFunction()
+                graph:Clear();
+                for x = -10, 10, 0.1 do
+                  y = math.sqrt((math.pow(x,2)) - 25)
+                  graph:Add(x,y);
+                end
+
+                graph:Update();
+              end
+              
+              
+              local xAxis = myPlot.xAxis;
+              local yAxis = myPlot.yAxis;
+
+              xAxis:Add(-100,0)
+              xAxis:Add(100,0)
+
+              yAxis:Add(0,-100)
+              yAxis:Add(0,100)
+              
+              redrawFunction();
+              ]]>
+              </script>
+
+            </column>
+          </row>
+        </table>
+        <p style="title">ANSWER</p>
+        <table name="answers" widths="30% 70%" grid="false">
+          <!-- Row 1 -->
+          <row>
+            <column>
+              <p>$ \lim_{x\rightarrow 5^{+}} f(x)=  $ </p>
+            </column>
+            <column>
+              <textField name="input1" placeholder="insert answer here" />
+            </column>
+          </row>
+
+        </table>
+        <button content="Check Answer">
+          <onClick>
+            <![CDATA[
+                a = tonumber(answers:Child(1):Child(2):Child(1).Text);
+                
+                if a == 0 then
+                  solutions:Child(1).Text = "Correct!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                  solutions:Child(2).Style.Visibility = "visible";
+                else
+                  solutions:Child(1).Text = "Incorrect, try again!";
+                  solutions:Child(1).Style.Visibility = "visible";
+                end
+          ]]>
+          </onClick>
+        </button>
+        <!-- Answer Stack -->
+        <stack name="solutions">
+          <p name="answer" style="collapsed"></p>
+          <p name="answer2" style="collapsed">The answer is: $ \lim_{x\rightarrow 5^{+}} f(x) = 0 $ </p>
+        </stack>
+      </stack>
+    </stack>
+  </sectionNoTitle>
+
+</document>

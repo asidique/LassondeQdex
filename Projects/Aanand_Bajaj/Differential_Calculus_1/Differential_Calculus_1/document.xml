@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G78C8E796_903A_479A_9183_9B8B68A44422">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>Slope of Secant to Curve and Slope of Tangent</title>
+    <creator>admin</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+  </metadata>
+
+  <include src="curriculumThemePack/curriculumStyles.xml" />
+  <include src="plotTools.xml" />
+
+  <!--Header and Footer-->
+  <style name="backgroundColor">
+    <background color="50 133 184" />
+  </style>
+  <style name="fontColor">
+    <foreground color="255 255 255" />
+  </style>
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="fontColor">Amanda Koon</p>
+      <p style="fontColor rightText">MCR3U</p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/logo1.png" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/logo2.png" />
+    </stack>
+  </footer>
+
+  <!-- Summary -->
+  <section name="summary">
+    <title>Introduction</title>
+    <p>The history of mathematics presents the development of calculus as being accredited to Sir Isaac Newton (1642-1727) an English physicist, mathematician and Gottfried Wilhelm Leibnitz (1646-1716) a German physicist, mathematician. </p>
+    <p>
+      <br />The introduction of calculus created an explosion in the development of the physical sciences and other areas of science as calculus provided a way of describing natural and physical laws in a mathematical format which is easily understood. The development of calculus also opened new areas of mathematics and science as individuals sought out new ways to apply the techniques of calculus.
+    </p>
+
+    <p>
+      <br />Calculus is the study of things that change and finding ways to represent these changes in a mathematical way. The symbol ∆ will be used to represent change. For example, the notation ∆y is to be read “The change in y”.
+    </p>
+  </section>
+
+  <!-- Secant -->
+  <section name="slopeSecant">
+    <title>Slope of a Secant Line</title>
+    <stack style="highlightBox">
+      <p>A secant line is defined by a straight line passing through two points on a curve. In general, we can define these points as having coordinates $ (x, f(x)) $ and $ (x + \bigtriangleup x, f(x + \bigtriangleup x)) $. The slope of the secant line, given by $ m_{s} $ is given by:</p>
+    </stack>
+
+    <stack style="highlightBox">
+      <p>$ m_{s} = \frac{f(x + \bigtriangleup x) - f(x)}{x + \bigtriangleup x - x} = \frac{f(x + \bigtriangleup x) - f(x)}{\bigtriangleup x } $</p>
+    </stack>
+
+    <stack style="questionAnswer">
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <style name="blackLine">
+              <foreground color="black" />
+            </style>
+            <style name="functionLine">
+              <foreground color="50 133 184" />
+              <lineThickness>3</lineThickness>
+            </style>
+            <style name="secantLine">
+              <foreground color="red" />
+              <lineThickness>3</lineThickness>
+            </style>
+            <style name="point">
+              <foreground color="green" />
+              <lineThickness>1</lineThickness>
+            </style>
+            <xyPlot name="myPlot" pan="disabled" tap="disabled" zoom="disabled">
+              <axis dim="y" auto="fixed" min="-10" max="10"></axis>
+              <axis dim="x" auto="lockAspectRatio" min="-10" max="10"></axis>
+              <series name="xAxis" manual="true" style="blackLine" />
+              <series name="yAxis" manual="true" style="blackLine" />
+              <series name="curve" manual="true" style="functionLine" />
+              <series name="secant_series" style="secantLine"></series>
+              <series name="inter1_series" draw="points" style="point"></series>
+              <series name="inter2_series" draw="points" style="point"></series>
+            </xyPlot>
+
+            <script>
+
+              <![CDATA[
+              
+              local x, y;
+              local x2, y2;
+              local x3, y3;
+              local a = 1;
+              local b = 0;
+              local c = -4;
+              secantB = 0;
+             
+              
+              a2 = 1;
+              b2 = 1;
+              
+              xOne = -2;
+              xTwo = 2;
+              local fxOne, fxTwo;
+              
+              local slope;
+              local slope2;
+              
+
+              local curve = myPlot.curve;
+              local secant = myPlot.secant_series;
+              local inter1 = myPlot.inter1_series;
+              local inter2 = myPlot.inter2_series;
+              
+              graphRoundValue = 0.1;
+              labelRoundValue = 0.1;
+              
+              local function curveGraph(x)
+                  y = a*math.pow(x,2) + b*x + c;
+                  return y;
+              end
+              
+              local function secantGraph(x2)
+                  local y2;
+                  y2 = slope*x2 + secantB;
+                  return y2;
+              end
+              
+              --[[ convert secant to normal line --]]
+              local function convertSecant(x,x2)
+                  slope = (curveGraph(x + (x2 - x)) - curveGraph(x))/(x2 - x);
+                  secantB = fxOne - slope*xOne;
+              end
+              
+              local function redrawGraph()
+              curve:Clear()
+                for x = -10, 10, 0.1 do
+                  curveGraph(x);
+                  curve:Add(x,y);
+                end
+                curve:Update();
+              end
+             
+              
+              local function redrawSecant()
+               secant:Clear();
+
+                --[[ x1,fx1 and x2,fx2 --]]
+
+                
+                 fxOne = curveGraph(xOne);
+                 fxTwo = curveGraph(xTwo);
+                 
+                convertSecant(xOne,xTwo);
+
+                for x2 = -10, 10, 1 do        
+                  y2 = slope*x2 + secantB;
+                  secant:Add(x2,y2); 
+                end
+                
+                secant:Update();
+              end
+              
+              local function redrawPoints()
+                inter1:Clear();
+                inter2:Clear();
+               
+                inter1:Add(xOne,fxOne);
+                inter2:Add(xTwo,fxTwo);
+                 
+                inter1:Update();
+                inter2:Update();
+              end
+             
+                                          
+              local xAxis = myPlot.xAxis;
+              local yAxis = myPlot.yAxis;
+
+              xAxis:Add(-100,0)
+              xAxis:Add(100,0)
+
+              yAxis:Add(0,-100)
+              yAxis:Add(0,100)
+              
+              redrawGraph();
+              redrawSecant();
+              redrawPoints();
+              ]]>
+            </script>
+
+            <p name="xInter" style="centerText">
+              Intercepts: (x,y) and (x,y)
+            </p>
+            <p name="equation" style="centerText">
+              Equation of Secant Line:
+            </p>
+            <p name="slopeText" style="centerText">
+
+            </p>
+            <p name="test"></p>
+            <script>
+              <![CDATA[
+              
+              
+              local function updateEquation()  
+                if xOne == xTwo then
+                  equation.Text = "Equation of Secant Line: y = no line";
+                  slopeText.Text = "Slope: no slope";
+                else
+                  equation.Text = "Equation of Secant Line: y = "..slope.."x + "..secantB;
+                  slopeText.Text = "Slope:"..slope;
+                end
+              end
+            
+            local function updateIntercepts()
+                --[[ simple --]]
+                xInter.Text = "Intercepts: ("..xOne..","..fxOne..") and ("..xTwo..","..fxTwo..")";
+           
+              end
+              
+             
+               function round(value,multiple)
+                result = 0;
+                
+                if value % multiple ~= 0 then
+                  result = multiple;
+                  division = math.floor((value/multiple)+1);
+                  result = division*multiple;
+                  return result;
+                else 
+                  return value;
+                end
+              end
+              updateEquation();
+
+            ]]>
+            </script>
+
+            <!--slider for a-->
+            <stack orientation="horizontal">
+              <p name="aLabel">x1 = -2</p>
+              <slider name="aSlider" min="-10" max="10" value="-2">
+                <onValueChanged>
+                  <![CDATA[
+                  xOne = round(value,graphRoundValue);
+                  aLabel.Text = "x1 = "..round(value,labelRoundValue)
+                    redrawSecant();
+                    redrawPoints();
+                    updateEquation();
+                    updateIntercepts();
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+            <!--slider for b-->
+            <stack orientation="horizontal">
+              <p name="bLabel">x2 = 1</p>
+              <slider name="bSlider" min="-10" max="10" value="1">
+                <onValueChanged>
+                  <![CDATA[
+                  xTwo = round(value,graphRoundValue);
+                  bLabel.Text = "x2 = "..round(value,labelRoundValue)
+                    redrawSecant();
+                    redrawPoints();
+                    updateEquation();
+                    updateIntercepts();
+
+                ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+          </column>
+        </row>
+      </table>
+    </stack>
+    q
+  </section>
+
+  <!-- Tangent -->
+  <section name="slopeTangent">
+    <title>Slope of a Tangent Line</title>
+    <stack style="highlightBox">
+      <p>
+        As the point A approaches point B, the quantity $ \bigtriangleup x $ approaches zero, the secant line approaches the <b>tangent line</b> at point B.  Additionally, $ \bigtriangleup y $ also approaches zero as A gets closer to B.
+
+        <br />
+        <br />
+        The <b>slope of the secant line</b> at this point, $ m_{s} $, and the and the slope of the tangent line $ m_{t} $ are equal and can be described by the limit:
+      </p>
+    </stack>
+
+    <stack style="highlightBox">
+      <p> $ m_{t} = \lim_{\bigtriangleup x \rightarrow 0} \frac{\bigtriangleup y}{\bigtriangleup x} = \lim_{\bigtriangleup x \rightarrow 0} \frac{f(x + \bigtriangleup x) - f(x)}{\bigtriangleup x} $</p>
+    </stack>
+
+    <stack style="highlightBox">
+      <p>At the point, the slope of the tangent can also be written as the derived function $ {f}' (x) $, or the instantaneous rate of change of $ y = f(x) $ with respect to x.  This derived function is written as: </p>
+    </stack>
+
+    <stack style="highlightBox">
+      <p> $ {f}'(x) = \frac{dy}{dx} = \lim_{\bigtriangleup x \rightarrow 0} \frac{\bigtriangleup y}{\bigtriangleup x} = \lim_{\bigtriangleup x \rightarrow 0} \frac{f(x + \bigtriangleup x) - f(x)}{\bigtriangleup x} $</p>
+    </stack>
+
+    <stack style="highlightBox">
+      <p>
+        The  process of calculating this limit function is called <b>differentiation</b>, and a function where differentiation is possible  is called a <b>differentiable function</b>.
+      </p>
+    </stack>
+
+
+    <stack style="questionAnswer">
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <style name="blackLine">
+              <foreground color="black" />
+            </style>
+            <style name="functionLine">
+              <foreground color="50 133 184" />
+              <lineThickness>3</lineThickness>
+            </style>
+            <style name="tangentLine">
+              <foreground color="red" />
+              <lineThickness>3</lineThickness>
+            </style>
+            <style name="point">
+              <foreground color="green" />
+              <lineThickness>1</lineThickness>
+            </style>
+            <xyPlot name="myPlot" pan="disabled" tap="disabled" zoom="disabled">
+              <axis dim="y" auto="fixed" min="-10" max="10"></axis>
+              <axis dim="x" auto="fixed" min="-10" max="10"></axis>
+              <series name="xAxis" manual="true" style="blackLine" />
+              <series name="yAxis" manual="true" style="blackLine" />
+              <series name="curve" manual="true" style="functionLine" />
+              <series name="tangent_series" style="tangentLine"></series>
+              <series name="inter1_series" draw="points" style="point"></series>
+            </xyPlot>
+
+            <script>
+
+              <![CDATA[
+              
+              local x, y;
+              local x2, y2;
+              local a = 1;
+              local b = 0;
+              local c = -4;
+              tangentYInter = 0;
+              
+              
+              xOne = 0;
+              xTwo = 1;
+              local fxOne;
+              
+              local slope;
+              
+
+              local curve = myPlot.curve;
+              local tangent = myPlot.tangent_series;
+              local inter1 = myPlot.inter1_series;
+              
+              graphRoundValue = 0.1;
+              labelRoundValue = 0.1;
+              
+              local function curveGraph(x)
+                  y = a*math.pow(x,2) + b*x + c;
+                  return y;
+              end
+              
+              
+              --[[ get y-intercept of tangent --]]
+              local function convertTangent()
+                  tangentYInter = fxOne - (2*a*(xOne) + b)*(xOne)
+              end
+              
+              local function tangentGraph(x)
+                y = (2*a*xOne + b)*x + tangentYInter;
+                return y;
+              end
+              
+              local function redrawGraph()
+              curve:Clear()
+                for x = -10, 10, 0.1 do
+                  curveGraph(x);
+                  curve:Add(x,y);
+                end
+                curve:Update();
+              end
+              
+              local function redrawTangent()
+              tangent:Clear();
+                --[[ x1,fx1 and x2,fx2 --]]
+                 fxOne = curveGraph(xOne);
+                
+                convertTangent();
+                
+                while xOne == xTwo do
+                  xTwo = math.random();
+                end
+                
+                slope = (tangentGraph(xTwo) - tangentGraph(xOne))/(xTwo - xOne);
+
+                for x2 = -10, 10, 1 do        
+                  y2 = (2*a*xOne + b)*x2 + tangentYInter;
+                  tangent:Add(x2,y2); 
+                end
+                tangent:Update();
+              end
+              
+              local function redrawPoints()
+                inter1:Clear();
+                inter1:Add(xOne,fxOne);
+                inter1:Update();
+              end
+                                          
+              local xAxis = myPlot.xAxis;
+              local yAxis = myPlot.yAxis;
+
+              xAxis:Add(-100,0)
+              xAxis:Add(100,0)
+
+              yAxis:Add(0,-100)
+              yAxis:Add(0,100)
+              
+              redrawGraph();
+              redrawTangent();
+              redrawPoints();
+              ]]>
+            </script>
+
+            <p name="xInter" style="centerText">
+              Tangent Point: (x,y)
+            </p>
+            <p name="equation" style="centerText">
+              Equation of Secant Line:
+            </p>
+            <p name="slopeText" style="centerText">
+
+            </p>
+            <p name="test"></p>
+            <script>
+              <![CDATA[
+              
+              
+              local function updateEquation()
+                slope = round(slope,labelRoundValue);
+                tangentYInter = round(tangentYInter,labelRoundValue);
+                equation.Text = "Equation of Tangent Line: y = "..slope.."x + "..tangentYInter;
+                slopeText.Text = "Slope:"..slope;
+              end
+            
+            local function updateIntercepts()
+                --[[ simple --]]
+              xInter.Text = "Tangent Point: ("..xOne..","..fxOne..")";
+              end
+              
+             
+               function round(value,multiple)
+                result = 0;
+                
+                if value % multiple ~= 0 then
+                  result = multiple;
+                  division = math.floor((value/multiple)+1);
+                  result = division*multiple;
+                  return result;
+                else 
+                  return value;
+                end
+              end
+              updateEquation();
+
+            ]]>
+            </script>
+
+            <!--slider for a-->
+            <stack orientation="horizontal">
+              <p name="aLabel">x = 0</p>
+              <slider name="aSlider" min="-10" max="10" value="0">
+                <onValueChanged>
+                  <![CDATA[
+                  xOne = round(value,graphRoundValue);
+                  aLabel.Text = "x = "..round(value,labelRoundValue)
+                    redrawTangent();
+                    redrawPoints();
+                    updateEquation();
+                    updateIntercepts();
+                    
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+          </column>
+        </row>
+      </table>
+    </stack>
+
+  </section>
+
+</document>

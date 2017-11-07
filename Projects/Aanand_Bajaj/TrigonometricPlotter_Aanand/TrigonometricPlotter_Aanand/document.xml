@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G9BFCAB99_57A4_4C1D_96B6_E59D36E8F0DC">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>MCR3U – 5.6 Trigonometric Function Plotter</title>
+    <creator>admin</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+  </metadata>
+
+  <include src="curriculumThemePack/curriculumStyles.xml" />
+  <include src="plotTools.xml" />
+
+  <!--Header and Footer-->
+  <style name="backgroundColor">
+    <background color="50 133 184" />
+  </style>
+  <style name="fontColor">
+    <foreground color="255 255 255" />
+  </style>
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="fontColor">Amanda Koon</p>
+      <p style="fontColor rightText">MCR3U</p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/logo1.png" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/logo2.png" />
+    </stack>
+  </footer>
+
+  <section name="Title">
+    <title>Trigonometric Function Plotter - Main Page</title>
+    <stack>
+      <button content="Sinusoidal Function Plotter">
+        <onClick>
+          application.navigateTo(Sinusoidal);
+        </onClick>
+      </button>
+
+      <button content="Cosine Function Plotter">
+        <onClick>
+          application.navigateTo(Cosine);
+        </onClick>
+      </button>
+    </stack>
+
+  </section>
+
+  <!-- Sinusoidal -->
+  <section name="Sinusoidal">
+    <title>Sinusoidal Function</title>
+    <stack style="questionAnswer">
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <equation>
+              $ y = asin[k(x - d)] + c$
+            </equation>
+            <style name="blackLine">
+              <foreground color="black" />
+            </style>
+            <style name="functionLine">
+              <foreground color="50 133 184" />
+              <lineThickness>3</lineThickness>
+            </style>
+            <xyPlot name="myPlot" pan="disabled" tap="disabled" zoom="disabled">
+              <axis dim="y" auto="fixed" min="-20" max="20"></axis>
+              <axis dim="x" auto="lockAspectRatio" min="-20" max="20"></axis>
+              <series name="xAxis" manual="true" style="blackLine" />
+              <series name="yAxis" manual="true" style="blackLine" />
+              <series name="func" manual="true" style="functionLine" />
+            </xyPlot>
+
+            <script>
+
+              <![CDATA[
+              
+              local x, y;
+              local a = 1;
+              local c = 0;
+              local d = 1; 
+              local e = 1; 
+              local funct = myPlot.func;
+              
+              graphRoundValue = 0.1;
+              labelRoundValue = 0.1;
+              
+              local function redrawFunction()
+                funct:Clear();
+                for x = -100, 100, 0.1 do
+                  y = a*math.sin(e*(x - d)) + c
+                  funct:Add(x,y);
+                end
+                funct:Update();
+              end
+              
+              local xAxis = myPlot.xAxis;
+              local yAxis = myPlot.yAxis;
+
+              xAxis:Add(-100,0)
+              xAxis:Add(100,0)
+
+              yAxis:Add(0,-100)
+              yAxis:Add(0,100)
+              
+              redrawFunction();
+              ]]>
+            </script>
+
+            <p name="newEquation" style="centerText">
+              Your Equation: y = ab<sup>[k(x - d)]</sup>+ c
+            </p>
+            <p name="amp" style="centerText">
+              Amplitude: a
+            </p>
+            <p name="period" style="centerText">
+              Period: 360/k
+            </p>
+            <p name="pshift" style="centerText">
+              Phase Shift: d
+            </p>
+            <p name="axis" style="centerText">
+              Equation of Axis: x = c
+            </p>
+            <script>
+              <![CDATA[
+              local a2 = a;
+              local c2 = c;
+              
+              local d2Value = d;
+              local e2Value = e;
+              
+              local d2 = ((d2Value*math.pi*180)/math.pi);;
+              local e2 = ((e2Value*math.pi*180)/math.pi);;
+              
+              local function showDValue(value)
+                local text;
+                
+                if(value > 0) then
+                  text = "Phase Shift: "..value.." right"
+                end
+                
+                if(value < 0) then
+                  text = "Phase Shift: "..value.." left"
+                end
+                
+                if(value == 0) then
+                  text = "Phase Shift: none"
+                end
+                
+                return text;
+              end
+              
+              local function updateAValue(value)
+                a2 = round(value,labelRoundValue);
+              end
+              
+              local function updateCValue(value)
+                c2 = round(value,labelRoundValue);
+              end
+              
+              local function updateDValue(value)
+                d2 = round(math.floor(((value*math.pi*180)/math.pi)),45);
+              end
+              
+              local function updateEValue(value)
+                e2 = round(math.floor(((value*math.pi*180)/math.pi)),45);
+              end
+                              
+              function round(value,multiple)
+                result = 0;
+                
+                if value % multiple ~= 0 then
+                  result = multiple;
+                  division = math.floor((value/multiple)+1);
+                  result = division*multiple;
+                  return result;
+                else 
+                  return value;
+                end
+              end
+              
+              local function updateEquation()
+                newEquation.FormattedText = "y = "..a2.."sin["..e2.."(x - "..d2..")] + "..c2;
+                amp.FormattedText = "Amplitude: "..a2;
+                period.FormattedText = "Period: 360/"..e2;
+                pshift.FormattedText = showDValue(d2);   
+                axis.FormattedText = "Equation of Axis: y = "..c2;
+              end
+              
+              updateEquation()
+
+            ]]>
+            </script>
+
+            <!--slider for a-->
+            <stack orientation="horizontal">
+              <p name="aLabel">a = 1</p>
+              <slider name="aSlider" min="0" max="10" value="1">
+                <onValueChanged>
+                  <![CDATA[
+                  a = round(value, graphRoundValue)
+                  aLabel.Text = "a = "..round(value,labelRoundValue)
+                  redrawFunction();
+                  updateAValue(value)
+                  updateEquation();
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+            <!--slider for k-->
+            <stack orientation="horizontal">
+              <p name="kLabel">k = 45</p>
+              <slider name="kSlider" min="0" max="2" value="0.25">
+                <onValueChanged>
+                  <![CDATA[
+                  e =  round(value*math.pi,(math.pi/4))
+                  kLabel.Text = "k = "..round(((value*math.pi*180)/math.pi),45);
+                  redrawFunction();
+                  updateEValue(value)
+                  updateEquation();
+                ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+            <!--slider for d-->
+            <stack orientation="horizontal">
+              <p name="dLabel">d = 45</p>
+              <slider name="dSlider" min="-10" max="10" value="0.25">
+                <onValueChanged>
+                  <![CDATA[
+                  d =  round(value*math.pi,(math.pi/4))
+                  dLabel.Text = "d = "..round(((value*math.pi*180)/math.pi),45);
+                  redrawFunction();
+                  updateDValue(value)
+                  updateEquation();
+                ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+            
+            <!--slider for c-->
+            <stack orientation="horizontal">
+              <p name="cLabel">c = 0</p>
+              <slider name="cSlider" min="-20" max="20" value="0">
+                <onValueChanged>
+                  <![CDATA[
+                  c = round(value, graphRoundValue)
+                  cLabel.Text = "c = "..round(value,labelRoundValue)
+                  redrawFunction();
+                  updateCValue(value)                  
+                  updateEquation();
+                ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+          </column>
+        </row>
+      </table>
+    </stack>
+  </section>
+
+  <!-- Cosine -->
+  <section name="Cosine">
+    <title>Cosine Function</title>
+    <stack style="questionAnswer">
+      <table name="table" grid="false">
+        <row>
+          <column>
+            <equation>
+              $ y = acos[k(x - d)] + c$
+            </equation>
+            <style name="blackLine">
+              <foreground color="black" />
+            </style>
+            <style name="functionLine">
+              <foreground color="50 133 184" />
+              <lineThickness>3</lineThickness>
+            </style>
+            <xyPlot name="myPlot" pan="disabled" tap="disabled" zoom="disabled">
+              <axis dim="y" auto="fixed" min="-20" max="20"></axis>
+              <axis dim="x" auto="lockAspectRatio" min="-20" max="20"></axis>
+              <series name="xAxis" manual="true" style="blackLine" />
+              <series name="yAxis" manual="true" style="blackLine" />
+              <series name="func" manual="true" style="functionLine" />
+            </xyPlot>
+
+            <script>
+
+              <![CDATA[
+              
+              local x, y;
+              local a = 1;
+              local c = 0;
+              local d = 1; 
+              local e = 1; 
+              local funct = myPlot.func;
+              
+              graphRoundValue = 0.1;
+              labelRoundValue = 0.1;
+              
+              local function redrawFunction()
+                funct:Clear();
+                for x = -100, 100, 0.1 do
+                  y = a*math.cos(e*(x - d)) + c
+                  funct:Add(x,y);
+                end
+                funct:Update();
+              end
+              
+              local xAxis = myPlot.xAxis;
+              local yAxis = myPlot.yAxis;
+
+              xAxis:Add(-100,0)
+              xAxis:Add(100,0)
+
+              yAxis:Add(0,-100)
+              yAxis:Add(0,100)
+              
+              redrawFunction();
+              ]]>
+            </script>
+
+            <p name="newEquation" style="centerText">
+              Your Equation: y = ab<sup>[k(x - d)]</sup>+ c
+            </p>
+            <p name="amp" style="centerText">
+              Amplitude: a
+            </p>
+            <p name="period" style="centerText">
+              Period: 360/k
+            </p>
+            <p name="pshift" style="centerText">
+              Phase Shift: d
+            </p>
+            <p name="axis" style="centerText">
+              Equation of Axis: x = c
+            </p>
+            <script>
+              <![CDATA[
+              local a2 = a;
+              local c2 = c;
+              
+              local d2Value = d;
+              local e2Value = e;
+              
+              local d2 = ((d2Value*math.pi*180)/math.pi);;
+              local e2 = ((e2Value*math.pi*180)/math.pi);;
+              
+              local function showDValue(value)
+                local text;
+                
+                if(value > 0) then
+                  text = "Phase Shift: "..value.." right"
+                end
+                
+                if(value < 0) then
+                  text = "Phase Shift: "..value.." left"
+                end
+                
+                if(value == 0) then
+                  text = "Phase Shift: none"
+                end
+                
+                return text;
+              end
+              
+              local function updateAValue(value)
+                a2 = round(value,labelRoundValue);
+              end
+              
+              local function updateCValue(value)
+                c2 = round(value,labelRoundValue);
+              end
+              
+              local function updateDValue(value)
+                d2 = round(math.floor(((value*math.pi*180)/math.pi)),45);
+              end
+              
+              local function updateEValue(value)
+                e2 = round(math.floor(((value*math.pi*180)/math.pi)),45);
+              end
+                              
+              function round(value,multiple)
+                result = 0;
+                
+                if value % multiple ~= 0 then
+                  result = multiple;
+                  division = math.floor((value/multiple)+1);
+                  result = division*multiple;
+                  return result;
+                else 
+                  return value;
+                end
+              end
+              
+              local function updateEquation()
+                newEquation.FormattedText = "y = "..a2.."cos["..e2.."(x - "..d2..")] + "..c2;
+                amp.FormattedText = "Amplitude: "..a2;
+                period.FormattedText = "Period: 360/"..e2;
+                pshift.FormattedText = showDValue(d2);   
+                axis.FormattedText = "Equation of Axis: y = "..c2;
+              end
+              
+              updateEquation()
+
+            ]]>
+            </script>
+
+            <!--slider for a-->
+            <stack orientation="horizontal">
+              <p name="aLabel">a = 1</p>
+              <slider name="aSlider" min="0" max="10" value="1">
+                <onValueChanged>
+                  <![CDATA[
+                  a = round(value, graphRoundValue)
+                  aLabel.Text = "a = "..round(value,labelRoundValue)
+                  redrawFunction();
+                  updateAValue(value)
+                  updateEquation();
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+            <!--slider for k-->
+            <stack orientation="horizontal">
+              <p name="kLabel">k = 45</p>
+              <slider name="kSlider" min="0" max="2" value="0.25">
+                <onValueChanged>
+                  <![CDATA[
+                  e =  round(value*math.pi,(math.pi/4))
+                  kLabel.Text = "k = "..round(((value*math.pi*180)/math.pi),45);
+                  redrawFunction();
+                  updateEValue(value)
+                  updateEquation();
+                ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+            <!--slider for d-->
+            <stack orientation="horizontal">
+              <p name="dLabel">d = 45</p>
+              <slider name="dSlider" min="-10" max="10" value="0.25">
+                <onValueChanged>
+                  <![CDATA[
+                  d =  round(value*math.pi,(math.pi/4))
+                  dLabel.Text = "d = "..round(((value*math.pi*180)/math.pi),45);
+                  redrawFunction();
+                  updateDValue(value)
+                  updateEquation();
+                ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+
+            <!--slider for c-->
+            <stack orientation="horizontal">
+              <p name="cLabel">c = 0</p>
+              <slider name="cSlider" min="-20" max="20" value="0">
+                <onValueChanged>
+                  <![CDATA[
+                  c = round(value, graphRoundValue)
+                  cLabel.Text = "c = "..round(value,labelRoundValue)
+                  redrawFunction();
+                  updateCValue(value)                  
+                  updateEquation();
+                ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+          </column>
+        </row>
+      </table>
+    </stack>
+  </section>
+</document>

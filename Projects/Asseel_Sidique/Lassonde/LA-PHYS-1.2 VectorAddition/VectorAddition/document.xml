@@ -1,0 +1,1073 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G7385405A_F5A2_4C39_ACB8_0F768CECDA6F">
+
+    <!-- Meta Data -->
+  <metadata>
+    <title>LA-PHYS-1.2 Vector Addition</title>
+    <creator>Asseel</creator>
+    <abstract>Introduces the concept of adding vectors in different forms. Features an interactive simulation that shows the addition of vectors.</abstract>
+    <coverImage src="resources/LassondeLogo.png" />
+  </metadata>
+  
+  <include src="resources/curriculumStylesLassonde.xml" />
+  <include src="resources/plotTools.xml" />
+
+  <header style="themeColour">
+    <stack style="center" orientation="horizontal">
+      <p></p>
+    </stack>
+  </header>
+  <footer style="themeColour">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="themeColourTitle">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment> 
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+
+  <!-- Section 1 -->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">1.2 Vector Addition</title>
+    <p style="sectionHeading">Introduction</p>
+    <stack orientation="vertical">
+      <image style="center" src="resources/vector.png"></image>
+      <stack style="contentBG">
+        <p>Vector addition is the summation of two or more vectors to produce a final vector. This final vector
+        is sometimes referred to as the <b>resultant vector</b>. In physics, forces can be represented by vectors.
+        Understanding how to add vectors can be used in a physics problem to determine the net force and also help with
+        breaking up the problem into components.
+      </p>
+      </stack>
+    </stack>
+    <p>
+      <br />
+    </p>
+  </section>
+  
+  <sectionNoTitle name="section2" style="pageLayout">
+    <p style="sectionHeading">Vector Addition Simulation</p>  
+    <stack style="contentBG">
+      <p>In this simulation, you can move vectors A and B around a graph. Vector C
+      will always represent the addition of A and B. To move a vector, simply select which vector you would like to move and tap and drag
+      to move the vector around the plot. The faded vectors represent the head-to-tail vectors.</p>
+    </stack>
+    <stack name="sim1" style="contentBG center">
+      
+      <script>
+        vectorChosen = 1;
+        ax = 2;
+        ay = 3;
+        bx = 5;
+        by = 6;
+        cx = 7;
+        cy = 9;
+        r = 0.5;
+        btnStack.btn2.Style.BackgroundColor = color.rgb(234, 64, 240);
+        btnStack.btn1.Style.BackgroundColor = color.rgb(64, 86, 255);
+        function round(value,multiple)
+          local remainder = value % multiple;
+          if remainder * 2 &gt;= multiple then
+              return value - remainder + multiple;
+          else
+              return value - remainder;
+          end
+        end
+      </script>
+      <xyPlot name="xy1" tap="custom" pan="custom" zoom="disabled" manual="true">
+        <onDocumentOpened>
+          ax = 2;
+          ay = 5;
+
+
+          bx = -2;
+          by = -5;
+
+          vecAdotted:Add(bx, by);
+          vecAdotted:Add(ax+bx, ay+by);
+          vecBdotted:Add(ax, ay);
+          vecBdotted:Add(ax+bx, ay+by);
+
+          local width = 1;
+          local angle = math.atan2(ax,ay);
+          local lineLength = math.sqrt(ax^2+ay^2);
+          local tPointOnLine;
+          local pointOnLine;
+
+          tPoint = width / (2 * lineLength);
+          pointOnLine = vector({ax, ay}) - tPoint * vector({ax, ay});
+          local normal = vector({-ay,ax});
+          local leftP = pointOnLine + tPoint * normal;
+          local rightP = pointOnLine - tPoint * normal;
+
+          vecA:Add(0, 0);
+          vecA:Add(ax, ay);
+          vecA:Add(leftP[1], leftP[2]);
+          vecA:Add(ax, ay);
+          vecA:Add(rightP[1], rightP[2]);
+          vecC:Add(0, 0);
+          vecC:Add(ax+bx, ay+by);
+          stack1.pointC.Text = "C(" .. round(ax+bx,0.1) .. ", " .. round(ay+by,0.1) .. ")";
+
+          local x = -2;
+          local y = -5;
+
+
+
+          local width = 1;
+          local angle = math.atan2(bx,by);
+          local lineLength = math.sqrt(bx^2+by^2);
+          local tPointOnLine;
+          local pointOnLine;
+
+          tPoint = width / (2 * lineLength);
+          pointOnLine = vector({bx, by}) - tPoint * vector({bx, by});
+          local normal = vector({-by,bx});
+          local leftP = pointOnLine + tPoint * normal;
+          local rightP = pointOnLine - tPoint * normal;
+
+          vecB:Add(0, 0);
+          vecB:Add(bx, by);
+          vecB:Add(leftP[1], leftP[2]);
+          vecB:Add(bx, by);
+          vecB:Add(rightP[1], rightP[2]);
+          vecC:Add(0, 0);
+          vecC:Add(ax+bx, ay+by);
+          stack1.pointC.Text = "C(" .. round(ax+bx,0.1) .. ", " .. round(ay+by,0.1) .. ")";
+
+          cx = ax+bx;
+          cy = ay+by;
+          local width = 1;
+          local angle = math.atan2(cx,cy);
+          local lineLength = math.sqrt(cx^2+cy^2);
+          local tPointOnLine;
+          local pointOnLine;
+
+          tPoint = width / (2 * lineLength);
+          pointOnLine = vector({cx, cy}) - tPoint * vector({cx, cy});
+          local normal = vector({-cy,cx});
+          local leftP = pointOnLine + tPoint * normal;
+          local rightP = pointOnLine - tPoint * normal;
+
+          vecC:Add(0, 0);
+          vecC:Add(cx, cy);
+          vecC:Add(leftP[1], leftP[2]);
+          vecC:Add(cx, cy);
+          vecC:Add(rightP[1], rightP[2]);
+
+          stack1.pointC.Text = "C(" .. round(cx,0.1) .. ", " .. round(cy,0.1) .. ")";
+          stack1.pointA.Text = "A(" .. round(ax,0.1) .. ", " .. round(ay,0.1) .. ")";
+          stack1.pointB.Text = "B(" .. round(bx,0.1) .. ", " .. round(by,0.1) .. ")";
+
+        </onDocumentOpened>
+      <onTap>
+        local x = xDim.Min + state.Current.X * (xDim.Max - xDim.Min);
+        local y = yDim.Min + state.Current.Y * (yDim.Max - yDim.Min);
+            
+          if vectorChosen == 1 then
+            vecA:Add(0, 0);
+            vecA:Add(x, y);
+            vecApoint:Add(x, y);
+          elseif vectorChosen == 2 then
+            vecB:Add(0, 0);
+            vecB:Add(x, y);
+            vecBpoint:Add(x, y);
+          elseif vectorChosen == 3 then
+            vecC:Add(0, 0);
+            vecC:Add(x, y);
+            vecCpoint:Add(x, y);
+          end
+      </onTap>
+      <onPan>
+        local x = xDim.Min + state.Current.X * (xDim.Max - xDim.Min);
+        local y = yDim.Min + state.Current.Y * (yDim.Max - yDim.Min);
+
+        vecAdotted:Add(bx, by);
+        vecAdotted:Add(ax+bx, ay+by);
+        vecBdotted:Add(ax, ay);
+        vecBdotted:Add(ax+bx, ay+by);
+              
+        if vectorChosen == 1 then
+        ax = x;
+        ay = y;
+
+        local width = 1;
+        local angle = math.atan2(ax,ay);
+        local lineLength = math.sqrt(ax^2+ay^2);
+        local tPointOnLine;
+        local pointOnLine;
+
+        tPoint = width / (2 * lineLength);
+        pointOnLine = vector({ax, ay}) - tPoint * vector({ax, ay});
+        local normal = vector({-ay,ax});
+        local leftP = pointOnLine + tPoint * normal;
+        local rightP = pointOnLine - tPoint * normal;
+
+        vecA:Add(0, 0);
+        vecA:Add(ax, ay);
+        vecA:Add(leftP[1], leftP[2]);
+        vecA:Add(ax, ay);
+        vecA:Add(rightP[1], rightP[2]);
+        vecC:Add(0, 0);
+        vecC:Add(ax+bx, ay+by);
+        stack1.pointC.Text = "C(" .. round(ax+bx,0.1) .. ", " .. round(ay+by,0.1) .. ")";
+        elseif vectorChosen == 2 then
+        bx = x;
+        by = y;
+
+        local width = 1;
+        local angle = math.atan2(bx,by);
+        local lineLength = math.sqrt(bx^2+by^2);
+        local tPointOnLine;
+        local pointOnLine;
+
+        tPoint = width / (2 * lineLength);
+        pointOnLine = vector({bx, by}) - tPoint * vector({bx, by});
+        local normal = vector({-by,bx});
+        local leftP = pointOnLine + tPoint * normal;
+        local rightP = pointOnLine - tPoint * normal;
+
+        vecB:Add(0, 0);
+        vecB:Add(bx, by);
+        vecB:Add(leftP[1], leftP[2]);
+        vecB:Add(bx, by);
+        vecB:Add(rightP[1], rightP[2]);
+        vecC:Add(0, 0);
+        vecC:Add(ax+bx, ay+by);
+        stack1.pointC.Text = "C(" .. round(ax+bx,0.1) .. ", " .. round(ay+by,0.1) .. ")";
+        end
+              
+        cx = ax+bx;
+        cy = ay+by;
+        local width = 1;
+        local angle = math.atan2(cx,cy);
+        local lineLength = math.sqrt(cx^2+cy^2);
+        local tPointOnLine;
+        local pointOnLine;
+
+        tPoint = width / (2 * lineLength);
+        pointOnLine = vector({cx, cy}) - tPoint * vector({cx, cy});
+        local normal = vector({-cy,cx});
+        local leftP = pointOnLine + tPoint * normal;
+        local rightP = pointOnLine - tPoint * normal;
+
+        vecC:Add(0, 0);
+        vecC:Add(cx, cy);
+        vecC:Add(leftP[1], leftP[2]);
+        vecC:Add(cx, cy);
+        vecC:Add(rightP[1], rightP[2]);
+              
+        stack1.pointC.Text = "C(" .. round(cx,0.1) .. ", " .. round(cy,0.1) .. ")";
+        stack1.pointA.Text = "A(" .. round(ax,0.1) .. ", " .. round(ay,0.1) .. ")";
+        stack1.pointB.Text = "B(" .. round(bx,0.1) .. ", " .. round(by,0.1) .. ")";
+
+      </onPan>
+      <axis name="xDim" dim="x" min="-10" max="10"></axis>
+      <axis name="yDim" dim="y" min="-10" max="10"></axis>
+      <series capacity="2" draw="line">
+        <style>
+          <foreground color="black" />
+          <lineThickness>1.5</lineThickness>
+        </style>
+        <data>
+          -10 0; 10 0
+        </data>
+      </series>
+      <series capacity="2" draw="line">
+        <style>
+          <foreground color="black" />
+          <lineThickness>1.5</lineThickness>
+        </style>
+        <data>
+          0 10; 0 -10
+        </data>
+      </series>
+      <series name="vecA" capacity="5">
+        <style>
+          <foreground color="64 86 255" />
+          <lineThickness>2</lineThickness>
+        </style>
+      </series>
+      <series name="vecB" capacity="5">
+        <style>
+          <foreground color="234 64 240" />
+          <lineThickness>2</lineThickness>
+        </style>
+
+      </series>
+      <series name="vecC" capacity="5">
+        <style>
+          <foreground color="246 174 0" />
+          <lineThickness>2</lineThickness>
+        </style>
+      </series>
+      <series name="vecAdotted" draw="lineSegments" capacity="5">
+        <style>
+          <foreground color="64 86 255 100" />
+          <lineThickness>2</lineThickness>
+        </style>
+      </series>
+      <series name="vecBdotted" draw="lineSegments" capacity="5">
+        <style>
+          <foreground color="234 64 240 100" />
+          <lineThickness>2</lineThickness>
+        </style>  
+      </series>
+    </xyPlot>
+      <stack orientation="horizontal" name="stack1" style="center">
+        <p name="pointA">
+          <style>
+            <foreground color="64 86 255" />
+            <textAlignment>center</textAlignment>
+          </style>
+          A(2, 3)
+        </p>
+        <p name="pointB">
+          <style>
+            <foreground color="234 64 240" />
+            <textAlignment>center</textAlignment>
+          </style>
+          B(5, 6)
+        </p>
+        <p name="pointC">
+          <style>
+            <foreground color="246 174 0" />
+            <textAlignment>center</textAlignment>
+          </style>
+          C(7,9)
+        </p>
+      </stack>
+      <stack name="btnStack" orientation="horizontal">
+        <button name="btn1" content="A">
+          <onClick>
+            if btn2.Style.BackgroundColor == color.rgb(139, 37, 142) then
+            btn2.Style.BackgroundColor = color.rgb(234, 64, 240);
+            end
+            btn1.Style.BackgroundColor = color.rgb(33, 44, 132);
+            vectorChosen = 1;
+          </onClick>
+        </button>
+        <button name="btn2" content="B">
+          <onClick>
+            if btn1.Style.BackgroundColor == color.rgb(33, 44, 132) then
+            btn1.Style.BackgroundColor = color.rgb(64, 86, 255);
+            end
+            btn2.Style.BackgroundColor = color.rgb(139, 37, 142);
+            vectorChosen = 2;
+          </onClick>
+        </button>
+      </stack>
+    </stack>
+    <p style="sectionHeading">Vector Notation</p>
+    <stack name="content1" style="contentBG">
+      <p>
+      Vectors can be represented in either point form (e.g x and y) or using magnitude and direction. Here is an example
+      of the same vector represented both ways:
+      </p>
+      <p>$ \vec{A}{\, \! } = ( 3, 4 ) $</p>
+      <p>$ \vec{A}{\, \! } = 5 \; 53^\circ \; North \; of \; East $</p>
+      <p>To convert from one form to another, we have to use the <b>Pythagoreom Thereom</b>. More on this on the next page.
+    </p>
+    </stack>
+    <p>
+      <br />
+    </p>
+  </sectionNoTitle>
+  <sectionNoTitle name="section3" style="pageLayout">
+    <p style="sectionHeading">Converting Vector Notations</p>
+    <stack name="stack1" style="contentBG">
+      <p>Pythagoreom Thereom helps us convert from one form to another easily. Let's say that we have a vector $ \vec{A}{\, \!} = ( 3, 4 ) $. To convert this, we imaging that we 
+      have a right triangle that has an adjacent side with a length of 3, an opposite side with a length of 4 and a hypoteneuse. The hypoteneuse represents the actual vector and the angle
+      that is created $ \theta $ represents the direction. See the image below to visualize.</p>
+      <image src="resources/triangle.png"></image>
+      <p>To convert from point form to polar coordinates, you have to determine the magnitude of the hypoteneuse and the angle $ \theta $. To do that, we have to use the equation: 
+      $ c^2 = a^2 + b^2 $ and solve for $ c $. Then to find the angle, we use $ tan \theta = \frac{O}{A} $ where O = opposite (y component) and A = adjacent (x component) and solve for $ \theta $.</p>
+    </stack>
+    <stack style="contentBG">
+      <p>EXAMPLE: Convert $ \vec{A}{\, \!} = (5, 9) $ to polar coordinates. </p>
+      <p>$ 5^2 + 9^2 = \sqrt{106} $</p>
+      <p>$ tan \theta = \frac{9}{5} = 60.95$°</p>
+      <p>∴ The converted vector is $ \vec{A}{\, \!} = \sqrt{106} \; 60.95$° $ \; North \; of \; East $</p>
+    </stack>
+    <p>
+      <br />
+    </p>
+  </sectionNoTitle>
+  <sectionNoTitle name="section4" style="pageLayout">
+    <p style="sectionHeading">Conversion Tool</p>
+    <stack style="contentBG center">
+      <stack orientation="horizontal">
+        <p style="center">POINT FORM</p>
+        <p style="center">POLAR COORDINATES</p>
+      </stack>
+      <stack name="contentStack1" orientation="horizontal">
+        <table name="tb1" widths="20% 30% 10% 30% 10%" grid="0">
+          <row name="r1">
+            <column>
+              <p> $ \vec{A}{\, \!} \; = \; ( \; $ </p>
+            </column>
+            <column name="c1">
+              <textInput name="pointX" placeholder="0"></textInput>
+            </column>
+            <column>
+              <p>,</p>
+            </column>
+            <column name="c2">
+              <textInput name="pointY" placeholder="0"></textInput>
+            </column>
+            <column>
+              <p>$ \; ) \; $</p>
+            </column>
+          </row>
+        </table>
+        <table name="tb2" widths="30% 20% 20% 30%" grid="0" style="right">
+          <row name="r1">
+            <column>
+              <p>M:</p>
+            </column>
+            <column name="c1">
+              <textInput name="Mag" placeholder="0">
+                <style>
+                  <horizontalAlignment>left</horizontalAlignment>
+                </style>
+              </textInput>
+            </column>
+            <column>
+              <p>$ \theta $: </p>
+            </column>
+            <column name="c2">
+              <textInput name="Ang" placeholder="0">
+                <style>
+                  <horizontalAlignment>left</horizontalAlignment>
+                </style>
+              </textInput>
+            </column>
+          </row>
+        </table>      
+      </stack>
+      <stack orientation="horizontal">
+        <button content="Convert to Polar" style="center">
+          <onClick>
+            local x = tonumber(contentStack1.tb1.r1.c1.pointX.Text);
+            local y = tonumber(contentStack1.tb1.r1.c2.pointY.Text);
+
+            local mag = math.sqrt(x^2+y^2);
+            local ang = math.atan(y/x) * 180/math.pi
+            contentStack1.tb2.r1.c1.Mag.Text = string.format("%.1f", mag);
+            contentStack1.tb2.r1.c2.Ang.Text = string.format("%.1f", ang);
+
+          </onClick>
+        </button>
+        <button content="Convert to Point" style="center">
+          <onClick>
+            local mag = tonumber(contentStack1.tb2.r1.c1.Mag.Text);
+            local ang = tonumber(contentStack1.tb2.r1.c2.Ang.Text);
+
+            x = math.cos(ang*math.pi/180)*mag
+            y = math.sin(ang*math.pi/180)*mag
+            contentStack1.tb1.r1.c1.pointX.Text = string.format("%.1f", x);
+            contentStack1.tb1.r1.c2.pointY.Text = string.format("%.1f", y) ;
+
+          </onClick>
+        </button>
+      </stack>
+    </stack>
+    <p style="sectionHeading">Quadrants</p>
+    <stack style="contentBG">
+      <p>When converting from one vector form to another, it is useful to understand how quadrants work. There are 4 quadrants in a cartesian plot
+      and depending on which quadrant the vector is sitting on will help determine the angle of the vector.</p>
+      <image src="resources/quadrants.png"></image>
+      <p>C - Using cos in this quadrant will be positive and all others will be negative</p>
+      <p>A - All trigonometric functions are positive</p>
+      <p>S - Sin in this quadrant is positive, all others are negative</p>
+      <p>T - Tan in this quadrant are positive, all others are negative</p>
+    </stack>
+    <p>
+      <br />
+    </p>
+  </sectionNoTitle>
+  
+  <sectionNoTitle name="section5" style="pageLayout">
+    <p style="sectionHeading">Practice Questions</p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="subSectionHeading">Question 1</p>
+      <!--DIAGRAM OF QUESTION WITH VECTORS (Make an Image)-->
+      <image src="resources/graph1.png" />
+      <p>Let Vector $ \vec{A}{\,\!} \; = \; ( 2, 5) \; $ and Vector $ \vec{B}{\,\!} \; = \; (1, 2) $. Determine: </p>
+    </stack>
+    <!--Each step is a stack, and each step has alternating background colors
+    The stacks with name "contA" and "contB" and such is where the multiple choice question lies.-->
+    <stack name="partA" orientation="horizontal" style="contentBG2">
+      <stack name="stepStack" orientation="vertical">
+        <p>PART A ►</p>
+      </stack>
+      <button name="btn" content="Show Part A">
+        <style>
+          <horizontalAlignment>right</horizontalAlignment>
+          <widthPercentage>40%</widthPercentage>
+        </style>
+        <onClick>
+          if btn.Text=="Show Part A" then
+          btn.Text = "Hide Part A";
+          contA.Style.Visibility = "visible";
+          stepStack:Child(1).Style.Bold = 1;
+          stepStack:Child(1).Text = "PART A ▼"
+          elseif btn.Text=="Hide Part A" then
+          btn.Text = "Show Part A";
+          contA.Style.Visibility = "collapsed";
+          stepStack:Child(1).Style.Bold = 0;
+          stepStack:Child(1).Text = "PART A ►"
+          end
+        </onClick>
+      </button>
+    </stack>
+    <stack name="contA" style="contentBG2">
+      <style>
+        <visibility>collapsed</visibility>
+      </style>
+      <!--CONTENT GOES HERE-->
+      <stack name="contentStack">
+        <p>a) Determine $ \vec{A}{\,\!} \; - \; \vec{B}{\,\!} \; $</p>
+        <stack orientation="horizontal">
+          <table name="tb1" widths="20% 25% 15% 30% 10%" grid="0">
+            <row name="r1">
+              <column>
+                <p> $ ( \; $ </p>
+              </column>
+              <column name="c1">
+                <textInput name="X" placeholder="__________">
+                  <style>
+                    <foreground color="black" />
+                  </style>
+                </textInput>
+              </column>
+              <column>
+                <p>,</p>
+              </column>
+              <column name="c2">
+                <textInput name="Y" style="black" placeholder="__________">
+                  <style>
+                    <foreground color="black" />
+                  </style>    
+                </textInput>
+              </column>
+              <column>
+                <p>$ \; ) \; $</p>
+              </column>
+            </row>
+          </table>
+          <button name="btn1" content="Check Answer">
+            <style>
+              <horizontalAlignment>left</horizontalAlignment>
+              <widthPercentage>80%</widthPercentage>
+            </style>
+            <onClick>
+              if tb1.r1.c1.X.Text == "1" and tb1.r1.c2.Y.Text == "3" then
+              btn1.Style.BackgroundColor = color.green;
+              btn1.Text = "Correct!"
+              
+              else
+              btn1.Text = "Try Again!"
+              end
+            </onClick>
+          </button>
+        </stack>
+      </stack>
+    </stack>
+    <stack name="partB" orientation="horizontal" style="contentBG">
+      <stack name="stepStack" orientation="vertical">
+        <p>PART B ►</p>
+      </stack>
+      <button name="btn" content="Show Part B">
+        <style>
+          <horizontalAlignment>right</horizontalAlignment>
+          <widthPercentage>40%</widthPercentage>
+        </style>
+        <onClick>
+          if btn.Text=="Show Part B" then
+          btn.Text = "Hide Part B";
+          contB.Style.Visibility = "visible";
+          stepStack:Child(1).Style.Bold = 1;
+          stepStack:Child(1).Text = "PART B ▼"
+
+          elseif btn.Text=="Hide Part B" then
+          btn.Text = "Show Part B";
+          contB.Style.Visibility = "collapsed";
+          stepStack:Child(1).Style.Bold = 0;
+          stepStack:Child(1).Text = "PART B ►"
+          end
+        </onClick>
+      </button>
+    </stack>
+    <stack name="contB" style="contentBG">
+      <style>
+        <visibility>collapsed</visibility>
+      </style>
+      <!--CONTENT GOES HERE-->
+      <p>b) Determine $ \vec{A}{\,\!} \; + \; \vec{B}{\,\!} \; $</p>
+      <stack name="contentStack">
+        <stack orientation="horizontal">
+          <table name="tb1" widths="20% 25% 15% 30% 10%" grid="0">
+            <row name="r1">
+              <column>
+                <p> $ ( \; $ </p>
+              </column>
+              <column name="c1">
+                <textInput name="X" placeholder="0"></textInput>
+              </column>
+              <column>
+                <p>,</p>
+              </column>
+              <column name="c2">
+                <textInput name="Y" placeholder="0"></textInput>
+              </column>
+              <column>
+                <p>$ \; ) \; $</p>
+              </column>
+            </row>
+          </table>
+          <button name="btn1" content="Check Answer">
+            <style>
+              <horizontalAlignment>left</horizontalAlignment>
+              <widthPercentage>80%</widthPercentage>
+            </style>
+            <onClick>
+              if tb1.r1.c1.X.Text == "3" and tb1.r1.c2.Y.Text == "7" then
+              btn1.Style.BackgroundColor = color.green;
+              btn1.Text = "Correct!"
+              else
+              btn1.Text = "Try Again!"
+              end
+            </onClick>
+          </button>
+        </stack>
+      </stack>
+    </stack>
+    <stack name="partC" orientation="horizontal" style="contentBG2">
+      <stack name="stepStack" orientation="vertical">
+        <p>PART C ►</p>
+      </stack>
+      <button name="btn" content="Show Part C">
+        <style>
+          <horizontalAlignment>right</horizontalAlignment>
+          <widthPercentage>40%</widthPercentage>
+        </style>
+        <onClick>
+          if btn.Text=="Show Part C" then
+          btn.Text = "Hide Part C";
+          contC.Style.Visibility = "visible";
+          stepStack:Child(1).Style.Bold = 1;
+          stepStack:Child(1).Text = "PART C ▼"
+
+          elseif btn.Text=="Hide Part C" then
+          btn.Text = "Show Part C";
+          contC.Style.Visibility = "collapsed";
+          stepStack:Child(1).Style.Bold = 0;
+          stepStack:Child(1).Text = "PART C ►"
+          end
+        </onClick>
+      </button>
+    </stack>
+    <stack name="contC" style="contentBG">
+      <style>
+        <visibility>collapsed</visibility>
+      </style>
+      <!--CONTENT GOES HERE-->
+      <p>c) Determine $ 2\vec{A}{\,\!} \; + \; 3\vec{B}{\,\!} \; $</p>
+      <stack name="contentStack">
+        <stack orientation="horizontal">
+          <table name="tb1" widths="20% 25% 15% 30% 10%" grid="0">
+            <row name="r1">
+              <column>
+                <p> $ ( \; $ </p>
+              </column>
+              <column name="c1">
+                <textInput name="X" placeholder="0"></textInput>
+              </column>
+              <column>
+                <p>,</p>
+              </column>
+              <column name="c2">
+                <textInput name="Y" placeholder="0"></textInput>
+              </column>
+              <column>
+                <p>$ \; ) \; $</p>
+              </column>
+            </row>
+          </table>
+          <button name="btn1" content="Check Answer">
+            <style>
+              <horizontalAlignment>left</horizontalAlignment>
+              <widthPercentage>80%</widthPercentage>
+            </style>
+            <onClick>
+              if tb1.r1.c1.X.Text == "7" and tb1.r1.c2.Y.Text == "16" then
+              btn1.Style.BackgroundColor = color.green;
+              btn1.Text = "Correct!"
+              else
+              btn1.Text = "Try Again!"
+              end
+            </onClick>
+          </button>
+        </stack>
+      </stack>
+    </stack>
+  </sectionNoTitle>
+
+  <sectionNoTitle name="section55" style="pageLayout">
+    <p style="sectionHeading">Practice Questions</p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="subSectionHeading">Question 2</p>
+      <!--DIAGRAM OF QUESTION WITH VECTORS (Make an Image)-->
+      <image src="resources/graph2.png" />
+      <p>Let Vector $ \vec{A}{\,\!} \; = \; 5 \; Units, \; 53.1^\circ \; North \; of \; East $ and Vector $ \vec{B}{\,\!} \; = \; (3, 4) $. Determine: </p>
+    </stack>
+    <!--Each step is a stack, and each step has alternating background colors
+    The stacks with name "contA" and "contB" and such is where the multiple choice question lies.-->
+    <stack name="partA" orientation="horizontal" style="contentBG2">
+      <stack name="stepStack" orientation="vertical">
+        <p>PART A ►</p>
+      </stack>
+      <button name="btn" content="Show Part A">
+        <style>
+          <horizontalAlignment>right</horizontalAlignment>
+          <widthPercentage>40%</widthPercentage>
+        </style>
+        <onClick>
+          if btn.Text=="Show Part A" then
+          btn.Text = "Hide Part A";
+          contA.Style.Visibility = "visible";
+          stepStack:Child(1).Style.Bold = 1;
+          stepStack:Child(1).Text = "PART A ▼"
+          elseif btn.Text=="Hide Part A" then
+          btn.Text = "Show Part A";
+          contA.Style.Visibility = "collapsed";
+          stepStack:Child(1).Style.Bold = 0;
+          stepStack:Child(1).Text = "PART A ►"
+          end
+        </onClick>
+      </button>
+    </stack>
+    <stack name="contA" style="contentBG2">
+      <style>
+        <visibility>collapsed</visibility>
+      </style>
+      <!--CONTENT GOES HERE-->
+      <stack name="contentStack">
+      <stack name="contentStack">
+        <p>a) Determine $ \vec{A}{\,\!} \; - \; \vec{B}{\,\!} \; $</p>
+        <stack orientation="horizontal">
+          <table name="tb1" widths="20% 25% 15% 30% 10%" grid="0">
+            <row name="r1">
+              <column>
+                <p> $ ( \; $ </p>
+              </column>
+              <column name="c1">
+                <textInput name="X" placeholder="0"></textInput>
+              </column>
+              <column>
+                <p>,</p>
+              </column>
+              <column name="c2">
+                <textInput name="Y" placeholder="0"></textInput>
+              </column>
+              <column>
+                <p>$ \; ) \; $</p>
+              </column>
+            </row>
+          </table>
+          <button name="btn1" content="Check Answer">
+            <style>
+              <horizontalAlignment>left</horizontalAlignment>
+              <widthPercentage>80%</widthPercentage>
+            </style>
+            <onClick>
+              if tb1.r1.c1.X.Text == "0" and tb1.r1.c2.Y.Text == "0" then
+              btn1.Style.BackgroundColor = color.green;
+              btn1.Text = "Correct!"
+              else
+              btn1.Text = "Try Again!"
+              end
+            </onClick>
+          </button>
+        </stack>
+      </stack>
+      </stack>
+    </stack>
+    <stack name="partB" orientation="horizontal" style="contentBG">
+      <stack name="stepStack" orientation="vertical">
+        <p>PART B ►</p>
+      </stack>
+      <button name="btn" content="Show Part B">
+        <style>
+          <horizontalAlignment>right</horizontalAlignment>
+          <widthPercentage>40%</widthPercentage>
+        </style>
+        <onClick>
+          if btn.Text=="Show Part B" then
+          btn.Text = "Hide Part B";
+          contB.Style.Visibility = "visible";
+          stepStack:Child(1).Style.Bold = 1;
+          stepStack:Child(1).Text = "PART B ▼"
+
+          elseif btn.Text=="Hide Part B" then
+          btn.Text = "Show Part B";
+          contB.Style.Visibility = "collapsed";
+          stepStack:Child(1).Style.Bold = 0;
+          stepStack:Child(1).Text = "PART B ►"
+          end
+        </onClick>
+      </button>
+    </stack>
+    <stack name="contB" style="contentBG">
+      <style>
+        <visibility>collapsed</visibility>
+      </style>
+      <!--CONTENT GOES HERE-->
+      <p>b) Determine $ \vec{A}{\,\!} \; + \; \vec{B}{\,\!} \; $</p>
+      <stack name="contentStack">
+        <stack orientation="horizontal">
+          <table name="tb1" widths="20% 25% 15% 30% 10%" grid="0">
+            <row name="r1">
+              <column>
+                <p> $ ( \; $ </p>
+              </column>
+              <column name="c1">
+                <textInput name="X" placeholder="0"></textInput>
+              </column>
+              <column>
+                <p>,</p>
+              </column>
+              <column name="c2">
+                <textInput name="Y" placeholder="0"></textInput>
+              </column>
+              <column>
+                <p>$ \; ) \; $</p>
+              </column>
+            </row>
+          </table>
+          <button name="btn1" content="Check Answer">
+            <style>
+              <horizontalAlignment>left</horizontalAlignment>
+              <widthPercentage>80%</widthPercentage>
+            </style>
+            <onClick>
+              if tb1.r1.c1.X.Text == "6" and tb1.r1.c2.Y.Text == "8" then
+              btn1.Style.BackgroundColor = color.green;
+              btn1.Text = "Correct!"
+              else
+              btn1.Text = "Try Again!"
+              end
+            </onClick>
+          </button>
+        </stack>
+      </stack>
+    </stack>
+    <p>
+      <br />
+    </p>
+  </sectionNoTitle>
+  
+  
+  
+  
+  <sectionNoTitle name="section6" style="pageLayout">
+    <p style="sectionHeading">Practice Questions</p>
+    <p>Convert the following into point form:</p>
+    <stack orientation="vertical" name="btnStack1" style="contentBG">
+      <p>1. $ \vec{A}{\,\!} \; = \; 6.4 \; Units, \; 38.7^\circ \; North \; of \; East \; $</p>
+      <stack orientation="horizontal">
+        <table name="tb1" widths="20% 25% 15% 30% 10%" grid="0">
+          <row name="r1">
+            <column>
+              <p> $ ( \; $ </p>
+            </column>
+            <column name="c1">
+              <textInput name="X" placeholder="0"></textInput>
+            </column>
+            <column>
+              <p>,</p>
+            </column>
+            <column name="c2">
+              <textInput name="Y" placeholder="0"></textInput>
+            </column>
+            <column>
+              <p>$ \; ) \; $</p>
+            </column>
+          </row>
+        </table>
+        <button name="btn1" content="Check Answer">
+          <style>
+            <horizontalAlignment>left</horizontalAlignment>
+            <widthPercentage>80%</widthPercentage>
+          </style>
+          <onClick>
+            if tb1.r1.c1.X.Text == "5" and tb1.r1.c2.Y.Text == "4" then
+            btn1.Style.BackgroundColor = color.green;
+            btn1.Text = "Correct!"
+            else
+            btn1.Text = "Try Again!"
+            end
+          </onClick>
+        </button>
+      </stack>
+      <p>2. $ \vec{A}{\,\!} \; = \; 4.2 \; Units, \; 225^\circ \; North \; of \; East \; $</p>
+      <stack orientation="horizontal">
+        <table name="tb1" widths="20% 25% 15% 30% 10%" grid="0">
+          <row name="r1">
+            <column>
+              <p> $ ( \; $ </p>
+            </column>
+            <column name="c1">
+              <textInput name="X" placeholder="0"></textInput>
+            </column>
+            <column>
+              <p>,</p>
+            </column>
+            <column name="c2">
+              <textInput name="Y" placeholder="0"></textInput>
+            </column>
+            <column>
+              <p>$ \; ) \; $</p>
+            </column>
+          </row>
+        </table>
+        <button name="btn1" content="Check Answer">
+          <style>
+            <horizontalAlignment>left</horizontalAlignment>
+            <widthPercentage>80%</widthPercentage>
+          </style>
+          <onClick>
+            if tb1.r1.c1.X.Text == "-3" and tb1.r1.c2.Y.Text == "-3" then
+            btn1.Style.BackgroundColor = color.green;
+            btn1.Text = "Correct!"
+            else
+            btn1.Text = "Try Again!"
+            end
+          </onClick>
+        </button>
+      </stack>
+      <p>3. $ \vec{A}{\,\!} \; = \; 25 \; Units, \; 10^\circ \; East \; of \; North \; $</p>
+      <stack orientation="horizontal">
+        <table name="tb1" widths="20% 25% 15% 30% 10%" grid="0">
+          <row name="r1">
+            <column>
+              <p> $ ( \; $ </p>
+            </column>
+            <column name="c1">
+              <textInput name="X" placeholder="0"></textInput>
+            </column>
+            <column>
+              <p>,</p>
+            </column>
+            <column name="c2">
+              <textInput name="Y" placeholder="0"></textInput>
+            </column>
+            <column>
+              <p>$ \; ) \; $</p>
+            </column>
+          </row>
+        </table>
+        <button name="btn1" content="Check Answer">
+          <style>
+            <horizontalAlignment>left</horizontalAlignment>
+            <widthPercentage>80%</widthPercentage>
+          </style>
+          <onClick>
+            if tb1.r1.c1.X.Text == "7" and tb1.r1.c2.Y.Text == "16" then
+            btn1.Style.BackgroundColor = color.green;
+            btn1.Text = "Correct!"
+            else
+            btn1.Text = "Try Again!"
+            end
+          </onClick>
+        </button>
+      </stack>
+    </stack>
+    <p>Convert the following into polar form.</p>
+    <stack orientation="vertical" name="btnStack2" style="contentBG">
+      <p>1. $ ( \; 17 \; , \; 45 \; ) \; $</p>
+      <stack orientation="horizontal">
+        <table name="tb1" widths="20% 25% 15% 30% 10%" grid="0">
+          <row name="r1">
+            <column>
+              <p> $ Magnitude \; $ </p>
+            </column>
+            <column name="c1">
+              <textInput name="X" placeholder="0"></textInput>
+            </column>
+            <column>
+              <p>$ \theta $</p>
+            </column>
+            <column name="c2">
+              <textInput name="Y" placeholder="0"></textInput>
+            </column>
+            <column>
+              <p>$ \; \; $</p>
+            </column>
+          </row>
+        </table>
+        <button name="btn1" content="Check Answer">
+          <style>
+            <horizontalAlignment>left</horizontalAlignment>
+            <widthPercentage>80%</widthPercentage>
+          </style>
+          <onClick>
+            if tb1.r1.c1.X.Text == "17" and tb1.r1.c2.Y.Text == "45" then
+            btn1.Style.BackgroundColor = color.green;
+            btn1.Text = "Correct!"
+            else
+            btn1.Text = "Try Again!"
+            end
+          </onClick>
+        </button>
+      </stack>
+      <p>1. $ ( \; 5.4 \; , \; 4.4 \; ) \; $</p>
+      <stack orientation="horizontal">
+        <table name="tb1" widths="20% 25% 15% 30% 10%" grid="0">
+          <row name="r1">
+            <column>
+              <p> $ Magnitude \; $ </p>
+            </column>
+            <column name="c1">
+              <textInput name="X" placeholder="0"></textInput>
+            </column>
+            <column>
+              <p>$ \theta $</p>
+            </column>
+            <column name="c2">
+              <textInput name="Y" placeholder="0"></textInput>
+            </column>
+            <column>
+              <p>$ \; \; $</p>
+            </column>
+          </row>
+        </table>
+        <button name="btn1" content="Check Answer">
+          <style>
+            <horizontalAlignment>left</horizontalAlignment>
+            <widthPercentage>80%</widthPercentage>
+          </style>
+          <onClick>
+            if tb1.r1.c1.X.Text == "7" and tb1.r1.c2.Y.Text == "39" then
+            btn1.Style.BackgroundColor = color.green;
+            btn1.Text = "Correct!"
+            else
+            btn1.Text = "Try Again!"
+            end
+          </onClick>
+        </button>
+      </stack>
+    </stack>
+  </sectionNoTitle>
+  <sectionNoTitle name="section7" style="pageLayout">
+    <p style="sectionHeading">Extra Resources</p>
+      <web url="https://www.khanacademy.org/math/precalculus/vectors-precalc/adding-vectors-in-magnitude-and-direction-form/v/mag-dir-vec-sums"></web>
+  </sectionNoTitle>
+</document>

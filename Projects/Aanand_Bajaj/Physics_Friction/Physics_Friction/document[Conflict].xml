@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G67DBD3D9_894A_455B_AABB_42E76BAE107F">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>SPH4U - Dynamics - Friction</title>
+    <creator>admin</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/lassondeLogo.png" />
+  </metadata>
+
+
+  <include src="curriculumThemePack/curriculumStyles.xml" />
+  <include src="plotTools.xml" />
+
+  <!--Header & Footer-->
+  <style name="backgroundColor">
+    <background color="232 12 46" />
+  </style>
+  <style name="fontColor">
+    <foreground color="255 255 255" />
+  </style>
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="fontColor"></p>
+      <p style="fontColor rightText"></p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>20</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--Header & Footer END-->
+
+  <!--intro-->
+  <section>
+    <title>
+      <style>
+        <textAlignment>right</textAlignment>
+        <marginTop>100</marginTop>
+      </style>
+      <size scale="xlarge">SPH4U</size>
+    </title>
+    <p style="chapterTitle">Friction</p>
+
+    <p style="title">INTRODUCTION</p>
+    <p>
+      Ever seen a car parked on a hill? What makes this possible is a force called static friction. In this lesson, we will discuss what friction is, the math behind it, and how to apply it in practical examples.
+    </p>
+  </section>
+
+  <!--Summary-->
+  <sectionNoTitle>
+    <stack>
+      <style>
+        <widthPercentage>0.93</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <style>
+        <counter name="decBullet" format="decimal" />
+      </style>
+      <p style="titleMargin">
+        Summary
+      </p>
+      <stack style="questionAnswer">
+        <p style="title">Static and Kinetic Friction</p>
+        <p>
+          The force of <b>static friction </b> $ F_{s} $ is a force between two surfaces that prevents those surfaces from sliding or slipping across each other. This is the same force that allows you to accelerate forward when you run. Basically, when you're running, your planted foot can grip the ground and push backward, which causes the ground the push forward on your foot.
+          <br />
+          <br />
+          The force that keeps a car in the same place when it is parked on a hill is called static friction. However, if the car is parked on too steep a hill, then the car will probably start sliding. This is because even though the two surfaces are sliding past each other, there can be a frictional force called <b>kinetic frictional force.</b>
+          The force of <b>kinetic friction </b> $ F_{k} $ always opposes the sliding motion and reduces the speed at which surfaces slide across each other.
+        </p>
+      </stack>
+      <p>
+        <style>
+          <marginBottom>120</marginBottom>
+        </style>
+      </p>
+    </stack>
+  </sectionNoTitle>
+
+  <!--Math-->
+  <sectionNoTitle>
+    <stack>
+      <style>
+        <widthPercentage>0.93</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <style>
+        <counter name="decBullet" format="decimal" />
+      </style>
+      <p style="titleMargin">
+        Mathematics
+      </p>
+      <!--Formula for Kinetic Frictional Force-->
+      <stack style="questionAnswer">
+        <p style="title">Formula for Kinetic Frictional Force</p>
+        <p>
+          If you press your hands together and rub them together, the force of kinetic friction will be larger than if you just pressed your hands together without rubbing.
+          <br />
+          <br />
+          Secondly, the type of surface sliding across each other will change the kinetic frictional force. The roughness of two surfaces sliding across each toher is quantified by a coefficient called <b>coefficient of kinetic friction </b> $ \mu_{k} $. The harder it is to slide two surfaces across each other, the higher the coefficient $ \mu_{k} $. <br />
+        </p>
+        <p>Thus, we can form the following equation: </p>
+        <equation>$ F_{k} = \mu_{k} \times F_{n} $</equation>
+      </stack>
+
+      <!--Formula for Static Frictional Force-->
+      <stack style="questionAnswer">
+        <p style="title">Formula for Static Frictional Force</p>
+        <p>
+          Imagine that you are pushing a very heavy box across a concrete floor. You may push harder and harder on the box and not move it at all. This means that static friction responds to what you do. Static friction increases to be equal to and in the opposite direction of your push. Once you start pushing the box, however, it is easier to maintain that motion than it was to initially push the box.
+
+          <br />
+          <br />
+          This means that <b>kinetic frictional force (what is preventing the box from moving faster) is less than the maximum static frictional force (what is preventing the box from moving in the first place). </b>
+          <br />
+          <br />
+
+          If the box is made heavier (increasing the normal force $ F_{n} $) you would need to push even harder initially. Secondly, if the concrete floor is changed to an ice floor, (reducing the coefficient of static friction $ \mu_{s} $) you find it easier to get the crate to move.
+          <br />
+        </p>
+        <p>Thus, we can form the following equation: </p>
+        <equation>$ F_{s max} = \mu_{s} \times F_{n} $</equation>
+      </stack>
+
+      <p>
+        <style>
+          <marginBottom>120</marginBottom>
+        </style>
+      </p>
+    </stack>
+  </sectionNoTitle>
+
+  <!--Examples-->
+  <sectionNoTitle>
+    <stack>
+      <style>
+        <widthPercentage>0.93</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <style>
+        <counter name="decBullet" format="decimal" />
+      </style>
+      <p style="titleMargin">
+        Application Example
+      </p>
+
+      <stack style="questionAnswer">
+        <p style="title">Example: Push the Fridge</p>
+        <p>An initially stationary 110 kg refrigerator sits on teh floor. The coefficient of static friction between teh refrigerator and the floor is 0.60, and the coefficient of kinetic friction between the refrigerator and the floor is 0.40. The person pushing on the refrigerator tries to budge the fridge with the following forces: </p>
+        <p>1) $ F_{push} = 400 N $</p>
+        <p>2) $ F_{push} = 600 N $</p>
+        <p>3) $ F_{push} = 800 N $</p>
+      </stack>
+    </stack>
+  </sectionNoTitle>
+</document>

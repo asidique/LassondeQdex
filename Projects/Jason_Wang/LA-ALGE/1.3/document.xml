@@ -1,0 +1,509 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G5F6FAEEB_479C_4D90_9681_7472DC564AF9">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>LA-ALGE-1.3 Matrix Row Operations</title>
+    <creator>jason_wang</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/lassondeLogo.png" />
+  </metadata>
+
+
+  <include src="resources/curriculumStylesLassonde.xml" />
+  <include src="resources/Utilities.xml" />
+
+  <!--                                      Header & Footer START                                         -->
+  <header style="themeColour">
+    <stack style="center" orientation="horizontal">
+      <p></p>
+    </stack>
+  </header>
+  <footer style="themeColour">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="themeColourTitle">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--                                      Header & Footer END                                         -->
+
+
+  <!-- Cover Page -->
+  <!-- This is the standard way title pages are created. A great website to get copyright free images .. www.pexels.com
+  *** The style: "pageLayout" is defined in curriculumStylesLassonde.xml. It simply sets the content to the center and adjusts the width to 80% ***-->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">1.3 Matrix Row Operations</title>
+    <p style="sectionHeading">Introduction</p>
+    <image src="resources/tools.jpeg" />
+    <stack orientation="vertical" style="contentBG">
+      <p style="justifiedText">
+        In this Module, we are going to learn how to perform the matrix elementary row operations. These operations will allow us to solve complicated linear systems more convenient.
+      </p>
+    </stack>
+  </section>
+
+  <!--Definition-->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Matrix Row Operations</p>
+    <stack style="mcStackLayout">
+      <p style="justifiedText">
+        We need some tools to help us solve complicated linear systems. Following table shows the three matrix elementary row operations that can help us with that.
+      </p>
+      <table grid="true" widths="40% 60%">
+        <head>
+          <column>
+            <p>Matrix Row Operation</p>
+          </column>
+          <column>
+            <p>Example</p>
+          </column>
+        </head>
+        <row>
+          <column>
+            <p>Switch any two rows</p>
+          </column>
+          <column>
+            <p><![CDATA[$\begin{bmatrix}2&6&4\\[6pt]8&3&2\end{bmatrix} \to \begin{bmatrix}8&3&2 \\[6pt] 2&6&4 \end{bmatrix}$]]></p>
+            <p>(Switch row 1 and row 2)</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>Multiply a row by a nonzero constant</p>
+          </column>
+          <column>
+            <p><![CDATA[$\begin{bmatrix}2&6&4\\[6pt]8&3&2\end{bmatrix} \to \begin{bmatrix}2&6&4 \\[6pt] 6\cdot 8&6 \cdot 3&6 \cdot 2 \end{bmatrix}$]]></p>
+            <p>(Multiply row 2 by 6)</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>Add one row to another</p>
+          </column>
+          <column>
+            <p><![CDATA[$\begin{bmatrix}2&6&4\\[6pt]8&3&2\end{bmatrix} \to \begin{bmatrix}2&6&4 \\[6pt] 8+2&3+6&2+4 \end{bmatrix}$]]></p>
+            <p>(Row 2 becomes the sum of rows 2 and 1)</p>
+          </column>
+        </row>
+      </table>
+    </stack>
+  </sectionNoTitle>
+
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Examples</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Example 1</p>
+      <table grid="false" widths="10% 90%">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>
+              Perform row operation $R_1 \leftrightarrow R_2$ on matrix <b>A</b>.
+            </p>
+            <p><![CDATA[$A=\begin{bmatrix}3&8&2\\[6pt]9&8&1\\[6pt]7&1&2\end{bmatrix}$]]></p>
+          </column>
+        </row>
+      </table>
+      <stack name="answerStack" style="invisible">
+        <p style="subSectionHeading">Answer:</p>
+        <p style="justifiedText">Row operation $R_1 \leftrightarrow R_2$ means to switch row 1 and row 2. Therefore,</p>
+        <p style="centeredText"><![CDATA[$\begin{bmatrix}3&8&2\\[6pt]9&8&1\\[6pt]7&1&2\end{bmatrix} \xrightarrow{R_1 \leftrightarrow R_2} \begin{bmatrix}9&8&1\\[6pt]3&8&2\\[6pt]7&1&2\end{bmatrix}$]]></p>
+      </stack>
+      <button name="btn" content="Show Answer">
+        <onClick>
+          if btn.Text == "Show Answer" then
+          answerStack.Style.Visibility = "visible";
+          btn.Text = "Hide Answer";
+          else
+          answerStack.Style.Visibility = "collapsed";
+          btn.Text = "Show Answer";
+          end
+        </onClick>
+      </button>
+    </stack>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Example 2</p>
+      <table grid="false" widths="10% 90%">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>
+              Perform the row operation $3R_2 \to R_2$ on matrix <b>B</b>.
+            </p>
+            <p><![CDATA[$B=\begin{bmatrix}5&5&2\\[6pt]4&9&7\\[6pt]3&2&5\end{bmatrix}$]]></p>
+          </column>
+        </row>
+      </table>
+      <stack name="answerStack" style="invisible">
+        <p style="subSectionHeading">Answer:</p>
+        <p>
+          $3R_2 \to R_2$ means to replace the <b>2nd</b> row with <b>3</b> times itself.
+        </p>
+        <p style="centeredText"><![CDATA[$\begin{bmatrix}5&5&2\\[6pt]4&9&7\\[6pt]3&2&5\end{bmatrix} \xrightarrow{3R_2 \to R_2} \begin{bmatrix}5&5&2\\[6pt]3 \cdot 4&3 \cdot 9 & 3 \cdot 7 \\[6pt] 3&2&5 \end{bmatrix} = \begin{bmatrix}5&5&2\\[6pt]12&27&21\\[6pt]3&2&5\end{bmatrix}$]]></p>
+      </stack>
+      <button name="btn" content="Show Answer">
+        <onClick>
+          if btn.Text == "Show Answer" then
+          answerStack.Style.Visibility = "visible";
+          btn.Text = "Hide Answer";
+          else
+          answerStack.Style.Visibility = "collapsed";
+          btn.Text = "Show Answer";
+          end
+        </onClick>
+      </button>
+    </stack>
+
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Example 3</p>
+      <table grid="false" widths="10% 90%">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>
+              Perform the row operation $R_2 + R_3 \to R_2$ on matrix <b>C</b>.
+            </p>
+            <p><![CDATA[$C = \begin{bmatrix} -4&10&7\\[6pt]13&25&4\\[6pt] 5&-8&1 \end{bmatrix}$]]></p>
+          </column>
+        </row>
+      </table>
+      <stack name="answerStack" style="invisible">
+        <p style="subSectionHeading">Answer:</p>
+        <p>
+          $R_2 + R_3 \to R_2$ means to replace the <b>2nd</b> row with the sum of the <b>2nd</b> and the <b>3rd</b> rows.
+        </p>
+        <p style="centeredText"><![CDATA[$\begin{bmatrix} -4&10&7\\[6pt]13&25&4\\[6pt] 5&-8&1 \end{bmatrix} \xrightarrow{R_2 + R_3 \to R_2} \begin{bmatrix} -4&10&7 \\[6pt] 13+5&25+(-8)&4+1 \\[6pt] 5&-8&1 \end{bmatrix} = \begin{bmatrix}-4&10&7\\[6pt]18&17&5\\[6pt]5&-8&1\end{bmatrix}$]]></p>
+      </stack>
+      <button name="btn" content="Show Answer">
+        <onClick>
+          if btn.Text == "Show Answer" then
+          answerStack.Style.Visibility = "visible";
+          btn.Text = "Hide Answer";
+          else
+          answerStack.Style.Visibility = "collapsed";
+          btn.Text = "Show Answer";
+          end
+        </onClick>
+      </button>
+    </stack>
+
+  </sectionNoTitle>
+
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Systems of Equations and Matrix Row Operations</p>
+    <stack style="mcStackLayout">
+      <p style="justifiedText">Recall that in an augmented matrix, each row represents an equation in the system and each column represents a variable or constant term. For example:</p>
+      <p style="centeredText"><![CDATA[$\begin{matrix}3x+5y&=&9 \\[6pt] 4x+y&=&6 \end{matrix} \to \begin{bmatrix}3&5&9\\[6pt]4&1&6\end{bmatrix}$]]></p>
+      <p style="justifiedText">
+        When working with augmented matrices, we can perform any of the <b>matrix row operations</b> to create a new augmented matrix that produces an equivalent system of equations.
+      </p>
+      
+      <p style="subSectionHeading">
+        <b>Switching any two rows</b>
+      </p>
+      <table grid="false" widths="50% 50%">
+        <head>
+          <column>
+            <p style="centeredText">Equation Systems</p>
+          </column>
+          <column>
+            <p style="centeredText">Augmented matrix</p>
+          </column>
+        </head>
+        <row>
+          <column>
+            <p style="centeredText"><![CDATA[$\begin{matrix}3x+5y&=&9 \\[6pt] 4x+y&=&6 \end{matrix}$]]></p>
+          </column>
+          <column>
+            <p style="centeredText"><![CDATA[$\begin{bmatrix}3&5&9\\[6pt]4&1&6\end{bmatrix}$]]></p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p style="centeredText">$\downarrow$</p>
+          </column>
+          <column>
+            <p style="centeredText">$\downarrow$</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p style="centeredText"><![CDATA[$\begin{matrix}4x+y&=&6 \\[6pt]3x+5y&=&9\end{matrix}$]]></p>
+          </column>
+          <column>
+            <p style="centeredText"><![CDATA[$\begin{bmatrix}4&1&6 \\[6pt]3&5&9\end{bmatrix}$]]></p>
+          </column>
+        </row>
+      </table>
+      <p style="justifiedText">The two systems from the above table are equivalent since the order of the equations doesn't matter, so we can switch any two rows when we solve a system using an augmented matrix.</p>
+
+      <p style="subSectionHeading">
+        <b>Multiply a row by a nonzero constant</b>
+      </p>
+      <table grid="false" widths="50% 50%">
+        <head>
+          <column>
+            <p style="centeredText">Equation Systems</p>
+          </column>
+          <column>
+            <p style="centeredText">Augmented matrix</p>
+          </column>
+        </head>
+        <row>
+          <column>
+            <p style="centeredText"><![CDATA[$\begin{matrix}3x+5y&=&9 \\[6pt] 4x+y&=&6 \end{matrix}$]]></p>
+          </column>
+          <column>
+            <p style="centeredText"><![CDATA[$\begin{bmatrix}3&5&9\\[6pt]4&1&6\end{bmatrix}$]]></p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p style="centeredText">$\downarrow$</p>
+          </column>
+          <column>
+            <p style="centeredText">$\downarrow$</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p style="centeredText"><![CDATA[$\begin{matrix}9x+15y&=&27 \\[6pt] 4x+y&=&6 \end{matrix}$]]></p>
+          </column>
+          <column>
+            <p style="centeredText"><![CDATA[$\begin{bmatrix}9&15&27\\[6pt]4&1&6\end{bmatrix}$]]></p>
+          </column>
+        </row>
+      </table>
+      <p style="justifiedText">We multiply the first row by 3, and both euqation systems are still equivalent. We often do this to eliminate a variable.</p>
+
+      <p style="subSectionHeading">
+        <b>Add one row to another</b>
+      </p>
+      <table grid="false" widths="50% 50%">
+        <head>
+          <column>
+            <p style="centeredText">Equation Systems</p>
+          </column>
+          <column>
+            <p style="centeredText">Augmented matrix</p>
+          </column>
+        </head>
+        <row>
+          <column>
+            <p style="centeredText"><![CDATA[$\begin{matrix}-3x+5y&=&9 \\[6pt] 3x+y&=&6 \end{matrix}$]]></p>
+          </column>
+          <column>
+            <p style="centeredText"><![CDATA[$\begin{bmatrix}-3&5&9\\[6pt]3&1&6\end{bmatrix}$]]></p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p style="centeredText">$\downarrow$</p>
+          </column>
+          <column>
+            <p style="centeredText">$\downarrow$</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p style="centeredText"><![CDATA[$\begin{matrix}-3x+5y&=&9 \\[6pt] 0x+6y&=&15 \end{matrix}$]]></p>
+          </column>
+          <column>
+            <p style="centeredText"><![CDATA[$\begin{bmatrix}-3&5&9\\[6pt]0&6&15\end{bmatrix}$]]></p>
+          </column>
+        </row>
+      </table>
+      <p>We know if $A=B$ and $C=D$, then $A+C = B+D$.</p>
+      <p style="justifiedText">We add the first row to the second row, and if equation 1 is $A=B$, equation 2 is $C=D$, then modified equation 2 is $A+C=B+D$. Therefore, both euqation systems are still equivalent. We can add the equation to obtain $6y=15$.</p>
+    </stack>
+  </sectionNoTitle>
+
+
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Practices</p>
+    
+    <stack style="mcStackLayout">
+      <script>
+        local answer = 2
+        local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=answer})
+      </script>
+      <p style="subSectionHeading">Question 1</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources/question.png" inspect="false" />
+          </column>
+          <column>
+            <p>Perform the row operation $R_1 + 2R_3 \to R_1$ on matrix <b>E</b>.</p>
+            <p><![CDATA[$E = \begin{bmatrix}-6&4&3 \\[6pt] 5&-2&-1 \\[6pt] 8&-3&5 \end{bmatrix}$]]></p>
+          </column>
+        </row>
+      </table>
+      <table name="choicesTable" grid="false" widths="50% 50%">
+        <row>
+          <column>
+            <p style="mcLayout"><![CDATA[$\begin{bmatrix}-6&4&3 \\[6pt] 5&-2&-1 \\[6pt] 16&-6&10 \end{bmatrix}$]]></p>
+          </column>
+          <column>
+            <p style="mcLayout"><![CDATA[$\begin{bmatrix}10&-2&13 \\[6pt] 5&-2&-1 \\[6pt] 8&-3&5 \end{bmatrix}$]]></p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="A" style="btnUnselected">
+              <onClick>
+                mcController:select(1)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="B" style="btnUnselected">
+              <onClick>
+                mcController:select(2)
+              </onClick>
+            </button>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p style="mcLayout"><![CDATA[$\begin{bmatrix}8&-3&5 \\[6pt] 5&-2&-1 \\[6pt] 10&-2&13 \end{bmatrix}$]]></p>
+          </column>
+          <column>
+            <p style="mcLayout"><![CDATA[$\begin{bmatrix}10&-2&13 \\[6pt] 5&-2&-1 \\[6pt] 16&-6&10 \end{bmatrix}$]]></p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="C" style="btnUnselected">
+              <onClick>
+                mcController:select(3)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="D" style="btnUnselected">
+              <onClick>
+                mcController:select(4)
+              </onClick>
+            </button>
+          </column>
+        </row>
+      </table>
+      <button name="checkBtn" content="Check Answer">
+        <onClick>
+          mcController:checkAnswer()
+        </onClick>
+      </button>
+    </stack>
+
+
+    <stack style="mcStackLayout">
+      <script>
+        local answer = 1
+        local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=answer})
+      </script>
+      <p style="subSectionHeading">Question 2</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources/question.png" inspect="false" />
+          </column>
+          <column>
+            <p>Perform the row operation, $R_3 \leftrightarrow 2R_1$, on the following matrix.</p>
+            <p><![CDATA[$\begin{bmatrix}5&8&2&0\\[6pt] -5&9&3&4 \\[6pt] -8&0&3&1 \end{bmatrix}$]]></p>
+          </column>
+        </row>
+      </table>
+      <table name="choicesTable" grid="false" widths="50% 50%">
+        <row>
+          <column>
+            <p style="mcLayout"><![CDATA[$\begin{bmatrix} -8&0&3&1\\[6pt] -5&9&3&4 \\[6pt] 5&8&2&0 \end{bmatrix}$]]></p>
+            <!-- uncomment following code if you want an image as your answer, replace the image src-->
+            <!--
+						<image src="resources/q.jpeg" style="mcLayout" />
+            -->
+          </column>
+          <column>
+            <p style="mcLayout"><![CDATA[$\begin{bmatrix} -5&9&3&4\\[6pt]5&8&2&0 \\[6pt] -8&0&3&1 \end{bmatrix}$]]></p>
+            <!-- uncomment following code if you want an image as your answer, replace the image src-->
+            <!--
+						<image src="resources/q.jpeg" style="mcLayout" />
+            -->
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="A" style="btnUnselected">
+              <onClick>
+                mcController:select(1)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="B" style="btnUnselected">
+              <onClick>
+                mcController:select(2)
+              </onClick>
+            </button>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p style="mcLayout"><![CDATA[$\begin{bmatrix}5&8&2&0\\[6pt] -8&0&3&1 \\[6pt] -5&9&3&4 \end{bmatrix}$]]></p>
+            <!-- uncomment following code if you want an image as your answer, replace the image src-->
+            <!--
+						<image src="resources/q.jpeg" style="mcLayout" />
+            -->
+          </column>
+          <column>
+            <p style="mcLayout"><![CDATA[$\begin{bmatrix}5&8&2&0\\[6pt] -16&0&6&2 \\[6pt] -5&9&3&4 \end{bmatrix}$]]></p>
+            <!-- uncomment following code if you want an image as your answer, replace the image src-->
+            <!--
+						<image src="resources/q.jpeg" style="mcLayout" />
+            -->
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="C" style="btnUnselected">
+              <onClick>
+                mcController:select(3)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="D" style="btnUnselected">
+              <onClick>
+                mcController:select(4)
+              </onClick>
+            </button>
+          </column>
+        </row>
+      </table>
+      <button name="checkBtn" content="Check Answer">
+        <onClick>
+          mcController:checkAnswer()
+        </onClick>
+      </button>
+    </stack>
+
+
+  </sectionNoTitle>
+
+
+
+</document>

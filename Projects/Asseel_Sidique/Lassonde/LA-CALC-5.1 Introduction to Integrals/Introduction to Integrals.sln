@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{3509FA56-3B69-4017-88D1-3C70D67D8588}") = "Introduction to Integrals", "Introduction to Integrals\Introduction to Integrals.qdexproj", "{BF87DC05-5BB5-4952-B5FD-A4137B55E710}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BF87DC05-5BB5-4952-B5FD-A4137B55E710}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF87DC05-5BB5-4952-B5FD-A4137B55E710}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF87DC05-5BB5-4952-B5FD-A4137B55E710}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF87DC05-5BB5-4952-B5FD-A4137B55E710}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
