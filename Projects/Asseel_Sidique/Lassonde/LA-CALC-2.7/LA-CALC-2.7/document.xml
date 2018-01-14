@@ -1,0 +1,654 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G1318DA1B_9D48_4705_AEEF_D4BCF352F5F0">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>LA-CALC-2.7 Visually Determining Vertical Asymptotes</title>
+    <creator>Sidique</creator>
+    <coverImage src="resources/LassondeLogo.png" />
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+  </metadata>
+
+
+  <include src="resources/curriculumStylesLassonde.xml" />
+  <include src="resources/plotTools.xml" />
+  <include src="resources/Utilities.xml" />
+
+  <!--                                      Header & Footer END                                         -->
+  <header style="themeColour">
+    <stack style="center" orientation="horizontal">
+      <p></p>
+    </stack>
+  </header>
+  <footer style="themeColour">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="themeColourTitle">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+
+  <!-- Section 1 -->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">2.7 Visually Determining Vertical Asymptotes</title>
+    <p style="sectionHeading">Introduction</p>
+    <image src="resources/verticalasymptote.png" />
+    <stack style="contentBG">
+      <p>
+        A <b>Vertical Asymptote</b> occurs when the value of a function increases as the function approaches some fixed number. It
+        can be seen in the image above represented by the dotted green line. In the picture, as x approaches -2 from the left, the value
+        of the function grows towards positive infinity and as x approaches -2 from the right, the value grows towards negative infinity. In
+        mathematical terms, we would describe this vertical asymptote as such: $ \displaystyle{ \lim_{x \to -2^-} } f(x) = +\infty $ and $ \displaystyle{ \lim_{x \to -2^+} } f(x) = -\infty $. In this module,
+        we will look at how to recognize vertical asymptotes by visually looking at functions. 
+      </p>
+    </stack>
+  </section>
+  
+  <sectionNoTitle style="pageLayout" name="section2">
+    <p style="sectionHeading">Formal Definition of a Vertical Asymptote</p>
+    <stack style="contentBG">
+      <p>To generalize the definition of a vertical asymptote, we can say that a function $ f(x) $ has a vertical
+      asymptote at $ a $ such that $ \displaystyle{ \lim_{ x \to a^- } } f(x) = \pm \infty $ and/or $ \displaystyle { \lim_{ x \to a^+ } } f(x) = \pm \infty $.
+      This means as long as the value of a function is increasing or decreasing infinitely from at least one side at some point on the function, we say that the function
+      has a vertical asymptote.</p>
+    </stack>
+  
+    <p style="sectionHeading">Example</p>
+    <stack style="contentBG">
+      <p>The graph below represents a piecewise function: </p>
+      <equation>$ f(x) = 
+        \begin{bmatrix}
+            \frac{x+1}{x}, x &lt; 0 \\
+          \frac{x}{1.7}sin(x-2), x \geq 0 
+        \end{bmatrix} $
+      </equation>
+      <xyPlot name="p1" manual="false" pan="disabled" tap="disabled" zoom="disabled">
+        <onDocumentOpened>
+          char.textX(xLabel, {9.5, 0.5}, 0.25, color.black);
+          char.textY(yLabel, {0.5, 9.5}, 0.25, color.black);
+          
+          for i=-10, 10, 0.01 do
+            if i &lt; 0 then
+              fx1:Add(i, (i+1)/i);
+            else
+              fx2:Add(i, i/1.7*math.sin(i-2));
+            end
+          end
+        </onDocumentOpened>
+        <axis dim="x" min="-10" max="10" auto="none" />
+        <axis dim="y" min="-10" max="10" auto="none" />
+        <series name="xLine">
+          <style>
+            <lineThickness>2</lineThickness>
+            <foreground color="black" />
+          </style>
+          <data>-20 0; 20 0;</data>
+        </series>
+        <series name="yLine">
+          <style>
+            <lineThickness>2</lineThickness>
+            <foreground color="black" />
+          </style>
+          <data>0 -20; 0 20;</data>
+        </series>
+        <series name="xLabel" />
+        <series name="yLabel" />
+        <series name="fx1" draw="line">
+          <style>
+            <lineThickness>2</lineThickness>
+            <foreground color="red" />
+          </style>
+        </series>
+        <series name="fx2" draw="line">
+          <style>
+            <lineThickness>2</lineThickness>
+            <foreground color="red" />
+          </style>
+        </series>
+        <series name="fx3" draw="lineSegments">
+          <style>
+            <foreground color="yellowGreen" />
+            <lineThickness>4</lineThickness>
+          </style>
+        </series>
+      </xyPlot>
+      <simulation asynchronous="false" name="sim1" loop="false" duration="3" period="0.1">
+        <onUpdate>
+          <![CDATA[
+          x = (time/3.0) * 20;
+          p1.fx3:Add(0, x - 10);
+          ]]>
+        </onUpdate>
+      </simulation>
+      <button content="Draw Vertical Asymptote">
+        <onClick>
+          p1.fx3:Clear();
+          sim1:Stop();
+          sim1:Start();
+        </onClick>
+      </button>
+    </stack>
+    <p style="sectionHeading">Analysis</p>
+    <stack style="contentBG">
+      <p>We can see that this function has a one-sided limit at $ f(x) = 0^- $ (from the left). The right hand side
+      of this function does not have any limits. Even though $ f(x) \to \infty $ at $ f(x) = 0^- $, we still say that $ f(x) $
+      has a vertical asymptote. In the case of a vertical asymptote, it does not matter if a function is defined at the limit because
+      we are only interested in seeing the values as it approaches the limit.</p>
+    </stack>
+  </sectionNoTitle>
+  
+  <sectionNoTitle name="section3" style="pageLayout">
+    <p style="sectionHeading">Practice</p>
+    <stack name="mcStack" style="mcStackLayout">
+      <script>
+        local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=2})
+      </script>
+			<p style="subSectionHeading">Question 1</p>
+			<table widths="10% 90%" grid="false">
+				<row>
+					<column>
+						<image src="resources/question.png" inspect="false" />
+					</column>
+					<column>
+						<p style="justifiedText">Given the graph below, determine the equation of all vertical asymptotes.</p>
+					</column>
+				</row>
+			</table>
+      
+      <!--INSERT GRAPH HERE-->
+      <xyPlot name="p1" manual="false" pan="disabled" tap="disabled" zoom="disabled">
+        <onDocumentOpened>
+          <![CDATA[
+            
+          char.textX(xLabel, {7.5, 0.5}, 0.25, color.black);
+          char.textY(yLabel, {0.5, 7.5}, 0.25, color.black);
+          
+          for i=-10, 10, 0.01 do
+            if i < -2 then
+              fx1:Add(i, (i+1)/(i^2-4));
+            elseif i < 2 then
+              fx2:Add(i, (i+1)/(i^2-4));
+            else
+              fx3:Add(i, (i+1)/(i^2-4));
+            end
+          end
+          ]]>
+        </onDocumentOpened>
+        <axis dim="x" min="-8" max="8" auto="none" minor="true" />
+        <axis dim="y" min="-8" max="8" auto="none" minor="true" />
+        <series name="xLine">
+          <style>
+            <lineThickness>2</lineThickness>
+            <foreground color="black" />
+          </style>
+          <data>-20 0; 20 0;</data>
+        </series>
+        <series name="yLine">
+          <style>
+            <lineThickness>2</lineThickness>
+            <foreground color="black" />
+          </style>
+          <data>0 -20; 0 20;</data>
+        </series>
+        <series name="xLabel" />
+        <series name="yLabel" />
+        <series name="fx1" draw="line">
+          <style>
+            <lineThickness>2</lineThickness>
+            <foreground color="red" />
+          </style>
+        </series>
+        <series name="fx2" draw="line">
+          <style>
+            <lineThickness>2</lineThickness>
+            <foreground color="red" />
+          </style>
+        </series>
+        <series name="fx3" draw="line">
+          <style>
+            <lineThickness>2</lineThickness>
+            <foreground color="red" />
+          </style>
+        </series>
+        <series name="fx4" draw="lineSegments">
+          <style>
+            <foreground color="yellowGreen" />
+            <lineThickness>4</lineThickness>
+          </style>
+        </series>
+        <series name="fx5" draw="lineSegments">
+            <style>
+              <foreground color="yellowGreen" />
+              <lineThickness>4</lineThickness>
+            </style>
+          </series>
+      </xyPlot>
+      <simulation asynchronous="false" name="sim1" loop="false" duration="3" period="0.1">
+        <onUpdate>
+          <![CDATA[
+          x = (time/3.0) * 20;
+          p1.fx4:Add(-2, x - 10);
+          p1.fx5:Add(2, x - 10);
+          ]]>
+        </onUpdate>
+      </simulation>
+			<table name="choicesTable" grid="false" widths="50% 50%">
+				<row>
+					<column>
+						<equation>$ x = 2 $</equation>
+					</column>
+					<column>
+						<equation>$ x = 2 $ and $ x = -2 $</equation>
+					</column>
+				</row>
+				<row>
+					<column>
+						<button name="btn" content="A" style="btnUnselected">
+							<onClick>
+                mcController:select(1)
+							</onClick>
+						</button>
+					</column>
+					<column>
+						<button name="btn" content="B" style="btnUnselected">
+							<onClick>
+                mcController:select(2)
+
+              </onClick>
+						</button>
+					</column>
+				</row>
+				<row>
+					<column>
+						<equation>$ x = \sqrt{2} $ and $ x = -\sqrt{2} $</equation>
+					</column>
+					<column>
+						<equation>$ x = 0 $</equation>
+
+					</column>
+				</row>
+				<row>
+					<column>
+						<button name="btn" content="C" style="btnUnselected">
+							<onClick>
+                mcController:select(3)
+              </onClick>
+						</button>
+					</column>
+					<column>
+						<button name="btn" content="D" style="btnUnselected">
+							<onClick>
+                mcController:select(4)
+              </onClick>
+						</button>
+					</column>
+				</row>
+			</table>
+			<button name="checkBtn" content="Check Answer">
+				<onClick>
+          mcController:checkAnswer();
+          if checkBtn.Style.BackgroundColor == color.green then
+            section3.mcStack.p1.fx4:Clear();
+            section3.mcStack.p1.fx5:Clear();
+            section3.mcStack.sim1:Stop();
+            section3.mcStack.sim1:Start();
+          end
+        </onClick>
+			</button>
+		</stack>
+  </sectionNoTitle>
+  
+  <sectionNoTitle name="section4" style="pageLayout">
+        <p style="sectionHeading">Practice</p>
+    <stack name="mcStack" style="mcStackLayout">
+      <script>
+        local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=3})
+      </script>
+			<p style="subSectionHeading">Question 2</p>
+			<table widths="10% 90%" grid="false">
+				<row>
+					<column>
+						<image src="resources/question.png" inspect="false" />
+					</column>
+					<column>
+						<p style="justifiedText">Given the graph below, determine the equation of all vertical asymptotes.</p>
+					</column>
+				</row>
+			</table>
+      
+      <!--INSERT GRAPH HERE-->
+      <xyPlot name="p1">
+        <onDocumentOpened>
+          <![CDATA[
+            
+          char.textX(xLabel, {19, 0.5}, 0.5, color.black);
+          char.textY(yLabel, {0.5, 19}, 0.5, color.black);
+          
+          for i=-21, 21, 0.01 do
+            if i < -4 then
+              fx1:Add(i, (3*i^2 - 9)/(i^2 + 7*i + 12));
+            elseif i > -3 then
+              fx2:Add(i, (3*i^2 - 9)/(i^2 + 7*i + 12));
+            end
+          end
+          ]]>
+        </onDocumentOpened>
+        <axis dim="x" min="-20" max="20" auto="none" minor="true" />
+        <axis dim="y" min="-10" max="30" auto="none" minor="true" />
+        <series name="xLine">
+          <style>
+            <lineThickness>2</lineThickness>
+            <foreground color="black" />
+          </style>
+          <data>-40 0; 40 0;</data>
+        </series>
+        <series name="yLine">
+          <style>
+            <lineThickness>2</lineThickness>
+            <foreground color="black" />
+          </style>
+          <data>0 -40; 0 40;</data>
+        </series>
+        <series name="xLabel" />
+        <series name="yLabel" />
+        <series name="fx1" draw="line">
+          <style>
+            <lineThickness>2</lineThickness>
+            <foreground color="red" />
+          </style>
+        </series>
+        <series name="fx2" draw="line">
+          <style>
+            <lineThickness>2</lineThickness>
+            <foreground color="red" />
+          </style>
+        </series>
+        <series name="fx3" draw="line">
+          <style>
+            <lineThickness>2</lineThickness>
+            <foreground color="red" />
+          </style>
+        </series>
+        <series name="fx4" draw="lineSegments">
+          <style>
+            <foreground color="yellowGreen" />
+            <lineThickness>4</lineThickness>
+          </style>
+        </series>
+        <series name="fx5" draw="lineSegments">
+            <style>
+              <foreground color="yellowGreen" />
+              <lineThickness>4</lineThickness>
+            </style>
+          </series>
+      </xyPlot>
+      <simulation asynchronous="false" name="sim1" loop="false" duration="3" period="0.1">
+        <onUpdate>
+          <![CDATA[
+          x = (time/3.0) * 42;
+          p1.fx4:Add(-3, x - 10);
+          p1.fx5:Add(-4, x - 10);
+          ]]>
+        </onUpdate>
+      </simulation>
+			<table name="choicesTable" grid="false" widths="50% 50%">
+				<row>
+					<column>
+						<equation>$ x = -5 $</equation>
+					</column>
+					<column>
+						<equation>$ x = -4 $ and $ x = -2 $</equation>
+					</column>
+				</row>
+				<row>
+					<column>
+						<button name="btn" content="A" style="btnUnselected">
+							<onClick>
+                mcController:select(1)
+							</onClick>
+						</button>
+					</column>
+					<column>
+						<button name="btn" content="B" style="btnUnselected">
+							<onClick>
+                mcController:select(2)
+
+              </onClick>
+						</button>
+					</column>
+				</row>
+				<row>
+					<column>
+						<equation>$ x = -3 $ and $ x = -4 $</equation>
+					</column>
+					<column>
+						<equation>Undefined</equation>
+
+					</column>
+				</row>
+				<row>
+					<column>
+						<button name="btn" content="C" style="btnUnselected">
+							<onClick>
+                mcController:select(3)
+              </onClick>
+						</button>
+					</column>
+					<column>
+						<button name="btn" content="D" style="btnUnselected">
+							<onClick>
+                mcController:select(4)
+              </onClick>
+						</button>
+					</column>
+				</row>
+			</table>
+			<button name="checkBtn" content="Check Answer">
+				<onClick>
+          mcController:checkAnswer();
+          if checkBtn.Style.BackgroundColor == color.green then
+            section4.mcStack.p1.fx4:Clear();
+            section4.mcStack.p1.fx5:Clear();
+            section4.mcStack.sim1:Stop();
+            section4.mcStack.sim1:Start();
+          end
+        </onClick>
+			</button>
+		</stack>
+  </sectionNoTitle>
+
+  
+  <sectionNoTitle name="section5" style="pageLayout">
+          <p style="sectionHeading">Practice</p>
+      <stack name="mcStack" style="mcStackLayout">
+        <script>
+          local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=2})
+        </script>
+			  <p style="subSectionHeading">Question 3</p>
+			  <table widths="10% 90%" grid="false">
+				  <row>
+					  <column>
+						  <image src="resources/question.png" inspect="false" />
+					  </column>
+					  <column>
+						  <p style="justifiedText">Given the graph below, determine the equation of all vertical asymptotes.</p>
+					  </column>
+				  </row>
+			  </table>
+      
+        <!--INSERT GRAPH HERE-->
+        <xyPlot name="p1">
+          <onDocumentOpened>
+            <![CDATA[
+            
+            char.textX(xLabel, {14.25, 0.5}, 0.5, color.black);
+            char.textY(yLabel, {0.5, 14.25}, 0.5, color.black);
+          
+            for i=-21, 21, 0.01 do
+              if i < -2 then
+                fx1:Add(i, (i^3)/(i^2-4));
+              elseif i > -2 and i < 0 then
+                fx2:Add(i, (i^3)/(i^2-4));
+              elseif i > 0 and i < 2 then
+                fx3:Add(i, (i^3)/(i^2-4));
+              elseif i > 2 then
+                fx4:Add(i, (i^3)/(i^2-4));
+              end
+            end
+            ]]>
+          </onDocumentOpened>
+          <axis dim="x" min="-15" max="15" auto="none" minor="true" />
+          <axis dim="y" min="-15" max="15" auto="none" minor="true" />
+          <series name="xLine">
+            <style>
+              <lineThickness>2</lineThickness>
+              <foreground color="black" />
+            </style>
+            <data>-40 0; 40 0;</data>
+          </series>
+          <series name="yLine">
+            <style>
+              <lineThickness>2</lineThickness>
+              <foreground color="black" />
+            </style>
+            <data>0 -40; 0 40;</data>
+          </series>
+          <series name="xLabel" />
+          <series name="yLabel" />
+          <series name="fx1" draw="line">
+            <style>
+              <lineThickness>2</lineThickness>
+              <foreground color="red" />
+            </style>
+          </series>
+          <series name="fx2" draw="line">
+            <style>
+              <lineThickness>2</lineThickness>
+              <foreground color="red" />
+            </style>
+          </series>
+          <series name="fx3" draw="line">
+            <style>
+              <lineThickness>2</lineThickness>
+              <foreground color="red" />
+            </style>
+          </series>
+          <series name="fx4" draw="line">
+            <style>
+              <lineThickness>2</lineThickness>
+              <foreground color="red" />
+            </style>
+          </series>
+          <series name="fx5" draw="lineSegments">
+              <style>
+                <foreground color="yellowGreen" />
+                <lineThickness>4</lineThickness>
+              </style>
+            </series>
+          <series name="fx6" draw="lineSegments">
+                <style>
+                  <foreground color="yellowGreen" />
+                  <lineThickness>4</lineThickness>
+                </style>
+              </series>
+          <series name="fx7" draw="lineSegments">
+            <style>
+              <foreground color="yellowGreen" />
+              <lineThickness>4</lineThickness>
+            </style>
+          </series>
+        </xyPlot>
+        <simulation asynchronous="false" name="sim1" loop="false" duration="3" period="0.1">
+          <onUpdate>
+            <![CDATA[
+            x = (time/3.0) * 42;
+            p1.fx5:Add(2, x - 20);
+            p1.fx7:Add(-2, x - 20);
+            ]]>
+          </onUpdate>
+        </simulation>
+			  <table name="choicesTable" grid="false" widths="50% 50%">
+				  <row>
+					  <column>
+						  <equation>$ x = 0 $</equation>
+					  </column>
+					  <column>
+						  <equation>$ x = -2 $ and $ x = 2 $</equation>
+					  </column>
+				  </row>
+				  <row>
+					  <column>
+						  <button name="btn" content="A" style="btnUnselected">
+							  <onClick>
+                  mcController:select(1)
+							  </onClick>
+						  </button>
+					  </column>
+					  <column>
+						  <button name="btn" content="B" style="btnUnselected">
+							  <onClick>
+                  mcController:select(2)
+
+                </onClick>
+						  </button>
+					  </column>
+				  </row>
+				  <row>
+					  <column>
+						  <equation>$ x = 0 $ and $ x = 2 $</equation>
+					  </column>
+					  <column>
+						  <equation>$ x = 0 $ and $ x = 2 $ and $ x =  -2 $</equation>
+
+					  </column>
+				  </row>
+				  <row>
+					  <column>
+						  <button name="btn" content="C" style="btnUnselected">
+							  <onClick>
+                  mcController:select(3)
+                </onClick>
+						  </button>
+					  </column>
+					  <column>
+						  <button name="btn" content="D" style="btnUnselected">
+							  <onClick>
+                  mcController:select(4)
+                </onClick>
+						  </button>
+					  </column>
+				  </row>
+			  </table>
+			  <button name="checkBtn" content="Check Answer">
+				  <onClick>
+            mcController:checkAnswer();
+            if checkBtn.Style.BackgroundColor == color.green then
+              section5.mcStack.p1.fx5:Clear();
+              section5.mcStack.p1.fx6:Clear();
+              section5.mcStack.p1.fx7:Clear();
+
+              section5.mcStack.sim1:Stop();
+              section5.mcStack.sim1:Start();
+            end
+          </onClick>
+			  </button>
+		  </stack>
+    </sectionNoTitle>
+  
+  <sectionNoTitle name="section6" style="pageLayout">
+    <p style="sectionHeading">
+      Extra Resources
+    </p>
+
+    <web url="https://www.khanacademy.org/math/calculus-home/limits-and-continuity-calc/unbounded-limits-calc/v/visual-vertical-asymptotes" />
+  </sectionNoTitle>
+
+</document>

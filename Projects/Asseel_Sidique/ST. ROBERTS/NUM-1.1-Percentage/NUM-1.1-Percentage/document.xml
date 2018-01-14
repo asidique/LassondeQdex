@@ -1,0 +1,1083 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G55507651_328D_4018_A6E6_009F6B0AB27B">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>NUM-1.1-Percentage</title>
+    <creator>Sidique</creator>
+    <coverImage src="resources/cover.png" />
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+  </metadata>
+
+  <include src="resources/curriculumStyles.xml" />
+  <include src="resources/Utilities.xml" />
+  <include src="resources/plotTools.xml" />
+
+   <!--                                      Header & Footer START                                         -->
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="whiteColor">Amanda Koon</p>
+      <p style="whiteColor rightText">NUMERACY</p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/logo1.png" inspect="false" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/logo2.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--                                      Header & Footer END                                         -->
+  
+    
+  <!-- Section 1 -->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">1.1 Percentage</title>
+    <image inspect="false" src="resources/piechart.jpg">
+    </image>
+    <p style="sectionHeading">Introduction</p>
+    <stack style="contentBG">
+      <p>A percentage can be viewed as a fraction, ratio or a part of a whole. We can view percentages as a piece of a pie, where the pie is the whole, and the parts of the pie that have unique colors represent parts
+      of the pie. Each of these parts is a percentage of the entire pie. In this module, we will look at what it means for something to be a percentage and show how similar it is to fractions and ratios.</p>
+    </stack>
+  </section>
+  
+  <sectionNoTitle name="section2" style="pageLayout">
+    <p style="sectionHeading">What is a Percentage?</p>
+    <stack style="contentBG">
+      <p>A percent is a fraction that is over 100. $ 1 \% $ can be read as one percent or one per one-hundred.</p>
+      <p>
+        <b>Note:</b> We can use the $ \% $ symbol to represent percentage but you may also encounter other forms such as $ pct $, or $ pc $</p>
+    
+      <p>Use the simulator below to see how percentage works on a pie chart. The blue represents your piece of the pie. You can split the pie by using the slider.</p>
+    </stack>
+    <p>
+      <style>
+        <marginBottom>5</marginBottom>
+      </style>
+    </p>
+    <!--CIRCLE PERCENTAGE SIMULATOR-->
+    <p style="sectionHeading">Piece of the Pie Simulator</p>
+    <stack style="contentBG">
+      <onDocumentOpened>
+        pieData = vector({40, 60, 0})
+        chart.pie(p2, pieData);
+        plotTools.drawSquare(p2.square, vector({9.3, 7}), 1, 1, color.rgba(46,152,212));
+        plotTools.drawSquare(p2.square2, vector({9.3, -7}), 1, 1, color.rgba(137,190,64));
+        plotTools.drawSquare(p2.square3, vector({11, 0}), 1, 1, color.gray);
+        char.textY(p2.label, vector({10, 6.7}), 0.5, color.black)
+        char.textO(p2.label, vector({10.5, 6.7}), 0.5, color.black)
+        char.textU(p2.label, vector({11.1, 6.7}), 0.5, color.black)
+        char.textR(p2.label, vector({11.5, 6.7}), 0.5, color.black)
+        
+        char.textP(p2.label, vector({10, 5.7}), 0.5, color.black)
+        char.textI(p2.label, vector({10.5, 5.7}), 0.5, color.black)
+        char.textE(p2.label, vector({10.7, 5.7}), 0.5, color.black)
+        char.textC(p2.label, vector({11.2, 5.7}), 0.5, color.black)
+        char.textE(p2.label, vector({11.7, 5.7}), 0.5, color.black)
+        
+        char.textF(p2.label, vector({10, -6.7}), 0.5, color.black)
+        char.textR(p2.label, vector({10.5, -6.7}), 0.5, color.black)
+        char.textI(p2.label, vector({11.1, -6.7}), 0.5, color.black)
+        char.textE(p2.label, vector({11.3, -6.7}), 0.5, color.black)
+        char.textN(p2.label, vector({11.8, -6.7}), 0.5, color.black)
+        char.textD(p2.label, vector({12.3, -6.7}), 0.5, color.black)
+        char.textS(p2.label, vector({12.8, -6.7}), 0.5, color.black)
+        
+        char.textP(p2.label, vector({10, -7.7}), 0.5, color.black)
+        char.textI(p2.label, vector({10.5, -7.7}), 0.5, color.black)
+        char.textE(p2.label, vector({10.7, -7.7}), 0.5, color.black)
+        char.textC(p2.label, vector({11.2, -7.7}), 0.5, color.black)
+        char.textE(p2.label, vector({11.7, -7.7}), 0.5, color.black)
+        
+        char.textU(p2.label, vector({11.5, 0.5}), 0.5, color.black);
+        char.textN(p2.label, vector({12, 0.5}), 0.5, color.black);
+        char.textU(p2.label, vector({12.5, 0.5}), 0.5, color.black);
+        char.textS(p2.label, vector({13, 0.5}), 0.5, color.black);
+        char.textE(p2.label, vector({13.5, 0.5}), 0.5, color.black);
+        char.textD(p2.label, vector({14, 0.5}), 0.5, color.black);
+        
+        
+        function gcd(a,b)
+	        if b ~= 0 then
+		        return gcd(b, a % b)
+	        else
+		        return math.abs(a)
+	        end
+        end
+        
+        
+      </onDocumentOpened>
+      <stack style="contentBG"></stack>
+      <xyPlot name="p2" tap="disabled" series="3">
+        <axis dim="x" min="-11" max="11" auto="lockAspectRatio" major="false"></axis>
+        <axis dim="y" min="-11" max="11" auto="fixed" major="false"></axis>
+        <series name="s1" manual="true"></series>
+        <series name="s2" manual="true"></series>
+        <series name="s3" manual="true"></series>
+        <series name="label"></series>
+        <series name="square" draw="segmentedFill">
+          <style>
+            <foreground color="cornflowerBlue" />
+          </style>
+        </series>
+        <series name="label2"></series>
+        <series name="square2" draw="segmentedFill">
+          <style>
+            <foreground color="cornflowerBlue" />
+          </style>
+        </series>
+        <series name="label3"></series>
+        <series name="square3" draw="segmentedFill">
+          <style>
+            <foreground color="gray" />
+          </style>
+        </series>
+      </xyPlot>
+      <equation name="lab1">Your Percentage: 40%</equation>
+      <equation name="lab2">Your Fraction: 40/100</equation>
+      <slider name="sl1" min="0" max="100" value="40">
+        <onValueChanged>
+        pieData[1] = value;
+        
+        if (100 - pieData[1] - pieData[2]) &gt;= 0 then
+          pieData[3] = 100-pieData[1]-pieData[2];
+        else
+          pieData[3] = 0;
+        end
+                
+        if (pieData[1]+pieData[2] &lt;= 100.5) then
+          p2.Series[1]:Clear();
+          p2.Series[2]:Clear();
+          p2.Series[3]:Clear();
+          chart.pie(p2, pieData);
+          p2.Series[1]:Update();
+          p2.Series[2]:Update();
+          p2.Series[3]:Update();
+          local denominator = 100;
+          local val = round(value, 1);
+          lab1.Text = "Your Percentage: " .. tostring(round(value, 1)) .. "%";
+          lab2.Text = "Your Fraction: " .. tostring(val) .. "/" .. tostring(100);
+        else
+          lab1.Text = "Your Percentage: " .. tostring(round(value, 1)) .. "%" .. " Warning, your pie pieces exceed 100%!";
+        end
+        </onValueChanged>
+      </slider>
+      <equation name="lab3">Friend's Percentage: 60%</equation>
+      <equation name="lab4">Friend's Fraction: 60/100</equation>
+      <slider name="sl2" min="0" max="100" value="40">
+        <onValueChanged>
+        pieData[2] = value;
+        
+        if (100 - pieData[1] - pieData[2]) &gt;= 0 then
+          pieData[3] = 100-pieData[1]-pieData[2];
+        else
+          pieData[3] = 0;
+        end
+                
+        if (pieData[1]+pieData[2] &lt;= 100.5) then
+          local denominator = 100;
+          local val = round(value, 1);
+          lab3.Text = "Friend's Percentage: " .. tostring(round(value, 1)) .. "%";
+          lab4.Text = "Friend's Fraction: " .. tostring(val) .. "/" .. tostring(100);
+          p2.Series[1]:Clear();
+          p2.Series[2]:Clear();
+          p2.Series[3]:Clear();
+          chart.pie(p2, pieData);
+          p2.Series[1]:Update();
+          p2.Series[2]:Update();
+          p2.Series[3]:Update();
+        else
+          lab3.Text = "Friend's Percentage: " .. tostring(round(value, 1)) .. "%" .. " Warning, your pie pieces exceed 100%!";
+        end
+        </onValueChanged>
+      </slider>
+    </stack>
+  </sectionNoTitle>
+  
+  <sectionNoTitle name="section3" style="pageLayout">
+    <onDocumentOpened>
+      applesTaken = vector({1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1});
+      appleCount = 0;
+    </onDocumentOpened>
+    <p style="sectionHeading">Percentage Simulator</p>
+    <stack style="contentBG">
+      <p>Farmer Joe has 12 apples, and you would like to take some of his. In this simulation, drag the slider to take apples from Farmer Joe. Notice the apples you take can be represented as a percentage of Farmer Joe's original 12 apples.</p>
+      <table name="t1" widths="30% 10% 10% 10% 10% 30%" grid="false">
+        <row>
+          <column>
+            <style>
+              <background color="beige" />
+            </style>
+            <image src="resources/farmerjoe.png">
+            </image>
+            <p style="centerText">Farmer Joe</p>
+          </column>
+          <column>
+            <style>
+              <background color="beige" />
+            </style>
+            <image src="resources/apple.png">
+            </image>
+            <image src="resources/apple.png">
+            </image>
+            <image src="resources/apple.png">
+            </image>
+            <image src="resources/apple.png">
+            </image>
+            <image src="resources/apple.png">
+            </image>
+            <image src="resources/apple.png">
+            </image>
+          </column>
+          <column>
+            <style>
+              <background color="beige" />
+            </style>
+            <image src="resources/apple.png">
+            </image>
+            <image src="resources/apple.png">
+            </image>
+            <image src="resources/apple.png">
+            </image>
+            <image src="resources/apple.png">
+            </image>
+            <image src="resources/apple.png">
+            </image>
+            <image src="resources/apple.png">
+            </image>
+          </column>
+          <column>
+            <style>
+              <background color="lightSkyBlue" />
+            </style>
+            <image style="hidden" src="resources/apple.png">
+            </image>
+            <image style="hidden" src="resources/apple.png">
+            </image>
+            <image style="hidden" src="resources/apple.png">
+            </image>
+            <image style="hidden" src="resources/apple.png">
+            </image>
+            <image style="hidden" src="resources/apple.png">
+            </image>
+            <image style="hidden" src="resources/apple.png">
+            </image>
+            </column>
+          <column>
+            <style>
+              <background color="lightSkyBlue" />
+            </style>
+            <image style="hidden" src="resources/apple.png">
+            </image>
+            <image style="hidden" src="resources/apple.png">
+            </image>
+            <image style="hidden" src="resources/apple.png">
+            </image>
+            <image style="hidden" src="resources/apple.png">
+            </image>
+            <image style="hidden" src="resources/apple.png">
+            </image>
+            <image style="hidden" src="resources/apple.png">
+            </image>
+            </column>
+          <column>
+            <style>
+              <background color="lightSkyBlue" />
+            </style>
+            <image src="resources/farmer.png">
+              <style>
+                <widthPercentage>65%</widthPercentage>
+              </style>
+            </image>
+            <p style="centerText">You</p>
+          </column>
+        </row>
+      </table>
+      <image src="resources/apple2.png" style="collapsed" />
+
+      <equation name="lab1">Your Percentage: 0% </equation>
+      <equation name="lab2">Your Fraction: 0/12 </equation>
+      
+      <slider min="0" max="12">
+        <onValueChanged>
+          local val = round(value, 1);
+          for i=applesTaken.count, 1, -1 do
+            if val &gt;= i then
+              applesTaken[i] = 1;
+            else
+              applesTaken[i] = 0;
+            end
+            if (i &lt;= 6) then
+              if(applesTaken[i] == 1) then
+                if (string.find(t1:Child(1):Child(2):Child(i).ImageSource,"resources/apple.png")) then
+                  t1:Child(1):Child(2):Child(i).ImageSource = "resources/apple2.png";
+                  t1:Child(1):Child(3+2):Child(i).Style.Visibility = "visible";
+                  appleCount = appleCount + 1;
+                end
+              else
+                if (string.find(t1:Child(1):Child(2):Child(i).ImageSource,"resources/apple2.png")) then
+                  t1:Child(1):Child(2):Child(i).ImageSource = "resources/apple.png";
+                  t1:Child(1):Child(3+2):Child(i).Style.Visibility = "hidden";
+                  appleCount = appleCount - 1;
+                end
+              end
+            else
+              if(applesTaken[i] == 1) then
+                if (string.find(t1:Child(1):Child(3):Child(i-6).ImageSource,"resources/apple.png")) then
+                  t1:Child(1):Child(3):Child(i-6).ImageSource = "resources/apple2.png";
+                  t1:Child(1):Child(2+2):Child(i-6).Style.Visibility = "visible";
+                  appleCount = appleCount + 1;
+                end
+              else
+                if (string.find(t1:Child(1):Child(3):Child(i-6).ImageSource,"resources/apple2.png")) then
+                  t1:Child(1):Child(3):Child(i-6).ImageSource = "resources/apple.png";
+                  t1:Child(1):Child(2+2):Child(i-6).Style.Visibility = "hidden";
+                  appleCount = appleCount - 1;
+                end
+              end
+            end
+          end
+          
+          lab1.Text = "Your Percentage: " .. tostring(round(appleCount*100/12, 0.1)) .. "%";
+          lab2.Text = "Your Fraction: " .. tostring(appleCount) .. "/12";
+          
+        </onValueChanged>
+      </slider>
+    </stack>
+  </sectionNoTitle>
+  
+  <sectionNoTitle name="section4" style="pageLayout">
+    <p style="sectionHeading">Example Questions</p>
+    <stack style="contentBG">
+      <table widths="10% 90%" grid="false">
+				<row> 
+					<column>
+						<image inspect="false" src="resources/question.png" />
+					</column>
+					<column>
+						<p style="justifiedText">What is 25% of 100?</p>
+					</column>
+				</row>
+			</table>
+      
+      <stack name="ans" style="collapsed">
+        <p>To solve this, convert 25% into decimal format. 25% of $ x $ is the same calculation
+        as $ 0.25 \times x $. Therefore, we can solve the question easily.</p>
+        <p>$ 0.25 \times 100 = 25 $</p>
+      </stack>
+      <button name="btn1" content="Show Answer">
+        <style>
+          <textAlignment>center</textAlignment>
+        </style>
+        <onClick>
+          if btn1.Text == "Show Answer" then
+            btn1.Text = "Hide Answer";
+            ans.Style.Visibility = "visible";
+          elseif btn1.Text == "Hide Answer" then
+            btn1.Text = "Show Answer";
+            ans.Style.Visibility = "collapsed";
+          end
+        </onClick>
+      </button>
+    </stack>
+    <p>
+      <style>
+        <marginBottom>5</marginBottom>
+      </style>
+    </p>
+    <stack style="contentBG">
+      <table widths="10% 90%" grid="false">
+				<row>
+					<column>
+						<image inspect="false" src="resources/question.png" />
+					</column>
+					<column>
+						<p style="justifiedText">100 is what percent of 250?</p>
+					</column>
+				</row>
+			</table>
+      
+      <stack name="ans" style="collapsed">
+        <p>To solve this, we simply get use 100 as our numerator and 250 as our denominator and convert the question
+        to a fraction</p>
+        <p>$ \frac{100}{250} $</p>
+        <p>We can simplify this fraction further by dividing the top and bottom by 50</p>
+        <p>$ \frac{2}{5} $</p>
+        <p>Then we calculate the decimal of this fraction</p>
+        <p>$ \frac{2}{5} = 0.4 $</p>
+        <p>Finally, convert this decimal into percentage by multiplying by 100</p>
+        <p>Therefore, the answer is $ 40 \% $</p>
+      </stack>
+      <button name="btn1" content="Show Answer">
+        <style>
+          <textAlignment>center</textAlignment>
+        </style>
+        <onClick>
+          if btn1.Text == "Show Answer" then
+            btn1.Text = "Hide Answer";
+            ans.Style.Visibility = "visible";
+          elseif btn1.Text == "Hide Answer" then
+            btn1.Text = "Show Answer";
+            ans.Style.Visibility = "collapsed";
+          end
+        </onClick>
+      </button>
+    </stack>
+    <p>
+      <style>
+        <marginBottom>5</marginBottom>
+      </style>
+    </p>
+    <stack style="contentBG">
+      <table widths="10% 90%" grid="false">
+				<row>
+					<column>
+						<image inspect="false" src="resources/question.png" />
+					</column>
+					<column>
+						<p style="justifiedText">What is 0.5% of 0.0125?</p>
+					</column>
+				</row>
+			</table>
+      
+      <stack name="ans" style="collapsed">
+        <p>To solve this, we think of 0.5% as a fraction over 100.</p>
+        <p>$ \frac{0.5}{100} $</p>
+        <p>We simply take this fraction and convert it into a decimal</p>
+        <p>$ \frac{0.5}{100} = 0.005 $</p>
+        <p>Then, multiply this decimal with 0.0125</p>
+        <p>$ 0.005 \times 0.0125 = 0.0000625 $</p>
+        <p>Therefore the answer is $ 0.0000625 $</p>
+      </stack>
+      <button name="btn1" content="Show Answer">
+        <style>
+          <textAlignment>center</textAlignment>
+        </style>
+        <onClick>
+          if btn1.Text == "Show Answer" then
+            btn1.Text = "Hide Answer";
+            ans.Style.Visibility = "visible";
+          elseif btn1.Text == "Hide Answer" then
+            btn1.Text = "Show Answer";
+            ans.Style.Visibility = "collapsed";
+          end
+        </onClick>
+      </button>
+    </stack>
+	</sectionNoTitle>
+  
+  <sectionNoTitle name="section5" style="pageLayout">
+    <p style="sectionHeading">Example Questions</p>
+    <stack style="contentBG">
+      <table widths="10% 90%" grid="false">
+			  <row>
+				  <column>
+					  <image src="resources/question.png" inspect="false" />
+				  </column>
+				  <column>
+					  <p style="justifiedText">A group of 4 university students start their own social media company called "Link Up" and have great success. The company generates
+            125.2 million dollars in revenue in its first year. Assuming each student has an equal share in the company, how much does each student make?</p>
+				  </column>
+			  </row>
+		  </table>
+      <stack name="ans" style="collapsed">
+        <p>To solve this, we first must determine what percentage of the company each student owns</p>
+        <p>Since there are 4 students and each student owns an equal piece, the students each of 25% ownership. $ 4 \times 25 \% = 100 \%. $</p>
+        <p>We can determine the amount of money each student makes by multiplying 25% by the total revenue.</p>
+        <p>$ 0.25 \times \$ 125.2 $ million $ = \$ 31.3 $ million </p>
+      </stack>
+      <button name="btn1" content="Show Answer">
+        <style>
+          <textAlignment>center</textAlignment>
+        </style>
+        <onClick>
+          if btn1.Text == "Show Answer" then
+            btn1.Text = "Hide Answer";
+            ans.Style.Visibility = "visible";
+          elseif btn1.Text == "Hide Answer" then
+            btn1.Text = "Show Answer";
+            ans.Style.Visibility = "collapsed";
+          end
+        </onClick>
+      </button>
+    </stack>
+    
+    <stack style="contentBG">
+      <table widths="10% 90%" grid="false">
+			  <row>
+				  <column>
+					  <image src="resources/question.png" inspect="false" />
+				  </column>
+				  <column>
+					  <p style="justifiedText">What if each student does not make an equal share, and one student in particular had done 70% of the work while the 3 other students
+            did the remaining equally. If the ownership of the company is decided based on work done, how much does each student take home now?</p>
+				  </column>
+			  </row>
+		  </table>
+      <stack name="ans" style="collapsed">
+        <p>We know that one student has $ 70 \% $ ownership while the other 3 have $ 30 \% $ put together </p>
+        <p>This means that the 3 other students each have $ 10 \% $ ownership.</p>
+        <p>Based on these new percentages, each student makes the following:</p>
+        <p>Student 1: $ 0.70 \times \$ 125.2 $ million $ = \$ 87.64 $ million</p>
+        <p>Student 2, 3, 4: $ 0.10 \times \$ 125.2 $ million $ = \$ 12.52 $ million </p>
+      </stack>
+      <button name="btn1" content="Show Answer">
+        <style>
+          <textAlignment>center</textAlignment>
+        </style>
+        <onClick>
+          if btn1.Text == "Show Answer" then
+            btn1.Text = "Hide Answer";
+            ans.Style.Visibility = "visible";
+          elseif btn1.Text == "Hide Answer" then
+            btn1.Text = "Show Answer";
+            ans.Style.Visibility = "collapsed";
+          end
+        </onClick>
+      </button>
+    </stack>
+  </sectionNoTitle>
+
+  <sectionNoTitle style="pageLayout" name="section6">
+    <p style="sectionHeading">Practice Problems</p>
+    <stack name="content" style="contentBG">
+      <table widths="10% 90%" grid="false">
+			  <row>
+				  <column>
+					  <image src="resources/question.png" inspect="false" />
+				  </column>
+				  <column>
+					  <p style="justifiedText">Convert the following percentage to Decimal. Input your answer and hit "Check" to check your answer.</p>
+				  </column>
+			  </row>
+		  </table>
+      <table name="t1" widths="30% 50% 20%" grid="false">
+        <style>
+          <widthPercentage>80%</widthPercentage>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <row>
+          <column>
+            <p>            
+              <style>
+                <textAlignment>right</textAlignment>
+              </style>
+              $   20 \% \; =  $
+            </p>
+          </column>
+          <column>
+            <textField name="input1" spelling="false" placeholder="Input Answer Here"></textField>
+          </column>
+          <column>
+            <button name="b1" content="Check">
+              <style>
+                <horizontalAlignment>right</horizontalAlignment>
+              </style>
+              <onClick>
+                
+                if (section6.content.t1:Child(1):Child(2):Child(1).Text == "0.2" or section6.content.t1:Child(1):Child(2):Child(1).Text == ".20") then
+                  b1.Text = "Correct!"
+                  b1.Style.BackgroundColor = color.green;
+                else
+                  b1.Text = "Incorrect"
+                  b1.Style.BackgroundColor = color.rgb(50, 133, 184)
+                end
+              </onClick>
+            </button>
+          </column>
+        </row>
+      </table>
+      <table name="t2" widths="30% 50% 20%" grid="false">
+          <style>
+            <widthPercentage>80%</widthPercentage>
+            <horizontalAlignment>center</horizontalAlignment>
+          </style>
+          <row>
+            <column>
+              <p>            
+                <style>
+                  <textAlignment>right</textAlignment>
+                </style>
+                $   75 \% \; =  $
+              </p>
+            </column>
+            <column>
+              <textField name="input1" spelling="false" placeholder="Input Answer Here"></textField>
+            </column>
+            <column>
+              <button name="b1" content="Check">
+                <style>
+                  <horizontalAlignment>right</horizontalAlignment>
+                </style>
+                <onClick>
+                
+                  if (section6.content.t2:Child(1):Child(2):Child(1).Text == "0.75" or section6.content.t2:Child(1):Child(2):Child(1).Text == ".75") then
+                    b1.Text = "Correct!"
+                    b1.Style.BackgroundColor = color.green;
+                  else
+                    b1.Text = "Incorrect"
+                    b1.Style.BackgroundColor = color.rgb(50, 133, 184)
+                  end
+                </onClick>
+              </button>
+            </column>
+          </row>
+        </table>
+      <table name="t3" widths="30% 50% 20%" grid="false">
+          <style>
+            <widthPercentage>80%</widthPercentage>
+            <horizontalAlignment>center</horizontalAlignment>
+          </style>
+          <row>
+            <column>
+              <p>            
+                <style>
+                  <textAlignment>right</textAlignment>
+                </style>
+                $  12.5 \% \; =  $
+              </p>
+            </column>
+            <column>
+              <textField name="input1" spelling="false" placeholder="Input Answer Here"></textField>
+            </column>
+            <column>
+              <button name="b1" content="Check">
+                <style>
+                  <horizontalAlignment>right</horizontalAlignment>
+                </style>
+                <onClick>
+                  if (section6.content.t3:Child(1):Child(2):Child(1).Text == "0.125" or section6.content.t3:Child(1):Child(2):Child(1).Text == ".125") then
+                    b1.Text = "Correct!"
+                    b1.Style.BackgroundColor = color.green;
+                  else
+                    b1.Text = "Incorrect"
+                    b1.Style.BackgroundColor = color.rgb(50, 133, 184)
+                  end
+                </onClick>
+              </button>
+            </column>
+          </row>
+        </table>
+      <table name="t4" widths="30% 50% 20%" grid="false">
+            <style>
+              <widthPercentage>80%</widthPercentage>
+              <horizontalAlignment>center</horizontalAlignment>
+            </style>
+            <row>
+              <column>
+                <p>            
+                  <style>
+                    <textAlignment>right</textAlignment>
+                  </style>
+                  $ 160.42 \% \; =  $
+                </p>
+              </column>
+              <column>
+                <textField name="input1" spelling="false" placeholder="Input Answer Here"></textField>
+              </column>
+              <column>
+                <button name="b1" content="Check">
+                  <style>
+                    <horizontalAlignment>right</horizontalAlignment>
+                  </style>
+                  <onClick>
+                    if (section6.content.t4:Child(1):Child(2):Child(1).Text == "1.6042") then
+                      b1.Text = "Correct!"
+                      b1.Style.BackgroundColor = color.green;
+                    else
+                      b1.Text = "Incorrect"
+                      b1.Style.BackgroundColor = color.rgb(50, 133, 184)
+                    end
+                  </onClick>
+                </button>
+              </column>
+            </row>
+          </table>
+    </stack>
+    <p>
+      <br />
+    </p>
+    <stack name="content2" style="contentBG">
+      <table widths="10% 90%" grid="false">
+			  <row>
+				  <column>
+					  <image src="resources/question.png" inspect="false" />
+				  </column>
+				  <column>
+					  <p style="justifiedText">Calculate the following percentages. Input your answer and hit "Check" to check your answer.</p>
+				  </column>
+			  </row>
+		  </table>
+      <table name="t1" widths="30% 50% 20%" grid="false">
+        <style>
+          <widthPercentage>80%</widthPercentage>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <row>
+          <column>
+            <p>            
+              <style>
+                <textAlignment>right</textAlignment>
+              </style>
+              $  20 \% \;  $ of $ 100 =  $
+            </p>
+          </column>
+          <column>
+            <textField name="input1" spelling="false" placeholder="Input Answer Here"></textField>
+          </column>
+          <column>
+            <button name="b1" content="Check">
+              <style>
+                <horizontalAlignment>right</horizontalAlignment>
+              </style>
+              <onClick>
+                
+                if (section6.content2.t1:Child(1):Child(2):Child(1).Text == "20") then
+                  b1.Text = "Correct!"
+                  b1.Style.BackgroundColor = color.green;
+                else
+                  b1.Text = "Incorrect"
+                  b1.Style.BackgroundColor = color.rgb(50, 133, 184)
+                end
+              </onClick>
+            </button>
+          </column>
+        </row>
+      </table>
+      <table name="t2" widths="30% 50% 20%" grid="false">
+          <style>
+            <widthPercentage>80%</widthPercentage>
+            <horizontalAlignment>center</horizontalAlignment>
+          </style>
+          <row>
+            <column>
+              <p>            
+                <style>
+                  <textAlignment>right</textAlignment>
+                </style>
+                $  75 \% \;  $ of $ 250 =   $
+              </p>
+            </column>
+            <column>
+              <textField name="input1" spelling="false" placeholder="Input Answer Here"></textField>
+            </column>
+            <column>
+              <button name="b1" content="Check">
+                <style>
+                  <horizontalAlignment>right</horizontalAlignment>
+                </style>
+                <onClick>
+                
+                  if (section6.content2.t2:Child(1):Child(2):Child(1).Text == "187.5") then
+                    b1.Text = "Correct!"
+                    b1.Style.BackgroundColor = color.green;
+                  else
+                    b1.Text = "Incorrect"
+                    b1.Style.BackgroundColor = color.rgb(50, 133, 184)
+                  end
+                </onClick>
+              </button>
+            </column>
+          </row>
+        </table>
+      <table name="t3" widths="30% 50% 20%" grid="false">
+          <style>
+            <widthPercentage>80%</widthPercentage>
+            <horizontalAlignment>center</horizontalAlignment>
+          </style>
+          <row>
+            <column>
+              <p>            
+                <style>
+                  <textAlignment>right</textAlignment>
+                </style>
+                $  12.5 \% \; $ of $ 10 =  $
+              </p>
+            </column>
+            <column>
+              <textField name="input1" spelling="false" placeholder="Input Answer Here"></textField>
+            </column>
+            <column>
+              <button name="b1" content="Check">
+                <style>
+                  <horizontalAlignment>right</horizontalAlignment>
+                </style>
+                <onClick>
+                  if (section6.content2.t3:Child(1):Child(2):Child(1).Text == "1.25") then
+                    b1.Text = "Correct!"
+                    b1.Style.BackgroundColor = color.green;
+                  else
+                    b1.Text = "Incorrect"
+                    b1.Style.BackgroundColor = color.rgb(50, 133, 184)
+                  end
+                </onClick>
+              </button>
+            </column>
+          </row>
+        </table>
+      <table name="t4" widths="40% 40% 20%" grid="false">
+            <style>
+              <widthPercentage>80%</widthPercentage>
+              <horizontalAlignment>center</horizontalAlignment>
+            </style>
+            <row>
+              <column>
+                <p>            
+                  <style>
+                    <textAlignment>right</textAlignment>
+                  </style>
+                  $ 160.42 \% \;  $ of $ 200 = $
+                </p>
+              </column>
+              <column>
+                <textField name="input1" spelling="false" placeholder="Input Answer Here"></textField>
+              </column>
+              <column>
+                <button name="b1" content="Check">
+                  <style>
+                    <horizontalAlignment>right</horizontalAlignment>
+                  </style>
+                  <onClick>
+                    if (section6.content2.t4:Child(1):Child(2):Child(1).Text == "320.84") then
+                      b1.Text = "Correct!"
+                      b1.Style.BackgroundColor = color.green;
+                    else
+                      b1.Text = "Incorrect"
+                      b1.Style.BackgroundColor = color.rgb(50, 133, 184)
+                    end
+                  </onClick>
+                </button>
+              </column>
+            </row>
+          </table>
+    </stack>
+  </sectionNoTitle>
+  
+  <sectionNoTitle style="pageLayout" name="section7">
+    <onDocumentOpened>
+        barData = matrix({{1,110}, {2,110}, {3,110}, {4,110}, {5,110}, {6,110}});
+      --chart.bar([Plot], [Width], [Matrix])
+      chart.bar(content.p1, 0.5, barData);
+    </onDocumentOpened>
+    <p style="sectionHeading">Practice Problems</p>
+    <stack name="content" style="contentBG">
+      <table widths="10% 90%" grid="false">
+			  <row>
+				  <column>
+					  <image src="resources/question.png" inspect="false" />
+				  </column>
+				  <column>
+					  <p style="justifiedText">You work as an analyst for a large company. Your job is to present the performance of your companies stock over the past 6 months. Use the input boxes below to create
+            a graph that represents your companies performance as per the following table. Assume the initial stock price is $ \$ 100.00 $ dollars. Round to one decimal place.</p>
+            <table>
+              <row>
+                <column>
+                  <p>June</p>
+                </column>
+                <column>
+                  <p>July</p>
+                </column>
+                <column>
+                  <p>Aug</p>
+                </column>
+                <column>
+                  <p>Sep</p>
+                </column>
+                <column>
+                  <p>Oct</p>
+                </column>
+                <column>
+                  <p>Nov</p>
+                </column>
+              </row>
+              <row>
+                <column>
+                  <p>$ +25.00 \% $</p>
+                </column>
+                <column>
+                  <p>$ -20.00 \% $</p>
+                </column>
+                <column>
+                  <p>$ +20.00 \% $</p>
+                </column>
+                <column>
+                  <p>$ -50.00 \% $</p>
+                </column>
+                <column>
+                  <p>$ +250.00 \% $</p>
+                </column>
+                <column>
+                  <p>$ +10.00 \% $</p>
+                </column>
+              </row>
+            </table>
+				  </column>
+			  </row>
+		  </table>
+    
+      <plot name="p1" tap="disabled" series="6">
+        <axis dim="x" min="0.75" max="6.25" auto="none"></axis>
+        <axis dim="y" min="50" max="220" auto="none"></axis>
+        <series manual="true"></series>
+        <series manual="true"></series>
+        <series manual="true"></series>
+        <series manual="true"></series>
+        <series manual="true"></series>
+        <series manual="true"></series>
+      </plot>
+      <stack orientation="horizontal">
+        <style>
+          <textAlignment>center</textAlignment>
+          <horizontalAlignment>center</horizontalAlignment>
+          <widthPercentage>92%</widthPercentage>
+        </style>
+        <textField name="input" placeholder="Input">
+          <style>
+            <textAlignment>center</textAlignment>
+          </style>
+          <onTextChanged>
+            local val = tonumber(input.Text);
+            barData:at(1,2, val);
+            section7.content.p1.Series[1]:Clear();
+            chart.bar(section7.content.p1, 0.5, barData);
+            section7.content.p1.Series[1]:Update();
+          </onTextChanged>
+        </textField>
+        <textField name="input2" placeholder="Input">
+          <style>
+            <textAlignment>center</textAlignment>
+          </style>
+          <onTextChanged>
+            local val = tonumber(input2.Text);
+            barData:at(2,2, val);
+            section7.content.p1.Series[2]:Clear();
+            chart.bar(section7.content.p1, 0.5, barData);
+            section7.content.p1.Series[2]:Update();
+          </onTextChanged>
+        </textField>
+        <textField name="input3" placeholder="Input">
+          <style>
+            <textAlignment>center</textAlignment>
+          </style>
+          <onTextChanged>
+            local val = tonumber(input3.Text);
+            barData:at(3,2, val);
+            section7.content.p1.Series[3]:Clear();
+            chart.bar(section7.content.p1, 0.5, barData);
+            section7.content.p1.Series[3]:Update();
+          </onTextChanged>
+        </textField>
+        <textField name="input4" placeholder="Input">
+          <style>
+            <textAlignment>center</textAlignment>
+          </style>
+          <onTextChanged>
+            local val = tonumber(input4.Text);
+            barData:at(4,2, val);
+            section7.content.p1.Series[4]:Clear();
+            chart.bar(section7.content.p1, 0.5, barData);
+            section7.content.p1.Series[4]:Update();
+          </onTextChanged>
+        </textField>
+        <textField name="input5" placeholder="Input">
+          <style>
+            <textAlignment>center</textAlignment>
+          </style>
+          <onTextChanged>
+            local val = tonumber(input5.Text);
+            barData:at(5,2, val);
+            section7.content.p1.Series[5]:Clear();
+            chart.bar(section7.content.p1, 0.5, barData);
+            section7.content.p1.Series[5]:Update();
+          </onTextChanged>
+        </textField>
+        <textField name="input6" placeholder="Input">
+          <style>
+            <textAlignment>center</textAlignment>
+          </style>
+          <onTextChanged>
+            local val = tonumber(input6.Text);
+            barData:at(6,2, val);
+            section7.content.p1.Series[6]:Clear();
+            chart.bar(section7.content.p1, 0.5, barData);
+            section7.content.p1.Series[6]:Update();
+          </onTextChanged>
+        </textField>
+      </stack>
+      <table widths="35% 65%" grid="false">
+        <row>
+          <column>
+            <image inspect="false" src="resources/boss.png">
+            </image>
+          </column>
+          <column rowSpan="2">
+            <button name="btn1" content="Check with your boss to verify your graph">
+              <onClick>
+                ans1.Style.Visibility = "visible";
+                local i1 = tonumber(section7.content:Child(3):Child(1).Text);
+                local i2 = tonumber(section7.content:Child(3):Child(2).Text);
+                local i3 = tonumber(section7.content:Child(3):Child(3).Text);
+                local i4 = tonumber(section7.content:Child(3):Child(4).Text);
+                local i5 = tonumber(section7.content:Child(3):Child(5).Text);
+                local i6 = tonumber(section7.content:Child(3):Child(6).Text);
+                if i1==null then
+                  i1=0;
+                end
+                if i2==null then
+                  i2=0;
+                end
+                if i3==null then
+                  i3=0;
+                end
+                if i4==null then
+                  i4=0;
+                end
+                if i5==null then
+                  i5=0;
+                end
+                if i6==null then
+                  i6=0;
+                end
+                local difference = i1+i2+i3+i4+i5+i6 - 846;
+
+                if (difference == 0) then
+                  if (section7.content:Child(3):Child(1).Text == "125") and
+                  (section7.content:Child(3):Child(2).Text == "100") and
+                  (section7.content:Child(3):Child(3).Text == "120") and
+                  (section7.content:Child(3):Child(4).Text == "60") and
+                  (section7.content:Child(3):Child(5).Text == "210") and
+                  (section7.content:Child(3):Child(6).Text == "231") then
+                    ans1.result.Text = "Great job! Your numbers are spot on. You've got a promotion coming your way!";
+                  else
+                    ans1.result.Text = "There seems to be something wrong. Please make sure you fill out the graph according to the table.";
+                  end
+                elseif (math.abs(difference) &lt; 5) then
+                  ans1.result.Text = "Good job; however, your numbers could use some improvement. Check your accuracy!";
+                else
+                  ans1.result.Text = "Unacceptable, please go over your numbers again and make sure you are more accurate!";
+                end
+              </onClick>
+            </button>
+            <stack name="ans1" style="hidden">
+              <style>
+                <textAlignment>center</textAlignment>
+                <horizontalAlignment>center</horizontalAlignment>
+              </style>
+              <p name="result"></p>
+            </stack>
+          </column>
+        </row>
+      </table>
+
+    </stack>
+  </sectionNoTitle>
+
+</document>

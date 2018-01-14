@@ -1,0 +1,779 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G676F73DF_14EC_4A31_82CA_F5EDD3448B44">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>LA-CALC-1.1 Introduction to Differential Calculus</title>
+    <creator>Sidique</creator>
+    <coverImage src="resources/LassondeLogo.png" />
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+  </metadata>
+
+  
+  
+  <include src="resources/curriculumStylesLassonde.xml" />
+  <include src="resources/plotTools.xml" />
+  <include src="resources/Utilities.xml" />
+  
+  <!--                                      Header & Footer END                                         -->
+  <header style="themeColour">
+    <stack style="center" orientation="horizontal">
+      <p></p>
+    </stack>
+  </header>
+  <footer style="themeColour">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="themeColourTitle">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+          
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--                                      Header & Footer END                                         --> 
+  
+  <!-- Section 1 --> 
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">1.1 Introduction to Differential Calculus</title>
+    <p style="sectionHeading">Introduction</p>
+    <image src="resources/newton2.png" />
+    <stack style="contentBG">
+      <p>Isaac Newton discovered calculus around the 17th century and we still use the same fundamental principles today. <b>Calculus</b> is the study of changes. This includes derivatives, integrals and limits. In this module,
+      we will be giving an introduction to Differential Calculus which focuses mainly on derivatives. To introduce this topic, let us start with a simple question.</p>  
+    </stack>
+  </section>
+
+
+  <sectionNoTitle name="section2" style="pageLayout">
+      <script>
+        local stepsController = StepsController:new({stepsStack=stepsStack, numOfSteps=3})
+      </script>
+		  <p style="sectionHeading">Example 1</p>
+		  <stack orientation="vertical" style="contentBG">
+        <p style="subSectionHeading">Question</p>
+        <equation>A missile is launched at $ t = 0 $ and its height is modelled by the function $ f(t) = -(t-3)^2+9 $. The missile hits the target at $ t = 3 $. Determine: </equation>
+        <p>a) The vertical speed of the missile just before it hit the target</p>
+        <p>b) If the missile missed the target, determine when the missile would explode (when it hits the ground). </p>
+        <xyPlot name="p1" style="pageLayout" pan="disabled" tap="disabled" zoom="disabled">
+          <onDocumentOpened>
+            char.textT(xLabel, {8.5, 0.5}, 0.5, color.black);
+            char.textH(yLabel, {0.5, 12.5}, 0.5, color.black);
+          </onDocumentOpened>
+          <axis dim="x" min="-2" max="10" auto="none"></axis>
+          <axis dim="y" min="-2" max="14" auto="none"></axis>
+          <series name="xAxis">
+            <style>
+              <lineThickness>2</lineThickness>
+              <foreground color="black" />
+            </style>
+            <data>
+              -20 0; 20 0;
+            </data>
+          </series>
+          <series name="yAxis">
+            <style>
+              <lineThickness>2</lineThickness>
+              <foreground color="black" />
+            </style>
+            <data>
+              0 -20; 0 20;
+            </data>
+          </series>
+          <series name="xLabel"></series>
+          <series name="yLabel"></series>
+          <series name="fx">
+            <style>
+              <lineThickness>2</lineThickness>
+            </style>
+          </series>
+        </xyPlot>
+        <button content="Draw Missile" name="btn">
+        <style>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <onClick>
+          p1.fx:Clear();
+          sim1:Stop();
+          sim1:Start();
+        </onClick>
+        </button>
+        <simulation name="sim1" asynchronous="false" duration="1.5" period="0.01" loop="false">
+          <onUpdate>
+            t2 = (time/1.5) * 6;
+            p1.fx:Add(t2, -(t2-3)^2 + 9);
+          </onUpdate>
+        </simulation>
+		  </stack>
+      <stack name="stepsStack">
+        <!--Each step is a stack, and each step has alternating background colors-->
+        <stack orientation="horizontal">
+          <stack name="stepStack" orientation="vertical">
+            <p>Find the derivative of $ f(t) $</p>
+            <stack name="cont" style="invisible">
+              <!--CONTENT GOES HERE-->
+              <p>The graph above shows a position-time graph which shows positive relative to time. The derivative of this graph will represent the velocity-time graph which shows speed relative to time.</p>
+              <p>First step is to find the derivative of $ f(t) $</p>
+              <p>$ \frac{d}{dt} f(t) = -2t + 6 $</p>
+            </stack>
+          </stack>
+          <button name="btn" style="stepByStepBtn">
+            <onClick>
+              stepsController:toggleStep(1)
+            </onClick>
+          </button>
+        </stack>
+        <stack orientation="horizontal">
+          <stack name="stepStack" orientation="vertical">
+            <p>Plug in $ t = 3 $ </p>
+            <stack name="cont" style="invisible">
+              <stack orientation="horizontal">
+                <stack orientation="vertical">
+                  <!--CONTENT GOES HERE-->
+                  <p>Using our derived function $ \frac{d}{dt} f(t) $, we must plug in $ t = 3 $ to determine the vertical speed at that time.</p>
+                  <p>$ \frac{d}{dt} f(3) = -2(3) + 6 $</p>
+                  <p>$ \frac{d}{dt} f(3) = 0 $</p>
+                  <p>Therefore the rockets vertical speed at that time is $ 0 \frac{m}{s} $.</p>
+                </stack>
+              </stack>
+            </stack>
+          </stack>
+          <button name="btn" style="stepByStepBtn">
+            <onClick>
+              stepsController:toggleStep(2)
+            </onClick>
+          </button>
+        </stack>
+        <stack orientation="horizontal">
+          <stack name="stepStack" orientation="vertical">
+            <p>Determine the time it takes the missile to hit the ground</p>
+            <stack name="cont" style="invisible">
+              <p>For this question, we must assume the rocket does not stop and it hits the ground.</p>
+              <p>Assuming the ground is at $ h = 0 $, we must find the roots of the polynomial function $ f(t) = -(t-3)^2 + 9 $.</p>
+              <p> $ 0 = -(t-3)^2 + 9 $</p>
+              <p> $ 0 = -(t^2+9) + 9 $ </p>
+              <p> $ 0 = -t^2 + 6t - 9 + 9 $</p>
+              <p>We see that if we plug in $ t = 0 $, we solved one of the roots since $ 0 = 0 $.</p>
+              <p>To solve the other root</p>
+              <p> $ -6t = -t^2 $</p>
+              <p> $ 6 = t $</p>
+              <p>Hence, we have found the time(s) the missile is at the ground. At $ t = 0 $ and $ t = 6 $. Since we are only considering the missile as it explodes, it will occur at $ t = 6 $.</p>
+            </stack>
+          </stack>
+          <button name="btn" style="stepByStepBtn">
+            <onClick>
+              stepsController:toggleStep(3)
+            </onClick>
+          </button>
+        </stack>
+      
+      </stack>
+	  </sectionNoTitle>
+
+  <sectionNoTitle name="section3" style="pageLayout">
+    <onDocumentOpened>
+      contentStack.vid.Loop = true;
+      contentStack.vid.ControlsEnabled = false;
+      contentStack.vid:Play();
+    </onDocumentOpened>
+    <p style="sectionHeading">Definition of a Derivative</p>
+    <stack name="contentStack" style="contentBG">
+      <p>The formal definition of a derivative is denoted by:</p>
+      <equation> $ \frac{d}{dx} f(x) = \displaystyle{\lim_ {h \to 0 }} \frac{f(x+h) - f(x)}{h} $</equation>
+      <p>In Algebra, it is easy to determine the slope of a line using the $ \frac{rise}{run} $ formula denoted by $ \frac{ \triangle y}{ \triangle x } $. To find
+      the slope of a curve, we use derivatives to help us find the answer.</p>
+      <p>To give an idea of what the formula above really does, take a look at the video of a function below. Notice how as you zoom in on a curved part of the graph, it appears to be a straight line. It's not
+      magic, it's math!</p>
+      <video name="vid" src="resources/zoomincurve.mp4">
+        <style>
+          <horizontalAlignment>center</horizontalAlignment>
+          <aspectRatio>1</aspectRatio>
+          <widthPercentage>80%</widthPercentage>
+        </style>
+      </video>
+      
+    </stack>
+    <p style="sectionHeading">Derivative Notations</p>
+    <stack name="contentStack2" style="contentBG">
+      <p>There are 3 different notations that can be used to represent derivative:</p>
+      <p>Lagrange's Notation: $ f'(x) $</p>
+      <p>Leibniz's Notation: $ \frac{d}{dx}f(x) $</p>
+      <p>Newton's Notation: $ \dot{y} $</p>
+      <p>In this module, we will be using Leibniz's notation.</p>
+    </stack>
+  </sectionNoTitle>
+
+  <sectionNoTitle name="section4" style="pageLayout">
+    <p style="sectionHeading">Derivative Rules for Common Functions</p>
+    <stack style="contentBG">
+      <p>Here are some rules for many functions that you can utilize.</p>
+    </stack>
+    <p style="sectionHeading">Constant</p>
+    <stack style="contentBG">
+      <equation>$ f(x) = c $</equation>
+      <equation>$ \frac{d}{dx} f(x) = 0 $</equation>
+    </stack>
+    <p style="sectionHeading">Line</p>
+    <stack style="contentBG">
+      <equation>$ f(x) = ax $</equation>
+      <equation>$ \frac{d}{dx} f(x) = a $</equation>
+    </stack>
+  
+    <p style="sectionHeading">Square</p>
+    <stack style="contentBG">
+      <equation>$ f(x) = x^2 $</equation>
+      <equation>$ \frac{d}{dx} f(x) = 2x $</equation>
+    </stack>
+    
+    <p style="sectionHeading">Square Root</p>
+    <stack style="contentBG">
+      <equation>$ f(x) = \sqrt{x} $</equation>
+      <equation>$ \frac{d}{dx} f(x) = \frac{1}{2}x^{\frac{-1}{2}} $</equation>
+    </stack>
+    
+    <p style="sectionHeading">Logarithms</p>
+    <stack style="contentBG">
+      <equation>$ f(x) = ln(x) $</equation>
+      <equation>$ \frac{d}{dx} f(x) = \frac{1}{x} $</equation>
+    </stack>
+  
+    <p style="sectionHeading">Trigonometry</p>
+    <stack style="contentBG">
+      <equation>$ f(x) = sin(x) $</equation>
+      <equation>$ \frac{d}{dx} f(x) = cos(x) $</equation>
+    
+      <equation>$ g(x) = cos(x) $</equation>
+      <equation>$ \frac{d}{dx} g(x) = -sin(x) $</equation>
+    
+      <equation>$ h(x) = tan(x) $</equation>
+      <equation>$ \frac{d}{dx} h(x) = sec^2(x) $</equation>
+
+    </stack>
+  
+  </sectionNoTitle>
+  
+  <sectionNoTitle name="section5" style="pageLayout">
+    <p style="sectionHeading">General Derivative Rules</p>
+    <stack style="contentBG">
+      <p>These rules are in a general format so they can be used for many functions that have the same format.</p>
+    </stack>
+      
+    <p style="sectionHeading">Multiplying by Constant</p>
+    <stack style="contentBG">
+      <equation>$ f(x) = c*g(x) $</equation>
+      <equation>$ \frac{d}{dx} f(x) = c*\frac{d}{dx}g(x) $</equation>
+    </stack>
+  
+    <p style="sectionHeading">Power Rule</p>
+    <stack style="contentBG">
+      <equation>$ f(x) = x^n $</equation>
+      <equation>$ \frac{d}{dx} f(x) = nx^{n-1} $</equation>
+    </stack>
+
+    <p style="sectionHeading">Sum Rule</p>
+    <stack style="contentBG">
+      <equation>$ f(x) = g(x) + h(x) $</equation>
+      <equation>$ \frac{d}{dx} f(x) = \frac{d}{dx}g(x) + \frac{d}{dx}h(x) $</equation>
+    </stack>
+    
+    <p style="sectionHeading">Difference Rule</p>
+    <stack style="contentBG">
+      <equation>$ f(x) = g(x) - h(x) $</equation>
+      <equation>$ \frac{d}{dx} f(x) = \frac{d}{dx}g(x) - \frac{d}{dx}h(x) $</equation>
+    </stack>
+    
+    <p style="sectionHeading">Product Rule</p>
+    <stack style="contentBG">
+      <equation>$ f(x) = g(x) \times h(x) $</equation>
+      <equation>$ \frac{d}{dx} f(x) = g(x) \times \frac{d}{dx}h(x) + \frac{d}{dx}g(x) \times h(x) $</equation>
+    </stack>
+    
+    <p style="sectionHeading">Product Rule</p>
+    <stack style="contentBG">
+      <equation>$ f(x) = \frac{g(x)}{h(x)} $</equation>
+      <equation>$ \frac{d}{dx} f(x) = \frac{\frac{d}{dx}g(x)h(x) - g(x)\frac{d}{dx}h(x)}{h(x)^2} $</equation>
+    </stack>
+  
+    
+     <p style="sectionHeading">Reciprocal Rule</p>
+    <stack style="contentBG">
+      <equation>$ f(x) = \frac{1}{g(x)} $</equation>
+      <equation>$ \frac{d}{dx} f(x) = \frac{-\frac{d}{dx}g(x)}{g(x)^2} $</equation>
+    </stack>
+    
+    <p style="sectionHeading">Chain Rule</p>
+    <stack style="contentBG">
+      <equation>$ f(x) = g(h(x)) $</equation>
+      <equation>$ \frac{d}{dx} f(x) = \frac{d}{dx}g(h(x)) \times \frac{d}{dx}h(x) $</equation>
+    </stack>
+  </sectionNoTitle> 
+
+  <sectionNoTitle name="section6" style="pageLayout">
+      <script>
+        local stepsController = StepsController:new({stepsStack=stepsStack, numOfSteps=5})
+      </script>
+		  <p style="sectionHeading">Example 2</p>
+		  <stack orientation="vertical" style="contentBG">
+        <p style="subSectionHeading">Question</p>
+        <equation>A racecar gets into position, ready to start the race. As it launches from the start line, its displacement is modelled by the function $ h(t) = \frac{1}{6}t^3 $. Assuming
+        the racecar starts from rest, determine:</equation>
+        <p>a) The acceleration of the racecar at $ t = 10s $</p>
+        <p>b) The instantaneous velocity at $ t = 10s $</p>
+        <p>c) Determine how far the racecar travelled at $ t = 10s $</p>
+        <xyPlot name="p1" style="pageLayout" pan="disabled" zoom="disabled" tap="disabled">
+          <onDocumentOpened>
+
+          </onDocumentOpened>
+          <axis dim="x" min="-10" max="30" auto="none"></axis>
+          <axis dim="y" min="-5" max="175" auto="none"></axis>
+          <series name="xAxis">
+            <style>
+              <lineThickness>2</lineThickness>
+              <foreground color="black" />
+            </style>
+            <data>
+              -60 0; 60 0;
+            </data>
+          </series>
+          <series name="yAxis">
+            <style>
+              <lineThickness>2</lineThickness>
+              <foreground color="black" />
+            </style>
+            <data>
+              0 -20; 0 190;
+            </data>
+          </series>
+          <series name="xLabel"></series>
+          <series name="yLabel"></series>
+          <series name="fx">
+            <style>
+              <lineThickness>2</lineThickness>
+            </style>
+          </series>
+        </xyPlot>
+        <button content="Draw Graph" name="btn">
+        <style>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <onClick>
+          p1.fx:Clear();
+          sim1:Stop();
+          sim1:Start();
+        </onClick>
+        </button>
+        <simulation name="sim1" asynchronous="false" duration="1.5" period="0.01" loop="false">
+          <onUpdate>
+            t2 = (time/1.5) * 10;
+            p1.fx:Add(t2, 1/6*(t2^3));
+          </onUpdate>
+        </simulation>
+		  </stack>
+      <stack name="stepsStack">
+        <!--Each step is a stack, and each step has alternating background colors-->
+        <stack orientation="horizontal">
+          <stack name="stepStack" orientation="vertical">
+            <p>Find the derivative of $ h(t) $</p>
+            <stack name="cont" style="invisible">
+              <!--CONTENT GOES HERE-->
+              <p>The graph above shows a position-time graph which shows positive relative to time. The derivative of this graph will represent the velocity-time graph.</p>
+              <p>First step is to find the derivative of $ h(t) $</p>
+              <p>We can use the Power Rule for derivatives to find $ \frac{d}{dx}h(t) $</p>
+              <p>$ \frac{d}{dt} h(t) = \frac{1t^2}{2} $</p>
+            </stack>
+          </stack>
+          <button name="btn" style="stepByStepBtn">
+            <onClick>
+              stepsController:toggleStep(1)
+            </onClick>
+          </button>
+        </stack>
+        <stack orientation="horizontal">
+          <stack name="stepStack" orientation="vertical">
+            <p>Find the second derivative of $ h(t) $ </p>
+            <stack name="cont" style="invisible">
+              <stack orientation="horizontal">
+                <stack orientation="vertical">
+                  <!--CONTENT GOES HERE-->
+                  <p>Using our derived function $ \frac{d}{dt} h(t) $, we must derive it once more.</p>
+                  <p>Again, we can use the power rule to derive this function</p>
+                  <p>$ \frac{d^2}{dt^2} h(t) = t $</p>
+                </stack>
+              </stack>
+            </stack>
+          </stack>
+          <button name="btn" style="stepByStepBtn">
+            <onClick>
+              stepsController:toggleStep(2)
+            </onClick>
+          </button>
+        </stack>
+        <stack orientation="horizontal">
+          <stack name="stepStack" orientation="vertical">
+            <p>Plug in $ t = 10s $ to $ \frac{d^2}{dx}h(t) $</p>
+            <stack name="cont" style="invisible">
+                  <p>$ \frac{d^2}{dt^2} h(10) = t $</p>
+                  <p>$ \frac{d^2}{dt^2} h(10) = 10 $</p>
+                  <p>Therefore the accelerating of the car is $ 10 \frac{m}{s^2} $</p>
+            </stack>
+          </stack>
+          <button name="btn" style="stepByStepBtn">
+            <onClick>
+              stepsController:toggleStep(3)
+            </onClick>
+          </button>
+        </stack>
+        <stack orientation="horizontal">
+          <stack name="stepStack" orientation="vertical">
+            <p>Plug in $ t = 10s $ to $ \frac{d}{dx}h(x) $ to find instantaneous velocity</p>
+            <stack name="cont" style="invisible">
+                  <p>$ \frac{d}{dt} h(10) = \frac{1t^2}{2} $</p>
+                  <p>$ \frac{d}{dt} h(10) = 50 $</p>
+                  <p>Therefore the instantaneous velocity of the car at $ t = 10s $ is $ 50 \frac{m}{s} $</p>
+            </stack>
+          </stack>
+          <button name="btn" style="stepByStepBtn">
+            <onClick>
+              stepsController:toggleStep(4)
+            </onClick>
+          </button>
+        </stack>
+        <stack orientation="horizontal">
+          <stack name="stepStack" orientation="vertical">
+            <p>Plug in $ t = 10s $ to $ h(x) $ to find the displacement</p>
+            <stack name="cont" style="invisible">
+                  <p>$ h(10) = \frac{1t^3}{6} $</p>
+                  <p>$ h(10) = 167m $</p>
+                  <p>Therefore the displacement of the racecar is $ 167m $.</p>
+            </stack>
+          </stack>
+          <button name="btn" style="stepByStepBtn">
+            <onClick>
+              stepsController:toggleStep(5)
+            </onClick>
+          </button>
+        </stack>
+      </stack>
+	  </sectionNoTitle>
+  
+  <sectionNoTitle name="section8" style="pageLayout">
+      <script>
+        local stepsController = StepsController:new({stepsStack=stepsStack, numOfSteps=4})
+      </script>
+		  <p style="sectionHeading">Example 3</p>
+		  <stack orientation="vertical" style="contentBG">
+        <p style="subSectionHeading">Question</p>
+        <equation>Let $ f(x) = 2x^2-16x+35 $ Find the derivative of $ f(x) $ using the definition of the derivative.</equation>      
+		  </stack>
+      <stack name="stepsStack">
+        <!--Each step is a stack, and each step has alternating background colors-->
+        <stack orientation="horizontal">
+          <stack name="stepStack" orientation="vertical">
+            <p>Plug in $ f(x) $ in to definition</p>
+            <stack name="cont" style="invisible">
+              <!--CONTENT GOES HERE-->
+              <equation> $ \frac{d}{dx} f(x) = \displaystyle{\lim_ {h \to 0 }} \frac{f(x+h) - f(x)}{h} $</equation>
+              <equation> $ \frac{d}{dx} f(x) = \displaystyle{\lim_ {h \to 0 }} \frac{2(x+h)^2 - 16(x+h)+35 - (2x^2-16x+35)}{h} $</equation>
+            </stack>
+          </stack>
+          <button name="btn" style="stepByStepBtn">
+            <onClick>
+              stepsController:toggleStep(1)
+            </onClick>
+          </button>
+        </stack>
+        <stack orientation="horizontal">
+          <stack name="stepStack" orientation="vertical">
+            <p>Expand and simplify </p>
+            <stack name="cont" style="invisible">
+              <stack orientation="horizontal">
+                <stack orientation="vertical">
+                  <!--CONTENT GOES HERE-->
+                  <equation> $ \frac{d}{dx} f(x) = \displaystyle{\lim_ {h \to 0 }} \frac{2x^2+4xh+2h^2-16x-16h+35-2x^2+16x-35}{h} $</equation>
+                  <equation> $ \frac{d}{dx} f(x) = \displaystyle{\lim_ {h \to 0 }} \frac{4xh+2h^2-16h}{h} $</equation>
+
+                </stack>
+              </stack>
+            </stack>
+          </stack>
+          <button name="btn" style="stepByStepBtn">
+            <onClick>
+              stepsController:toggleStep(2)
+            </onClick>
+          </button>
+        </stack>
+        <stack orientation="horizontal">
+          <stack name="stepStack" orientation="vertical">
+            <p>Factor out the $ h $ and simplify</p>
+            <stack name="cont" style="invisible">
+                <equation> $ \frac{d}{dx} f(x) = \displaystyle{\lim_ {h \to 0 }} \frac{h(4x+2h-16)}{h} $</equation>
+                <equation> $ \frac{d}{dx} f(x) = \displaystyle{\lim_ {h \to 0 }} (4x+2h-16) $</equation>
+            </stack>
+          </stack>
+          <button name="btn" style="stepByStepBtn">
+            <onClick>
+              stepsController:toggleStep(3)
+            </onClick>
+          </button>
+        </stack>
+        <stack orientation="horizontal">
+          <stack name="stepStack" orientation="vertical">
+            <p>Set $ h $ to 0</p>
+            <stack name="cont" style="invisible">
+                <equation> $ \frac{d}{dx} f(x) = (4x-16) $</equation>
+                <p>Hence, we have found $ \frac{d}{dx} f(x) $</p>
+            </stack>
+          </stack>
+          <button name="btn" style="stepByStepBtn">
+            <onClick>
+              stepsController:toggleStep(4)
+            </onClick>
+          </button>
+        </stack>
+        
+      </stack>
+	  </sectionNoTitle>
+  
+  <sectionNoTitle name="section7" style="pageLayout">
+    <p style="sectionHeading">Practice</p>
+    <stack name="mcStack" style="mcStackLayout">
+      <script>
+        local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=2})
+      </script>
+			<p style="subSectionHeading">Question 1</p>
+			<table widths="10% 90%" grid="false">
+				<row>
+					<column>
+						<image src="resources/question.png" inspect="false" />
+					</column>
+					<column>
+						<p style="justifiedText">Let $ f(x) = x^3-3x^2+x $ and let $ g(x) $ be the inverse of $ f(x) $ ( $ f^{-1}(x) $ ). What is the value of $ \frac{d}{dx} g(3) $. </p>
+					</column>
+				</row>
+			</table>
+			<table name="choicesTable" grid="false" widths="50% 50%">
+				<row>
+					<column>
+						<equation>$ 10 $ </equation>
+              
+					</column>
+					<column>
+						<equation> $ \frac{1}{10} $ </equation>
+
+              
+					</column>
+				</row>
+				<row>
+					<column>
+						<button name="btn" content="A" style="btnUnselected">
+							<onClick>
+                mcController:select(1)
+							</onClick>
+						</button>
+					</column>
+					<column>
+						<button name="btn" content="B" style="btnUnselected">
+							<onClick>
+                mcController:select(2)
+              </onClick>
+						</button>
+					</column>
+				</row>
+				<row>
+					<column>
+					  <equation> $ 1 $ </equation>
+              
+					</column>
+					<column>
+					  <equation> None of the above. </equation>
+
+              
+					</column>
+				</row>
+				<row>
+					<column>
+						<button name="btn" content="C" style="btnUnselected">
+							<onClick>
+                mcController:select(3)
+              </onClick>
+						</button>
+					</column>
+					<column>
+						<button name="btn" content="D" style="btnUnselected">
+							<onClick>
+                mcController:select(4)
+              </onClick>
+						</button>
+					</column>
+				</row>
+			</table>
+			<button name="checkBtn" content="Check Answer">
+				<onClick>
+          mcController:checkAnswer()
+        </onClick>
+			</button>
+		</stack>
+   <stack name="mcStack2" style="mcStackLayout">
+      <script>
+        local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=4})
+      </script>
+			<p style="subSectionHeading">Question 2</p>
+			<table widths="10% 90%" grid="false">
+				<row>
+					<column>
+						<image src="resources/question.png" inspect="false" />
+					</column>
+					<column>
+						<p style="justifiedText">Let $ f(x) = \frac{x}{x-2} $. What is $ \frac{d}{dx} f(x) $.  </p>
+					</column>
+				</row>
+			</table>
+			<table name="choicesTable" grid="false" widths="50% 50%">
+				<row>
+					<column>
+						<equation>$ \frac{d}{dx} f(x) = \frac{2}{(x-2)^2} $ </equation>
+              
+					</column>
+					<column>
+						<equation>$ \frac{d}{dx} f(x) = \frac{2}{(x+2)^2} $ </equation>
+
+              
+					</column>
+				</row>
+				<row>
+					<column>
+						<button name="btn" content="A" style="btnUnselected">
+							<onClick>
+                mcController:select(1)
+							</onClick>
+						</button>
+					</column>
+					<column>
+						<button name="btn" content="B" style="btnUnselected">
+							<onClick>
+                mcController:select(2)
+              </onClick>
+						</button>
+					</column>
+				</row>
+				<row>
+					<column>
+					  <equation>$ \frac{d}{dx} f(x) = -\frac{2}{(x+2)^2} $ </equation>
+              
+					</column>
+					<column>
+					  <equation>$ \frac{d}{dx} f(x) = -\frac{2}{(x-2)^2} $ </equation>
+              
+					</column>
+				</row>
+				<row>
+					<column>
+						<button name="btn" content="C" style="btnUnselected">
+							<onClick>
+                mcController:select(3)
+              </onClick>
+						</button>
+					</column>
+					<column>
+						<button name="btn" content="D" style="btnUnselected">
+							<onClick>
+                mcController:select(4)
+              </onClick>
+						</button>
+					</column>
+				</row>
+			</table>
+			<button name="checkBtn" content="Check Answer">
+				<onClick>
+          mcController:checkAnswer()
+        </onClick>
+			</button>
+		</stack>
+  <stack name="mcStack3" style="mcStackLayout">
+      <script>
+        local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=1})
+      </script>
+			<p style="subSectionHeading">Question 3</p>
+			<table widths="10% 90%" grid="false">
+				<row>
+					<column>
+						<image src="resources/question.png" inspect="false" />
+					</column>
+					<column>
+						<p style="justifiedText">Let $ f(x) = e^{cos x^2} $. What is $ \frac{d}{dx} f(x) $.  </p>
+					</column>
+				</row>
+			</table>
+			<table name="choicesTable" grid="false" widths="50% 50%">
+				<row>
+					<column>
+						<equation>$ \frac{d}{dx} f(x) = -2xe^{cos x^2}sinx^2 $ </equation>
+              
+					</column>
+					<column>
+						<equation>$ \frac{d}{dx} f(x) = 2xe^{cos x^2}sinx^2 $ </equation>
+
+              
+					</column>
+				</row>
+				<row>
+					<column>
+						<button name="btn" content="A" style="btnUnselected">
+							<onClick>
+                mcController:select(1)
+							</onClick>
+						</button>
+					</column>
+					<column>
+						<button name="btn" content="B" style="btnUnselected">
+							<onClick>
+                mcController:select(2)
+              </onClick>
+						</button>
+					</column>
+				</row>
+				<row>
+					<column>
+					  <equation>$ \frac{d}{dx} f(x) = -2xe^{cos x^2}sinx^2$ </equation>
+              
+					</column>
+					<column>
+					  <equation>$ \frac{d}{dx} f(x) = 2xe^{cos x^2}sinx^2 $ </equation>
+              
+					</column>
+				</row>
+				<row>
+					<column>
+						<button name="btn" content="C" style="btnUnselected">
+							<onClick>
+                mcController:select(3)
+              </onClick>
+						</button>
+					</column>
+					<column>
+						<button name="btn" content="D" style="btnUnselected">
+							<onClick>
+                mcController:select(4)
+              </onClick>
+						</button>
+					</column>
+				</row>
+			</table>
+			<button name="checkBtn" content="Check Answer">
+				<onClick>
+          mcController:checkAnswer()
+        </onClick>
+			</button>
+		</stack>
+  </sectionNoTitle>
+
+  <sectionNoTitle name="section9" style="pageLayout">
+     <p style="sectionHeading">Extra Resources</p>
+    <web url="https://www.khanacademy.org/math/differential-calculus/limit-basics-dc/limits-introduction-dc/v/newton-leibniz-and-usain-bolt" />
+  </sectionNoTitle>
+</document>

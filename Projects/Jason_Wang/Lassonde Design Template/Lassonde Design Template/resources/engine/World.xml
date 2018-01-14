@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fragment xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd">
+  <include src="Link.xml" />
+  <include src="PointMass.xml" />
+  <script>
+    <![CDATA[
+
+mouseInfluenceSize = 20
+mouseTearSize = 8
+
+
+
+-- World
+World = {sim,plot,gravity=-981}
+function World:new(o)
+  o = o or {}
+  if o.sim == nil or o.plot == nil then error("Fail to create World. sim, or plot must be provided.") end
+  o.constraintAccuracy = 3
+  o.mouseInfluenceScalar = 5
+  o.timeStep = o.sim.Period
+  o.pointmasses = {}
+  o.minX = o.plot.XAxis.Min
+  o.minY= o.plot.YAxis.Min
+  o.maxX = o.plot.XAxis.Max
+  o.maxY = o.plot.YAxis.Max
+  o.width = o.maxX - o.minX
+  o.height = o.maxY - o.minY
+
+  setmetatable(o, self)
+  self.__index = self
+  return o
+end
+
+function World:update()
+  -- update physics
+  -- solve the constraints multiple times
+  -- the more it's solved, the more accurate.
+  for x=0, self.constraintAccuracy do
+    for i=1, #self.pointmasses do
+      self.pointmasses[i]:solveConstraints(self)
+    end
+  end
+
+  -- update each PointMass's position
+  for i=1, #self.pointmasses do
+    local pm = self.pointmasses[i]
+    pm:updatePhysics(self)
+  end
+end
+
+function World:mouseDidPress(x,y)
+  if self.pmouseX == nil then
+    self.pmouseX = x
+    self.pmouseY = y
+  else
+    self.pmouseX = self.mouseX
+    self.pmouseY = self.mouseY
+  end
+  self.mouseX = x
+  self.mouseY = y
+  
+  for i=1, #self.pointmasses do
+    local pm = self.pointmasses[i]
+    if pm.x > self.mouseX-2 and pm.x < self.mouseX+2 and pm.y > self.mouseY-2 and pm.y < self.mouseY+2 then
+      pm:updateInteractions(self)
+      pm:updatePhysics(self)
+    end
+  end
+end
+
+
+function World:updateGraphics()
+  for i=1,#self.pointmasses do
+    self.pointmasses[i]:draw()
+  end
+end
+
+
+function World:draw()
+  self:update()
+  self:updateGraphics()
+end
+
+
+-- Dimensions for our curtain. These are number of PointMasss for each direction, not actual widths and heights
+-- the true width and height can be calculated by multiplying restingDistances by the curtain dimensions
+function World:createCurtain(pointSeries, lineSeries, curtainWidth, curtainHeight, restingDistances, xStart, yStart, stiffnesses)
+  stiffnesses = stiffnesses or 1
+  for j = 1, curtainHeight do -- rows
+    for i = 1, curtainWidth do -- columns
+      local p = PointMass:new({series=pointSeries, x=(xStart + (i-1) * restingDistances), y=(yStart - (j-1) * restingDistances)})
+      
+      if i > 1 then
+        p:attachTo(lineSeries, self.pointmasses[#self.pointmasses], restingDistances, stiffnesses)
+      end
+      if j > 1 then
+        p:attachTo(lineSeries, self.pointmasses[(j-2)*curtainWidth+i], restingDistances, stiffnesses)
+      end
+      -- we pin the very top PointMasss to where they are
+      if j == 1 then
+        p:pinTo(p.x, p.y)
+      end
+      -- add to PointMasses table
+      table.insert(self.pointmasses, p)
+    end
+  end
+end
+
+
+-----------------------
+-- Utility functions --
+-----------------------
+
+-- Using http:--www.codeguru.com/forum/showpost.php?p=1913101&postcount=16
+-- We use this to have consistent interaction
+-- so if the cursor is moving fast, it won't interact only in spots where the applet registers it at
+function distPointToSegmentSquared(lineX1, lineY1, lineX2, lineY2, pointX, pointY)
+  local vx = lineX1 - pointX
+  local vy = lineY1 - pointY
+  local ux = lineX2 - lineX1
+  local uy = lineY2 - lineY1
+
+  local len = ux*ux + uy*uy
+  local det = (-vx * ux) + (-vy * uy)
+  if det < 0 or det > len then
+    ux = lineX2 - pointX
+    uy = lineY2 - pointY
+    return math.min(vx*vx+vy*vy, ux*ux+uy*uy)
+  end
+
+  det = ux*vy - uy*vx
+  return det * det / len
+end
+
+    ]]>
+  </script>
+</fragment>

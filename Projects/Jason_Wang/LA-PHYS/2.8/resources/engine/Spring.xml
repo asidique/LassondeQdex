@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<fragment xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd">
+  <script>
+    <![CDATA[
+-- k = spring constant, h = zigzag half height, num = total number of zigzag
+Spring = {series, p1, p2, restingDist, k, h=1.5, num=10, visible=true}
+function Spring:new(o)
+  o = o or {}
+  setmetatable(o, self)
+  self.__index = self
+  return o
+end
+
+function Spring:getLength()
+  return (self.p1 - self.p2):len()
+end
+
+function Spring:getCenter()
+  return (self.p1 + self.p2)/2
+end
+
+function Spring:getAngle()
+  local vec = self.p2 - self.p1
+  return math.atan(vec.y/vec.x)
+end
+
+function Spring:getForce()
+  local f = -self.k*(self:getLength() - self.restingDist)
+  local angle = self:getAngle()
+  return Vector(f*math.cos(angle), f*math.sin(angle))
+end
+
+-- draw the spring with center 0,0 horizontally
+function Spring:initDrawing()
+  local d = self:getLength()
+  local halfD = d/2
+  local dx = d/self.num
+  local dxq = dx/4
+  local x = -halfD
+  for i=1, self.num do
+    self.series:Add(x,0)
+    self.series:Add(x+dxq, self.h)
+    self.series:Add(x+dxq, self.h)
+    self.series:Add(x+dxq*3, -self.h)
+    self.series:Add(x+dxq*3, -self.h)
+    self.series:Add(x+dx, 0)
+    x = x + dx
+  end
+end
+
+function Spring:draw()
+  local angle = self:getAngle()
+  local center = self:getCenter()
+  local dratio = 1+(self:getLength() - self.restingDist)/self.restingDist
+  self.series.Transform = matrixf.translation(center.x, center.y, 0) * matrixf.rotationAboutAxis(0, 0, 1, angle) * matrixf.scaling(dratio,1,1) 
+end
+
+
+    ]]>
+  </script>
+</fragment>

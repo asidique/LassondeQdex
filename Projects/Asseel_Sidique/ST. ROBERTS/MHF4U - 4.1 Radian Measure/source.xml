@@ -1,0 +1,1210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G75B0745D_B8BE_4AED_85A7_3EC57017F660">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>MHF4U - 4.1 Radian Measure</title>
+    <creator>Thiago</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/calculator.png" />
+  </metadata>
+
+  <include src="acurriculumThemePack/curriculumStyles.xml" />
+  <include src="plotTools.xml" />
+
+  <!--                                      Header & Footer                                           -->
+
+  <style name="backgroundColor">
+
+    <background color="50 133 184" />
+
+  </style>
+
+  <style name="fontColor">
+
+    <foreground color="255 255 255" />
+
+  </style>
+
+  <header style="backgroundColor">
+
+    <stack style="center" orientation="horizontal">
+
+      <p style="fontColor">Ms. Koon</p>
+
+      <p style="fontColor rightText">MHF4U</p>
+
+    </stack>
+
+  </header>
+
+  <footer style="backgroundColor">
+
+    <stack orientation="horizontal">
+
+      <image style="tiny" src="resources/logo1.png" inspect="false" />
+
+      <p style="fontColor">
+
+        <style>
+
+          <numbering suffix="true" counter="pages" />
+
+          <textAlignment>center</textAlignment>
+
+          <marginTop>30</marginTop>
+
+          <foreground color="255 255 255" />
+
+        </style>
+
+      </p>
+
+      <image style="tiny" src="resources/logo2.png" inspect="false" />
+
+    </stack>
+
+  </footer>
+
+  <!--                                      Header & Footer END                                         -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  <!--  SECTION 1  -->
+
+
+  <section>
+    <title>
+      <style>
+        <textAlignment>right</textAlignment>
+        <marginTop>80</marginTop>
+      </style>
+      <size scale="xlarge">4.1</size>
+    </title>
+    <p style="chapterTitle">
+      Radian Measure
+    </p>
+
+    <p style="title">
+      <style>
+        <marginTop>50</marginTop>
+      </style>
+      <size scale="large">Why Radians ?</size>
+    </p>
+
+   
+    <p>
+      Radian measures simplify calculations 
+      related to rates of change of angles or rotational motions.  
+      It is widely used in modelling situations that involve motors, 
+      wheels, and waves (e.g. sound, electromagnetic, etc.).
+    </p>
+
+    <!-- This line can be removed after the curriculumStyles.xml fragment is included -->
+    <p style="invisible">This document is formatted improperly because the curriculumStyles.xml fragment was not included at the beginning of your document.</p>
+  </section>
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <!--  SECTION 2  -->
+
+  <sectionNoTitle>
+    <stack name="wrapTitle">
+      <style>
+        <widthPercentage>0.92</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <p style="titleStyle">
+        <style>
+          <marginTop>50</marginTop>
+          <size scale="large" />
+          <foreground color="50 135 184" />
+        </style>
+        <b>Definition</b>
+      </p>
+    </stack>
+
+    
+      <stack orientation="horizontal">
+
+        <script>
+          plotTools.drawCircle(myCirclePlot.second_series, vector({0,0}), 5)
+          char.textA(myCirclePlot.letterA, {5,2}, .5)
+          char.textR(myCirclePlot.letterR, {2.5,-1}, .5)
+        </script>
+
+        <drawing name="myCirclePlot">
+          <axis dim="x" auto="lockAspectRatio" />
+          <axis dim="y" auto="fixed" min="-6" max="6" />
+          <series name="second_series" manual="true" capacity="8000">
+            <style>
+              <foreground color="55 133 184" />
+            </style>
+          </series>
+          <series name="lines" manual="true">
+            <style>
+              <foreground color="255 0 0" />
+            </style>
+            <data>5 0; 0 0; 3 4;</data>
+          </series>
+          <series name="letterA" manual="true" />
+          <series name="letterR" manual="true" />
+
+        </drawing>
+
+        <stack>
+          <style>
+            <marginTop>60</marginTop>
+          </style>
+          <p>
+            1 radian is the angle subtended at the centre of a circle when a = r.
+          </p>
+
+          <stack name="mystackA" style="borderOutside">
+            <style>
+              <borderColor color="55 133 184" />
+              <widthPercentage>.99</widthPercentage>
+            </style>
+            <stack name="mystackA2" style="borderInside">
+              <style>
+                <borderColor color="55 133 184" />
+              </style>
+              <p> For any angle $ \theta $,</p>
+              <p> $ \theta = \frac{a}{r} $</p>
+            </stack>
+          </stack>
+        </stack>
+
+      </stack>
+
+
+
+
+
+    <stack style="questionAnswer">
+      <style>
+        <marginTop>80</marginTop>
+        <marginBottom>80</marginBottom>
+      </style>
+      <p style="title">Example 1</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="acurriculumThemePack\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>
+              An arc of a circle measuring 22.5 cm subtends a central
+
+              angle of $\frac{4\pi}{3} $ rad. Find the approximate radius of the
+
+              circle, to the nearest tenth of a centimetre.
+            </p>
+          </column>
+        </row>
+      </table>
+
+
+
+
+
+      <stack name="answerWrap" style="collapsed">
+
+        <p style="title">ANSWER</p>
+        <table name="table" widths="10% 90%" grid="false">
+          <row>
+            <column>
+              <image src="acurriculumThemePack\answer.png" inspect="false" />
+            </column>
+            <column>
+
+              <p>$ a = 22.5cm $</p>
+              <p>$ \theta = 4\pi / 3 $</p>
+              <p>$ r = ? $</p>
+              
+              <p>$ r = \frac{a}{\theta} $</p>
+
+              <p>
+                $ = \frac{22.5}{4\pi / 3}  $
+              </p>
+              <p>$ = 5.4 cm $</p>
+              
+            </column>
+          </row>
+        </table>
+      </stack>
+
+      <button name="button1" content="Show Answer">
+        <onClick>
+          if button1.Text == "Show Answer" then
+          answerWrap.Style.Visibility = "visible";
+          button1.Text = "Hide Answer"
+          else
+          answerWrap.Style.Visibility = "collapsed";
+          button1.Text = "Show Answer"
+          end
+        </onClick>
+      </button>
+    </stack>
+
+
+
+
+
+
+
+
+
+
+  </sectionNoTitle>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!--  SECTION 3  -->
+
+  <sectionNoTitle>
+    <stack name="wrapTitle">
+      <style>
+        <widthPercentage>0.92</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <p style="titleStyle">
+        <style>
+          <marginTop>50</marginTop>
+          <size scale="large" />
+          <foreground color="50 135 184" />
+        </style>
+        <b>Examples</b>
+      </p>
+    </stack>
+
+
+
+
+
+
+
+
+
+
+    <stack style="questionAnswer">
+      <style>
+        <marginBottom>80</marginBottom>
+      </style>
+      <p style="title">Example 2</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="acurriculumThemePack\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>
+              How many radians are there in 1 revolution ?
+            </p>
+          </column>
+        </row>
+      </table>
+
+      <stack orientation="horizontal">
+        <script>
+          plotTools.drawCircle(myCirclePlot.second_series, vector({0,0}), 5)
+        </script>
+
+        <drawing name="myCirclePlot">
+          <axis dim="x" auto="lockAspectRatio" />
+          <axis dim="y" auto="fixed" min="-6" max="6" />
+          <series name="second_series" manual="true" capacity="8000">
+            <style>
+              <foreground color="55 133 184" />
+            </style>
+          </series>
+          <series name="lines" manual="true">
+            <style>
+              <foreground color="255 0 0" />
+            </style>
+            <data>0 0; 3 4;</data>
+          </series>
+          <series name="letterA" manual="true" />
+          <series name="letterR" manual="true" />
+
+        </drawing>
+
+
+        <stack>
+         
+          <button name="buttonMain" content="Show Answer">
+            <onClick>
+              if buttonMain.Text == "Show Answer" then
+              answerWrap.Style.Visibility = "visible";
+              buttonMain.Text = "Hide Answer"
+              else
+              answerWrap.Style.Visibility = "hidden";
+              buttonMain.Text = "Show Answer"
+              end
+            </onClick>
+          </button>
+          <stack style="hidden" name="answerWrap">
+            <style></style>
+            <p style="centerText">In 1 revolution,  arc length = circumference.  Thus,</p>
+            <p style="centerText">$ \theta = \frac{2\pi r}{r} $</p>
+            <p style="centerText">$ = 2 \pi rad $</p>
+          </stack>
+        </stack>
+
+      </stack>
+
+
+      
+      
+      
+      
+      
+      
+
+
+
+
+
+      <stack orientation="horizontal">
+        <stack>
+      <p>
+        <style>
+          <marginTop>60</marginTop>
+        </style>
+        <u>Relating degrees to radians:</u>
+      </p>
+
+     
+        <p name="aParagraph">
+          1 revolution =  _______ $ \pi $ rad =  _______ °
+        </p>
+
+
+   <stack name="inputWrap" orientation="horizontal">
+            <p style="rightText">Your Answer:</p>
+      <textField name="myInput">
+        <style>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <placeholder>
+          Type here
+        </placeholder>
+      </textField>
+    </stack>
+      <button content="Fill in the Blank">
+        <style>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <onClick>
+          <![CDATA[
+          if inputWrap.myInput.Text == "" then
+          inputWrap.myInput.Text = "2";
+          end
+          
+          local inputNumber = math.deg(tonumber(inputWrap.myInput.Text)*math.pi)
+          aParagraph.FormattedText = string.format("1 revolution = <u>%s</u> rad = <u>%d</u>°", inputWrap.myInput.Text , inputNumber);
+          if inputNumber == 360 then
+          mystackA.mystackA2.stackC3.textForUI.FormattedText =  string.format(" %d ° ", inputNumber/2)
+          end
+   ]]>
+        </onClick>
+      </button>
+
+        </stack>
+
+        <stack name="mystackA" style="borderOutside">
+          <style>
+            <marginTop>90</marginTop>
+            <borderColor color="55 133 184" />
+            <widthPercentage>.99</widthPercentage>
+          </style>
+          <stack name="mystackA2" style="borderInside">
+            <style>
+              <borderColor color="55 133 184" />
+            </style>
+            <p> So :</p>
+            <stack name="stackC3" orientation="horizontal">
+              <p style="rightText">$ \pi $ =</p>
+              <p name="textForUI"></p>
+            </stack>
+          </stack>
+        </stack>
+        
+        
+
+      </stack>
+    </stack>
+
+
+
+
+
+
+
+
+
+
+
+    <stack style="questionAnswer">
+      <style>
+        <marginBottom>80</marginBottom>
+      </style>
+      <p style="title">Example 3</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="acurriculumThemePack\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>
+              Convert to radian measure in exact form.
+            </p>
+          </column>
+        </row>
+      </table>
+
+
+      <stack orientation="horizontal">
+        <stack>
+          <p>a) $ 45 $°</p>
+          <stack name="answerWrap" style="hidden">
+            <p style="centerText themeColourTitle"><b>Answer</b></p>
+          <p style="centerText"> $ 45 \cdot \frac{\pi}{180} $ </p>
+          <p style="centerText">$ = \frac{\pi}{4} $</p>
+          </stack>
+          <button name="buttonMain" content="Show Answer">
+            <onClick>
+              if buttonMain.Text == "Show Answer" then
+              answerWrap.Style.Visibility = "visible";
+              buttonMain.Text = "Hide Answer"
+              else
+              answerWrap.Style.Visibility = "hidden";
+              buttonMain.Text = "Show Answer"
+              end
+            </onClick>
+          </button>
+        </stack>
+
+        <stack>
+          <p>b) $ 30 $°</p>
+          <stack name="answerWrap" style="hidden">
+          <p style="centerText themeColourTitle"><b>Answer</b></p>
+          <p style="centerText"> $ 30 \cdot \frac{\pi}{180} $ </p>
+          <p style="centerText">$ = \frac{\pi}{6} $</p>
+          </stack>
+          <button name="buttonMain" content="Show Answer">
+            <onClick>
+              if buttonMain.Text == "Show Answer" then
+              answerWrap.Style.Visibility = "visible";
+              buttonMain.Text = "Hide Answer"
+              else
+              answerWrap.Style.Visibility = "hidden";
+              buttonMain.Text = "Show Answer"
+              end
+            </onClick>
+          </button>
+        </stack>       
+      </stack>
+
+
+
+
+      <stack orientation="horizontal">
+        <style>
+          <marginTop>50</marginTop>
+        </style>
+        <stack>
+          <p>c) $ 135 $°</p>
+          <stack name="answerWrap" style="hidden">
+            <p style="centerText themeColourTitle">
+              <b>Answer</b>
+            </p>
+            <p style="centerText"> $ 135 \cdot \frac{\pi}{180} $ </p>
+            <p style="centerText">$ = \frac{3\pi}{4} $</p>
+          </stack>
+          <button name="buttonMain" content="Show Answer">
+            <onClick>
+              if buttonMain.Text == "Show Answer" then
+              answerWrap.Style.Visibility = "visible";
+              buttonMain.Text = "Hide Answer"
+              else
+              answerWrap.Style.Visibility = "hidden";
+              buttonMain.Text = "Show Answer"
+              end
+            </onClick>
+          </button>
+        </stack>
+
+        <stack>
+          <p>d) $ 210 $°</p>
+          <stack name="answerWrap" style="hidden">
+            <p style="centerText themeColourTitle">
+              <b>Answer</b>
+            </p>
+            <p style="centerText"> $ 210 \cdot \frac{\pi}{180} $ </p>
+            <p style="centerText">$ = \frac{7\pi}{6} $</p>
+          </stack>
+          <button name="buttonMain" content="Show Answer">
+            <onClick>
+              if buttonMain.Text == "Show Answer" then
+              answerWrap.Style.Visibility = "visible";
+              buttonMain.Text = "Hide Answer"
+              else
+              answerWrap.Style.Visibility = "hidden";
+              buttonMain.Text = "Show Answer"
+              end
+            </onClick>
+          </button>
+        </stack>
+      </stack>
+     
+    </stack>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <stack style="questionAnswer">
+      <style>
+        <marginBottom>80</marginBottom>
+      </style>
+      <p style="title">Example 4</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="acurriculumThemePack\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>
+              Convert to degree measure in exact form.
+            </p>
+          </column>
+        </row>
+      </table>
+
+
+
+
+
+
+      <stack orientation="horizontal">
+        <stack>
+          <p>a) $ \frac{5\pi}{3} $</p>
+          <stack name="answerWrap" style="hidden">
+            <p style="centerText themeColourTitle">
+              <b>Answer</b>
+            </p>
+            <p style="centerText"> $ \frac{5\pi}{3} \cdot \frac{180}{\pi} $ </p>
+            <p style="centerText">$ = 300 $°</p>
+          </stack>
+          <button name="buttonMain" content="Show Answer">
+            <onClick>
+              if buttonMain.Text == "Show Answer" then
+              answerWrap.Style.Visibility = "visible";
+              buttonMain.Text = "Hide Answer"
+              else
+              answerWrap.Style.Visibility = "hidden";
+              buttonMain.Text = "Show Answer"
+              end
+            </onClick>
+          </button>
+        </stack>
+
+        <stack>
+          <p>b) $ \frac{\pi}{2} $</p>
+
+          <p style="centerText" name="aParagraph">
+            $ \frac{\pi}{2} $ =  _______ °
+          </p>
+
+
+          <stack name="inputWrap" orientation="horizontal">
+            <p style="rightText">You Answer:</p>
+            <textField name="myInput">
+              <style>
+                <horizontalAlignment>center</horizontalAlignment>
+              </style>
+              <placeholder>
+                Type here
+              </placeholder>
+            </textField>
+          </stack>
+          <p name="wrongAnswer" style="collapsed centerText">Incorrect, try again!</p>
+          <button content="Fill in the Blank">
+            <style>
+              <horizontalAlignment>center</horizontalAlignment>
+            </style>
+            <onClick>
+              <![CDATA[
+          local inputNumber = tonumber(inputWrap.myInput.Text)
+          if inputNumber == 90 then
+          aParagraph.FormattedText = string.format("Correct!  <u>%d</u>°", inputNumber);
+          wrongAnswer.Style.Visibility = "collapsed"
+          
+          
+          else
+          wrongAnswer.Style.Visibility = "visible";
+          end
+   ]]>
+            </onClick>
+          </button>
+          
+        </stack>
+      </stack>
+
+
+    </stack>   
+    
+    
+    
+    
+    
+    
+    
+
+    <p>
+      <style>
+        <marginBottom>50</marginBottom>
+      </style>
+    </p>
+
+
+
+  </sectionNoTitle>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+
+
+
+
+  <!--  SECTION 4  -->
+
+  <sectionNoTitle>
+    <stack name="wrapTitle">
+      <style>
+        <widthPercentage>0.92</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <p style="titleStyle">
+        <style>
+          <marginTop>50</marginTop>
+          <size scale="large" />
+          <foreground color="50 135 184" />
+        </style>
+        <b>
+          Angular Velocity
+        </b>
+      </p>
+    </stack>
+
+    <stack style="questionAnswer">
+      <p>
+        <style>
+          <marginTop>30</marginTop>
+          <marginBottom>30</marginBottom>
+        </style>
+        Angular velocity measures the number of radians travelled per unit time. 
+        It is measured in radians per second [rad/s].
+      </p>
+    </stack>
+
+
+
+
+
+
+
+
+    <stack style="questionAnswer">
+      <style>
+        <marginTop>80</marginTop>
+      </style>
+      <p style="title">Example 1</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="acurriculumThemePack\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>
+              The World's largest centerless Ferris Wheel, The Big-­O, in Tokyo
+
+              Japan, has a diameter of 60 metres. It completes one revolution
+
+              in 20 minutes.
+            </p>
+            
+          </column>
+        </row>
+      </table>
+
+
+
+
+      <p>
+        <style>
+          <marginTop>80</marginTop>
+        </style>
+        a) Determine the angular velocity in radians/second.
+      </p>
+      <stack name="answerWrap" style="collapsed">
+
+        <p style="title">ANSWER</p>
+        <table name="table" widths="10% 90%" grid="false">
+          <row>
+            <column>
+              <image src="acurriculumThemePack\answer.png" inspect="false" />
+            </column>
+            <column>
+
+              <p> $ w = \frac{\theta}{t} $</p>
+              <p>$ = \frac{2\pi}{20 \cdot 60} $</p>
+              <p>$ = \frac{\pi}{600} $</p>
+              <p>Therefore, the angular velocity is $ \frac{\pi}{600} $ rad/s.</p>
+ 
+            </column>
+          </row>
+        </table>
+      </stack>
+
+      <button name="button1" content="Show Answer">
+        <onClick>
+          if button1.Text == "Show Answer" then
+          answerWrap.Style.Visibility = "visible";
+          button1.Text = "Hide Answer"
+          else
+          answerWrap.Style.Visibility = "collapsed";
+          button1.Text = "Show Answer"
+          end
+        </onClick>
+      </button>
+    
+
+
+
+
+    <p>
+      <style>
+        <marginTop>80</marginTop>
+      </style>
+      b) How far has a rider travelled at 6 minutes into the ride?</p>
+      <stack name="answerWrap1" style="collapsed">
+
+        <p style="title">ANSWER</p>
+        
+        <table name="table" widths="10% 25% 65%" grid="false">
+          <row>
+            <column>
+              <image src="acurriculumThemePack\answer.png" inspect="false" />
+            </column>
+            <column>
+              <p>$ a = ? $</p>
+              <p>$ r = 30m $</p>
+              <p>$ t = 6 \cdot 60 = 360 s $</p>                            
+            </column>
+            <column>
+              <p>Angular distance = (angular velocity)(time)</p>
+              <p>$ \theta = wt $</p>
+              <p>$ = \frac{\pi}{600}(360) $</p>
+              <p>$ = \frac{3\pi}{5} rad $</p>
+              <p>Distance travelled is the arc length:</p>
+              <p>$ a = (\frac{3\pi}{5})(30m) $</p>
+              <p>$ = 18\pi m $</p>
+              <p>Therefore, a rider travels $ 18\pi m $ 6 minutes into the ride.</p>
+            </column>
+          </row>
+        </table>
+      </stack>
+
+      <button name="button11" content="Show Answer">
+        <onClick>
+          if button11.Text == "Show Answer" then
+          answerWrap1.Style.Visibility = "visible";
+          button11.Text = "Hide Answer"
+          else
+          answerWrap1.Style.Visibility = "collapsed";
+          button11.Text = "Show Answer"
+          end
+        </onClick>
+      </button>
+      
+    </stack>
+
+
+   
+
+
+
+
+
+
+
+
+    <p>
+      <style>
+        <marginBottom>50</marginBottom>
+      </style>
+    </p>
+    
+  </sectionNoTitle>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Section 5 -->
+  <sectionNoTitle>
+
+    <stack name="wrapTitle">
+      <style>
+        <widthPercentage>0.92</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <p style="titleStyle">
+        <style>
+          <marginTop>50</marginTop>
+          <size scale="large" />
+          <foreground color="50 135 184" />
+        </style>
+        <b>
+          Area of a Sector
+        </b>
+      </p>
+    </stack>
+
+    <stack orientation="horizontal">
+
+      <script>
+        plotTools.drawCircle(myCirclePlot.second_series, vector({0,0}), 5)
+        char.textA(myCirclePlot.letterA, {2.5,2}, .5)
+
+        char.textA(myCirclePlot.letterA1, {2.2,1.5}, .2)
+        char.textR(myCirclePlot.letterR1, {2.5,1.5}, .2)
+        char.textE(myCirclePlot.letterE1, {2.8,1.5}, .2)
+        char.textA(myCirclePlot.letterA11, {3.1,1.5}, .2)
+
+        char.textR(myCirclePlot.letterR, {2.5,-1}, .5)
+      </script>
+
+      <drawing name="myCirclePlot">
+        <axis dim="x" auto="lockAspectRatio" />
+        <axis dim="y" auto="fixed" min="-6" max="6" />
+        <series name="second_series" manual="true" capacity="8000">
+          <style>
+            <foreground color="55 133 184" />
+          </style>
+        </series>
+        <series name="lines" manual="true">
+          <style>
+            <foreground color="255 0 0" />
+          </style>
+          <data>5 0; 0 0; 3 4;</data>
+        </series>
+        <series name="letterA" manual="true" />
+        
+        <series name="letterA1" manual="true" />
+        <series name="letterR1" manual="true" />
+        <series name="letterE1" manual="true" />
+        <series name="letterA11" manual="true" />
+        
+        <series name="letterR" manual="true" />
+
+      </drawing>
+
+      <stack>
+        <style>
+          <marginTop>60</marginTop>
+        </style>
+        <p>
+          As the area of a sector is proportional to the
+
+          angle at the centre, we have:
+        </p>
+
+        <stack name="mystackA" style="borderOutside">
+          <style>
+            <borderColor color="55 133 184" />
+            <widthPercentage>.99</widthPercentage>
+          </style>
+          <stack name="mystackA2" style="borderInside">
+            <style>
+              <borderColor color="55 133 184" />
+            </style>
+            <p>
+              <b>Formula for sector area:</b></p>
+            <p> $ A = \frac{1}{2} r^{2} \theta $</p>
+          </stack>
+        </stack>
+      </stack>
+
+    </stack>
+
+
+
+
+
+    <stack style="questionAnswer">
+      <style>
+        <marginTop>80</marginTop>
+        <marginBottom>80</marginBottom>
+      </style>
+      <p style="title">Example 1</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="acurriculumThemePack\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>
+             Find the area and perimeter of the shaded region.
+            </p>
+          </column>
+        </row>
+      </table>
+
+<!-- PLOT for the question, inside this stack there's 1 plot and another stack with 3 p tags -->
+
+      <stack orientation="horizontal">
+
+        <script>
+
+
+
+          plotTools.drawCircle(myCirclePlot.second_series, vector({0,0}), 5)
+          plotTools.drawCircle(myCirclePlot.second_series2, vector({0,0.7}), 2)
+          char.textA(myCirclePlot.letterA, {-3.3,-4.6}, .5)
+          char.textB(myCirclePlot.letterB, {3.3,-4.5}, .5)
+          char.textC(myCirclePlot.letterC, {0,5.3}, .5)
+
+          char.textE(myCirclePlot.letterE, {1.5,-1.5}, .4)
+          char.textD(myCirclePlot.letterD, {-1.7,-1.5}, .4)
+
+          char.textF(myCirclePlot.letterF, {0,3}, .4)
+        </script>
+
+        <drawing name="myCirclePlot">
+          <axis dim="x" auto="lockAspectRatio" />
+          <axis dim="y" auto="fixed" min="-6" max="6" />
+
+
+
+
+
+          <series name="second_series" manual="true" capacity="8000">
+            <style>
+              <foreground color="55 133 184" />
+            </style>
+          </series>
+
+
+         
+          
+          
+          <series name="second_series2" draw="radialFill" manual="true" capacity="8000">
+            <style>
+              <foreground color="55 133 184" />
+            </style>
+          </series>
+
+
+
+
+
+          <series name="lines" manual="true">
+            <style>
+              <foreground color="0 0 0" />
+            </style>
+            <data>-3 -4; 0 0; 3 -4;</data>
+          </series>
+
+          <series name="linesFill" draw="radialFill" manual="true">
+            <style>
+              <foreground color="255 255 255" />
+            </style>
+            <data>-3 -4; 0 0; 3 -4;</data>
+          </series>
+          
+          <series name="letterA" manual="true" />
+          <series name="letterB" manual="true" />
+          <series name="letterC" manual="true" />
+          
+          <series name="letterE" manual="true" />
+          <series name="letterD" manual="true" />
+
+          <series name="letterF" manual="true" />
+
+        </drawing>
+
+        <stack>
+          <style>
+            <marginTop>60</marginTop>
+          </style>
+          <p>
+            Inner radius = $ 4 cm $
+          </p>
+          <p>
+            Outer radius = $ 9 cm $
+          </p>
+          <p>
+            Angle = $ \frac{\pi}{6} $
+          </p>
+        </stack>
+      </stack>
+
+
+
+
+
+
+
+
+
+          <stack name="answerWrap" style="collapsed">
+
+        <p style="title">ANSWER</p>
+        <table name="table" widths="10% 45% 45%" grid="false">
+          <row>
+            <column>
+              <image src="acurriculumThemePack\answer.png" inspect="false" />
+            </column>
+            <column>
+
+              <p>The angle subtended  by arc DFE </p>
+              <p>$ = 2\pi - \frac{\pi}{6} $</p>
+              <p>$ = \frac{11\pi}{6} $</p>
+
+              <p>$ A = A(outer) - A(inner) $</p>
+              <p>$ = \frac{1}{2} (9^{2})(\frac{11\pi}{6}) - \frac{1}{2}(4^{2})(\frac{11\pi}{6}) $</p>
+              <p>$ = \frac{65}{2} (\frac{11\pi}{6}) $</p>
+
+              <p>$  = \frac{715\pi}{12}cm^{2} $</p>            
+            </column>
+
+            <column>
+              <p>Perimeter includes arc ACB, arc DFE and edges AD and BE. So,</p>
+              <p>$ P = ACB + DFE + 2AD $</p>
+              <p>$ = 9 (\frac{11\pi}{6}) + 4 (\frac{11\pi}{6}) + 2(5)$</p>
+              <p>$ = \frac{(13)(11\pi)}{6} + 10 $</p>
+              <p>$ = \frac{143\pi + 60}{6} cm $ </p>
+            </column>
+          </row>
+        </table>
+      </stack>
+
+      <button name="button1" content="Show Answer">
+        <onClick>
+          if button1.Text == "Show Answer" then
+          answerWrap.Style.Visibility = "visible";
+          button1.Text = "Hide Answer"
+          else
+          answerWrap.Style.Visibility = "collapsed";
+          button1.Text = "Show Answer"
+          end
+        </onClick>
+      </button>
+    </stack>
+
+  </sectionNoTitle>
+  
+  
+  
+  
+</document>

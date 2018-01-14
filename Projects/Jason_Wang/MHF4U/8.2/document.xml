@@ -1,0 +1,687 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G46DFC36D_B4A9_4CBE_9470_147E94FB05A4">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>MHF4U L8.2 - Composite Functions Part 2</title>
+    <creator>jason_wang</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/calculator.png" />
+  </metadata>
+
+  <include src="documentStyle.xml" />
+
+  <!-- Header & Footer -->
+  <header style="backgroundColor1">
+    <stack style="center" orientation="horizontal">
+      <p style="fontColor1">Ms. Koon</p>
+      <p style="fontColor1 rightText">MHF4U</p>
+    </stack>
+  </header>
+  <footer style="backgroundColor1">
+    <stack orientation="horizontal">
+      <image src="resources/logo1.png" style="tiny" />
+      <p style="fontColor1">
+        <style>
+          <numbering counter="pages" suffix="true" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image src="resources/logo2.png" style="tiny" />
+    </stack>
+  </footer>
+  <!-- Header & Footer END -->
+
+  <!--section 1 Composite Functions Part 2-->
+  <section>
+    <title style="chaptNumTitle">
+      <size scale="xlarge">L8.2</size>
+    </title>
+    <p style="chapterTitle">Composite Functions Part 2</p>
+    <stack style="wrap">
+      <p style="sectionTitle1">
+        <size scale="large">Introduction</size>
+      </p>
+      <p style="justified marginTop15 marginBottom50">
+        Combined function can be formed by addition/subtraction or multiplication/division.
+        Composite functions can be obtained by evaluating a function in another function.
+      </p>
+    </stack>
+  </section>
+
+  <!--section 2 Products of Polynomial functions-->
+  <sectionNoTitle>
+    <stack style="wrapTitle width93">
+      <p style="sectionTitle1 marginTop50">Products of polynomial functions</p>
+      <p style="justified marginTop15">When two polynomial functions are multiplied, the result is another polynomial function with a higher degree.</p>
+      <p style="marginTop15">We will use the following investigation to answer the question:</p>
+
+      <stack style="questionAnswer">
+        <table widths="10% 90%" grid="false">
+          <row>
+            <column>
+              <image src="curriculumThemePack\question.png" inspect="false" />
+            </column>
+            <column>
+              <p style="justified width9">What is the degree of a polynomial function formed by multiplying two other polynomial functions?</p>
+            </column>
+          </row>
+        </table>
+      </stack>
+
+      <button content="Start Investigation" style="marginTop50 marginBottom50">
+        <onClick>
+          application.navigateTo(investigation)
+        </onClick>
+      </button>
+    </stack>
+  </sectionNoTitle>
+
+  <!--section 3 Investigation-->
+  <sectionNoTitle name="investigation">
+    <stack style="wrap" name="rootStack">
+      <p style="sectionTitle1 marginBottom50 centeredText">Investigation</p>
+
+      <stack style="themeColour marginBottom50" name="investigationStack">
+
+        <p style="marginTop15 title themeColourTitle">
+          <size scale="normal">Instructions:</size>
+        </p>
+        <p style="marginTop15">
+          Graph $f(x)$, $g(x)$ and $h(x)=f(x)g(x)$ on <link url="https://www.desmos.com/calculator">Desmos</link>.
+        </p>
+        <p>Record the degree of the functions $f(x)$, $g(x)$ and $h(x)$.</p>
+
+        <table widths="8% 34% 34% 8% 8% 8%">
+          <head>
+            <column columnSpan="3"></column>
+            <column columnSpan="3">
+              <p style="centeredText">
+                <b>Degree of</b>
+              </p>
+            </column>
+          </head>
+          <row>
+            <column rowSpan="2"></column>
+            <column rowSpan="2">
+              <p>$f(x)$</p>
+            </column>
+            <column rowSpan="2">
+              <p>$g(x)$</p>
+            </column>
+            <column>
+              <p>$f(x)$</p>
+            </column>
+            <column>
+              <p>$g(x)$</p>
+            </column>
+            <column>
+              <p>$h(x)$</p>
+            </column>
+          </row>
+          <row>
+            <column>
+              <p>1</p>
+            </column>
+            <column>
+              <p>$y=0.05(x-3)(x+6)$</p>
+            </column>
+            <column>
+              <p>$y=0.1(x-5)^2(x+3)$</p>
+            </column>
+            <column>
+              <textField></textField>
+            </column>
+            <column>
+              <textField></textField>
+            </column>
+            <column>
+              <textField></textField>
+            </column>
+          </row>
+          <row>
+            <column>
+              <p>2</p>
+            </column>
+            <column>
+              <p>$y=(x-1)(x+5)(x-2)$</p>
+            </column>
+            <column>
+              <p>$y=0.01(x+2)(x-3)(x+4)(x-10)$</p>
+            </column>
+            <column>
+              <textField></textField>
+            </column>
+            <column>
+              <textField></textField>
+            </column>
+            <column>
+              <textField></textField>
+            </column>
+          </row>
+          <row>
+            <column>
+              <p>3</p>
+            </column>
+            <column>
+              <p>$y=(x-4)^2(x+6)(x-1)$</p>
+            </column>
+            <column>
+              <p>$y=3x-1$</p>
+            </column>
+            <column>
+              <textField></textField>
+            </column>
+            <column>
+              <textField></textField>
+            </column>
+            <column>
+              <textField></textField>
+            </column>
+          </row>
+        </table>
+        <stack name="answers" style="collapsed">
+          <p style="marginTop15 title themeColourTitle">
+            <size scale="normal">Answers:</size>
+          </p>
+          <table widths="8% 34% 34% 8% 8% 8%">
+            <head>
+              <column columnSpan="3"></column>
+              <column columnSpan="3">
+                <p style="centeredText">
+                  <b>Degree of</b>
+                </p>
+              </column>
+            </head>
+            <row>
+              <column rowSpan="2"></column>
+              <column rowSpan="2">
+                <p>$f(x)$</p>
+              </column>
+              <column rowSpan="2">
+                <p>$g(x)$</p>
+              </column>
+              <column>
+                <p>$f(x)$</p>
+              </column>
+              <column>
+                <p>$g(x)$</p>
+              </column>
+              <column>
+                <p>$h(x)$</p>
+              </column>
+            </row>
+            <row>
+              <column>
+                <p>1</p>
+              </column>
+              <column>
+                <p>$y=0.05(x-3)(x+6)$</p>
+              </column>
+              <column>
+                <p>$y=0.1(x-5)^2(x+3)$</p>
+              </column>
+              <column>
+                <p style="boldText fontColorRed">2</p>
+              </column>
+              <column>
+                <p style="boldText fontColorRed">3</p>
+              </column>
+              <column>
+                <p style="boldText fontColorRed">5</p>
+              </column>
+            </row>
+            <row>
+              <column>
+                <p>2</p>
+              </column>
+              <column>
+                <p>$y=(x-1)(x+5)(x-2)$</p>
+              </column>
+              <column>
+                <p>$y=0.01(x+2)(x-3)(x+4)(x-10)$</p>
+              </column>
+              <column>
+                <p style="boldText fontColorRed">3</p>
+              </column>
+              <column>
+                <p style="boldText fontColorRed">4</p>
+              </column>
+              <column>
+                <p style="boldText fontColorRed">7</p>
+              </column>
+            </row>
+            <row>
+              <column>
+                <p>3</p>
+              </column>
+              <column>
+                <p>$y=(x-4)^2(x+6)(x-1)$</p>
+              </column>
+              <column>
+                <p>$y=3x-1$</p>
+              </column>
+              <column>
+                <p style="boldText fontColorRed">4</p>
+              </column>
+              <column>
+                <p style="boldText fontColorRed">1</p>
+              </column>
+              <column>
+                <p style="boldText fontColorRed">5</p>
+              </column>
+            </row>
+          </table>
+        </stack>
+      </stack>
+
+      <stack name="conclusion" style="collapsed">
+
+        <p style="title themeColourTitle">
+          <size scale="large">Conclusion</size>
+        </p>
+        <p>
+          <b>If $h(x)$ is the product of two polynomial functions $f(x)$ and $g(x)$, it has a degree equal to the sum of the degrees of $f(x)$ and $g(x)$.</b>
+        </p>
+      </stack>
+
+      <button name="conclusionBtn" style="marginTop50 marginBottom50" content="Show Conclusion">
+        <onClick> if conclusionBtn.Text == "Show Conclusion" then rootStack.investigationStack.answers.Style.Visibility = "visible"; conclusion.Style.Visibility = "visible"; conclusionBtn.Text = "Hide Conclusion" elseif conclusionBtn.Text =="Hide Conclusion" then rootStack.investigationStack.answers.Style.Visibility = "collapsed"; conclusion.Style.Visibility="collapsed"; conclusionBtn.Text = "Show Conclusion" end </onClick>
+      </button>
+
+    </stack>
+  </sectionNoTitle>
+
+  <!--Section 4 Quotient of two functions-->
+  <sectionNoTitle>
+    <stack style="wrap">
+      <p style="sectionTitle1 marginTop50 centeredText">
+        <b>Quotient of two functions</b>
+      </p>
+      <stack style="questionAnswer marginBottom50">
+        <p style="title">Example 1</p>
+        <table grid="false" widths="10% 90%">
+          <row>
+            <column>
+              <image src="curriculumThemePack\question.png" inspect="false" />
+            </column>
+            <column>
+              <p>Let $f(x)=2x+3$ and $g(x)=2x^2+x-3$.</p>
+              <style>
+                <counter name="bullet" format="lowerRoman" />
+              </style>
+              <style name="alphabetBullet">
+                <increment counter="bullet" />
+                <numbering counter="bullet" mode="flat" pattern="#) " />
+              </style>
+              <p style="alphabetBullet">
+                Determine an equation for $y=\frac{f(x)}{g(x)}$ , $g(x) \neq 0$ and state its domain and range.
+              </p>
+              <p style="alphabetBullet">
+                Use <link url="https://www.desmos.com/calculator">Desmos</link> to verify your results.
+              </p>
+            </column>
+          </row>
+        </table>
+
+        <image src="resources/eq1.png" style="medium" />
+        <p style="marginTop15">This results in the following discontinuities:</p>
+        <p style="bullet">a hole at $x=-\frac{3}{2}$, $y = \frac{1}{(-\frac{3}{2}-1)} = -\frac{2}{5}$.</p>
+        <p style="bullet">Vertical asymptote at $x=1$</p>
+        <p style="marginTop15">Thus, the domain is $\{x \in R \mid x \neq -\frac{3}{2}, 1\}$ and the range is $\{y \in R \mid x \neq -\frac{2}{5}, 0\}$.</p>
+
+        <p style="marginTop50 title themeColourTitle">Note:</p>
+        <p style="justified marginTop15 marginBottom50">
+          The domain of a quotient function is further restricted by excluding any values that make the denominator, $g(x)$, equal to zero.<br />When you graph this function using technology (graphing calculator, Desmos, etc.), the hole may <b>NOT</b> appear properly.
+        </p>
+      </stack>
+    </stack>
+  </sectionNoTitle>
+
+  <!--Section 5 Odd or Even Functions-->
+  <sectionNoTitle>
+    <stack style="wrap">
+      <p style="sectionTitle1 marginTop50 centeredText">
+        <b>Odd or Even Functions?</b>
+      </p>
+      <stack name="practiceStack" style="questionAnswer marginBottom50">
+        <p style="title marginBottom15">Recall:</p>
+        <p style="bullet marginLeft15">
+          <b>Even function: </b>$f(-x)=f(x)$ → symmetric about the y-axis (line symmetry)
+        </p>
+        <p style="bullet marginLeft15">
+          <b>Odd function: </b>$f(-x)=-f(x)$ → symmetric about the origin (point symmetry)
+        </p>
+        <table grid="false" widths="10% 90%" style="marginTop50">
+          <row>
+            <column>
+              <image src="curriculumThemePack\question.png" inspect="false" />
+            </column>
+            <column>
+              <p style="justified width95">
+                <b>What happens when you multiply or divide an odd function by another odd function, an even function by an even function, or a mix of the two?</b>
+              </p>
+            </column>
+          </row>
+        </table>
+
+        <p style="marginTop50 title themeColourTitle">Instructions:</p>
+        <p style="justified marginTop15 marginBottom50">
+          Graph $f(x)$, $g(x)$ and their product/quotient using <link url="https://www.desmos.com/calculator">Desmos</link>.<br />Record <b>odd</b> or <b>even</b> on the table.
+        </p>
+
+        <table name="practiceTable1" grid="true" widths="40% 20% 20% 20%" style="width95 centeredText">
+          <head>
+            <column>
+              <p>Scenario</p>
+            </column>
+            <column>
+              <p>$f(x)$</p>
+            </column>
+            <column>
+              <p>$g(x)$</p>
+            </column>
+            <column>
+              <p>Product/Quotient</p>
+            </column>
+          </head>
+          <row>
+            <column>
+              <p>$f(x)=5x^2-20$</p>
+              <p>$g(x)=x^3-4x$</p>
+            </column>
+            <column>
+              <p style="centeredText">even</p>
+            </column>
+            <column>
+              <p style="centeredText">odd</p>
+            </column>
+            <column>
+              <button name="b1" content="select" style="switchButtonStyle">
+                <onClick>
+                  if b1.Text == "even" then
+                  b1.Style.BackgroundColor = color.indianRed;
+                  b1.Text = "odd"
+                  else
+                  b1.Style.BackgroundColor = color.cornflowerBlue;
+                  b1.Text = "even"
+                  end
+                </onClick>
+              </button>
+            </column>
+          </row>
+          <row>
+            <column>
+              <p>$f(x)=-2x+5$</p>
+              <p>$g(x)=x^4$</p>
+            </column>
+            <column>
+              <button name="b2" content="select" style="switchButtonStyle">
+                <onClick>
+                  if b2.Text == "even" then
+                  b2.Style.BackgroundColor = color.indianRed;
+                  b2.Text = "odd"
+                  else
+                  b2.Style.BackgroundColor = color.cornflowerBlue;
+                  b2.Text = "even"
+                  end
+                </onClick>
+              </button>
+            </column>
+            <column>
+              <button name="b3" content="select" style="switchButtonStyle">
+                <onClick>
+                  if b3.Text == "even" then
+                  b3.Style.BackgroundColor = color.indianRed;
+                  b3.Text = "odd"
+                  else
+                  b3.Style.BackgroundColor = color.cornflowerBlue;
+                  b3.Text = "even"
+                  end
+                </onClick>
+              </button>
+            </column>
+            <column>
+              <button name="b4" content="select" style="switchButtonStyle">
+                <onClick>
+                  if b4.Text == "even" then
+                  b4.Style.BackgroundColor = color.indianRed;
+                  b4.Text = "odd"
+                  else
+                  b4.Style.BackgroundColor = color.cornflowerBlue;
+                  b4.Text = "even"
+                  end
+                </onClick>
+              </button>
+            </column>
+          </row>
+          <row>
+            <column>
+              <p>$f(x)=0.5x^3-4x^2+x$</p>
+              <p>$g(x)=0.6x^5+0.2x^2$</p>
+            </column>
+            <column>
+              <button name="b5" content="select" style="switchButtonStyle">
+                <onClick>
+                  if b5.Text == "even" then
+                  b5.Style.BackgroundColor = color.indianRed;
+                  b5.Text = "odd"
+                  else
+                  b5.Style.BackgroundColor = color.cornflowerBlue;
+                  b5.Text = "even"
+                  end
+                </onClick>
+              </button>
+            </column>
+            <column>
+              <button name="b6" content="select" style="switchButtonStyle">
+                <onClick>
+                  if b6.Text == "even" then
+                  b6.Style.BackgroundColor = color.indianRed;
+                  b6.Text = "odd"
+                  else
+                  b6.Style.BackgroundColor = color.cornflowerBlue;
+                  b6.Text = "even"
+                  end
+                </onClick>
+              </button>
+            </column>
+            <column>
+              <button name="b7" content="select" style="switchButtonStyle">
+                <onClick>
+                  if b7.Text == "even" then
+                  b7.Style.BackgroundColor = color.indianRed;
+                  b7.Text = "odd"
+                  else
+                  b7.Style.BackgroundColor = color.cornflowerBlue;
+                  b7.Text = "even"
+                  end
+                </onClick>
+              </button>
+            </column>
+          </row>
+          <row>
+            <column>
+              <p>$f(x)=3x^2-4x+1$</p>
+              <p>$g(x)=-0.5x^4+x^3+x^2-2$</p>
+            </column>
+            <column>
+              <button name="b8" content="select" style="switchButtonStyle">
+                <onClick>
+                  if b8.Text == "even" then
+                  b8.Style.BackgroundColor = color.indianRed;
+                  b8.Text = "odd"
+                  else
+                  b8.Style.BackgroundColor = color.cornflowerBlue;
+                  b8.Text = "even"
+                  end
+                </onClick>
+              </button>
+            </column>
+            <column>
+              <button name="b9" content="select" style="switchButtonStyle">
+                <onClick>
+                  if b9.Text == "even" then
+                  b9.Style.BackgroundColor = color.indianRed;
+                  b9.Text = "odd"
+                  else
+                  b9.Style.BackgroundColor = color.cornflowerBlue;
+                  b9.Text = "even"
+                  end
+                </onClick>
+              </button>
+            </column>
+            <column>
+              <button name="b10" content="select" style="switchButtonStyle">
+                <onClick>
+                  if b10.Text == "even" then
+                  b10.Style.BackgroundColor = color.indianRed;
+                  b10.Text = "odd"
+                  else
+                  b10.Style.BackgroundColor = color.cornflowerBlue;
+                  b10.Text = "even"
+                  end
+                </onClick>
+              </button>
+            </column>
+          </row>
+        </table>
+
+        <table name="answerTable1" grid="true" widths="40% 20% 20% 20%" style="centeredText width95 collapsed">
+          <head>
+            <column>
+              <p>Scenario</p>
+            </column>
+            <column>
+              <p>$f(x)$</p>
+            </column>
+            <column>
+              <p>$g(x)$</p>
+            </column>
+            <column>
+              <p>Product/Quotient</p>
+            </column>
+          </head>
+          <row>
+            <column>
+              <p>$f(x)=5x^2-20$</p>
+              <p>$g(x)=x^3-4x$</p>
+            </column>
+            <column>
+              <p>even</p>
+            </column>
+            <column>
+              <p>odd</p>
+            </column>
+            <column>
+              <p style="fontColorRed">odd</p>
+            </column>
+          </row>
+          <row>
+            <column>
+              <p>$f(x)=-2x+5$</p>
+              <p>$g(x)=x^4$</p>
+            </column>
+            <column>
+              <p style="fontColorRed">odd</p>
+            </column>
+            <column>
+              <p style="fontColorRed">even</p>
+            </column>
+            <column>
+              <p style="fontColorRed">odd</p>
+            </column>
+          </row>
+          <row>
+            <column>
+              <p>$f(x)=0.5x^3-4x^2+x$</p>
+              <p>$g(x)=0.6x^5+0.2x^2$</p>
+            </column>
+            <column>
+              <p style="fontColorRed">odd</p>
+            </column>
+            <column>
+              <p style="fontColorRed">odd</p>
+            </column>
+            <column>
+              <p style="fontColorRed">even</p>
+            </column>
+          </row>
+          <row>
+            <column>
+              <p>$f(x)=3x^2-4x+1$</p>
+              <p>$g(x)=-0.5x^4+x^3+x^2-2$</p>
+            </column>
+            <column>
+              <p style="fontColorRed">even</p>
+            </column>
+            <column>
+              <p style="fontColorRed">even</p>
+            </column>
+            <column>
+              <p style="fontColorRed">even</p>
+            </column>
+          </row>
+        </table>
+        <script>
+          <![CDATA[
+					local answers = {"odd","odd","even","odd","odd","odd","even","even","even","even"}
+					function checkAnswers()
+						local i = -1;
+						for j=2,5 do
+							for k=2,4 do
+								if i < 1 then 
+									i = i + 1 
+								else 
+									local btn = practiceStack.practiceTable1:Child(j):Child(k):Child(1)
+									if btn.Text == answers[i] then 
+										btn.Style.BackgroundColor = color.green
+									else btn.Style.BackgroundColor = color.red
+									end 
+									i = i + 1
+								end
+							end
+						end
+						practiceStack.answerTable1.Style.Visibility = "visible"
+						practiceStack.checkAnswerBtn.Text = "Hide Answer"
+					end
+					
+					function hideAnswers()
+						local i = 0
+						for j=2,5 do
+							for k=2,4 do
+								if i < 2 then i = i + 1 else
+									local btn = practiceStack.practiceTable1:Child(j):Child(k):Child(1)
+									if btn.Text == "odd" then 
+										btn.Style.BackgroundColor = color.indianRed
+									else btn.Style.BackgroundColor = color.cornflowerBlue
+									end
+								end
+							end
+						end
+						practiceStack.answerTable1.Style.Visibility = "collapsed"
+						practiceStack.checkAnswerBtn.Text = "Show Answer"
+					end
+					]]>
+        </script>
+        <button name="checkAnswerBtn" style="marginTop50 marginBottom50" content="Show Answer">
+          <onClick> if checkAnswerBtn.Text == "Show Answer" then checkAnswers() elseif checkAnswerBtn.Text =="Hide Answer" then hideAnswers() end </onClick>
+        </button>
+
+      </stack>
+    </stack>
+
+  </sectionNoTitle>
+
+
+  <!--feedback section-->
+  <sectionNoTitle>
+    <web name="feedback" url="https://drive.google.com/open?id=1WlGnXlOPX1rNhvg2hVPV6dJrFqNH-i1YLg6FbIO8eCE">
+      <style>
+        <aspectRatio>2</aspectRatio>
+      </style>
+    </web>
+  </sectionNoTitle>
+</document>

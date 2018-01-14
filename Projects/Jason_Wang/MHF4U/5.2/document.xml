@@ -71,7 +71,7 @@
           xy:Add(0, 5)
           xy:Update()
 
-          for x = -math.pi, 2*math.pi, 0.01 do
+          for x = -math.pi, 2*math.pi, 0.001 do
             y = math.sin(x)
             s:Add(x, y)
             c:Add(x, 1/y)
@@ -80,7 +80,8 @@
           c:Update()
           c.Visible = false
           for i=-1,2 do
-            plotTools.drawDashLine(d, vector({i*math.pi,-5}), vector({i*math.pi,5}))
+            d:Add(i*math.pi, -0.2)
+            d:Add(i*math.pi, 0.2)
           end
 
           ]]>
@@ -89,9 +90,14 @@
         <axis dim="x" min="-3.16" max="6.3" auto="fixed"></axis>
         <axis dim="y" min="-5" max="5" auto="fixed"></axis>
         <series name="xy" manual="true" draw="lineSegments" style="axes" />
-        <series name="dash" manual="true" draw="lineSegments" />
-        <series name="sin" manual="true" />
-        <series name="csc" manual="true" />
+        <series name="dash" manual="true" draw="lineSegments">
+          <style>
+            <foreground color="black" />
+            <lineThickness>2</lineThickness>
+          </style>
+        </series>
+        <series name="sin" manual="true" capacity="10000" />
+        <series name="csc" manual="true" capacity="10000" />
       </xyPlot>
       <stack name="btnStack" orientation="horizontal">
         <button name="btn1" content="y=sin(x)" style="btnSelected">
@@ -107,6 +113,12 @@
           </onClick>
         </button>
       </stack>
+      <p style="justifiedText">
+        <style>
+          <size scale="0.8" />
+        </style>
+        The short <b>|</b> represents the multiples of π
+      </p>
     </stack>
   </sectionNoTitle>
 
@@ -137,7 +149,8 @@
           c:Update()
           c.Visible = false
           for i=-1,2 do
-            plotTools.drawDashLine(d, vector({i*math.pi,-5}), vector({i*math.pi,5}))
+            d:Add(i*math.pi, -0.2)
+            d:Add(i*math.pi, 0.2)
           end
           ]]>
       </script>
@@ -145,9 +158,14 @@
         <axis dim="x" min="-3.16" max="6.3" auto="fixed"></axis>
         <axis dim="y" min="-5" max="5" auto="fixed"></axis>
         <series name="xy" manual="true" draw="lineSegments" style="axes" />
-        <series name="dash" manual="true" draw="lineSegments" />
-        <series name="cos" manual="true" />
-        <series name="sec" manual="true" />
+        <series name="dash" manual="true" draw="lineSegments">
+          <style>
+            <foreground color="black" />
+            <lineThickness>2</lineThickness>
+          </style>
+        </series>
+        <series name="cos" manual="true" capacity="10000" />
+        <series name="sec" manual="true" capacity="10000" />
       </xyPlot>
       <stack name="btnStack" orientation="horizontal">
         <button name="btn1" content="y=cos(x)" style="btnSelected">
@@ -163,6 +181,12 @@
           </onClick>
         </button>
       </stack>
+      <p style="justifiedText">
+        <style>
+          <size scale="0.8" />
+        </style>
+        The short <b>|</b> represents the multiples of π
+      </p>
     </stack>
   </sectionNoTitle>
   
@@ -193,7 +217,8 @@
           c:Update()
           c.Visible = false
           for i=-2,4 do
-            plotTools.drawDashLine(d, vector({i*math.pi,-5}), vector({i*math.pi,5}))
+            d:Add(i*math.pi, -0.2)
+            d:Add(i*math.pi, 0.2)
           end
           ]]>
       </script>
@@ -201,9 +226,14 @@
         <axis dim="x" min="-6.3" max="12.6" auto="fixed"></axis>
         <axis dim="y" min="-5" max="5" auto="fixed"></axis>
         <series name="xy" manual="true" draw="lineSegments" style="axes" />
-        <series name="dash" manual="true" draw="lineSegments" />
-        <series name="tan" manual="true" />
-        <series name="cot" manual="true" />
+        <series name="dash" manual="true" draw="lineSegments">
+          <style>
+            <foreground color="black" />
+            <lineThickness>2</lineThickness>
+          </style>
+        </series>
+        <series name="tan" manual="true" capacity="10000" />
+        <series name="cot" manual="true" capacity="10000" />
       </xyPlot>
       <stack name="btnStack" orientation="horizontal">
         <button name="btn1" content="y=tan(x)" style="btnSelected">
@@ -219,7 +249,21 @@
           </onClick>
         </button>
       </stack>
+      <p style="justifiedText">
+        <style>
+          <size scale="0.8" />
+        </style>
+        The short <b>|</b> represents the multiples of π
+      </p>
     </stack>
+  </sectionNoTitle>
+  <!--feedback section-->
+  <sectionNoTitle>
+    <web name="feedback" url="https://drive.google.com/open?id=169zZV-Azls3UUsKqsfDhznUotH_N4YAzP9Acc8_cwNs">
+      <style>
+        <aspectRatio>2</aspectRatio>
+      </style>
+    </web>
   </sectionNoTitle>
 
 </document>

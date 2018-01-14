@@ -1,0 +1,689 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="GA95D8BC5_9CE5_42DF_B3BF_C0180FB987D9">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>LA-PHYS-2.5 Intro to Energy and Work</title>
+    <creator>jason_wang</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/lassondeLogo.png" />
+  </metadata>
+  
+  
+  <include src="resources/curriculumStylesLassonde.xml" />
+  <include src="resources/Utilities.xml" />
+  <include src="resources/plotTools.xml" />
+
+  <!--                                      Header & Footer START                                         -->
+  <header style="themeColour">
+    <stack style="center" orientation="horizontal">
+      <p></p>
+    </stack>
+  </header>
+  <footer style="themeColour">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="themeColourTitle">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--                                      Header & Footer END                                         -->
+
+
+  <!-- Cover Page -->
+  <!-- This is the standard way title pages are created. A great website to get copyright free images .. www.pexels.com
+  *** The style: "pageLayout" is defined in curriculumStylesLassonde.xml. It simply sets the content to the center and adjusts the width to 80% ***-->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">2.5 Intro to Energy and Work</title>
+    <p style="sectionHeading">Introduction</p>
+    <image src="resources/work.jpeg" />
+    <stack orientation="vertical" style="contentBG">
+      <p style="justifiedText">
+        Although we often hear people talking about energy consumption, energy is never really destroyed. It is just transferred from one form to another, doing work in the process. In this module, we are going to learn the concept of <b>energy</b> and <b>work</b>, and how to measure them.
+      </p>
+    </stack>
+  </section>
+
+
+  <!--Simulation-->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Simulation</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">A block with mass 5kg is initially resting on a frictionless surface. Lift the block or/and push the block using the controller below and see the change of the energy and work.</p>
+      <p style="notes"><![CDATA[1 Push = A force acts on the block for very short period
+1 Lift = Lift the block by 1 metre]]></p>
+      <script>
+        local P = {box = plot.box, ground = plot.ground, length=4, center={20,4}, position={20,4}}
+      </script>
+      <drawing name="plot" pan="disabled" tap="disabled" zoom="disabled">
+        <axis dim="x" max="40" min="0" auto="fixed" />
+        <axis dim="y" max="30" min="0" auto="fixed" />
+        <series name="box" draw="radialFill" capacity="6" style="dodgerBlueF" />
+        <series name="ground" draw="radialFill" style="grayF" />
+      </drawing>
+      <stack name="btns" orientation="vertical">
+        <stack name="controlBtns" orientation="horizontal">
+          <button name="Lift" content="Lift Box">
+            <onClick>
+              <![CDATA[
+            P:lift()
+            ]]>
+            </onClick>
+          </button>
+          <button name="Push" content="Push Box">
+            <onClick>
+              <![CDATA[
+            P:push()
+            ]]>
+            </onClick>
+          </button>
+        </stack>
+        <stack name="simBtns" orientation="horizontal">
+          <button name="start" content="Start Simulation">
+            <onClick>
+              <![CDATA[
+              if start.Text == "Start Simulation" then
+                start.Text = "Pause Simulation"
+                sim:Play()
+              else
+                start.Text = "Start Simulation"
+                sim:Pause()
+              end
+              ]]>
+            </onClick>
+          </button>
+          <button name="reset" content="Reset">
+            <onClick>
+              <![CDATA[
+              sim:Pause()
+              P:reset()
+              ]]>
+            </onClick>
+          </button>
+        </stack>
+      </stack>
+      <table name="dataTable" grid="false" widths="15% 22% 21% 21% 21%">
+        <row>
+          <column>
+            <p style="centeredText">Velocity</p>
+          </column>
+          <column>
+            <p style="centeredText">Potential Energy</p>
+          </column>
+          <column>
+            <p style="centeredText">Kinetic Energy</p>
+          </column>
+          <column>
+            <p style="centeredText">Total Energy</p>
+          </column>
+          <column>
+            <p style="centeredText">Work Done</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p style="centeredText">0</p>
+          </column>
+          <column>
+            <p style="centeredText">0</p>
+          </column>
+          <column>
+            <p style="centeredText">0</p>
+          </column>
+          <column>
+            <p style="centeredText">0</p>
+          </column>
+          <column>
+            <p style="centeredText">0</p>
+          </column>
+        </row>
+      </table>
+      <script>
+        <![CDATA[
+        local PE = 0
+        local KE = 0
+        local m = 5
+        local g = 9.81
+        local v = 0
+        
+        plotTools.drawSquare(P.ground, vector({20,1}), 40, 2)
+        
+        function P:initDrawing()
+          local hl = self.length/2
+          self.box:Add(self.center[1],self.center[2])
+          self.box:Add(self.center[1]-hl, self.center[2]-hl)
+          self.box:Add(self.center[1]-hl, self.center[2]+hl)
+          self.box:Add(self.center[1]+hl, self.center[2]+hl)
+          self.box:Add(self.center[1]+hl, self.center[2]-hl)
+          self.box:Add(self.center[1]-hl, self.center[2]-hl)
+        end
+        
+        function P:reset()
+          PE = 0
+          KE = 0
+          v = 0
+          btns.simBtns.start.Text = "Start Simulation"
+          self.position = {20,4}
+          self.box.Transform = matrixf.translation(0,0,0)
+          P:updateData()
+        end
+        
+        function P:lift()
+          PE = PE + m*g
+          self.position[2] = self.position[2] + 1
+          self.box.Transform = matrixf.translation(self.position[1] - self.center[1], self.position[2] - self.center[2], 0)
+          self:updateData()
+        end
+        
+        function P:push()
+          KE = KE + 50
+          v = math.sqrt(KE*2/m)
+          self:updateData()
+        end
+                
+        function P:updatePosition()
+          self.position[1] = self.position[1] + v/100
+          self.box.Transform = matrixf.translation(self.position[1] - self.center[1], self.position[2] - self.center[2], 0)
+        end
+        
+        function P:updateData()
+          dataTable:Child(2):Child(1):Child(1).Text = string.format("%.2f", v)
+          dataTable:Child(2):Child(2):Child(1).Text = string.format("%d", PE)
+          dataTable:Child(2):Child(3):Child(1).Text = string.format("%d", KE)
+          dataTable:Child(2):Child(4):Child(1).Text = string.format("%d", PE+KE)
+          dataTable:Child(2):Child(5):Child(1).Text = string.format("%d", KE)
+        end
+            
+        P:initDrawing()
+        ]]>
+      </script>
+      <simulation name="sim" period="0.01">
+        <onUpdate>
+          <![CDATA[
+          P:updatePosition()
+          ]]>
+        </onUpdate>
+      </simulation>
+    </stack>
+  </sectionNoTitle>
+
+
+  <!--Definition-->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Energy and Work</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Energy</p>
+      <p style="justifiedText">Energy is a measurement of the ability of something to do work. It is not a material substance. Energy can be stored and measured in many forms. Energy is never really destroyed. It is just transferred from one form to another, doing work in the process.</p>
+      <p style="justifiedText">For example,</p>
+      <p style="justifiedText">A speeding bullet has a measurable amount of energy (Kinetic energy) associated with it. The bullet gained this energy because work was done on it by a charge of gunpowder which lost some chemical potential energy in the process.</p>
+      <p style="justifiedText">In practice, whenever work is done to move energy from one form to another, there is always some loss to other forms of energy such as heat and sound.</p>
+    </stack>
+
+
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Work</p>
+      <p style="justifiedText">In physics, a force is said to do <b>work</b> if, when acting, there is a displacement of the point of application in the direction of the force. For example, when a ball is held above the ground and then dropped, the work done on the ball as it falls is equal to the weight of the ball (a force) multiplied by the distance to the ground (a displacement).</p>
+      <p style="justifiedText">The work $\,W$ done by a constant force of magnitude $\,F$ on a point that moves a displacement $\,s$ in a straight line in the direction of the force is the product</p>
+      <p style="centeredText">$W=F \cdot s$</p>
+    </stack>
+
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Measure Energy and Work</p>
+      <p style="justifiedText">The standard unit used to measure energy and work done in physics is the <b>Joule</b>, which has the symbol <b>J</b>. In mechanics, $1J = 1N \cdot m$.</p>
+      <p style="justifiedText">Another unit of energy is <b>Calorie</b>. The amount of energy in an item of food is often written in Calories on the back of the packet. One Calorie is the amount of energy required to raise 1 kg of water by 1 °C.</p>
+      <p style="centeredText">1 Calorie = 4184 J</p>      
+    </stack>
+
+  </sectionNoTitle>
+
+
+  <!--Step-by-Step-->
+  <sectionNoTitle style="pageLayout">
+    <script>
+      local stepsController = StepsController:new({stepsStack=stepsStack, numOfSteps=4, shown_message="Show Step", hidden_message="Hide Step", showStepCounter=true})
+    </script>
+    <p style="sectionHeading">Step by Step</p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="subSectionHeading">Question 1</p>
+      <p style="justifiedText">Suppose we're feeling guilty about eating a chocolate bar; we want to find how much exercise we need to do to burn off those extra 200 Calories. Let's consider a simple form of exercise: pushing a heavy box around a room, see Figure below.</p>
+      <image src="resources\p1.png">
+        <style>
+          <widthPercentage>0.4</widthPercentage>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+      </image>
+    </stack>
+    <stack name="stepsStack">
+      <!--Each step is a stack, and each step has alternating background colors-->
+      <!--Use Snippet to create any single step stack -->
+
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Calculate Total Energy</p>
+          <stack name="cont" style="invisible">
+            <p style="justifiedText">The work we need to do to burn the energy in the candy bar is</p>
+            <p style="centeredText">$E=200cal \cdot 4184J/cal=836800J$</p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(1)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Determine the distance</p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            <p style="justifiedText">Using Work equation: $W=F \cdot \Delta x$, we can calculate $\Delta x$</p>
+            <p style="centeredText"><![CDATA[$\begin{matrix}W&=&F \cdot \Delta x \\[8pt] 836800J &=& 500N \cdot \Delta x \\[8pt] \Delta x &=& \frac{836800J}{500N} \\[8pt] \Delta x &=& 1673.6m \end{matrix}$]]></p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(2)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Pull in an Angle</p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            <p style="justifiedText">What if the box was pulled in an angle like below:</p>
+            <image src="resources/p2.png">
+              <style>
+                <widthPercentage>0.4</widthPercentage>
+                <horizontalAlignment>center</horizontalAlignment>
+              </style>
+            </image>
+            <p style="justifiedText">In the case of the box shown above, only the horizontal component of the applied force, $Fcos(\theta)$, left parenthesis, theta, right parenthesis, is doing work on the box since the box is being displaced horizontally.</p>
+            <p style="justifiedText">Now a more general equation can be written as:</p>
+            <p style="centeredText">$W=F\Delta x cos(\theta)$</p>
+            <p style="justifiedText">If the applied force is 500N with an angle of 30 degree. How much of a chocolate bar can we eat this time if we pull the box through the same 1673.6 m?</p>
+            <p style="centeredText"><![CDATA[$W=500N \cdot 1673.6m \cdot cos(30^o)=734690J$]]></p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(3)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Lifting</p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            <p style="justifiedText">Another common form of exercise is lifting weights. In this case we are working against the force of gravity rather than friction.</p>
+            <p style="justifiedText">We can determine the force $F = mg$, and the change in position is simply the height, so the work is</p>
+            <p style="centeredText">$W=mgh$</p>
+            <p style="justifiedText">If lifting 50kg weight to a height of 0.5m, the work done to the weight is</p>
+            <p style="centeredText">$W=50kg \cdot 9.81 m/s^2 \cdot 0.5m = 245.25J$</p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(4)
+          </onClick>
+        </button>
+      </stack>
+
+    </stack>
+  </sectionNoTitle>
+
+
+  <!--Moving Box (Advanced)-->
+  <sectionNoTitle style="pageLayout">
+    <script>
+      local stepsController = StepsController:new({stepsStack=stepsStack, numOfSteps=8, shown_message="Show Step", hidden_message="Hide Step", showStepCounter=true})
+    </script>
+    
+    <p style="sectionHeading">Moving Box</p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="subSectionHeading">Question 2</p>
+      <p style="justifiedText">Someone moves a 5kg box to the right with a force of 50N, the force of kinetic friction while it's sliding is 30N. The box slides the ground for a distance of 10 metres. What's the work done by each force? What's the net work? How fast is the box after moving 10m?</p>
+      <image src="resources/p3.png" style="width70" />
+    </stack>
+    <stack name="stepsStack">
+      <!--Each step is a stack, and each step has alternating background colors-->
+      <!--Use Snippet to create any single step stack -->
+      <style name="width70">
+        <widthPercentage>0.7</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Analyze Forces</p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            <p style="justifiedText">Recall Work equation:</p>
+            <p style="centeredText">$W=Fdcos(\theta)$</p>
+            <p style="justifiedText">There are four forces here:</p>
+            <p><![CDATA[  1. Normal Force]]></p>
+            <p><![CDATA[  2. Gravitational Force]]></p>
+            <p><![CDATA[  3. Applied Force]]></p>
+            <p><![CDATA[  4. Force of Kinetic Friction]]></p>
+            <p style="justifiedText">The distance $\,d = 10m$, the $\,F$ and the angle between that force and the displacement, $\,\theta$ is going to differ for each of the forces.</p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(1)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Normal Force</p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            <image src="resources/p6.png" style="width70" />
+            <p style="justifiedText">$W_N=F_N \cdot d \cdot cos(90^o) = 0J$</p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(2)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Gravitational Force</p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            <image src="resources/p7.png" style="width70" />
+            <p style="justifiedText">$W_g=F_g \cdot d \cdot cos(-90^o) = 0J$</p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(3)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Applied Force</p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            <image src="resources/p4.png" style="width70" />
+            <p style="justifiedText">$W_{Applied}=50N \cdot 10m \cdot cos(0^o) = 500J$</p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(4)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Kinetic Friction</p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            <image src="resources/p5.png" style="width70" />
+            <p style="justifiedText">$W=30N \cdot 10m \cdot cos(180^o) = -300J$</p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(5)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Determine the Net Work</p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            <p style="justifiedText">To find the net work done on this box, we simple add up all the works done by individual forces:</p>
+            <p style="centeredText">$W_{net} = 0 + 0 + (-300) + 500 = 200J$</p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(6)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Determine Final Velocity</p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            <p style="justifiedText">From the work-energy principle, we have</p>
+            <p style="centeredText"><![CDATA[$\begin{matrix}
+            W_{net} &=& \Delta KE \\[8pt]
+            200J &=&\frac{1}{2} m {v_f}^{2} - \frac{1}{2} m {v_i}^{2} \\[8pt]
+            200J &=& \frac{1}{2} \cdot 5kg \cdot {v_f}^{2} - 0 \\[8pt]
+            v_f &=& 8.94m/s
+            \end{matrix}$]]></p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(7)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Lifting the Box</p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            <p style="justifiedText">If we lift the box upward for 2 metres with constant velocity, what's the net work done on the box?</p>
+            <image src="resources/p8.png" style="width70" />
+            <p style="centeredText">$F_g = mg = 5kg \cdot 9.81m/{s^2} = 49.05N$</p>
+            <p style="centeredText"><![CDATA[$W_g = 49.05N \cdot 2m \cdot cos(180^o) = -98.1J$]]></p>
+            <p style="centeredText"><![CDATA[$W_{net} = mgh - W_g = 5kg \cdot 9.81 \cdot 2m + (-98.1J) = 0J$]]></p>
+            <p style="justifiedText"><![CDATA[This makes sense, because there is no kinetic energy change, in other word, $\Delta KE = 0$]]></p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(8)
+          </onClick>
+        </button>
+      </stack>
+
+    </stack>
+  </sectionNoTitle>
+
+
+  <!--Practices-->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Practices</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Question 3</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p style="justifiedText">
+              Hans Full is pulling on a rope to drag his backpack to school across the ice. He pulls upwards and rightwards with a force of 22.9 Newtons at an angle of 35 degrees above the horizontal to drag his backpack a horizontal distance of 129 metres to the right. Determine the work (in Joules) done upon the backpack.
+            </p>
+          </column>
+        </row>
+      </table>
+      <textField name="input" placeholder="Enter your answer here. (round to nearest integer)" />
+      <p name="answer" style="invisible">2420</p>
+      <stack name="answerStack" style="invisible">
+        <!--q3 solution-->
+        <p>Answer: 2420 J</p>
+      </stack>
+      <p name="feedback" style="invisible" />
+      <script>
+        local attempt = 0;
+        local max = 3;
+      </script>
+      <button name="btn" content="Check Answer" style="btnSelected">
+        <onClick>
+          if input.Text ~= answer.Text then
+          feedback.Style.Visibility = "visible"
+          feedback.Text = "Incorrect! Try again."
+          attempt = attempt + 1
+          if attempt &gt;= max then
+          answerStack.Style.Visibility = "visible"
+          end
+          else
+          feedback.Style.Visibility = "visible"
+          feedback.Text = "Correct, Good Job!"
+          end
+        </onClick>
+      </button>
+    </stack>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Question 4</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p style="justifiedText">
+              While training for breeding season, a 380 gram male squirrel does 32 pushups in a minute, displacing its center of mass by a distance of 8.5 cm for each pushup. Determine the total work done on the squirrel while moving upward (32 times).
+            </p>
+          </column>
+        </row>
+      </table>
+      <textField name="input" placeholder="Enter your answer here. (round to nearest integer)" />
+      <p name="answer" style="invisible">10</p>
+      <stack name="answerStack" style="invisible">
+        <!--q3 solution-->
+        <p>Answer: 10 J</p>
+      </stack>
+      <p name="feedback" style="invisible" />
+      <script>
+        local attempt = 0;
+        local max = 3;
+      </script>
+      <button name="btn" content="Check Answer" style="btnSelected">
+        <onClick>
+          if input.Text ~= answer.Text then
+          feedback.Style.Visibility = "visible"
+          feedback.Text = "Incorrect! Try again."
+          attempt = attempt + 1
+          if attempt &gt;= max then
+          answerStack.Style.Visibility = "visible"
+          end
+          else
+          feedback.Style.Visibility = "visible"
+          feedback.Text = "Correct, Good Job!"
+          end
+        </onClick>
+      </button>
+    </stack>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Question 5</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p style="justifiedText">
+              Justin Thyme is traveling down Lake Avenue at 32.8 m/s in his 1510-kg 1992 Camaro. He spots a police car with a radar gun and quickly slows down to a legal speed of 20.1 m/s.
+            </p>
+            <p style="justifiedText">
+              <![CDATA[
+a. Determine the initial kinetic energy of the Camaro.
+b. Determine the kinetic energy of the Camaro after slowing down.
+c. Determine the amount of work done on the Camaro during the deceleration.
+]]>
+            </p>
+          </column>
+        </row>
+      </table>
+      <textField name="input" placeholder="Enter your answer here. (round to nearest integer)" />
+      <textField name="input2" placeholder="Enter your answer here. (round to nearest integer)" />
+      <textField name="input3" placeholder="Enter your answer here. (round to nearest integer)" />
+      <p name="answer" style="invisible">812259</p>
+      <p name="answer2" style="invisible">305028</p>
+      <p name="answer3" style="invisible">507231</p>
+      <stack name="answerStack" style="invisible">
+        <!--q3 solution-->
+        <p><![CDATA[
+Answers: 
+  a. 812259 J
+  b. 305028 J
+  c. 507231 J]]></p>
+      </stack>
+      <p name="feedback" style="invisible" />
+      <script>
+        local attempt = 0;
+        local max = 3;
+      </script>
+      <button name="btn" content="Check Answer" style="btnSelected">
+        <onClick>
+          if input.Text ~= answer.Text or input2.Text ~= answer2.Text or input3.Text ~= answer3.Text then
+          feedback.Style.Visibility = "visible"
+          feedback.Text = "Incorrect! Try again."
+          attempt = attempt + 1
+          if attempt &gt;= max then
+          answerStack.Style.Visibility = "visible"
+          end
+          else
+          feedback.Style.Visibility = "visible"
+          feedback.Text = "Correct, Good Job!"
+          end
+        </onClick>
+      </button>
+    </stack>
+  </sectionNoTitle>
+
+  <!--Challenge-->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Challenge</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Question 6</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p style="justifiedText">
+              Sheila (m=56.8 kg) is in her saucer sled moving at 12.6 m/s at the bottom of the sledding hill near Bluebird Lake. She approaches a long embankment inclined upward at 16° above the horizontal. As she slides up the embankment, she encounters a coefficient of friction of 0.128. Determine the height to which she will travel before coming to rest.
+            </p>
+          </column>
+        </row>
+      </table>
+      <stack name="answerStack" style="invisible">
+        <!--q3 solution-->
+        <p>Answer: 5.60m</p>
+      </stack>
+      <button name="btn" content="Check Answer" style="btnSelected">
+        <onClick>
+          answerStack.Style.Visibility = "visible"
+        </onClick>
+      </button>
+    </stack>
+  </sectionNoTitle>
+
+
+
+</document>

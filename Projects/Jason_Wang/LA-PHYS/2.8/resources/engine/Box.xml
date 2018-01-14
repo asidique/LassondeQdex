@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<fragment xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd">
+  <script>
+    <![CDATA[
+-- angle in degree
+Box = {series, center, w, h, mass=10, acc=Vector(0,0), angle=0, damping=0.99, visible=true}
+function Box:new(o)
+  o = o or {}
+  o.origin = o.center:clone()
+  o.prevCenter = o.center:clone()
+  setmetatable(o, self)
+  self.__index = self
+  return o
+end
+
+function Box:reset()
+  self.acc = Vector(0,0)
+  self.center = self.origin:clone()
+  self.prevCenter = self.origin:clone()
+end
+
+function Box:initDrawing()
+  plotTools.drawSquare(self.series, vector({0,0}), self.w, self.h)
+end
+
+function Box:draw()
+  self.series.Transform = matrixf.translation(self.center.x, self.center.y, 0) * matrixf.rotationAboutAxis(0,0,1,math.rad(self.angle))
+end
+
+function Box:applyForce(f)
+  self.acc = self.acc + f/self.mass
+end
+
+function Box:isTouched(x,y)
+  local hw = self.w/2
+  local hh = self.h/2
+  return (x>self.center.x-hw and x<self.center.x+hw and y>self.center.y-hh and y<self.center.y+hh)
+end
+
+function Box:updatePhysics(t)
+  local vel = self.damping * (self.center - self.prevCenter)
+  local newCenter = self.center + vel + 0.5 * t * t * self.acc
+  self.prevCenter = self.center
+  self.center = newCenter
+  self.acc = Vector(0,0)
+end
+    ]]>
+  </script>
+</fragment>

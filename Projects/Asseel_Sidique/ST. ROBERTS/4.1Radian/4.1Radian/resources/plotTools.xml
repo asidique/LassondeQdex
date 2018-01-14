@@ -1,0 +1,1068 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<fragment xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd">
+  <!-- v6.1: Added LetterPack (In Progress), and Symbol Pack(In Progress) Added Letter S, b, k. Lower Case letters are no longer called by smallC. textc is used instead.-->
+  <!--Added chartTools (pie, bar, line, area, scatter) -->
+
+  <!-- Shapes-->
+  <script>
+    <![CDATA[
+    plotTools = {}
+    transparent = color.transparent
+    
+    function plotTools.drawSquare(series, centre, width, height, customColor)
+      local x = centre[1];
+      local y = centre[2];
+      local shapeColor = customColor or series.Style.ForegroundColor
+      
+      series:Add(x - width/2, y + height/2, shapeColor);
+      series:Add(x + width/2, y + height/2, shapeColor);
+      series:Add(x + width/2, y - height/2, shapeColor);
+      series:Add(x - width/2, y - height/2, shapeColor);
+      series:Add(x - width/2, y + height/2, shapeColor);
+    end      
+    
+    function plotTools.drawArrow(series, start, finish, customColor)
+      local width = 1;
+      local line = finish - start;
+      local angle = math.atan2(line[1],line[2]);
+      local lineLength = math.sqrt((start[1] - finish[1])^2+(start[2] - finish[2])  ^2);
+      local tPointOnLine;
+      local pointOnLine
+      local shapeColor = customColor or series.Style.ForegroundColor
+    
+      tPoint = width / (2 * lineLength);
+      pointOnLine = finish - tPoint * line;
+      local normal = vector({-line[2],line[1]});
+      local leftP = pointOnLine + tPoint * normal;
+      local rightP = pointOnLine - tPoint * normal;
+      series:Add(start[1],start[2], transparent)
+      series:Add(start[1],start[2], shapeColor)
+      series:Add(finish[1],finish[2], shapeColor)
+      series:Add(leftP[1],leftP[2], shapeColor)
+      series:Add(finish[1],finish[2], shapeColor)
+      series:Add(rightP[1],rightP[2], shapeColor)
+      series:Add(rightP[1],rightP[2], transparent)
+      series:Update();
+    end
+    
+    function plotTools.drawCircle(series, centre, radius, customColor)    
+	  radius = math.abs(radius)
+      local x = centre[1];
+      local y = centre[2];
+      local points = 2*math.pi*radius*100;
+        if radius < 1 then
+          points = points + 300
+        end
+      local shapeColor = customColor or series.Style.ForegroundColor
+      shapeColors = colors(points, shapeColor);
+      
+      series:Add(matrixf.circle(pointf({x, y}), radius, points), shapeColors);
+    end
+    
+    function plotTools.drawArc(series, startAngle, endAngle, centre, radius, customColor)
+	if startAngle ~= endAngle then
+	  radius = math.abs(radius)
+      local rad = math.rad;      
+      local seg = 100;
+      local delta = rad((endAngle - startAngle)) / seg;
+      local theta;      
+      local x = centre[1] + radius * math.cos(rad(startAngle));
+      local y = centre[2] + radius * math.sin(rad(startAngle));
+      local shapeColor = customColor or series.Style.ForegroundColor
+      
+      series:Add(x, y, shapeColor);
+      for theta = rad(startAngle), rad(endAngle), delta do
+        x = centre[1] + radius * math.cos(theta);
+        y = centre[2] + radius * math.sin(theta);
+        series:Add(x, y, shapeColor);
+      end
+      local x = centre[1] + radius * math.cos(rad(endAngle));
+      local y = centre[2] + radius * math.sin(rad(endAngle));
+      series:Add(x, y, shapeColor);
+	end
+    end
+    
+    function plotTools.drawEllipse(series, centre, xradius, yradius, customColor)
+	  xradius = math.abs(xradius)
+	  yradius = math.abs(yradius)
+      x = centre[1];
+      y = centre[2];
+      radius = math.max(xradius,yradius)
+      local points = 2*math.pi*radius*100;  
+      if radius < 1 then
+      points = points + 300
+      end
+      local shapeColor = customColor or series.Style.ForegroundColor
+      shapeColors = colors(points, shapeColor);
+      
+      series:Add(matrixf.ellipse(pointf({x, y}), xradius, yradius, points), shapeColors);
+    end
+    
+    function plotTools.drawEllipseArc(series, startAngle, endAngle, centre, xradius, yradius, customColor)    
+	  if startAngle ~= endAngle then
+	    xradius = math.abs(xradius)
+	    yradius = math.abs(yradius)
+        local seg = 100;
+        local delta = math.rad((endAngle - startAngle)) / seg;
+        local theta;      
+        local x = centre[1] + xradius * math.cos(math.rad(startAngle));
+        local y = centre[2] + yradius * math.sin(math.rad(startAngle));
+        local shapeColor = customColor or series.Style.ForegroundColor
+        
+        series:Add(x, y, shapeColor);
+        for theta = math.rad(startAngle), math.rad(endAngle), delta do
+          x = centre[1] + xradius * math.cos(theta);
+          y = centre[2] + yradius * math.sin(theta);
+          series:Add(x, y, shapeColor);
+        end
+        local x = centre[1] + xradius * math.cos(math.rad(endAngle));
+        local y = centre[2] + yradius * math.sin(math.rad(endAngle));
+        series:Add(x, y, shapeColor);
+	  end
+    end
+    ]]>
+  </script>
+
+  <!--Character Set-->
+  <script>
+    <!--Letters-->
+    <![CDATA[
+    local char = {}
+    local transparent = color.transparent
+    
+    function char.stringText(input)
+      --split(input, "")
+    end
+    
+    --Need to make this function draw lineSegments instead of lines
+    function char.textA(series, anchor, height, customColor)
+      local x = anchor[1]
+      local y = anchor[2]
+      local height = height or 1
+      local size = height/1.35
+      local charColor = customColor or color.black
+
+      series:Add(x, y, transparent)
+      series:Add(x, y, charColor)
+      series:Add(0.50 * size + x, 1.35 * size + y, charColor)
+      series:Add(1.00 * size + x, 0.00 * size + y, charColor)
+      series:Add(1.00 * size + x, 0.00 * size + y, transparent)
+      series:Add(0.15 * size + x, 0.45 * size + y, transparent)
+      series:Add(0.15 * size + x, 0.45 * size + y, charColor)
+      series:Add(0.85 * size + x, 0.45 * size + y, charColor)
+      series:Add(0.85 * size + x, 0.45 * size + y, transparent)
+    end
+
+    function char.textB(series, anchor, height, customColor)
+      local x = anchor[1]
+      local y = anchor[2]
+      local size = height or 1
+      local charColor = customColor or color.black
+
+      series:Add(0.0 * size + x, 0.00 * size + y, transparent)
+      series:Add(0.0 * size + x, 0.00 * size + y, charColor)
+      series:Add(0.0 * size + x, 0.00 * size + y, charColor)
+      series:Add(0.0 * size + x, 1.00 * size + y, charColor)
+      plotTools.drawArc(series, 90, -90, vector({0.3 * size + x, 0.75 * size + y}), 0.25 * size, charColor)
+      series:Add(0.0 * size + x, 0.50 * size + y, charColor)
+      plotTools.drawArc(series, 90, -90, vector({0.4 * size + x, 0.25 * size + y}), 0.25 * size, charColor)
+      series:Add(0.0 * size + x, 0.00 * size + y, charColor)
+      series:Add(0.0 * size + x, 0.00 * size + y, transparent)
+    end
+
+    function char.textb(series, anchor, height, customColor)
+      local x = anchor[1]
+      local y = anchor[2]
+      local size = height or 1
+      local charColor = customColor or color.black
+      local xradius = 0.255 * size
+      local yradius = 0.345 * size
+      
+      local u = (0.255 * size + x) + xradius * math.cos(math.rad(0));
+      local v = (0.345 * size + y) + yradius * math.sin(math.rad(0));
+
+      series:Add(0.00 * size + x, 1.00 * size + y, transparent)
+      series:Add(0.00 * size + x, 1.00 * size + y, charColor)
+      series:Add(0.00 * size + x, 0.00 * size + y, charColor)
+      series:Add(0.00 * size + x, 0.00 * size + y, transparent)
+      series:Add(u, v, transparent)
+      plotTools.drawEllipseArc(series, 0, 360, {0.255 * size + x, 0.345 * size + y}, 0.255 * size, 0.345 * size, charColor);
+      series:Add(u, v, transparent)
+    end
+    
+    function char.textC(series, anchor, height, customColor)
+      local x = anchor[1];
+      local y = anchor[2];
+      local size = height or 1;
+      local charColor = customColor or color.black;
+      local radius = 0.5 * size
+      
+      local u = (0.5 * size + x) + radius * math.cos(math.rad(45));
+      local v = (0.5 * size + y) + radius * math.sin(math.rad(45));
+      series:Add(u, v, transparent)
+      plotTools.drawArc(series, 45, 315, {0.5 * size + x, 0.5 * size + y}, radius, charColor)
+      u = (0.5 * size + x) + radius * math.cos(math.rad(315));
+      v = (0.5 * size + y) + radius * math.sin(math.rad(315));
+      series:Add(u, v, transparent)
+    end
+    
+    function char.textc(series, anchor, height, customColor)
+      local x = anchor[1]
+      local y = anchor[2]
+      local size = height or 1
+      local charColor = customColor or color.black;
+      local xradius = 0.29 * size
+      local yradius = 0.375 * size
+      
+      local x = 0.29 * size + x + xradius * math.cos(math.rad(25));
+      local y = 0.375 * size + y + yradius * math.sin(math.rad(25));
+      series:Add(x, y, transparent)
+      plotTools.drawEllipseArc(series, 25, 340, {0.29 * size + x, 0.375 * size + y}, xradius, yradius, charColor)
+      x = 0.29 * size + x + xradius * math.cos(math.rad(340));
+      y = 0.375 * size + y + yradius * math.sin(math.rad(340));
+      series:Add(x, y, transparent)
+    end
+    
+    function char.textD(series, anchor, height, customColor)
+      local charColor = customColor or color.black;
+      local x = anchor[1];
+      local y = anchor[2];
+      local size = height or 1;
+      
+      series:Add(0.0 * size + x, 0.0 * size + y, transparent);
+      series:Add(0.0 * size + x, 0.0 * size + y, charColor);
+      series:Add(0.0 * size + x, 1.0 * size + y, charColor);
+      plotTools.drawArc(series, 90, -90, vector({0.3 * size + x, 0.5 * size + y}), 0.5 * size, charColor);
+      series:Add(0.0 * size + x, 0.0 * size + y, charColor);
+      series:Add(0.0 * size + x, 0.0 * size + y, transparent);
+    end
+    
+    function char.textE(series, anchor, height, customColor)
+      local charColor = customColor or color.black;
+      local x = anchor[1]
+      local y = anchor[2]
+      local size = height or 1;
+      
+      series:Add(0.72 * size + x, 1.00 * size + y, transparent)
+      series:Add(0.72 * size + x, 1.00 * size + y, charColor)
+      series:Add(0.00 * size + x, 1.00 * size + y, charColor)
+      series:Add(0.00 * size + x, 0.00 * size + y, charColor)
+      series:Add(0.75 * size + x, 0.00 * size + y, charColor)
+      series:Add(0.75 * size + x, 0.00 * size + y, transparent)
+      series:Add(0.70 * size + x, 0.52 * size + y, transparent)
+      series:Add(0.70 * size + x, 0.52 * size + y, charColor)
+      series:Add(0.00 * size + x, 0.52 * size + y, charColor)
+      series:Add(0.00 * size + x, 0.52 * size + y, transparent)
+    end
+    
+    function char.textF(series, anchor, height, customColor)
+      local charColor = customColor or color.black;
+      local x = anchor[1]
+      local y = anchor[2]
+      local size = height or 1
+      
+      series:Add(0.67 * size + x, 1.00 * size + y, transparent)
+      series:Add(0.67 * size + x, 1.00 * size + y, charColor)
+      series:Add(0.00 * size + x, 1.00 * size + y, charColor)
+      series:Add(0.00 * size + x, 0.00 * size + y, charColor)
+      series:Add(0.00 * size + x, 0.00 * size + y, transparent)
+      series:Add(0.58 * size + x, 0.54 * size + y, transparent)
+      series:Add(0.58 * size + x, 0.54 * size + y, charColor)
+      series:Add(0.00 * size + x, 0.54 * size + y, charColor)
+      series:Add(0.00 * size + x, 0.54 * size + y, transparent)
+    end
+    
+    function char.textG(series, anchor, height, customColor)
+      local charColor = customColor or color.black;
+      local x = anchor[1]
+      local y = anchor[2]
+      local size = height or 1
+      
+      series:Add(0.55 * size + x, 0.50 * size + y, transparent)
+      series:Add(0.55 * size + x, 0.50 * size + y, charColor)
+      series:Add(0.77 * size + x, 0.50 * size + y, charColor)
+      series:Add(0.77 * size + x, 0.25 * size + y, charColor)
+      plotTools.drawEllipseArc(series, -45, -300, vector({0.45 * size + x, 0.50 * size + y}), 0.45 * size, 0.50 * size, charColor)
+      series:Add(0.675 * size + x, 0.933 * size + y, transparent)
+    end
+    
+    function char.textH(series, anchor, height, customColor)
+      local charColor = customColor or color.black;
+      local x = anchor[1]
+      local y = anchor[2]
+      local size = height or 1
+      
+      series:Add(0.00 * size + x, 0.00 * size + y, transparent)
+      series:Add(0.00 * size + x, 0.00 * size + y, charColor)
+      series:Add(0.00 * size + x, 1.00 * size + y, charColor)  
+      series:Add(0.00 * size + x, 0.55 * size + y, charColor) 
+      series:Add(0.60 * size + x, 0.55 * size + y, charColor)       
+      series:Add(0.60 * size + x, 0.00 * size + y, charColor)
+      series:Add(0.60 * size + x, 1.00 * size + y, charColor)
+      series:Add(0.60 * size + x, 1.00 * size + y, transparent)
+    end
+    
+    function char.textI(series, anchor, height, customColor)
+      local charColor = customColor or color.black;
+      local x = anchor[1]
+      local y = anchor[2]
+      local size = height
+      
+      series:Add(0.00 * size + x, 1.00 * size + y, transparent)
+      series:Add(0.00 * size + x, 1.00 * size + y, charColor)
+      series:Add(0.00 * size + x, 0.00 * size + y, charColor)
+      series:Add(0.00 * size + x, 0.00 * size + y, transparent)
+    end
+    
+    function char.textJ(series, anchor, height, customColor)
+      local charColor = customColor or color.black;
+      local x = anchor[1]
+      local y = anchor[2]
+      local size = height or 1
+      
+      series:Add(0.50 * size + x, 1.00 * size + y, transparent)
+      series:Add(0.50 * size + x, 1.00 * size + y, charColor)
+      series:Add(0.50 * size + x, 0.33 * size + y, charColor)
+      plotTools.drawArc(series, 0, -160, vector({0.25 * size + x, 0.25 * size + y}), 0.25 * size, charColor)
+      series:Add(0.015 * size + x, 0.1645 * size + y, transparent)
+    end
+    
+    function char.textK(series, anchor, height, customColor)
+      local charColor = customColor or color.black;
+      local x = anchor[1]
+      local y = anchor[2]
+      local size = height or 1
+      
+      series:Add(0.00 * size + x, 0.00 * size + y, transparent)
+      series:Add(0.00 * size + x, 0.00 * size + y, charColor)
+      series:Add(0.00 * size + x, 1.00 * size + y, charColor)
+      series:Add(0.00 * size + x, 0.40 * size + y, charColor)
+      series:Add(0.60 * size + x, 1.00 * size + y, charColor)
+      series:Add(0.20 * size + x, 0.60 * size + y, charColor)
+      series:Add(0.60 * size + x, 0.00 * size + y, charColor)
+      series:Add(0.60 * size + x, 0.00 * size + y, transparent)
+    end
+    
+    function char.textk(series, anchor, height, customColor)
+      local charColor = customColor or color.black;
+      local x = anchor[1]
+      local y = anchor[2]
+      local size = height or 1
+      
+      series:Add(0.000 * size + x, 1.00 * size + y, transparent)
+      series:Add(0.000 * size + x, 1.00 * size + y, charColor)
+      series:Add(0.000 * size + x, 0.00 * size + y, charColor)
+      series:Add(0.000 * size + x, 0.00 * size + y, transparent)
+      series:Add(0.420 * size + x, 0.72 * size + y, transparent)
+      series:Add(0.420 * size + x, 0.72 * size + y, charColor)
+      series:Add(0.000 * size + x, 0.29 * size + y, charColor)
+      series:Add(0.000 * size + x, 0.29 * size + y, transparent)
+      series:Add(0.166 * size + x, 0.46 * size + y, transparent)
+      series:Add(0.166 * size + x, 0.46 * size + y, charColor)
+      series:Add(0.470 * size + x, 0.00 * size + y, charColor)
+      series:Add(0.470 * size + x, 0.00 * size + y, transparent)
+    end
+    
+    function char.textL(series, anchor, height, customColor)
+      local charColor = customColor or color.black;
+      local x = anchor[1]
+      local y = anchor[2]
+      local size = height or 1
+      
+      series:Add(0.00 * size + x, 1.00 * size + y, transparent)
+      series:Add(0.00 * size + x, 1.00 * size + y, charColor)
+      series:Add(0.00 * size + x, 0.00 * size + y, charColor)
+      series:Add(0.60 * size + x, 0.00 * size + y, charColor)
+      series:Add(0.60 * size + x, 0.00 * size + y, transparent)
+    end
+    
+    function char.textM(series, anchor, height, customColor)
+      local charColor = customColor or color.black;
+      local x = anchor[1]
+      local y = anchor[2]
+      local height = height or 1
+      local size = height/1.25
+      
+      series:Add(0.00 * size + x, 0.00 * size + y, transparent)
+      series:Add(0.00 * size + x, 0.00 * size + y, charColor)
+      series:Add(0.00 * size + x, 1.25 * size + y, charColor)
+      series:Add(0.50 * size + x, 0.30 * size + y, charColor)
+      series:Add(1.00 * size + x, 1.25 * size + y, charColor)
+      series:Add(1.00 * size + x, 0.00 * size + y, charColor)
+      series:Add(1.00 * size + x, 0.00 * size + y, transparent)
+    end
+    
+    function char.textm(series, anchor, height, customColor)
+      local charColor = customColor or color.black;
+      local x = anchor[1]
+      local y = anchor[2]
+      local size = height or 1
+      
+      series:Add(0.00 * size + x, 0.75 * size + y, transparent)
+      series:Add(0.00 * size + x, 0.75 * size + y, charColor)
+      series:Add(0.00 * size + x, 0.00 * size + y, charColor)
+      plotTools.drawEllipseArc(series, 180, 0, {0.24 * size + x, 0.50 * size + y}, 0.24 * size, 0.25 * size, charColor)
+      series:Add(0.48 * size + x, 0.00 * size + y, charColor)
+      series:Add(0.48 * size + x, 0.50 * size + y, charColor)
+      plotTools.drawEllipseArc(series, 180, 0, {0.72 * size + x, 0.50 * size + y}, 0.24 * size, 0.25 * size, charColor)
+      series:Add(0.96 * size + x, 0.00 * size + y, charColor)
+      series:Add(0.96 * size + x, 0.50 * size + y, charColor)
+      series:Add(0.96 * size + x, 0.50 * size + y, transparent)
+    end
+    
+    function char.textN(series, anchor, height, customColor)
+      local x = anchor[1];
+      local y = anchor[2];
+      local size = height or 1;
+      local charColor = customColor or color.black;
+      
+      series:Add(0.00 * size + x, 0.00 * size + y, transparent);
+      series:Add(0.00 * size + x, 0.00 * size + y, charColor);
+      series:Add(0.00 * size + x, 1.00 * size + y, charColor);
+      series:Add(0.66 * size + x, 0.00 * size + y, charColor);
+      series:Add(0.66 * size + x, 1.00 * size + y, charColor);
+      series:Add(0.66 * size + x, 1.00 * size + y, transparent);
+    end
+    
+    function char.textO(series, anchor, height, customColor)
+      local x = anchor[1]
+      local y = anchor[2]
+      local size = height or 1
+      local charColor = customColor or color.black;
+      local radius = 0.5 * size
+      
+      local u = (0.5 * size + x) + radius * math.cos(math.rad(0));
+      local v = (0.5 * size + y) + radius * math.sin(math.rad(0));
+      series:Add(u, v, transparent);
+      plotTools.drawArc(series, 0, 360, vector({0.5 * size + x, 0.5 * size + y}), 0.5 * size, charColor);
+      u = (0.5 * size + x) + radius * math.cos(math.rad(360));
+      v = (0.5 * size + y) + radius * math.sin(math.rad(360));
+      series:Add(u, v, transparent);
+    end
+    
+    function char.textP(series, anchor, height, customColor)
+      local x = anchor[1]
+      local y = anchor[2]
+      local size = height or 1
+      local charColor = customColor or color.black;
+      
+      series:Add(0.00 * size + x, 0.00 * size + y, transparent)
+      series:Add(0.00 * size + x, 0.00 * size + y, charColor)
+      series:Add(0.00 * size + x, 1.00 * size + y, charColor)
+      plotTools.drawArc(series, 90, -90, {0.3 * size + x, 0.7 * size + y}, 0.3 * size, charColor)
+      series:Add(0.00 * size + x, 0.40 * size + y, charColor)
+      series:Add(0.00 * size + x, 0.40 * size + y, transparent)
+    end
+    
+    function char.textQ(series, anchor, height, customColor)
+      local x = anchor[1]
+      local y = anchor[2]
+      local size = height or 1
+      local charColor = customColor or color.black;
+      local xradius = 0.45 * size
+      local yradius = 0.5 * size
+      
+      local u = (0.45 * size + x) + xradius * math.cos(math.rad(0));
+      local v = (0.5 * size + y) + yradius * math.sin(math.rad(0));
+      series:Add(u, v, transparent);
+      plotTools.drawEllipseArc(series, 0, 360, vector({0.45 * size + x, 0.5 * size + y}), 0.45 * size, 0.5 * size, charColor);
+      u = (0.45 * size + x) + xradius * math.cos(math.rad(360));
+      v = (0.5 * size + y) + yradius * math.sin(math.rad(360));
+      series:Add(u, v, transparent);
+      series:Add(0.47 * size + x, 0.21 * size + y, transparent)
+      series:Add(0.47 * size + x, 0.21 * size + y, charColor)
+      series:Add(0.97 * size + x, -.08 * size + y, charColor)
+      series:Add(0.97 * size + x, -.08 * size + y, transparent)
+    end
+    
+    function char.textR(series, anchor, height, customColor)
+      local x = anchor[1]
+      local y = anchor[2]
+      local size = height or 1
+      local charColor = customColor or color.black;
+      
+      series:Add(0.00 * size + x, 0.00 * size + y, transparent)
+      series:Add(0.00 * size + x, 0.00 * size + y, charColor)
+      series:Add(0.00 * size + x, 1.00 * size + y, charColor)
+      plotTools.drawArc(series, 90, -90, {0.480 * size + x, 0.767 * size + y}, 0.233 * size, charColor)
+      series:Add(0.00 * size + x, 0.534 * size + y, charColor)
+      series:Add(0.44 * size + x, 0.534 * size + y, charColor)
+      series:Add(0.78 * size + x, 0.000 * size + y, charColor)
+      series:Add(0.78 * size + x, 0.000 * size + y, transparent)
+    end
+    
+    function char.textS(series, anchor, height, customColor)
+      local x = anchor[1];
+      local y = anchor[2];
+      local size = height or 1;
+      local charColor = customColor or color.black;
+      local xradius1 = 0.335 * size;
+      local yradius1 = 0.233 * size;
+      local xradius2 = 0.375 * size;
+      local yradius2 = 0.267 * size;
+      
+      local u = (0.375 * size + x) + xradius1 * math.cos(math.rad(-7));
+      local v = (0.767 * size + y) + yradius1 * math.sin(math.rad(-7));
+      series:Add(u, v, transparent);
+      --series:Add(0.710 * size + x, 0.767 * size + y, transparent);
+      plotTools.drawEllipseArc(series, -7, 261, {0.375 * size + x, 0.767 * size + y}, 0.335 * size, 0.233 * size, charColor);
+      plotTools.drawEllipseArc(series, 81, -192, {0.375 * size + x, 0.267 * size + y}, 0.375 * size, 0.267 * size, charColor);
+      --series:Add(x, 0.267 * size + y, transparent);
+      u = (0.375 * size + x) + xradius2 * math.cos(math.rad(-192));
+      v = (0.267 * size + y) + yradius2 * math.sin(math.rad(-192));
+      series:Add(u, v, transparent);
+    end
+    
+    function char.textT(series, anchor, height, customColor)
+      local x = anchor[1]
+      local y = anchor[2]
+      local size = height or 1
+      local charColor = customColor or color.black;
+      
+      series:Add(0.00 * size + x, 1.00 * size + y, transparent)
+      series:Add(0.00 * size + x, 1.00 * size + y, charColor)
+      series:Add(0.84 * size + x, 1.00 * size + y, charColor)
+      series:Add(0.84 * size + x, 1.00 * size + y, transparent)
+      series:Add(0.42 * size + x, 0.00 * size + y, transparent)
+      series:Add(0.42 * size + x, 0.00 * size + y, charColor)
+      series:Add(0.42 * size + x, 1.00 * size + y, charColor)
+      series:Add(0.42 * size + x, 1.00 * size + y, transparent)
+    end
+    
+    function char.textU(series, anchor, height, customColor)
+      local charColor = customColor or color.black;
+      local x = anchor[1]
+      local y = anchor[2]
+      local size = height or 1
+      
+      series:Add(0.00 * size + x, 1.00 * size + y, transparent)
+      series:Add(0.00 * size + x, 1.00 * size + y, charColor)
+      plotTools.drawEllipseArc(series, 180, 360, vector({0.30 * size + x, 0.35 * size + y}), 0.30 * size, 0.35 * size, charColor)
+      series:Add(0.60 * size + x, 1.00 * size + y, charColor)
+      series:Add(0.60 * size + x, 1.00 * size + y, transparent)
+    end
+    
+    function char.textV(series, anchor, height, customColor)
+      local charColor = customColor or color.black;
+      local x = anchor[1]
+      local y = anchor[2]
+      local size = height or 1
+      
+      series:Add(0.000 * size + x, 1.00 * size + y, transparent)
+      series:Add(0.000 * size + x, 1.00 * size + y, charColor)
+      series:Add(0.375 * size + x, 0.00 * size + y, charColor)
+      series:Add(0.750 * size + x, 1.00 * size + y, charColor)
+      series:Add(0.750 * size + x, 1.00 * size + y, transparent)
+    end
+    
+    function char.textW(series, anchor, height, customColor)
+      local x = anchor[1]
+      local y = anchor[2]
+      local size = height or 1
+      local charColor = customColor or color.black;
+      
+      series:Add(0.000 * size + x, 1.00 * size + y, transparent)
+      series:Add(0.000 * size + x, 1.00 * size + y, charColor)
+      series:Add(0.250 * size + x, 0.00 * size + y, charColor)
+      series:Add(0.575 * size + x, 1.00 * size + y, charColor)
+      series:Add(0.900 * size + x, 0.00 * size + y, charColor)
+      series:Add(1.150 * size + x, 1.00 * size + y, charColor)
+      series:Add(1.150 * size + x, 1.00 * size + y, transparent)
+    end
+    
+    function char.textX(series, anchor, height, customColor)
+      local charColor = customColor or color.black;
+      local x = anchor[1]
+      local y = anchor[2]
+      local size = height or 1
+      
+      series:Add(0.05 * size + x, 1.00 * size + y, transparent)
+      series:Add(0.05 * size + x, 1.00 * size + y, charColor)
+      series:Add(0.75 * size + x, 0.00 * size + y, charColor)
+      series:Add(0.75 * size + x, 0.00 * size + y, transparent)
+      series:Add(0.74 * size + x, 1.00 * size + y, transparent)
+      series:Add(0.74 * size + x, 1.00 * size + y, charColor)
+      series:Add(0.00 * size + x, 0.00 * size + y, charColor)
+      series:Add(0.00 * size + x, 0.00 * size + y, transparent)
+    end
+    
+    function char.textY(series, anchor, height, customColor)
+      local charColor = customColor or color.black;
+      local x = anchor[1]
+      local y = anchor[2]
+      local size = height or 1
+      
+      series:Add(0.00 * size + x, 1.00 * size + y, transparent)
+      series:Add(0.00 * size + x, 1.00 * size + y, charColor)
+      series:Add(0.35 * size + x, 0.50 * size + y, charColor)
+      series:Add(0.35 * size + x, 0.00 * size + y, charColor)
+      series:Add(0.35 * size + x, 0.50 * size + y, charColor)
+      series:Add(0.70 * size + x, 1.00 * size + y, charColor)
+      series:Add(0.70 * size + x, 1.00 * size + y, transparent)      
+    end
+    
+    function char.textZ(series, anchor, height, customColor)
+      local charColor = customColor or color.black;
+      local x = anchor[1]
+      local y = anchor[2]
+      local size = height or 1;
+      
+      series:Add(0.05 * size + x, 1.00 * size + y, transparent)
+      series:Add(0.05 * size + x, 1.00 * size + y, charColor)
+      series:Add(0.70 * size + x, 1.00 * size + y, charColor)
+      series:Add(0.00 * size + x, 0.00 * size + y, charColor)
+      series:Add(0.75 * size + x, 0.00 * size + y, charColor)
+      series:Add(0.75 * size + x, 0.00 * size + y, transparent)    
+    end
+    ]]>
+    <!--Numbers-->
+    <![CDATA[    
+    function char.num0(series, anchor, height, customColor)
+      local charColor = customColor or color.black;
+      local x = anchor[1];
+      local y = anchor[2];
+      local size = height or 1;
+      local xradius = 0.3 * size
+      local yradius = 0.5 * size
+      
+      local u = (0.3 * size + x) + xradius * math.cos(math.rad(0));
+      local v = (0.5 * size + y) + yradius * math.sin(math.rad(0));
+      series:Add(u, v, transparent)
+      plotTools.drawEllipseArc(series, 0, 360, {0.3 * size + x, 0.5 * size + y}, 0.3 * size, 0.5 * size, charColor);
+      series:Add(u, v, transparent)
+    end
+    
+    function char.num1(series, anchor, height, customColor)
+      local charColor = customColor or color.black;
+      local x = anchor[1];
+      local y = anchor[2];
+      local size = height or 1;
+
+      series:Add(0.00 * size + x, 0.74 * size + y, transparent);
+      series:Add(0.00 * size + x, 0.74 * size + y, charColor);
+      series:Add(0.25 * size + x, 1.00 * size + y, charColor);
+      series:Add(0.25 * size + x, 0.00 * size + y, charColor);
+      series:Add(0.25 * size + x, 0.00 * size + y, transparent);
+    end
+    
+    function char.num2(series, anchor, height, customColor)
+      local charColor = customColor or color.black;
+      local x = anchor[1];
+      local y = anchor[2];
+      local size = height or 1;
+      local radius = 0.28 * size
+      
+      local u = (0.30 * size + x) + radius * math.cos(math.rad(170));
+      local v = (0.72 * size + y) + radius * math.sin(math.rad(170));
+      series:Add(u, v, transparent)
+      plotTools.drawArc(series, 170, -45, {0.30 * size + x, 0.72 * size + y}, 0.28 * size, charColor);
+      series:Add(0.00 * size + x, 0.00 * size + y, charColor);
+      series:Add(0.60 * size + x, 0.00 * size + y, charColor);
+      series:Add(0.60 * size + x, 0.00 * size + y, transparent);
+    end
+    
+    function char.num3(series, anchor, height, customColor)
+      local charColor = customColor or color.black;
+      local x = anchor[1];
+      local y = anchor[2];
+      local size = height or 1;
+      local xradius = 0.245 * size;
+      local yradius = 0.225 * size;
+      
+      local u = (0.290 * size + x) + xradius * math.cos(math.rad(170));
+      local v = (0.775 * size + y) + yradius * math.sin(math.rad(170));
+      series:Add(u, v, transparent)
+      plotTools.drawEllipseArc(series, 170, -90, vector({0.290 * size + x, 0.775 * size + y}), 0.245 * size, 0.225 * size, charColor);
+      plotTools.drawEllipseArc(series, 90, -180, vector({0.290 * size + x, 0.275 * size + y}), 0.290 * size, 0.275 * size, charColor);
+      xradius = 0.290 * size;
+      yradius = 0.275 * size;
+      u = (0.290 * size + x) + xradius * math.cos(math.rad(-180));
+      v = (0.275 * size + y) + yradius * math.sin(math.rad(-180));
+      series:Add(u, v, transparent)
+    end
+    
+    function char.num4(series, anchor, height, customColor)
+      local charColor = customColor or color.black;
+      local x = anchor[1];
+      local y = anchor[2];
+      local size = height or 1;
+          
+      series:Add(0.50 * size + x, 0.0 * size + y, transparent);
+      series:Add(0.50 * size + x, 0.0 * size + y, charColor);
+      series:Add(0.50 * size + x, 1.0 * size + y, charColor);
+      series:Add(0.00 * size + x, 0.27 * size + y, charColor);
+      series:Add(0.70 * size + x, 0.27 * size + y, charColor);
+      series:Add(0.70 * size + x, 0.27 * size + y, transparent);
+    end
+    
+    function char.num5(series, anchor, height, customColor)
+      local charColor = customColor or color.black;
+      local x = anchor[1];
+      local y = anchor[2];
+      local size = height or 1;
+      local radius = 0.32 * size
+
+      series:Add(0.63 * size + x, 1.00 * size + y, transparent);
+      series:Add(0.63 * size + x, 1.00 * size + y, charColor);
+      series:Add(0.14 * size + x, 1.00 * size + y, charColor);
+      plotTools.drawArc(series, 150, -165, {0.31 * size + x, 0.32 * size + y}, 0.32* size, charColor);
+      
+      local u = (0.31 * size + x) + radius * math.cos(math.rad(-165));
+      local v = (0.32 * size + y) + radius * math.sin(math.rad(-165));
+      series:Add(u, v, transparent)
+    end
+    
+    function char.num6(series, anchor, height, customColor)
+      local charColor = customColor or color.black;
+      local x = anchor[1];
+      local y = anchor[2];
+      local size = height or 1;
+      local radius = 0.31 * size
+      
+      local u = (0.31 * size + x) + radius * math.cos(math.rad(30));
+      local v = (0.70 * size + y) + radius * math.sin(math.rad(30));
+      series:Add(u, v, transparent)
+      plotTools.drawArc(series, 30, 180, {0.31 * size + x, 0.70 * size + y}, 0.31* size, charColor);
+      plotTools.drawArc(series, -180, 180, {0.31 * size + x, 0.31 * size + y}, 0.31* size, charColor);
+      u = (0.31 * size + x) + radius * math.cos(math.rad(180));
+      v = (0.31 * size + y) + radius * math.sin(math.rad(180));
+      series:Add(u, v, transparent)
+    end
+    
+    function char.num7(series, anchor, height, customColor)
+      local charColor = customColor or color.black;
+      local x = anchor[1];
+      local y = anchor[2];
+      local size = height or 1;
+      
+      series:Add(0.0 * size + x, 1 * size + y, transparent);
+      series:Add(0.0 * size + x, 1 * size + y, charColor);
+      series:Add(0.7 * size + x, 1 * size + y, charColor);
+      plotTools.drawArc(series, 135, 175, {1.78 * size + x, -0.1 * size + y}, 1.545* size, charColor);
+      series:Add(0.24 * size + x, 0 * size + y, charColor);
+      series:Add(0.24 * size + x, 0 * size + y, transparent);
+    end
+    
+    function char.num8(series, anchor, height, customColor)
+      local charColor = customColor or color.black;
+      local x = anchor[1];
+      local y = anchor[2];
+      local size = height or 1;
+      local xradius = 0.245 * size;
+      local yradius = 0.255 * size;
+      
+      local u = (0.290 * size + x) + xradius * math.cos(math.rad(-90));
+      local v = (0.775 * size + y) + yradius * math.sin(math.rad(-90));
+      series:Add(u, v, transparent)
+      plotTools.drawEllipseArc(series, -90, 270, {0.29 * size + x, 0.775 * size + y}, 0.245 * size, 0.225 * size, charColor);
+      plotTools.drawEllipseArc(series, 90, 450, {0.29 * size + x, 0.275 * size + y}, 0.290 * size, 0.275 * size, charColor);
+      
+      xradius = 0.290 * size;
+      yradius = 0.275 * size;
+      u = (0.290 * size + x) + xradius * math.cos(math.rad(450));
+      v = (0.275 * size + y) + yradius * math.sin(math.rad(450));
+      series:Add(u, v, transparent)
+    end
+    
+    function char.num9(series, anchor, height, customColor)
+      local charColor = customColor or color.black;
+      local x = anchor[1];
+      local y = anchor[2];
+      local size = height or 1;
+      local xradius = 0.28 * size;
+      local yradius = 0.31 * size;
+      
+      local u = (0.28 * size + x) + xradius * math.cos(math.rad(0));
+      local v = (0.69 * size + y) + yradius * math.sin(math.rad(0));
+      series:Add(u, v, transparent)
+      plotTools.drawEllipseArc(series, 0, 360, {0.28 * size + x, 0.69 * size + y}, 0.28 * size, 0.31 * size, charColor);
+      plotTools.drawEllipseArc(series, 0, -160, {0.28 * size + x, 0.31 * size + y}, 0.28 * size, 0.31 * size, charColor);
+      
+      u = (0.28 * size + x) + xradius * math.cos(math.rad(-160));
+      v = (0.31 * size + y) + yradius * math.sin(math.rad(-160));
+      series:Add(u, v, transparent)
+    end
+    ]]>
+  <!--Symbol Pack-->
+    <![CDATA[
+    local symbol = {}
+    local transparent = color.transparent;
+    
+    function symbol.drawPlus(series, anchor, size, customColor)
+      local charColor = customColor or color.black;
+      local x = anchor[1]
+      local y = anchor[2]
+
+      series:Add(0.00 * size + x, 0.50 * size + y, transparent)
+      series:Add(0.00 * size + x, 0.50 * size + y, charColor)
+      series:Add(0.50 * size + x, 0.50 * size + y, charColor)
+      series:Add(0.50 * size + x, 0.50 * size + y, transparent)
+      series:Add(0.25 * size + x, 0.75 * size + y, transparent)
+      series:Add(0.25 * size + x, 0.75 * size + y, charColor)
+      series:Add(0.25 * size + x, 0.25 * size + y, charColor)
+      series:Add(0.25 * size + x, 0.25 * size + y, transparent)
+    end
+
+    function symbol.drawMinus(series, anchor, size, customColor)
+      local charColor = customColor or color.black;
+      local x = anchor[1]
+      local y = anchor[2]
+
+      series:Add(0.00 * size + x, 0.50 * size + y, transparent)
+      series:Add(0.00 * size + x, 0.50 * size + y, charColor)
+      series:Add(0.50 * size + x, 0.50 * size + y, charColor)
+      series:Add(0.50 * size + x, 0.50 * size + y, transparent)
+    end
+
+    function symbol.parenthesisLeft(series, anchor, height, customColor)
+      local charColor = customColor or color.black;
+      local x = anchor[1]
+      local y = anchor[2]
+      local size = height
+      local xradius = 0.62 * size;
+      local yradius = 0.88 * size;
+      
+      local u = (0.62 * size + x) + xradius * math.cos(math.rad(130));
+      local v = (0.35 * size + y) + yradius * math.sin(math.rad(130));
+      series:Add(u, v, transparent)
+      plotTools.drawEllipseArc(series, 130, 230, {0.62 * size + x, 0.35 * size + y}, 0.62 * size, 0.88 *  size)
+      u = (0.62 * size + x) + xradius * math.cos(math.rad(230));
+      v = (0.35 * size + y) + yradius * math.sin(math.rad(230));
+      series:Add(u, v, transparent)
+      --series:Add(NaN, NaN)
+    end
+
+    function symbol.parenthesisRight(series, anchor, height, customColor)
+      local charColor = customColor or color.black;
+      local x = anchor[1]
+      local y = anchor[2]
+      local size = height
+      local xradius = 0.62 * size;
+      local yradius = 0.88 * size;
+      
+      local u = (-.40 * size + x) + xradius * math.cos(math.rad(-50));
+      local v = (0.35 * size + y) + yradius * math.sin(math.rad(-50));
+      series:Add(u, v, transparent)
+      plotTools.drawEllipseArc(series, -50, 50, {-0.40 * size + x, 0.35 * size + y}, 0.62 * size, 0.88 * size)
+      u = (-.40 * size + x) + xradius * math.cos(math.rad(50));
+      v = (0.35 * size + y) + yradius * math.sin(math.rad(50));
+      series:Add(u, v, transparent)
+      --series:Add(NaN, NaN)
+    end
+    
+    function symbol.quanserQ(series, anchor, height)
+      local x = anchor[1]
+      local y = anchor[2]
+      local size = height/8
+      
+      plotTools.drawArc(series, -28.95, 314.15, vector({4.00 * size + x, 4.00 * size + y}), 4.00 * size)
+      plotTools.drawArc(series, 316.36, -22.50, vector({4.00 * size + x, 4.00 * size + y}), 3.02 * size)
+      plotTools.drawArc(series, -28.95, -28.00, vector({4.00 * size + x, 4.00 * size + y}), 4.00 * size)
+      series:Add(NaN, NaN)
+
+      plotTools.drawRotatedEllipseArc(series, 0159.30, -162.91, {6.315 * size + x, 1.400 * size + y}, 1.16 * size, 2.01 * size, 37)
+      plotTools.drawRotatedEllipseArc(series, -145.00, 0148.95, {6.315 * size + x, 1.400 * size + y}, 0.40 * size, 1.22 * size, 37)
+      plotTools.drawRotatedEllipseArc(series, 0159.30, 0159.00, {6.315 * size + x, 1.400 * size + y}, 1.16 * size, 2.01 * size, 37)
+      series:Add(NaN, NaN)
+    end
+      
+    function symbol.quanserQFilled(series, anchor, height)
+      
+      local size = height/8
+      local seg = 100;
+      local theta;
+      
+      local part1 = {};
+      part1.startAngle = -162.91;
+      part1.stop1 = -145;
+      part1.stop2 = 148.95;
+      part1.endAngle = 159.3;
+      part1.centerX = anchor[1] + size * 6.315;
+      part1.centerY = anchor[2] + size * 1.400;
+      part1.outerRadiusx = 1.16 * size;
+      part1.outerRadiusy = 2.01 * size;
+      part1.innerRadiusx = 0.40 * size;
+      part1.innerRadiusy = 1.22 * size;
+      part1.delta = math.rad((part1.endAngle - part1.startAngle)) / seg;
+      part1.angle = math.rad(37);
+      local x1 = part1.outerRadiusx * math.cos(math.rad(part1.startAngle));
+      local y1 = part1.outerRadiusy * math.sin(math.rad(part1.startAngle));
+      local u1 = part1.centerX + x1*math.cos(part1.angle) - y1*math.sin(part1.angle)
+      local v1 = part1.centerY + x1*math.sin(part1.angle) + y1*math.cos(part1.angle)
+      local x2 = part1.innerRadiusx * math.cos(math.rad(part1.stop1));
+      local y2 = part1.innerRadiusy * math.sin(math.rad(part1.stop1));
+      local u2 = part1.centerX + x2*math.cos(part1.angle) - y2*math.sin(part1.angle)
+      local v2 = part1.centerY + x2*math.sin(part1.angle) + y2*math.cos(part1.angle)
+      series:Add(u1, v1);      
+      for theta = math.rad(part1.startAngle), math.rad(part1.stop1), part1.delta do
+        x1 = part1.outerRadiusx * math.cos(theta);
+        y1 = part1.outerRadiusy * math.sin(theta);
+        u1 = part1.centerX + x1*math.cos(part1.angle) - y1*math.sin(part1.angle)
+        v1 = part1.centerY + x1*math.sin(part1.angle) + y1*math.cos(part1.angle)
+        series:Add(u1, v1);
+        series:Add(u2, v2);
+      end
+      for theta = math.rad(part1.stop1), math.rad(part1.stop2), part1.delta do
+        x1 = part1.outerRadiusx * math.cos(theta);
+        y1 = part1.outerRadiusy * math.sin(theta);
+        u1 = part1.centerX + x1*math.cos(part1.angle) - y1*math.sin(part1.angle)
+        v1 = part1.centerY + x1*math.sin(part1.angle) + y1*math.cos(part1.angle)
+        x2 = part1.innerRadiusx * math.cos(theta);
+        y2 = part1.innerRadiusy * math.sin(theta);
+        u2 = part1.centerX + x2*math.cos(part1.angle) - y2*math.sin(part1.angle)
+        v2 = part1.centerY + x2*math.sin(part1.angle) + y2*math.cos(part1.angle)
+        series:Add(u1, v1);
+        series:Add(u2, v2);
+      end
+      for theta = math.rad(part1.stop2), math.rad(part1.endAngle), part1.delta do
+        x1 = part1.outerRadiusx * math.cos(theta);
+        y1 = part1.outerRadiusy * math.sin(theta);
+        u1 = part1.centerX + x1*math.cos(part1.angle) - y1*math.sin(part1.angle)
+        v1 = part1.centerY + x1*math.sin(part1.angle) + y1*math.cos(part1.angle)
+        x2 = part1.innerRadiusx * math.cos(math.rad(part1.stop2));
+        y2 = part1.innerRadiusy * math.sin(math.rad(part1.stop2));
+        u2 = part1.centerX + x2*math.cos(part1.angle) - y2*math.sin(part1.angle)
+        v2 = part1.centerY + x2*math.sin(part1.angle) + y2*math.cos(part1.angle)
+        series:Add(u1, v1);
+        series:Add(u2, v2);
+      end
+      series:Add(NaN, NaN)
+      
+      local part2 = {};
+      local rad = math.rad;
+      part2.startAngle = -28.95
+      part2.stop1 = -22.50
+      part2.stop2 = 314.15
+      part2.endAngle = 316.36
+      part2.centerX = anchor[1] + size * 4
+      part2.centerY = anchor[2] + size * 4
+      part2.outerRadius = 4.00 * size
+      part2.innerRadius = 3.02 * size
+      part2.delta = rad((part2.endAngle - part2.startAngle)) / seg;
+      local x3 = part2.centerX + part2.outerRadius * math.cos(rad(part2.startAngle));
+      local y3 = part2.centerY + part2.outerRadius * math.sin(rad(part2.startAngle));
+      local x4 = part2.centerX + part2.innerRadius * math.cos(rad(part2.stop1));
+      local y4 = part2.centerY + part2.innerRadius * math.sin(rad(part2.stop1));
+      series:Add(x3, y3);
+      for theta = rad(part2.startAngle), rad(part2.stop1), part2.delta do
+        x3 = part2.centerX + part2.outerRadius * math.cos(theta);
+        y3 = part2.centerY + part2.outerRadius * math.sin(theta);
+        series:Add(x3, y3);
+        series:Add(x4, y4);
+      end
+      for theta = rad(part2.stop1), rad(part2.stop2), part2.delta do
+        x3 = part2.centerX + part2.outerRadius * math.cos(theta);
+        y3 = part2.centerY + part2.outerRadius * math.sin(theta);
+        x4 = part2.centerX + part2.innerRadius * math.cos(theta);
+        y4 = part2.centerY + part2.innerRadius * math.sin(theta);
+        series:Add(x3, y3);
+        series:Add(x4, y4);
+      end
+      --[[x3 = part2.centerX + part2.outerRadius * math.cos(part2.endAngle);
+      y3 = part2.centerY + part2.outerRadius * math.sin(part2.endAngle);
+      x4 = part2.centerX + part2.innerRadius * math.cos(part2.endAngle);
+      y4 = part2.centerY + part2.innerRadius * math.sin(part2.endAngle);--]]
+      --series:Add(x3, y3);
+      --series:Add(x4, y4);
+      for theta = rad(part2.stop2), rad(part2.endAngle), part2.delta do
+        x4 = part2.centerX + part2.innerRadius * math.cos(theta);
+        y4 = part2.centerY + part2.innerRadius * math.sin(theta);
+        series:Add(x3, y3);
+        series:Add(x4, y4);
+      end
+      series:Add(NaN, NaN)
+
+    end
+
+    ]]>
+  </script>
+  
+  <!-- Charts -->
+  <script>
+    <![CDATA[
+    local chart = {}
+    local transparent = color.transparent
+    
+    local colorVec = colors({color.rgb(239,64,57), color.rgb(46,152,212), color.rgb(137,190,64), color.rgb(151,92,166), color.rgb(248,152,32), color.rgb(37,154,137), color.gold, color.tomato, color.dodgerBlue, color.oliveDrab, color.slateBlue, color.orange, color.cadetBlue, color.rgb(220, 220, 50), color.crimson, color.deepSkyBlue, color.limeGreen, color.blueViolet, color.coral, color.teal});
+    
+    local colorVecAlpha = colors({color.rgba(239,64,57,150), color.rgba(46,152,212,150), color.rgba(137,190,64,150), color.rgba(151,92,166,150), color.rgba(248,152,32,150), color.rgba(37,154,137,150), color.rgba(255,215,0,150), color.rgba(255,99,71,150), color.rgba(30,144,255,150), color.rgba(107,142,35,150), color.rgba(106, 90, 205,150), color.rgba(255,165,0,150), color.rgba(95,158,160,150), color.rgba(220, 220, 50,150), color.rgba(220,20,60,150), color.rgba(0,191,255,150), color.rgba(50,205,50,150), color.rgba(138,43,226,150), color.rgba(255,127,80,150), color.rgba(0,128,128,150)});
+    
+    function chart.pie(plotName, number)
+       plotName.Series[1].DrawMode = enum.DrawMode.RadialFill
+       startAngle = 90
+       endAngle = number[1]*3.60 + startAngle
+       plotName.Series[1]:Add(0,0,colorVec[1])
+       plotTools.drawArc(plotName.Series[1], startAngle, endAngle, vector({0,0}), 10, colorVec[1])
+       for i = 2, number.count do
+         plotName.Series[i].DrawMode = enum.DrawMode.RadialFill
+         startAngle = number[i-1]*3.60 + startAngle
+         endAngle = number[i]*3.60 + startAngle
+         if number.count == 8 or number.count == 15 then
+         plotName.Series[i]:Add(0,0,colorVec[i+1])
+         plotTools.drawArc(plotName.Series[i], startAngle, endAngle, vector({0,0}), 10, colorVec[i+1])
+         else
+         plotName.Series[i]:Add(0,0,colorVec[i])
+         plotTools.drawArc(plotName.Series[i], startAngle, endAngle, vector({0,0}), 10, colorVec[i])
+         end
+       end    
+    end
+
+    function chart.bar(plotName, width, number)      
+       for i = 1, number.rowCount do
+         plotName.Series[i].DrawMode = enum.DrawMode.RadialFill
+         plotTools.drawSquare(plotName.Series[i], vector({number[i][1], number[i][2]/2}), width, number[i][2], colorVec[i%20+1])
+       end    
+    end
+    
+    function chart.barH(plotName, width, number)      
+       for i = 1, number.rowCount do
+         plotName.Series[i].DrawMode = enum.DrawMode.RadialFill
+         plotTools.drawSquare(plotName.Series[i], vector({number[i][2]/2, number[i][1]}), number[i][2], width, colorVec[i%20+1])
+       end    
+    end
+    
+    function chart.line(plotName, set, number)
+      colorCurrent = colorVec[set%20+1]
+      set = 2*(set-1)
+      plotName.Series[1+set].DrawMode = enum.DrawMode.Points;     
+      plotName.Series[2+set].DrawMode = enum.DrawMode.Line;
+      for i = 1, number.rowCount do
+        plotName.Series[1+set]:Add(number[i][1],number[i][2], colorCurrent)
+        plotName.Series[2+set]:Add(number[i][1],number[i][2], colorCurrent)
+      end    
+    end 
+    
+    function chart.area(plotName, set, number)
+      currColor = colorVecAlpha[set]
+      plotName.Series[set].DrawMode = enum.DrawMode.SegmentedFill;
+      for i = 1, number.rowCount do
+        plotName.Series[set]:Add(number[i][1], 0, currColor)
+        plotName.Series[set]:Add(number[i][1], number[i][2], currColor)
+      end
+    end 
+    
+    function chart.scatter(plotName, set, number)
+      colorCurrent = colorVec[set%20+1]
+      set = 2*(set-1)
+      plotName.Series[1+set].DrawMode = enum.DrawMode.Points;
+      plotName.Series[2+set].DrawMode = enum.DrawMode.Line;
+      X = 0; Y = 0;
+      smallX = 0; largeX = 0;
+      for i = 1, number.rowCount do
+        plotName.Series[1+set]:Add(number[i][1], number[i][2], colorCurrent)
+        X = X + number[i][1]; Y = Y + number[i][2];
+        if number[i][1] < smallX then smallX = number[i][1] end
+        if number[i][1] > largeX then largeX = number[i][1] end
+      end
+      X = X/number.rowCount; Y = Y/number.rowCount;
+      for c = 1, number.rowCount do
+        m = ((number[c][1]-X)*(number[c][2]-Y))/((number[c][1]-X)*(number[c][1]-X))
+      end
+      b = Y - (m*X)
+      plotName.Series[2+set]:Add(smallX, (m*smallX+b), color.black)
+      plotName.Series[2+set]:Add(largeX, (m*largeX+b), color.black)
+    end
+    ]]>
+  </script>
+
+</fragment>

@@ -1,0 +1,1440 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G6B0BB8A6_B7C1_442A_B377_A917914901A9">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>NUM-1.2-Unit Rate</title>
+    <creator>Sidique</creator>
+    <coverImage src="resources/cover.png" />
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+  </metadata>
+  
+  
+  <include src="resources/curriculumStyles.xml" />
+  <include src="resources/Utilities.xml" />
+  <include src="resources/plotTools.xml" />
+
+   <!--                                      Header & Footer START                                         -->
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="whiteColor">Amanda Koon</p>
+      <p style="whiteColor rightText">NUMERACY</p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/logo1.png" inspect="false" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/logo2.png" inspect="false" />
+    </stack>
+  </footer>
+
+  <!-- Section 1 -->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">1.2 Unit Rate</title>
+    <onActivePageChanged>
+      audioOn=false;
+      section2:Child(4).btnStack.btn1.Text = "Audio: Off";
+      section2:Child(4).btnStack.btn1.Style.BackgroundColor = color.gray;
+      audioOn = false;
+      section2:Child(4).sound2:Stop();
+      section2:Child(4).sound1:Stop();
+    </onActivePageChanged>
+        <p style="sectionHeading">Introduction</p>
+    <image src="resources/speedgauge2.jpg" />
+    <stack style="contentBG">
+      <p>
+        <b>Unit Rates</b> can be thought of as a comparison between two things measured in different units. A popular example of unit rates can be found in cars. The speedometer in a car measure how fast the car is going.
+        In some parts of the world, this measurement of speed is in $ \frac{km}{h} $ (read as kilometers per hour) and in other parts its measured as $ \frac{m}{h} $ or $ mph $ (read as miles per hour). Notice that even though
+        kilometers and miles are different units of length, we can still represent speed using both of them.
+      </p>
+    </stack>
+  </section>
+  
+
+  <sectionNoTitle style="pageLayout" name="section2">
+    <p style="sectionHeading">Definition of Unit Rate</p>
+    <stack style="contentBG">
+      <p>A Unit Rate is formally defined as a ratio or comparison between two different units. These units can be arbitrary. For an example, we can create a unit rate that uses the units cats/people or houses/birds. Of course
+      for a unit rate to be useful, it must have some sensible rates. A useful measurement for speed is $ \frac{km}{h} $. However, see how we can represent the same speed in different unit rates.</p>
+      <p>Imagine there is a car with a speed of $ 50 \frac{km}{h} $</p>
+      <p>If we wanted to represent the speed in $ \frac{meters}{h} $ it would be $ 50 000\frac{meters}{h} $</p>
+      <p>If we wanted to represent the speed in $ \frac{meters}{s} $ it would be $ 13.89 \frac{meters}{s} $</p>
+      <p>We'll take a look at how to do these conversions later in this module.</p>
+    </stack>
+    <p style="sectionHeading">Speedometer Simulation</p>
+    <stack style="contentBG">
+      <onActivePageChanged>
+        sim1:Start();
+        sim3:Start();
+      </onActivePageChanged>
+      <onDocumentOpened>
+        --LOCAL VARIABLES
+        speed1Pos = vector({-6.5, 0});
+        speed2Pos = vector({6.5, 0});
+        speed1Rad = 5;
+        speed2Rad = 5;
+        accBtnPos = vector({0, -6});
+        accBtnRad = 3;
+        isAcc = false;
+        ind = 103;
+        ind2 = 103;
+        oldX = 0;
+        oldY = 0;
+        angle = 0;
+        speed = 0.01;
+        timeStep = 0;
+        soundFin = true;
+        firstStart = true;
+        audioOn = false;
+
+        --SPEEDOMETER1
+        plotTools.drawArc(p1.s1, 0, 180, speed1Pos, 1.5, color.black);
+        plotTools.drawArc(p1.speedometer1, 0, 180, speed1Pos, speed1Rad, color.black);
+
+        --SPEEDOMETER2
+        plotTools.drawArc(p1.speedometer2, 0, 180, speed2Pos, speed2Rad, color.black);
+        plotTools.drawArc(p1.s2, 0, 180, speed2Pos, 1.5, color.black);
+
+
+        --ACC BUTTON WITH ARROWS
+        plotTools.drawCircle(p1.accelerator, accBtnPos, accBtnRad, color.green);
+        plotTools.drawArrow(p1.a1, vector({2.0, 0}), vector({2.0, -0.5}), color.white);
+        plotTools.drawArrow(p1.a2, vector({-2.0, 0}), vector({-2.0, 0.5}), color.white);
+        plotTools.drawArc(p1.a3, 180, 270, vector({0, 0}), 2.0, color.white);
+        plotTools.drawArc(p1.a4, 0, 90, vector({0, 0}), 2.0, color.white);
+
+        --ACCELERATION LABEL
+        local start = -2.75;
+        char.textA(p1.acceleratorLabel, vector({start+0.5, -10}), 0.5, color.black)
+        char.textC(p1.acceleratorLabel, vector({start+1, -10}), 0.5, color.black)
+        char.textC(p1.acceleratorLabel, vector({start+1.5, -10}), 0.5, color.black)
+        char.textE(p1.acceleratorLabel, vector({start+2.0, -10}), 0.5, color.black)
+        char.textL(p1.acceleratorLabel, vector({start+2.5, -10}), 0.5, color.black)
+        char.textE(p1.acceleratorLabel, vector({start+3.0, -10}), 0.5, color.black)
+        char.textR(p1.acceleratorLabel, vector({start+3.5, -10}), 0.5, color.black)
+        char.textA(p1.acceleratorLabel, vector({start+4.0, -10}), 0.5, color.black)
+        char.textT(p1.acceleratorLabel, vector({start+4.5, -10}), 0.5, color.black)
+        char.textE(p1.acceleratorLabel, vector({start+5.0, -10}), 0.5, color.black)
+
+        --SPEEDOMETER 1 LABELS
+        local rad=5.5;
+        local rad2 = 5.3;
+
+        char.num1(p1.speedLabel, speed1Pos+vector({math.cos(math.rad(92))*rad, math.sin(math.rad(92))*rad} ), 0.20, color.red)
+        char.num0(p1.speedLabel, speed1Pos+vector({0.20+(math.cos(math.rad(92))*rad), math.sin(math.rad(92))*rad} ), 0.20, color.red)
+        char.num0(p1.speedLabel, speed1Pos+vector({0.40+(math.cos(math.rad(92))*rad), math.sin(math.rad(92))*rad} ), 0.20, color.red)
+
+        char.num9(p1.speedLabel, speed1Pos+vector({math.cos(math.rad(99))*rad, math.sin(math.rad(99))*rad} ), 0.20, color.red)
+        char.num0(p1.speedLabel, speed1Pos+vector({(math.cos(math.rad(99))*rad)+0.20, math.sin(math.rad(99))*rad } ), 0.20, color.red)
+
+        char.num8(p1.speedLabel, speed1Pos+vector({math.cos(math.rad(108))*rad, math.sin(math.rad(108))*rad} ), 0.20, color.red)
+        char.num0(p1.speedLabel, speed1Pos+vector({0.20 + (math.cos(math.rad(108))*rad), math.sin(math.rad(108))*rad} ), 0.20, color.red)
+
+        char.num7(p1.speedLabel, speed1Pos+vector({math.cos(math.rad(117))*rad, math.sin(math.rad(117))*rad} ), 0.20, color.red)
+        char.num0(p1.speedLabel, speed1Pos+vector({0.20 + (math.cos(math.rad(117))*rad), math.sin(math.rad(117))*rad} ), 0.20, color.red)
+
+        char.num6(p1.speedLabel, speed1Pos+vector({math.cos(math.rad(126))*rad, math.sin(math.rad(126))*rad} ), 0.20, color.red)
+        char.num0(p1.speedLabel, speed1Pos+vector({0.20 + (math.cos(math.rad(126))*rad), math.sin(math.rad(126))*rad} ), 0.20, color.red)
+
+        char.num5(p1.speedLabel, speed1Pos+vector({math.cos(math.rad(135))*rad, math.sin(math.rad(135))*rad} ), 0.20, color.red)
+        char.num0(p1.speedLabel, speed1Pos+vector({0.20 + (math.cos(math.rad(135))*rad), math.sin(math.rad(135))*rad} ), 0.20, color.red)
+
+        char.num4(p1.speedLabel, speed1Pos+vector({math.cos(math.rad(144))*rad, math.sin(math.rad(144))*rad} ), 0.20, color.red)
+        char.num0(p1.speedLabel, speed1Pos+vector({0.20 + (math.cos(math.rad(144))*rad), math.sin(math.rad(144))*rad} ), 0.20, color.red)
+
+        char.num3(p1.speedLabel, speed1Pos+vector({math.cos(math.rad(153))*rad, math.sin(math.rad(153))*rad} ), 0.20, color.red)
+        char.num0(p1.speedLabel, speed1Pos+vector({0.20 + (math.cos(math.rad(153))*rad), math.sin(math.rad(153))*rad} ), 0.20, color.red)
+
+        char.num2(p1.speedLabel, speed1Pos+vector({math.cos(math.rad(162))*rad, math.sin(math.rad(162))*rad} ), 0.20, color.red)
+        char.num0(p1.speedLabel, speed1Pos+vector({0.20 + (math.cos(math.rad(162))*rad), math.sin(math.rad(162))*rad} ), 0.20, color.red)
+
+        char.num1(p1.speedLabel, speed1Pos+vector({math.cos(math.rad(171))*rad, math.sin(math.rad(171))*rad} ), 0.20, color.red)
+        char.num0(p1.speedLabel, speed1Pos+vector({0.20 + (math.cos(math.rad(171))*rad), math.sin(math.rad(171))*rad} ), 0.20, color.red)
+
+        char.num0(p1.speedLabel, speed1Pos+vector({math.cos(math.rad(180))*rad, math.sin(math.rad(180))*rad} ), 0.20, color.red)
+
+        char.num1(p1.speedLabel, speed1Pos+vector({math.cos(math.rad(81))*rad2, math.sin(math.rad(81))*rad2} ), 0.20, color.red)
+        char.num1(p1.speedLabel, speed1Pos+vector({0.20 + (math.cos(math.rad(81))*rad2), math.sin(math.rad(81))*rad2} ), 0.20, color.red)
+        char.num0(p1.speedLabel, speed1Pos+vector({0.40 + (math.cos(math.rad(81))*rad2), math.sin(math.rad(81))*rad2} ), 0.20, color.red)
+
+        char.num1(p1.speedLabel, speed1Pos+vector({math.cos(math.rad(72))*rad2, math.sin(math.rad(72))*rad2} ), 0.20, color.red)
+        char.num2(p1.speedLabel, speed1Pos+vector({0.20 + (math.cos(math.rad(72))*rad2), math.sin(math.rad(72))*rad2} ), 0.20, color.red)
+        char.num0(p1.speedLabel, speed1Pos+vector({0.40 + (math.cos(math.rad(72))*rad2), math.sin(math.rad(72))*rad2} ), 0.20, color.red)
+
+        char.num1(p1.speedLabel, speed1Pos+vector({(math.cos(math.rad(63))*rad2), math.sin(math.rad(63))*rad2} ), 0.20, color.red)
+        char.num3(p1.speedLabel, speed1Pos+vector({0.20+(math.cos(math.rad(63))*rad2), math.sin(math.rad(63))*rad2} ), 0.20, color.red)
+        char.num0(p1.speedLabel, speed1Pos+vector({0.40+(math.cos(math.rad(63))*rad2), math.sin(math.rad(63))*rad2} ), 0.20, color.red)
+
+        char.num1(p1.speedLabel, speed1Pos+vector({(math.cos(math.rad(54))*rad2), math.sin(math.rad(54))*rad2} ), 0.20, color.red)
+        char.num4(p1.speedLabel, speed1Pos+vector({0.20+(math.cos(math.rad(54))*rad2), math.sin(math.rad(54))*rad2} ), 0.20, color.red)
+        char.num0(p1.speedLabel, speed1Pos+vector({0.40+(math.cos(math.rad(54))*rad2), math.sin(math.rad(54))*rad2} ), 0.20, color.red)
+
+        char.num1(p1.speedLabel, speed1Pos+vector({(math.cos(math.rad(45))*rad2), math.sin(math.rad(45))*rad2} ), 0.20, color.red)
+        char.num5(p1.speedLabel, speed1Pos+vector({0.20+(math.cos(math.rad(45))*rad2), math.sin(math.rad(45))*rad2} ), 0.20, color.red)
+        char.num0(p1.speedLabel, speed1Pos+vector({0.40+(math.cos(math.rad(45))*rad2), math.sin(math.rad(45))*rad2} ), 0.20, color.red)
+
+        char.num1(p1.speedLabel, speed1Pos+vector({(math.cos(math.rad(36))*rad2), math.sin(math.rad(36))*rad2} ), 0.20, color.red)
+        char.num6(p1.speedLabel, speed1Pos+vector({0.20+(math.cos(math.rad(36))*rad2), math.sin(math.rad(36))*rad2} ), 0.20, color.red)
+        char.num0(p1.speedLabel, speed1Pos+vector({0.40+(math.cos(math.rad(36))*rad2), math.sin(math.rad(36))*rad2} ), 0.20, color.red)
+
+        char.num1(p1.speedLabel, speed1Pos+vector({(math.cos(math.rad(27))*rad2), math.sin(math.rad(27))*rad2} ), 0.20, color.red)
+        char.num7(p1.speedLabel, speed1Pos+vector({0.20+(math.cos(math.rad(27))*rad2), math.sin(math.rad(27))*rad2} ), 0.20, color.red)
+        char.num0(p1.speedLabel, speed1Pos+vector({0.40+(math.cos(math.rad(27))*rad2), math.sin(math.rad(27))*rad2} ), 0.20, color.red)
+
+        char.num1(p1.speedLabel, speed1Pos+vector({(math.cos(math.rad(18))*rad2), math.sin(math.rad(18))*rad2} ), 0.20, color.red)
+        char.num8(p1.speedLabel, speed1Pos+vector({0.20+(math.cos(math.rad(18))*rad2), math.sin(math.rad(18))*rad2} ), 0.20, color.red)
+        char.num0(p1.speedLabel, speed1Pos+vector({0.40+(math.cos(math.rad(18))*rad2), math.sin(math.rad(18))*rad2} ), 0.20, color.red)
+
+        char.num1(p1.speedLabel, speed1Pos+vector({(math.cos(math.rad(9))*rad2), math.sin(math.rad(9))*rad2} ), 0.20, color.red)
+        char.num9(p1.speedLabel, speed1Pos+vector({0.20+(math.cos(math.rad(9))*rad2), math.sin(math.rad(9))*rad2} ), 0.20, color.red)
+        char.num0(p1.speedLabel, speed1Pos+vector({0.40+(math.cos(math.rad(9))*rad2), math.sin(math.rad(9))*rad2} ), 0.20, color.red)
+
+        char.num2(p1.speedLabel, speed1Pos+vector({(math.cos(math.rad(0))*rad2), math.sin(math.rad(0))*rad2} ), 0.20, color.red)
+        char.num0(p1.speedLabel, speed1Pos+vector({0.20+(math.cos(math.rad(0))*rad2), math.sin(math.rad(0))*rad2} ), 0.20, color.red)
+        char.num0(p1.speedLabel, speed1Pos+vector({0.40+(math.cos(math.rad(0))*rad2), math.sin(math.rad(0))*rad2} ), 0.20, color.red)
+
+        --SPEEDOMETER 2 LABELS
+        char.num1(p1.speedLabel2, speed2Pos+vector({math.cos(math.rad(92))*rad, math.sin(math.rad(92))*rad} ), 0.20, color.red)
+        char.num0(p1.speedLabel2, speed2Pos+vector({0.20+(math.cos(math.rad(92))*rad), math.sin(math.rad(92))*rad} ), 0.20, color.red)
+        char.num0(p1.speedLabel2, speed2Pos+vector({0.40+(math.cos(math.rad(92))*rad), math.sin(math.rad(92))*rad} ), 0.20, color.red)
+
+        char.num9(p1.speedLabel2, speed2Pos+vector({math.cos(math.rad(99))*rad, math.sin(math.rad(99))*rad} ), 0.20, color.red)
+        char.num0(p1.speedLabel2, speed2Pos+vector({(math.cos(math.rad(99))*rad)+0.20, math.sin(math.rad(99))*rad } ), 0.20, color.red)
+
+        char.num8(p1.speedLabel2, speed2Pos+vector({math.cos(math.rad(108))*rad, math.sin(math.rad(108))*rad} ), 0.20, color.red)
+        char.num0(p1.speedLabel2, speed2Pos+vector({0.20 + (math.cos(math.rad(108))*rad), math.sin(math.rad(108))*rad} ), 0.20, color.red)
+
+        char.num7(p1.speedLabel2, speed2Pos+vector({math.cos(math.rad(117))*rad, math.sin(math.rad(117))*rad} ), 0.20, color.red)
+        char.num0(p1.speedLabel2, speed2Pos+vector({0.20 + (math.cos(math.rad(117))*rad), math.sin(math.rad(117))*rad} ), 0.20, color.red)
+
+        char.num6(p1.speedLabel2, speed2Pos+vector({math.cos(math.rad(126))*rad, math.sin(math.rad(126))*rad} ), 0.20, color.red)
+        char.num0(p1.speedLabel2, speed2Pos+vector({0.20 + (math.cos(math.rad(126))*rad), math.sin(math.rad(126))*rad} ), 0.20, color.red)
+
+        char.num5(p1.speedLabel2, speed2Pos+vector({math.cos(math.rad(135))*rad, math.sin(math.rad(135))*rad} ), 0.20, color.red)
+        char.num0(p1.speedLabel2, speed2Pos+vector({0.20 + (math.cos(math.rad(135))*rad), math.sin(math.rad(135))*rad} ), 0.20, color.red)
+
+        char.num4(p1.speedLabel2, speed2Pos+vector({math.cos(math.rad(144))*rad, math.sin(math.rad(144))*rad} ), 0.20, color.red)
+        char.num0(p1.speedLabel2, speed2Pos+vector({0.20 + (math.cos(math.rad(144))*rad), math.sin(math.rad(144))*rad} ), 0.20, color.red)
+
+        char.num3(p1.speedLabel2, speed2Pos+vector({math.cos(math.rad(153))*rad, math.sin(math.rad(153))*rad} ), 0.20, color.red)
+        char.num0(p1.speedLabel2, speed2Pos+vector({0.20 + (math.cos(math.rad(153))*rad), math.sin(math.rad(153))*rad} ), 0.20, color.red)
+
+        char.num2(p1.speedLabel2, speed2Pos+vector({math.cos(math.rad(162))*rad, math.sin(math.rad(162))*rad} ), 0.20, color.red)
+        char.num0(p1.speedLabel2, speed2Pos+vector({0.20 + (math.cos(math.rad(162))*rad), math.sin(math.rad(162))*rad} ), 0.20, color.red)
+
+        char.num1(p1.speedLabel2, speed2Pos+vector({math.cos(math.rad(171))*rad, math.sin(math.rad(171))*rad} ), 0.20, color.red)
+        char.num0(p1.speedLabel2, speed2Pos+vector({0.20 + (math.cos(math.rad(171))*rad), math.sin(math.rad(171))*rad} ), 0.20, color.red)
+
+        char.num0(p1.speedLabel2, speed2Pos+vector({math.cos(math.rad(180))*rad, math.sin(math.rad(180))*rad} ), 0.20, color.red)
+
+        char.num1(p1.speedLabel2, speed2Pos+vector({math.cos(math.rad(81))*rad2, math.sin(math.rad(81))*rad2} ), 0.20, color.red)
+        char.num1(p1.speedLabel2, speed2Pos+vector({0.20 + (math.cos(math.rad(81))*rad2), math.sin(math.rad(81))*rad2} ), 0.20, color.red)
+        char.num0(p1.speedLabel2, speed2Pos+vector({0.40 + (math.cos(math.rad(81))*rad2), math.sin(math.rad(81))*rad2} ), 0.20, color.red)
+
+        char.num1(p1.speedLabel2, speed2Pos+vector({math.cos(math.rad(72))*rad2, math.sin(math.rad(72))*rad2} ), 0.20, color.red)
+        char.num2(p1.speedLabel2, speed2Pos+vector({0.20 + (math.cos(math.rad(72))*rad2), math.sin(math.rad(72))*rad2} ), 0.20, color.red)
+        char.num0(p1.speedLabel2, speed2Pos+vector({0.40 + (math.cos(math.rad(72))*rad2), math.sin(math.rad(72))*rad2} ), 0.20, color.red)
+
+        char.num1(p1.speedLabel2, speed2Pos+vector({(math.cos(math.rad(63))*rad2), math.sin(math.rad(63))*rad2} ), 0.20, color.red)
+        char.num3(p1.speedLabel2, speed2Pos+vector({0.20+(math.cos(math.rad(63))*rad2), math.sin(math.rad(63))*rad2} ), 0.20, color.red)
+        char.num0(p1.speedLabel2, speed2Pos+vector({0.40+(math.cos(math.rad(63))*rad2), math.sin(math.rad(63))*rad2} ), 0.20, color.red)
+
+        char.num1(p1.speedLabel2, speed2Pos+vector({(math.cos(math.rad(54))*rad2), math.sin(math.rad(54))*rad2} ), 0.20, color.red)
+        char.num4(p1.speedLabel2, speed2Pos+vector({0.20+(math.cos(math.rad(54))*rad2), math.sin(math.rad(54))*rad2} ), 0.20, color.red)
+        char.num0(p1.speedLabel2, speed2Pos+vector({0.40+(math.cos(math.rad(54))*rad2), math.sin(math.rad(54))*rad2} ), 0.20, color.red)
+
+        char.num1(p1.speedLabel2, speed2Pos+vector({(math.cos(math.rad(45))*rad2), math.sin(math.rad(45))*rad2} ), 0.20, color.red)
+        char.num5(p1.speedLabel2, speed2Pos+vector({0.20+(math.cos(math.rad(45))*rad2), math.sin(math.rad(45))*rad2} ), 0.20, color.red)
+        char.num0(p1.speedLabel2, speed2Pos+vector({0.40+(math.cos(math.rad(45))*rad2), math.sin(math.rad(45))*rad2} ), 0.20, color.red)
+
+        char.num1(p1.speedLabel2, speed2Pos+vector({(math.cos(math.rad(36))*rad2), math.sin(math.rad(36))*rad2} ), 0.20, color.red)
+        char.num6(p1.speedLabel2, speed2Pos+vector({0.20+(math.cos(math.rad(36))*rad2), math.sin(math.rad(36))*rad2} ), 0.20, color.red)
+        char.num0(p1.speedLabel2, speed2Pos+vector({0.40+(math.cos(math.rad(36))*rad2), math.sin(math.rad(36))*rad2} ), 0.20, color.red)
+
+        char.num1(p1.speedLabel2, speed2Pos+vector({(math.cos(math.rad(27))*rad2), math.sin(math.rad(27))*rad2} ), 0.20, color.red)
+        char.num7(p1.speedLabel2, speed2Pos+vector({0.20+(math.cos(math.rad(27))*rad2), math.sin(math.rad(27))*rad2} ), 0.20, color.red)
+        char.num0(p1.speedLabel2, speed2Pos+vector({0.40+(math.cos(math.rad(27))*rad2), math.sin(math.rad(27))*rad2} ), 0.20, color.red)
+
+        char.num1(p1.speedLabel2, speed2Pos+vector({(math.cos(math.rad(18))*rad2), math.sin(math.rad(18))*rad2} ), 0.20, color.red)
+        char.num8(p1.speedLabel2, speed2Pos+vector({0.20+(math.cos(math.rad(18))*rad2), math.sin(math.rad(18))*rad2} ), 0.20, color.red)
+        char.num0(p1.speedLabel2, speed2Pos+vector({0.40+(math.cos(math.rad(18))*rad2), math.sin(math.rad(18))*rad2} ), 0.20, color.red)
+
+        char.num1(p1.speedLabel2, speed2Pos+vector({(math.cos(math.rad(9))*rad2), math.sin(math.rad(9))*rad2} ), 0.20, color.red)
+        char.num9(p1.speedLabel2, speed2Pos+vector({0.20+(math.cos(math.rad(9))*rad2), math.sin(math.rad(9))*rad2} ), 0.20, color.red)
+        char.num0(p1.speedLabel2, speed2Pos+vector({0.40+(math.cos(math.rad(9))*rad2), math.sin(math.rad(9))*rad2} ), 0.20, color.red)
+
+        char.num2(p1.speedLabel2, speed2Pos+vector({(math.cos(math.rad(0))*rad2), math.sin(math.rad(0))*rad2} ), 0.20, color.red)
+        char.num0(p1.speedLabel2, speed2Pos+vector({0.20+(math.cos(math.rad(0))*rad2), math.sin(math.rad(0))*rad2} ), 0.20, color.red)
+        char.num0(p1.speedLabel2, speed2Pos+vector({0.40+(math.cos(math.rad(0))*rad2), math.sin(math.rad(0))*rad2} ), 0.20, color.red)
+
+        char.textM(p1.speedLabel2, speed1Pos+vector({-0.75, 2}), 0.5, color.black);
+        char.textP(p1.speedLabel2, speed1Pos+vector({-0.25, 2}), 0.5, color.black);
+        char.textH(p1.speedLabel2, speed1Pos+vector({0.25, 2}), 0.5, color.black);
+
+        char.textK(p1.speedLabel, speed2Pos+vector({-0.6, 2.5}), 0.5, color.black)
+        char.textM(p1.speedLabel, speed2Pos+vector({-0.1, 2.5}), 0.5, color.black)
+        plotTools.drawSquare(p1.line, speed2Pos+vector({-0.0, 2.2}), 1, 0.01, color.black);
+        char.textH(p1.speedLabel, speed2Pos+vector({-0.2, 1.75}), 0.4, color.black);
+
+
+
+
+
+      </onDocumentOpened>
+      
+      <p>In this simulation below, we can see a practical application of unit rates. As mentioned before, in some
+      cars, we use $ \frac{km}{h} $ and in others we use $ mph $. Turn the accelerate button to speed up the car and notice
+      the different unit rates for the cars speed! Even though the numbers are in different units, they both represent the same speed.</p>
+      <stack name="btnStack" orientation="horizontal">
+        <style>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <p name="lab1" style="subSectionHeading">Left Speedometer: 00.0 MPH</p>
+        <button name="btn1" content="Audio: Off">
+          <style>
+            <background color="gray" />
+          </style>
+          <onClick>
+            if btn1.Text == "Audio: Off" then
+              btn1.Text = "Audio: On";
+              btn1.Style.BackgroundColor = color.green;
+              audioOn = true;
+              section2:Child(4).sound2:Start();
+            elseif btn1.Text == "Audio: On" then
+              btn1.Text = "Audio: Off";
+              btn1.Style.BackgroundColor = color.gray;
+              audioOn = false;
+              section2:Child(4).sound2:Stop();
+              section2:Child(4).sound1:Stop();
+            end
+          </onClick>
+        </button>
+        <p name="lab2" style="subSectionHeading">Right Speedometer: 00.0 KM/H</p>
+      </stack>
+      <video name="sound1" src="resources/throttle2.mp3" style="collapsed">
+        <onDuration>
+          soundFin = true;
+        </onDuration>
+      </video>
+      <video name="sound2" src="resources/idle4.mp3" style="collapsed">
+        <onDocumentOpened>
+          sound2:Play();
+          sound2.Loop = true;
+        </onDocumentOpened>
+      </video>
+      <xyPlot name="p1" tap="disabled" pan="custom" zoom="disabled" manual="true">
+        <style>
+          <aspectRatio>0.7</aspectRatio>
+          <background color="225 225 255" />
+        </style>
+        <onPan>
+          timeStep = timeStep + 1;
+            
+          local x1 = p1.XAxis.Min+ state.Current.X * (p1.XAxis.Max - p1.XAxis.Min);
+          local y1 = p1.YAxis.Min+ state.Current.Y * (p1.YAxis.Max - p1.YAxis.Min);
+            
+          if((distanceBetween(x1, y1, accBtnPos[1], accBtnPos[2]) &lt;= accBtnRad+1)) then
+            --INSIDE ACCELERATE BUTTON
+            isAcc = true;
+            if((firstStart == true)) then
+              sim2:Stop();
+              sim1:Start();
+              firstStart = false;
+            end
+            if (timeStep % 100) then
+              if(oldX == x1 and oldY == y1) then
+                isAcc = false;  
+              end
+              oldX = x1;
+              oldY = y1;
+            end
+
+          end
+
+        </onPan>
+        <axis dim="x" min="-12" max="13" auto="none" major="false" minor="false"></axis>
+        <axis dim="y" min="-11" max="8" auto="none" major="false" minor="false"></axis>
+        <series name="bg" draw="segmentedFill">
+          <style>
+            <background color="225 225 225" />
+            <foreground color="225 225 225" />
+          </style>
+          <data>50 50; 50 -50; -50 -50; -50 -50; -50 50; 50 50</data>
+        </series>
+        <series name="speedometer1" capacity="110">
+          <style>
+            <lineThickness>4</lineThickness>
+          </style>
+        </series>
+        <series name="s1" draw="radialFill"></series>
+          
+        <series name="speedometer2" capacity="110">
+          <style>
+            <lineThickness>4</lineThickness>
+          </style>
+        </series>
+        <series name="s2" draw="radialFill" capacity="110"></series>
+          
+        <series name="accelerator" draw="radialFill"></series>          
+        <series name="acceleratorLabel"></series>
+        <series name="a1" draw="triangles"></series>
+        <series name="a2" draw="triangles"></series>
+        <series name="a3" draw="line">
+          <style>
+            <lineThickness>2</lineThickness>
+          </style>
+        </series>
+        <series name="a4" draw="line">
+          <style>
+            <lineThickness>2</lineThickness>
+          </style>
+        </series>
+        
+        <series name="needle1" capacity="3" draw="segmentedFill" manual="true">
+          <style>
+            <foreground color="black" />
+          </style>
+        </series>
+          
+        <series name="needle2" capacity="3" draw="segmentedFill" manual="true">
+          <style>
+            <foreground color="black" />
+          </style>
+        </series>
+          
+        <series name="speedLabel"></series>
+        <series name="speedLabel2" capacity="6000"></series>
+        <series name="line"></series>
+          
+      </xyPlot>
+      <simulation name="sim1" loop="false" period=".018" duration="10" asynchronous="false">
+        <onStateChanged>
+
+        </onStateChanged>
+        <onUpdate>
+
+          if(p1.needle1 == null) then
+          else
+            if (isAcc == true) then
+              ind = ind - (1/2); --Sets Index to go from 0 to 100
+              ind2 = ind2 - (0.5*0.621371);
+              if(ind &lt; 1) then
+                ind = 1;
+              elseif (ind &gt; 103) then
+                ind = 103;
+              end
+              if(ind2 &lt; 103-(103*0.621371)) then
+                ind2 = 103-(103*0.621371);
+              elseif (ind2 &gt; 103) then
+                ind2 = 103;
+                sim2:Stop();
+                firstStart = true;
+              end
+              p1.needle1:Clear();
+              if(ind &lt;= 98) then
+                p1.needle1:Add(p1.s2.Points[ind+5].X , p1.s2.Points[ind+5].Y);
+              else
+                p1.needle1:Add(p1.s2.Points[103].X , p1.s2.Points[103].Y);
+              end
+              p1.needle1:Add(p1.speedometer2.Points[ind].X , p1.speedometer2.Points[ind].Y);
+              if(ind &gt; 6) then
+                p1.needle1:Add(p1.s2.Points[ind-5].X , p1.s2.Points[ind-5].Y);
+              else
+                p1.needle1:Add(p1.s2.Points[1].X , p1.s2.Points[1].Y);
+              end
+              p1.needle1:Update();
+              p1.needle2:Clear();
+              if(ind2 &lt;= 98) then
+                p1.needle2:Add(p1.s1.Points[ind2+5].X , p1.s1.Points[ind2+5].Y);
+              else
+                p1.needle2:Add(p1.s1.Points[103].X , p1.s1.Points[103].Y);
+              end
+              p1.needle2:Add(p1.speedometer1.Points[ind2].X , p1.speedometer1.Points[ind2].Y);
+              if(ind2 &gt; 6) then
+                p1.needle2:Add(p1.s1.Points[ind2-5].X , p1.s1.Points[ind2-5].Y);
+              else
+                p1.needle2:Add(p1.s1.Points[1].X , p1.s1.Points[1].Y);
+              end
+              p1.needle2:Update();
+            else
+              sim1:Stop();
+              sim2:Start();
+            end
+          end
+        </onUpdate>
+      </simulation>
+      <simulation name="sim2" loop="false" period="0.01" duration="3" asynchronous="false">
+        <onDuration>
+          firstStart = true;
+        </onDuration>
+        <onUpdate>
+            if (isAcc) then
+              if(audioOn) then
+                sound1:SeekToTime(((103-ind)/103) * 4);
+                sound1:Play();
+                sound2:Stop();
+                soundFin = false;
+              end
+            else
+              if (audioOn) then
+                sound1:Stop();
+                sound2:Play();
+              else
+                sound1:Stop();
+                sound2:Stop();
+              end
+            end
+            if(p1.needle1 == null) then
+            else
+              if (isAcc == false) then
+                ind = ind + (time);
+                ind2 = ind2 + (0.621371*time);
+                if(ind &lt; 1) then
+                  ind = 1;
+                elseif (ind &gt; 103) then
+                  ind = 103;
+                  sim2:Stop();
+                  firstStart = true;
+                end
+                if(ind2 &lt; 103-(103*0.621371)) then
+                  ind2 = 103-(103*0.621371)-1;
+                elseif (ind2 &gt; 103) then
+                  ind2 = 103;
+                  sim2:Stop();
+                  firstStart = true;
+                end
+                p1.needle1:Clear();
+                if(ind &lt;= 98) then
+                  p1.needle1:Add(p1.s2.Points[ind+5].X , p1.s2.Points[ind+5].Y);
+                else
+                  p1.needle1:Add(p1.s2.Points[103].X , p1.s2.Points[103].Y);
+                end
+                p1.needle1:Add(p1.speedometer2.Points[ind].X , p1.speedometer2.Points[ind].Y);
+                if(ind &gt; 6) then
+                  p1.needle1:Add(p1.s2.Points[ind-5].X , p1.s2.Points[ind-5].Y);
+                else
+                  p1.needle1:Add(p1.s2.Points[1].X , p1.s2.Points[1].Y);
+                end
+                p1.needle1:Update();
+                  
+                p1.needle2:Clear();
+                if(ind2 &lt;= 98) then
+                  p1.needle2:Add(p1.s1.Points[ind2+5].X , p1.s1.Points[ind2+5].Y);
+                else
+                  p1.needle2:Add(p1.s1.Points[103].X , p1.s1.Points[103].Y);
+                end
+                p1.needle2:Add(p1.speedometer1.Points[ind2].X , p1.speedometer1.Points[ind2].Y);
+                if(ind2 &gt; 6) then
+                  p1.needle2:Add(p1.s1.Points[ind2-5].X , p1.s1.Points[ind2-5].Y);
+                else
+                  p1.needle2:Add(p1.s1.Points[1].X , p1.s1.Points[1].Y);
+                end
+                p1.needle2:Update();
+              else
+                sim2:Stop();
+                firstStart = true;
+                  
+              end
+            end
+          </onUpdate>
+      </simulation>
+      <simulation name="sim3" loop="true" period="0.1" duration="6.28" asynchronous="false">
+        <onUpdate>
+
+          if (p1.a1 == null or p1.a2 == null or p1.a3 == null or p1.a4 == null or accBtnPos == null) then
+          else
+            angle = angle + speed;
+            p1.a1.Transform = matrixf.translation(accBtnPos[1], accBtnPos[2], 1) * matrixf.rotationAboutAxis(0, 0, -1, angle);
+            p1.a2.Transform = matrixf.translation(accBtnPos[1], accBtnPos[2], 1) * matrixf.rotationAboutAxis(0, 0, -1, angle);
+            p1.a3.Transform = matrixf.translation(accBtnPos[1], accBtnPos[2], 1) * matrixf.rotationAboutAxis(0, 0, -1, angle);
+            p1.a4.Transform = matrixf.translation(accBtnPos[1], accBtnPos[2], 1) * matrixf.rotationAboutAxis(0, 0, -1, angle);
+          end
+          btnStack.lab1.Text = "Left Speedometer:                    " .. tostring(round((math.pi-math.atan2(p1.needle1.Points[2].Y , p1.needle1.Points[2].X + speed1Pos[1]))/math.pi * 125, 0.1)) .. " MPH";
+          btnStack.lab2.Text = "Right Speedometer:                   " .. round((round((math.pi-math.atan2(p1.needle1.Points[2].Y , p1.needle1.Points[2].X + speed1Pos[1]))/math.pi * 125, 0.1))/0.621371,2) .. " KM/H";
+
+
+        </onUpdate>
+      </simulation>
+    </stack>
+  </sectionNoTitle>
+
+  <sectionNoTitle style="pageLayout" name="section3">
+    <onActivePageChanged>
+      audioOn=false;
+      section2:Child(4).btnStack.btn1.Text = "Audio: Off";
+      section2:Child(4).btnStack.btn1.Style.BackgroundColor = color.gray;
+      audioOn = false;
+      section2:Child(4).sound2:Stop();
+      section2:Child(4).sound1:Stop();
+    </onActivePageChanged>
+    <p style="sectionHeading">Learn Unit Rates, Save Money!</p>
+    <stack style="contentBG">
+      <p>Imagine shopping at your favorite grocery store looking to buy some fresh cupcakes. While browsing, you come across two really good deals:</p>
+      <equation>
+        <b>Deal 1: </b>You can get 12 cupcakes for $ \$ 4.49 $</equation>
+      <equation>
+        <b>Deal 2: </b>You can get 6 cupcakes for $ \$ 2.99 $</equation>
+      <p>You might be thinking, the second deal seems great, I'm only paying $ \$ 2.99 ! $ However, lets use unit rates to determine which deal is really best.</p>
+      <p>We want to convert Deal 1 and Deal 2 into the following unit rates: $ \frac{dollar}{cupcake} $ (dollars per cupcake). This will tell us how much 1 cupcake is worth in both deals. </p>
+      <button content="Convert Deal 1 to Unit Rate">
+        <onClick>
+          d1.Style.Visibility = "visible";
+        </onClick>
+      </button>
+      <stack style="collapsed" name="d1">
+        <equation>12 Cupcakes for $ \$ 4.49 $</equation>
+        <equation>If we divide $ \frac{ \$ 4.49 }{12 \; Cupcakes} $, we'll know how much 1 cupcake is worth</equation>
+        <equation>After calculating, the unit rate of Deal 1 is: $ \frac{ \$ 0.37 }{1 \; Cupcake} $</equation>
+        <equation>This means that 1 cupcake is $ 37 \; cents $</equation>
+        <equation>Find out if this is a better deal than Deal 2!</equation>
+      </stack>
+      <button content="Convert Deal 2 to Unit Rate">
+        <onClick>
+          d2.Style.Visibility = "visible";
+        </onClick>
+      </button>
+      <stack style="collapsed" name="d2">
+        <equation>6 Cupcakes for $ \$ 2.99 $</equation>
+        <equation>If we divide $ \frac{ \$ 2.99 }{6 \; Cupcakes} $, we'll know how much 1 cupcake is worth</equation>
+        <equation>After calculating, the unit rate of Deal 1 is: $ \frac{ \$ 0.50 }{1 \; Cupcake} $</equation>
+        <equation>This means that 1 cupcake is $ 50 \; cents $</equation>
+      </stack>
+      <button content="Conclusion">
+        <onClick>
+          d3.Style.Visibility = "visible";
+        </onClick>
+      </button>
+      <stack style="collapsed" name="d3">
+        <equation>As we can see, we are actually paying $ 35 \% $ more for 1 cupcake in Deal 2!</equation>
+        <equation>Learning Unit Rates can help you save money!</equation>
+      </stack>
+    </stack>
+  </sectionNoTitle>
+
+  <sectionNoTitle name="section4" style="pageLayout">
+    <p style="sectionHeading">Job Interview</p>
+    <stack style="contentBG">
+      <image src="resources/bossHappy.png" style="collapsed" />
+      <image src="resources/bossMad.png" style="collapsed" />
+      <p>Using our unit rate skills so far, you are now offered two jobs. Both of the jobs have the same amount of work involved, the same distance away but have different salaries.</p>
+      <p>You have to decide which job to take that will earn you the most money! Sounds easy right?
+    </p>
+      <table name="t1" widths="25% 25% 25% 25%" grid="false">
+        <row>
+          <column>
+            <style>
+              <background color="beige" />
+            </style>
+            <image src="resources/boss2.png">
+            </image>
+            <p style="centerText">Boss at Company A</p>
+          </column>
+          <column>
+            <style>
+              <background color="beige" />
+            </style>
+            <p name="cont">
+              <size scale="small"> We offer a great career, work for us! We'll pay you $ \$ 60 \; 000 $ dollars per year. An offer you can't refuse. Hit the button below me to accept our offer.</size>
+            </p>
+            <button content="Accept Offer">
+              <onClick>
+                <![CDATA[
+                section4:Child(2).t1:Child(1):Child(3).cont2.FormattedText = "<size scale='small'>Are you sure you want to take their offer? We are offering you a better pay! $35*8 Hours*5 Days*52 Weeks = $72 800 per year!</size>";
+                section4:Child(2).t1:Child(1):Child(4):Child(1).ImageSource = "resources/bossMad.png";
+                ]]>
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <style>
+              <background color="honeydew" />
+            </style>
+            <p name="cont2">
+              <size scale="small">You should work for us. We'll pay you $ \$ 35.00 $ per hour! Please consider our offer, we'd love to have you. Hit the button below me to accept our offer.</size>
+            </p>
+            <button content="Accept Offer">
+              <onClick>
+                <![CDATA[
+                cont2.FormattedText = "<size scale='small'>Excellent choice! We were offering you $12 800 more dollars than Company A! Great decision, welcome aboard!</size>";
+                section4:Child(2).t1:Child(1):Child(4):Child(1).ImageSource = "resources/bossHappy.png";
+                ]]>
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <style>
+              <background color="honeydew" />
+            </style>
+            <image src="resources/boss.png">
+              <style>
+              </style>
+            </image>
+            <p style="centerText">Boss at Company B</p>
+          </column>
+        </row>
+      </table>
+    </stack>
+    <p style="sectionHeading">Gas Station Dilemma</p>
+    <stack style="contentBG">
+      <p>You've got a great job, but now you need to get there for your first day! Unfortunately, you car is out of gas. You're still tight on money so pick the cheapest gas station to fill up.</p>
+      <table name="t1" widths="25% 25% 25% 25%" grid="false">
+        <row>
+          <column>
+            <style>
+              <background color="beige" />
+            </style>
+            <image src="resources/gas1.png">
+            </image>
+            <p style="centerText">Gas Station A</p>
+          </column>
+          <column>
+            <style>
+              <background color="beige" />
+            </style>
+            <p name="cont">
+              <size scale="small"> We sell 20 L of gas for $13! Buy from us!</size>
+            </p>
+            <button content="Buy Gas">
+              <onClick>
+                <![CDATA[
+                section4:Child(4).t1:Child(1):Child(2).cont.FormattedText = "<size scale='small'>Great choice! You saved 11 cents per Litre buying from us!</size>";
+                ]]>
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <style>
+              <background color="honeydew" />
+            </style>
+            <p name="cont2">
+              <size scale="small">We sell 35 L of gas for $25! Buy from us!</size>
+            </p>
+            <button content="Buy Gas">
+              <onClick>
+                <![CDATA[
+                 section4:Child(4).t1:Child(1):Child(2).cont.FormattedText = "<size scale='small'>Bad Choice! You could've saved 11 cents per Litre if you bought from us!</size>";
+                ]]>
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <style>
+              <background color="honeydew" />
+            </style>
+            <image src="resources/gas2.png">
+              <style>
+              </style>
+            </image>
+            <p style="centerText">Boss at Company B</p>
+          </column>
+        </row>
+      </table>
+    </stack>
+  </sectionNoTitle>
+
+  <sectionNoTitle name="section5" style="pageLayout">
+    <p style="sectionHeading">Measuring in Mililitres vs Fluid Ounces</p>
+    <stack style="contentBG">
+      <p>Using the simulation below, your task is to find out how to convert mililitres to ounces through experiment. We start off with two measuring cylinders labelled mL and fl oz. The cup you must use
+      is exactly 100ml. Using the instructions and the information provided, find out what the conversion rate between  mililitres to ounces is. (Hint: Find out how many mL is in 1 fl oz).</p>
+      <onDocumentOpened>
+       function drawNumss() 
+       
+        char.textM(p1.measurementLabel, vector({-6.5, -5}), 0.5, color.black);
+        char.textL(p1.meaasurementLabel, vector({-6.0, -5}), 0.5, color.black);
+        
+        char.textF(p1.measurementLabel, vector({6.0, -5}), 0.5, color.black);
+        char.textL(p1.measurementLabel, vector({6.5, -5}), 0.5, color.black);
+        char.textO(p1.measurementLabel, vector({7.25, -5}), 0.5, color.black);
+        char.textZ(p1.measurementLabel, vector({7.75, -5}), 0.5, color.black);
+       
+        for i=0, 12, 1 do
+          char.num0(p1.nums, vector({-4.75, 1*i + -8.6}), 0.25, color.black);
+        end
+          char.num1(p1.nums, vector({-5, -8.6}), 0.25, color.black);
+          char.num2(p1.nums, vector({-5, -7.6}), 0.25, color.black);
+          char.num3(p1.nums, vector({-5, -6.6}), 0.25, color.black);
+          char.num4(p1.nums, vector({-5, -5.6}), 0.25, color.black);
+          char.num5(p1.nums, vector({-5, -4.6}), 0.25, color.black);
+          char.num6(p1.nums, vector({-5, -3.6}), 0.25, color.black);
+          char.num7(p1.nums, vector({-5, -2.6}), 0.25, color.black);
+          char.num8(p1.nums, vector({-5, -1.6}), 0.25, color.black);
+          char.num9(p1.nums, vector({-5, -0.6}), 0.25, color.black);
+          
+          char.num1(p1.nums, vector({-5.25, -8.6+9}), 0.25, color.black);
+          char.num0(p1.nums, vector({-5, -8.6+9}), 0.25, color.black);
+          
+          char.num1(p1.nums, vector({-5.25, -8.6+10}), 0.25, color.black);
+          char.num1(p1.nums, vector({-5, -8.6+10}), 0.25, color.black);
+          
+          char.num1(p1.nums, vector({-5.25, -8.6+11}), 0.25, color.black);
+          char.num2(p1.nums, vector({-5, -8.6+11}), 0.25, color.black);
+          
+          char.num1(p1.nums, vector({-5.25, -8.6+12}), 0.25, color.black);
+          char.num3(p1.nums, vector({-5, -8.6+12}), 0.25, color.black);
+          
+          char.num1(p1.nums, vector({5.25, 2 + -8.6}), 0.25, color.black);
+          char.num2(p1.nums, vector({5.25, 5 + -8.6}), 0.25, color.black);
+          char.num3(p1.nums, vector({5.25, 8 + -8.6}), 0.25, color.black);
+          char.num4(p1.nums, vector({5.25, 11 + -8.6}), 0.25, color.black);
+       end
+      function init()
+      
+          --DRAW MEASUREMENTS
+          drawNumss();
+          --NECESSARY VARS
+          step1 = false;
+          step2 = false;
+          step3 = false;
+          beaker1Filled = false;
+          beaker2Filled = false;
+          focusBox1 = false;
+          water2Follow = false;
+          currentState = 0;
+          waterFillPos = vector({0, -3.5});
+          pourWaterPos2 = vector({7, 7})
+          pourWaterPos = vector({-7, 7});
+          focusBoxWidth = 2;
+          focusBoxHeight = 3.5;
+          time2 = 0;
+          pourBtnPos = vector({2.35, 1.5});
+          pourBtnRad = 1.5;
+          pourBtnPos2 = vector({-4, 7});
+          pourBtnPos3 = vector({4, 7})
+          water1Pos = vector({0, 0})
+          resetBtnPos = vector({0, 6.5});
+
+          --DRAW OBJECTS (Beaker, jugs)
+          plotTools.drawSquare(p1.beaker1, vector({-5, -2.5}), 2, 14, color.black);
+          plotTools.drawSquare(p1.beaker2, vector({5, -2.5}), 2, 14, color.black);
+          plotTools.drawSquare(p1.jug, vector({7.5, -7.5}), 2, 3.5, color.black);
+        
+          --DRAW LABELS
+          char.textD(p1.label, vector({6.5, -5.0}), 0.5, color.black);
+          char.textR(p1.label, vector({7.0, -5.0}), 0.5, color.black);
+          char.textA(p1.label, vector({7.5, -5.0}), 0.5, color.black);
+          char.textG(p1.label, vector({8.0, -5.0}), 0.5, color.black);
+          char.textM(p1.label, vector({7.0, -5.6}), 0.5, color.black);
+          char.textE(p1.label, vector({7.5, -5.6}), 0.5, color.black);
+        
+          char.textP(p1.label, waterFillPos + vector({-1.25, 1}), 0.5, color.black);
+          char.textL(p1.label, waterFillPos + vector({-0.75, 1}), 0.5, color.black);
+          char.textA(p1.label, waterFillPos + vector({-0.25, 1}), 0.5, color.black);
+          char.textC(p1.label, waterFillPos + vector({0.25, 1}), 0.5, color.black);
+          char.textE(p1.label, waterFillPos + vector({0.9, 1}), 0.5, color.black);
+
+          char.textH(p1.label, waterFillPos + vector({-1, 0}), 0.5, color.black);
+          char.textE(p1.label, waterFillPos + vector({-0.5, 0}), 0.5, color.black);
+          char.textR(p1.label, waterFillPos + vector({0, 0}), 0.5, color.black);
+          char.textE(p1.label, waterFillPos + vector({0.5, 0}), 0.5, color.black);
+
+
+          function drawJug(xx, yy)
+            p1.jug:Clear();
+            plotTools.drawSquare(p1.jug, vector({xx, yy}), focusBoxWidth, focusBoxHeight, color.black);
+            p1.jug:Update();
+            if water2Follow == true then
+              p1.water2:Clear();
+              p1.water2:Add(p1.jug.Points[4].X, p1.jug.Points[4].Y, color.rgb(66, 134, 244));
+              p1.water2:Add(p1.jug.Points[3].X, p1.jug.Points[3].Y, color.rgb(66, 134, 244));
+              p1.water2:Add(p1.jug.Points[1].X, p1.jug.Points[1].Y-0.1, color.rgb(66, 134, 244));
+              p1.water2:Add(p1.jug.Points[1].X, p1.jug.Points[1].Y-0.1, color.rgb(66, 134, 244));
+              p1.water2:Add(p1.jug.Points[2].X, p1.jug.Points[2].Y-0.1, color.rgb(66, 134, 244));
+              p1.water2:Add(p1.jug.Points[3].X, p1.jug.Points[3].Y, color.rgb(66, 134, 244));
+              p1.water2:Update();
+            end
+          end
+          drawJug(7.5, -7.5);
+          p1.label:Update();
+          step1sim:Start();
+        end
+        init();
+      </onDocumentOpened>
+      <xyPlot name="p1" pan="custom" manual="true" zoom="disabled" tap="custom">
+        <style>
+          <background color="100 100 100 100" />
+          <aspectRatio>1</aspectRatio>
+        </style>
+
+        <onPan>
+          local x1 = p1.XAxis.Min+ state.Current.X * (p1.XAxis.Max - p1.XAxis.Min);
+          local y1 = p1.YAxis.Min+ state.Current.Y * (p1.YAxis.Max - p1.YAxis.Min);
+          
+          drawJug(x1, y1);
+          
+          if pointToBoxIntersection(waterFillPos[1], waterFillPos[2], focusBoxWidth, focusBoxHeight, x1, y1) and currentState == 0 then
+            step1 = true;
+            step1sim:Stop();
+            p1.label:Clear();
+            p1.focusArea:Clear();
+            p1.focusArea:Update();
+            plotTools.drawCircle(p1.pourBtn, pourBtnPos, pourBtnRad, color.rgb(66, 134, 244));
+            char.textF(p1.label, pourBtnPos + vector({-0.8, 0}), 0.5, color.white);
+            char.textI(p1.label, pourBtnPos + vector({-0.1, 0}), 0.5, color.white);
+            char.textL(p1.label, pourBtnPos + vector({0.2, 0}), 0.5, color.white);
+            char.textL(p1.label, pourBtnPos + vector({0.7, 0}), 0.5, color.white);
+            p1.label:Update();
+            currentState = 1;
+          elseif currentState == 1 and not pointToBoxIntersection(waterFillPos[1], waterFillPos[2], focusBoxWidth, focusBoxHeight, x1, y1) and step1 == true then
+            currentState = 0;
+            step1sim:Start();
+            step1 = false;
+            p1.pourBtn:Clear();
+            p1.label:Clear();
+            char.textP(p1.label, waterFillPos + vector({-1.25, 1}), 0.5, color.black);
+            char.textL(p1.label, waterFillPos + vector({-0.75, 1}), 0.5, color.black);
+            char.textA(p1.label, waterFillPos + vector({-0.25, 1}), 0.5, color.black);
+            char.textC(p1.label, waterFillPos + vector({0.25, 1}), 0.5, color.black);
+            char.textE(p1.label, waterFillPos + vector({0.9, 1}), 0.5, color.black);
+
+            char.textH(p1.label, waterFillPos + vector({-1, 0}), 0.5, color.black);
+            char.textE(p1.label, waterFillPos + vector({-0.5, 0}), 0.5, color.black);
+            char.textR(p1.label, waterFillPos + vector({0, 0}), 0.5, color.black);
+            char.textE(p1.label, waterFillPos + vector({0.5, 0}), 0.5, color.black);
+            p1.label:Update();
+          end
+          
+          if currentState == 3 and pointToBoxIntersection(pourWaterPos[1], pourWaterPos[2], focusBoxWidth, focusBoxHeight, x1, y1) then
+            step3sim1:Stop();
+            p1.focusArea:Clear();
+            p1.focusArea:Update();
+            p1.pourBtn2:Clear();
+            p1.label:Clear();
+            plotTools.drawCircle(p1.pourBtn2, pourBtnPos2, pourBtnRad, color.rgb(66, 134, 244));
+            char.textP(p1.label, pourBtnPos2 + vector({-0.9, 0}), 0.5, color.white);
+            char.textO(p1.label, pourBtnPos2 + vector({-0.45, 0}), 0.5, color.white);
+            char.textU(p1.label, pourBtnPos2 + vector({0.2, 0}), 0.5, color.white);
+            char.textR(p1.label, pourBtnPos2 + vector({0.7, 0}), 0.5, color.white);
+            p1.label:Update();
+            currentState = 4;
+          elseif currentState == 4 and not pointToBoxIntersection(pourWaterPos[1], pourWaterPos[2], focusBoxWidth, focusBoxHeight, x1, y1) then
+            step3sim1:Start();
+            p1.label:Clear();
+            p1.pourBtn2:Clear();
+            p1.label:Update();
+            currentState = 3;
+          end
+          
+          if currentState == 5 and pointToBoxIntersection(pourWaterPos2[1], pourWaterPos2[2], focusBoxWidth, focusBoxHeight, x1, y1) then
+            step5sim:Stop();
+            p1.focusArea:Clear();
+            p1.focusArea:Update();
+            p1.pourBtn2:Clear();
+            p1.label:Clear();
+            plotTools.drawCircle(p1.pourBtn2, pourBtnPos3, pourBtnRad, color.rgb(66, 134, 244));
+            char.textP(p1.label, pourBtnPos3 + vector({-0.9, 0}), 0.5, color.white);
+            char.textO(p1.label, pourBtnPos3 + vector({-0.45, 0}), 0.5, color.white);
+            char.textU(p1.label, pourBtnPos3 + vector({0.2, 0}), 0.5, color.white);
+            char.textR(p1.label, pourBtnPos3 + vector({0.7, 0}), 0.5, color.white);
+            p1.label:Update();
+            currentState = 6;
+          elseif currentState == 6 and not pointToBoxIntersection(pourWaterPos2[1], pourWaterPos2[2], focusBoxWidth, focusBoxHeight, x1, y1) then
+            step5sim:Start();
+            p1.label:Clear();
+            p1.pourBtn2:Clear();
+            p1.label:Update();
+            currentState = 5;
+          end
+        </onPan>
+        <onTap>
+          local x1 = p1.XAxis.Min+ x * (p1.XAxis.Max - p1.XAxis.Min);
+          local y1 = p1.YAxis.Min+ y * (p1.YAxis.Max - p1.YAxis.Min);
+          
+          if currentState == 1 and distanceBetween(x1, y1, pourBtnPos[1], pourBtnPos[2]) &lt; pourBtnRad then
+            currentState = 2;
+            step2sim:Start();
+          end
+          
+          if currentState == 4 and distanceBetween(x1, y1, pourBtnPos2[1], pourBtnPos2[2]) &lt; pourBtnRad then
+            water2Follow = false;
+            p1.pourBtn2:Clear();
+            step4sim1:Start();
+          end
+          
+          if currentState == 6 and distanceBetween(x1, y1, pourBtnPos3[1], pourBtnPos3[2]) &lt; pourBtnRad then
+            water2Follow = false;
+            p1.pourBtn2:Clear();
+            p1.water2.Transform = matrixf.translation(0, 0, 1);
+            step6sim:Start();
+          end
+          
+          if currentState == 7 and distanceBetween(x1, y1, resetBtnPos[1], resetBtnPos[2]) &lt; pourBtnRad then
+            p1.label:Clear();
+            p1.water1:Clear();
+            p1.water2:Clear();
+            p1.water3:Clear();
+            p1.water4:Clear();
+            p1.jug:Clear();
+            p1.resetBtn:Clear();
+            p1.label:Update();
+            p1.water1:Update();
+            p1.water2:Update();
+            p1.water3:Update();
+            p1.water4:Update();
+            p1.jug:Update();
+            p1.resetBtn:Update();
+            init();
+          end
+        </onTap>
+        <axis dim="x" min="-10" max="10" major="false" auto="none"></axis>
+        <axis dim="y" min="-10" max="10" major="false" auto="none"></axis>
+        <series name="water1" manual="true" draw="triangles">
+          <style>
+            <foreground color="aquamarine" />
+          </style>
+        </series>
+        <series name="water2" manual="true" draw="triangles">
+          <style>
+            <foreground color="aquamarine" />
+          </style>
+        </series>
+        <series name="water3" manual="true" draw="triangles">
+          <style>
+            <background color="aquamarine" />
+          </style>
+        </series>
+        <series name="water4" manual="true" draw="triangles">
+          <style>
+            <background color="aquamarine" />
+          </style>
+        </series>
+        <series name="drip1" draw="triangles" manual="true"></series>
+        <series name="drip2" draw="triangles" manual="true"></series>
+        <series name="jug" manual="true">
+          <style>
+            <lineThickness>2</lineThickness>
+          </style>
+        </series>
+        
+        <series name="beaker1"></series>
+        <series name="beaker2"></series>
+        <series name="sink" draw="triangles">
+          <data>
+            0.5 -0.5; 0.5 -1; -0.5 -1;
+            -0.5 -1; -0.5 0.7; 0.5 -0.5;
+            -1.5 -1; 0.5 0.5; 0.5 -0.5;
+            -1.5 1; -1.5 -1; 0.5 0.5;
+            -1.5 1; -2.5 1; -2.5 -10;
+            -2.5 -10; -1.5 -10; -1.5 1;
+          </data>
+          <colors>
+          silver; silver; silver; 
+          silver; silver; silver; 
+          black; black; black; 
+          black; black; black;
+          black; black; black;
+          black; black; black
+        </colors>
+        </series>
+        <series name="focusArea" draw="triangles" manual="true">
+          <style>
+            <foreground color="255 255 255 150" />
+          </style>
+        </series>
+        <series name="pourBtn" draw="radialFill"></series>
+        <series name="pourBtn2" draw="radialFill"></series>
+        <series name="resetBtn" draw="radialFill"></series>
+        <series name="LM" draw="lineSegments">
+          <!--vector({-5, -2.5}), 2, 14-->
+          <style>
+            <foreground color="red" />
+          </style>
+          <data>
+            -4 -9.5; -4.5 -9.5; -4 -9.5;
+            -4 -9.0; -4.25 -9.0; -4 -9.0;
+            -4 -8.5; -4.5  -8.5; -4 -8.5;
+            -4 -8.0; -4.25 -8.0; -4 -8.0;
+            -4 -7.5; -4.5  -7.5; -4 -7.5;
+            -4 -7.0; -4.25 -7.0; -4 -7.0;
+            -4 -6.5; -4.5  -6.5; -4 -6.5;
+            -4 -6.0; -4.25 -6.0; -4 -6.0;
+            -4 -5.5; -4.5  -5.5; -4 -5.5;
+            -4 -5.0; -4.25 -5.0; -4 -5.0;
+            -4 -4.5; -4.5  -4.5; -4 -4.5;
+            -4 -4.0; -4.25 -4.0; -4 -4.0;
+            -4 -3.5; -4.5  -3.5; -4 -3.5;
+            -4 -3.0; -4.25 -3.0; -4 -3.0;
+            -4 -2.5; -4.5  -2.5; -4 -2.5;
+            -4 -2.0; -4.25 -2.0; -4 -2.0;
+            -4 -1.5; -4.5  -1.5; -4 -1.5;
+            -4 -1.0; -4.25 -1.0; -4 -1.0;
+            -4 -0.5; -4.5  -0.5; -4 -0.5;
+            -4 0;    -4.25 0;    -4 0;
+            -4 0.5;  -4.5  0.5;  -4 0.5;
+            -4 1;   -4.25  1;    -4 1;
+            -4 1.5; -4.5   1.5;  -4 1.5;
+            -4 2.0; -4.25  2.0;  -4 2.0;
+            -4 2.5; -4.5   2.5;  -4 2.5;
+            -4 3.0; -4.25  3.0;  -4 3.0;
+            -4 3.5; -4.5   3.5;  -4 3.5;
+            -4 4.0; -4.25  4.0;  -4 4.0;
+            -4 4.5; -4.5   4.5;  -4 4.5; -4 -9.5;
+          </data>   
+        </series>
+        <series name="GAL" draw="lineSegments">
+          <style>
+            <foreground color="red" />
+          </style>
+            
+          <data>
+            6 -9.5; 5.5 -9.5; 6 -9.5;
+            6 -9.0; 5.75 -9.0; 6 -9.0;
+            6 -8.5; 5.5  -8.5; 6 -8.5;
+            6 -8.0; 5.75 -8.0; 6 -8.0;
+            6 -7.5; 5.5  -7.5; 6 -7.5;
+            6 -7.0; 5.75 -7.0; 6 -7.0;
+            6 -6.5; 5.5  -6.5; 6 -6.5;
+            6 -6.0; 5.75 -6.0; 6 -6.0;
+            6 -5.5; 5.5  -5.5; 6 -5.5;
+            6 -5.0; 5.75 -5.0; 6 -5.0;
+            6 -4.5; 5.5  -4.5; 6 -4.5;
+            6 -4.0; 5.75 -4.0; 6 -4.0;
+            6 -3.5; 5.5  -3.5; 6 -3.5;
+            6 -3.0; 5.75 -3.0; 6 -3.0;
+            6 -2.5; 5.5  -2.5; 6 -2.5;
+            6 -2.0; 5.75 -2.0; 6 -2.0;
+            6 -1.5; 5.5  -1.5; 6 -1.5;
+            6 -1.0; 5.75 -1.0; 6 -1.0;
+            6 -0.5; 5.5  -0.5; 6 -0.5;
+            6 0;    5.75 0;    6 0;
+            6 0.5;  5.5  0.5;  6 0.5;
+            6 1;   5.75  1;    6 1;
+            6 1.5; 5.5   1.5;  6 1.5;
+            6 2.0; 5.75  2.0;  6 2.0;
+            6 2.5; 5.5   2.5;  6 2.5;
+            6 3.0; 5.75  3.0;  6 3.0;
+            6 3.5; 5.5   3.5;  6 3.5;
+            6 4.0; 5.75  4.0;  6 4.0;
+            6 4.5; 5.5   4.5;  6 4.5; 6 -9.5;
+          </data> 
+          
+        </series>
+        <series name="nums" capacity="10000"></series>
+        <series name="label" manual="true"></series>
+        <series name="measurementLabel"></series>
+      </xyPlot>
+      <simulation name="step1sim" duration="2" period="0.01" loop="true" asynchronous="false">
+        <onUpdate>
+          if time &gt; 1 then
+            time2 = time;
+          else
+            time2 = 2 - time;
+          end
+          
+          if focusBox1 == false then
+            p1.focusArea:Clear();
+            p1.focusArea:Add(waterFillPos[1] - 2, waterFillPos[2] - 2);
+            p1.focusArea:Add(waterFillPos[1] + 2, waterFillPos[2] + 2);
+            p1.focusArea:Add(waterFillPos[1] - 2, waterFillPos[2] + 2);
+            p1.focusArea:Add(waterFillPos[1] + 2, waterFillPos[2] + 2);
+            p1.focusArea:Add(waterFillPos[1] + 2, waterFillPos[2] - 2);
+            p1.focusArea:Add(waterFillPos[1] - 2, waterFillPos[2] - 2);
+            p1.focusArea:Update();
+            focusBox1 = true;
+          end
+          
+          if (currentState == 0 and step1 == false) then
+            p1.focusArea:Clear();
+            p1.focusArea:Add(waterFillPos[1] - 2, waterFillPos[2] -2, color.rgba(150, 255, 150, 1/time2 * 150));
+            p1.focusArea:Add(waterFillPos[1] + 2, waterFillPos[2] + 2, color.rgba(150, 255, 150, 1/time2 * 150));
+            p1.focusArea:Add(waterFillPos[1] - 2, waterFillPos[2] + 2, color.rgba(150, 255, 150, 1/time2 * 150));
+            p1.focusArea:Add(waterFillPos[1] + 2, waterFillPos[2] + 2, color.rgba(150, 255, 150, 1/time2 * 150));
+            p1.focusArea:Add(waterFillPos[1] + 2, waterFillPos[2] - 2, color.rgba(150, 255, 150, 1/time2 * 150));
+            p1.focusArea:Add(waterFillPos[1] - 2, waterFillPos[2] - 2, color.rgba(150, 255, 150, 1/time2 * 150));
+            p1.focusArea:Update();
+          end
+        </onUpdate>
+      </simulation>
+      <simulation name="step2sim" duration="1" period="0.01" loop="false" asynchronous="false">
+        <onDuration>
+          step2sim:Stop();
+          step2sim2:Start();
+            
+        </onDuration>
+        <onUpdate>
+          p1.water1:Clear();
+          p1.water1:Add(-0.5, -0.5, color.rgb(66, 134, 244));
+          p1.water1:Add(0.5, -0.5, color.rgb(66, 134, 244));
+          p1.water1:Add(-0.5, time*p1.jug.Points[4].Y, color.rgb(66, 134, 244));
+          p1.water1:Add(-0.5, time*p1.jug.Points[4].Y, color.rgb(66, 134, 244));
+          p1.water1:Add(0.5, time*p1.jug.Points[4].Y, color.rgb(66, 134, 244));
+          p1.water1:Add(0.5, -0.5, color.rgb(66, 134, 244));
+          p1.water1:Update();
+        </onUpdate>
+      </simulation>
+      <simulation name="step2sim2" duration="0.5" period="0.01" loop="false" asynchronous="false">
+        <onDuration>
+          p1.water1:Clear();
+          p1.water1:Update();
+          p1.pourBtn:Clear();
+          p1.label:Clear();
+          p1.label:Update();
+          water2Follow = true;
+          if (not beaker1Filled) then
+            currentState = 3;
+            step3sim1:Start();
+          else
+            currentState = 5;
+            step5sim:Start();
+          end
+        </onDuration>
+        <onUpdate>
+          p1.water2:Clear();
+          p1.water2:Add(p1.jug.Points[4].X, p1.jug.Points[4].Y, color.rgb(66, 134, 244));
+          p1.water2:Add(p1.jug.Points[3].X, p1.jug.Points[3].Y, color.rgb(66, 134, 244));
+          p1.water2:Add(p1.jug.Points[1].X, p1.jug.Points[4].Y + (time/0.5)*focusBoxHeight, color.rgb(66, 134, 244));
+          p1.water2:Add(p1.jug.Points[3].X, p1.jug.Points[3].Y, color.rgb(66, 134, 244));
+          p1.water2:Add(p1.jug.Points[1].X, p1.jug.Points[4].Y + (time/0.5)*focusBoxHeight, color.rgb(66, 134, 244));
+          p1.water2:Add(p1.jug.Points[2].X, p1.jug.Points[4].Y + (time/0.5)*focusBoxHeight, color.rgb(66, 134, 244));
+          p1.water2:Update();
+        </onUpdate>
+        
+      </simulation>
+      <simulation name="step3sim1" duration="2" period="0.01" loop="true" asynchronous="false">
+        <onUpdate>
+          if time &gt; 1 then
+            time2 = time;
+          else
+            time2 = 2 - time;
+          end
+          
+          if currentState == 3 then
+            p1.focusArea:Clear();
+            p1.focusArea:Add(pourWaterPos[1] - 2, pourWaterPos[2] -2, color.rgba(150, 255, 150, 1/time2 * 150));
+            p1.focusArea:Add(pourWaterPos[1] + 2, pourWaterPos[2] + 2, color.rgba(150, 255, 150, 1/time2 * 150));
+            p1.focusArea:Add(pourWaterPos[1] - 2, pourWaterPos[2] + 2, color.rgba(150, 255, 150, 1/time2 * 150));
+            p1.focusArea:Add(pourWaterPos[1] + 2, pourWaterPos[2] + 2, color.rgba(150, 255, 150, 1/time2 * 150));
+            p1.focusArea:Add(pourWaterPos[1] + 2, pourWaterPos[2] - 2, color.rgba(150, 255, 150, 1/time2 * 150));
+            p1.focusArea:Add(pourWaterPos[1] - 2, pourWaterPos[2] - 2, color.rgba(150, 255, 150, 1/time2 * 150));
+            p1.focusArea:Update();
+          end
+        </onUpdate>
+      </simulation>
+      <simulation name="step4sim1" duration="2" period="0.01" loop="false" asynchronous="false">
+        <onDuration>
+          p1.drip1:Clear();
+          p1.drip1:Update();
+          p1.jug.Transform = matrixf.translation(0, 0, 1);
+          p1.water2.Transform = matrixf.translation(0, 0, 1);
+          currentState = 0;
+          beaker1Filled = true;
+          step1sim:Start();
+          p1.focusArea:Clear();
+          p1.focusArea:Add(waterFillPos[1] - 2, waterFillPos[2] - 2, color.rgba(150, 255, 150, 200));
+          p1.focusArea:Add(waterFillPos[1] + 2, waterFillPos[2] + 2, color.rgba(150, 255, 150, 200));
+          p1.focusArea:Add(waterFillPos[1] - 2, waterFillPos[2] + 2, color.rgba(150, 255, 150, 200));
+          p1.focusArea:Add(waterFillPos[1] + 2, waterFillPos[2] + 2, color.rgba(150, 255, 150, 200));
+          p1.focusArea:Add(waterFillPos[1] + 2, waterFillPos[2] - 2, color.rgba(150, 255, 150, 200));
+          p1.focusArea:Add(waterFillPos[1] - 2, waterFillPos[2] - 2, color.rgba(150, 255, 150, 200));
+          p1.focusArea:Update();
+        </onDuration>
+        <onUpdate>
+          if time &gt; 1 then
+            time2 = time;
+          else
+            time2 = 2 - time;
+          end
+          if currentState == 4 then
+            
+            if time &lt; 1 then
+              drawJug(0, 0);
+              p1.jug.Transform = matrixf.translation(pourWaterPos[1], pourWaterPos[2], 1) * matrixf.rotationAboutAxis(0, 0, -1, time*math.pi/2);
+              p1.jug:Update();
+              if time &lt; 0.7 then
+                p1.water2:Clear();
+                p1.water2:Add(p1.jug.Points[4].X, p1.jug.Points[4].Y, color.rgb(66, 134, 244)); --BOTTOM LEFT
+                p1.water2:Add(p1.jug.Points[3].X, p1.jug.Points[3].Y, color.rgb(66, 134, 244)); -- BOTTOM RIGHT
+                p1.water2:Add(p1.jug.Points[1].X, p1.jug.Points[1].Y-0.1 -focusBoxHeight*time/0.7, color.rgb(66, 134, 244)); --TOP LEFT
+                p1.water2:Add(p1.jug.Points[1].X, p1.jug.Points[1].Y-0.1 -focusBoxHeight*time/0.7, color.rgb(66, 134, 244)); -- TOP LEFT
+                p1.water2:Add(p1.jug.Points[2].X, p1.jug.Points[2].Y-0.1, color.rgb(66, 134, 244)); -- TOP RIGHT
+                p1.water2:Add(p1.jug.Points[3].X, p1.jug.Points[3].Y, color.rgb(66, 134, 244)); -- BOTTOM RIGHT
+              else
+                p1.water2:Clear();
+                p1.water2:Add(p1.jug.Points[4].X +focusBoxWidth*(time-0.7)/0.3, p1.jug.Points[4].Y, color.rgb(66, 134, 244)); --BOTTOM LEFT
+                p1.water2:Add(p1.jug.Points[3].X, p1.jug.Points[3].Y, color.rgb(66, 134, 244)); -- BOTTOM RIGHT
+                p1.water2:Add(p1.jug.Points[1].X +focusBoxWidth*(time-0.7)/0.3, p1.jug.Points[1].Y-0.1 -focusBoxHeight, color.rgb(66, 134, 244)); --TOP LEFT
+                p1.water2:Add(p1.jug.Points[1].X +focusBoxWidth*(time-0.7)/0.3, p1.jug.Points[1].Y-0.1 -focusBoxHeight, color.rgb(66, 134, 244)); -- TOP LEFT
+                p1.water2:Add(p1.jug.Points[2].X, p1.jug.Points[2].Y-0.1, color.rgb(66, 134, 244)); -- TOP RIGHT
+                p1.water2:Add(p1.jug.Points[3].X, p1.jug.Points[3].Y, color.rgb(66, 134, 244)); -- BOTTOM RIGHT
+              end
+              p1.water2.Transform = matrixf.translation(pourWaterPos[1], pourWaterPos[2], 1) * matrixf.rotationAboutAxis(0, 0, -1, time*math.pi/2);
+              p1.water2:Update();
+                p1.water3:Clear();
+                p1.water3:Add(p1.beaker1.Points[4].X, p1.beaker1.Points[4].Y, color.rgb(66, 134, 244)); --BOTTOM LEFT
+                p1.water3:Add(p1.beaker1.Points[3].X, p1.beaker1.Points[3].Y, color.rgb(66, 134, 244)); -- BOTTOM RIGHT
+                p1.water3:Add(p1.beaker1.Points[1].X, p1.beaker1.Points[4].Y + time*10 + 0.1, color.rgb(66, 134, 244)); --TOP LEFT
+                p1.water3:Add(p1.beaker1.Points[1].X, p1.beaker1.Points[4].Y + time*10 + 0.1, color.rgb(66, 134, 244)); -- TOP LEFT
+                p1.water3:Add(p1.beaker1.Points[2].X, p1.beaker1.Points[4].Y + time*10 + 0.1, color.rgb(66, 134, 244)); -- TOP RIGHT
+                p1.water3:Add(p1.beaker1.Points[3].X, p1.beaker1.Points[3].Y, color.rgb(66, 134, 244)); -- BOTTOM RIGHT              
+                p1.water3:Update();
+                p1.drip1:Clear();
+                p1.drip1:Add(p1.beaker1.Points[4].X, p1.beaker1.Points[4].Y, color.rgba(66, 134, 244, 150));
+                p1.drip1:Add(p1.beaker1.Points[1].X, p1.beaker1.Points[1].Y, color.rgba(66, 134, 244, 150));
+                p1.drip1:Add(p1.beaker1.Points[4].X+0.25, p1.beaker1.Points[4].Y, color.rgba(66, 134, 244, 150));
+                p1.drip1:Add(p1.beaker1.Points[4].X+0.25, p1.beaker1.Points[4].Y, color.rgba(66, 134, 244, 150));
+                p1.drip1:Add(p1.beaker1.Points[1].X, p1.beaker1.Points[1].Y, color.rgba(66, 134, 244, 150));
+                p1.drip1:Add(p1.beaker1.Points[1].X+0.25, p1.beaker1.Points[1].Y, color.rgba(66, 134, 244, 150));
+                p1.drip1:Update();
+            elseif time &lt; 2 then
+              p1.water2:Clear();
+              p1.water2:Update();
+              drawJug(0, 0);
+              p1.jug.Transform = matrixf.translation(pourWaterPos[1], pourWaterPos[2], 1) * matrixf.rotationAboutAxis(0, 0, -1, -time2*math.pi/2);
+              p1.jug:Update();
+              p1.drip1:Clear();
+              p1.drip1:Add(p1.beaker1.Points[4].X, p1.beaker1.Points[4].Y, color.rgba(66, 134, 244, 1/time2*150));
+              p1.drip1:Add(p1.beaker1.Points[1].X, p1.beaker1.Points[1].Y, color.rgba(66, 134, 244, 1/time2*150));
+              p1.drip1:Add(p1.beaker1.Points[4].X+0.25, p1.beaker1.Points[4].Y, color.rgba(66, 134, 244, 1/time2*150));
+              p1.drip1:Add(p1.beaker1.Points[4].X+0.25, p1.beaker1.Points[4].Y, color.rgba(66, 134, 244, 1/time2*150));
+              p1.drip1:Add(p1.beaker1.Points[1].X, p1.beaker1.Points[1].Y, color.rgba(66, 134, 244, 1/time2*150));
+              p1.drip1:Add(p1.beaker1.Points[1].X+0.25, p1.beaker1.Points[1].Y, color.rgba(66, 134, 244, 1/time2*150));
+              p1.drip1:Update();
+            end
+          end
+        </onUpdate>
+      </simulation>
+      <simulation name="step5sim" duration="2" period="0.01" loop="true" asynchronous="false">
+        <onUpdate>
+          if time &gt; 1 then
+            time2 = time;
+          else
+            time2 = 2 - time;
+          end
+          
+          if currentState == 5 then
+            p1.focusArea:Clear();
+            p1.focusArea:Add(pourWaterPos2[1] - 2, pourWaterPos2[2] -2, color.rgba(150, 255, 150, 1/time2 * 150));
+            p1.focusArea:Add(pourWaterPos2[1] + 2, pourWaterPos2[2] + 2, color.rgba(150, 255, 150, 1/time2 * 150));
+            p1.focusArea:Add(pourWaterPos2[1] - 2, pourWaterPos2[2] + 2, color.rgba(150, 255, 150, 1/time2 * 150));
+            p1.focusArea:Add(pourWaterPos2[1] + 2, pourWaterPos2[2] + 2, color.rgba(150, 255, 150, 1/time2 * 150));
+            p1.focusArea:Add(pourWaterPos2[1] + 2, pourWaterPos2[2] - 2, color.rgba(150, 255, 150, 1/time2 * 150));
+            p1.focusArea:Add(pourWaterPos2[1] - 2, pourWaterPos2[2] - 2, color.rgba(150, 255, 150, 1/time2 * 150));
+            p1.focusArea:Update();
+          end
+        </onUpdate>
+      </simulation>
+      <simulation name="step6sim" duration="2" period="0.01" loop="false" asynchronous="false">
+          <onDuration>
+            p1.drip2:Clear();
+            p1.drip2:Update();
+            p1.jug.Transform = matrixf.translation(0, 0, 1);
+            p1.water2.Transform = matrixf.translation(0, 0, 1);
+            currentState = 7;
+            beaker2Filled = true;
+            plotTools.drawCircle(p1.resetBtn, resetBtnPos, 2, color.green);
+            char.textR(p1.label, resetBtnPos + vector({-1, 0}), 0.5, color.white);
+            char.textE(p1.label, resetBtnPos + vector({-0.5, 0}), 0.5, color.white);
+            char.textS(p1.label, resetBtnPos + vector({0, 0}), 0.5, color.white);
+            char.textE(p1.label, resetBtnPos + vector({0.5, 0}), 0.5, color.white);
+            char.textT(p1.label, resetBtnPos + vector({1.0, 0}), 0.5, color.white);
+            p1.label:Update();
+          </onDuration>
+        <onUpdate>
+          if time &gt; 1 then
+            time2 = time;
+          else
+            time2 = 2 - time;
+          end
+          if currentState == 6 then
+            
+            if time &lt; 1 then
+              drawJug(0, 0);
+              p1.jug.Transform = matrixf.translation(pourWaterPos2[1], pourWaterPos2[2], 1) * matrixf.rotationAboutAxis(0, 0, -1, -time*math.pi/2);
+              p1.jug:Update();
+              if time &lt; 0.7 then
+                p1.water2:Clear();
+                p1.water2:Add(p1.jug.Points[4].X, p1.jug.Points[4].Y, color.rgb(66, 134, 244)); --BOTTOM LEFT
+                p1.water2:Add(p1.jug.Points[3].X, p1.jug.Points[3].Y, color.rgb(66, 134, 244)); -- BOTTOM RIGHT
+                p1.water2:Add(p1.jug.Points[1].X, p1.jug.Points[1].Y-0.1 , color.rgb(66, 134, 244)); --TOP LEFT
+                p1.water2:Add(p1.jug.Points[1].X, p1.jug.Points[1].Y-0.1 , color.rgb(66, 134, 244)); -- TOP LEFT
+                p1.water2:Add(p1.jug.Points[2].X, p1.jug.Points[2].Y-0.1 -focusBoxHeight*time/0.7, color.rgb(66, 134, 244)); -- TOP RIGHT
+                p1.water2:Add(p1.jug.Points[3].X, p1.jug.Points[3].Y, color.rgb(66, 134, 244)); -- BOTTOM RIGHT
+              else
+                p1.water2:Clear();
+                p1.water2:Add(p1.jug.Points[4].X , p1.jug.Points[4].Y, color.rgb(66, 134, 244)); --BOTTOM LEFT
+                p1.water2:Add(p1.jug.Points[3].X -focusBoxWidth*(time-0.7)/0.3, p1.jug.Points[3].Y, color.rgb(66, 134, 244)); -- BOTTOM RIGHT
+                p1.water2:Add(p1.jug.Points[1].X , p1.jug.Points[1].Y, color.rgb(66, 134, 244)); --TOP LEFT
+                p1.water2:Add(p1.jug.Points[1].X , p1.jug.Points[1].Y, color.rgb(66, 134, 244)); -- TOP LEFT
+                p1.water2:Add(p1.jug.Points[2].X -focusBoxWidth*(time-0.7)/0.3, p1.jug.Points[2].Y-focusBoxHeight, color.rgb(66, 134, 244)); -- TOP RIGHT
+                p1.water2:Add(p1.jug.Points[3].X -focusBoxWidth*(time-0.7)/0.3, p1.jug.Points[3].Y, color.rgb(66, 134, 244)); -- BOTTOM RIGHT
+              end
+              p1.water2.Transform = matrixf.translation(pourWaterPos2[1], pourWaterPos2[2], 1) * matrixf.rotationAboutAxis(0, 0, -1, -time*math.pi/2);
+              p1.water2:Update();
+                p1.water4:Clear();
+                p1.water4:Add(p1.beaker2.Points[4].X, p1.beaker2.Points[4].Y, color.rgb(66, 134, 244)); --BOTTOM LEFT
+                p1.water4:Add(p1.beaker2.Points[3].X, p1.beaker2.Points[3].Y, color.rgb(66, 134, 244)); -- BOTTOM RIGHT
+                p1.water4:Add(p1.beaker2.Points[1].X, p1.beaker2.Points[4].Y + time*10 + 0.1, color.rgb(66, 134, 244)); --TOP LEFT
+                p1.water4:Add(p1.beaker2.Points[1].X, p1.beaker2.Points[4].Y + time*10 + 0.1, color.rgb(66, 134, 244)); -- TOP LEFT
+                p1.water4:Add(p1.beaker2.Points[2].X, p1.beaker2.Points[4].Y + time*10 + 0.1, color.rgb(66, 134, 244)); -- TOP RIGHT
+                p1.water4:Add(p1.beaker2.Points[3].X, p1.beaker2.Points[3].Y, color.rgb(66, 134, 244)); -- BOTTOM RIGHT              
+                p1.water4:Update();
+                p1.drip2:Clear();
+                p1.drip2:Add(p1.beaker2.Points[3].X, p1.beaker2.Points[3].Y, color.rgba(66, 134, 244, 150));
+                p1.drip2:Add(p1.beaker2.Points[2].X, p1.beaker2.Points[2].Y, color.rgba(66, 134, 244, 150));
+                p1.drip2:Add(p1.beaker2.Points[3].X-0.25, p1.beaker2.Points[3].Y, color.rgba(66, 134, 244, 150));
+                p1.drip2:Add(p1.beaker2.Points[3].X-0.25, p1.beaker2.Points[3].Y, color.rgba(66, 134, 244, 150));
+                p1.drip2:Add(p1.beaker2.Points[2].X, p1.beaker2.Points[2].Y, color.rgba(66, 134, 244, 150));
+                p1.drip2:Add(p1.beaker2.Points[2].X-0.25, p1.beaker2.Points[2].Y, color.rgba(66, 134, 244, 150));
+                p1.drip2:Update();
+            elseif time &lt; 2 then
+              p1.water2:Clear();
+              p1.water2:Update();
+              drawJug(0, 0);
+              p1.jug.Transform = matrixf.translation(pourWaterPos2[1], pourWaterPos2[2], 1) * matrixf.rotationAboutAxis(0, 0, -1, time2*math.pi/2);
+              p1.jug:Update();
+              p1.drip2:Clear();
+              p1.drip2:Add(p1.beaker2.Points[3].X, p1.beaker2.Points[3].Y, color.rgba(66, 134, 244, 1/time2*150));
+              p1.drip2:Add(p1.beaker2.Points[2].X, p1.beaker2.Points[2].Y, color.rgba(66, 134, 244, 1/time2*150));
+              p1.drip2:Add(p1.beaker2.Points[3].X-0.25, p1.beaker2.Points[3].Y, color.rgba(66, 134, 244, 1/time2*150));
+              p1.drip2:Add(p1.beaker2.Points[3].X-0.25, p1.beaker2.Points[3].Y, color.rgba(66, 134, 244, 1/time2*150));
+              p1.drip2:Add(p1.beaker2.Points[2].X, p1.beaker2.Points[2].Y, color.rgba(66, 134, 244, 1/time2*150));
+              p1.drip2:Add(p1.beaker2.Points[2].X-0.25, p1.beaker2.Points[2].Y, color.rgba(66, 134, 244, 1/time2*150));
+              p1.drip2:Update();
+            end
+          end
+        </onUpdate>
+      </simulation>
+      <button name="btn1" content="Show Hint">
+        <onClick>
+          if btn1.Text == "Show Hint" then
+            hint.Style.Visibility = "visible";
+            btn1.Text = "Hide Hint";
+          else
+            hint.Style.Visibility = "collapsed";
+            btn1.Text = "Show Hint";
+          end
+        </onClick>
+      </button>
+      <stack name="hint" style="collapsed">
+        <p>We can see that 100mL is rougly 3.3 fl oz. after completing the simulation above. If we create a ratio such as $ \frac{mL}{fl \; oz} $ we can determine how many mL are in 1 fl oz.</p>
+      </stack>
+      <button name="btn2" content="Show Solution">
+        <onClick>
+          if btn2.Text == "Show Solution" then
+            soln.Style.Visibility = "visible";
+            btn2.Text = "Hide Solution";
+          else
+            soln.Style.Visibility = "collapsed";
+            btn2.Text = "Show Solution";
+          end
+        </onClick>
+      </button>
+      <stack name="soln" style="collapsed">
+        <p>After we complete the solution, we divide $ \frac{100mL}{3.3 \; fl \; oz} $. This gives us approximately 30mL per 1 fl oz.</p>
+        <p>We've just discovered a conversion from mililitres to fluid ounces! Every fluid ounce is about 30mL. Unit rates can be really useful if you know how to use them.</p>
+        <p>
+          <b>Note:</b> Since we are using a simulation and we are approximating some numbers by looking, our final answer be a few numbers off. The actual rate of mililitres per fluid ounce is 29.57 mL. We are not too far off from this!
+        </p>
+      </stack>
+    </stack>
+  </sectionNoTitle>
+
+</document>

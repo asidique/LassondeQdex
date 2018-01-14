@@ -9,6 +9,8 @@ Project("{3509FA56-3B69-4017-88D1-3C70D67D8588}") = "4.3", "4.3\4.3.qdexproj", "
 EndProject
 Project("{3509FA56-3B69-4017-88D1-3C70D67D8588}") = "4.7", "4.7\4.7.qdexproj", "{2B8CEA97-F69A-47C0-BF19-B1DEA4956524}"
 EndProject
+Project("{3509FA56-3B69-4017-88D1-3C70D67D8588}") = "2.6", "2.6\2.6.qdexproj", "{99EAFC16-7E62-49BC-8167-75D64A43236A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{2B8CEA97-F69A-47C0-BF19-B1DEA4956524}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B8CEA97-F69A-47C0-BF19-B1DEA4956524}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B8CEA97-F69A-47C0-BF19-B1DEA4956524}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99EAFC16-7E62-49BC-8167-75D64A43236A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99EAFC16-7E62-49BC-8167-75D64A43236A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99EAFC16-7E62-49BC-8167-75D64A43236A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99EAFC16-7E62-49BC-8167-75D64A43236A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,792 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="GC46666D5_F05B_48A3_9B16_1B25A0B296A0">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>LA-PHYS-2.7 Elastic Energy</title>
+    <creator>jason_wang</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/lassondeLogo.png" />
+  </metadata>
+
+  <include src="resources/curriculumStylesLassonde.xml" />
+  <include src="resources/Utilities.xml" />
+  <include src="resources/plotTools.xml" />
+  <include src="resources/engine/JEngine.xml" />
+
+  <!--                                      Header & Footer START                                         -->
+  <header style="themeColour">
+    <stack style="center" orientation="horizontal">
+      <p></p>
+    </stack>
+  </header>
+  <footer style="themeColour">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="themeColourTitle">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--                                      Header & Footer END                                         -->
+
+
+
+  <!-- Cover Page -->
+  <!-- This is the standard way title pages are created. A great website to get copyright free images .. www.pexels.com
+  *** The style: "pageLayout" is defined in curriculumStylesLassonde.xml. It simply sets the content to the center and adjusts the width to 80% ***-->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">2.7 Elastic Energy</title>
+    <p style="sectionHeading">Introduction</p>
+    <image src="resources/spring.jpeg" />
+    <stack orientation="vertical" style="contentBG">
+      <p style="justifiedText">
+        Elastic energy is the potential mechanical energy stored in the configuration of a material or physical system as work is performed to distort its volume or shape. Elastic energy occurs when objects are compressed and stretched, or generally deformed in any manner. In this module, we are going to introduce the Hooke's law and learn to solve Spring potential energy problems.
+      </p>
+    </stack>
+  </section>
+
+
+  <!--Simulation-->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Simulation</p>
+    <stack style="mcStackLayout">
+      <script>
+        <![CDATA[
+        local box = plot.box
+        local dash = plot.dash
+        local boxDash = plot.boxDash
+        local ground = plot.ground
+        
+        local boxSize = 6
+        local boxCenterX = 20
+        local springLen = boxCenterX - boxSize/2
+        local numOfZigZag = 10  -- total amount of zigzag
+        local h = 1.5           -- spring half height
+        
+        local dx = 0            -- hooke's law x
+        local x = boxCenterX    -- box center x coordinate
+        local k = 10            -- spring constant
+        local b = 0             -- damping constant
+        local F = 0             -- Net force
+        local v = 0             -- velocity
+        local m = 5             -- mass
+        local t = 0.01          -- time step
+        
+        local PE = 0            -- elastic potential energy
+        local KE = 0            -- kinetic energy
+        local TE = 0            -- total energy
+        
+        local Spring = {springLen=springLen, n=numOfZigZag, h=h, series = plot.spring}
+        
+        function Spring:drawZigZag(x,y)
+          self.dx = (self.springLen + dx)/self.n
+          local dxq = self.dx/4
+          self.series:Add(x,y)
+          self.series:Add(x+dxq, y+self.h)
+          self.series:Add(x+dxq, y+self.h)
+          self.series:Add(x+dxq*3, y-self.h)
+          self.series:Add(x+dxq*3, y-self.h)
+          self.series:Add(x+self.dx, y)
+        end
+        
+        function Spring:draw(x,y)
+          for i=1,self.n do
+            self:drawZigZag(x,y)
+            x = x + self.dx
+          end
+          Spring.series:Update()
+        end
+        
+        function Spring:updateState()
+          F = -k*dx - b*v
+          v = v + F*t
+          x = x + v*t
+          dx = x - boxCenterX
+        end
+        
+        function Spring:updateDrawing()
+          box.Transform = matrixf.translation(dx,0,0)
+          boxDash.Transform = matrixf.translation(dx,0,0)
+          Spring:draw(0,15)
+        end
+        
+        function Spring:updateDataTable()
+          PE = 0.5*k*dx*dx
+          KE = TE - PE
+          dataTable:Child(2):Child(1):Child(1).Text = string.format("%.2f", dx)
+          dataTable:Child(2):Child(2):Child(1).Text = string.format("%.2f", v)
+          dataTable:Child(2):Child(3):Child(1).Text = string.format("%.2f", F)
+          dataTable:Child(2):Child(4):Child(1).Text = string.format("%d", PE)
+          dataTable:Child(2):Child(5):Child(1).Text = string.format("%d", KE)
+        end
+        
+        ]]>
+      </script>
+      <p style="subSectionHeading">Play with the simulation of a perfect Spring and observe the data changes.</p>
+      <p style="notes">Instruction: Double tab the graph and drag to set the box initial position.</p>
+      <xyPlot name="plot" pan="custom">
+        <onPan>
+          <![CDATA[
+          sim:Pause()
+          btn.Text = "Start Simulation"
+          x = state.Current.X * 40
+          if x < boxSize/2 then 
+            x = boxSize/2
+          elseif x > 40-boxSize/2 then
+            x = 40-boxSize/2
+          end
+          dx = x - boxCenterX
+          v = 0
+          TE = 0.5*k*dx*dx
+          Spring:updateDataTable()
+          Spring:updateDrawing()
+          ]]>
+        </onPan>
+        <axis dim="x" min="0" max="40" auto="fixed" />
+        <axis dim="y" min="0" max="30" auto="fixed" />
+        <series name="spring" draw="lineSegments" capacity="60" manual="true" style="grayF">
+          <style>
+            <lineThickness>2</lineThickness>
+          </style>
+        </series>
+        <series name="box" draw="radialFill" style="quanserRedF" />
+        <series name="ground" draw="radialFill" style="blackF" />
+        <series name="dash" draw="lineSegments" />
+        <series name="boxDash" draw="lineSegments" />
+      </xyPlot>
+
+      <script>
+        <![CDATA[
+        
+        Spring:draw(0,15)
+        
+        plotTools.drawSquare(box, vector({boxCenterX, 15}), boxSize, boxSize)
+        plotTools.drawDashLine(dash, vector({boxCenterX, 25}), vector({boxCenterX, 5}), color.rgb(88,88,88), 30)
+        plotTools.drawDashLine(boxDash, vector({boxCenterX, 25}), vector({boxCenterX, 5}), themeColor, 30)
+        plotTools.drawSquare(ground, vector({20, 15-boxSize/2-1}), 40, 2)
+        ]]>
+      </script>
+
+      <simulation name="sim" period="0.01">
+        <onUpdate>
+          <![CDATA[
+          Spring:updateState()
+          Spring:updateDrawing()
+          Spring:updateDataTable()
+          
+          ]]>
+        </onUpdate>
+      </simulation>
+      <table name="controlTable" grid="false" widths="60% 40%">
+        <row>
+          <column>
+            <slider name="slider" min="0" max="50" value="10">
+              <onValueChanged>
+                <![CDATA[
+                sim:Pause()
+                btn.Text = "Start Simulation"
+                k = round(slider.Value,1)
+                controlTable:Child(1):Child(2):Child(1).FormattedText = "Spring constant (k) = <b>"..string.format("%d",k).."</b>"
+                v = 0
+                TE = 0.5*k*dx*dx
+                Spring:updateDataTable()
+                ]]>
+              </onValueChanged>
+            </slider>
+          </column>
+          <column>
+            <p style="centeredText">Spring constant (k) = 10</p>
+          </column>
+        </row>
+      </table>
+      <table name="dataTable" grid="false" widths="20% 20% 20% 20% 20%">
+        <row style="contentBG2">
+          <column>
+            <p style="centeredText">Δx</p>
+          </column>
+          <column>
+            <p style="centeredText">Velocity</p>
+          </column>
+          <column>
+            <p style="centeredText">Force</p>
+          </column>
+          <column>
+            <p style="centeredText">PE</p>
+          </column>
+          <column>
+            <p style="centeredText">KE</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p style="centeredText">0</p>
+          </column>
+          <column>
+            <p style="centeredText">0</p>
+          </column>
+          <column>
+            <p style="centeredText">0</p>
+          </column>
+          <column>
+            <p style="centeredText">0</p>
+          </column>
+          <column>
+            <p style="centeredText">0</p>
+          </column>
+        </row>
+      </table>
+      <button name="btn" content="Start Simulation">
+        <onClick>
+          <![CDATA[
+          if btn.Text == "Start Simulation" then
+            sim:Play()
+            btn.Text = "Pause Simulation"
+          else
+            sim:Pause()
+            btn.Text = "Start Simulation"
+          end
+          ]]>
+        </onClick>
+      </button>
+    </stack>
+  </sectionNoTitle>
+
+  <!--Hooke's Law-->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Material Properties and Deformation</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Introduction</p>
+      <p style="justifiedText">
+        When a force is placed on a material, the material stretches or compresses in response to the force. In mechanics, the force applied per unit area is called the stress (symbol $\sigma$).
+      </p>
+      <p style="justifiedText">
+        The extent of the stretching/compression produced as the material responds to stress in called the strain (symbol $\epsilon$). Strain is measured by the ratio of the difference in length $\Delta L$, to original length $L_0$ along the direction of the stress:
+      </p>
+      <p style="centeredText">$\epsilon = \frac{\Delta L}{L_0}$</p>
+      <p style="justifiedText">There are boardly two types of deformations:</p>
+      <p style="justifiedText">
+        <b>Elastic Deformation:</b> When the stress is removed, the material returns to the shape it had before. The deformation is reversible, non-permanent.
+      </p>
+      <p style="justifiedText">
+        <b>Plastic Deformation:</b> When the stress is too large that when removed, the material does not go back to its previous dimension. There is a permanent, irreversible deformation.
+      </p>
+    </stack>
+    <p style="sectionHeading">Hooke's Law</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Definition</p>
+      <p style="justifiedText">When studying springs and elasticity, physicist Robert Hooke noticed that the stress vs strain curve for many materials has a linear region. Within certain limits, the force required to stretch an elastic object such as a metal spring is directly proportional to the extension of the spring. This is known as Hooke's law:</p>
+      <p style="centeredText">$F=-kx$</p>
+      <p style="justifiedText">Where $\,F$ is the force, $\,x$ is the length of extension/compression and $\,k$ is the spring constant which is usually given in $N/m$. (Go back to previous page, see how the Force changes when you drag the box.)</p>
+      <p style="justifiedText">The $\,x$ is the distance between two vertical dash lines. $x = L - L_0$</p>
+    </stack>
+    <p style="sectionHeading">Young's Modulus</p>
+
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Definition</p>
+      <p style="justifiedText">Young's modulus (also known as the elastic modulus) is a number that measures the resistance of a material to being elastically deformed. Young's modulus is usually given the symbol $\,E$:</p>
+      <p style="centeredText">$E=\frac{\sigma}{\epsilon}=\frac{Stress}{Strain}$</p>
+      <p style="justifiedText">And, we can get the spring constant <b>k</b> using</p>
+      <p style="centeredText">$k=E\frac{A}{L}$</p>
+      <p style="justifiedText">Where, <b>A</b> is the area over which the force is applied (since stress depends on the area) and <b>L</b> is the nominal length of the material.</p>
+    </stack>
+  </sectionNoTitle>
+
+  <!--Elastic Potential Energy-->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Elastic Potential Energy</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Definition</p>
+      <p style="justifiedText">
+        <b>Elastic potential energy</b> is the energy stored as a result of applying a force to deform an elastic object. The energy is stored until the force is removed and the object back to its original form, doing work in the process. The deformation could involve compressing, stretching or twisting the object.
+      </p>
+      <p style="justifiedText">For example:</p>
+      <p style="justifiedText">
+        <![CDATA[    • An archer's stretched bow
+    • A bent diving board before a diver jumps off the board
+    • A bouncy ball compressed on a brick wall
+    ]]>
+      </p>
+    </stack>
+
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Calculate Elastic Potential Energy</p>
+      <p style="justifiedText">Recall the Hooke's law: $F=k \cdot \Delta x$, where the spring constant k is some positive number. Since energy is a scalar quantity so the direction of the force is not important here.</p>
+      <p style="justifiedText">In an ideal spring system, the energy is conserved and the elastic potential energy $\,U$ can be found from the work done:</p>
+      <p style="centeredText">$U = \frac{1}{2}(\Delta x) \cdot k\Delta x = \frac{1}{2}k(\Delta x)^2$</p>
+      <stack>
+        <script>
+          local P, dx, k
+        </script>
+        <xyPlot name="plot" pan="custom" zoom="disabled">
+          <title>Plot of force vs displacement for a perfect spring</title>
+          <onPan>
+            <![CDATA[
+          local newDx = round(state.Current.X * plot.XAxis.Max, 1)
+          if dx ~= newDx then dx=newDx; P:draw() end
+          ]]>
+          </onPan>
+          <axis dim="x" auto="fixed" min="0" max="120">
+            <title>Δx</title>
+          </axis>
+          <axis dim="y" auto="fixed" min="0" max="120">
+            <title>F = k∙Δx</title>
+          </axis>
+          <series name="forceLine" capacity="2" draw="lineSegments" manual="true" style="grayF" />
+          <series name="verticalLine" capacity="2" draw="lineSegments" manual="true" />
+          <series name="triangle" capacity="4" draw="segmentedFill" manual="true" />
+          <series name="dot" draw="radialFill" />
+        </xyPlot>
+        <p style="notes">The highlight triangle area equals to the elastic potential energy. Pan the graph and observe the data changes.</p>
+        <table name="kTable" grid="false" widths="75% 25%">
+          <row>
+            <column>
+              <slider name="slider" min="0.5" max="5" value="1">
+                <onValueChanged>
+                  <![CDATA[
+            local newK = round(slider.Value, 0.1)
+            if newK ~= k then k = newK; P:draw() end
+            ]]>
+                </onValueChanged>
+              </slider>
+            </column>
+            <column>
+              <p style="centeredText"></p>
+            </column>
+          </row>
+        </table>    
+        <table grid="false" name="table" widths="33% 34% 33%">
+          <row style="contentBG2">
+            <column>
+              <p style="centeredText">Δx</p>
+            </column>
+            <column>
+              <p style="centeredText">F</p>
+            </column>
+            <column>
+              <p style="centeredText">U</p>
+            </column>
+          </row>
+          <row name="dataRow">
+            <column>
+              <p style="centeredText"></p>
+            </column>
+            <column>
+              <p style="centeredText"></p>
+            </column>
+            <column>
+              <p style="centeredText"></p>
+            </column>
+          </row>
+        </table>
+        <script>
+          <![CDATA[
+        P = {}
+        dx = 50
+        k = 1
+        local F = k*dx
+        local E = 0.5*F*dx
+
+local triColor = color.rgb(151,191,225)
+function P:updateTable()
+  kTable:Child(1):Child(2):Child(1).Text = string.format("k = %.1f",k)
+  table.dataRow:Child(1):Child(1).Text = string.format("%d",dx)
+  table.dataRow:Child(2):Child(1).Text = string.format("%.1f",F)
+  table.dataRow:Child(3):Child(1).Text = string.format("%.1f",E)
+end
+  
+function P:draw()
+  F = k*dx
+  E = 0.5*F*dx
+  plot.forceLine:Add(0, 0)
+  plot.forceLine:Add(plot.XAxis.Max, plot.XAxis.Max*k)
+  plot.verticalLine:Add(dx, F)
+  plot.verticalLine:Add(dx, 0)
+  plot.triangle:Add(0, 0, triColor)
+  plot.triangle:Add(dx, F, triColor)
+  plot.triangle:Add(dx, 0, triColor)
+  plot.triangle:Add(0, 0, triColor)
+  plot.dot.Transform = matrixf.translation(dx, F, 0)
+  plot.forceLine:Update()
+  plot.verticalLine:Update()
+  plot.triangle:Update()
+  self:updateTable()
+end
+  
+function P:initDrawing()
+  plotTools.drawEllipse(plot.dot, vector({0,0}), 1, 4/3, color.rgb(79,150,221))
+  self:draw()
+end
+
+P:initDrawing()
+        ]]>
+        </script>
+      </stack>
+    </stack>
+  </sectionNoTitle>
+  
+  <!--Step-by-Step-->
+
+  <!--QUESTION STEP BY STEP LAYOUT-->
+  <!--Setup StepsController with correct number of Steps-->
+  <sectionNoTitle style="pageLayout">
+    <script>
+      local stepsController = StepsController:new({stepsStack=stepsStack, numOfSteps=4, shown_message="Show Step", hidden_message="Hide Step", showStepCounter=true})
+    </script>
+    <p style="sectionHeading">Step-by-Step</p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="subSectionHeading">Question 1</p>
+      <p style="justifiedText">There is a coil spring with resting length <b>L</b> hanging vertically as following figure. If we add a mass <b>m</b> to the spring, the length of the spring has gained length <b>a</b> when the mass reaches its equilibrium position. What's the spring constant? If we pull it down for an additional <b>b</b> metres, what's the elastic potential energy? Once we release it, what will be the velocity of the mass when it reaches its equilibrium position? (ignore spring mass and energy loss)
+      </p>
+      <image src="resources/p1.png">
+        <style>
+          <widthPercentage>0.6</widthPercentage>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+      </image>
+      
+      
+    </stack>
+    <stack name="stepsStack">
+      <!--Each step is a stack, and each step has alternating background colors-->
+      <!--Use Snippet to create any single step stack -->
+
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Spring Constant</p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            <p style="justifiedText">Since the block at equilibrium position doesn't move, then $\Sigma F = 0$, and there are only the gravitational force and the force of the spring.</p>
+            <p style="centeredText"><![CDATA[$\begin{matrix}kx - mg &=& 0\\[8pt]k&=&\frac{mg}{x}\\[8pt]k&=&\frac{mg}{a}\end{matrix}$]]></p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(1)
+          </onClick>
+        </button>
+      </stack>
+
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Elastic Potential Energy</p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            <p style="justifiedText">Recall elastic potential energy equation:</p>
+            <p style="centeredText">$U=\frac{1}{2}kx^2$</p>
+            <p style="justifiedText">Since we already calculated k, and x = a at equilibrium position,</p>
+            <p style="centeredText"><![CDATA[$\begin{matrix}U_1&=&\frac{1}{2}kx^2\\[8pt]U_1&=&\frac{1}{2} \cdot \frac{mg}{a} \cdot a^2\\[8pt] U_1 &=& \frac{mga}{2} \end{matrix}$]]></p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(2)
+          </onClick>
+        </button>
+      </stack>
+
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Find Energy after pulled</p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            <p style="justifiedText">The total displacement difference is $x=a+b$.</p>
+            <p style="justifiedText">Since the velocity at this moment is 0, we then only consider the elastic potential energy:</p>
+            <p style="centeredText"><![CDATA[$\begin{matrix}U_2&=&\frac{1}{2}kx^2\\[8pt]U_2&=&\frac{1}{2}\cdot \frac{mg}{a} \cdot (a+b)^2\\[8pt]U_2&=&\frac{mg(a+b)^2}{2a}\end{matrix}$]]></p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(3)
+          </onClick>
+        </button>
+      </stack>
+
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Find the velocity</p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            <p style="justifiedText">In order to find the velocity at equilibrium position, first we need to know the kinetic energy at that point.</p>
+            <p style="centeredText"><![CDATA[$\begin{matrix}KE &=& U_2 - U_1\\[8pt] KE &=& \frac{mg(a+b)^2}{2a} - \frac{mga}{2} \\[8pt] KE &=& \frac{mg(b^2 + 2ab)}{2a}\end{matrix}$]]></p>
+            <p style="justifiedText">To find the velocity:</p>
+            <p style="centeredText"><![CDATA[$\begin{matrix}\frac{1}{2}mv^2 &=& \frac{mg(b^2 + 2ab)}{2a}\\[8pt]v &=& \sqrt{\frac{g(b^2 + 2ab)}{a}}\end{matrix}$ ]]></p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(4)
+          </onClick>
+        </button>
+      </stack>
+
+
+
+
+    </stack>
+  </sectionNoTitle>
+
+  <!--Combined Springs-->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Combined Springs</p>
+    <stack style="mcStackLayout">
+      <script>
+        local b1,b2,b3,s1,s2,s3,s4,s5
+      </script>
+      <p style="subSectionHeading">The simulation below shows the comparison of series, single, and parallel spring(s) systems from left to right. All the springs have the same resting length and spring constant k. All boxes have the same mass. How much did the spring stretch for each case?</p>
+      <xyPlot name="plot" pan="disabled" tap="disabled" zoom="disabled">
+        <axis name="XAxis" auto="fixed" dim="x" min="0" max="400" major="false" />
+        <axis name="YAxis" auto="fixed" dim="y" min="0" max="300" />
+        <series name="s1" draw="lineSegments" />
+        <series name="s2" draw="lineSegments" />
+        <series name="s3" draw="lineSegments" />
+        <series name="s4" draw="lineSegments" />
+        <series name="s5" draw="lineSegments" />
+        <series name="box1" draw="radialFill" />
+        <series name="box2" draw="radialFill" />
+        <series name="box3" draw="radialFill" />
+        <series name="points" draw="points" capacity="2" />
+        <series name="links" draw="lineSegments" capacity="2" />
+      </xyPlot>
+      <script>
+        <![CDATA[
+
+local ceilingY = 300
+local springL = 50
+local boxSize = 30
+local halfBoxSize = boxSize/2
+b1 = Box:new({series=plot.box1, center=Vector(100,200-halfBoxSize), w=boxSize, h=boxSize})
+b2 = Box:new({series=plot.box2, center=Vector(300,250-halfBoxSize), w=boxSize, h=boxSize})
+b3 = Box:new({series=plot.box3, center=Vector(200,250-halfBoxSize), w=boxSize, h=boxSize})
+s1 = Spring:new({series=plot.s1, p1=Vector(100,ceilingY), p2=Vector(100,ceilingY-springL), restingDist=springL, k=3, h=10})
+s2 = Spring:new({series=plot.s2, p1=Vector(100,s1.p2.y), p2=Vector(100,s1.p2.y-springL), restingDist=springL, k=3, h=10})
+s3 = Spring:new({series=plot.s3, p1=Vector(290,ceilingY), p2=Vector(290,ceilingY-springL), restingDist=springL, k=3, h=10})
+s4 = Spring:new({series=plot.s4, p1=Vector(310,ceilingY), p2=Vector(310,ceilingY-springL), restingDist=springL, k=3, h=10})
+s5 = Spring:new({series=plot.s5, p1=Vector(200,ceilingY), p2=Vector(200,ceilingY-springL), restingDist=springL, k=3, h=10})
+
+local originald1 = ceilingY - s1.restingDist - s2.restingDist - b1.h/2
+local originald2 = ceilingY - s3.restingDist - b2.h/2
+s1:initDrawing()
+s1:draw()
+s2:initDrawing()
+s2:draw()
+s3:initDrawing()
+s3:draw()
+s4:initDrawing()
+s4:draw()
+s5:initDrawing()
+s5:draw()
+b1:initDrawing()
+b1:draw()
+b2:initDrawing()
+b2:draw()
+b3:initDrawing()
+b3:draw()
+
+-- combined spring constant K on the object
+local keq1 = s1.k*s2.k/(s1.k+s2.k)
+local keq2 = s3.k+s4.k
+local distanceRatio = s2.k/(s1.k+s2.k) -- the ratio to get first spring change
+
+local world = {}
+function world:update()
+  -- y differences
+  local dy1 = originald1 - b1.center.y
+  local dy2 = originald2 - b2.center.y
+  local dy3 = originald2 - b3.center.y
+
+  local Fg1 = Vector(0, b1.mass*(-981))
+  local Fg2 = Vector(0, b2.mass*(-981))
+  local Fg3 = Vector(0, b3.mass*(-981))
+  local Fs1 = Vector(0, keq1*dy1*100)
+  local Fs2 = Vector(0, keq2*dy2*100)
+  local Fs3 = Vector(0, s5.k*dy3*100)
+
+  -- apply forces
+  b1:applyForce(Fg1 + Fs1)
+  b2:applyForce(Fg2 + Fs2)
+  b3:applyForce(Fg3 + Fs3)
+
+  b1:updatePhysics(0.016)
+  b2:updatePhysics(0.016)
+  b3:updatePhysics(0.016)
+  
+  -- update springs terminal points coordinates
+  s1.p2.y = ceilingY - s1.restingDist - dy1*distanceRatio
+  s2.p1.y = s1.p2.y
+  s2.p2.y = s2.p1.y - s2.restingDist - dy1*(1-distanceRatio)
+
+  local dd2 = ceilingY - s3.restingDist - dy2
+  s3.p2.y = dd2
+  s4.p2.y = dd2
+  s5.p2.y = ceilingY - s5.restingDist - dy3
+
+  s1:draw()
+  s2:draw()
+  s3:draw()
+  s4:draw()
+  s5:draw()
+  b1:draw()
+  b2:draw()
+  b3:draw()
+end
+        ]]>
+      </script>
+      <simulation name="sim" period="0.016">
+        <onUpdate>
+          <![CDATA[          
+world:update()
+          ]]>
+        </onUpdate>
+      </simulation>
+<!--
+      <slider name="slider" min="0" max="150" value="50">
+        <onValueChanged>
+          <![CDATA[
+          sim:Pause()
+          btn.Text = "Start Simulation"
+          local val = round(slider.Value, 5)
+          if originald1 - val ~= b1.center.y then
+            b1.center.y = originald1 - val
+            b2.center.y = originald2 - val
+            world:update()
+          end
+          ]]>
+        </onValueChanged>
+      </slider>
+-->
+      <stack name="btnStack" orientation="horizontal">
+        <button name="btn" content="Start Simulation">
+          <onClick>
+            <![CDATA[
+  if btn.Text == "Start Simulation" then
+    btn.Text = "Pause Simulation"
+    sim:Play()
+  else
+    btn.Text = "Start Simulation"
+    sim:Pause()
+  end
+          ]]>
+          </onClick>
+        </button>
+        <button name="btn2" content="Reset">
+          <onClick>
+            <![CDATA[
+sim:Pause()
+btn.Text = "Start Simulation"
+b1:reset()
+b2:reset()
+b3:reset()
+world:update()
+          ]]>
+          </onClick>
+        </button>
+      </stack>
+
+    </stack>
+  </sectionNoTitle>
+
+  <!--Series&Parallel Springs-->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Series and Parallel Springs</p>
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Definition</p>
+      <p style="justifiedText">In mechanics, series springs are when multiple springs are connected end-to-end, and parallel springs are when they are connected side-by-side; in both cases, so as to act as a single spring.</p>
+      <table grid="false" widths="20% 80%">
+        <row>
+          <column>
+            <p style="contentBG2 centeredText">Series</p>
+          </column>
+          <column>
+            <image src="resources/series.png">
+              <style link="centeredText">
+                <widthPercentage>0.6</widthPercentage>
+              </style>
+            </image>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p style="contentBG2 centeredText">Parallel</p>
+          </column>
+          <column>
+            <image src="resources/parallel.png">
+              <style link="centeredText">
+                <widthPercentage>0.6</widthPercentage>
+              </style>
+            </image>
+          </column>
+        </row>
+      </table>
+    </stack>
+
+    <stack style="mcStackLayout">
+      <p style="subSectionHeading">Equivalent Spring</p>
+      <p style="justifiedText">The following table gives formulas for the spring that is equivalent to a system of two springs, in series or in parallel.</p>
+      <table grid="true" widths="40% 30% 30%">
+        <row style="contentBG2">
+          <column>
+            <p style="centeredText">Quantity</p>
+          </column>
+          <column>
+            <p style="centeredText">Parallel</p>
+          </column>
+          <column>
+            <p style="centeredText">Series</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p style="centeredText">Equivalent spring constant</p>
+          </column>
+          <column>
+            <p style="centeredText">$k_{eq}=k_1 + k_2$</p>
+          </column>
+          <column>
+            <p style="centeredText">$\frac{1}{k_{eq}} = \frac{1}{k_1} + \frac{1}{k_2}$</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p style="centeredText">Deflection (elongation)</p>
+          </column>
+          <column>
+            <p style="centeredText">$x_{eq}=x_1=x_2$</p>
+          </column>
+          <column>
+            <p style="centeredText">$x_{eq}=x_1+x_2$</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p style="centeredText">Force</p>
+          </column>
+          <column>
+            <p style="centeredText">$F_{eq}=F_1+F_2$</p>
+          </column>
+          <column>
+            <p style="centeredText">$F_{eq}=F_1=F_2$</p>
+          </column>
+        </row>
+      </table>
+      <p style="notes alignRight">
+        <link url="https://en.wikipedia.org/wiki/Series_and_parallel_springs">Learn more</link>
+    </p>
+    </stack>
+
+  </sectionNoTitle>
+
+
+
+
+</document>

@@ -1,0 +1,1065 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G083D8560_2BA5_4820_BD96_4CCED80F98F6">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>8.1 Composite Functions</title>
+    <creator>Asseel</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/cover.png" />
+  </metadata>
+
+  <include src="resources/curriculumStyles.xml" />
+
+  <!--                                      Header & Footer                                           -->
+  <!-- CUSTOM STYLES -->
+  <style name="title2">
+    <!--<borderColor color="50 133 184" /> ... Border color says it changes color of a string of text. But it doesn't work-->
+    <foreground color="50 133 184" />
+    <size points="30" />
+  </style>
+
+  <style name="header1">
+    <foreground color="50 133 184" />
+    <size points="25" />
+  </style>
+
+  <style name="content1">
+    <size points="15" />
+  </style>
+
+  <style name="lineBreak">
+    <marginTop>15</marginTop>
+    <marginBottom>15</marginBottom>
+  </style>
+
+  <style name="backgroundColor">
+    <background color="50 133 184" />
+  </style>
+
+  <style name="backgroundColor2">
+    <background color="91 192 255 100" />
+    <!-- DARK SKY BLUE:
+           HEX: 8FBCD8 -->
+  </style>
+
+  <style name="backgroundColor3">
+    <background color="213 68 38 100" />
+    <!--#d54426-->
+  </style>
+
+  <style name="backgroundColor4">
+    <background color="55 178 94 100" />
+  </style>
+
+  <style name="backgroundColor5">
+    <background color="109 61 198 100" />
+  </style>
+
+  <style name="blackLine">
+    <foreground color="black" />
+    <lineThickness>2</lineThickness>
+  </style>
+
+  <style name="lineColor2">
+    <foreground color="91 192 255" />
+    <!-- DARK SKY BLUE:
+           HEX: 8FBCD8 -->
+  </style>
+
+  <style name="lineColor3">
+    <foreground color="213 68 38" />
+    <!--#d54426-->
+  </style>
+
+  <style name="lineColor4">
+    <foreground color="55 178 94" />
+  </style>
+
+  <style name="lineColor5">
+    <foreground color="109 61 198" />
+  </style>
+
+  <style name="question">
+    <widthPercentage>80%</widthPercentage>
+    <horizontalAlignment>center</horizontalAlignment>
+    <textAlignment>center</textAlignment>
+    <background color="91 192 255 100" />
+  </style>
+
+  <style name="center">
+    <horizontalAlignment>center</horizontalAlignment>
+    <textAlignment>center</textAlignment>
+  </style>
+
+
+  <style name="fontColor">
+    <foreground color="255 255 255" />
+  </style>
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="fontColor">Amanda Koon</p>
+      <p style="fontColor rightText">MHF4U</p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/logo1.png" inspect="false" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/logo2.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--                                      Header & Footer END                                         -->
+
+  <!-- Section 1 -->
+  <section name="section1">
+    <p style="chapterNumber">8.1</p>
+    <title style="title2 rightText">Composite Functions - Part 1</title>
+    <p style="header1">Introduction</p>
+    <p style="content1">Combined function can be formed by addition/subtraction or multiplication/division.  Composite functions can be obtained by evaluating a function in another function. </p>
+    <p style="header1">Sum and Differences of Functions</p>
+    <p style="content1">
+      • When functions are added or subtracted, they follow the <bold>superposition principle</bold>.
+    </p>
+    <p style="content1">• To add or subtract functions, the domain of the functions must be the same.</p>
+    <p style="content1">• In this module, you will investigate the sum and differences of linear and quadratic functions. This knowledge can be extended to other forms of functions.</p>
+    <p style="header1">Superposition Principle</p>
+    <stack style="backgroundColor2">
+      <p name="definition" style="content1">
+      </p>
+      <button name="btn" content="Show Definition">
+        <onClick>
+          if btn.Text == "Show Definition" then
+          definition.Text = "If f(x) has a solution and g(x) has a solution, then it is true that f(x) + g(x) has a solution";
+          btn.Text = "Hide Definition";
+          else
+          definition.Text = "";
+          btn.Text = "Show Definition";
+          end
+        </onClick>
+      </button>
+    </stack>
+    <p style="content1 lineBreak">
+      <b>How do we predict the characteristics of combined functions formed by adding or subtraction two or more functions?</b>
+    </p>
+
+  </section>
+
+  <!-- Section 2 -->
+  <section name="section2">
+    <title style="header1">Investigation 1: Two Linear Functions</title>
+    <onDocumentOpened>
+      updateVals();
+    </onDocumentOpened>
+    <script>
+      function round(num, numDecimalPlaces)
+      local mult = 10^(numDecimalPlaces or 0)
+      return math.floor(num * mult + 0.5) / mult
+      end
+      function updateGraph()
+
+      local plotPointer1 = stack2.myPlot.aSeries;
+      local plotPointer2 = stack2.myPlot.bSeries;
+      local plotPointer3 = stack2.myPlot.cSeries;
+      local plotPointer4 = stack2.myPlot.dSeries;
+      local xAxis = stack2.myPlot.xaxis;
+      local yAxis = stack2.myPlot.yaxis;
+
+      plotPointer1:Clear()
+      plotPointer2:Clear()
+      plotPointer3:Clear()
+      plotPointer4:Clear()
+      xAxis:Clear()
+      yAxis:Clear()
+
+      for x = -100, 100, 5 do
+      y = 0
+      xAxis:Add(x,y)
+      end
+
+      for y = -100, 100, 5 do
+      x = 0
+      yAxis:Add(x,y)
+      end
+
+
+      for x = -2, 2, 1 do
+      y = (round(hstack1.vstack1.eq1sl1.Value,2)*x) + round(hstack1.vstack1.eq1sl2.Value,2);
+      local y1 = y;
+      plotPointer1:Add(x,y)
+      y = (round(hstack1.vstack2.eq2sl1.Value,2)*x) + round(hstack1.vstack2.eq2sl2.Value,2);
+      local y2 = y;
+      plotPointer2:Add(x,y)
+      y = y1+y2
+      plotPointer3:Add(x,y)
+      y = y1-y2
+      plotPointer4:Add(x,y)
+      end
+      plotPointer1:Update()
+      plotPointer2:Update()
+      plotPointer3:Update()
+      plotPointer4:Update()
+      end
+    </script>
+    <p style="lineBreak"></p>
+    <stack name="hstack1" orientation="horizontal">
+      <style>
+        <widthPercentage>80%</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <stack name="vstack1" orientation="vertical">
+        <equation name="eq1">$ f( x ) = mx+b $</equation>
+        <p name="label1" style="centerText">m = 1</p>
+        <slider name="eq1sl1" max="5" min="-5" value="1">
+          <onValueChanged>
+            label1.Text = "m = " .. string.format("%.2f", round(eq1sl1.Value, 2));
+            updateVals();
+          </onValueChanged>
+        </slider>
+        <p name="label2" style="centerText">b = 0</p>
+        <slider name="eq1sl2" max="5" min="-5" value="0">
+          <onValueChanged>
+            label2.Text = "b = " .. string.format("%.2f", round(eq1sl2.Value, 2));
+            updateVals();
+          </onValueChanged>
+        </slider>
+      </stack>
+      <stack name="vstack2" orientation="vertical">
+        <equation name="eq2">$ g( x ) = mx+b $</equation>
+        <p name="label3" style="centerText">m = 1</p>
+        <slider name="eq2sl1" max="5" min="-5" value="1" style="sliderColor">
+          <onValueChanged>
+            label3.Text = "m = " .. string.format("%.2f", round(eq2sl1.Value, 2));
+            updateVals();
+          </onValueChanged>
+        </slider>
+        <p name="label4" style="centerText">b = 0</p>
+        <slider name="eq2sl2" max="5" min="-5" value="0">
+          <onValueChanged>
+            label4.Text = "b = " .. string.format("%.2f", round(eq2sl2.Value, 2));
+            updateVals();
+          </onValueChanged>
+        </slider>
+      </stack>
+    </stack>
+    <stack name="stack2" orientation="vertical">
+      <table grid="false">
+        <style>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <row>
+          <column style="backgroundColor3">
+            <p>$ f( x ) $</p>
+          </column>
+          <column style="backgroundColor2">
+            <p>$ g( x ) $</p>
+          </column>
+          <column style="backgroundColor4">
+            <p>$ f( x ) + g( x ) $</p>
+          </column>
+          <column style="backgroundColor5">
+            <p>$ f( x ) - g( x )$</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <toggle name="toggleS1" value="true">
+              <onValueChanged>
+                stack2.myPlot.aSeries.Visible = not stack2.myPlot.aSeries.Visible;
+                updateGraph()
+              </onValueChanged>
+            </toggle>
+          </column>
+          <column>
+            <toggle name="toggleS2" value="true">
+              <onValueChanged>
+                stack2.myPlot.bSeries.Visible = not stack2.myPlot.bSeries.Visible;
+                updateGraph()
+              </onValueChanged>
+            </toggle>
+          </column>
+          <column>
+            <toggle name="toggleS3" value="true">
+              <onValueChanged>
+                stack2.myPlot.cSeries.Visible = not stack2.myPlot.cSeries.Visible;
+                updateGraph()
+              </onValueChanged>
+            </toggle>
+          </column>
+          <column>
+            <toggle name="toggleS4" value="true">
+              <onValueChanged>
+                stack2.myPlot.dSeries.Visible = not stack2.myPlot.dSeries.Visible;
+                updateGraph()
+              </onValueChanged>
+            </toggle>
+          </column>
+        </row>
+      </table>
+
+      <xyPlot name="myPlot" manual="false">
+        <style>
+          <aspectRatio>0.5</aspectRatio>
+        </style>
+        <axis dim="x" auto="none" min="-2" max="2" />
+        <axis dim="y" auto="none" min="-5" max="5" />
+        <series name="xaxis" style="blackLine">
+        </series>
+        <series name="yaxis" style="blackLine">
+        </series>
+        <series name="aSeries" style="lineColor3" />
+        <series name="bSeries" style="lineColor2" />
+        <series name="cSeries" style="lineColor4" />
+        <series name="dSeries" style="lineColor5" />
+      </xyPlot>
+    </stack>
+    <table name="tb1">
+      <style>
+        <visibility>collapsed</visibility>
+      </style>
+      <head>
+        <column style="backgroundColor2">
+          <equation>$ x $</equation>
+        </column>
+        <column style="backgroundColor2">
+          <equation>$ f( x ) $</equation>
+        </column>
+        <column style="backgroundColor2">
+          <equation>$ g( x ) $</equation>
+        </column>
+        <column style="backgroundColor2">
+          <equation>$ f( x ) + g( x ) $</equation>
+        </column>
+        <column style="backgroundColor2">
+          <equation>$ f( x ) - g( x ) $</equation>
+        </column>
+      </head>
+      <row name="r1">
+        <column name="c1">
+          <p name="x1">-2</p>
+        </column>
+        <column name="r1c1">
+          <!--f(x) -->
+          <p name="data"></p>
+        </column>
+        <column name="r1c2">
+          <!--g(x) -->
+          <p name="data"></p>
+        </column>
+        <column name="r1c3">
+          <!--f(x)+g(x) -->
+          <p name="data"></p>
+        </column>
+        <column name="r1c4">
+          <!--f(x)-g(x) -->
+          <p name="data"></p>
+        </column>
+      </row>
+      <row name="r2">
+        <column name="c1">
+          <p name="x2">-1</p>
+        </column>
+        <column name="r2c1">
+          <p name="data"></p>
+        </column>
+        <column name="r2c2">
+          <p name="data"></p>
+        </column>
+        <column name="r2c3">
+          <p name="data"></p>
+        </column>
+        <column name="r2c4">
+          <p name="data"></p>
+        </column>
+      </row>
+      <row name="r3">
+        <column name="c1">
+          <p name="x3">0</p>
+        </column>
+        <column name="r3c1">
+          <p name="data"></p>
+        </column>
+        <column name="r3c2">
+          <p name="data"></p>
+        </column>
+        <column name="r3c3">
+          <p name="data"></p>
+        </column>
+        <column name="r3c4">
+          <p name="data"></p>
+        </column>
+      </row>
+      <row name="r4">
+        <column name="c1">
+          <p name="x4">1</p>
+        </column>
+        <column name="r4c1">
+          <p name="data"></p>
+        </column>
+        <column name="r4c2">
+          <p name="data"></p>
+        </column>
+        <column name="r4c3">
+          <p name="data"></p>
+        </column>
+        <column name="r4c4">
+          <p name="data"></p>
+        </column>
+      </row>
+      <row name="r5">
+        <column name="c1">
+          <p name="x5">2</p>
+        </column>
+        <column name="r5c1">
+          <p name="data"></p>
+        </column>
+        <column name="r5c2">
+          <p name="data"></p>
+        </column>
+        <column name="r5c3">
+          <p name="data"></p>
+        </column>
+        <column name="r5c4">
+          <p name="data"></p>
+        </column>
+      </row>
+    </table>
+    <stack name="buttonStack" orientation="horizontal">
+      <button name="resetTableBtn" content="Reset Slider Values" style="backgroundColor">
+        <onClick>
+          hstack1.vstack1.eq1sl1.Value = 1;
+          hstack1.vstack1.eq1sl2.Value = 0;
+          hstack1.vstack2.eq2sl1.Value = 1;
+          hstack1.vstack2.eq2sl2.Value = 0;
+        </onClick>
+      </button>
+      <button name="toggleGraph" content="Hide Graph" style="backgroundColor">
+        <onClick>
+          if toggleGraph.Text == "Hide Graph" then
+          stack2.Style.Visibility = "collapsed";
+          toggleGraph.Text = "Show Graph"
+          toggleGraph.Style.BackgroundColor = color.rgb(50, 133, 184);
+          else
+          stack2.Style.Visibility = "visible";
+          toggleGraph.Text = "Hide Graph";
+          toggleGraph.Style.BackgroundColor = color.rgb(220, 220, 220);
+          end
+        </onClick>
+      </button>
+
+      <button name="toggleTable" content="Show Table" style="backgroundColor">
+        <onClick>
+          if toggleTable.Text == "Show Table" then
+          tb1.Style.Visibility = "visible";
+          toggleTable.Text = "Hide Table"
+          toggleTable.Style.BackgroundColor = color.rgb(220, 220, 220);
+          else
+          tb1.Style.Visibility = "collapsed";
+          toggleTable.Text = "Show Table"
+          toggleTable.Style.BackgroundColor = color.rgb(50, 133, 184);
+          end
+        </onClick>
+      </button>
+    </stack>
+
+    <script>
+      <![CDATA[
+        function linearEq(m, x, b)
+          local val = (m*x) + b;
+          return val;
+        end;
+ 
+        function updateVals()
+          tb1.r1.r1c1.data.Text = string.format("%.2f", linearEq(round(hstack1.vstack1.eq1sl1.Value,2), tonumber(tb1.r1.c1.x1.Text), round(hstack1.vstack1.eq1sl2.Value,2)));
+          tb1.r2.r2c1.data.Text = string.format("%.2f", linearEq(round(hstack1.vstack1.eq1sl1.Value,2), tonumber(tb1.r2.c1.x2.Text), round(hstack1.vstack1.eq1sl2.Value,2)));
+          tb1.r3.r3c1.data.Text = string.format("%.2f", linearEq(round(hstack1.vstack1.eq1sl1.Value,2), tonumber(tb1.r3.c1.x3.Text), round(hstack1.vstack1.eq1sl2.Value,2)));
+          tb1.r4.r4c1.data.Text = string.format("%.2f", linearEq(round(hstack1.vstack1.eq1sl1.Value,2), tonumber(tb1.r4.c1.x4.Text), round(hstack1.vstack1.eq1sl2.Value,2)));
+          tb1.r5.r5c1.data.Text = string.format("%.2f", linearEq(round(hstack1.vstack1.eq1sl1.Value,2), tonumber(tb1.r5.c1.x5.Text), round(hstack1.vstack1.eq1sl2.Value,2)));
+          
+          tb1.r1.r1c2.data.Text = string.format("%.2f", linearEq(round(hstack1.vstack2.eq2sl1.Value,2), tonumber(tb1.r1.c1.x1.Text), round(hstack1.vstack2.eq2sl2.Value,2)));
+          tb1.r2.r2c2.data.Text = string.format("%.2f", linearEq(round(hstack1.vstack2.eq2sl1.Value,2), tonumber(tb1.r2.c1.x2.Text), round(hstack1.vstack2.eq2sl2.Value,2)));
+          tb1.r3.r3c2.data.Text = string.format("%.2f", linearEq(round(hstack1.vstack2.eq2sl1.Value,2), tonumber(tb1.r3.c1.x3.Text), round(hstack1.vstack2.eq2sl2.Value,2)));
+          tb1.r4.r4c2.data.Text = string.format("%.2f", linearEq(round(hstack1.vstack2.eq2sl1.Value,2), tonumber(tb1.r4.c1.x4.Text), round(hstack1.vstack2.eq2sl2.Value,2)));
+          tb1.r5.r5c2.data.Text = string.format("%.2f", linearEq(round(hstack1.vstack2.eq2sl1.Value,2), tonumber(tb1.r5.c1.x5.Text), round(hstack1.vstack2.eq2sl2.Value,2)));
+          
+          
+          tb1.r1.r1c3.data.Text = string.format("%.2f", tonumber(tb1.r1.r1c1.data.Text) + tonumber(tb1.r1.r1c2.data.Text));
+          tb1.r2.r2c3.data.Text = string.format("%.2f", tonumber(tb1.r2.r2c1.data.Text) + tonumber(tb1.r2.r2c2.data.Text));
+          tb1.r3.r3c3.data.Text = string.format("%.2f", tonumber(tb1.r3.r3c1.data.Text) + tonumber(tb1.r3.r3c2.data.Text));
+          tb1.r4.r4c3.data.Text = string.format("%.2f", tonumber(tb1.r4.r4c1.data.Text) + tonumber(tb1.r4.r4c2.data.Text));
+          tb1.r5.r5c3.data.Text = string.format("%.2f", tonumber(tb1.r5.r5c1.data.Text) + tonumber(tb1.r5.r5c2.data.Text));
+          
+          tb1.r1.r1c4.data.Text = string.format("%.2f", tonumber(tb1.r1.r1c1.data.Text) - tonumber(tb1.r1.r1c2.data.Text));
+          tb1.r2.r2c4.data.Text = string.format("%.2f", tonumber(tb1.r2.r2c1.data.Text) - tonumber(tb1.r2.r2c2.data.Text));
+          tb1.r3.r3c4.data.Text = string.format("%.2f", tonumber(tb1.r3.r3c1.data.Text) - tonumber(tb1.r3.r3c2.data.Text));
+          tb1.r4.r4c4.data.Text = string.format("%.2f", tonumber(tb1.r4.r4c1.data.Text) - tonumber(tb1.r4.r4c2.data.Text));
+          tb1.r5.r5c4.data.Text = string.format("%.2f", tonumber(tb1.r5.r5c1.data.Text) - tonumber(tb1.r5.r5c2.data.Text));
+          updateGraph();
+          return null;
+        end;
+        ]]>
+    </script>
+    <p style="lineBreak"></p>
+  </section>
+
+  <!-- Section 3-->
+  <section>
+    <title style="header1">Check Your Understanding</title>
+
+    <p style="lineBreak"></p>
+
+    <stack style="backgroundColor2 center">
+      <style>
+        <widthPercentage>90%</widthPercentage>
+      </style>
+      <p style="title">Question 1</p>
+
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p> The sum of two linear functions is $ \underline{\hspace{1.5cm}} $ </p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table widths="10% 90%" name="table" grid="false">
+        <row name="row">
+          <column name="col">
+            <image src="resources\answer.png" inspect="false" />
+          </column>
+          <column name="col2">
+            <p name="data"></p>
+          </column>
+        </row>
+      </table>
+      <button name="btn" content="Show Answer">
+        <onClick>
+          if btn.Text == "Show Answer" then
+          table.row.col2.data.Text = "Linear.";
+          btn.Text = "Hide Answer"
+          else
+          table.row.col2.data.Text = "";
+          btn.Text = "Show Answer"
+          end
+        </onClick>
+      </button>
+
+
+    </stack>
+    <p style="lineBreak"></p>
+    <stack style="backgroundColor2 center">
+      <style>
+        <widthPercentage>90%</widthPercentage>
+      </style>
+      <p style="title">Question 2</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p> $ f( x ) - g( x ) $ and $ g( x ) - f( x ) $ are $ \underline{\hspace{1.5cm}} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table widths="10% 90%" name="table2" grid="false">
+        <row name="row">
+          <column>
+            <image src="resources\answer.png" inspect="false" />
+          </column>
+          <column name="col2">
+            <p name="data"></p>
+          </column>
+        </row>
+      </table>
+      <button name="btn" content="Show Answer">
+        <onClick>
+          if btn.Text == "Show Answer" then
+          table2.row.col2.data.Text = "Not Equal.";
+          btn.Text = "Hide Answer"
+          else
+          table2.row.col2.data.Text = "";
+          btn.Text = "Show Answer"
+          end
+        </onClick>
+      </button>
+    </stack>
+    <p style="lineBreak"></p>
+  </section>
+
+  <!-- Section 4-->
+  <section name="section4">
+    <title style="header1">Investigation 2: Linear and Quadratic Functions</title>
+    <onDocumentOpened>
+      updateVals2();
+    </onDocumentOpened>
+    <script>
+
+      function updateGraph2()
+
+      local plotPointer1 = stack3.myPlot.aSeries;
+      local plotPointer2 = stack3.myPlot.bSeries;
+      local plotPointer3 = stack3.myPlot.cSeries;
+      local plotPointer4 = stack3.myPlot.dSeries;
+      local xAxis = stack3.myPlot.xaxis;
+      local yAxis = stack3.myPlot.yaxis;
+
+      plotPointer1:Clear()
+      plotPointer2:Clear()
+      plotPointer3:Clear()
+      plotPointer4:Clear()
+      xAxis:Clear()
+      yAxis:Clear()
+
+      for x = -100, 100, 5 do
+      y = 0
+      xAxis:Add(x,y)
+      end
+
+      for y = -100, 100, 5 do
+      x = 0
+      yAxis:Add(x,y)
+      end
+
+      for x = -2, 2, 0.05 do
+      y = (round(hstack1.vstack1.eq1sl1.Value,2)*x) + round(hstack1.vstack1.eq1sl2.Value,2);
+      local y1 = y;
+      plotPointer1:Add(x,y)
+      y = (round(hstack1.vstack2.eq2sl1.Value,2)*((x-round(hstack1.vstack2.eq2sl2.Value, 2))^2)) + round(hstack1.vstack2.eq2sl3.Value,2);
+      local y2 = y;
+      plotPointer2:Add(x,y)
+      y = y1+y2
+      plotPointer3:Add(x,y)
+      y = y1-y2
+      plotPointer4:Add(x,y)
+      end
+
+      plotPointer1:Update()
+      plotPointer2:Update()
+      plotPointer3:Update()
+      plotPointer4:Update()
+      end
+    </script>
+    <p style="lineBreak"></p>
+    <stack name="hstack1" orientation="horizontal">
+      <style>
+        <widthPercentage>80%</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+      <stack name="vstack1" orientation="vertical">
+        <equation name="eq1">$ g( x ) = mx+b $</equation>
+        <p name="label1" style="centerText">m = 1</p>
+        <slider name="eq1sl1" max="5" min="-5" value="1">
+          <onValueChanged>
+            label1.Text = "m = " .. string.format("%.2f", round(eq1sl1.Value, 2));
+            updateVals2();
+          </onValueChanged>
+        </slider>
+        <p name="label2" style="centerText">b = 0</p>
+        <slider name="eq1sl2" max="5" min="-5" value="0">
+          <onValueChanged>
+            label2.Text = "b = " .. string.format("%.2f", round(eq1sl2.Value, 2));
+            updateVals2();
+          </onValueChanged>
+        </slider>
+      </stack>
+      <stack name="vstack2" orientation="vertical">
+        <equation name="eq2">$ h( x ) = a( x-h )^2 + k $</equation>
+        <p name="label3" style="centerText">a = 1</p>
+        <slider name="eq2sl1" max="5" min="-5" value="1" style="sliderColor">
+          <onValueChanged>
+            label3.Text = "a = " .. string.format("%.2f", round(eq2sl1.Value, 2));
+            updateVals2();
+          </onValueChanged>
+        </slider>
+        <p name="label4" style="centerText">h = 0</p>
+        <slider name="eq2sl2" max="5" min="-5" value="0">
+          <onValueChanged>
+            label4.Text = "h = " .. string.format("%.2f", round(eq2sl2.Value, 2));
+            updateVals2();
+          </onValueChanged>
+        </slider>
+        <p name="label5" style="centerText">k = 0</p>
+        <slider name="eq2sl3" max="5" min="-5" value="0">
+          <onValueChanged>
+            label5.Text = "k = " .. string.format("%.2f", round(eq2sl3.Value, 2));
+            updateVals2();
+          </onValueChanged>
+        </slider>
+      </stack>
+    </stack>
+    <stack name="stack3" orientation="vertical">
+      <table grid="false">
+        <style>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <row>
+          <column style="backgroundColor3">
+            <p>$ g( x ) $</p>
+          </column>
+          <column style="backgroundColor2">
+            <p>$ h( x ) $</p>
+          </column>
+          <column style="backgroundColor4">
+            <p>$ g( x ) + h( x ) $</p>
+          </column>
+          <column style="backgroundColor5">
+            <p>$ g( x ) - h( x )$</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <toggle name="toggleS1" value="true">
+              <onValueChanged>
+                stack3.myPlot.aSeries.Visible = not stack3.myPlot.aSeries.Visible;
+                updateGraph2()
+              </onValueChanged>
+            </toggle>
+          </column>
+          <column>
+            <toggle name="toggleS2" value="true">
+              <onValueChanged>
+                stack3.myPlot.bSeries.Visible = not stack3.myPlot.bSeries.Visible;
+                updateGraph2()
+              </onValueChanged>
+            </toggle>
+          </column>
+          <column>
+            <toggle name="toggleS3" value="true">
+              <onValueChanged>
+                stack3.myPlot.cSeries.Visible = not stack3.myPlot.cSeries.Visible;
+                updateGraph2()
+              </onValueChanged>
+            </toggle>
+          </column>
+          <column>
+            <toggle name="toggleS4" value="true">
+              <onValueChanged>
+                stack3.myPlot.dSeries.Visible = not stack3.myPlot.dSeries.Visible;
+                updateGraph2()
+              </onValueChanged>
+            </toggle>
+          </column>
+        </row>
+      </table>
+
+      <xyPlot name="myPlot" manual="false">
+        <style>
+          <aspectRatio>0.5</aspectRatio>
+        </style>
+        <axis dim="x" auto="fixed" min="-2" max="2" major="true" minor="true" />
+        <axis dim="y" auto="fixed" min="-5" max="5" major="true" minor="true" />
+        <series name="xaxis" style="blackLine">
+        </series>
+        <series name="yaxis" style="blackLine">
+        </series>
+        <series name="aSeries" style="lineColor3" />
+        <series name="bSeries" style="lineColor2" />
+        <series name="cSeries" style="lineColor4" />
+        <series name="dSeries" style="lineColor5" />
+      </xyPlot>
+    </stack>
+    <table name="tb1">
+      <style>
+        <visibility>collapsed</visibility>
+      </style>
+      <head>
+        <column style="backgroundColor2">
+          <equation>$ x $</equation>
+        </column>
+        <column style="backgroundColor2">
+          <equation>$ g( x ) $</equation>
+        </column>
+        <column style="backgroundColor2">
+          <equation>$ h( x ) $</equation>
+        </column>
+        <column style="backgroundColor2">
+          <equation>$ g( x ) + h( x ) $</equation>
+        </column>
+        <column style="backgroundColor2">
+          <equation>$ g( x ) - h( x ) $</equation>
+        </column>
+      </head>
+      <row name="r1">
+        <column name="c1">
+          <p name="x1">-2</p>
+        </column>
+        <column name="r1c1">
+          <!--g(x) -->
+          <p name="data"></p>
+        </column>
+        <column name="r1c2">
+          <!--h(x) -->
+          <p name="data"></p>
+        </column>
+        <column name="r1c3">
+          <!--g(x)+h(x) -->
+          <p name="data"></p>
+        </column>
+        <column name="r1c4">
+          <!--g(x)-h(x) -->
+          <p name="data"></p>
+        </column>
+      </row>
+      <row name="r2">
+        <column name="c1">
+          <p name="x2">-1</p>
+        </column>
+        <column name="r2c1">
+          <p name="data"></p>
+        </column>
+        <column name="r2c2">
+          <p name="data"></p>
+        </column>
+        <column name="r2c3">
+          <p name="data"></p>
+        </column>
+        <column name="r2c4">
+          <p name="data"></p>
+        </column>
+      </row>
+      <row name="r3">
+        <column name="c1">
+          <p name="x3">0</p>
+        </column>
+        <column name="r3c1">
+          <p name="data"></p>
+        </column>
+        <column name="r3c2">
+          <p name="data"></p>
+        </column>
+        <column name="r3c3">
+          <p name="data"></p>
+        </column>
+        <column name="r3c4">
+          <p name="data"></p>
+        </column>
+      </row>
+      <row name="r4">
+        <column name="c1">
+          <p name="x4">1</p>
+        </column>
+        <column name="r4c1">
+          <p name="data"></p>
+        </column>
+        <column name="r4c2">
+          <p name="data"></p>
+        </column>
+        <column name="r4c3">
+          <p name="data"></p>
+        </column>
+        <column name="r4c4">
+          <p name="data"></p>
+        </column>
+      </row>
+      <row name="r5">
+        <column name="c1">
+          <p name="x5">2</p>
+        </column>
+        <column name="r5c1">
+          <p name="data"></p>
+        </column>
+        <column name="r5c2">
+          <p name="data"></p>
+        </column>
+        <column name="r5c3">
+          <p name="data"></p>
+        </column>
+        <column name="r5c4">
+          <p name="data"></p>
+        </column>
+      </row>
+    </table>
+    <stack name="buttonStack" orientation="horizontal">
+      <button name="resetTableBtn" content="Reset Slider Values" style="backgroundColor">
+        <onClick>
+          hstack1.vstack1.eq1sl1.Value = 1;
+          hstack1.vstack1.eq1sl2.Value = 0;
+          hstack1.vstack2.eq2sl1.Value = 1;
+          hstack1.vstack2.eq2sl2.Value = 0;
+          hstack1.vstack2.eq2sl3.Value = 0;
+        </onClick>
+      </button>
+
+      <button name="toggleGraph" content="Hide Graph" style="backgroundColor">
+        <onClick>
+          if toggleGraph.Text == "Hide Graph" then
+          stack3.Style.Visibility = "collapsed";
+          toggleGraph.Text = "Show Graph"
+          toggleGraph.Style.BackgroundColor = color.rgb(50, 133, 184);
+          else
+          stack3.Style.Visibility = "visible";
+          toggleGraph.Text = "Hide Graph";
+          toggleGraph.Style.BackgroundColor = color.rgb(220, 220, 220);
+          end
+        </onClick>
+      </button>
+
+      <button name="toggleTable" content="Show Table" style="backgroundColor">
+        <onClick>
+          if toggleTable.Text == "Show Table" then
+          tb1.Style.Visibility = "visible";
+          toggleTable.Text = "Hide Table"
+          toggleTable.Style.BackgroundColor = color.rgb(220, 220, 220);
+          else
+          tb1.Style.Visibility = "collapsed";
+          toggleTable.Text = "Show Table"
+          toggleTable.Style.BackgroundColor = color.rgb(50, 133, 184);
+          end
+        </onClick>
+      </button>
+    </stack>
+    <script>
+      <![CDATA[
+        function quadEq(a, x, h, k)
+          local val = (a*(x-h)^2)+k
+          return val;
+        end;
+ 
+        function updateVals2()
+          tb1.r1.r1c1.data.Text = string.format("%.2f", linearEq(round(hstack1.vstack1.eq1sl1.Value,2), tonumber(tb1.r1.c1.x1.Text), round(hstack1.vstack1.eq1sl2.Value,2)));
+          tb1.r2.r2c1.data.Text = string.format("%.2f", linearEq(round(hstack1.vstack1.eq1sl1.Value,2), tonumber(tb1.r2.c1.x2.Text), round(hstack1.vstack1.eq1sl2.Value,2)));
+          tb1.r3.r3c1.data.Text = string.format("%.2f", linearEq(round(hstack1.vstack1.eq1sl1.Value,2), tonumber(tb1.r3.c1.x3.Text), round(hstack1.vstack1.eq1sl2.Value,2)));
+          tb1.r4.r4c1.data.Text = string.format("%.2f", linearEq(round(hstack1.vstack1.eq1sl1.Value,2), tonumber(tb1.r4.c1.x4.Text), round(hstack1.vstack1.eq1sl2.Value,2)));
+          tb1.r5.r5c1.data.Text = string.format("%.2f", linearEq(round(hstack1.vstack1.eq1sl1.Value,2), tonumber(tb1.r5.c1.x5.Text), round(hstack1.vstack1.eq1sl2.Value,2)));
+          
+          tb1.r1.r1c2.data.Text = string.format("%.2f", quadEq(round(hstack1.vstack2.eq2sl1.Value,2), tonumber(tb1.r1.c1.x1.Text), round(hstack1.vstack2.eq2sl2.Value,2), round(hstack1.vstack2.eq2sl3.Value,2)));
+          tb1.r2.r2c2.data.Text = string.format("%.2f", quadEq(round(hstack1.vstack2.eq2sl1.Value,2), tonumber(tb1.r2.c1.x2.Text), round(hstack1.vstack2.eq2sl2.Value,2), round(hstack1.vstack2.eq2sl3.Value,2)));
+          tb1.r3.r3c2.data.Text = string.format("%.2f", quadEq(round(hstack1.vstack2.eq2sl1.Value,2), tonumber(tb1.r3.c1.x3.Text), round(hstack1.vstack2.eq2sl2.Value,2), round(hstack1.vstack2.eq2sl3.Value,2)));
+          tb1.r4.r4c2.data.Text = string.format("%.2f", quadEq(round(hstack1.vstack2.eq2sl1.Value,2), tonumber(tb1.r4.c1.x4.Text), round(hstack1.vstack2.eq2sl2.Value,2), round(hstack1.vstack2.eq2sl3.Value,2)));
+          tb1.r5.r5c2.data.Text = string.format("%.2f", quadEq(round(hstack1.vstack2.eq2sl1.Value,2), tonumber(tb1.r5.c1.x5.Text), round(hstack1.vstack2.eq2sl2.Value,2), round(hstack1.vstack2.eq2sl3.Value,2)));
+          
+          
+          tb1.r1.r1c3.data.Text = string.format("%.2f", tonumber(tb1.r1.r1c1.data.Text) + tonumber(tb1.r1.r1c2.data.Text));
+          tb1.r2.r2c3.data.Text = string.format("%.2f", tonumber(tb1.r2.r2c1.data.Text) + tonumber(tb1.r2.r2c2.data.Text));
+          tb1.r3.r3c3.data.Text = string.format("%.2f", tonumber(tb1.r3.r3c1.data.Text) + tonumber(tb1.r3.r3c2.data.Text));
+          tb1.r4.r4c3.data.Text = string.format("%.2f", tonumber(tb1.r4.r4c1.data.Text) + tonumber(tb1.r4.r4c2.data.Text));
+          tb1.r5.r5c3.data.Text = string.format("%.2f", tonumber(tb1.r5.r5c1.data.Text) + tonumber(tb1.r5.r5c2.data.Text));
+          
+          tb1.r1.r1c4.data.Text = string.format("%.2f", tonumber(tb1.r1.r1c1.data.Text) - tonumber(tb1.r1.r1c2.data.Text));
+          tb1.r2.r2c4.data.Text = string.format("%.2f", tonumber(tb1.r2.r2c1.data.Text) - tonumber(tb1.r2.r2c2.data.Text));
+          tb1.r3.r3c4.data.Text = string.format("%.2f", tonumber(tb1.r3.r3c1.data.Text) - tonumber(tb1.r3.r3c2.data.Text));
+          tb1.r4.r4c4.data.Text = string.format("%.2f", tonumber(tb1.r4.r4c1.data.Text) - tonumber(tb1.r4.r4c2.data.Text));
+          tb1.r5.r5c4.data.Text = string.format("%.2f", tonumber(tb1.r5.r5c1.data.Text) - tonumber(tb1.r5.r5c2.data.Text));
+          updateGraph2();
+          return null;
+        end;
+        ]]>
+    </script>
+    <p style="lineBreak"></p>
+  </section>
+
+  <!-- Section 5-->
+  <section>
+    <title style="header1">Check Your Understanding</title>
+
+    <p style="lineBreak"></p>
+
+    <stack style="backgroundColor2 center">
+      <style>
+        <widthPercentage>90%</widthPercentage>
+      </style>
+      <p style="title">Question 1</p>
+
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p> The sum of a linear function and a quadratic function is $ \underline{\hspace{1.5cm}} $ </p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table widths="10% 90%" name="table" grid="false">
+        <row name="row">
+          <column name="col">
+            <image src="resources\answer.png" inspect="false" />
+          </column>
+          <column name="col2">
+            <p name="data"></p>
+          </column>
+        </row>
+      </table>
+      <button name="btn" content="Show Answer">
+        <onClick>
+          if btn.Text == "Show Answer" then
+          table.row.col2.data.Text = "Quadratic.";
+          btn.Text = "Hide Answer"
+          else
+          table.row.col2.data.Text = "";
+          btn.Text = "Show Answer"
+          end
+        </onClick>
+      </button>
+
+
+    </stack>
+    <p style="lineBreak"></p>
+    <stack style="backgroundColor2 center">
+      <style>
+        <widthPercentage>90%</widthPercentage>
+      </style>
+      <p style="title">Question 2</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p> $ g( x ) - h( x ) $ and $ h( x ) - g( x ) $ are $ \underline{\hspace{1.5cm}} $</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <table widths="10% 90%" name="table2" grid="false">
+        <row name="row">
+          <column>
+            <image src="resources\answer.png" inspect="false" />
+          </column>
+          <column name="col2">
+            <p name="data"></p>
+          </column>
+        </row>
+      </table>
+      <button name="btn" content="Show Answer">
+        <onClick>
+          if btn.Text == "Show Answer" then
+          table2.row.col2.data.Text = "Not Equal.";
+          btn.Text = "Hide Answer"
+          else
+          table2.row.col2.data.Text = "";
+          btn.Text = "Show Answer"
+          end
+        </onClick>
+      </button>
+    </stack>
+    <p style="lineBreak"></p>
+  </section>
+
+  <sectionNoTitle style="pageLayout">
+    <style>
+      <widthPercentage>80%</widthPercentage>
+      <horizontalAlignment>center</horizontalAlignment>
+    </style>
+
+    <web url="https://drive.google.com/open?id=1SoPhSCyPIAKtLmwaoUApmSLAIkLE2TLglDImfL4GGgQ">
+      <style>
+        <aspectRatio>2</aspectRatio>
+      </style>
+    </web>
+  </sectionNoTitle>
+  
+</document>

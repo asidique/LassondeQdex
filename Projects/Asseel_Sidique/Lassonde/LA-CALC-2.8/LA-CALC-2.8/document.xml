@@ -1,0 +1,839 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="GE0AF0E6C_36A8_44CA_A91D_E5C5DB93CF31">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>LA-CALC-2.8 Vertical Asymptotes of Natural Log</title>
+    <creator>Sidique</creator>
+    <coverImage src="resources/LassondeLogo.png" />
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+  </metadata>
+
+
+  <include src="resources/curriculumStylesLassonde.xml" />
+  <include src="resources/plotTools.xml" />
+  <include src="resources/Utilities.xml" />
+  
+    <!--                                      Header & Footer END                                         -->
+  <header style="themeColour">
+    <stack style="center" orientation="horizontal">
+      <p></p>
+    </stack>
+  </header>
+  <footer style="themeColour">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="themeColourTitle">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+  
+  <!-- Section 1 -->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">2.8 Vertical Asymptotes of Natural Log</title>
+    <p style="sectionHeading">Introduction</p>
+    <image src="resources/asmyptote.png" />
+    <stack style="contentBG">
+      <p>In the previous module, we discussed how to visually recognize Vertical Asymptotes. In this module, we will be looking at determining Vertical Asymptotes
+      of Natural Log functions. <b>Natural Log</b> functions contain the key operation $ ln $ such as in $ f(x) = ln(x) $. 
+    </p>
+    </stack>
+  </section>
+  
+  <sectionNoTitle name="section2" style="pageLayout">
+    <p style="sectionHeading">Natural Log Functions</p>
+    <stack style="contentBG">
+      <p>$ ln $ is referred to as $ log \; x $ to the base $ e $. The number $ e $ is approximately 2.718. Natural log is not defined for negative
+      numbers, or zero. This will be useful as this will help us determine Vertical Asymptotes in $ ln $ functions.</p>
+    </stack>
+    <p style="sectionHeading">Natural Log Graph</p>
+    <stack name="graphStack" style="contentBG">
+      <p>Experiment with the sliders below to understand how natural log functions work. Notice how the graph stretches, compresses and shifts. Also notice how the Vertical Asymptote
+      moves depending on the operation.</p>
+      <xyPlot name="p1" pan="disabled" tap="disabled" zoom="disabled">
+        <onDocumentOpened>
+          char.textX(xLabel, {9.5, 0.5}, 0.25, color.black);
+          char.textY(yLabel, {0.5, 5.5}, 0.25, color.black);
+          for x=-10,10,0.01 do
+            fx:Add(x, math.log(x));
+          end
+        </onDocumentOpened>
+        <axis dim="x" min="-10" max="10" auto="none" />
+        <axis dim="y" min="-2" max="6" auto="none" />
+        <series name="xLine">
+          <style>
+            <lineThickness>2</lineThickness>
+            <foreground color="black" />
+          </style>
+          <data>-20 0; 20 0;</data>
+        </series>
+        <series name="yLine">
+          <style>
+            <lineThickness>2</lineThickness>
+            <foreground color="black" />
+          </style>
+          <data>0 -20; 0 20;</data>
+        </series>
+        <series name="xLabel" />
+        <series name="yLabel" />
+        <series name="fx" capacity="5000">
+          <style>
+            <lineThickness>2.5</lineThickness>
+          </style>
+        </series>
+      </xyPlot>
+      <equation>$ f(x) = ln( \frac{a}{e}x + c) + d $</equation>
+      <table name="t1" widths="10% 70% 15%" grid="0">
+        <row name="r1">
+          <column name="c1">
+            <style>
+                <marginTop>10</marginTop>
+              </style>
+            <equation>$ a $</equation>
+          </column>
+          <column name="c2">
+            <slider name="sl" min="1" max="4" value="1">
+              <onValueChanged>
+                section2.graphStack.t1.r1.c3.lab.Text = tostring(round(value, 0.01));
+              </onValueChanged>
+            </slider>
+          </column>
+          <column name="c3">
+            <style>
+                <marginTop>5</marginTop>
+                <textAlignment>center</textAlignment>
+                <horizontalAlignment>center</horizontalAlignment>
+              </style>
+            <p name="lab">1</p>
+          </column>
+        </row>
+        <row name="r2">
+          <column name="c1">
+            <style>
+                <marginTop>10</marginTop>
+              </style>
+            <equation>$ c $</equation>
+          </column>
+          <column name="c2">
+            <slider name="sl" min="-4" max="4" value="0">
+              <onValueChanged>
+                section2.graphStack.t1.r2.c3.lab.Text = tostring(round(value, 0.01));
+              </onValueChanged>
+            </slider>
+          </column>
+          <column name="c3">
+            <style>
+                <marginTop>5</marginTop>
+                <textAlignment>center</textAlignment>
+                <horizontalAlignment>center</horizontalAlignment>
+              </style>
+            <p name="lab">0</p>
+          </column>
+        </row>
+        <row name="r3">
+          <column name="c1">
+            <style>
+                <marginTop>10</marginTop>
+              </style>
+            <equation>$ d $</equation>
+          </column>
+          <column name="c2">
+            <slider name="sl" min="-4" max="4" value="0">
+              <onValueChanged>
+                section2.graphStack.t1.r3.c3.lab.Text = tostring(round(value, 0.01));
+              </onValueChanged>
+            </slider>
+          </column>
+          <column name="c3">
+            <style>
+                <marginTop>5</marginTop>
+                <textAlignment>center</textAlignment>
+                <horizontalAlignment>center</horizontalAlignment>
+              </style>
+            <p name="lab">0</p>
+          </column>
+        </row>
+        <row name="r4">
+          <column name="c1">
+            <style>
+                <marginTop>10</marginTop>
+              </style>
+            <equation>$ e $</equation>
+          </column>
+          <column name="c2">
+            <slider name="sl" min="1" max="4" value="1">
+              <onValueChanged>
+                section2.graphStack.t1.r4.c3.lab.Text = tostring(round(value, 0.01));
+              </onValueChanged>
+            </slider>
+          </column>
+          <column name="c3">
+            <style>
+                <marginTop>5</marginTop>
+                <textAlignment>center</textAlignment>
+                <horizontalAlignment>center</horizontalAlignment>
+              </style>
+            <p name="lab">1</p>
+          </column>
+        </row>
+      </table>
+      <button content="Draw">
+        <style>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <onClick>
+          section2.graphStack.p1.fx:Clear();
+          for aa=-10, 10, 0.03 do
+            section2.graphStack.p1.fx:Add(aa, section2.graphStack.t1.r3.c2.sl.Value + math.log(section2.graphStack.t1.r1.c2.sl.Value*section2.graphStack.t1.r4.c2.sl.Value*aa + section2.graphStack.t1.r2.c2.sl.Value));
+          end
+        </onClick>
+      </button>
+    </stack>
+  </sectionNoTitle>
+  
+  <sectionNoTitle style="pageLayout" name="section3">
+    <p style="sectionHeading">Determining Asymptotes of Natural Log Functions</p>
+    <stack style="contentBG">
+      <p>Now that we understand how to plot Natural Log functions, let's look at algebraically determining its Vertical Asymptotes.</p>
+      <p>Lets take the function $ f(x) = ln(x-3) $</p>
+      <p>We know that $ ln $ functions are not defined for $ ln(x) $ such that $ x \leq 0 $</p>
+      <p>Let's look at what happens to $ f(x) $ as x approaches $ 3^+ $ (from the right side). We will use a table of values to determine the values.</p>
+      <stack>
+        <style>
+          <widthPercentage>80%</widthPercentage>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <table>
+          <row>
+            <column>
+              <equation>$ x $</equation>
+            </column>
+            <column>
+              <equation>$ f(x) $</equation>
+            </column>
+          </row>
+          <row>
+            <column>
+              <equation>3.1</equation>
+            </column>
+            <column>
+              <equation>-2.30</equation>
+            </column>
+          </row>
+          <row>
+            <column>
+              <equation>3.01</equation>
+            </column>
+            <column>
+              <equation>-4.61</equation>
+            </column>
+          </row>
+          <row>
+            <column>
+              <equation>3.001</equation>
+            </column>
+            <column>
+              <equation>-6.90</equation>
+            </column>
+          </row>
+          <row>
+            <column>
+              <equation>3.00001</equation>
+            </column>
+            <column>
+              <equation>-11.51</equation>
+            </column>
+          </row>
+        </table>
+      </stack>
+      <p>It is clear that the closer we approach $ 3 $ from the right, $ f(x) $ is becoming decreasingly negative. This means that there is a Vertical Asymptote at $ x = 3 $. Let's confirm by graphing the function.</p>
+      <button name="btn" content="Show Graph">
+        <style>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <onClick>
+          if btn.Text == "Show Graph" then
+            p1.Style.Visibility = "visible";
+            btn.Text = "Hide Graph";
+          else
+            p1.Style.Visibility = "collapsed";
+            btn.Text = "Show Graph";
+          end
+        </onClick>
+      </button>
+      <xyPlot name="p1" pan="disabled" tap="disabled" zoom="disabled">
+        <style>
+          <widthPercentage>80%</widthPercentage>
+          <visibility>collapsed</visibility>
+        </style>
+        <onDocumentOpened>
+          char.textX(xLabel, {9.5, 0.5}, 0.25, color.black);
+          char.textY(yLabel, {0.5, 5.5}, 0.25, color.black);
+          for x=0,10,0.05 do
+            fx:Add(x, math.log(x-3));
+          end
+          
+          for x=-10, 10, 0.15 do
+            fx2:Add(3, x);
+          end
+        </onDocumentOpened>
+        <axis dim="x" min="-2" max="10" auto="none" />
+        <axis dim="y" min="-2" max="6" auto="none" />
+        <series name="xLine">
+          <style>
+            <lineThickness>2</lineThickness>
+            <foreground color="black" />
+          </style>
+          <data>-20 0; 20 0;</data>
+        </series>
+        <series name="yLine">
+          <style>
+            <lineThickness>2</lineThickness>
+            <foreground color="black" />
+          </style>
+          <data>0 -20; 0 20;</data>
+        </series>
+        <series name="xLabel" />
+        <series name="yLabel" />
+        <series name="fx">
+          <style>
+            <lineThickness>2.5</lineThickness>
+          </style>
+        </series>
+        <series name="fx2" draw="lineSegments">
+          <style>
+            <lineThickness>2.5</lineThickness>
+          </style>
+        </series>
+      </xyPlot>
+      
+    </stack>
+  </sectionNoTitle>
+  
+  <sectionNoTitle name="section4" style="pageLayout">
+      <script>
+        local stepsController = StepsController:new({stepsStack=stepsStack, numOfSteps=3})
+      </script>
+		  <p style="sectionHeading">Step-by-Step Example</p>
+		  <stack orientation="vertical" style="contentBG">
+			  <p style="subSectionHeading">QUESTION 1</p>
+			  <p style="justifiedText">For the following function, determine the vertical asymptote algebraically and confirm your answer graphically.</p>
+        <equation>$ f(x) = ln(2x+5) + 10 $</equation>
+		  </stack>
+      <stack name="stepsStack">
+        <!--Each step is a stack, and each step has alternating background colors-->
+        <stack orientation="horizontal">
+          <stack name="stepStack" orientation="vertical">
+            <p>Find $ x $ such that $ f(x) = 0 $</p>
+            <stack name="cont" style="invisible">
+              <!--CONTENT GOES HERE-->
+              <p>The first step is to find where $ f(x) $ is not defined and has a one-sided limit. We do this by determining when $ f(x) = 0 $.</p>
+              <p>$ f(x) = ln(2x+5) + 10 $</p>
+              <p>We can ignore the $ + 10 $ since it does not change where our asymptote lies.</p>
+              <p>$ f(x) = ln(2x+5) $</p>
+              <p>$ 2x+5 = 0 $</p>
+              <p>$ x= - \frac{5}{2} $</p>
+            </stack>
+          </stack>
+          <button name="btn" style="stepByStepBtn">
+            <onClick>
+              stepsController:toggleStep(1)
+            </onClick>
+          </button>
+        </stack>
+        <stack orientation="horizontal">
+          <stack name="stepStack" orientation="vertical">
+            <p>Create a table of values to confirm the vertical asymptote</p>
+            <stack name="cont" style="invisible">
+              <stack orientation="horizontal">
+                <stack orientation="vertical">
+                  <!--CONTENT GOES HERE-->
+                  <p>This table has the values of $ f(x) $ as it approaches $ \frac{-5}{2} $ from the right. We don't check the left because $ ln(x) $ is not defined for negative values.</p>
+                  <table>
+                    <row>
+                      <column>
+                        <equation>$ x $</equation>
+                      </column>
+                      <column>
+                        <equation>$ f(x) $</equation>
+                      </column>
+                    </row>
+                    <row>
+                      <column>
+                        <equation>$ \frac{-5}{2} + 0.1 $ </equation>
+                      </column>
+                      <column>
+                        <equation>-1.60</equation>
+                      </column>
+                    </row>
+                    <row>
+                      <column>
+                        <equation>$ \frac{-5}{2} + 0.01 $ </equation>
+                      </column>
+                      <column>
+                        <equation>-3.91</equation>
+                      </column>
+                    </row>
+                    <row>
+                      <column>
+                        <equation>$ \frac{-5}{2} + 0.001 $ </equation>
+                      </column>
+                      <column>
+                        <equation>-6.21</equation>
+                      </column>
+                    </row>
+                    <row>
+                      <column>
+                        <equation>$ \frac{-5}{2} + 0.0001 $ </equation>
+                      </column>
+                      <column>
+                        <equation>-8.52</equation>
+                      </column>
+                    </row>
+                  </table>
+                  <p>Clearly, the values get more and more negative as we approach $ f(x) = - \frac{5}{2} $ from the right.</p>
+                </stack>
+              </stack>
+            </stack>
+          </stack>
+          <button name="btn" style="stepByStepBtn">
+            <onClick>
+              stepsController:toggleStep(2)
+            </onClick>
+          </button>
+        </stack>
+        <stack orientation="horizontal">
+          <stack name="stepStack" orientation="vertical">
+            <!--CONTENT GOES HERE-->
+            <p>Graph to confirm the vertical asymptote</p>
+            <stack name="cont" style="invisible">
+              <xyPlot name="p1" pan="disabled" tap="disabled" zoom="disabled">
+                <style>
+                  <widthPercentage>80%</widthPercentage>
+                </style>
+                <onDocumentOpened>
+                  char.textX(xLabel, {4.5, 0.5}, 0.25, color.black);
+                  char.textY(yLabel, {0.5, 4.5}, 0.25, color.black);
+                  for x=-5,5,0.05 do
+                    fx:Add(x, math.log(2*x+5));
+                  end
+          
+                  for x=-10, 10, 0.15 do
+                    fx2:Add(-2.5, x);
+                  end
+                </onDocumentOpened>
+                <axis dim="x" min="-3" max="3" auto="none" />
+                <axis dim="y" min="-4" max="5" auto="none" />
+                <series name="xLine">
+                  <style>
+                    <lineThickness>2</lineThickness>
+                    <foreground color="black" />
+                  </style>
+                  <data>-20 0; 20 0;</data>
+                </series>
+                <series name="yLine">
+                  <style>
+                    <lineThickness>2</lineThickness>
+                    <foreground color="black" />
+                  </style>
+                  <data>0 -20; 0 20;</data>
+                </series>
+                <series name="xLabel" />
+                <series name="yLabel" />
+                <series name="fx">
+                  <style>
+                    <lineThickness>2.5</lineThickness>
+                  </style>
+                </series>
+                <series name="fx2" draw="lineSegments">
+                  <style>
+                    <lineThickness>2.5</lineThickness>
+                  </style>
+                </series>
+              </xyPlot>
+              <p>As the graph shows, the vertical asymptote is at $ x = -\frac{5}{2} $ </p>
+            </stack>
+          </stack>
+          <button name="btn" style="stepByStepBtn">
+            <onClick>
+              stepsController:toggleStep(3)
+            </onClick>
+          </button>
+        </stack>
+        
+      </stack>
+	  </sectionNoTitle>
+  
+  <sectionNoTitle name="section5" style="pageLayout">    
+		<p style="sectionHeading">Practice</p>
+		<stack name="mcStack" style="mcStackLayout">
+      <script>
+        local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=1})
+      </script>
+			<p style="subSectionHeading">QUESTION 1</p>
+			<table name="table" widths="10% 90%" grid="false">
+				<row name="r1">
+					<column>
+						<image src="resources/question.png" inspect="false" />
+					</column>
+					<column name="c1">
+            <p>For the following function, determine the vertical asymptotes: </p>
+            <equation>$ f(x) = 7ln(\frac{1}{2}x-2) $</equation>
+            <xyPlot name="p1" pan="disabled" tap="disabled" zoom="disabled">
+              <onDocumentOpened>
+                char.textX(xLabel, {14.5, 0.5}, 0.25, color.black);
+                char.textY(yLabel, {0.5, 9.5}, 0.25, color.black);
+                for x= 4,20,0.01 do
+                  fx:Add(x, 7*math.log(0.5*x-2));
+                end
+              </onDocumentOpened>
+              <axis dim="x" min="0" max="15" auto="none" />
+              <axis dim="y" min="-10" max="10" auto="none" />
+              <series name="xLine">
+                <style>
+                  <lineThickness>2</lineThickness>
+                  <foreground color="black" />
+                </style>
+                <data>-20 0; 20 0;</data>
+              </series>
+              <series name="yLine">
+                <style>
+                  <lineThickness>2</lineThickness>
+                  <foreground color="black" />
+                </style>
+                <data>0 -20; 0 20;</data>
+              </series>
+              <series name="xLabel" />
+              <series name="yLabel" />
+              <series name="fx" capacity="5000">
+                <style>
+                  <lineThickness>2.5</lineThickness>
+                </style>
+              </series>
+              <series name="asym" draw="lineSegments">
+                <style>
+                  <lineThickness>2.5</lineThickness>
+                </style>
+              </series>
+            </xyPlot>
+					</column>
+				</row>
+			</table>
+			<table name="choicesTable" grid="false" widths="50% 50%">
+				<row>
+					<column>
+            <equation> $ x = 4 $</equation>
+					</column>
+					<column>
+						<equation> $ x = 4.5 $</equation>
+					</column>
+				</row>
+				<row>
+					<column>
+						<button name="btn" content="A" style="btnUnselected">
+							<onClick>
+                mcController:select(1)
+							</onClick>
+						</button>
+					</column>
+					<column>
+						<button name="btn" content="B" style="btnUnselected">
+							<onClick>
+                mcController:select(2)
+              </onClick>
+						</button>
+					</column>
+				</row>
+				<row>
+					<column>
+            <equation> $ x = 4.25 $</equation>
+					</column>
+					<column>
+            <equation> $ x = 4.15 $</equation>
+					</column>
+				</row>
+				<row>
+					<column>
+						<button name="btn" content="C" style="btnUnselected">
+							<onClick>
+                mcController:select(3)
+              </onClick>
+						</button>
+					</column>
+					<column>
+						<button name="btn" content="D" style="btnUnselected">
+							<onClick>
+                mcController:select(4)
+              </onClick>
+						</button>
+					</column>
+				</row>
+			</table>
+			<button name="checkBtn" content="Check Answer">
+				<onClick>
+          mcController:checkAnswer()
+          if checkBtn.Text == "Correct!" then
+            for i=-15, 15, 0.35 do
+              table.r1.c1.p1.asym:Add(4, i);
+            end
+          end
+        </onClick>
+			</button>
+		</stack>
+
+  </sectionNoTitle>
+  <sectionNoTitle name="section6" style="pageLayout">    
+		<p style="sectionHeading">Practice</p>
+		<stack name="mcStack" style="mcStackLayout">
+      <script>
+        local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=3})
+      </script>
+			<p style="subSectionHeading">QUESTION 2</p>
+			<table name="table" widths="10% 90%" grid="false">
+				<row name="r1">
+					<column>
+						<image src="resources/question.png" inspect="false" />
+					</column>
+					<column name="c1">
+            <p>For the following function, determine the vertical asymptotes: </p>
+            <equation>$ f(x) = -10ln(\frac{1}{2}x+5)+10 $</equation>
+            <xyPlot name="p1" pan="disabled" tap="disabled" zoom="disabled">
+              <onDocumentOpened>
+                char.textX(xLabel, {11.5, 0.5}, 0.25, color.black);
+                char.textY(yLabel, {0.5, 11.5}, 0.25, color.black);
+                for x= -12,12,0.01 do
+                  fx:Add(x, -10*math.log(0.5*x+5)+10);
+                end
+              </onDocumentOpened>
+              <axis dim="x" min="-12" max="12" auto="none" />
+              <axis dim="y" min="-12" max="12" auto="none" />
+              <series name="xLine">
+                <style>
+                  <lineThickness>2</lineThickness>
+                  <foreground color="black" />
+                </style>
+                <data>-20 0; 20 0;</data>
+              </series>
+              <series name="yLine">
+                <style>
+                  <lineThickness>2</lineThickness>
+                  <foreground color="black" />
+                </style>
+                <data>0 -20; 0 20;</data>
+              </series>
+              <series name="xLabel" />
+              <series name="yLabel" />
+              <series name="fx" capacity="5000">
+                <style>
+                  <lineThickness>2.5</lineThickness>
+                </style>
+              </series>
+              <series name="asym" draw="lineSegments">
+                <style>
+                  <lineThickness>2.5</lineThickness>
+                </style>
+              </series>
+            </xyPlot>
+					</column>
+				</row>
+			</table>
+			<table name="choicesTable" grid="false" widths="50% 50%">
+				<row>
+					<column>
+            <equation> $ x = -9 $</equation>
+					</column>
+					<column>
+						<equation> $ x = -5 $</equation>
+					</column>
+				</row>
+				<row>
+					<column>
+						<button name="btn" content="A" style="btnUnselected">
+							<onClick>
+                mcController:select(1)
+							</onClick>
+						</button>
+					</column>
+					<column>
+						<button name="btn" content="B" style="btnUnselected">
+							<onClick>
+                mcController:select(2)
+              </onClick>
+						</button>
+					</column>
+				</row>
+				<row>
+					<column>
+            <equation> $ x = -10 $</equation>
+					</column>
+					<column>
+            <equation> $ x = -9.5 $</equation>
+					</column>
+				</row>
+				<row>
+					<column>
+						<button name="btn" content="C" style="btnUnselected">
+							<onClick>
+                mcController:select(3)
+              </onClick>
+						</button>
+					</column>
+					<column>
+						<button name="btn" content="D" style="btnUnselected">
+							<onClick>
+                mcController:select(4)
+              </onClick>
+						</button>
+					</column>
+				</row>
+			</table>
+			<button name="checkBtn" content="Check Answer">
+				<onClick>
+          mcController:checkAnswer()
+          if checkBtn.Text == "Correct!" then
+            for i=-15, 15, 0.35 do
+              table.r1.c1.p1.asym:Add(-10, i);
+            end
+          end
+        </onClick>
+			</button>
+		</stack>
+
+  </sectionNoTitle>
+  <sectionNoTitle name="section7" style="pageLayout">    
+		<p style="sectionHeading">Practice</p>
+		<stack name="mcStack" style="mcStackLayout">
+      <script>
+        local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=4})
+      </script>
+			<p style="subSectionHeading">QUESTION 3</p>
+			<table name="table" widths="10% 90%" grid="false">
+				<row name="r1">
+					<column>
+						<image src="resources/question.png" inspect="false" />
+					</column>
+					<column name="c1">
+            <p>For the following function, determine the vertical asymptotes: </p>
+            <equation>$ f(x) = 10ln(x^2-2)-20 $</equation>
+            <xyPlot name="p1" pan="disabled" tap="disabled" zoom="disabled">
+              <onDocumentOpened>
+                char.textX(xLabel, {11.5, 0.5}, 0.25, color.black);
+                char.textY(yLabel, {0.5, 11.5}, 0.25, color.black);
+                for x= -12,12,0.01 do
+                  fx:Add(x, 10*math.log(x*x-2)-20);
+                end
+              </onDocumentOpened>
+              <axis dim="x" min="-12" max="12" auto="none" />
+              <axis dim="y" min="-12" max="12" auto="none" />
+              <series name="xLine">
+                <style>
+                  <lineThickness>2</lineThickness>
+                  <foreground color="black" />
+                </style>
+                <data>-20 0; 20 0;</data>
+              </series>
+              <series name="yLine">
+                <style>
+                  <lineThickness>2</lineThickness>
+                  <foreground color="black" />
+                </style>
+                <data>0 -20; 0 20;</data>
+              </series>
+              <series name="xLabel" />
+              <series name="yLabel" />
+              <series name="fx" capacity="5000">
+                <style>
+                  <lineThickness>2.5</lineThickness>
+                </style>
+              </series>
+              <series name="asym" draw="lineSegments">
+                <style>
+                  <lineThickness>2.5</lineThickness>
+                </style>
+              </series>
+              <series name="asym2" draw="lineSegments">
+                <style>
+                  <lineThickness>2.5</lineThickness>
+                </style>
+              </series>
+            </xyPlot>
+					</column>
+				</row>
+			</table>
+			<table name="choicesTable" grid="false" widths="50% 50%">
+				<row>
+					<column>
+            <equation> $ x = \sqrt{2} $</equation>
+					</column>
+					<column>
+						<equation> $ x = -\sqrt{2} $</equation>
+					</column>
+				</row>
+				<row>
+					<column>
+						<button name="btn" content="A" style="btnUnselected">
+							<onClick>
+                mcController:select(1)
+							</onClick>
+						</button>
+					</column>
+					<column>
+						<button name="btn" content="B" style="btnUnselected">
+							<onClick>
+                mcController:select(2)
+              </onClick>
+						</button>
+					</column>
+				</row>
+				<row>
+					<column>
+            <equation> No Vertical Asymptote </equation>
+					</column>
+					<column>
+            <equation> $ x = \sqrt{2}, x = -\sqrt{2} $</equation>
+					</column>
+				</row>
+				<row>
+					<column>
+						<button name="btn" content="C" style="btnUnselected">
+							<onClick>
+                mcController:select(3)
+              </onClick>
+						</button>
+					</column>
+					<column>
+						<button name="btn" content="D" style="btnUnselected">
+							<onClick>
+                mcController:select(4)
+              </onClick>
+						</button>
+					</column>
+				</row>
+			</table>
+			<button name="checkBtn" content="Check Answer">
+				<onClick>
+          mcController:checkAnswer()
+          if checkBtn.Text == "Correct!" then
+            for i=-15, 15, 0.35 do
+              table.r1.c1.p1.asym:Add(1.41421, i);
+              table.r1.c1.p1.asym2:Add(-1.41421, i);
+            end
+          end
+        </onClick>
+			</button>
+		</stack>
+  </sectionNoTitle>
+  
+  <sectionNoTitle name="section8" style="pageLayout">
+    <p style="sectionHeading">Extra Resources</p>
+    <web url="https://www.khanacademy.org/math/algebra-home/alg-exp-and-log/alg-graphs-of-logarithmic-functions/v/vertical-asymptote-natural-log"></web>
+  </sectionNoTitle>
+</document>

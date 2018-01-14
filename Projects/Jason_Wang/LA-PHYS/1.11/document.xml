@@ -3,7 +3,7 @@
 
   <!-- Meta Data -->
   <metadata>
-    <title>LA-PHYS-1.11 Centripetal Force</title>
+    <title>LA-PHYS-1.10 Centripetal Force</title>
     <creator>jason_wang</creator>
     <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
     <coverImage src="resources/lassondeLogo.png" />
@@ -40,7 +40,7 @@
   <!-- This is the standard way title pages are created. A great website to get copyright free images .. www.pexels.com
   *** The style: "pageLayout" is defined in curriculumStylesLassonde.xml. It simply sets the content to the center and adjusts the width to 80% ***-->
   <section name="section1" style="pageLayout">
-    <title style="chapterTitle">1.11 Centripetal Force</title>
+    <title style="chapterTitle">1.10 Centripetal Force</title>
     <p style="sectionHeading">Introduction</p>
     <image src="resources/centripetal.jpeg" />
     <stack orientation="vertical" style="contentBG">

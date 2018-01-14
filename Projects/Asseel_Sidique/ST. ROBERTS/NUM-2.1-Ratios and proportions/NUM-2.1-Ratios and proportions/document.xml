@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G428D96F3_1A03_43C3_B439_EA5FD0733278">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>NUM-2.1-Ratios and Proportions</title>
+    <creator>Sidique</creator>
+    <coverImage src="resources/cover.png" />
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+  </metadata>
+  
+    <include src="resources/curriculumStyles.xml" />
+  <include src="resources/Utilities.xml" />
+  <include src="resources/plotTools.xml" />
+
+   <!--                                      Header & Footer START                                         -->
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="whiteColor">Amanda Koon</p>
+      <p style="whiteColor rightText">NUMERACY</p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/logo1.png" inspect="false" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/logo2.png" inspect="false" />
+    </stack>
+  </footer>
+
+
+  <!-- Section 1 -->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">2.1 Rate and Proportions</title>
+    <!--FRONT IMAGE-->
+    <p style="sectionHeading">Introduction</p>
+    <image src="resources/ratio.png" />
+    <stack style="contentBG">
+      <p>Ratios and proportions are two really important mathematical concepts. A simple example of ratios is to say that in the picture above, the ratio of boys to girls is 5 : 7. A proportional statement would be to say that for every 10 boys, there are 14 girls. Notice
+      how there aren't 10 boys or 14 girls in the picture above, however the proportional statement is true because of the ratio of boys to girls in this scenatio. Let's look ahead at some more examples to get a better understanding.</p>
+    </stack>
+  </section>
+  
+  <sectionNoTitle style="pageLayout" name="section2">
+    <p style="sectionHeading">What is a Ratio?</p>
+    <stack style="contentBG">
+      <p>A ratio is a comparison between two things. It tells us much of one thing there is compared to another thing. These 'things' can be anything, a ratio from boys to girls, apples to oranges, houses to people. <b>Equavilent Ratios</b> can represent one ratio in many different ways. For an example,
+      an equivalent ratio for $ 3:6 $ is $ 1:2 $
+    </p>
+    </stack>
+    <p style="sectionHeading">What is a Proportion?</p>
+    <stack style="contentBG">
+      <p>A proportion is a statement that says two things are equal. For an example, if an average adult eats three meals a day, we can give it a ratio: $ \frac{1 \; adult}{3 \; meals} $. If
+      we wanted to know on average how many meals 5 adults would have, we need to use proportions. $ \frac{1 \; adult}{3 \; meals} $ = $ \frac{5 \; adult}{15 \; meals} $. Proportions can be useful when you change the magnitude of a ratio and want to see
+    how the things in that ratio are affected.</p>
+    </stack>
+  </sectionNoTitle>
+  
+  <sectionNoTitle style="pageLayout" name="section3">
+    <p style="sectionHeading">Simulation</p>
+    <stack style="contentBG">
+      
+    </stack>
+  </sectionNoTitle>
+
+</document>

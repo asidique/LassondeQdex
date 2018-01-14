@@ -1,0 +1,808 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G110AB3A1_5645_4937_8861_9970F4A19657">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>LA-CALC-1.2 Slope of a Secant Line to a Curve</title>
+    <creator>Sidique</creator>
+    <coverImage src="resources/LassondeLogo.png" />
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+  </metadata>
+
+  <include src="resources/curriculumStylesLassonde.xml" />
+  <include src="resources/plotTools.xml" />
+  <include src="resources/Utilities.xml" />
+  
+<!--                                      Header & Footer END                                         -->
+  <header style="themeColour">
+    <stack style="center" orientation="horizontal">
+      <p></p>
+    </stack>
+  </header>
+  <footer style="themeColour">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="themeColourTitle">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+          
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--                                      Header & Footer END                                         -->
+  <!-- Section 1 -->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">1.2 Slope of Secant Line to a Curve</title>
+    <p style="sectionHeading">Introduction</p>
+    <image src="resources/secanttitle.png" />
+    <stack style="contentBG">
+      <p>Calculus can be used to represent changes in a mathematical way. 
+      One of the tools we can use to represent change is to use the Secant Line. 
+      A Secant Line is a line which passes through two points of a graph such as in the image above. 
+      In this module we will investigate calculations involving Secant Lines and use it to obtain important data 
+      from curves.</p>
+    </stack>
+    <p>
+      <br />
+    </p>
+  </section>
+  
+  <sectionNoTitle name="section2" style="pageLayout">
+    <onDocumentOpened>
+      <![CDATA[
+            f1 = section2.content.p1.func1;
+            for i=-5, 5, 0.01 do
+              f1:Add(i, i^2);
+            end
+            l1 = section2.content.p1.slope1;
+            v1 = -1
+            v2 = 1
+            slope = ((v1^2)-v2^2)/(v1-v2);
+            b = v1^2 - slope*v1;
+            l1:Add(-10, (slope*-10 + b));
+            l1:Add(10, (slope*10 + b)); 
+            
+            p1 = section2.content.p1.poi1;
+            p1:Add(v1, (v1^2));
+            
+            p2 = section2.content.p1.poi2;
+            p2:Add(v2, (v2^2));
+            
+        ]]>
+      
+    </onDocumentOpened>
+    <p style="sectionHeading">What is a Secant Line?</p>
+    <stack style="contentBG">
+      <p>A <b>Secant Line</b> is defined by a straight line passing through two points on a curve. We can define these points as having the coordinates $ (x, f(x)) $ and
+      $ (x + \triangle x, f(x + \triangle x)) $.
+    </p>
+    </stack>
+    <p style="sectionHeading">Slope of a Secant Line</p>
+    <stack style="contentBG">
+      <p>Let the slope of the secant line be $ m_{s} $. To calculate $ m_{s} $, we use the formula: </p>
+      <equation>$ m_{s} = \frac{ \triangle y} { \triangle x} = \frac{ f(x+ \triangle x) - f(x) }{ x + \triangle x - x } = \frac{ f(x + \triangle x) - f(x)}{ \triangle x} $</equation>
+      <p>The slope represents the <b>Average Rate of Change</b> between two points on a function.
+      </p>
+    </stack>
+    <p style="sectionHeading">Secant Line Plotter</p>
+    <stack name="content" style="contentBG">
+      <p>Use the simulation below to plot a Secant Line on the quadratic function. Drag the sliders to change the x positions of the two points.</p>
+      <plot name="p1" tap="disabled">
+        <axis dim="x" min="-5" max="5" auto="none"></axis>
+        <axis dim="y" min="-1" max="5" auto="none"></axis>
+        <series name="func1"></series>
+        <series name="slope1" draw="line" capacity="2">
+          <style>
+            <foreground color="cadetBlue" />
+          </style>
+        </series>
+        <series name="poi1" draw="points" capacity="1">
+          <style>
+            <foreground color="cadetBlue" />
+          </style>
+        </series>
+        <series name="poi2" draw="points" capacity="1">
+          <style>
+            <foreground color="cadetBlue" />
+          </style>
+        </series>
+      </plot>
+      <table name="t1" grid="false" widths="10% 90%">
+        <row>
+          <column>
+              <style>
+                <marginTop>25</marginTop>
+              </style>
+              <p>
+                <style>
+                  <textAlignment>right</textAlignment>
+                </style>
+                $ x_{1} $</p>
+          </column>
+          <column>
+            <stack name="sliderStack">
+              <style>
+                <horizontalAlignment>left</horizontalAlignment>
+              </style>
+              <slider min="-2.1" max="2.1" name="s1" value="-1">
+                <onValueChanged>
+                  <![CDATA[
+                  p1 = section2.content.p1.poi1;
+                  l1 = section2.content.p1.slope1;
+                  val = section2.content.t1:Child(2):Child(2).sliderStack:Child(1).Value;
+                  slope = ((value^2)-val^2)/(value-val);
+                  b = value^2 - slope*value;
+                  
+                  p1:Add(value, (value^2));
+                  l1:Add(-10, (slope*-10 + b));
+                  l1:Add(10, (slope*10 + b)); 
+                  section2.content.intercept.Text = "Intercepts: (" .. round(value,.1) .. "," .. round(value^2,.1) .. ") and (" .. round(val,.1) .. "," .. round(val^2,.1) .. ")";
+                  section2.content.equation.Text = "Equation of Secant Line: y= " .. round(slope, .1) .. "x + " .. round(b, .1);
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+          </column>
+        </row>
+        <row>
+          <column>
+            <style>
+              <marginTop>25</marginTop>
+            </style>
+            <p> 
+              <style>
+                <textAlignment>right</textAlignment>
+              </style>
+                $ x_{2} $</p>
+          </column>
+          <column>
+            <stack name="sliderStack">
+              <style>
+                <horizontalAlignment>left</horizontalAlignment>
+              </style>
+              <slider min="-2.1" max="2.1" name="s1" value="1">
+                <onValueChanged>
+                  <![CDATA[
+                  p2 = section2.content.p1.poi2;
+                  l1 = section2.content.p1.slope1;
+                  val = section2.content.t1:Child(1):Child(2).sliderStack:Child(1).Value;
+                  slope = (-(value^2)+val^2)/(-value+val);
+                  b = value^2 - slope*value;
+                  
+                  p2:Add(value, (value^2));
+                  l1:Add(-10, (slope*-10 + b));
+                  l1:Add(10, (slope*10 + b)); 
+                  section2.content.intercept.Text = "Intercepts: (" .. round(val,.1) .. "," .. round(val^2,.1) .. ") and (" .. round(value,.1) .. "," .. round(value^2,.1) .. ")";
+                  section2.content.equation.Text = "Equation of Secant Line: y= " .. round(slope, .1) .. "x + " .. round(b, .1);
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+          </column>
+        </row>
+      </table>
+      <p style="center" name="intercept">Intercepts: (-1, 1) and (1, 1)</p>
+      <p style="center" name="equation">Equation of Secant Line: y=0x+1 </p>
+    </stack>
+    <p style="sectionHeading">Analysis</p>
+    <stack style="contentBG">
+      <p>While playing around with the two point of intersections, notice what happens when they are very close together. If you place the two points close enough, it seems as if the
+      secant line is just barely touching one point of the curve instead of crossing it two times. This observation is how the <b>Tangent Line</b> was discovered.
+      </p>
+    </stack>
+  </sectionNoTitle>
+  
+  <sectionNoTitle name="section3" style="pageLayout">
+    <onDocumentOpened>
+      <![CDATA[
+            f1 = section3.content.p1.func1;
+            for i=-5, 5, 0.01 do
+              f1:Add(i, i^2);
+            end
+            l1 = section3.content.p1.slope1;
+            v1 = -1
+            slope = -2;
+            b = v1^2 - slope*v1;
+            l1:Add(-10, (slope*-10 + b));
+            l1:Add(10, (slope*10 + b)); 
+            
+            p1 = section3.content.p1.poi1;
+            p1:Add(v1, (v1^2));
+
+            
+        ]]>
+      
+    </onDocumentOpened>
+    <p style="sectionHeading">What is a Tangent Line?</p>
+    <stack style="contentBG">
+      <p>Given the formal definition of a secant line, as $ \triangle x $ approaches zero, the secant line approaches the tangent line. The <b>Tangent Line</b> is defined as
+      a line that only intersects one part of a curve.</p>
+      <p>One way to approximate the slope of a tangent is to find the slope between the tangent point $ (x, y) $ and another point that is very close to the tangent point $ (x \pm 0.001, y \pm 0.001 ) $</p>
+    </stack>
+    <p style="sectionHeading">Slope of a Tangent Line</p>
+    <stack style="contentBG">
+      <p>The point of intersection where a tangent line intersects a curve represents the <b>Instantaneous Rate of Change</b></p>
+    </stack>
+    <p style="sectionHeading">Tangent Line Plotter</p>
+    <stack name="content" style="contentBG">
+      <p>Use the simulation below to plot a Tangent Line on the quadratic function. Drag the sliders to change the x positions of the point.</p>
+      <plot name="p1" tap="disabled">
+        <axis dim="x" min="-5" max="5" auto="none"></axis>
+        <axis dim="y" min="-1" max="5" auto="none"></axis>
+        <series name="func1"></series>
+        <series name="slope1" draw="line" capacity="2">
+          <style>
+            <foreground color="cadetBlue" />
+          </style>
+        </series>
+        <series name="poi1" draw="points" capacity="1">
+          <style>
+            <foreground color="cadetBlue" />
+          </style>
+        </series>
+      </plot>
+      <table name="t1" grid="false" widths="10% 90%">
+        <row>
+          <column>
+              <style>
+                <marginTop>25</marginTop>
+              </style>
+              <p>
+                <style>
+                  <textAlignment>right</textAlignment>
+                </style>
+                $ x_{1} $</p>
+          </column>
+          <column>
+            <stack name="sliderStack">
+              <style>
+                <horizontalAlignment>left</horizontalAlignment>
+              </style>
+              <slider min="-2.1" max="2.1" name="s1" value="-1">
+                <onValueChanged>
+                  <![CDATA[
+                  p1 = section3.content.p1.poi1;
+                  l1 = section3.content.p1.slope1;
+                  slope = 2*value;
+                  b = value^2 - slope*value;
+                  
+                  p1:Add(value, (value^2));
+                  l1:Add(-10, (slope*-10 + b));
+                  l1:Add(10, (slope*10 + b)); 
+                  section3.content.intercept.Text = "Tangent Point: (" .. round(value,.1) .. "," .. round(value^2,.1) .. ")";
+                  section3.content.equation.Text = "Equation of Tangent Line: y= " .. round(slope, .1) .. "x + " .. round(b, .1);
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+          </column>
+        </row>
+      </table>
+      <p style="center" name="intercept">Tangent Point: (-1, 1)</p>
+      <p style="center" name="equation">Equation of Tangent Line: y=0x+1 </p>
+    </stack>
+
+    <p style="sectionHeading">Analysis</p>
+    <stack style="contentBG">
+      <p>If we take the derivative of our function, $ f(x) $, we see that $ f'(x) $ represents the slope of $ f(x) $. The tangent line also represents the slope of $ f(x) $ at
+      a certain point $ x $. It is clear that tangential functions can be useful as it relates to the derivative of a function.</p>
+    </stack>
+  </sectionNoTitle>
+    
+  <sectionNoTitle name="section4" style="pageLayout">
+    <onDocumentOpened>
+      <![CDATA[
+        for i=-6, 6, 0.01 do
+          section4.content.q1.func1:Add(i, (i^2-5));
+        end
+        
+        numOfClicks = 0;
+        slope = section4.content.q1.slope1;
+        p1 = section4.content.q1.p1;
+        p2 = section4.content.q1.p2;
+        p1:Add(-2, -1);
+        p2:Add(4, 11);
+        
+        ]]>
+
+    </onDocumentOpened>
+    <script>
+      local stepsController = StepsController:new({stepsStack=stepsStack, numOfSteps=3})
+    </script>
+    <p style="sectionHeading">Secant Line Question</p>
+    <stack name="content" orientation="vertical" style="contentBG">
+      <p style="subSectionHeading">Example 1</p>
+      <p style="justifiedText">Determine the Equation of the Secant Line given the function $ f(x) = x^2 - 5 $. The Secant Line intersects $ f(x) $ at $ x = -2 $ and $ x = 4 $</p>
+      <xyPlot name="q1">
+        <axis dim="x" min="-12" max="12" auto="none"></axis>
+        <axis dim="y" min="-6" max="18" auto="none"></axis>
+        <series name="func1"></series>
+        <series name="slope1" draw="line" capacity="2">
+          <style>
+            <foreground color="cadetBlue" />
+          </style>
+        </series>
+        <series name="p1" capacity="1" draw="points">
+          <style>
+            <foreground color="cadetBlue" />
+          </style>
+        </series>
+        <series name="p2" capacity="1" draw="points">
+          <style>
+            <foreground color="cadetBlue" />
+          </style>
+        </series>
+      </xyPlot>
+    </stack>
+    <stack name="stepsStack">
+      <!--Each step is a stack, and each step has alternating background colors-->
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Sketch the graph</p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            <p>Use this step to visualize the problem and see the sign of the slope of the secant line. Use the button below to draw the secant line.</p>
+            <button content="Draw Line">
+              <onClick>
+                section4.content.q1.slope1:Add(-10, 2*-10 + 3)
+                section4.content.q1.slope1:Add(10, 2*10 + 3);
+              </onClick>
+            </button>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <onClick>
+            stepsController:toggleStep(1)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Determine the slope of two points</p>
+          <stack name="cont" style="invisible">
+            <stack orientation="horizontal">
+              <stack orientation="vertical">
+                <!--CONTENT GOES HERE-->
+                <p>Using the formula $ m = \frac{y_{2} - y_{1}}{x_{2} - x_{1}} $ we can determine the slope from the two points of intersection</p>
+                <p>$ m = \frac{y_{2} - y_{1}}{x_{2} - x_{1}} $ </p>
+                <p>$ m = \frac{11 - (-1)}{4 - (-2)} $ </p>
+                <p>$ m = 2 $</p>
+              </stack>
+            </stack>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <onClick>
+            stepsController:toggleStep(2)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <!--CONTENT GOES HERE-->
+          <p>Find equation using one point and $ m $ calculated in Step 2.</p>
+          <stack name="cont" style="invisible">
+            <p>Use the equation of a line $ y = mx+b $ with one point of intersection and the slope.</p>
+            <p>$ 11 = (2)4 + b $</p>
+            <p>$ b = 3 $</p>
+            <p>Final equation of line:</p>
+            <p>$ y = 2x + 3 $</p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <onClick>
+            stepsController:toggleStep(3)
+          </onClick>
+        </button>
+      </stack>
+    </stack>
+  </sectionNoTitle>
+
+  <sectionNoTitle name="section5" style="pageLayout">
+    <script>
+      local stepsController = StepsController:new({stepsStack=stepsStack, numOfSteps=1})
+    </script>
+    <p style="sectionHeading">Tangent Line Question</p>
+    <stack name="content" orientation="vertical" style="contentBG">
+      <p style="subSectionHeading">Example 2</p>
+      <p style="justifiedText">For the function $ f( x ) = 6x^2 - 4 $, estimate the instantaneous rate of change at $ x = -2 $ without graphing</p>
+    </stack>
+    <stack name="stepsStack">
+      <!--Each step is a stack, and each step has alternating background colors-->
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Determine slope from equation of tangent line.</p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            <p>The equation used to solve this problem is: $ m_{s} = \frac{ \triangle y} { \triangle x} = \frac{ f(x+ \triangle x) - f(x) }{ x + \triangle x - x } = \frac{ f(x + \triangle x) - f(x)}{ \triangle x} $.</p>
+            <p>Plug in a very small value for $ \triangle x $ such as $ x+0.001 $ to determine the instantaneous rate of change.</p>
+            <p>$ m_{t} = \frac{ f( -2 ) - f( -2.001 ) }{ -2 - (-2.001) } $ </p>
+            <p>$ m_{t} = \frac{20 - 20.024}{0.001} $</p>
+            <p>$ m_{t} = -24 $</p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <onClick>
+            stepsController:toggleStep(1)
+          </onClick>
+        </button>
+      </stack>
+    </stack>
+  </sectionNoTitle>
+
+  <sectionNoTitle name="section6" style="pageLayout">
+    <onDocumentOpened>
+            local ser = section6.content.xy1.l1;
+      
+      for x=0,3,0.1 do
+        ser:Add(x, 10-(4.9*math.pow(x,2)))
+      end
+    </onDocumentOpened>
+    <script>
+      local stepsController = StepsController:new({stepsStack=stepsStack, numOfSteps=3})
+    </script>
+    <p style="sectionHeading">Word Problem</p>
+    <stack name="content" orientation="vertical" style="contentBG">
+      <p style="subSectionHeading">Example 3</p>
+      <p style="justifiedText">A diver is on a 10m platform, preparing to dive. The diver's height above the water, in metres with respect to time $ t $, can be modelled by the equation $ h( t ) = 10 - 4.9t^2 $</p>
+      <xyPlot name="xy1" pan="disabled" tap="disabled" zoom="disabled">
+          <style>
+            <widthPercentage>70%</widthPercentage>
+          </style>
+          <axis dim="x" min="0" max="2" auto="none"></axis>
+          <axis dim="y" min="0" max="12" auto="none"></axis>
+          <series capacity="2" draw="line">
+            <style>
+              <foreground color="black" />
+              <lineThickness>1.5</lineThickness>
+            </style>
+            <data>
+              -10 0; 10 0
+            </data>
+          </series>
+          <series capacity="2" draw="line">
+            <style>
+              <foreground color="black" />
+              <lineThickness>1.5</lineThickness>
+            </style>
+            <data>
+              0 90; 0 -10
+            </data>
+          </series>
+          <series name="xLabel">
+          <style>
+            <foreground color="black" />
+          </style>
+        </series>
+          <series name="yLabel">
+            <style>
+              <foreground color="black" />
+            </style>
+          </series>
+          <series name="l1"></series>
+        </xyPlot>
+    </stack>
+    <stack name="stepsStack">
+      <!--Each step is a stack, and each step has alternating background colors-->
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Determine when the diver will enter the water</p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            <p>The diver  enters the water at $ h( t ) = 0 $. Plugging it in to the equation, we get: </p>
+            <p>$ 0 = 10 - 4.9t^2 $</p>
+            <p>$ 10 = 4.9t^2 $</p>
+            <p>$ t = 1.4s $</p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <onClick>
+            stepsController:toggleStep(1)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Calculate the average rate of change in height for the entire dive</p>
+          <stack name="cont" style="invisible">
+            <stack orientation="horizontal">
+              <stack orientation="vertical">
+                <!--CONTENT GOES HERE-->
+                <p>The average rate of change for the entire dive can be represented as $ \frac{ \bigtriangleup h}{ \bigtriangleup t} $</p>
+                <p>The diver starts his dive at $ t = 0s $ and finishes his dive at $ t = 1.4s $</p>
+                <p>$ Average = \frac {0 - 10}{1.4 - 0} $</p>
+                <p>$ Average = -7.1 m/s $</p>
+                <p>Since height is in metres and time is in seconds, we can represent $ \frac{ \bigtriangleup h}{ \bigtriangleup t} $ as $ \frac{m}{s} $ </p>
+              </stack>
+            </stack>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <onClick>
+            stepsController:toggleStep(2)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <!--CONTENT GOES HERE-->
+          <p>Estimate the rate at which the diver's height above the water is changing as the diver enters the water</p>
+          <stack name="cont" style="invisible">
+            <p>To answer this question we have to use two points. One at $ t = 1.428571s $ and another point that is right next to it; like $ t = 1.4001 $. This way, we can 
+            calculate instantaneous rate of change. </p>
+            <p>$ IROC = \frac{ h ( 1.4001 ) - h( 1.428571s ) }{ 1.4001 - 1.428571s } $</p>
+            <p>$ IROC = \frac{ 0.3946m - 0 } { -0.028471s } $</p>
+            <p>$ IROC = -13.86 \frac{m}{s} $</p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <onClick>
+            stepsController:toggleStep(3)
+          </onClick>
+        </button>
+      </stack>
+    </stack>
+  </sectionNoTitle>
+
+  <sectionNoTitle name="section7" style="pageLayout">
+      <onDocumentOpened>
+        local xLab = section7.content.myPlot.xLabel;
+        local yLab = section7.content.myPlot.yLabel;
+
+        char.textX(xLab, {4.5, 0.2}, .2);
+        char.textY(yLab, {0.2, 4.5}, .2);
+      
+        local series = section7.content.myPlot.l1;
+      
+        for x=0,5,0.1 do
+          series:Add(x, -1/4*math.pow(x,2) + 4);
+        end
+      </onDocumentOpened>
+      <script>
+        local stepsController = StepsController:new({stepsStack=stepsStack, numOfSteps=3})
+      </script>
+      <p style="sectionHeading">Word Problem</p>
+      <stack name="content" orientation="vertical" style="contentBG">
+        <p style="subSectionHeading">Question 1</p>
+        <p style="justifiedText">The motion of a ball falling from a vertical height of 4 metres is given by the function $ h( t ) = - \frac{1}{4} x^2 + 5 $ where $ t $ is the time in secionds</p>
+        <xyPlot name="myPlot" pan="disabled" tap="disabled" zoom="disabled">
+            <axis dim="y" auto="fixed" min="0" max="5"></axis>
+            <axis dim="x" auto="fixed" min="0" max="5"></axis>
+            <series capacity="2" draw="line">
+              <style>
+                <foreground color="black" />
+                <lineThickness>3</lineThickness>
+              </style>
+              <data>
+                -10 0; 10 0
+              </data>
+            </series>
+            <series capacity="2" draw="line">
+              <style>
+                <foreground color="black" />
+                <lineThickness>3</lineThickness>
+              </style>
+              <data>
+                0 90; 0 -10
+              </data>
+            </series>
+            <series name="xLabel" manual="true"></series>
+            <series name="yLabel" manual="true"></series>
+            <series name="l1" manual="true" style="functionLine" />
+            <series name="tang" style="tangentLine"></series>
+          </xyPlot>
+      </stack>
+      <stack name="stepsStack">
+        <!--Each step is a stack, and each step has alternating background colors-->
+        <stack orientation="horizontal">
+          <stack name="stepStack" orientation="vertical">
+            <p>A) When does the ball hit the floor?</p>
+            <stack name="cont" style="invisible">
+              <!--CONTENT GOES HERE-->
+              <stack>
+                <p style="title qNum"></p>
+                <table widths="10% 90%" grid="false">
+                  <row>
+                    <column>
+                      <image src="resources\question.png" inspect="false" />
+                    </column>
+                    <column>
+                      <p>When does the ball hit the floor?</p>
+                    </column>
+                  </row>
+                </table>
+                <p style="title">ANSWER</p>
+                <p name="answer1" style="collapsed">4</p>
+                <!-- If there is only one "blank" in the question, delete the next line: -->
+                <table name="table" widths="10% 80% 10%" grid="false">
+                  <row>
+                    <column>
+                      <image src="resources\answer.png" inspect="false" />
+                    </column>
+                    <column>
+                      <stack name="input">
+                        <textField name="input1" placeholder="Answer Here" />
+                      </stack>
+                    </column>
+                    <column>
+                      <image name="mark" src="resources\invisible.png" inspect="false" />
+                    </column>
+                  </row>
+                </table>
+                <stack name="solution" style="collapsed">
+                  <p> The ball hits the floor when $ h( t ) = 0 $. So plugging that in, we get: </p>
+                  <p> $ 0 =  - \frac{1}{4} x^2 + 5 $</p>
+                  <p> $ 4 = \frac{1}{4} x^2 $ </p>
+                  <p> $ 16 = x^2 $</p>
+                  <p> $ x = 4 $</p>
+                </stack>
+                <button content="Check Answer">
+                  <onClick>
+                    solution.Style.Visibility = "visible";
+                    <!-- If there is only one "blank", the "if statement" needs to be reduced to: 
+                          if table:Child(1):Child(2).input.input1.Text == answer1.Text then -->
+                    <!-- If there are extra "blanks", the "if statement" needs to be appended to include a check for each additional correct answer. Use 'and' in between each additional check. For example, 
+                          if table:Child(1):Child(2).input.input1.Text == answer1.Text and table:Child(1):Child(2).input.input2.Text == answer2.Text and table:Child(1):Child(2).input.input3.Text == answer3.Text and table:Child(1):Child(2).input.input4.Text == answer4.Text then -->
+                    if table:Child(1):Child(2).input.input1.Text == answer1.Text then
+                    table:Child(1):Child(3).mark.ImageSource = "resources/right.png";
+                    else
+                    table:Child(1):Child(3).mark.ImageSource = "resources/wrong.png";
+                    end
+                  </onClick>
+                </button>
+              </stack>
+            </stack>
+          </stack>
+          <button name="btn" style="stepByStepBtn">
+            <onClick>
+              stepsController:toggleStep(1)
+            </onClick>
+          </button>
+        </stack>
+        <stack orientation="horizontal">
+          <stack name="stepStack" orientation="vertical">
+            <p>B) What is the IROC at $ t = 2 $ ?</p>
+              <stack name="cont" style="invisible">
+              <stack orientation="horizontal">
+                <stack orientation="vertical">
+                  <stack>
+          <p style="title qNum"></p>
+          <table widths="10% 90%" grid="false">
+            <row>
+              <column>
+                <image src="resources\question.png" inspect="false" />
+              </column>
+              <column>
+                <p>What is the IROC at $ t = 2 $ ?.</p>
+              </column>
+            </row>
+          </table>
+          <p style="title">ANSWER</p>
+          <p name="answer1" style="collapsed">-1</p>
+          <!-- If there is only one "blank" in the question, delete the next line: -->
+          <table name="table" widths="10% 80% 10%" grid="false">
+            <row>
+              <column>
+                <image src="resources\answer.png" inspect="false" />
+              </column>
+              <column>
+                <stack name="input">
+                  <textField name="input1" placeholder="Answer Here" />
+                </stack>
+              </column>
+              <column>
+                <image name="mark" src="resources\invisible.png" inspect="false" />
+              </column>
+            </row>
+          </table>
+          <stack name="solution" style="collapsed">
+            <p> To find the IROC at $ t = 2 $, use the formula for instantaneous rate of change. $ \frac{f( x ) - f( a )}{x - a} $</p>
+            <p> $ IROC = \frac{ 3.00 - 3.001 }{ 2.00 - 2.001 } $</p>
+            <p> $ IROC = -1 $ </p>
+          </stack>
+          <button content="Check Answer">
+            <onClick>
+              solution.Style.Visibility = "visible";
+              <!-- If there is only one "blank", the "if statement" needs to be reduced to: 
+                   if table:Child(1):Child(2).input.input1.Text == answer1.Text then -->
+              <!-- If there are extra "blanks", the "if statement" needs to be appended to include a check for each additional correct answer. Use 'and' in between each additional check. For example, 
+                   if table:Child(1):Child(2).input.input1.Text == answer1.Text and table:Child(1):Child(2).input.input2.Text == answer2.Text and table:Child(1):Child(2).input.input3.Text == answer3.Text and table:Child(1):Child(2).input.input4.Text == answer4.Text then -->
+              if table:Child(1):Child(2).input.input1.Text == answer1.Text then
+              table:Child(1):Child(3).mark.ImageSource = "resources/right.png";
+              else
+              table:Child(1):Child(3).mark.ImageSource = "resources/wrong.png";
+              end
+            </onClick>
+          </button>
+        </stack>
+                </stack>
+              </stack>
+            </stack>
+          </stack>
+          <button name="btn" style="stepByStepBtn">
+            <onClick>
+              stepsController:toggleStep(2)
+            </onClick>
+          </button>
+        </stack>
+        <stack orientation="horizontal">
+          <stack name="stepStack" orientation="vertical">
+            <!--CONTENT GOES HERE-->
+            <p>C) What is the average speed of the ball?</p>
+            <stack name="cont" style="invisible">
+            <stack>
+                <p style="title qNum"></p>
+                <table widths="10% 90%" grid="false">
+                  <row>
+                    <column>
+                      <image src="resources\question.png" inspect="false" />
+                    </column>
+                    <column>
+                      <p>What is the average speed of the ball?</p>
+                    </column>
+                  </row>
+                </table>
+                <p style="title">ANSWER</p>
+                <p name="answer1" style="collapsed">-1</p>
+                <!-- If there is only one "blank" in the question, delete the next line: -->
+                <table name="table" widths="10% 80% 10%" grid="false">
+                  <row>
+                    <column>
+                      <image src="resources\answer.png" inspect="false" />
+                    </column>
+                    <column>
+                      <stack name="input">
+                        <textField name="input1" placeholder="Answer Here" />
+                      </stack>
+                    </column>
+                    <column>
+                      <image name="mark" src="resources\invisible.png" inspect="false" />
+                    </column>
+                  </row>
+                </table>
+                <stack name="solution" style="collapsed">
+                  <p> The speed of the ball can be determined using the formula $ \frac{ f( x ) - f( h ) }{ x - h } $ where x = 0 and h = 4</p>
+                  <p> $ f( 0 ) = 5 $</p>
+                  <p> $ f( 4 ) = 1 $</p>
+                  <p> $ Average = \frac{ 5 - 1 }{ 0 - 4 } $</p>
+                  <p> $ Average = -1 \frac{m}{s} $</p>
+                </stack>
+                <button content="Check Answer">
+                  <onClick>
+                    solution.Style.Visibility = "visible";
+                    <!-- If there is only one "blank", the "if statement" needs to be reduced to: 
+                         if table:Child(1):Child(2).input.input1.Text == answer1.Text then -->
+                    <!-- If there are extra "blanks", the "if statement" needs to be appended to include a check for each additional correct answer. Use 'and' in between each additional check. For example, 
+                         if table:Child(1):Child(2).input.input1.Text == answer1.Text and table:Child(1):Child(2).input.input2.Text == answer2.Text and table:Child(1):Child(2).input.input3.Text == answer3.Text and table:Child(1):Child(2).input.input4.Text == answer4.Text then -->
+                    if table:Child(1):Child(2).input.input1.Text == answer1.Text then
+                    table:Child(1):Child(3).mark.ImageSource = "resources/right.png";
+                    else
+                    table:Child(1):Child(3).mark.ImageSource = "resources/wrong.png";
+                    end
+                  </onClick>
+                </button>
+              </stack>
+            
+     
+            </stack>
+          </stack>
+          <button name="btn" style="stepByStepBtn">
+            <onClick>
+              stepsController:toggleStep(3)
+            </onClick>
+          </button>
+        </stack>
+      </stack>
+    </sectionNoTitle>
+  
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Extra Resources</p>
+    <web url="https://www.khanacademy.org/math/ap-calculus-ab/ab-derivative-intro/ab-secant-average-rate-of-change/v/slope-of-a-secant-line-arbitrary-difference" />
+  </sectionNoTitle>
+
+</document>

@@ -1,0 +1,1163 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>MHF4U - L3.1 Reciprocal of a Linear Function</title>
+    <creator>Asseel</creator>
+    <coverImage src="resources/cover.png" />
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+  </metadata>
+
+  <include src="resources/curriculumStyles.xml" />
+  <include src="resources/plotTools.xml" />
+  <include src="resources/Utilities.xml" />
+
+
+  <!--                                      Header & Footer START                                         -->
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="whiteColor">Amanda Koon</p>
+      <p style="whiteColor rightText">MHF4U</p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/logo1.png" inspect="false" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/logo2.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--                                      Header & Footer END                                         -->
+
+
+  <!-- Section 1 -->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">3.1 Reciprocal of a Linear Function</title>
+    <p style="sectionHeading">Introduction</p>
+    <stack orientation="vertical" style="contentBG">
+      <p>
+        When you divide polynomial functions, the result is a <b>Rational Function</b> in the form of:
+      </p>
+      <p style="centerText">$ f(x) = \frac{P(x)}{Q(x)} $ where $ Q(x) \neq 0 $ </p>
+      <p>
+        Since the division by zero is underfined, rational functions have restrictions. The graphs
+        of rational functions have properties such as intercepts and asymptotes. In this module, the nature
+        of the graph of a reciprocal linear function will be investigated.
+      </p>
+    </stack>
+    <p>
+      <br />
+    </p>
+  </section>
+
+  <sectionNoTitle name="section2" style="pageLayout">
+    <script>
+      <![CDATA[
+      local stepsController = StepsController:new({stepsStack=stepsStack, numOfSteps=4})
+      char.textX(contentStack:Child(2).xAxisLabel, {6.5, -0.5}, 0.25, color.black);
+      char.textY(contentStack:Child(2).yAxisLabel, {-0.5, 6.5}, 0.25, color.black);
+      for i=-7,7,0.01 do
+        if i > 0 then
+          contentStack:Child(2).fx:Add(i, 1/i)
+        else
+          contentStack:Child(2).fx2:Add(i, 1/i)
+        end
+      end
+      
+      for i=-7, 7, 0.1 do
+        contentStack:Child(2).asymptote:Add(i, 0)
+        contentStack:Child(2).asymptote2:Add(0, i)
+      end
+      ]]>
+    </script>
+    <p style="sectionHeading">Investigation 1</p>
+    <stack name="contentStack" orientation="vertical" style="contentBG">
+      <p style="justifiedText">The function of $ y= \frac{1}{x} $ is shown</p>
+      <xyPlot name="plot">
+        <axis dim="x" min="-7" max="7" auto="none"></axis>
+        <axis dim="y" min="-7" max="7" auto="none"></axis>
+        <series name="xAxis" style="axes">
+          <data>
+            -10 0; 10 0;
+          </data>
+        </series>
+        <series name="yAxis" style="axes">
+          <data>
+            0 -10; 0 10;
+          </data>
+        </series>
+        <series name="xAxisLabel"></series>
+        <series name="yAxisLabel"></series>
+        <series name="fx">
+          <style>
+            <foreground color="red" />
+          </style>
+        </series>
+        <series name="fx2">
+          <style>
+            <foreground color="red" />
+          </style>
+        </series>
+        <series name="asymptote" draw="lineSegments">
+          <style>
+            <foreground color="transparent" />
+            <lineThickness>3</lineThickness>
+          </style>
+        </series>
+        <series name="asymptote2" draw="lineSegments">
+          <style>
+            <foreground color="transparent" />
+            <lineThickness>3</lineThickness>
+          </style>
+        </series>
+      </xyPlot>
+
+    </stack>
+    <stack name="stepsStack">
+      <!--Each step is a stack, and each step has alternating background colors-->
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Part A</p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            <p>Describe what happens to the function as $ x \rightarrow 0 $ (x approaches 0): </p>
+            <p>i) From the left</p>
+            <button name="btn1" content="Show Answer">
+              <onClick>
+                if btn1.Text == "Show Answer" then
+                btn1.Text = "Hide Answer"
+                ans1.Style.Visibility = "visible";
+                elseif btn1.Text == "Hide Answer" then
+                btn1.Text = "Show Answer"
+                ans1.Style.Visibility = "collapsed";
+                end
+              </onClick>
+            </button>
+            <p name="ans1" style="collapsed">The function decreases from the left as $ x \rightarrow 0 $. It approaches negative infinity ($ - \infty $).</p>
+            <p>ii) From the right</p>
+            <button name="btn2" content="Show Answer">
+              <onClick>
+                if btn2.Text == "Show Answer" then
+                btn2.Text = "Hide Answer"
+                ans2.Style.Visibility = "visible";
+                elseif btn2.Text == "Hide Answer" then
+                btn2.Text = "Show Answer"
+                ans2.Style.Visibility = "collapsed";
+                end
+              </onClick>
+            </button>
+            <p name="ans2" style="collapsed">The function increases from the right as $ x \rightarrow 0 $. It approaches positive infinity ( $ + \infty $ ).</p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <onClick>
+            stepsController:toggleStep(1)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Part B</p>
+          <stack name="cont" style="invisible">
+            <stack orientation="horizontal">
+              <stack orientation="vertical">
+                <!--CONTENT GOES HERE-->
+                <p>Describe what happens to the function as $ x \rightarrow \infty $ (x approaches $ \infty $): </p>
+                <p>i) Negative Infinity ($ - \infty $)</p>
+                <button name="btn1" content="Show Answer">
+                  <onClick>
+                    if btn1.Text == "Show Answer" then
+                    btn1.Text = "Hide Answer"
+                    ans1.Style.Visibility = "visible";
+                    elseif btn1.Text == "Hide Answer" then
+                    btn1.Text = "Show Answer"
+                    ans1.Style.Visibility = "collapsed";
+                    end
+                  </onClick>
+                </button>
+                <p name="ans1" style="collapsed">As $ x \rightarrow - \infty $, the function approaches 0 from the bottom $ ( f(x) \rightarrow 0^- ) $.</p>
+                <p>ii) Positive Infinity ($ + \infty $)</p>
+                <button name="btn2" content="Show Answer">
+                  <onClick>
+                    if btn2.Text == "Show Answer" then
+                    btn2.Text = "Hide Answer"
+                    ans2.Style.Visibility = "visible";
+                    elseif btn2.Text == "Hide Answer" then
+                    btn2.Text = "Show Answer"
+                    ans2.Style.Visibility = "collapsed";
+                    end
+                  </onClick>
+                </button>
+                <p name="ans2" style="collapsed">As $ x \rightarrow + \infty $, the function approaches 0 from the top $ ( f(x) \rightarrow 0^{+} ) $.</p>
+              </stack>
+            </stack>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <onClick>
+            stepsController:toggleStep(2)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <!--CONTENT GOES HERE-->
+          <p>Part C</p>
+          <stack name="cont" style="invisible">
+            <p>State the equation of the horizontal and vertical asymptotes of the function.</p>
+            <!--Make asymptotes appear on graph as red dotted lines AND reveal answer-->
+            <button name="btn1" content="Show Answer">
+              <onClick>
+                if btn1.Text == "Show Answer" then
+                btn1.Text = "Hide Answer"
+                ans1.Style.Visibility = "visible";
+                ans2.Style.Visibility = "visible";
+                section2.contentStack:Child(2).asymptote.Style.ForegroundColor = color.red;
+                section2.contentStack:Child(2).asymptote2.Style.ForegroundColor = color.red;
+                elseif btn1.Text == "Hide Answer" then
+                btn1.Text = "Show Answer"
+                ans1.Style.Visibility = "collapsed";
+                ans2.Style.Visibility = "collapsed";
+                section2.contentStack:Child(2).asymptote.Style.ForegroundColor = color.transparent;
+                section2.contentStack:Child(2).asymptote2.Style.ForegroundColor = color.transparent;
+                end
+              </onClick>
+            </button>
+            <p name="ans1" style="collapsed">Horizontal Asymptote: $ y = 0 $.</p>
+            <p name="ans2" style="collapsed">Vertical Asymptote: $ x = 0 $.</p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <onClick>
+            stepsController:toggleStep(3)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <!--CONTENT GOES HERE-->
+          <p>Part D</p>
+          <stack name="cont" style="invisible">
+            <p>Write the domain and range of the function.</p>
+            <button name="btn1" content="Show Answer">
+              <onClick>
+                if btn1.Text == "Show Answer" then
+                btn1.Text = "Hide Answer"
+                ans1.Style.Visibility = "visible";
+                ans2.Style.Visibility = "visible";
+                elseif btn1.Text == "Hide Answer" then
+                btn1.Text = "Show Answer"
+                ans1.Style.Visibility = "collapsed";
+                ans2.Style.Visibility = "collapsed";
+                end
+              </onClick>
+            </button>
+            <p name="ans1" style="collapsed">{ $ { x \in R \: | \: x \neq 0 } $ }</p>
+            <p name="ans2" style="collapsed">{ $ { y \in R \: | \: y \neq 0 } $ }</p>
+
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <onClick>
+            stepsController:toggleStep(4)
+          </onClick>
+        </button>
+      </stack>
+    </stack>
+    <p>
+      <br />
+    </p>
+  </sectionNoTitle>
+
+  <sectionNoTitle name="section3" style="pageLayout">
+    <script>
+      <![CDATA[
+        local stepsController = StepsController:new({stepsStack=stepsStack, numOfSteps=4})
+        char.textX(contentStack:Child(2).xAxisLabel, {6.5, -0.5}, 0.25, color.black);
+        char.textY(contentStack:Child(2).yAxisLabel, {-0.5, 6.5}, 0.25, color.black);
+        for i=-7,7,0.01 do
+          if i > -2 then
+            contentStack:Child(2).fx:Add(i, 1/(3*i+6))
+          else
+            contentStack:Child(2).fx2:Add(i, 1/(3*i+6))
+          end
+        end
+      
+        for i=-7, 7, 0.1 do
+          contentStack:Child(2).asymptote:Add(i, 0)
+          contentStack:Child(2).asymptote2:Add(-2, i)
+        end
+        ]]>
+    </script>
+    <p style="sectionHeading">Investigation 2</p>
+    <stack name="contentStack" orientation="vertical" style="contentBG">
+      <p style="justifiedText">The function of $ y= \frac{1}{3x+6} $ is shown</p>
+      <xyPlot name="plot">
+        <axis dim="x" min="-7" max="7" auto="none"></axis>
+        <axis dim="y" min="-7" max="7" auto="none"></axis>
+        <series name="xAxis" style="axes">
+          <data>
+            -10 0; 10 0;
+          </data>
+        </series>
+        <series name="yAxis" style="axes">
+          <data>
+            0 -10; 0 10;
+          </data>
+        </series>
+        <series name="xAxisLabel"></series>
+        <series name="yAxisLabel"></series>
+        <series name="fx">
+          <style>
+            <foreground color="red" />
+          </style>
+        </series>
+        <series name="fx2">
+          <style>
+            <foreground color="red" />
+          </style>
+        </series>
+        <series name="asymptote" draw="lineSegments">
+          <style>
+            <foreground color="transparent" />
+            <lineThickness>3</lineThickness>
+          </style>
+        </series>
+        <series name="asymptote2" draw="lineSegments">
+          <style>
+            <foreground color="transparent" />
+            <lineThickness>3</lineThickness>
+          </style>
+        </series>
+      </xyPlot>
+
+    </stack>
+    <stack name="stepsStack">
+      <!--Each step is a stack, and each step has alternating background colors-->
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Part A</p>
+          <stack name="cont" style="invisible">
+            <!--CONTENT GOES HERE-->
+            <p>State the equation of the horizontal and vertical asymptotes of the function.</p>
+            <button name="btn1" content="Show Answer">
+              <onClick>
+                if btn1.Text == "Show Answer" then
+                btn1.Text = "Hide Answer"
+                ans1.Style.Visibility = "visible";
+                ans2.Style.Visibility = "visible";
+                section3.contentStack:Child(2).asymptote.Style.ForegroundColor = color.red;
+                section3.contentStack:Child(2).asymptote2.Style.ForegroundColor = color.red;
+                elseif btn1.Text == "Hide Answer" then
+                btn1.Text = "Show Answer"
+                ans1.Style.Visibility = "collapsed";
+                ans2.Style.Visibility = "collapsed";
+                section3.contentStack:Child(2).asymptote.Style.ForegroundColor = color.transparent;
+                section3.contentStack:Child(2).asymptote2.Style.ForegroundColor = color.transparent;
+                end
+              </onClick>
+            </button>
+            <p name="ans1" style="collapsed">Horizontal Asymptote: $ y = 0 $</p>
+            <p name="ans2" style="collapsed">Vertical Asymptote: $ x = -2 $</p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <onClick>
+            stepsController:toggleStep(1)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Part B</p>
+          <stack name="cont" style="invisible">
+            <stack orientation="horizontal">
+              <stack orientation="vertical">
+                <!--CONTENT GOES HERE-->
+                <p>Which part of the function helps you determine the equation of the vertical asymptote?</p>
+                <button name="btn1" content="Show Answer">
+                  <onClick>
+                    if btn1.Text == "Show Answer" then
+                    btn1.Text = "Hide Answer"
+                    ans1.Style.Visibility = "visible";
+                    elseif btn1.Text == "Hide Answer" then
+                    btn1.Text = "Show Answer"
+                    ans1.Style.Visibility = "collapsed";
+                    end
+                  </onClick>
+                </button>
+                <p name="ans1" style="collapsed">Setting the denominator equals to 0 to solve for x gives the equation of the vertical asymptote.</p>
+              </stack>
+            </stack>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <onClick>
+            stepsController:toggleStep(2)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <!--CONTENT GOES HERE-->
+          <p>Part C</p>
+          <stack name="cont" style="invisible">
+            <p>Describes what happens to the function: </p>
+            <p>i) As $ x \rightarrow -2 $ (x approaches -2)</p>
+            <button name="btn1" content="Show Answer">
+              <onClick>
+                if btn1.Text == "Show Answer" then
+                btn1.Text = "Hide Answer"
+                ans1.Style.Visibility = "visible";
+                elseif btn1.Text == "Hide Answer" then
+                btn1.Text = "Show Answer"
+                ans1.Style.Visibility = "collapsed";
+                end
+              </onClick>
+            </button>
+            <p name="ans1" style="collapsed">As $ x \rightarrow -2^-, \: f(x) \rightarrow - \infty. \: As \: x \rightarrow -2^+, \: f(x) \rightarrow + \infty. $</p>
+            <p>i) As $ x \rightarrow \infty $ (x approaches infinity) </p>
+            <button name="btn2" content="Show Answer">
+              <onClick>
+                if btn2.Text == "Show Answer" then
+                btn2.Text = "Hide Answer"
+                ans2.Style.Visibility = "visible";
+                elseif btn2.Text == "Hide Answer" then
+                btn2.Text = "Show Answer"
+                ans2.Style.Visibility = "collapsed";
+                end
+              </onClick>
+            </button>
+            <p name="ans2" style="collapsed">As $ x \rightarrow \infty, \: f(x) \rightarrow 0. $</p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <onClick>
+            stepsController:toggleStep(3)
+          </onClick>
+        </button>
+      </stack>
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <!--CONTENT GOES HERE-->
+          <p>Part D</p>
+          <stack name="cont" style="invisible">
+            <p>Write the domain and range of the function.</p>
+            <button name="btn1" content="Show Answer">
+              <onClick>
+                if btn1.Text == "Show Answer" then
+                btn1.Text = "Hide Answer"
+                ans1.Style.Visibility = "visible";
+                ans2.Style.Visibility = "visible";
+                elseif btn1.Text == "Hide Answer" then
+                btn1.Text = "Show Answer"
+                ans1.Style.Visibility = "collapsed";
+                ans2.Style.Visibility = "collapsed";
+                end
+              </onClick>
+            </button>
+            <p name="ans1" style="collapsed">{ $ { x \in R \: | \: x \neq -2 } $ }</p>
+            <p name="ans2" style="collapsed">{ $ { y \in R \: | \: y \neq 0 } $ } </p>
+
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <onClick>
+            stepsController:toggleStep(4)
+          </onClick>
+        </button>
+      </stack>
+    </stack>
+    <p>
+      <br />
+    </p>
+  </sectionNoTitle>
+
+  <sectionNoTitle name="section4" style="pageLayout">
+    <script>
+      <![CDATA[
+        char.textX(plot.xAxisLabel, {6.5, -0.5}, 0.25, color.black);
+        char.textY(plot.yAxisLabel, {-0.5, 6.5}, 0.25, color.black);
+        for i=-7,7,0.01 do
+          if i > -2 then
+            plot.fx:Add(i, 1/(3*i+6))
+          else
+            plot.fx2:Add(i, 1/(3*i+6))
+          end
+        end
+      
+        for i=-7, 7, 0.1 do
+          plot.asymptote:Add(i, 0)
+          plot.asymptote2:Add(-2, i)
+        end
+      
+        char.textY(plot.label1, {-6, 0.5}, 0.25, color.green);
+        symbol.drawEqual(plot.label1, {-5.75, 0.5}, 0.25, color.green)
+        char.num0(plot.label1, {-5.5, 0.5}, 0.25, color.green);
+      
+        char.textX(plot.label2, {-1.75, -6}, 0.25, color.green);
+        symbol.drawEqual(plot.label2, {-1.5, -6}, 0.25, color.green);
+        char.textC(plot.label2, {-1.25, -5.75}, 0.25, color.green);
+        symbol.drawMinus(plot.label2, {-1.25, -6.15}, 0.5, color.green);
+        char.textK(plot.label2, {-1.2, -6.25}, 0.25, color.green);
+        ]]>
+    </script>
+    <p style="sectionHeading">Properties of the Reciprocal Linear Function</p>
+    <xyPlot name="plot">
+      <axis dim="x" min="-7" max="7" auto="none"></axis>
+      <axis dim="y" min="-7" max="7" auto="none"></axis>
+      <series name="xAxis" style="axes">
+        <data>
+          -10 0; 10 0;
+        </data>
+      </series>
+      <series name="yAxis" style="axes">
+        <data>
+          0 -10; 0 10;
+        </data>
+      </series>
+      <series name="xAxisLabel"></series>
+      <series name="yAxisLabel"></series>
+      <series name="fx">
+        <style>
+          <foreground color="red" />
+        </style>
+      </series>
+      <series name="fx2">
+        <style>
+          <foreground color="red" />
+        </style>
+      </series>
+      <series name="asymptote" draw="lineSegments">
+        <style>
+          <foreground color="green" />
+          <lineThickness>3</lineThickness>
+        </style>
+      </series>
+      <series name="asymptote2" draw="lineSegments">
+        <style>
+          <foreground color="green" />
+          <lineThickness>3</lineThickness>
+        </style>
+      </series>
+      <series name="label1"></series>
+      <series name="label2"></series>
+    </xyPlot>
+    <stack name="contentStack" orientation="vertical" style="contentBG">
+      <p>
+        In general, the <b>Reciprocal</b> of a <b>Linear Function</b> has the form:
+      </p>
+      <p style="centerText">$ f(x) = \frac{1}{kx-c} $</p>
+      <p style="subSectionHeading">Properties:</p>
+      <p>
+        The restirction on the <b>Domain</b> occurs at the <i>Vertical Asymptote</i>
+      </p>
+      <p>
+        <i>Vertical Asymptote: </i>$ x = \frac{c}{k} $
+      </p>
+      <p>
+        <i>Horizontal Asymptote: </i>$ y = 0 $ (assuming no vertical shift)
+      </p>
+    </stack>
+    <p>
+      <br />
+    </p>
+  </sectionNoTitle>
+
+  <sectionNoTitle name="section5" style="pageLayout">
+    <script>
+      <![CDATA[
+        char.textX(graphStack.graph1.plot.xAxisLabel, {6.5, -0.5}, 0.25, color.black);
+        char.textY(graphStack.graph1.plot.yAxisLabel, {-0.5, 4.5}, 0.25, color.black);
+      
+        char.textX(graphStack.graph2.plot.xAxisLabel, {-6.5, -0.5}, 0.25, color.black);
+        char.textY(graphStack.graph2.plot.yAxisLabel, {-0.5, 4.5}, 0.25, color.black);
+        for i=-7,7,0.01 do
+          if i > 4 then
+            graphStack.graph1.plot.fx:Add(i, 1/(2*i-8))
+          else
+            graphStack.graph1.plot.fx2:Add(i, 1/(2*i-8))
+          end
+        
+          if i > -3 then
+            graphStack.graph2.plot.fx:Add(i, 1/(-2*i-6));
+          else
+            graphStack.graph2.plot.fx2:Add(i, 1/(-2*i-6));
+          end
+        end
+      
+        for i=-7, 7, 0.1 do
+          graphStack.graph1.plot.asymptote:Add(i, 0)
+          graphStack.graph1.plot.asymptote2:Add(4, i)
+          graphStack.graph1.plot.tang1:Add(i, (-0.5)*(i-3)-0.5);
+          graphStack.graph1.plot.tang2:Add(i, (-0.125)*(i-6)+0.25);
+        
+          graphStack.graph2.plot.asymptote:Add(i, 0)
+          graphStack.graph2.plot.asymptote2:Add(-3, i)
+        
+          graphStack.graph2.plot.tang1:Add(i, (1/8)*(i+5)+0.25);
+          graphStack.graph2.plot.tang2:Add(i, (1/2)*(i+2)-0.5);
+        end
+        ]]>
+    </script>
+    <p style="sectionHeading">Increasing and Decreasing Functions</p>
+    <stack orientation="vertical" style="contentBG">
+      <p>
+        How can you determine when is a reciprocal linear function in the form $ f(x) = \frac{1}{kx-c} \: $ is <b>increasing</b> or <b>decreasing</b>?
+      </p>
+      <p style="subSectionHeading centerText">Compare $ f(x) = \frac{1}{2x-8} $ and $ g(x) = \frac{1}{-2x-6} $</p>
+    </stack>
+    <p>
+      <br />
+    </p>
+    <stack orientation="horizontal" name="graphStack">
+      <stack orientation="vertical" style="contentBG" name="graph1">
+        <p style="subSectionHeading centerText">Graph of $ f(x) = \frac{1}{2x-8} $ is shown</p>
+        <xyPlot name="plot">
+          <axis name="x" dim="x" min="-1" max="7" auto="none"></axis>
+          <axis name="y" dim="y" min="-5" max="5" auto="none"></axis>
+          <series name="xAxis" style="axes">
+            <data>
+              -10 0; 10 0;
+            </data>
+          </series>
+          <series name="yAxis" style="axes">
+            <data>
+              0 -10; 0 10;
+            </data>
+          </series>
+          <series name="xAxisLabel"></series>
+          <series name="yAxisLabel"></series>
+          <series name="fx">
+            <style>
+              <foreground color="orange" />
+            </style>
+          </series>
+          <series name="fx2">
+            <style>
+              <foreground color="orange" />
+            </style>
+          </series>
+          <series name="asymptote" draw="lineSegments">
+            <style>
+              <lineThickness>3</lineThickness>
+              <foreground color="red" />
+            </style>
+          </series>
+          <series name="asymptote2" draw="lineSegments">
+            <style>
+              <lineThickness>3</lineThickness>
+              <foreground color="red" />
+            </style>
+          </series>
+          <series name="tang1" draw="lineSegments">
+            <style>
+              <foreground color="transparent" />
+            </style>
+          </series>
+          <series name="tang2" draw="lineSegments">
+            <style>
+              <foreground color="transparent" />
+            </style>
+          </series>
+        </xyPlot>
+        <!--x = 3, y = -1/2. **** x = 6, y = -1/8-->
+        <button name="btn1" content="Show Tangents at x=3 and x=6">
+          <onClick>
+            if btn1.Text == "Show Tangents at x=3 and x=6" then
+            plot.tang1.Style.ForegroundColor = color.green;
+            plot.tang2.Style.ForegroundColor = color.green;
+            btn1.Text = "Hide Tangents"
+            elseif btn1.Text == "Hide Tangents" then
+            btn1.Text = "Show Tangents at x=3 and x=6";
+            plot.tang1.Style.ForegroundColor = color.transparent;
+            plot.tang2.Style.ForegroundColor = color.transparent;
+            end
+          </onClick>
+        </button>
+        <button name="btn2" content="Conclusion">
+          <onClick>
+            if btn2.Text == "Conclusion" then
+            conc.Style.Visibility = "visible";
+            btn2.Text = "Hide Conclusion";
+            elseif btn2.Text == "Hide Conclusion" then
+            conc.Style.Visibility = "hidden";
+            btn2.Text = "Conclusion";
+            end
+          </onClick>
+        </button>
+        <p name="conc" style="hidden">
+          Both tangents have negative slopes when <b>$ k &gt; 0, \; f(x) $</b> is always <b>decreasing</b>
+        </p>
+      </stack>
+      <stack orientation="vertical" style="contentBG" name="graph2">
+        <p style="subSectionHeading centerText">Graph of $ f(x) = \frac{1}{-2x-6} $ is shown</p>
+        <xyPlot name="plot">
+          <axis name="x" dim="x" min="-7" max="1" auto="none"></axis>
+          <axis name="y" dim="y" min="-5" max="5" auto="none"></axis>
+          <series name="xAxis" style="axes">
+            <data>
+              -10 0; 10 0;
+            </data>
+          </series>
+          <series name="yAxis" style="axes">
+            <data>
+              0 -10; 0 10;
+            </data>
+          </series>
+          <series name="xAxisLabel"></series>
+          <series name="yAxisLabel"></series>
+          <series name="fx">
+            <style>
+              <foreground color="orange" />
+            </style>
+          </series>
+          <series name="fx2">
+            <style>
+              <foreground color="orange" />
+            </style>
+          </series>
+          <series name="asymptote" draw="lineSegments">
+            <style>
+              <lineThickness>3</lineThickness>
+              <foreground color="red" />
+            </style>
+          </series>
+          <series name="asymptote2" draw="lineSegments">
+            <style>
+              <lineThickness>3</lineThickness>
+              <foreground color="red" />
+            </style>
+          </series>
+          <series name="tang1" draw="lineSegments">
+            <style>
+              <foreground color="transparent" />
+            </style>
+          </series>
+          <series name="tang2" draw="lineSegments">
+            <style>
+              <foreground color="transparent" />
+            </style>
+          </series>
+        </xyPlot>
+        <!--x=-5, y=0.25-->
+        <button name="btn1" content="Show Tangents at x=-5 and x=-2">
+          <onClick>
+            if btn1.Text == "Show Tangents at x=-5 and x=-2" then
+            plot.tang1.Style.ForegroundColor = color.green;
+            plot.tang2.Style.ForegroundColor = color.green;
+            btn1.Text = "Hide Tangents"
+            elseif btn1.Text == "Hide Tangents" then
+            btn1.Text = "Show Tangents at x=-5 and x=-2";
+            plot.tang1.Style.ForegroundColor = color.transparent;
+            plot.tang2.Style.ForegroundColor = color.transparent;
+            end
+          </onClick>
+        </button>
+        <button name="btn2" content="Conclusion">
+          <onClick>
+            if btn2.Text == "Conclusion" then
+            conc.Style.Visibility = "visible";
+            btn2.Text = "Hide Conclusion";
+            elseif btn2.Text == "Hide Conclusion" then
+            conc.Style.Visibility = "hidden";
+            btn2.Text = "Conclusion";
+            end
+          </onClick>
+        </button>
+        <p name="conc" style="hidden">
+          Both tangents have positive slopes when <b>$ k &lt; 0, \; f(x) $</b> is always <b>increasing</b>
+        </p>
+      </stack>
+    </stack>
+    <p>
+      <br />
+    </p>
+  </sectionNoTitle>
+
+  <sectionNoTitle name="section6" style="pageLayout">
+    <p style="sectionHeading">Practice Questions</p>
+    <stack name="q1" orientation="vertical" style="contentBG">
+      <script>
+        local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn}, checkBtn=checkBtn, answer=2})
+      </script>
+      <p style="subSectionHeading">Question 1</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources/question.png" inspect="false" />
+          </column>
+          <column>
+            <p style="justifiedText">Is the function $ f(x) = \frac{1}{x+2} $ increasing or decreasing?</p>
+          </column>
+        </row>
+      </table>
+      <table name="choicesTable" grid="false" widths="50% 50%">
+        <row>
+          <column>
+            <p style="centerText">Increasing</p>
+          </column>
+          <column>
+            <p style="centerText">Decreasing</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="A" style="btnUnselected">
+              <onClick>
+                mcController:select(1)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="B" style="btnUnselected">
+              <onClick>
+                mcController:select(2)
+              </onClick>
+            </button>
+          </column>
+        </row>
+      </table>
+      <button name="checkBtn" content="Check Answer">
+        <onClick>
+          mcController:checkAnswer()
+        </onClick>
+      </button>
+    </stack>
+    <p>
+      <br />
+    </p>
+    <stack name="q2" orientation="vertical" style="contentBG">
+      <script>
+        local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn}, checkBtn=checkBtn, answer=1})
+      </script>
+      <p style="subSectionHeading">Question 2</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources/question.png" inspect="false" />
+          </column>
+          <column>
+            <p style="justifiedText">Is the function $ g(x) = \frac{1}{-3x+5} $ increasing or decreasing?</p>
+          </column>
+        </row>
+      </table>
+      <table name="choicesTable" grid="false" widths="50% 50%">
+        <row>
+          <column>
+            <p style="centerText">Increasing</p>
+          </column>
+          <column>
+            <p style="centerText">Decreasing</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="A" style="btnUnselected">
+              <onClick>
+                mcController:select(1)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="B" style="btnUnselected">
+              <onClick>
+                mcController:select(2)
+              </onClick>
+            </button>
+          </column>
+        </row>
+      </table>
+      <button name="checkBtn" content="Check Answer">
+        <onClick>
+          mcController:checkAnswer()
+        </onClick>
+      </button>
+    </stack>
+    <p>
+      <br />
+    </p>
+    <stack name="q3" orientation="vertical" style="contentBG">
+      <script>
+        local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn}, checkBtn=checkBtn, answer=1})
+      </script>
+      <p style="subSectionHeading">Question 3</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources/question.png" inspect="false" />
+          </column>
+          <column>
+            <p style="justifiedText">Is the function $ h(x) = \frac{1}{12-6x} $ increasing or decreasing?</p>
+          </column>
+        </row>
+      </table>
+      <table name="choicesTable" grid="false" widths="50% 50%">
+        <row>
+          <column>
+            <p style="centerText">Increasing</p>
+          </column>
+          <column>
+            <p style="centerText">Decreasing</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="A" style="btnUnselected">
+              <onClick>
+                mcController:select(1)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="B" style="btnUnselected">
+              <onClick>
+                mcController:select(2)
+              </onClick>
+            </button>
+          </column>
+        </row>
+      </table>
+      <button name="checkBtn" content="Check Answer">
+        <onClick>
+          mcController:checkAnswer()
+        </onClick>
+      </button>
+    </stack>
+    <p>
+      <br />
+    </p>
+    <stack name="q4" orientation="vertical" style="contentBG">
+      <script>
+        local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=2})
+      </script>
+      <p style="subSectionHeading">Question 4</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources/question.png" inspect="false" />
+          </column>
+          <column>
+            <p style="justifiedText">Find the equation of the vertical asymptote of the function $ f(x)=\frac{1}{4x-2} $</p>
+          </column>
+        </row>
+      </table>
+      <table name="choicesTable" grid="false" widths="50% 50%">
+        <row>
+          <column>
+            <p style="centerText">$ x = 2 $</p>
+          </column>
+          <column>
+            <p style="centerText">$ x = \frac{1}{2} $</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="A" style="btnUnselected">
+              <onClick>
+                mcController:select(1)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="B" style="btnUnselected">
+              <onClick>
+                mcController:select(2)
+              </onClick>
+            </button>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p style="centerText">$ x = -4 $</p>
+          </column>
+          <column>
+            <p style="centerText">$ x = -\frac{1}{2} $</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="C" style="btnUnselected">
+              <onClick>
+                mcController:select(3)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="D" style="btnUnselected">
+              <onClick>
+                mcController:select(4)
+              </onClick>
+            </button>
+          </column>
+        </row>
+      </table>
+      <button name="checkBtn" content="Check Answer">
+        <onClick>
+          mcController:checkAnswer()
+        </onClick>
+      </button>
+    </stack>
+    <p>
+      <br />
+    </p>
+    <stack name="q5" orientation="vertical" style="contentBG">
+      <script>
+        local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=1})
+      </script>
+      <p style="subSectionHeading">Question 5</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources/question.png" inspect="false" />
+          </column>
+          <column>
+            <p style="justifiedText">Find the equation of the vertical asymptote of the function $ f(x)=\frac{1}{x+5} $</p>
+          </column>
+        </row>
+      </table>
+      <table name="choicesTable" grid="false" widths="50% 50%">
+        <row>
+          <column>
+            <p style="centerText">$ x = -5 $</p>
+          </column>
+          <column>
+            <p style="centerText">$ x = 5 $</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="A" style="btnUnselected">
+              <onClick>
+                mcController:select(1)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="B" style="btnUnselected">
+              <onClick>
+                mcController:select(2)
+              </onClick>
+            </button>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p style="centerText">$ x = 1 $</p>
+          </column>
+          <column>
+            <p style="centerText">$ x = -4 $</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="C" style="btnUnselected">
+              <onClick>
+                mcController:select(3)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="D" style="btnUnselected">
+              <onClick>
+                mcController:select(4)
+              </onClick>
+            </button>
+          </column>
+        </row>
+      </table>
+      <button name="checkBtn" content="Check Answer">
+        <onClick>
+          mcController:checkAnswer()
+        </onClick>
+      </button>
+    </stack>
+    <p>
+      <br />
+    </p>
+    <stack name="q6" orientation="vertical" style="contentBG">
+      <script>
+        local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=3})
+      </script>
+      <p style="subSectionHeading">Question 6</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources/question.png" inspect="false" />
+          </column>
+          <column>
+            <p style="justifiedText">Find the equation of the vertical asymptote of the function $ f(x)=\frac{1}{9-3x} $</p>
+          </column>
+        </row>
+      </table>
+      <table name="choicesTable" grid="false" widths="50% 50%">
+        <row>
+          <column>
+            <p style="centerText">$ x = - \frac{1}{3} $</p>
+          </column>
+          <column>
+            <p style="centerText">$ x = -3 $</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="A" style="btnUnselected">
+              <onClick>
+                mcController:select(1)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="B" style="btnUnselected">
+              <onClick>
+                mcController:select(2)
+              </onClick>
+            </button>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p style="centerText">$ x = 3 $</p>
+          </column>
+          <column>
+            <p style="centerText">$ x = \frac{1}{3} $</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="C" style="btnUnselected">
+              <onClick>
+                mcController:select(3)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="D" style="btnUnselected">
+              <onClick>
+                mcController:select(4)
+              </onClick>
+            </button>
+          </column>
+        </row>
+      </table>
+      <button name="checkBtn" content="Check Answer">
+        <onClick>
+          mcController:checkAnswer()
+        </onClick>
+      </button>
+    </stack>
+    <p>
+      <br />
+    </p>
+  </sectionNoTitle>
+
+
+</document>

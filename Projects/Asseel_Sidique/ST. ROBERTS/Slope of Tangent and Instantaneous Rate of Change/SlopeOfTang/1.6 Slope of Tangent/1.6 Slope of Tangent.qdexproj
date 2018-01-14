@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <CustomProjectExtensionsPath>$(LocalAppData)\CustomProjectSystems\qdex\</CustomProjectExtensionsPath>
+    <ProjectGuid>1fbcfa3a-662b-4e9d-b52b-09cbb5c799a5</ProjectGuid>
+  </PropertyGroup>
+  <Import Project="$(CustomProjectExtensionsPath)CustomProject.Default.props" />
+  <Import Project="$(CustomProjectExtensionsPath)CustomProject.props" />
+  <PropertyGroup>
+    <SchemaVersion>2.0</SchemaVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="document.xml">
+    </Content>
+    <Content Include="resources\answer.png" />
+    <Content Include="resources\cover.png" />
+    <Content Include="resources\invisible.png" />
+    <Content Include="resources\logo1.png" />
+    <Content Include="resources\logo2.png" />
+    <Content Include="resources\question.png" />
+    <Content Include="resources\right.png" />
+    <Content Include="resources\wrong.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\curriculumStyles.xml" />
+    <None Include="resources\plotTools.xml" />
+  </ItemGroup>
+  <PropertyGroup>
+    <OutputPath>resources</OutputPath>
+  </PropertyGroup>
+  <Import Project="$(CustomProjectExtensionsPath)CustomProjectCs.targets" />
+  <!-- This next bit is required unless the macro used to Import your targets is defined in an MSBuild toolset. -->
+  <ProjectExtensions>
+    <ProjectCapabilities>
+      <ProjectConfigurationsDeclaredAsItems />
+    </ProjectCapabilities>
+  </ProjectExtensions>
+</Project>

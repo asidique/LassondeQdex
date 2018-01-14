@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G475CE8C0_9DA9_48A5_852D_5151E8153818">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>LA-CALC-2.6 Limits at Infinity</title>
+    <creator>jason_wang</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+		<coverImage src="resources/lassondeLogo.png" />
+  </metadata>
+
+  <include src="resources/curriculumStylesLassonde.xml" />
+  <include src="resources/Utilities.xml" />
+  <include src="resources/plotTools.xml" />
+
+  <!--                                      Header & Footer START                                         -->
+  <header style="themeColour">
+    <stack style="center" orientation="horizontal">
+      <p></p>
+    </stack>
+  </header>
+  <footer style="themeColour">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/lassonde.png" inspect="false" />
+      <p style="themeColourTitle">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/york.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--                                      Header & Footer END                                         -->
+
+
+  <!-- Cover Page -->
+  <!-- This is the standard way title pages are created. A great website to get copyright free images .. www.pexels.com
+  *** The style: "pageLayout" is defined in curriculumStylesLassonde.xml. It simply sets the content to the center and adjusts the width to 80% ***-->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">2.6 Limits at Infinity</title>
+    <p style="sectionHeading">Introduction</p>
+    <image src="resources/limit.png" />
+    <stack orientation="vertical" style="contentBG">
+      <p style="justifiedText">
+        For f(x) a real function, the limit of f as x approaches infinity is L, denoted $\lim_{x\to\infty} f(x) = L$. In this module, we will learn to find the limit of rational function as x approches to infinity.
+      </p>
+    </stack>
+  </section>
+  
+    <!--section 2 - Simulation-->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Simulation</p>
+    <stack style="mcStackLayout">
+      <p style="justifiedText">
+        The simulation below shows the plot of the following function. Modify the value of $\,x\,$ using the slider below, and observe the change of $f(x)$.
+      </p>
+      <p style="centeredText"><style><size scale="xlarge" /></style>$f(x)=\frac{4x^5-3x^2+3}{6x^5-100x^2-10}$</p>
+      <xyPlot name="plot1">
+        <axis dim="y" min="-3" max="3" auto="fixed" />
+        <series name="s1" manual="true" />
+      </xyPlot>
+      <table name="dataTable" widths="10% 35% 40% 15%" grid="false">
+        <row>
+          <column>
+            <p style="centeredText">$\,x\,$</p>
+          </column>
+          <column>
+            <p style="centeredText">$4x^5-3x^2+3$</p>
+          </column>
+          <column>
+            <p style="centeredText">$6x^5-100x^2-10$</p>
+          </column>
+          <column>
+            <p style="centeredText">$f(x)$</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p style="centeredText"></p>
+          </column>
+          <column>
+            <p style="centeredText"></p>
+          </column>
+          <column>
+            <p style="centeredText"></p>
+          </column>
+          <column>
+            <p style="centeredText"></p>
+          </column>
+        </row>
+      </table>
+      <script>local preValue = 0</script>
+      <slider name="xSlider" min="-30" max="30" value="0">
+        <onValueChanged>
+          <![CDATA[
+           local input = round(xSlider.Value,0.15)
+           if(input~=preValue) then
+             updateData1(input)
+             drawPlot1(input)
+             preValue=input
+           end
+          ]]>
+        </onValueChanged>
+      </slider>
+      <script>
+        <![CDATA[
+        function updateData1(input)
+          local a1 = math.pow(input,5);
+          local a2 = math.pow(input,2);
+          local s1 = string.format("(%d)-(%d)+3",4*a1,3*a2);
+          local s2 = string.format("(%d)-(%d)-10",6*a1,100*a2);
+          dataTable:Child(2):Child(1):Child(1).Text = string.format("%d",input)
+          dataTable:Child(2):Child(2):Child(1).Text = s1;
+          dataTable:Child(2):Child(3):Child(1).Text = s2;
+          dataTable:Child(2):Child(4):Child(1).Text = string.format("%.4f",(4*a1-3*a2+3)/(6*a1-100*a2-10));
+        end
+        function drawPlot1(input)
+          input = math.abs(input)
+          local x, y;
+          local plotPointer = plot1.s1;
+          local min = -input-1;
+          local max = input+1;
+          local step = (max-min)/100.0;
+          plotPointer:Clear()
+          for x = min, max, step do
+            y = (4*math.pow(x,5)-3*math.pow(x,2)+3)/(6*math.pow(x,5)-100*x*x-10);
+            plotPointer:Add(x,y)
+          end
+          plotPointer:Update()
+        end
+        updateData1(0);
+        drawPlot1(0);
+        ]]>
+      </script>
+    </stack>
+  </sectionNoTitle>
+  
+
+</document>

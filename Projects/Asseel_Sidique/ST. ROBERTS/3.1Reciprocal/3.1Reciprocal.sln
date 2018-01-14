@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{3509FA56-3B69-4017-88D1-3C70D67D8588}") = "3.1Reciprocal", "3.1Reciprocal\3.1Reciprocal.qdexproj", "{B6924497-C613-4641-B250-DDD2BF92E244}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B6924497-C613-4641-B250-DDD2BF92E244}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6924497-C613-4641-B250-DDD2BF92E244}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6924497-C613-4641-B250-DDD2BF92E244}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6924497-C613-4641-B250-DDD2BF92E244}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CC5FDCCE-8110-4AC5-927E-B0437DB0983C}
+	EndGlobalSection
+EndGlobal

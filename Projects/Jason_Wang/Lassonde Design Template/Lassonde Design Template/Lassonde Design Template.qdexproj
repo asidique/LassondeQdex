@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <CustomProjectExtensionsPath>$(LocalAppData)\CustomProjectSystems\qdex\</CustomProjectExtensionsPath>
+    <ProjectGuid>e6ed2914-ee07-4a7c-965d-27d26a136d9b</ProjectGuid>
+  </PropertyGroup>
+  <Import Project="$(CustomProjectExtensionsPath)CustomProject.Default.props" />
+  <Import Project="$(CustomProjectExtensionsPath)CustomProject.props" />
+  <PropertyGroup>
+    <SchemaVersion>2.0</SchemaVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="document.xml">
+    </Content>
+    <Content Include="resources\diagram1.jpeg" />
+    <Content Include="resources\lassonde.png" />
+    <Content Include="resources\LassondeLogoDesign.png" />
+    <Content Include="resources\q.jpeg" />
+    <Content Include="resources\question.png" />
+    <Content Include="resources\right.png" />
+    <Content Include="resources\spacex.jpg" />
+    <Content Include="resources\spacex2.jpg" />
+    <Content Include="resources\spacex3.png" />
+    <Content Include="resources\spacex4.jpg" />
+    <Content Include="resources\spacex5.jpg" />
+    <Content Include="resources\spacex6.jpg" />
+    <Content Include="resources\wrong.png" />
+    <Content Include="resources\york.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\curriculumStylesLassonde.xml" />
+    <None Include="resources\engine\JEngine.xml" />
+    <None Include="resources\engine\Link.xml" />
+    <None Include="resources\engine\PointMass.xml" />
+    <None Include="resources\engine\World.xml" />
+    <None Include="resources\Utilities.xml" />
+  </ItemGroup>
+  <PropertyGroup>
+    <OutputPath>resources</OutputPath>
+  </PropertyGroup>
+  <Import Project="$(CustomProjectExtensionsPath)CustomProjectCs.targets" />
+  <!-- This next bit is required unless the macro used to Import your targets is defined in an MSBuild toolset. -->
+  <ProjectExtensions>
+    <ProjectCapabilities>
+      <ProjectConfigurationsDeclaredAsItems />
+    </ProjectCapabilities>
+  </ProjectExtensions>
+</Project>

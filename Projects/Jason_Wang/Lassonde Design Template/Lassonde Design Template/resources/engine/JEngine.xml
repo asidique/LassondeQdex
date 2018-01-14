@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<fragment xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd">
+  <include src="World.xml" />
+  <script>
+    <![CDATA[
+    
+    ]]>
+  </script>
+</fragment>

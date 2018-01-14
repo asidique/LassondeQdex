@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{3509FA56-3B69-4017-88D1-3C70D67D8588}") = "NUM-2.1-Ratios and proportions", "NUM-2.1-Ratios and proportions\NUM-2.1-Ratios and proportions.qdexproj", "{E202F300-6FFF-4F5F-9770-50CBFB99067C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E202F300-6FFF-4F5F-9770-50CBFB99067C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E202F300-6FFF-4F5F-9770-50CBFB99067C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E202F300-6FFF-4F5F-9770-50CBFB99067C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E202F300-6FFF-4F5F-9770-50CBFB99067C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9DD8DD20-ADBA-4973-993B-4E440A21C330}
+	EndGlobalSection
+EndGlobal

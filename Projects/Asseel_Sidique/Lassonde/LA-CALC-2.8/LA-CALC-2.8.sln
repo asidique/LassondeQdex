@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{3509FA56-3B69-4017-88D1-3C70D67D8588}") = "LA-CALC-2.8", "LA-CALC-2.8\LA-CALC-2.8.qdexproj", "{AFBF5FE5-B371-4FB1-BC7F-F0B4AB992FEE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AFBF5FE5-B371-4FB1-BC7F-F0B4AB992FEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFBF5FE5-B371-4FB1-BC7F-F0B4AB992FEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFBF5FE5-B371-4FB1-BC7F-F0B4AB992FEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFBF5FE5-B371-4FB1-BC7F-F0B4AB992FEE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {07092C59-3379-4826-9FBA-54456B24895B}
+	EndGlobalSection
+EndGlobal
