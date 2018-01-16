@@ -3,10 +3,10 @@
 
   <!-- Meta Data -->
   <metadata>
-    <title>LA-CALC-3.7 Product Rule II</title>
+    <title>LA-CALC-3.5 Product Rule II</title>
     <creator>Thiago</creator>
     <coverImage src="resources/LassondeLogo.png" />
-    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <abstract>In this module, we look at the product rule when it applies to deriving functions where its composition is the product of 3 or more functions. </abstract>
   </metadata>
 
   <include src="resources/curriculumStylesLassonde.xml" />

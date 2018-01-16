@@ -5,7 +5,7 @@
   <metadata>
     <title>LA-CALC-2.3 Estimating One-Sided Limits Using Graphs</title>
     <creator>Aanand</creator>
-    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <abstract>Often times, we can analyze limits if we consider the limit as a function appraoches x from two different directions. In this module, we will find out how to determine if a limit exists or if it is a one-sided limit.</abstract>
     <coverImage src="resources/lassondeLogo.png" />
   </metadata>
 

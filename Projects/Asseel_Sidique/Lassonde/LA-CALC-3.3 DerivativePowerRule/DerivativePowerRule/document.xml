@@ -3,9 +3,9 @@
 
   <!-- Meta Data -->
   <metadata>
-    <title>LA-CALC-3.3 Derivative Power Rule</title>
+    <title>LA-CALC-3.1 Derivative Power Rule</title>
     <creator>Thiago</creator>
-    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <abstract>In this module, we cover the power rule for derivatives, a tool that is useful to quickly derive functions that have variables raised to a power.</abstract>
     <coverImage src="resources/LassondeLogo.png" />
   </metadata>
 

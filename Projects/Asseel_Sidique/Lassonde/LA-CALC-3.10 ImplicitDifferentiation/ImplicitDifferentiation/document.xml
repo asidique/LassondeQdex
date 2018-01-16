@@ -3,10 +3,10 @@
 
   <!-- Meta Data -->
   <metadata>
-    <title>LA-CALC-3.10 Implicit Differentiation</title>
+    <title>LA-CALC-3.8 Implicit Differentiation</title>
     <creator>Thiago</creator>
     <coverImage src="resources/LassondeLogo.png" />
-    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <abstract>How do you derive functions that have two unknown variables, such as the function of a circle? In this module, we cover implicit differentiation which covers just that.</abstract>
   </metadata>
 
   <include src="resources/curriculumStylesLassonde.xml" />

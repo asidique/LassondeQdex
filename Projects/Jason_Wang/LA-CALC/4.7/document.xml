@@ -3,9 +3,9 @@
 
   <!-- Meta Data -->
   <metadata>
-    <title>LA-CALC-4.7 Optimizing with Calculus</title>
+    <title>LA-CALC-4.6 Optimizing with Calculus</title>
     <creator>jason_wang</creator>
-    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <abstract>In this module, we will utilize critical points of functions (using derivatives) to determine optimal values of a quantity.</abstract>
     <coverImage src="resources/lassondeLogo.png" />
   </metadata>
   

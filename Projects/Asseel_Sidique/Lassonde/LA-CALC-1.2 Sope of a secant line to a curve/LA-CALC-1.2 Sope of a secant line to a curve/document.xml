@@ -6,7 +6,7 @@
     <title>LA-CALC-1.2 Slope of a Secant Line to a Curve</title>
     <creator>Sidique</creator>
     <coverImage src="resources/LassondeLogo.png" />
-    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <abstract>In this module, we will look at an important tool in calculus which is finding the slope of a secant line to a curve. We investigate the relationship between tangent and secant lines and work out step-by-step word problems.</abstract>
   </metadata>
 
   <include src="resources/curriculumStylesLassonde.xml" />

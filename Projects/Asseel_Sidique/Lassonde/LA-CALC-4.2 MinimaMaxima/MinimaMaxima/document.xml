@@ -6,7 +6,7 @@
     <title>LA-CALC-4.2 Identifying Minima and Maxima</title>
     <creator>Thiago</creator>
     <coverImage src="resources/LassondeLogo.png" />
-    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <abstract>In this module, we will introduce the concept of the minima and maxima of functions, differentiate local vs global and complete step-by-step questions. </abstract>
   </metadata>
 
   <include src="resources/curriculumStylesLassonde.xml" />

@@ -3,10 +3,10 @@
 
   <!-- Meta Data -->
   <metadata>
-    <title>LA-CALC-3.6 Product Rule I</title>
+    <title>LA-CALC-3.4 Product Rule I</title>
     <creator>Thiago</creator>
     <coverImage src="resources/LassondeLogo.png" />
-    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <abstract>In Calculus, the product rule is a formula used to find the derivative of two products. In this module, we cover step-by-step examples using the product rule.</abstract>
   </metadata>
 
   <include src="resources/curriculumStylesLassonde.xml" />

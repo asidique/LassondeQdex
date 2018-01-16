@@ -3,10 +3,10 @@
 
   <!-- Meta Data -->
   <metadata>
-    <title>LA-CALC-3.9 Combining Chain and Product Rule</title>
+    <title>LA-CALC-3.7 Combining Chain and Product Rule</title>
     <creator>Thiago</creator>
     <coverImage src="resources/LassondeLogo.png" />
-    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <abstract>In this module, we will utilize a combination of rules previously discussed, namely the chain rule and product rule. </abstract>
   </metadata>
 
   <include src="resources/curriculumStylesLassonde.xml" />

@@ -3,10 +3,10 @@
 
   <!-- Meta Data -->
   <metadata>
-    <title>LA-CALC-3.8 Quotient Rule</title>
+    <title>LA-CALC-3.6 Quotient Rule</title>
     <creator>Thiago</creator>
     <coverImage src="resources/LassondeLogo.png" />
-    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <abstract>In this module, we will cover the quotient rule for derivatives. This rule is a method of finding the derivative of a function that is a ratio of two functions.</abstract>
   </metadata>
   
   <include src="resources/curriculumStylesLassonde.xml" />
