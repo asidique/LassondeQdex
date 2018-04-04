@@ -1,0 +1,724 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G7A555F67_28D5_4BA5_9FED_0953AA6822C0">
+
+  <!-- Meta Data -->    
+  <metadata>
+    <title>NUM-4.1-Linear and Non-Linear</title>
+    <creator>Sidique</creator>
+    <coverImage src="resources/cover.png" />
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+  </metadata>
+
+  <include src="resources/curriculumStyles.xml" />
+  <include src="resources/Utilities.xml" />
+  <include src="resources/plotTools.xml" />
+
+  <!--                                      Header & Footer START                                         -->
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="whiteColor">Amanda Koon</p>
+      <p style="whiteColor rightText">NUMERACY</p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/logo1.png" inspect="false" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/logo2.png" inspect="false" />
+    </stack>
+  </footer>
+  
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">4.1 Linear and Non-Linear Relations</title>
+     <image src="resources/nonlinear.png"></image>
+    <stack style="contentBG">
+      <p>In previous modules, we discussed linear relations. Now we will introduce <b>Non-Linear Relations</b>. This is a relationship between two things which are not constant or linear. For an example, if you take an apple and let it drop from the sky,
+      you will see that at first, it falls slowly, but as time passes by, it falls more quickly. This relationship isn't linear since it gets its change in height is bigger as time goes on and not constant.</p>
+    </stack>
+  </section>
+
+  <sectionNoTitle name="section2" style="pageLayout">
+    <p style="sectionHeading">Recognizing Linear vs Non Linear</p>
+    <image src="resources/table2.png">
+      <style>
+        <widthPercentage>0%</widthPercentage>
+      </style>
+    </image>
+    <stack style="contentBG">
+      <p style="subSectionHeading">Linear Example</p>
+      <p>How do we tell if a function is linear or non linear? We can use the first differences in a T-Table to determine whether
+      a function is linear or non linear.</p>
+      <p>Let's take this T-Table and find the first differences. The <b>first differences</b> are the changes in y with respect to x.
+      This means that if we take any two data points, the first difference will be the difference of those data points. For an example, let's take
+    data points 1 and 2. We see that our y values for those are 9 and 5. So we put the two data points into this formula: $ \frac{y_{2} - y_{1}}{x_{2} - x_{1}} $</p>
+    <equation>$ \frac{9 - 5}{2 - 1} = \frac{4}{1} = 4 $</equation>
+    <p>Now let's take another data point, 2 and 3.</p>
+    <equation>$ \frac{13 - 9}{3 - 2} = \frac{4}{1} = 4 $</equation>
+      <p>We can see that the first differences are the same. This means this function is <b>linear</b>.</p>
+    <table name="t1">
+        <style>
+          <widthPercentage>40%</widthPercentage>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <row>
+          <column>
+            <p>X Values</p>
+          </column>
+          <column>
+            <p>Y Values</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>1</p>
+          </column>
+          <column>
+            <p>5</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>2</p>
+          </column>
+          <column>
+            <p>9</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>3</p>
+          </column>
+          <column>
+            <p>13</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>4</p>
+          </column>
+          <column>
+            <p>17</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>5</p>
+          </column>
+          <column>
+            <p>21</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>6</p>
+          </column>
+          <column>
+            <p>25</p>
+          </column>
+        </row>
+      </table>
+    <image name="t2" src="resources/table2.png">
+      <style>
+        <widthPercentage>60%</widthPercentage>
+        <visibility>collapsed</visibility>
+      </style>
+    </image>
+    <button name="btn" content="Show all first differences">
+      <onClick>
+        if btn.Text == "Show all first differences" then
+          t1.Style.Visibility = "collapsed";
+          t2.Style.Visibility = "visible";
+          btn.Text = "Hide all first differences";
+        else
+          btn.Text = "Show all first differences";
+          t1.Style.Visibility = "visible";
+          t2.Style.Visibility = "collapsed";
+        end
+      </onClick>
+    </button>
+    </stack>
+      <stack style="contentBG">
+      <p style="subSectionHeading">Non-linear Example</p>
+      <p>Let's take this T-Table and find the first differences. We'll take two data points (1 and 2) and put them into this formula: $ \frac{y_{2} - y_{1}}{x_{2} - x_{1}} $</p>
+    <equation>$ \frac{4 - 1}{2 - 1} = \frac{3}{1} = 3 $</equation>
+    <p>Now let's take another data point, 2 and 3.</p>
+    <equation>$ \frac{9 - 4}{3 - 2} = \frac{5}{1} = 5 $</equation>
+      <p>We can see that the first differences are not the same. This means this function is <b>non linear</b>.</p>
+    <table name="t1">
+        <style>
+          <widthPercentage>60%</widthPercentage>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <row>
+          <column>
+            <p>X Values</p>
+          </column>
+          <column>
+            <p>Y Values</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>1</p>
+          </column>
+          <column>
+            <p>1</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>2</p>
+          </column>
+          <column>
+            <p>4</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>3</p>
+          </column>
+          <column>
+            <p>9</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>4</p>
+          </column>
+          <column>
+            <p>16</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>5</p>
+          </column>
+          <column>
+            <p>25</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>6</p>
+          </column>
+          <column>
+            <p>36</p>
+          </column>
+        </row>
+      </table>
+    <image name="t2" src="resources/table3.png">
+      <style>
+        <widthPercentage>70%</widthPercentage>
+        <visibility>collapsed</visibility>
+      </style>
+    </image>
+    <button name="btn" content="Show all first differences">
+      <onClick>
+        if btn.Text == "Show all first differences" then
+          t1.Style.Visibility = "collapsed";
+          t2.Style.Visibility = "visible";
+          btn.Text = "Hide all first differences";
+        else
+          btn.Text = "Show all first differences";
+          t1.Style.Visibility = "visible";
+          t2.Style.Visibility = "collapsed";
+        end
+      </onClick>
+    </button>
+    </stack>
+  </sectionNoTitle>
+
+  <sectionNoTitle name="section3" style="pageLayout">
+    <p style="sectionHeading">Example Question</p>
+    <stack style="contentBG">
+      <p>Determine if the following T-Table represents a linear or non linear function.</p>
+      <table name="t1">
+        <style>
+          <widthPercentage>40%</widthPercentage>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <row>
+          <column>
+            <p>X Values</p>
+          </column>
+          <column>
+            <p>Y Values</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>-10</p>
+          </column>
+          <column>
+            <p>8</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>-7</p>
+          </column>
+          <column>
+            <p>7</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>-4</p>
+          </column>
+          <column>
+            <p>6</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>-1</p>
+          </column>
+          <column>
+            <p>5</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>2</p>
+          </column>
+          <column>
+            <p>4</p>
+          </column>
+        </row>
+      </table>
+      <p>At first glance, it may seem that this function is not linear. However, using the steps in the previous
+      page, we use the formula $ \frac{y_{2} - y_{1}}{x_{2} - x_{1}} $ to determine if the first differences are constant.</p>
+      <p>Let's take data points 1 and 2</p>
+      <equation>$ \frac{8 - 7}{-10 - (-7)} $ = $ \frac{1}{3} $</equation>
+      <p>Let's take data points 2 and 3</p>
+      <equation>$ \frac{7 - 6}{-4 - (-7)} $ = $ \frac{1}{3} $</equation>
+      <p>We see that the first differences are constant, and therefore conclude that this function is linear.</p>
+    </stack>
+  </sectionNoTitle>
+
+  <sectionNoTitle name="section4" style="pageLayout">
+    <p style="sectionHeading">Practice - Find the missing point</p>
+    <stack style="contentBG">
+      <p>For the following graph and table below, find the missing point that will make this function linear. Drag your finger on the graph to
+      plot the point and hit submit when you think it is correct!</p>
+      <table name="t1">
+        <style>
+          <widthPercentage>40%</widthPercentage>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <row>
+          <column>
+            <p>X Values</p>
+          </column>
+          <column>
+            <p>Y Values</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>-2</p>
+          </column>
+          <column>
+            <p>0</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>0</p>
+          </column>
+          <column>
+            <p>2</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>2</p>
+          </column>
+          <column>
+            <p name="empty"> </p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>4</p>
+          </column>
+          <column>
+            <p>6</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>6</p>
+          </column>
+          <column>
+            <p>8</p>
+          </column>
+        </row>
+      </table>
+      <xyPlot name="p2" pan="custom" tap="custom" zoom="disabled" manual="true">
+        <onDocumentOpened>
+          plotTools.drawArrow(yaxis, vector({0, -10}), vector({0, 10}), color.black);
+          plotTools.drawArrow(xaxis, vector({-7, 0}), vector({10, 0}), color.black);
+          labelSize = 0.1;
+          distanceApart = 1;
+          distanceAxis = -0.2;
+          begin = 0.95
+          char.textX(label, vector({6, 0.2}), 0.2, color.black);
+          char.textY(label, vector({0.2, 6}), 0.2, color.black);
+          char.num1(label, vector({begin, distanceAxis}), labelSize, color.black);
+          char.num2(label, vector({begin+distanceApart*1, distanceAxis}), labelSize, color.black);
+          char.num3(label, vector({begin+distanceApart*2, distanceAxis}), labelSize, color.black);
+          char.num4(label, vector({begin+distanceApart*3, distanceAxis}), labelSize, color.black);
+          char.num5(label, vector({begin+distanceApart*4, distanceAxis}), labelSize, color.black);
+          char.num6(label, vector({begin+distanceApart*5, distanceAxis}), labelSize, color.black);
+          char.num7(label, vector({begin+distanceApart*6, distanceAxis}), labelSize, color.black);
+          char.num8(label, vector({begin+distanceApart*7, distanceAxis}), labelSize, color.black);
+          char.num9(label, vector({begin+distanceApart*8, distanceAxis}), labelSize, color.black);
+
+
+          char.num1(label, vector({distanceAxis, begin+distanceApart*0}), labelSize, color.black);
+          char.num2(label, vector({distanceAxis, begin+distanceApart*1}), labelSize, color.black);
+          char.num3(label, vector({distanceAxis, begin+distanceApart*2}), labelSize, color.black);
+          char.num4(label, vector({distanceAxis, begin+distanceApart*3}), labelSize, color.black);
+          char.num5(label, vector({distanceAxis, begin+distanceApart*4}), labelSize, color.black);
+          char.num6(label, vector({distanceAxis, begin+distanceApart*5}), labelSize, color.black);
+          char.num7(label, vector({distanceAxis, begin+distanceApart*6}), labelSize, color.black);
+          char.num8(label, vector({distanceAxis, begin+distanceApart*7}), labelSize, color.black);
+          char.num9(label, vector({distanceAxis, begin+distanceApart*8}), labelSize, color.black);
+          
+          points3:Add(-2, 0);
+          points3:Add(0, 2);
+          points3:Add(4, 6);
+          points3:Add(6, 8);
+
+        </onDocumentOpened>
+        
+        <axis name="XAxis" dim="x" min="-2" max="8" auto="none" minor="false" />
+        <axis name="YAxis" dim="y" min="-2" max="8" auto="none" minor="false" />
+        <onPan>
+          scaledX = p2.XAxis.Min + state.Current.X * (p2.XAxis.Max - p2.XAxis.Min);
+          scaledY = p2.YAxis.Min + state.Current.Y * (p2.YAxis.Max - p2.YAxis.Min);
+          points:Add(2, round(scaledY,1));
+          t1:Child(4):Child(2).empty.Text = tostring(round(scaledY, 1));
+        </onPan>
+        <series name="yaxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>2</lineThickness>
+          </style>
+        </series>
+        <series name="xaxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>2</lineThickness>
+          </style>
+        </series>
+        <series name="line" draw="lineSegments">
+          <style>
+            <lineThickness>2</lineThickness>
+          </style>
+        </series>
+        <series name="points3" draw="points">
+          <style>
+            <foreground color="red" />
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        <series name="label"></series>
+        <series name="graph">
+          <style>
+            <lineThickness>1.5</lineThickness>
+            <foreground color="red" />
+          </style>
+        </series>
+        <series name="points" draw="points" capacity="1">
+          <style>
+            <foreground color="red" />
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+      </xyPlot>
+      <simulation name="sim1" duration="2">
+        <onUpdate>
+          t = time/2;
+          p2.graph:Add(t*8-2, (t*8-2)+2);
+        </onUpdate>
+      </simulation>
+      <button name="btn" content="Submit">
+        <onClick>
+          if (t1:Child(4):Child(2).empty.Text == "4") then
+            btn.Text = "Correct!"
+            sim1:Start();
+            btn.Style.BackgroundColor = color.green;
+          else
+            btn.Text = "Try Again";
+            btn.Style.BackgroundColor = color.rgb(50,133,184);
+          end
+        </onClick>
+      </button>
+    </stack>
+  </sectionNoTitle>
+
+  <sectionNoTitle name="section5" style="pageLayout">
+    <p style="sectionHeading">Examples of Common Non-Linear functions</p>
+    <stack style="contentBG">
+      <p>Linear functions are usually always in the form $ y = mx+b $; however, functions are not always
+      limited to this form. Here are some examples of non-linear functions you may see.</p>
+      <stack orientation="horizontal">
+      <stack orientation="vertical">
+      <equation>$ f(x) = x^2 $</equation>
+      <xyPlot name="p1" pan="custom" tap="custom" zoom="disabled" manual="true">
+        <onDocumentOpened>
+          plotTools.drawArrow(yaxis, vector({0, -15}), vector({0, 10}), color.black);
+          plotTools.drawArrow(xaxis, vector({-10, 0}), vector({10, 0}), color.black);
+          labelSize = 0.3;
+          distanceApart = 1;
+          distanceAxis = -0.5;
+          begin = 0.95
+          char.textX(label, vector({6, 0.2}), 0.2, color.black);
+          char.textY(label, vector({0.2, 6}), 0.2, color.black);
+          char.num1(label, vector({begin, distanceAxis}), labelSize, color.black);
+          char.num2(label, vector({begin+distanceApart*1, distanceAxis}), labelSize, color.black);
+          char.num3(label, vector({begin+distanceApart*2, distanceAxis}), labelSize, color.black);
+          char.num4(label, vector({begin+distanceApart*3, distanceAxis}), labelSize, color.black);
+          char.num5(label, vector({begin+distanceApart*4, distanceAxis}), labelSize, color.black);
+          char.num6(label, vector({begin+distanceApart*5, distanceAxis}), labelSize, color.black);
+          char.num7(label, vector({begin+distanceApart*6, distanceAxis}), labelSize, color.black);
+          char.num8(label, vector({begin+distanceApart*7, distanceAxis}), labelSize, color.black);
+          char.num9(label, vector({begin+distanceApart*8, distanceAxis}), labelSize, color.black);
+
+
+          char.num1(label, vector({distanceAxis, begin+distanceApart*0}), labelSize, color.black);
+          char.num2(label, vector({distanceAxis, begin+distanceApart*1}), labelSize, color.black);
+          char.num3(label, vector({distanceAxis, begin+distanceApart*2}), labelSize, color.black);
+          char.num4(label, vector({distanceAxis, begin+distanceApart*3}), labelSize, color.black);
+          char.num5(label, vector({distanceAxis, begin+distanceApart*4}), labelSize, color.black);
+          char.num6(label, vector({distanceAxis, begin+distanceApart*5}), labelSize, color.black);
+          char.num7(label, vector({distanceAxis, begin+distanceApart*6}), labelSize, color.black);
+          char.num8(label, vector({distanceAxis, begin+distanceApart*7}), labelSize, color.black);
+          char.num9(label, vector({distanceAxis, begin+distanceApart*8}), labelSize, color.black);
+          
+          for i = -10, 10, 0.01 do
+            graph:Add(i, math.pow(i, 2));
+          end
+        </onDocumentOpened>
+        
+        <axis name="XAxis" dim="x" min="-10" max="10" auto="none" minor="false" />
+        <axis name="YAxis" dim="y" min="-5" max="10" auto="none" minor="false" />
+        <series name="yaxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>2</lineThickness>
+          </style>
+        </series>
+        <series name="xaxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>2</lineThickness>
+          </style>
+        </series>
+        <series name="label"></series>
+        <series name="graph">
+          <style>
+            <lineThickness>1.5</lineThickness>
+            <foreground color="red" />
+          </style>
+        </series>
+      </xyPlot>
+      </stack>
+      <stack orientation="vertical">
+      <equation>$ f(x) = x^3 $</equation>
+      <xyPlot name="p2" pan="custom" tap="custom" zoom="disabled" manual="true">
+        <onDocumentOpened>
+          plotTools.drawArrow(yaxis, vector({0, -10}), vector({0, 10}), color.black);
+          plotTools.drawArrow(xaxis, vector({-10, 0}), vector({10, 0}), color.black);
+          labelSize = 0.3;
+          distanceApart = 1;
+          distanceAxis = -0.5;
+          begin = 0.95
+          char.textX(label, vector({6, 0.2}), 0.2, color.black);
+          char.textY(label, vector({0.2, 6}), 0.2, color.black);
+          char.num1(label, vector({begin, distanceAxis}), labelSize, color.black);
+          char.num2(label, vector({begin+distanceApart*1, distanceAxis}), labelSize, color.black);
+          char.num3(label, vector({begin+distanceApart*2, distanceAxis}), labelSize, color.black);
+          char.num4(label, vector({begin+distanceApart*3, distanceAxis}), labelSize, color.black);
+          char.num5(label, vector({begin+distanceApart*4, distanceAxis}), labelSize, color.black);
+          char.num6(label, vector({begin+distanceApart*5, distanceAxis}), labelSize, color.black);
+          char.num7(label, vector({begin+distanceApart*6, distanceAxis}), labelSize, color.black);
+          char.num8(label, vector({begin+distanceApart*7, distanceAxis}), labelSize, color.black);
+          char.num9(label, vector({begin+distanceApart*8, distanceAxis}), labelSize, color.black);
+
+
+          char.num1(label, vector({distanceAxis, begin+distanceApart*0}), labelSize, color.black);
+          char.num2(label, vector({distanceAxis, begin+distanceApart*1}), labelSize, color.black);
+          char.num3(label, vector({distanceAxis, begin+distanceApart*2}), labelSize, color.black);
+          char.num4(label, vector({distanceAxis, begin+distanceApart*3}), labelSize, color.black);
+          char.num5(label, vector({distanceAxis, begin+distanceApart*4}), labelSize, color.black);
+          char.num6(label, vector({distanceAxis, begin+distanceApart*5}), labelSize, color.black);
+          char.num7(label, vector({distanceAxis, begin+distanceApart*6}), labelSize, color.black);
+          char.num8(label, vector({distanceAxis, begin+distanceApart*7}), labelSize, color.black);
+          char.num9(label, vector({distanceAxis, begin+distanceApart*8}), labelSize, color.black);
+          
+          for i = -10, 10, 0.01 do
+            graph:Add(i, math.pow(i, 3));
+          end
+        </onDocumentOpened>
+        
+        <axis name="XAxis" dim="x" min="-10" max="10" auto="none" minor="false" />
+        <axis name="YAxis" dim="y" min="-10" max="10" auto="none" minor="false" />
+        <series name="yaxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>2</lineThickness>
+          </style>
+        </series>
+        <series name="xaxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>2</lineThickness>
+          </style>
+        </series>
+        <series name="label"></series>
+        <series name="graph">
+          <style>
+            <lineThickness>1.5</lineThickness>
+            <foreground color="red" />
+          </style>
+        </series>
+      </xyPlot>
+      </stack>
+      </stack>
+      <stack orientation="horizontal">
+      <stack orientation="vertical">
+      <equation>$ f(x) = log(x) $</equation>
+      <xyPlot name="p3" pan="custom" tap="custom" zoom="disabled" manual="true">
+        <onDocumentOpened>
+          plotTools.drawArrow(yaxis, vector({0, -10}), vector({0, 10}), color.black);
+          plotTools.drawArrow(xaxis, vector({-10, 0}), vector({10, 0}), color.black);
+          labelSize = 0.3;
+          distanceApart = 1;
+          distanceAxis = -0.5;
+          begin = 0.95
+          char.textX(label, vector({6, 0.2}), 0.2, color.black);
+          char.textY(label, vector({0.2, 6}), 0.2, color.black);
+          char.num1(label, vector({begin, distanceAxis}), labelSize, color.black);
+          char.num2(label, vector({begin+distanceApart*1, distanceAxis}), labelSize, color.black);
+          char.num3(label, vector({begin+distanceApart*2, distanceAxis}), labelSize, color.black);
+          char.num4(label, vector({begin+distanceApart*3, distanceAxis}), labelSize, color.black);
+          char.num5(label, vector({begin+distanceApart*4, distanceAxis}), labelSize, color.black);
+          char.num6(label, vector({begin+distanceApart*5, distanceAxis}), labelSize, color.black);
+          char.num7(label, vector({begin+distanceApart*6, distanceAxis}), labelSize, color.black);
+          char.num8(label, vector({begin+distanceApart*7, distanceAxis}), labelSize, color.black);
+          char.num9(label, vector({begin+distanceApart*8, distanceAxis}), labelSize, color.black);
+
+
+          char.num1(label, vector({distanceAxis, begin+distanceApart*0}), labelSize, color.black);
+          char.num2(label, vector({distanceAxis, begin+distanceApart*1}), labelSize, color.black);
+          char.num3(label, vector({distanceAxis, begin+distanceApart*2}), labelSize, color.black);
+          char.num4(label, vector({distanceAxis, begin+distanceApart*3}), labelSize, color.black);
+          char.num5(label, vector({distanceAxis, begin+distanceApart*4}), labelSize, color.black);
+          char.num6(label, vector({distanceAxis, begin+distanceApart*5}), labelSize, color.black);
+          char.num7(label, vector({distanceAxis, begin+distanceApart*6}), labelSize, color.black);
+          char.num8(label, vector({distanceAxis, begin+distanceApart*7}), labelSize, color.black);
+          char.num9(label, vector({distanceAxis, begin+distanceApart*8}), labelSize, color.black);
+          
+          for i = -10, 10, 0.01 do
+            graph:Add(i, math.log(i));
+          end
+        </onDocumentOpened>
+        
+        <axis name="XAxis" dim="x" min="-2" max="10" auto="none" minor="false" />
+        <axis name="YAxis" dim="y" min="-2" max="10" auto="none" minor="false" />
+        <series name="yaxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>2</lineThickness>
+          </style>
+        </series>
+        <series name="xaxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>2</lineThickness>
+          </style>
+        </series>
+        <series name="label"></series>
+        <series name="graph">
+          <style>
+            <lineThickness>1.5</lineThickness>
+            <foreground color="red" />
+          </style>
+        </series>
+      </xyPlot>
+      </stack>
+      <stack orientation="vertical">
+      <equation>$ f(x) = \frac{1}{x} $</equation>
+      <xyPlot name="p4" pan="custom" tap="custom" zoom="disabled" manual="true">
+        <onDocumentOpened>
+          plotTools.drawArrow(yaxis, vector({0, -10}), vector({0, 10}), color.black);
+          plotTools.drawArrow(xaxis, vector({-10, 0}), vector({10, 0}), color.black);
+          labelSize = 0.3;
+          distanceApart = 1;
+          distanceAxis = -0.5;
+          begin = 0.95
+          char.textX(label, vector({6, 0.2}), 0.2, color.black);
+          char.textY(label, vector({0.2, 6}), 0.2, color.black);
+          char.num1(label, vector({begin, distanceAxis}), labelSize, color.black);
+          char.num2(label, vector({begin+distanceApart*1, distanceAxis}), labelSize, color.black);
+          char.num3(label, vector({begin+distanceApart*2, distanceAxis}), labelSize, color.black);
+          char.num4(label, vector({begin+distanceApart*3, distanceAxis}), labelSize, color.black);
+          char.num5(label, vector({begin+distanceApart*4, distanceAxis}), labelSize, color.black);
+          char.num6(label, vector({begin+distanceApart*5, distanceAxis}), labelSize, color.black);
+          char.num7(label, vector({begin+distanceApart*6, distanceAxis}), labelSize, color.black);
+          char.num8(label, vector({begin+distanceApart*7, distanceAxis}), labelSize, color.black);
+          char.num9(label, vector({begin+distanceApart*8, distanceAxis}), labelSize, color.black);
+
+
+          char.num1(label, vector({distanceAxis, begin+distanceApart*0}), labelSize, color.black);
+          char.num2(label, vector({distanceAxis, begin+distanceApart*1}), labelSize, color.black);
+          char.num3(label, vector({distanceAxis, begin+distanceApart*2}), labelSize, color.black);
+          char.num4(label, vector({distanceAxis, begin+distanceApart*3}), labelSize, color.black);
+          char.num5(label, vector({distanceAxis, begin+distanceApart*4}), labelSize, color.black);
+          char.num6(label, vector({distanceAxis, begin+distanceApart*5}), labelSize, color.black);
+          char.num7(label, vector({distanceAxis, begin+distanceApart*6}), labelSize, color.black);
+          char.num8(label, vector({distanceAxis, begin+distanceApart*7}), labelSize, color.black);
+          char.num9(label, vector({distanceAxis, begin+distanceApart*8}), labelSize, color.black);
+          
+          for i = 0.1, 10, 0.01 do
+            graph:Add(i, 1/i);
+          end
+        </onDocumentOpened>
+        
+        <axis name="XAxis" dim="x" min="-2" max="10" auto="none" minor="false" />
+        <axis name="YAxis" dim="y" min="-2" max="10" auto="none" minor="false" />
+        <series name="yaxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>2</lineThickness>
+          </style>
+        </series>
+        <series name="xaxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>2</lineThickness>
+          </style>
+        </series>
+        <series name="label"></series>
+        <series name="graph">
+          <style>
+            <lineThickness>1.5</lineThickness>
+            <foreground color="red" />
+          </style>
+        </series>
+      </xyPlot>
+       </stack>
+      </stack>
+    </stack>
+  </sectionNoTitle>
+</document>

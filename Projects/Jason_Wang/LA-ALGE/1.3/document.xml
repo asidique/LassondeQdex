@@ -5,7 +5,7 @@
   <metadata>
     <title>LA-ALGE-1.3 Matrix Row Operations</title>
     <creator>jason_wang</creator>
-    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <abstract>In this Module, we are going to learn how to perform the matrix elementary row operations. These operations will allow us to solve complicated linear systems more easier.</abstract>
     <coverImage src="resources/lassondeLogo.png" />
   </metadata>
 

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2024
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{3509FA56-3B69-4017-88D1-3C70D67D8588}") = "PRODUCTRULE", "PRODUCTRULE\PRODUCTRULE.qdexproj", "{F39B4CBC-3D8A-4E6B-B5CC-17999731586B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F39B4CBC-3D8A-4E6B-B5CC-17999731586B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F39B4CBC-3D8A-4E6B-B5CC-17999731586B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F39B4CBC-3D8A-4E6B-B5CC-17999731586B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F39B4CBC-3D8A-4E6B-B5CC-17999731586B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C2BC74A5-F4D1-4B59-808D-FBB50CD2FD94}
+	EndGlobalSection
+EndGlobal

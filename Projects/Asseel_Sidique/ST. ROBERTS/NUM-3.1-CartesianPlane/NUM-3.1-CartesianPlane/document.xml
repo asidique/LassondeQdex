@@ -1,0 +1,530 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G99219BBC_4361_4BBF_9CEB_9C69BC7FC8D5">
+
+  <metadata>
+    <title>NUM-3.1-Cartesian Plane and T-tables</title>
+    <creator>Sidique</creator>
+    <coverImage src="resources/cover.png" />
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+  </metadata>
+
+  <include src="resources/curriculumStyles.xml" />
+  <include src="resources/Utilities.xml" />
+  <include src="resources/plotTools.xml" />
+
+  <!--                                      Header & Footer START                                         -->
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="whiteColor">Amanda Koon</p>
+      <p style="whiteColor rightText">NUMERACY</p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/logo1.png" inspect="false" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/logo2.png" inspect="false" />
+    </stack>
+  </footer>
+
+  <!-- Section 1 -->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">Cartesian Plane and T-tables</title>
+    <image src="resources/cartesian.png">
+      <style>
+        <widthPercentage>80%</widthPercentage>
+      </style>
+    </image>
+    <stack style="contentBG">
+      <p>The <b>Cartesian plane</b> is a 2D graph with an x-axis and a y-axis. These axes are perpindicular to each other and each axis has a length of infinity. The Cartesian plane is useful
+      because it helps us visualize some of the math we learn. In this module, we'll go over the properties of a Cartesian plane and understand what a <b>T-table</b> is.</p>
+    </stack>
+  </section>
+
+  <sectionNoTitle name="section2" style="pageLayout">
+    <p style="sectionHeading">Properties of the Cartesian Plane</p>
+    <stack style="contentBG">
+      <p style="subSectionHeading">Origin</p>
+      <p>
+        The <b>Origin</b> is the point in the Cartesian Plane where the X-Axis and Y-Axis meet. You can find this value by going to the coordinates (0, 0). This point is very important as
+        this is the "start" of the graph.
+      </p>
+    </stack>
+    <stack style="contentBG">
+      <p style="subSectionHeading">X-Axis</p>
+      <p>The X-Axis is the horizontal line that stretches to infinity both ways. The more left our values are on the X-Axis, the more negative they are.</p>
+    </stack>
+    <stack style="contentBG">
+      <p style="subSectionHeading">Y-Axis</p>
+      <p>Similar to the X-Axis, the Y-Axis also stretches to infinity, except vertically. The more lower you are on the graph, the more negative you are on the Y-Axis.</p>
+    </stack>
+    <stack style="contentBG">
+
+      <p style="subSectionHeading">Quadrants</p>
+      <p>Quadrants are the sections on the Cartesian Plane that correspond to the sign of the x-axis and y-axis values.</p>
+      <p>Quadrant 1 is located when the X-Axis is positive and the Y-Axis is positive.</p>
+      <p>Quadrant 2 is located when the X-Axis is negative and the Y-Axis is positive.</p>
+      <p>Quadrant 3 is located when the X-Axis is negative and the Y-Axis is negative.</p>
+      <p>Quadrant 4 is located when the X-Axis is positive and the Y-Axis is negative.</p>
+      <p>Here's an image to visualize. <b>Note: </b> the numbers of the quadrants are written as roman numerals.
+    </p>
+      <image src="resources/quadrants2.png">
+        <style>
+          <horizontalAlignment>center</horizontalAlignment>
+          <widthPercentage>80%</widthPercentage>
+        </style>
+      </image>
+    </stack>
+    <stack style="contentBG">
+      <p style="subSectionHeading">Coordinates</p>
+      <p>Coordinates are ways of representing numbers on the Cartesian Plane. Since we have one X-Axis and one Y-Axis, we can represent a <b>point</b> on the plane using the notation (x, y). In this 
+      notation, x represents where we are on the x-axis and y represents where we are on the y-axis. Put them together and you have a point! See the next page for an interactive simulation.
+    </p>
+    </stack>
+  </sectionNoTitle>
+
+  <sectionNoTitle name="section3" style="pageLayout">
+    <p style="sectionHeading">Plot Your Point</p>
+    <stack style="contentBG">
+      <p style="subSectionHeading">Instructions</p>
+      <p>Use this simulation to understand how points work on the Cartesian Plane. Using the input boxes below, input a number for your x-axis and your y-axis. Then click "Plot Point" to see where
+      the point lies on the Cartesian Plane. Don't be afraid to try negative numbers!</p>
+      <table name="t1">
+        <row>
+          <column>
+            <textField name="xfield" placeholder="Enter X Coordinate">
+            </textField>
+          </column>
+          <column>
+            <textField name="yfield" placeholder="Enter Y Coordinate"></textField>
+          </column>
+        </row>
+      </table>
+      <equation name="coord">(0, 0)</equation>
+      <button name="btn" content="Plot Point">
+        <onClick>
+          p1.point:Clear();
+          p1.point:Add(tonumber(t1:Child(1):Child(1):Child(1).Text), tonumber(t1:Child(1):Child(2):Child(1).Text));
+          coord.Text = "(" .. t1:Child(1):Child(1):Child(1).Text .. ", " .. t1:Child(1):Child(2):Child(1).Text .. ")";
+          xVal = tonumber(t1:Child(1):Child(1):Child(1).Text);
+          yVal = tonumber(t1:Child(1):Child(2):Child(1).Text);
+          t1:Child(1):Child(1):Child(1).Text = "";
+          t1:Child(1):Child(2):Child(1).Text = "";
+          p1.point:Update();
+          p1.line:Clear();
+          p1.line2:Clear();
+          sim1:Start();
+        </onClick>
+      </button>
+      <xyPlot pan="disabled" zoom="disabled" tap="disabled" name="p1">
+        <style>
+          <aspectRatio>1</aspectRatio>
+        </style>
+        <onDocumentOpened>
+          plotTools.drawArrow(yaxis, vector({0, -10}), vector({0, 10}), color.black);
+          plotTools.drawArrow(yaxis, vector({-10, 0}), vector({10, 0}), color.black);
+          xVal = 0;
+          yVal = 0;
+          labelSize = 0.25;
+          distanceApart = 1;
+          distanceAxis = -0.5;
+          char.textX(label, vector({9, 1}), 0.75, color.black);
+          char.textY(label, vector({1, 9}), 0.75, color.black);
+          char.num1(label, vector({0.8, distanceAxis}), labelSize, color.black);
+          char.num2(label, vector({0.8+distanceApart*1, distanceAxis}), labelSize, color.black);
+          char.num3(label, vector({0.8+distanceApart*2, distanceAxis}), labelSize, color.black);
+          char.num4(label, vector({0.8+distanceApart*3, distanceAxis}), labelSize, color.black);
+          char.num5(label, vector({0.8+distanceApart*4, distanceAxis}), labelSize, color.black);
+          char.num6(label, vector({0.8+distanceApart*5, distanceAxis}), labelSize, color.black);
+          char.num7(label, vector({0.8+distanceApart*6, distanceAxis}), labelSize, color.black);
+          char.num8(label, vector({0.8+distanceApart*7, distanceAxis}), labelSize, color.black);
+          char.num9(label, vector({0.8+distanceApart*8, distanceAxis}), labelSize, color.black);
+
+          symbol.drawMinus(label, vector({-1, distanceAxis}), 0.25, color.black)
+          char.num1(label, vector({-0.8, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({-2, distanceAxis}), 0.25, color.black)
+          char.num2(label, vector({-0.8-distanceApart*1, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({-3, distanceAxis}), 0.25, color.black)
+          char.num3(label, vector({-0.8-distanceApart*2, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({-4, distanceAxis}), 0.25, color.black)
+          char.num4(label, vector({-0.8-distanceApart*3, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({-5, distanceAxis}), 0.25, color.black)
+          char.num5(label, vector({-0.8-distanceApart*4, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({-6, distanceAxis}), 0.25, color.black)
+          char.num6(label, vector({-0.8-distanceApart*5, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({-7, distanceAxis}), 0.25, color.black)
+          char.num7(label, vector({-0.8-distanceApart*6, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({-8, distanceAxis}), 0.25, color.black)
+          char.num8(label, vector({-0.8-distanceApart*7, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({-9, distanceAxis}), 0.25, color.black)
+          char.num9(label, vector({-0.8-distanceApart*8, distanceAxis}), labelSize, color.black);
+
+          char.num1(label, vector({distanceAxis, 0.8}), labelSize, color.black);
+          char.num2(label, vector({distanceAxis, 1.8}), labelSize, color.black);
+          char.num3(label, vector({distanceAxis, 2.8}), labelSize, color.black);
+          char.num4(label, vector({distanceAxis, 3.8}), labelSize, color.black);
+          char.num5(label, vector({distanceAxis, 4.8}), labelSize, color.black);
+          char.num6(label, vector({distanceAxis, 5.8}), labelSize, color.black);
+          char.num7(label, vector({distanceAxis, 6.8}), labelSize, color.black);
+          char.num8(label, vector({distanceAxis, 7.8}), labelSize, color.black);
+          char.num9(label, vector({distanceAxis, 8.8}), labelSize, color.black);
+
+          symbol.drawMinus(label, vector({distanceAxis-0.2, -0.75}), 0.25, color.black)
+          char.num1(label, vector({distanceAxis, -0.8}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis-0.2, -1.75}), 0.25, color.black)
+          char.num2(label, vector({distanceAxis, -1.8}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis-0.2, -2.75}), 0.25, color.black)
+          char.num3(label, vector({distanceAxis, -2.8}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis-0.2, -3.75}), 0.25, color.black)
+          char.num4(label, vector({distanceAxis, -3.8}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis-0.2, -4.75}), 0.25, color.black)
+          char.num5(label, vector({distanceAxis, -4.8}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis-0.2, -5.75}), 0.25, color.black)
+          char.num6(label, vector({distanceAxis, -5.8}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis-0.2, -6.75}), 0.25, color.black)
+          char.num7(label, vector({distanceAxis, -6.8}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis-0.2, -7.75}), 0.25, color.black)
+          char.num8(label, vector({distanceAxis, -7.8}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis-0.2, -8.75}), 0.25, color.black)
+          char.num9(label, vector({distanceAxis, -8.8}), labelSize, color.black);
+
+        </onDocumentOpened>
+        <axis dim="x" auto="none" min="-10" max="10" minor="true"></axis>
+        <axis dim="y" auto="none" min="-10" max="10" minor="true"></axis>
+
+        <series name="yaxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>2</lineThickness>
+          </style>
+        </series>
+        <series name="xaxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>2</lineThickness>
+          </style>
+        </series>
+        <series name="line" draw="lineSegments">
+          <style>
+            <lineThickness>2</lineThickness>
+          </style>
+        </series>
+        <series name="line2" draw="lineSegments">
+          <style>
+            <lineThickness>3</lineThickness>
+          </style>
+        </series>
+        <series name="label"></series>
+        <series name="point" manual="true" draw="points">
+          <style>
+            <lineThickness>1.7</lineThickness>
+          </style>
+        </series>
+      </xyPlot>
+      <simulation name="sim1" duration="2" period="0.1">
+        <onUpdate>
+
+          if time &lt; 1 then
+            p1.line:Add(xVal*(time), 0);
+            p1.line2:Add(0, yVal*time);
+          else
+            p1.line:Add(xVal, yVal*(time-1));
+            p1.line2:Add(xVal*(time-1), yVal);
+          end
+        </onUpdate>
+      </simulation>
+    </stack>
+  </sectionNoTitle>
+
+  <sectionNoTitle name="section4" style="pageLayout">
+    <p style="sectionHeading">T-Tables</p>
+    <stack style="contentBG">
+      <p>T-Tables are used to store information that is important to plotting graphs. Now that you understand the Cartesian Plane, we can make T-Tables to draw points and line onto the plane.
+      T-Tables have two columns, one for x values and one for y values. Take a look at the following T-Table. Click on plot to see how to draw it onto the Cartesian Plane.</p>
+      <table>
+        <style>
+          <widthPercentage>40%</widthPercentage>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <row>
+          <column>
+            <p>X Values</p>
+          </column>
+          <column>
+            <p>Y Values</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>0</p>
+          </column>
+          <column>
+            <p>0</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>1</p>
+          </column>
+          <column>
+            <p>1</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>2</p>
+          </column>
+          <column>
+            <p>2</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>3</p>
+          </column>
+          <column>
+            <p>3</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>4</p>
+          </column>
+          <column>
+            <p>4</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>5</p>
+          </column>
+          <column>
+            <p>5</p>
+          </column>
+        </row>
+      </table>
+      <xyPlot name="p2" pan="disabled" tap="disabled" zoom="disabled">
+        <onDocumentOpened>
+          plotTools.drawArrow(yaxis, vector({0, -10}), vector({0, 10}), color.black);
+          plotTools.drawArrow(xaxis, vector({-7, 0}), vector({10, 0}), color.black);
+          labelSize = 0.1;
+          distanceApart = 1;
+          distanceAxis = -0.2;
+          begin = 0.95
+          char.textX(label, vector({6, 0.2}), 0.2, color.black);
+          char.textY(label, vector({0.2, 6}), 0.2, color.black);
+          char.num1(label, vector({begin, distanceAxis}), labelSize, color.black);
+          char.num2(label, vector({begin+distanceApart*1, distanceAxis}), labelSize, color.black);
+          char.num3(label, vector({begin+distanceApart*2, distanceAxis}), labelSize, color.black);
+          char.num4(label, vector({begin+distanceApart*3, distanceAxis}), labelSize, color.black);
+          char.num5(label, vector({begin+distanceApart*4, distanceAxis}), labelSize, color.black);
+          char.num6(label, vector({begin+distanceApart*5, distanceAxis}), labelSize, color.black);
+          char.num7(label, vector({begin+distanceApart*6, distanceAxis}), labelSize, color.black);
+          char.num8(label, vector({begin+distanceApart*7, distanceAxis}), labelSize, color.black);
+          char.num9(label, vector({begin+distanceApart*8, distanceAxis}), labelSize, color.black);
+
+
+          char.num1(label, vector({distanceAxis, begin+distanceApart*0}), labelSize, color.black);
+          char.num2(label, vector({distanceAxis, begin+distanceApart*1}), labelSize, color.black);
+          char.num3(label, vector({distanceAxis, begin+distanceApart*2}), labelSize, color.black);
+          char.num4(label, vector({distanceAxis, begin+distanceApart*3}), labelSize, color.black);
+          char.num5(label, vector({distanceAxis, begin+distanceApart*4}), labelSize, color.black);
+          char.num6(label, vector({distanceAxis, begin+distanceApart*5}), labelSize, color.black);
+          char.num7(label, vector({distanceAxis, begin+distanceApart*6}), labelSize, color.black);
+          char.num8(label, vector({distanceAxis, begin+distanceApart*7}), labelSize, color.black);
+          char.num9(label, vector({distanceAxis, begin+distanceApart*8}), labelSize, color.black);
+
+        </onDocumentOpened>
+        <axis dim="x" min="-1" max="7" auto="none" minor="false" />
+        <axis dim="y" min="-1" max="7" auto="none" minor="false" />
+        <series name="yaxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>2</lineThickness>
+          </style>
+        </series>
+        <series name="xaxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>2</lineThickness>
+          </style>
+        </series>
+        <series name="line" draw="lineSegments">
+          <style>
+            <lineThickness>2</lineThickness>
+          </style>
+        </series>
+        <series name="line2" draw="lineSegments">
+          <style>
+            <lineThickness>3</lineThickness>
+          </style>
+        </series>
+        <series name="label"></series>
+        <series name="graph">
+          <style>
+            <lineThickness>1.5</lineThickness>
+            <foreground color="red" />
+          </style>
+        </series>
+        <series name="points" draw="points">
+          <style>
+            <foreground color="red" />
+          </style>
+        </series>
+      </xyPlot>
+      <simulation name="sim2" duration="3" period="0.01">
+        <onDuration>
+
+        </onDuration>
+        <onUpdate>
+          p2.graph:Add(time*3, (time*3));
+        </onUpdate>
+      </simulation>
+      <button content="Plot Graph">
+        <onClick>
+          p2.points:Add(0, 0);
+          p2.points:Add(1, 1);
+          p2.points:Add(2, 2);
+          p2.points:Add(3, 3);
+          p2.points:Add(4, 4);
+          p2.points:Add(5, 5);
+          sim2:Start();
+        </onClick>
+      </button>
+    </stack>
+  </sectionNoTitle>
+
+  <sectionNoTitle name="section5" style="pageLayout">
+    <p style="sectionHeading">Practice</p>
+    <stack style="contentBG">
+      <p style="subSectionHeading">Instructions</p>
+      <p>For the following graph, answer all the questions below by writing a number labelled on the graph. To plot a point, pan your finger around the graph. When you're all done and want to lock in your answers, click on the submit button.</p>
+      <xyPlot name="p2" pan="custom" tap="custom" zoom="custom" manual="true">
+        <onDocumentOpened>
+          plotTools.drawArrow(yaxis, vector({0, -10}), vector({0, 10}), color.black);
+          plotTools.drawArrow(xaxis, vector({-7, 0}), vector({10, 0}), color.black);
+          labelSize = 0.1;
+          distanceApart = 1;
+          distanceAxis = -0.2;
+          begin = 0.95
+          char.textX(label, vector({6, 0.2}), 0.2, color.black);
+          char.textY(label, vector({0.2, 6}), 0.2, color.black);
+          char.num1(label, vector({begin, distanceAxis}), labelSize, color.black);
+          char.num2(label, vector({begin+distanceApart*1, distanceAxis}), labelSize, color.black);
+          char.num3(label, vector({begin+distanceApart*2, distanceAxis}), labelSize, color.black);
+          char.num4(label, vector({begin+distanceApart*3, distanceAxis}), labelSize, color.black);
+          char.num5(label, vector({begin+distanceApart*4, distanceAxis}), labelSize, color.black);
+          char.num6(label, vector({begin+distanceApart*5, distanceAxis}), labelSize, color.black);
+          char.num7(label, vector({begin+distanceApart*6, distanceAxis}), labelSize, color.black);
+          char.num8(label, vector({begin+distanceApart*7, distanceAxis}), labelSize, color.black);
+          char.num9(label, vector({begin+distanceApart*8, distanceAxis}), labelSize, color.black);
+
+
+          char.num1(label, vector({distanceAxis, begin+distanceApart*0}), labelSize, color.black);
+          char.num2(label, vector({distanceAxis, begin+distanceApart*1}), labelSize, color.black);
+          char.num3(label, vector({distanceAxis, begin+distanceApart*2}), labelSize, color.black);
+          char.num4(label, vector({distanceAxis, begin+distanceApart*3}), labelSize, color.black);
+          char.num5(label, vector({distanceAxis, begin+distanceApart*4}), labelSize, color.black);
+          char.num6(label, vector({distanceAxis, begin+distanceApart*5}), labelSize, color.black);
+          char.num7(label, vector({distanceAxis, begin+distanceApart*6}), labelSize, color.black);
+          char.num8(label, vector({distanceAxis, begin+distanceApart*7}), labelSize, color.black);
+          char.num9(label, vector({distanceAxis, begin+distanceApart*8}), labelSize, color.black);
+
+          char.num3(label2, vector({5.7, 0.25}), 0.25, color.red);
+          char.num1(label2, vector({0.15, 5.7}), 0.25, color.red);
+          char.num4(label2, vector({3.9, 4.9}), 0.25, color.red);
+          char.num2(label2, vector({0, 0}), 0.25, color.red);
+        </onDocumentOpened>
+        <onPan>
+          scaledX = p2.XAxis.Min + state.Current.X * (p2.XAxis.Max - p2.XAxis.Min);
+          scaledY = p2.YAxis.Min + state.Current.Y * (p2.YAxis.Max - p2.YAxis.Min);
+          points:Add(round(scaledX,1), round(scaledY,1));
+        </onPan>
+        <axis name="XAxis" dim="x" min="-1" max="7" auto="none" minor="false" major="true" />
+        <axis name="YAxis" dim="y" min="-1" max="7" auto="none" minor="false" major="true" />
+        <series name="yaxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>2</lineThickness>
+          </style>
+        </series>
+        <series name="xaxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>2</lineThickness>
+          </style>
+        </series>
+        <series name="line" draw="lineSegments">
+          <style>
+            <lineThickness>2</lineThickness>
+          </style>
+        </series>
+        <series name="line2" draw="lineSegments">
+          <style>
+            <lineThickness>3</lineThickness>
+          </style>
+        </series>
+        <series name="label"></series>
+        <series name="label2">
+          <style>
+            <lineThickness>2</lineThickness>
+          </style>
+        </series>
+
+        <series name="points" draw="points" capacity="1">
+          <style>
+            <foreground color="red" />
+            <lineThickness>2</lineThickness>
+          </style>
+        </series>
+      </xyPlot>
+      <stack name="s1" orientation="horizontal">
+        <stack name="d1" orientation="vertical">
+        <p style="alignRight">X-Axis</p>
+        <p style="alignRight">Y-Axis</p>
+        <p style="alignRight">Origin</p>
+        <p style="alignRight">Select point (3, 5)</p>
+        <p style="alignRight">Where is <b>4</b> located?</p>
+        <p style="alignRight">Which quadrant is <b>4</b> on?</p>
+        </stack>
+        <stack name="d2" orientation="vertical">
+          <textField placeholder="Enter Number Here"></textField>
+          <textField placeholder="Enter Number Here"></textField>
+          <textField placeholder="Enter Number Here"></textField>
+          <p>Pan the graph to select a point</p>
+          <stack name="d3" orientation="horizontal">
+            <style>
+              <widthPercentage>50%</widthPercentage>
+            </style>
+            <p>(</p>
+            <textField placeholder="  0  "></textField>
+            <p>,</p>
+            <textField placeholder="  0  "></textField>
+            <p>)</p>
+          </stack>
+          <textField placeholder="Enter Number Here"></textField>
+        </stack>
+      </stack>
+      <p name="label2" style="alignCenter"></p>
+      <button content="Submit" name="btn">
+        <onClick>
+          if s1.d2:Child(1).Text == "3" and s1.d2:Child(2).Text == "1" and s1.d2:Child(3).Text == "2" and round(scaledX,1) == 3 and round(scaledY,1) == 5 and s1.d2.d3:Child(2).Text == "4" and s1.d2.d3:Child(4).Text == "5" and s1.d2:Child(6).Text == "1" then
+            label2.Text = "You are correct!";
+            btn.Style.BackgroundColor = color.green;
+          else
+            label2.Text = "Incorrect, check your numbers and try again!"
+            btn.Style.BackgroundColor = color.rgb(50,133,184);
+          end
+        </onClick>
+      </button>
+    </stack>
+  </sectionNoTitle>
+
+</document>

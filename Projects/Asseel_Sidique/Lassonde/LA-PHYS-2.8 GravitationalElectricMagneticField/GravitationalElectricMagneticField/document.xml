@@ -6,7 +6,7 @@
     <title>LA-PHYS-2.8 Gravitational, Magnetic and Electric Fields</title>
     <creator>Asseel</creator>
     <coverImage src="resources/LassondeLogo.png" />
-    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <abstract>In this module we will compare and contrast gravitational, electric and magnetic field with simulations and examples. </abstract>
   </metadata>
 
   <include src="resources/curriculumStylesLassonde.xml" />

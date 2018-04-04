@@ -1,0 +1,695 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G748294C9_08B3_4B8B_B3E2_28CDF7A95E76">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>MCV4U – 2.5 Chain Rule</title>
+    <creator>Thiago</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <coverImage src="resources/cover.png" />
+  </metadata>
+
+  <include src="resources/curriculumStyles.xml" />
+
+  <style name="fontColor">
+    <foreground color="255 255 255" />
+  </style>
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="fontColor">Amanda Koon</p>
+      <p style="fontColor rightText">MCV4U</p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/logo1.png" inspect="false" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/logo2.png" inspect="false" />
+    </stack>
+  </footer>
+  <!--                                      Header & Footer END   -->
+
+
+
+  <!--                                      Header & Footer                                           -->
+  <!-- CUSTOM STYLES -->
+  <style name="title2">
+    <!--<borderColor color="50 133 184" /> ... Border color says it changes color of a string of text. But it doesn't work-->
+    <foreground color="50 133 184" />
+    <size points="30" />
+  </style>
+
+  <style name="header1">
+    <foreground color="50 133 184" />
+    <size points="25" />
+  </style>
+
+  <style name="content1">
+    <size points="15" />
+  </style>
+
+  <style name="lineBreak">
+    <marginTop>15</marginTop>
+    <marginBottom>15</marginBottom>
+  </style>
+
+  <style name="backgroundColor">
+    <background color="50 133 184" />
+  </style>
+
+  <style name="backgroundColor2">
+    <background color="91 192 255 100" />
+    <!-- DARK SKY BLUE:
+           HEX: 8FBCD8 -->
+  </style>
+
+  <style name="backgroundColor3">
+    <background color="213 68 38 100" />
+    <!--#d54426-->
+  </style>
+
+  <style name="backgroundColor4">
+    <background color="55 178 94 100" />
+  </style>
+
+  <style name="backgroundColor5">
+    <background color="109 61 198 100" />
+  </style>
+
+  <style name="blackLine">
+    <foreground color="black" />
+    <lineThickness>2</lineThickness>
+  </style>
+
+  <style name="lineColor2">
+    <foreground color="91 192 255" />
+    <!-- DARK SKY BLUE:
+           HEX: 8FBCD8 -->
+  </style>
+
+  <style name="lineColor3">
+    <foreground color="213 68 38" />
+    <!--#d54426-->
+  </style>
+
+  <style name="lineColor4">
+    <foreground color="55 178 94" />
+  </style>
+
+  <style name="lineColor5">
+    <foreground color="109 61 198" />
+  </style>
+
+  <style name="question">
+    <widthPercentage>80%</widthPercentage>
+    <horizontalAlignment>center</horizontalAlignment>
+    <textAlignment>center</textAlignment>
+    <background color="91 192 255 100" />
+  </style>
+
+  <style name="center">
+    <horizontalAlignment>center</horizontalAlignment>
+    <textAlignment>center</textAlignment>
+  </style>
+
+
+
+
+
+
+
+
+
+  <!--    SECTION 1    -->
+  <section style="pageLayout">
+    <title style="chapterTitle">Chain Rule</title>
+
+    <p style="sectionHeading">Introduction</p>
+
+    <stack style="contentBG">
+      <p>
+        In this module we will cover the Chain rule for derivatives.
+        The Chain rule is one of the core principals in calculus, and you're going to use it any time you take the derivative of a function even reasonably complex.
+        The Chain rule can be a little daunting at first because we use it when we have a smaller function inside of a bigger function, in example: <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/e6163d8c6e3f44778dbc5214fe4430c9.png" alt=" h(g(x)) " scale="0.0175" baseline="0.25" inspect="false" />,
+        and our goal is to take the derivative of <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/e6163d8c6e3f44778dbc5214fe4430c9.png" alt=" h(g(x)) " scale="0.0175" baseline="0.25" inspect="false" />.
+      </p>
+    </stack>
+
+
+  </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!--    SECTION 2    -->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Chain Rule</p>
+
+    <stack style="contentBG">
+      <p style="centerText">
+        Let <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/8ab1bdca581f4b5b8bfa2c01e7841744.png" alt=" f(x) = h(g(x)) " scale="0.0175" baseline="0.25" inspect="false" />
+      </p>
+      <p style="centerText">
+        The Chain rule tells us that the derivative of <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/8f8f85822c684671a2ca93cef45f8ee4.png" alt=" f(x) " scale="0.0175" baseline="0.25" inspect="false" />, is equal to:
+      </p>
+      <p style="centerText">
+        <style>
+          <marginBottom>40</marginBottom>
+        </style>
+        <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/cabb399ef06049ad831257fa47eeabb0.png" alt=" f'(x) = h'(g(x)) \cdot g'(x) " scale="0.0175" baseline="0.25" inspect="false" />
+      </p>
+
+
+      <style name="myWrap">
+        <widthPercentage>0.93</widthPercentage>
+        <horizontalAlignment>center</horizontalAlignment>
+      </style>
+
+      <style name="titleP">
+        <marginTop>50</marginTop>
+        <marginBottom>30</marginBottom>
+        <size scale="large" />
+        <foreground color="91 90 90" />
+      </style>
+    </stack>
+
+
+      <p style="sectionHeading">Examples</p>
+
+
+
+    <stack style="contentBG">
+
+      <stack>
+        <style>
+          <horizontalAlignment>center</horizontalAlignment>
+          <marginBottom>60</marginBottom>
+        </style>
+
+        <p style="subSectionHeading">Example 1</p>
+
+        <table widths="10% 90%" grid="false">
+          <row>
+            <column>
+              <image src="resources\question.png" inspect="false" />
+            </column>
+            <column>
+              <p>Let <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/e2c269f9869b443bb58bd6bbb1dca344.png" alt=" F(x) = (3x + 1)^{3} " scale="0.0175" baseline="0.25" inspect="false" />, find <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/c468fb4522bb45178227f4fd8277845c.png" alt="F'(x)" scale="0.0175" baseline="0.25" inspect="false" /> :</p>
+            </column>
+          </row>
+        </table>
+
+
+
+        <p>Let <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/263b9d5acb574105a81e26ad7cf800dd.png" alt=" h(x) " scale="0.0175" baseline="0.25" inspect="false" /> be the outside function and <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/4bc87a7b08a74f1b8dc3342c623b48f1.png" alt=" g(x) " scale="0.0175" baseline="0.25" inspect="false" /> be the inside function. In this case we get: </p>
+
+        <stack orientation="horizontal">
+          <style>
+            <widthPercentage>0.4</widthPercentage>
+          </style>
+          <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/cddd3c49c2cf495a9dbccbe9a6db2645.png" alt=" h(x) = (-)^{3} " scale="0.0175" baseline="0" inspect="true" /></p>
+          <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/edcd5ca6d9ad4999bc3046f2b3537ce1.png" alt=" g(x) = 3x + 1 " scale="0.0175" baseline="0" inspect="true" /></p>
+        </stack>
+
+
+        <p>
+          <style>
+            <marginTop>35</marginTop>
+          </style>
+          By applying the <b> Power rule </b>, we get:
+        </p>
+        <stack orientation="horizontal">
+          <style>
+            <widthPercentage>0.4</widthPercentage>
+          </style>
+          <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/bbedde781b154c77bcbd1f7245ecb4aa.png" alt=" h'(x) = 3(-)^{2} " scale="0.0175" baseline="0" inspect="true" /></p>
+          <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/53ada6d669854783bfe2d4bb3771ecb1.png" alt=" g'(x) = 3 " scale="0.0175" baseline="0" inspect="true" /></p>
+          <style>
+            <marginBottom>35</marginBottom>
+          </style>
+        </stack>
+
+
+
+        <p>
+          Finally, by applying the <b>Chain rule</b>, we get:
+        </p>
+
+        <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/b68f25d55b1b45669a0da19390d8ac20.png" alt=" F'(x) = 3(3x + 1)^{2} \cdot (3)  " scale="0.0175" baseline="0" inspect="true" /></p>
+        <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/4eefa553f104460cab922f75c83f0e26.png" alt=" F'(x) = 9(3x + 1)^{2} " scale="0.0175" baseline="0" inspect="true" /></p>
+
+      </stack>
+    </stack>
+
+    <p>
+      <br />
+    </p>
+
+    <stack style="contentBG">
+      <p style="subSectionHeading">Example 2</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/dcda1fc6af7849378a18ec9f02bde352.png" alt=" F(x) = (x^{2} + 3)^{7}, " scale="0.0175" baseline="0.25" inspect="false" /> find <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/fd4f8735804743e39d067e92d72e1f7f.png" alt=" F'(x): " scale="0.0175" baseline="0.25" inspect="false" /></p>
+          </column>
+        </row>
+      </table>
+
+      <stack name="answerWrap" style="collapsed">
+        <p style="subSectionHeading">Answer</p>
+        <table name="table" widths="10% 90%" grid="false">
+          <row>
+            <column>
+              <image src="resources\answer.png" inspect="false" />
+            </column>
+            <column>
+              <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/d17e0728f6fb4fe7a6004ef79d6af7d7.png" alt=" f(x) = (-)^{7} " scale="0.0175" baseline="0.25" inspect="false" /> and <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/3026a86497274a2d884c28a0b944fdd2.png" alt=" g(x) = (x^{2} + 3) " scale="0.0175" baseline="0.25" inspect="false" /></p>
+              <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/d30954bae5c04ae59602469de1d988ce.png" alt=" f'(x) =  7(-)^{7 -1} " scale="0.0175" baseline="0.25" inspect="false" /> and <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/508f854258ae4e359ca8b4cb5ed009e2.png" alt=" g'(x) = 2x " scale="0.0175" baseline="0.25" inspect="false" /></p>
+              <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/901e64d89b47436d9e64b0c068e33fac.png" alt=" F'(x) = 7(x^{2} + 3)^{6} \cdot 2x " scale="0.0175" baseline="0" inspect="true" /></p>
+              <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/7d88c6a04a474eafbcae2f9e3858f6e4.png" alt=" F'(x) = 14x(x^{2} + 3)^{6} " scale="0.0175" baseline="0" inspect="true" /></p>
+            </column>
+          </row>
+        </table>
+      </stack>
+
+      <button name="button1" content="Show Answer">
+        <onClick>
+          if button1.Text == "Show Answer" then
+          answerWrap.Style.Visibility = "visible";
+          button1.Text = "Hide Answer"
+          else
+          answerWrap.Style.Visibility = "collapsed";
+          button1.Text = "Show Answer"
+          end
+        </onClick>
+      </button>
+
+    </stack>
+
+    <p>
+      <br />
+    </p>
+
+    <stack style="contentBG">
+      <p style="subSectionHeading">Example 2</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/69467fa6980849d6ba94326a4013093a.png" alt=" F(x) = sin(2x), " scale="0.0175" baseline="0.25" inspect="false" /> find <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/fd4f8735804743e39d067e92d72e1f7f.png" alt=" F'(x): " scale="0.0175" baseline="0.25" inspect="false" /></p>
+          </column>
+        </row>
+      </table>
+
+      <stack name="answerWrap" style="collapsed">
+        <p style="subSectionHeading">Answer</p>
+        <table name="table" widths="10% 90%" grid="false">
+          <row>
+            <column>
+              <image src="resources\answer.png" inspect="false" />
+            </column>
+            <column>
+              <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/4f3b7aba310642779f55f25b0c4b6178.png" alt=" f(x) = sin(x) " scale="0.0175" baseline="0.25" inspect="false" /> and <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/5f760949e75c404aa549885b7da02dfc.png" alt=" g(x) = 2x " scale="0.0175" baseline="0.25" inspect="false" /></p>
+              <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/9b037f3ed34e451e919c3910380519c2.png" alt=" f'(x) =  cos(x) " scale="0.0175" baseline="0.25" inspect="false" /> and <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/588305646ce6452a9fd6da2e448e2870.png" alt=" g'(x) = 2 " scale="0.0175" baseline="0.25" inspect="false" /></p>
+              <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/b980e08e9e8145aa99b74d145040eb03.png" alt=" F'(x) = cos(2x) \cdot 2 " scale="0.0175" baseline="0" inspect="true" /></p>
+              <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/2c539007b5d74e918c719a0299acbacc.png" alt=" F'(x) = 2cos(2x) " scale="0.0175" baseline="0" inspect="true" /></p>
+            </column>
+          </row>
+        </table>
+      </stack>
+
+      <button name="button1" content="Show Answer">
+        <onClick>
+          if button1.Text == "Show Answer" then
+          answerWrap.Style.Visibility = "visible";
+          button1.Text = "Hide Answer"
+          else
+          answerWrap.Style.Visibility = "collapsed";
+          button1.Text = "Show Answer"
+          end
+        </onClick>
+      </button>
+
+    </stack>
+    <p>
+      <style>
+        <marginBottom>50</marginBottom>
+      </style>
+    </p>
+  </sectionNoTitle>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!--    Section 3     -->
+
+
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Practice</p>
+
+    <stack style="contentBG">
+
+
+      <p style="subSectionHeading">Question 1</p>
+
+
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>The following table lists the values of functions <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/6661f92104a54d91a124d02f7630cacb.png" alt=" f " scale="0.0175" baseline="0.194444" inspect="false" /> and <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/3d38ea42eb7a42a488679abcd457bc74.png" alt="g" scale="0.0175" baseline="0.194444" inspect="false" />, and of their derivatives, <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/13678c5653d946768d59a403601ca871.png" alt="f'" scale="0.0175" baseline="0.194444" inspect="false" /> and <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/2122015e2e8140eb9ea2f5f170e6b0cf.png" alt="g'" scale="0.0175" baseline="0.194444" inspect="false" />, for the <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/da8b81388ed247fd9a195f9e84d958f7.png" alt="x" scale="0.0175" baseline="0" inspect="false" /> values -2 and 4.</p>
+          </column>
+        </row>
+      </table>
+
+
+      <table grid="false">
+        <head>
+          <column>
+            <p>x</p>
+          </column>
+          <column>
+            <p>f(x)</p>
+          </column>
+          <column>
+            <p>g(x)</p>
+          </column>
+          <column>
+            <p>f'(x)</p>
+          </column>
+          <column>
+            <p>g'(x)</p>
+          </column>
+        </head>
+        <row>
+          <column>
+            <p>-2</p>
+          </column>
+          <column>
+            <p>5</p>
+          </column>
+          <column>
+            <p>-1</p>
+          </column>
+          <column>
+            <p>1</p>
+          </column>
+          <column>
+            <p>6</p>
+          </column>
+        </row>
+
+        <row>
+          <column>
+            <p>4</p>
+          </column>
+          <column>
+            <p>-4</p>
+          </column>
+          <column>
+            <p>-2</p>
+          </column>
+          <column>
+            <p>0</p>
+          </column>
+          <column>
+            <p>8</p>
+          </column>
+        </row>
+      </table>
+
+      <p>Let <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/93c2068cc7c74edaa19789a1963d85d4.png" alt=" F(x)= f(g(x))" scale="0.0175" baseline="0.25" inspect="false" />, find <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/a91bfed7039442f2b15ebe63585e250e.png" alt=" F'(4)" scale="0.0175" baseline="0.25" inspect="false" />.</p>
+
+      <table name="table1" grid="false" widths="10% 90%">
+        <row name="row1">
+          <column>
+            <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/7968b0b12cff4e47825d3846d873582b.png" alt=" F'(4) = " scale="0.0175" baseline="0" inspect="true" /></p>
+          </column>
+          <column name="column2">
+            <textInput name="userInput" spelling="false">
+              <placeholder>Insert answer here</placeholder>
+            </textInput>
+          </column>
+        </row>
+      </table>
+
+
+      <p name="answerLabel" style="collapsed centerText">  </p>
+
+      <stack name="explanationWrap" style="collapsed">
+        <p>
+          <style>
+            <size scale="small" />
+            <marginTop>55</marginTop>
+            <marginBottom>25</marginBottom>
+            <horizontalAlignment>center</horizontalAlignment>
+          </style>
+          <b>Question 1 - Explanation</b>
+        </p>
+        <p style="centerText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/28b04b54b8e84419ba87ebbeacd8170c.png" alt=" F'(4) = f'(g(x)) \cdot g'(x) " scale="0.0175" baseline="0" inspect="true" /></p>
+        <p style="centerText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/13f6986d10124c859061490e1e5d6e5a.png" alt=" F'(4) = f'(g(4)) \cdot g'(4) " scale="0.0175" baseline="0" inspect="true" /></p>
+        <p style="centerText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/8b32b48dbe324a7daa375f60e1155f1b.png" alt=" F'(4) = f'(-2) \cdot 8 " scale="0.0175" baseline="0" inspect="true" /></p>
+        <p style="centerText">
+          <style>
+            <marginBottom>40</marginBottom>
+          </style>
+          <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/a55c0a03ed2e4d4e8668a2ff82c1e5aa.png" alt=" F'(4) = 1 \cdot 8  = 8 " scale="0.0175" baseline="0.25" inspect="false" />
+        </p>
+      </stack>
+
+      <stack orientation="horizontal">
+        <button content="Check Answer">
+          <onClick>
+
+            answerNumber = tonumber(table1.row1.column2.userInput.Text)
+
+            if answerNumber == 8 then
+            answerLabel.Text = "Correrct!"
+            else
+            answerLabel.Text = "Incorrect. Try again!"
+            end
+
+            answerLabel.Style.Visibility = "visible"
+          </onClick>
+        </button>
+        <button name="explanationButton" content="Explanation">
+          <style>
+            <background color="255 255 255" />
+            <foreground color="0 0 0" />
+          </style>
+          <onClick>
+            answerLabel.Style.Visibility = "collapsed"
+
+
+            if explanationButton.Text == "Explanation" then
+            explanationWrap.Style.Visibility = "visible"
+            explanationButton.Text = "Hide Explanation"
+            else
+            explanationWrap.Style.Visibility = "collapsed"
+            explanationButton.Text = "Explanation"
+            end
+
+
+          </onClick>
+        </button>
+      </stack>
+
+
+
+    </stack>
+
+
+
+
+
+
+
+
+
+    <stack style="contentBG">
+
+
+      <p style="subSectionHeading">Question 2</p>
+
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p> Let <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/0a92ccbd0cf74db0a0512d052585e4b4.png" alt=" F(x) = (4x^{2} + 25)^{15} " scale="0.0175" baseline="0.25" inspect="false" />. Find <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/2d1c717619774f4e8f7d67e3c2aae154.png" alt=" F'(x)" scale="0.0175" baseline="0.25" inspect="false" />:</p>
+          </column>
+        </row>
+      </table>
+
+
+
+
+
+
+
+      <p name="answer" style="collapsed">B</p>
+      <script>
+        local selection = -1;
+        local deselectedColor = color.silver;
+        local selectedColor = color.rgb(50, 133, 184);
+
+        local function chooseButton(i)
+        if selection &gt; 0 then
+        stack.table:Child(selection):Child(1):Child(1).Style.BackgroundColor = deselectedColor;
+        end
+        stack.table:Child(i):Child(1):Child(1).Style.BackgroundColor = selectedColor;
+        selection = i;
+        end
+      </script>
+      <stack orientation="horizontal" name="stack">
+        <table name="table" widths="10% 90%" grid="false">
+          <style name="buttons">
+            <foreground color="white" />
+            <background color="silver" />
+          </style>
+          <row name="row">
+
+            <column>
+              <button content="A">
+                <onClick>final.Text="A"; chooseButton(1);</onClick>
+              </button>
+            </column>
+
+            <column>
+              <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/c35224c3f762406b9d56f83e29979e09.png" alt=" F'(x) = 30(4x + 25)^{14} \cdot 8x " scale="0.0175" baseline="0" inspect="true" /></p>
+            </column>
+
+          </row>
+
+          <row>
+
+            <column>
+              <button content="B">
+                <onClick>final.Text="B"; chooseButton(2);</onClick>
+              </button>
+            </column>
+
+            <column>
+              <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/0f64ae8317734d6e9fcd274f8e68e613.png" alt=" F'(x) = 15(4x^{2} + 25)^{14} \cdot 8x" scale="0.0175" baseline="0" inspect="true" /></p>
+            </column>
+
+          </row>
+
+          <row>
+
+            <column>
+              <button content="C">
+                <onClick>final.Text="C"; chooseButton(3);</onClick>
+              </button>
+            </column>
+
+            <column>
+              <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/e563d54241264d67ac4bc3baf7b4d564.png" alt=" F'(x) = 15(8x)^{14} \cdot 8x " scale="0.0175" baseline="0" inspect="true" /></p>
+            </column>
+
+          </row>
+        </table>
+      </stack>
+
+      <p name="final" style="collapsed" />
+      <stack name="hint" style="collapsed">
+        <p style="centerText">  Not quite there, try again ! </p>
+      </stack>
+      <stack name="solution" style="collapsed">
+        <p style="centerText"> Correct! <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/ba8bd55267474bda8ea32c322d07d1ff.png" alt=" F'(x) = 15(4x^{2} + 25)^{14} \cdot 8x" scale="0.0175" baseline="0.25" inspect="false" /> </p>
+      </stack>
+
+
+
+
+
+      <button content="Check Answer">
+        <onClick>
+          if string.lower(final.Text) == string.lower(answer.Text) then
+          solution.Style.Visibility = "visible";
+          hint.Style.Visibility = "collapsed";
+          stack.table:Child(selection):Child(1):Child(1).Style.BackgroundColor = color.green;
+          else
+          solution.Style.Visibility = "collapsed";
+          hint.Style.Visibility = "visible";
+          stack.table:Child(selection):Child(1):Child(1).Style.BackgroundColor = selectedColor;
+          end
+        </onClick>
+      </button>
+
+    </stack>
+
+
+
+
+
+
+
+
+
+    <p>
+      <style>
+        <marginBottom>120</marginBottom>
+      </style>
+    </p>
+  </sectionNoTitle>
+
+
+
+
+  <sectionNoTitle>
+    <web url="https://drive.google.com/open?id=10lPjwNN9ckChdFoB-I3eAnFgoVE1D3zIfA9vJMXO_VQ">
+      <style>
+        <aspectRatio>2</aspectRatio>
+      </style>
+    </web>
+  </sectionNoTitle>
+
+
+
+
+
+
+</document>

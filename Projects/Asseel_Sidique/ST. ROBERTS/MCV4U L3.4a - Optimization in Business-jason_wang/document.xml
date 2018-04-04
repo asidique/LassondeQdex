@@ -1,0 +1,412 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="GE44458E9_E7A8_4A23_B611_DD7B7BF89AA0">
+
+	<!-- Meta Data -->
+	<metadata>
+		<title>MCV4U L3.4a - Optimization in Business</title>
+		<creator>jason_wang</creator>
+		<abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+		<coverImage src="resources/calculator.png" />
+	</metadata>
+
+	<include src="documentStyle.xml" />
+
+	<!-- Header & Footer -->
+	<header style="backgroundColor1">
+		<stack style="center" orientation="horizontal">
+			<p style="fontColor1">Ms. Koon</p>
+			<p style="fontColor1 rightText">MCV4U</p>
+		</stack>
+	</header>
+	<footer style="backgroundColor1">
+		<stack orientation="horizontal">
+			<image src="resources/logo1.png" style="tiny" />
+			<p style="fontColor1">
+				<style>
+					<numbering counter="pages" suffix="true" />
+					<textAlignment>center</textAlignment>
+					<marginTop>30</marginTop>
+					<foreground color="255 255 255" />
+				</style>
+			</p>
+			<image src="resources/logo2.png" style="tiny" />
+		</stack>
+	</footer>
+	<!-- Header & Footer END -->
+
+	<!--section 1 Optimization in Business-->
+	<section name="section1">
+		<title style="chaptNumTitle">
+			<size scale="xlarge">L3.4a</size>
+		</title>
+		<p style="chapterTitle">Optimization in Business</p>
+		<stack style="wrap">
+			<p style="sectionTitle1">
+				<size scale="large">Background</size>
+			</p>
+			<p style="justified marginTop15 marginBottom50">A market research shows that a local bubble tea shop sells 2000 cups of bubble tea a day and the average price of a drink is <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/3ac8f5889693416aa510675c3744758e.png" alt="\$5.50" scale="0.0175" baseline="0.055554" inspect="false" />. The research further shows that for every 10 cents increase in the average price, sales will go down by 40 drinks sold. The average cost of one drink is <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/3efeee87e6cf4d7b9c2491e479dfa75b.png" alt="\$1.50" scale="0.0175" baseline="0.055554" inspect="false" />.</p>
+			<style>
+				<counter name="bullet" format="lowerRoman" />
+			</style>
+			<style name="questionBullet">
+				<increment counter="bullet" />
+				<numbering counter="bullet" mode="flat" pattern="#) " />
+			</style>
+			<p style="questionBullet">Model the profit with a function.</p>
+			<p style="questionBullet">Determine the sales volume required to generate maximum profit.</p>
+			<p style="questionBullet">What other extraneous factors should you consider if you were to invest in this business?</p>
+		</stack>
+	</section>
+
+	<!--P.2-->
+	<sectionNoTitle name="section2">
+		<p style="sectionTitle1 marginTop50">Determine a function P(x) to model profit</p>
+		<stack style="wrap themeColour">
+			<stack name="stack" style="wrap">
+				<p>Profit of this business can be determined using the following word equation:</p>
+				<p style="centeredText">
+					<![CDATA[
+]]><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/6ecd119bad46448f912b298a340b174b.png" alt="\begin{matrix} Profit &amp; = &amp; Revenue-Cost &amp; \; \\ &amp; = &amp; (\#\;of\;drinks\;sold) &amp; (sale\;price-cost) \end{matrix} " scale="0.0175" baseline="0.95" inspect="false" /><![CDATA[
+								]]>
+				</p>
+				<p>To write this in mathematical form, we will start with the existing sales and prices, and use a variable, <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/da8b81388ed247fd9a195f9e84d958f7.png" alt="x" scale="0.0175" baseline="0" inspect="false" />, to keep track of the number of changes made to the sale price.</p>
+				<p>
+					Let <b><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/da8b81388ed247fd9a195f9e84d958f7.png" alt="x" scale="0.0175" baseline="0" inspect="false" /></b> be the number of 10 cents increase in price and <b><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/5c2aa3fb57e847c0b2cce24cacf7afff.png" alt="P(x)" scale="0.0175" baseline="0.25" inspect="false" /></b> be profit
+				</p>
+				<p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/7181417a432647ddb92a59d26464545a.png" alt="P(x)=(2000-40x)(5.50+0.10x-1.50)" scale="0.0175" baseline="0" inspect="true" /></p>
+				<p>Thus, the function that can be used to model profit with respect to the number of changes to price is:</p>
+				<p style="centeredText boldText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/6217dada77934686aec06d1f28b65b32.png" alt="P(x)=(2000-40x)(4+0.1x)" scale="0.0175" baseline="0" inspect="true" /></p>
+				<p>Let’s take a closer look at this function to make meaning of <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/3a60f3077be948f4ba35c5a030a970f6.png" alt="P" scale="0.0175" baseline="0.194444" inspect="false" /> and <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/da8b81388ed247fd9a195f9e84d958f7.png" alt="x" scale="0.0175" baseline="0" inspect="false" />.</p>
+
+				<button name="graphButton1" content="What does this graph look like?&#xD; How do you interpret P(2)? P(-10)?">
+					<onClick>
+						stack.graphStack.Style.Visibility = "visible";
+						graphButton1.Style.Visibility = "collapsed";
+					</onClick>
+				</button>
+
+				<stack name="graphStack" style="collapsed">
+					<image src="resources/g1.png" />
+					<p style="justified">The ordered pairs <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/80557a076fa3428e934c2cd917ae6a69.png" alt="(x, P(x))" scale="0.0175" baseline="0.25" inspect="false" /> on the graph tell you more than just changes and profit. They allow you to determine the sale price and sales. For example:</p>
+					<table grid="true" widths="10% 15% 15% 30% 30%">
+						<head>
+							<column></column>
+							<column>
+								<p>Profit <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/50ba7d69eb8c47d1aa256c0fb6a9e19b.png" alt="(\$)" scale="0.0175" baseline="0.25" inspect="false" /></p>
+							</column>
+							<column>
+								<p># of changes</p>
+							</column>
+							<column>
+								<p>Sale price <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/50ba7d69eb8c47d1aa256c0fb6a9e19b.png" alt="(\$)" scale="0.0175" baseline="0.25" inspect="false" /></p>
+							</column>
+							<column>
+								<p>Sales (# of cups)</p>
+							</column>
+						</head>
+						<data>
+							<image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/f08bc977339e43ecac5dae73986d014d.png" alt="P(2)" scale="0.0175" baseline="0.25" inspect="false" />,8064,2,<image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/2a927e802a9d48d4b4ab4412a5685ca3.png" alt="4+0.1(2)=4.20" scale="0.0175" baseline="0.25" inspect="false" />,<image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/d29203044d77454dac8ba837d59de26e.png" alt="2000-4(2)=1992" scale="0.0175" baseline="0.25" inspect="false" />;
+							<image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/77ebafae497b490a9b6018cf40028781.png" alt="P(-10)" scale="0.0175" baseline="0.25" inspect="false" />,7200,-10,<image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/e0c476f0013e4e2eb096b1842efd4107.png" alt="4+0.1(-10)=3.00" scale="0.0175" baseline="0.25" inspect="false" />,<image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/57d22dac1861422594ae70f1d75bb584.png" alt="2000-4(-10)=2040" scale="0.0175" baseline="0.25" inspect="false" />;
+						</data>
+					</table>
+
+					<p>It is also clear that the current sale price of <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/54ae36ec0bd24b2394e8c16e5d5c1333.png" alt="\$4" scale="0.0175" baseline="0.055554" inspect="false" /> does not generate maximum profit.</p>
+				</stack>
+			</stack>
+		</stack>
+	</sectionNoTitle>
+	
+	<!--P.3-->
+	<sectionNoTitle name="section3">
+		<p style="sectionTitle1 marginTop50">Boundary conditions</p>
+		<stack style="wrap themeColour">
+			<stack style="wrap">
+				<p>Next, we will use optimization to determine the maximum profit. To do this, you also need to determine boundary conditions. If you are planning to invest in this business, what are some determining factors that may affect your business decisions?</p>
+
+				<p style="bullet">How many drinks can your shop make in an hour?</p>
+				<p style="bullet">How low/high should you set the price? This can affect your brand image.</p>
+
+				<p>For instance, we will say this shop can handle a daily sales volume of 2100 drinks and it must at least break-even. This sets our boundaries of:</p>
+				<table grid="false" widths="45% 10% 45%">
+					<row>
+						<column>
+							<p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/ab0ea08fbef643d481aac7b4216913c6.png" alt="2000-4x \leq 2100" scale="0.0175" baseline="0" inspect="true" /></p>
+							<p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/6a3e3eff149749d29e6aac5b6aa207b3.png" alt="-4x \leq 100" scale="0.0175" baseline="0" inspect="true" /></p>
+							<p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/06be140e53374d77b177b309e7be79c0.png" alt="x \geq -25" scale="0.0175" baseline="0" inspect="true" /></p>
+						</column>
+						<column>
+							<p style="centeredText">and</p>
+						</column>
+						<column>
+							<p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/4d92bd431ff44fd6abdce9b365f8e0e2.png" alt="(2000-40x)(4+0.1x) \geq 0" scale="0.0175" baseline="0" inspect="true" /></p>
+							<p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/3559fe3e6c944372afab0f0242107054.png" alt="-40 \leq x \leq 50" scale="0.0175" baseline="0" inspect="true" /></p>
+						</column>
+					</row>
+				</table>
+				<p>
+					Putting this together, we have <b><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/b01e69af21a8413dbbe189e46f4b5756.png" alt="-25 \leq x \leq 50" scale="0.0175" baseline="0.135971" inspect="false" /></b>.
+				</p>
+			</stack>
+		</stack>
+	</sectionNoTitle>
+
+	<!--P.4-->
+	<sectionNoTitle name="section4">
+		<p style="sectionTitle1 marginTop50">Optimization and test for absolute maximum profit</p>
+		<stack style="wrap themeColour">
+			<stack style="wrap">
+				<p>You’ve learned previously that when a function reaches its local max/min, the slope of its tangent is 0. So:</p>
+				<p style="centeredText">
+					<image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/3b3d463ef6484f509c43abeb2c05e002.png" alt="\begin{matrix}P(x)&amp;=&amp;(2000-40x)(4+0.1x)\qquad&amp; \\ &amp;=&amp;8000+200x-160x-4x^2&amp; \\ &amp;=&amp;8000+40x-4x^2\qquad\qquad&amp; \end{matrix}" scale="0.0175" baseline="1.55" inspect="false" />
+				</p>
+				<p>Take the first derivative of <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/5c2aa3fb57e847c0b2cce24cacf7afff.png" alt="P(x)" scale="0.0175" baseline="0.25" inspect="false" /> and set it to 0:</p>
+				<p style="centeredText">
+					<image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/0ce69bdfb3e24292b40621edd665e62b.png" alt="\begin{matrix}P'(x)&amp;=&amp;40-8x&amp; \\ \qquad 0&amp;=&amp;40-8x&amp; \\ \qquad x&amp;=&amp;5 \qquad \end{matrix}" scale="0.0175" baseline="1.55" inspect="false" /><![CDATA[
+										]]>
+				</p>
+				<p>Test absolute max using the boundaries determined:</p>
+				<p style="centeredText">
+					<![CDATA[
+]]><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/355b0b64b89c49f180f69bcdd5c81868.png" alt="P(-25)=8000+40(-25)-4(-25)^2=4500" scale="0.0175" baseline="0.25" inspect="false" /><![CDATA[
+]]><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/53f6a111d9dc4f96af06d8cf22d08cce.png" alt="P(5)=8000+40(5)-4(5)^2=8100" scale="0.0175" baseline="0.25" inspect="false" /><![CDATA[
+]]><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/a38f2f69e7bc4c48b4e519e08c640537.png" alt="P(50)=8000+40(50)-4(50)^2=0" scale="0.0175" baseline="0.25" inspect="false" /><![CDATA[
+										]]>
+				</p>
+				<p>Therefore, an absolute profit of <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/493f4529bc2943529db8a1c2cafbe2c7.png" alt="\$8100" scale="0.0175" baseline="0.055554" inspect="false" /> is achieved when <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/a3ebe2dbc5214107b10743eedc102098.png" alt="x = 5" scale="0.0175" baseline="0" inspect="false" />. This implies a sales volume of 1980 drinks and a sale price of <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/770e740f0f40422baba999b3c4b166a4.png" alt="\$4.50" scale="0.0175" baseline="0.055554" inspect="false" />.</p>
+			</stack>
+		</stack>
+	</sectionNoTitle>
+
+	<!--P.5-->
+	<sectionNoTitle name="section5">
+		<stack style="wrap themeColour" name="mainStackWrapper">
+			<stack style="wrap" name="mainStack">
+				<p style="title">
+					<size scale="xlarge">Practice</size>
+				</p>
+				<p>There are 500 rooms in a hotel in Kyoto.  During cherry blossom season, it receives 420 bookings at a nightly rate of USD <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/22c641e3d73f422fa347f88b1c2b6656.png" alt="\$200" scale="0.0175" baseline="0.055554" inspect="false" />. Research shows that 5 more rooms will be sold for every <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/3de362cfd0934b1cbe139c52d83ed6a7.png" alt="\$25" scale="0.0175" baseline="0.055554" inspect="false" /> decrease in price. The hotel manager must ensure the hotel is at least 40% full every night. Let x represent the number of <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/3de362cfd0934b1cbe139c52d83ed6a7.png" alt="\$25" scale="0.0175" baseline="0.055554" inspect="false" /> decrease in price.</p>
+
+				<!--Problem 1-->
+				<stack>
+					<p style="title qNum"></p>
+					<table grid="false" widths="10% 90%">
+						<row>
+							<column>
+								<image src="curriculumThemePack\question.png" inspect="false" />
+							</column>
+							<column>
+								<p>Model the revenue with a function.</p>
+							</column>
+						</row>
+					</table>
+					<p style="title">ANSWER</p>
+					<p name="answerA" style="collapsed">420</p>
+					<p name="answerB" style="collapsed">5</p>
+					<p name="answerC" style="collapsed">200</p>
+					<p name="answerD" style="collapsed">25</p>
+					<table name="table" grid="false" widths="10% 8% 14% 5% 14% 8% 14% 5% 14% 8%">
+						<row name="row">
+							<column>
+								<image src="curriculumThemePack\answer.png" inspect="false" />
+							</column>
+							<column>
+								<p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/41346e2acc1c4bb9b925d1d4655dc5a3.png" alt="R=(" scale="0.0175" baseline="0" inspect="true" /></p>
+							</column>
+							<column name="aCol">
+								<textField name="inputA" placeholder="_____" />
+							</column>
+							<column>
+								<p> <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/650889cc976f4d30922df660e08710c7.png" alt="+" scale="0.0175" baseline="0" inspect="true" /> </p>
+							</column>
+							<column name="bCol">
+								<textField name="inputB" placeholder="_____" />
+							</column>
+							<column>
+								<p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/7d87883570f34e1284b8d7a61f8b4f7b.png" alt="x)(" scale="0.0175" baseline="0" inspect="true" /></p>
+							</column>
+							<column name="cCol">
+								<textField name="inputC" placeholder="_____" />
+							</column>
+							<column>
+								<p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/8bf4158a2a564d58801567851ce43394.png" alt="-" scale="0.0175" baseline="0" inspect="true" /></p>
+							</column>
+							<column name="dCol">
+								<textField name="inputD" placeholder="_____" />
+							</column>
+							<column>
+								<p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/032560c2323f478f8474e84ac9272c33.png" alt="x)" scale="0.0175" baseline="0" inspect="true" /></p>
+							</column>
+						</row>
+					</table>
+					<stack name="solution" style="collapsed">
+						<p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/5081640e7f6a426290913c767a1c4f54.png" alt="R = (\underline{\;420\;} + \underline{\;5\;} x)(\underline{\;200\;}-\underline{\;25\;} x)" scale="0.0175" baseline="0" inspect="true" /></p>
+					</stack>
+					<button content="Check Answer">
+						<onClick>
+							solution.Style.Visibility = "visible";
+						</onClick>
+					</button>
+				</stack>
+
+				<!--Problem 2-->
+				<stack>
+					<p style="title qNum"></p>
+					<table grid="false" widths="10% 90%">
+						<row>
+							<column>
+								<image src="curriculumThemePack\question.png" inspect="false" />
+							</column>
+							<column>
+								<p>Determine the test boundaries for x.</p>
+							</column>
+						</row>
+					</table>
+					<p style="title">ANSWER</p>
+					<p name="answerA" style="collapsed">-44</p>
+					<p name="answerB" style="collapsed">16</p>
+					<table name="table" grid="false" widths="10% 30% 20% 30% 10%">
+						<row name="row">
+							<column>
+								<image src="curriculumThemePack\answer.png" inspect="false" />
+							</column>
+							<column name="aCol">
+								<textField style="centeredText" name="inputA" placeholder="__________" />
+							</column>
+							<column>
+								<p style="centeredText"> <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/d1297db5d82f4871a48bc261ab2d8e09.png" alt="\leq x \leq" scale="0.0175" baseline="0" inspect="true" /> </p>
+							</column>
+							<column name="bCol">
+								<textField style="centeredText" name="inputB" placeholder="__________" />
+							</column>
+							<column name="imgCol">
+							</column>
+						</row>
+					</table>
+					<stack name="solution" style="collapsed">
+						<p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/3d66dd8e0eda4af4b9b23522c6cb7d5e.png" alt="\underline{\;-44\;} \leq x \leq \underline{\;16\;}" scale="0.0175" baseline="0" inspect="true" /></p>
+					</stack>
+					<button content="Check Answer">
+						<onClick>
+							solution.Style.Visibility = "visible";
+						</onClick>
+					</button>
+				</stack>
+
+				<!--Problem 3-->
+				<stack>
+					<p style="title qNum"></p>
+					<table grid="false" widths="10% 90%">
+						<row>
+							<column>
+								<image src="curriculumThemePack\question.png" inspect="false" />
+							</column>
+							<column>
+								<p>Determine the nightly rate required to generate maximum profit.</p>
+							</column>
+						</row>
+					</table>
+					<p style="title">ANSWER</p>
+					<p name="answerA" style="collapsed">1150</p>
+					<table name="table" grid="false" widths="10% 20% 60% 10%">
+						<row name="row">
+							<column>
+								<image src="curriculumThemePack\answer.png" inspect="false" />
+							</column>
+							<column>
+								<p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/38e347a9e8ea434fad53336813904981.png" alt="\$" scale="0.0175" baseline="0" inspect="true" /></p>
+							</column>
+							<column name="aCol">
+								<textField name="inputA" placeholder="__________" />
+							</column>
+							<column name="imgCol">
+							</column>
+						</row>
+					</table>
+					<stack name="solution" style="collapsed">
+						<p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/df6638654bb144db8e98d0926daf57cf.png" alt="\$\underline{\;1150\;}" scale="0.0175" baseline="0" inspect="true" /></p>
+					</stack>
+					<button content="Check Answer">
+						<onClick>
+							solution.Style.Visibility = "visible";
+						</onClick>
+					</button>
+				</stack>
+				<stack name="fullSolution" style="collapsed">
+				<p style="title">
+					<size scale="xlarge">Full Solution</size>
+				</p>
+				<p>
+					<b>Kyoto Hotel:</b> Let <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/56b1f7b51ee14207802456084bb97df1.png" alt="x=\#\;of\;changes" scale="0.0175" baseline="0.194444" inspect="false" />
+				</p>
+
+				<style>
+					<counter name="decBullet" format="decimal" />
+				</style>
+
+				<style name="numberedBullet">
+					<increment counter="decBullet" />
+					<numbering counter="decBullet" mode="flat" />
+				</style>
+
+				<table grid="false" widths="10% 90%">
+					<row>
+						<column>
+							<p style="numberedBullet"></p>
+						</column>
+						<column>
+							<stack>
+								<p style="centeredText">
+									<image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/b0193744371847eaaeaf9f60c33070d5.png" alt="\begin{matrix}Revenue&amp;=&amp;(\#\;rooms\;sold)(price) \\ \hspace{1.0cm}R&amp;=&amp;(420+5x)(200-25x) \\ &amp;=&amp;84000-9500x-125x^2 \end{matrix}" scale="0.0175" baseline="1.55" inspect="false" /><![CDATA[
+					]]>
+								</p>
+								<p style="fontColorRed centeredText">Determine local max</p>
+								<p style="centeredText marginBottom15">
+									<image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/372a07ef649f41adbf3c93fb27b2e1ae.png" alt="\begin{matrix}R'&amp;=&amp;-9500-250x \\ 0&amp;=&amp;-9500-250x \\ x&amp;=&amp;-38\hspace{1.5cm} \end{matrix}" scale="0.0175" baseline="1.55" inspect="false" />
+								</p>
+							</stack>
+						</column>
+					</row>
+					<row>
+						<column>
+							<p style="numberedBullet"></p>
+						</column>
+						<column>
+							<stack>
+								<p style="centeredText boldText marginBottom15">Boundaries</p>
+								<p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/03adcfa521f148d5ac990fe4f52be149.png" alt="200 \leq \# \; rooms \leq 500" scale="0.0175" baseline="0" inspect="true" /></p>
+								<p style="centeredText fontColorRed small marginBottom15">where 200 is 40% of 500</p>
+								<p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/af418bfee2c8488b895311f18474e0f0.png" alt="200 \leq 420+5x \leq 500" scale="0.0175" baseline="0" inspect="true" /></p>
+								<p style="centeredText marginBottom15"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/84aab442ffec40519cd58348607f7ec6.png" alt="-44 \leq x \leq 16" scale="0.0175" baseline="0" inspect="true" /></p>
+							</stack>
+						</column>
+					</row>
+					<row>
+						<column>
+							<p style="numberedBullet"></p>
+						</column>
+						<column>
+							<stack>
+								<p style="centeredText boldText marginBottom15">Test absolute max</p>
+								<p style="centeredText">
+									<image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/2baa623af22a48adb41744cc16a3d7ff.png" alt="\begin{matrix}R(-44)&amp;=&amp;84000-9500(-44)-125(-44)^2&amp;=&amp;260000 \\ R(-38)&amp;=&amp;84000-9500(-38)-125(-38)^2&amp;=&amp;264500 \\ R(16)&amp;=&amp;84000-9500(16)-125(16)^2&amp;=&amp;-100000 \end{matrix}" scale="0.0175" baseline="1.55" inspect="false" />
+								</p>
+							</stack>
+						</column>
+					</row>
+				</table>
+				<p style="centeredText boldText marginTop15 marginBottom15">Max revenue can be reached with a nightly rate of <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/ce374bfc702a45d5bd18b6adb361a05b.png" alt="(200-25(-38))=\$1150" scale="0.0175" baseline="0.25" inspect="false" />.</p>
+				<image src="resources\solutionSheet.png" />
+				<image src="resources\g2.png" />
+
+			</stack>
+			</stack>
+		</stack>
+		
+		<button name="fullSolutionBtn" content="Check Full Solution">
+			<onClick>
+				section5.mainStackWrapper.mainStack.fullSolution.Style.Visibility = "visible";
+				fullSolutionBtn.Style.Visibility = "collapsed";
+			</onClick>
+		</button>
+	</sectionNoTitle>
+</document>

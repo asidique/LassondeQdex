@@ -1,0 +1,732 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="GF2BE3B3D_83B4_48F0_B529_1BF6D000B818">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>MCV4U – 3.1 Rectilinear Motion</title>
+    <creator>Asseel</creator>
+    <coverImage src="resources/cover.png" />
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+  </metadata>
+
+
+  <include src="resources/Utilities.xml" />
+  <include src="resources/curriculumStyles.xml" />
+
+  <!--                                      Header & Footer START                                         -->
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="whiteColor">Amanda Koon</p>
+      <p style="whiteColor rightText">MCV4U</p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/logo1.png" inspect="false" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/logo2.png" inspect="false" />
+    </stack>
+  </footer>
+
+  <!-- Cover Page -->
+  <!-- This is the standard way title pages are created. A great website to get copyright free images .. www.pexels.com
+  *** The style: "pageLayout" is defined in curriculumStylesLassonde.xml. It simply sets the content to the center and adjusts the width to 80% ***-->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">4.1 Rectilinear Motion</title>
+    <p style="sectionHeading">Introduction</p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="justifiedText">
+        Solve problems about motion along a line using the power of differential calculus. For example, given the position of a particle as a function of time s(t), find the particle's maximum velocity.
+      </p>
+    </stack>
+  </section>
+
+  <!--QUESTION STEP BY STEP LAYOUT-->
+  <!--Setup StepsController with correct number of Steps-->
+  <sectionNoTitle style="pageLayout">
+    <script>
+      local stepsController = StepsController:new({stepsStack=stepsStack, numOfSteps=4, showStepCounter=true})
+    </script>
+    <p style="sectionHeading">Step by Step</p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="subSectionHeading">Example 1</p>
+      <p style="justifiedText">The position of a particle moving along the x-axis is given by $s(t)=t^3-6t^2+9t$, where $t \geq 0$. When is the particle "speeding up"?</p>
+    </stack>
+    <stack name="stepsStack">
+      <!--Each step is a stack, and each step has alternating background colors-->
+      <!--Use Snippet to create any single step stack -->
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>"speeding up" cases</p>
+          <stack name="cont" style="invisible">
+            <p style="centeredText bullet"><![CDATA[$v(t)>0$ and $a(t)>0$]]></p>
+					  <p style="centeredText bullet"><![CDATA[$v(t)<0$ and $a(t)<0$]]></p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(1)
+          </onClick>
+        </button>
+      </stack>
+
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Get v(t)</p>
+          <stack name="cont" style="invisible">
+            <p>To get velocity $v(t)$, we solve the first derivative of $s(t)$.</p>
+					  <p style="centeredText">$s'(t) = \frac{ds}{dt} = v(t)$</p>
+					  <p style="centeredText">$v(t) = 3t^2 - 12t + 9$</p>
+
+					  <p>Now we can get the inital velocity, which help us graph: $v(0)=9$</p>
+					  <p>Also, we need to find the time(s) where velocity is 0.</p>
+					  <p style="centeredText"><![CDATA[$ \begin{matrix} 3t^2 - 12t + 9 & = & 0 \\[6pt] t^2-4t+3&=&0 \\[6pt] (t-3)(t-1)&=&0 \end{matrix}$]]></p>
+					  <p style="centeredText">$t=1 \quad or \quad t=3$</p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(2)
+          </onClick>
+        </button>
+      </stack>
+
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Get a(t)</p>
+          <stack name="cont" style="invisible">
+            <p style="justifiedText">To get acceleration, we will need to calculate the first derivative of $v(t)$.</p>
+					  <p style="centeredText">$v'(t)=\frac{dv}{dt}=a(t)$</p>
+					  <p style="centeredText">$a(t)=6t-12$</p>
+					  <p style="justifiedText">Then find the time where acceleration is 0.</p>
+					  <p style="centeredText"><![CDATA[$\begin{matrix}6t-12&=&0\\[6pt]6t&=&12\\[6pt]t&=&2\end{matrix}$]]></p>
+					  <p style="justifiedText">Therefore, the particle "speeding up" at <![CDATA[$1<t<2$ and $t>3$]]></p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(3)
+          </onClick>
+        </button>
+      </stack>
+
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Show Graph</p>
+          <stack name="cont" style="invisible">
+            <table name="controlTable" grid="false">
+							<style name="blue">
+								<background color="dodgerBlue" />
+								<foreground color="white" />
+							</style>
+							<style name="red">
+								<background color="quanserRed" />
+								<foreground color="white" />
+							</style>
+							<style name="green">
+								<background color="yellowGreen" />
+								<foreground color="white" />
+							</style>
+							<row>
+								<column>
+									<button name="sButton" content="Hide s(t)" style="red">
+										<onClick>
+											if sButton.Text == "Hide s(t)" then
+											controlTable.Parent.myPlot.s.Visible = false;
+											sButton.Text = "Show s(t)";
+											sButton.Style.BackgroundColor = color.transparent;
+											sButton.Style.ForegroundColor = color.quanserRed;
+											else
+											controlTable.Parent.myPlot.s.Visible = true;
+											sButton.Text = "Hide s(t)";
+											sButton.Style.BackgroundColor = color.quanserRed;
+											sButton.Style.ForegroundColor = color.white;
+											end
+
+										</onClick>
+									</button>
+								</column>
+								<column>
+									<button name="vButton" content="Hide v(t)" style="blue">
+										<onClick>
+											if vButton.Text == "Hide v(t)" then
+											controlTable.Parent.myPlot.v.Visible = false;
+											vButton.Text = "Show v(t)";
+											vButton.Style.BackgroundColor = color.transparent;
+											vButton.Style.ForegroundColor = color.dodgerBlue;
+											else
+											controlTable.Parent.myPlot.v.Visible = true;
+											vButton.Text = "Hide v(t)";
+											vButton.Style.BackgroundColor = color.dodgerBlue;
+											vButton.Style.ForegroundColor = color.white;
+											end
+										</onClick>
+									</button>
+								</column>
+								<column>
+									<button name="aButton" content="Hide a(t)" style="green">
+										<onClick>
+											if aButton.Text == "Hide a(t)" then
+											controlTable.Parent.myPlot.a.Visible = false;
+											aButton.Text = "Show a(t)";
+											aButton.Style.BackgroundColor = color.transparent;
+											aButton.Style.ForegroundColor = color.yellowGreen;
+											else
+											controlTable.Parent.myPlot.a.Visible = true;
+											aButton.Text = "Hide a(t)";
+											aButton.Style.BackgroundColor = color.yellowGreen;
+											aButton.Style.ForegroundColor = color.white;
+											end
+										</onClick>
+									</button>
+								</column>
+							</row>
+						</table>
+						<xyPlot name="myPlot">
+							<title>Displacement, Velocity, Acceleration</title>
+							<axis dim="x" auto="fixed" min="0" max="4">
+								<title>Time</title>
+							</axis>
+							<axis dim="y" auto="fixed" min="-5" max="10">
+							</axis>
+							<series name="s" manual="false" />
+							<series name="v" manual="false" />
+							<series name="a" manual="false" />
+						</xyPlot>
+
+						<script>
+							local t, s, v, a;
+							local sPointer = myPlot.s;
+							local vPointer = myPlot.v;
+							local aPointer = myPlot.a;
+
+							for t = 0, 4, 0.1 do
+							s = math.pow(t,3) - 6*math.pow(t,2) + 9*t;
+							v = 3*math.pow(t,2) - 12*t + 9;
+							a = 6*t - 12;
+							sPointer:Add(t,s);
+							vPointer:Add(t,v);
+							aPointer:Add(t,a);
+							end
+
+							sPointer:Update();
+							vPointer:Update();
+							aPointer:Update();
+						</script>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(4)
+          </onClick>
+        </button>
+      </stack>
+    </stack>
+  </sectionNoTitle>
+  
+  <!--Practices-->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Practices</p>
+    <!--Q1-->
+    <stack style="mcStackLayout contentBG">
+      <p style="subSectionHeading">Question 1</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources/question.png" inspect="false" />
+          </column>
+          <column>
+            <p>A particle moves along the x-axis so that at any time $t \geq 0$ its velocity is given by $v(t)=-t^3+6t^2+2t$.</p>
+            <p style="boldText">At What value of $t$ does the particle obtain its maximum acceleration?</p>
+          </column>
+        </row>
+      </table>
+      <textField name="input" placeholder="Enter your answer here." />
+      <stack name="answerStack" style="invisible">
+        <p>Answer: 2</p>
+        <stack name="fullSolution" style="invisible">
+          <p>To get the function of acceleration, solve the first derivative of $v(t)$:</p>
+          <p style="centeredText">$a(t)=-3t^2+12t+2$</p>
+          <p>Solve the first derivative of $a(t)$ to get max/min value:</p>
+          <p style="centeredText">$a'(t)=-6t+12$</p>
+          <p style="centeredText"><![CDATA[$\begin{matrix}-6t+12&=&0\\[6pt]6t&=&12\\[6pt]t&=&2\end{matrix}$]]></p>
+          <p>In order to know if 2 is maximum, we need to solve the second derivative of $a(t)$:</p>
+          <p style="centeredText">$a''(t)=-6$</p>
+          <p style="justifiedText">Since $a''(t)$ always less than 0, thus $t=2$ is the maximum acceleration.</p>
+
+          <xyPlot name="myPlot">
+            <title>Acceleration</title>
+            <axis dim="x" auto="fixed" min="0" max="5">
+              <title>Time</title>
+            </axis>
+            <axis dim="y" auto="fixed" min="0" max="20">
+            </axis>
+            <series name="a" manual="false" />
+          </xyPlot>
+
+          <script>
+            local t, a;
+            local aPointer = myPlot.a;
+
+            for t = 0, 5, 0.1 do
+            a = -3*math.pow(t,2)+12*t+2
+            aPointer:Add(t,a);
+            end
+            aPointer:Update();
+          </script>
+        </stack>
+        <button name="fullSolutionBtn" content="Show Full Solution">
+          <onClick>
+            if fullSolutionBtn.Text == "Show Full Solution" then
+            answerStack.fullSolution.Style.Visibility = "visible";
+            fullSolutionBtn.Text = "Hide Full Solution";
+            else
+            answerStack.fullSolution.Style.Visibility = "collapsed";
+            fullSolutionBtn.Text = "Show Full Solution";
+            end
+          </onClick>
+        </button>
+      </stack>
+      <p name="answer" style="invisible">2</p>
+      <p name="feedback" style="invisible" />
+      <script>
+        local attempt = 0;
+        local max = 3;
+      </script>
+      <button name="btn" content="Check Answer">
+        <onClick>
+          if input.Text ~= answer.Text then 
+            feedback.Style.Visibility = "visible" 
+            feedback.Text = "Incorrect! Try again." 
+            attempt = attempt + 1
+            if attempt &gt;= max then
+              answerStack.Style.Visibility = "visible"
+            end
+          else 
+            feedback.Style.Visibility = "visible" 
+            feedback.Text = "Correct, Good Job!" 
+          end
+        </onClick>
+      </button>
+    </stack>
+    <p>
+      <br/>
+    </p>
+    <!--Q2-->
+    <stack style="mcStackLayout contentBG">
+      <script>
+        local mqController = MQController:new({mqStack=mqStack, numOfSteps=3})
+      </script>
+      <p style="subSectionHeading">Question 2</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources/question.png" inspect="false" />
+          </column>
+          <column>
+            <p style="justifiedText">A particle moves along a number line (not shown) for $t \geq 0$. Its position function $s(t)$ is shown in blue, its velocity function $v(t)$ is in red, and its acceleration function $a(t)$ is in green. All are graphed with respect to time $t$ in seconds.</p>
+            <p>With the graphs as an aid, answer the questions below.</p>
+          </column>
+        </row>
+      </table>
+
+      <stack name="mqStack" orientation="vertical">
+        <stack orientation="vertical">
+          <stack name="header" orientation="horizontal">
+            <!--Step Title and Button-->
+            <p name="title">PART A</p>
+            <button name="btn" content="Show Part A" style="stepByStepBtn">
+              <onClick>
+                mqController:toggleStep(1)
+              </onClick>
+            </button>
+          </stack>
+          <stack name="content" style="invisible">
+            <table widths="10% 90%" grid="false">
+              <row>
+                <column>
+                  <image src="resources\question.png" inspect="false" />
+                </column>
+                <column>
+                  <p>How many units per second is the initial velocity of the particle?</p>
+                </column>
+              </row>
+            </table>
+            <textField name="input" placeholder="Enter your answer here." />
+            <p name="answer" style="invisible">8</p>
+            <stack name="answerStack" style="invisible">
+              <!--q1 solution-->
+              <p>Answer: 8</p>
+              <stack name="fullSolution" style="invisible">
+                <p>The y-intersection of $v(t)$, which is 8.</p>
+              </stack>
+              <button name="fullSolutionBtn" content="Show Full Solution">
+                <onClick>
+                  if fullSolutionBtn.Text == "Show Full Solution" then
+                  answerStack.fullSolution.Style.Visibility = "visible";
+                  fullSolutionBtn.Text = "Hide Full Solution";
+                  else
+                  answerStack.fullSolution.Style.Visibility = "collapsed";
+                  fullSolutionBtn.Text = "Show Full Solution";
+                  end
+                </onClick>
+              </button>
+            </stack>
+            <p name="feedback" style="invisible" />
+            <script>
+              local attempt = 0;
+              local max = 3;
+            </script>
+            <button name="btn" content="Check Answer">
+              <onClick>
+                if input.Text ~= answer.Text then 
+                  feedback.Style.Visibility = "visible" 
+                  feedback.Text = "Incorrect! Try again." 
+                  attempt = attempt + 1
+                  if attempt &gt;= max then
+                    answerStack.Style.Visibility = "visible"
+                  end
+                else 
+                  feedback.Style.Visibility = "visible" 
+                  feedback.Text = "Correct, Good Job!" 
+                end
+              </onClick>
+            </button>
+          </stack>
+        </stack>
+        <stack orientation="vertical">
+          <stack name="header" orientation="horizontal">
+            <!--Step Title and Button-->
+            <p name="title">PART B</p>
+            <button name="btn" content="Show Part B" style="stepByStepBtn">
+              <onClick>
+                mqController:toggleStep(2)
+              </onClick>
+            </button>
+          </stack>
+          <stack name="content" style="invisible">
+            <!--Step Content-->
+            <table widths="10% 90%" grid="false">
+              <row>
+                <column>
+                  <image src="resources\question.png" inspect="false" />
+                </column>
+                <column>
+                  <p>The particle is moving to the right when $t \in$ __________. (Enter a range like $[3,63)$)</p>
+                </column>
+              </row>
+            </table>
+            <textField name="input" placeholder="Enter your answer here." />
+            <p name="answer" style="invisible">[0,1)</p>
+            <stack name="answerStack" style="invisible">
+              <!--q2 solution-->
+              <p>Answer: [0,1)</p>
+              <stack name="fullSolution" style="invisible">
+                <p>The particle is moving to the right when velocity <![CDATA[$v(t)>0$]]></p>
+                <p><![CDATA[So, $time$ between 0 and 1 (exclusive), which answer is $[0,1)$]]></p>
+              </stack>
+              <button name="fullSolutionBtn" content="Show Full Solution">
+                <onClick>
+                  if fullSolutionBtn.Text == "Show Full Solution" then
+                  answerStack.fullSolution.Style.Visibility = "visible";
+                  fullSolutionBtn.Text = "Hide Full Solution";
+                  else
+                  answerStack.fullSolution.Style.Visibility = "collapsed";
+                  fullSolutionBtn.Text = "Show Full Solution";
+                  end
+                </onClick>
+              </button>
+            </stack>
+            <p name="feedback" style="invisible" />
+            <script>
+              local attempt = 0;
+              local max = 3;
+            </script>
+            <button name="btn" content="Check Answer">
+              <onClick>
+                if input.Text ~= answer.Text then 
+                  feedback.Style.Visibility = "visible" 
+                  feedback.Text = "Incorrect! Try again." 
+                  attempt = attempt + 1
+                  if attempt &gt;= max then
+                    answerStack.Style.Visibility = "visible"
+                  end
+                else 
+                  feedback.Style.Visibility = "visible" 
+                  feedback.Text = "Correct, Good Job!" 
+                end
+              </onClick>
+            </button>
+          </stack>
+        </stack>
+        <stack orientation="vertical">
+          <stack name="header" orientation="horizontal">
+            <!--Step Title and Button-->
+            <p name="title">PART C</p>
+            <button name="btn" content="Show Part C" style="stepByStepBtn">
+              <onClick>
+                mqController:toggleStep(3)
+              </onClick>
+            </button>
+          </stack>
+          <stack name="content" style="invisible">
+            <!--Step Content-->
+            <table widths="10% 90%" grid="false">
+              <row>
+                <column>
+                  <image src="resources\question.png" inspect="false" />
+                </column>
+                <column>
+                  <p>The total distance tranveled by the particle for $t \in [0,3]$ is ______ units.</p>
+                </column>
+              </row>
+            </table>
+            <textField name="input" placeholder="Enter your answer here." />
+            <p name="answer" style="invisible">2.5</p>
+            <stack name="answerStack" style="invisible">
+              <!--q3 solution-->
+              <p>Answer: 2.5</p>
+              <stack name="fullSolution" style="invisible">
+                <p>Total distance means the displacement travelled ignoring directions. For example:</p>
+                <p>If you travel 3 units to the right and 1 unit to the left. The displacement would be 2, but total distance would be 4.</p>
+                <p>Now look at the graph, $v(t)$ became negative after 1, which means the particle changes the direction at 1.</p>
+                <p>Time between 0 and 1, $s(t)$ shows the particle has traveled 2 units forward, and 0.5 unit backward from 1 to 3.</p>
+                <p>Therefore, the total distance traveled by the particle for $t \in [0,3]$ is $2 + 0.5 = 2.5$ units.</p>
+              </stack>
+              <button name="fullSolutionBtn" content="Show Full Solution">
+                <onClick>
+                  if fullSolutionBtn.Text == "Show Full Solution" then
+                  answerStack.fullSolution.Style.Visibility = "visible";
+                  fullSolutionBtn.Text = "Hide Full Solution";
+                  else
+                  answerStack.fullSolution.Style.Visibility = "collapsed";
+                  fullSolutionBtn.Text = "Show Full Solution";
+                  end
+                </onClick>
+              </button>
+            </stack>
+            <p name="feedback" style="invisible" />
+            <script>
+              local attempt = 0;
+              local max = 3;
+            </script>
+            <button name="btn" content="Check Answer">
+              <onClick>
+                if input.Text ~= answer.Text then 
+                  feedback.Style.Visibility = "visible" 
+                  feedback.Text = "Incorrect! Try again." 
+                  attempt = attempt + 1
+                  if attempt &gt;= max then
+                    answerStack.Style.Visibility = "visible"
+                  end
+                else 
+                  feedback.Style.Visibility = "visible" 
+                  feedback.Text = "Correct, Good Job!" 
+                end
+              </onClick>
+            </button>
+          </stack>
+        </stack>
+      </stack>
+    </stack>
+    <p>
+      <br/>
+    </p>
+    <!--Q3-->
+    <stack style="mcStackLayout contentBG">
+      <p style="subSectionHeading">Question 3</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>The position of a particle moving along a number line is given by</p>
+            <p>$s(t)=\frac{2}{3}t^3-6t^2+10t \hspace{1.0cm}for\hspace{1.0cm} t \geq 0$</p>
+            <p>where t is time in seconds.</p>
+            <p>The particle moves both left and right in the first six seconds. What's the total distance traveled by the particle for $0 \leq t \leq 6$?</p>
+          </column>
+        </row>
+      </table>
+			<textField name="input" placeholder="Enter your answer here." />
+			<p>
+        <size scale="small">Round answer to 2 decimal places.</size>
+      </p>
+      <p name="answer" style="invisible">30.67</p>
+      <stack name="answerStack" style="invisible">
+				<p>Answer: 30.67</p>
+				<stack name="fullSolution" style="invisible">
+          <p>First, we need to know when the particle is moving on the right and left.</p>
+				  <p>To do that, we need to get the velocity function, so do the first derivative of $s(t)$:</p>
+				  <p style="centeredText">$v(t)=2t^2-12t+10$</p>
+				  <p>Solve for t-intersections of $v(t)$ to get direction changing point.</p>
+				  <p style="centeredText"><![CDATA[$\begin{matrix}2t^2-12t+10&=&0 \\[6pt] t^2-6t+5&=&0 \\[6pt] (t-1)(t-5)&=&0 \end{matrix}$]]></p>
+				  <p style="centeredText">$t=1 \hspace{1.0cm} or \hspace{1.0cm} t=5$</p>
+
+          <table grid="true" widths="50% 50%" style="width50">
+            <head>
+              <column>
+                <p>$t$</p>
+              </column>
+              <column>
+                <p>$s(t)$</p>
+              </column>
+            </head>
+            <data>
+              0, 0; 1, $4\frac{2}{3}$; 5, $-16\frac{2}{3}$; 6, -12
+            </data>
+          </table>
+				  <p>Then, we solve for the distance for every segment:</p>
+          <table grid="true" widths="50% 50%" style="width50">
+            <head>
+              <column>
+                <p>range</p>
+              </column>
+              <column>
+                <p>distance</p>
+              </column>
+            </head>
+            <data>
+              $0 \leq 1$, $4\frac{2}{3}$;
+              $1 \leq 5$, $21\frac{1}{3}$;
+              $5 \leq 6$, $4\frac{2}{3}$;
+            </data>
+          </table>
+				  <p>
+            <b>Finally, the sum of all distances: $4\frac{2}{3} + 21\frac{1}{3}+ 4\frac{2}{3} = 30\frac{2}{3}$</b>
+          </p>
+			    <stack name="graphStack" style="invisible">
+					  <table name="controlTable" grid="false">
+						  <style name="blue">
+							  <background color="dodgerBlue" />
+							  <foreground color="white" />
+						  </style>
+						  <style name="red">
+							  <background color="quanserRed" />
+							  <foreground color="white" />
+						  </style>
+						  <row>
+							  <column>
+								  <button name="sButton" content="Hide s(t)" style="red">
+									  <onClick>
+										  if sButton.Text == "Hide s(t)" then
+								  		  controlTable.Parent.myPlot.s.Visible = false;
+							  			  sButton.Text = "Show s(t)";
+											  sButton.Style.BackgroundColor = color.transparent;
+											  sButton.Style.ForegroundColor = color.quanserRed;
+										  else
+											  controlTable.Parent.myPlot.s.Visible = true;
+											  sButton.Text = "Hide s(t)";
+											  sButton.Style.BackgroundColor = color.quanserRed;
+											  sButton.Style.ForegroundColor = color.white;
+										  end
+                    </onClick>
+								  </button>
+							  </column>
+							  <column>
+								  <button name="vButton" content="Hide v(t)" style="blue">
+                    <onClick>
+                      if vButton.Text == "Hide v(t)" then
+                        controlTable.Parent.myPlot.v.Visible = false;
+                        vButton.Text = "Show v(t)";
+											  vButton.Style.BackgroundColor = color.transparent;
+											  vButton.Style.ForegroundColor = color.dodgerBlue;
+										  else
+											  controlTable.Parent.myPlot.v.Visible = true;
+											  vButton.Text = "Hide v(t)";
+											  vButton.Style.BackgroundColor = color.dodgerBlue;
+											  vButton.Style.ForegroundColor = color.white;
+										  end
+									  </onClick>
+								  </button>
+							  </column>
+						  </row>
+					  </table>
+            <xyPlot name="myPlot" style="width9">
+              <title>Displacement and Velocity</title>
+              <axis dim="x" auto="fixed" min="0" max="6">
+                <title>Time</title>
+              </axis>
+              <axis dim="y" auto="fixed" min="-20" max="20">
+              </axis>
+              <series name="s" manual="false" />
+              <series name="v" manual="false" />
+            </xyPlot>
+            <script>
+              local t, s, v;
+              local sPointer = myPlot.s;
+              local vPointer = myPlot.v;
+
+              for t = 0, 6, 0.1 do
+              s = 2/3*math.pow(t,3)-6*math.pow(t,2)+10*t;
+              v = 2*math.pow(t,2)-12*t+10;
+              sPointer:Add(t,s);
+              vPointer:Add(t,v);
+              end
+              sPointer:Update();
+              vPointer:Update();
+            </script>
+				  </stack>
+          <button name="showGraphBtn" content="Show Graph">
+            <onClick>
+              if showGraphBtn.Text == "Show Graph" then
+              showGraphBtn.Parent.graphStack.Style.Visibility = "visible";
+              showGraphBtn.Text = "Hide Graph";
+              else
+              showGraphBtn.Parent.graphStack.Style.Visibility = "collapsed";
+              showGraphBtn.Text = "Show Graph";
+              end
+            </onClick>
+          </button>
+        </stack>
+        <button name="fullSolutionBtn" content="Show Full Solution">
+          <onClick>
+            if fullSolutionBtn.Text == "Show Full Solution" then
+            answerStack.fullSolution.Style.Visibility = "visible";
+            fullSolutionBtn.Text = "Hide Full Solution";
+            else
+            answerStack.fullSolution.Style.Visibility = "collapsed";
+            fullSolutionBtn.Text = "Show Full Solution";
+            end
+          </onClick>
+        </button>
+			</stack>
+      <p name="feedback" style="invisible" />
+      <script>
+        local attempt = 0;
+        local max = 3;
+      </script>
+      <button name="btn" content="Check Answer">
+        <onClick>
+          if input.Text ~= answer.Text then 
+            feedback.Style.Visibility = "visible" 
+            feedback.Text = "Incorrect! Try again." 
+            attempt = attempt + 1
+            if attempt &gt;= max then
+              answerStack.Style.Visibility = "visible"
+            end
+          else 
+            feedback.Style.Visibility = "visible" 
+            feedback.Text = "Correct, Good Job!" 
+          end
+        </onClick>
+      </button>
+    </stack>
+    <p>
+      <br/>
+    </p>
+
+  </sectionNoTitle>
+  
+</document>

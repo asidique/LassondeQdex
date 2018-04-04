@@ -39,9 +39,8 @@
   <!-- This is the standard way title pages are created. A great website to get copyright free images .. www.pexels.com
   *** The style: "pageLayout" is defined in curriculumStylesLassonde.xml. It simply sets the content to the center and adjusts the width to 80% ***-->
   <section name="section1" style="pageLayout">
-    <title style="chapterTitle">3.1 Rectilinear Motion</title>
+    <title style="chapterTitle">4.1 Rectilinear Motion</title>
     <p style="sectionHeading">Introduction</p>
-    <image src="resources/rectilinear_motion.png" />
     <stack orientation="vertical" style="contentBG">
       <p style="justifiedText">
         Solve problems about motion along a line using the power of differential calculus. For example, given the position of a particle as a function of time s(t), find the particle's maximum velocity.
@@ -53,7 +52,7 @@
   <!--Setup StepsController with correct number of Steps-->
   <sectionNoTitle style="pageLayout">
     <script>
-      local stepsController = StepsController:new({stepsStack=stepsStack, numOfSteps=4, shown_message=nil,hidden_message=nil, showStepCounter=true})
+      local stepsController = StepsController:new({stepsStack=stepsStack, numOfSteps=4, showStepCounter=true})
     </script>
     <p style="sectionHeading">Step by Step</p>
     <stack orientation="vertical" style="contentBG">
@@ -240,7 +239,7 @@
   <sectionNoTitle style="pageLayout">
     <p style="sectionHeading">Practices</p>
     <!--Q1-->
-    <stack style="mcStackLayout">
+    <stack style="mcStackLayout contentBG">
       <p style="subSectionHeading">Question 1</p>
       <table widths="10% 90%" grid="false">
         <row>
@@ -287,7 +286,7 @@
             aPointer:Update();
           </script>
         </stack>
-        <button name="fullSolutionBtn" content="Show Full Solution" style="btnSelected">
+        <button name="fullSolutionBtn" content="Show Full Solution">
           <onClick>
             if fullSolutionBtn.Text == "Show Full Solution" then
             answerStack.fullSolution.Style.Visibility = "visible";
@@ -305,7 +304,7 @@
         local attempt = 0;
         local max = 3;
       </script>
-      <button name="btn" content="Check Answer" style="btnSelected">
+      <button name="btn" content="Check Answer">
         <onClick>
           if input.Text ~= answer.Text then
           feedback.Style.Visibility = "visible"
@@ -321,8 +320,11 @@
         </onClick>
       </button>
     </stack>
+    <p>
+      <br />
+    </p>
     <!--Q2-->
-    <stack style="mcStackLayout">
+    <stack style="mcStackLayout contentBG">
       <script>
         local mqController = MQController:new({mqStack=mqStack, numOfSteps=3})
       </script>
@@ -346,7 +348,7 @@
             <p name="title">PART A</p>
             <button name="btn" content="Show Part A" style="stepByStepBtn">
               <onClick>
-                mqController:toggleStep(1,"Show Part A","Hide Part A")
+                mqController:toggleStep(1)
               </onClick>
             </button>
           </stack>
@@ -369,7 +371,7 @@
               <stack name="fullSolution" style="invisible">
                 <p>The y-intersection of $v(t)$, which is 8.</p>
               </stack>
-              <button name="fullSolutionBtn" content="Show Full Solution" style="btnSelected">
+              <button name="fullSolutionBtn" content="Show Full Solution">
                 <onClick>
                   if fullSolutionBtn.Text == "Show Full Solution" then
                   answerStack.fullSolution.Style.Visibility = "visible";
@@ -386,7 +388,7 @@
               local attempt = 0;
               local max = 3;
             </script>
-            <button name="btn" content="Check Answer" style="btnSelected">
+            <button name="btn" content="Check Answer">
               <onClick>
                 if input.Text ~= answer.Text then
                 feedback.Style.Visibility = "visible"
@@ -409,7 +411,7 @@
             <p name="title">PART B</p>
             <button name="btn" content="Show Part B" style="stepByStepBtn">
               <onClick>
-                mqController:toggleStep(2,"Show Part B","Hide Part B")
+                mqController:toggleStep(2)
               </onClick>
             </button>
           </stack>
@@ -434,7 +436,7 @@
                 <p>The particle is moving to the right when velocity <![CDATA[$v(t)>0$]]></p>
                 <p><![CDATA[So, $time$ between 0 and 1 (exclusive), which answer is $[0,1)$]]></p>
               </stack>
-              <button name="fullSolutionBtn" content="Show Full Solution" style="btnSelected">
+              <button name="fullSolutionBtn" content="Show Full Solution">
                 <onClick>
                   if fullSolutionBtn.Text == "Show Full Solution" then
                   answerStack.fullSolution.Style.Visibility = "visible";
@@ -451,7 +453,7 @@
               local attempt = 0;
               local max = 3;
             </script>
-            <button name="btn" content="Check Answer" style="btnSelected">
+            <button name="btn" content="Check Answer">
               <onClick>
                 if input.Text ~= answer.Text then
                 feedback.Style.Visibility = "visible"
@@ -474,7 +476,7 @@
             <p name="title">PART C</p>
             <button name="btn" content="Show Part C" style="stepByStepBtn">
               <onClick>
-                mqController:toggleStep(3,"Show Part C","Hide Part C")
+                mqController:toggleStep(3)
               </onClick>
             </button>
           </stack>
@@ -502,7 +504,7 @@
                 <p>Time between 0 and 1, $s(t)$ shows the particle has traveled 2 units forward, and 0.5 unit backward from 1 to 3.</p>
                 <p>Therefore, the total distance traveled by the particle for $t \in [0,3]$ is $2 + 0.5 = 2.5$ units.</p>
               </stack>
-              <button name="fullSolutionBtn" content="Show Full Solution" style="btnSelected">
+              <button name="fullSolutionBtn" content="Show Full Solution">
                 <onClick>
                   if fullSolutionBtn.Text == "Show Full Solution" then
                   answerStack.fullSolution.Style.Visibility = "visible";
@@ -519,7 +521,7 @@
               local attempt = 0;
               local max = 3;
             </script>
-            <button name="btn" content="Check Answer" style="btnSelected">
+            <button name="btn" content="Check Answer">
               <onClick>
                 if input.Text ~= answer.Text then
                 feedback.Style.Visibility = "visible"
@@ -538,8 +540,11 @@
         </stack>
       </stack>
     </stack>
+    <p>
+      <br />
+    </p>
     <!--Q3-->
-    <stack style="mcStackLayout">
+    <stack style="mcStackLayout contentBG">
       <p style="subSectionHeading">Question 3</p>
       <table widths="10% 90%" grid="false">
         <row>
@@ -673,7 +678,7 @@
               vPointer:Update();
             </script>
           </stack>
-          <button name="showGraphBtn" content="Show Graph" style="btnSelected">
+          <button name="showGraphBtn" content="Show Graph">
             <onClick>
               if showGraphBtn.Text == "Show Graph" then
               showGraphBtn.Parent.graphStack.Style.Visibility = "visible";
@@ -685,7 +690,7 @@
             </onClick>
           </button>
         </stack>
-        <button name="fullSolutionBtn" content="Show Full Solution" style="btnSelected">
+        <button name="fullSolutionBtn" content="Show Full Solution">
           <onClick>
             if fullSolutionBtn.Text == "Show Full Solution" then
             answerStack.fullSolution.Style.Visibility = "visible";
@@ -702,7 +707,7 @@
         local attempt = 0;
         local max = 3;
       </script>
-      <button name="btn" content="Check Answer" style="btnSelected">
+      <button name="btn" content="Check Answer">
         <onClick>
           if input.Text ~= answer.Text then
           feedback.Style.Visibility = "visible"
@@ -718,7 +723,18 @@
         </onClick>
       </button>
     </stack>
+    <p>
+      <br />
+    </p>
 
+  </sectionNoTitle>
+  
+  <sectionNoTitle style="pageLayout">
+      <web url="https://drive.google.com/open?id=1wcj0pzdDdMODDlNUK9br-s65pAndCP4XNPgnoYToiqQ">
+        <style>
+          <aspectRatio>2</aspectRatio>
+        </style>
+      </web>
   </sectionNoTitle>
 
 

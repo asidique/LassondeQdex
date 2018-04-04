@@ -35,7 +35,7 @@
       <image style="tiny" src="resources/logo2.png" inspect="false" />
     </stack>
   </footer>
-
+œ
   <!-- Section 1 -->
   <section name="section1" style="pageLayout">
     <title style="chapterTitle">1.2 Unit Rate</title>
@@ -740,7 +740,8 @@
     </stack>
   </sectionNoTitle>
 
-  <sectionNoTitle name="section5" style="pageLayout">
+
+    <sectionNoTitle name="section5" style="pageLayout">
     <p style="sectionHeading">Measuring in Mililitres vs Fluid Ounces</p>
     <stack style="contentBG">
       <p>Using the simulation below, your task is to find out how to convert mililitres to ounces through experiment. We start off with two measuring cylinders labelled mL and fl oz. The cup you must use
@@ -748,13 +749,13 @@
       <onDocumentOpened>
        function drawNumss() 
        
-        char.textM(p1.measurementLabel, vector({-6.5, -5}), 0.5, color.black);
-        char.textL(p1.meaasurementLabel, vector({-6.0, -5}), 0.5, color.black);
+        char.textM(p1.measurementLabel, vector({-8.5, -7}), 0.5, color.black);
+        char.textL(p1.measurementLabel, vector({-8.0, -7}), 0.5, color.black);
         
-        char.textF(p1.measurementLabel, vector({6.0, -5}), 0.5, color.black);
-        char.textL(p1.measurementLabel, vector({6.5, -5}), 0.5, color.black);
-        char.textO(p1.measurementLabel, vector({7.25, -5}), 0.5, color.black);
-        char.textZ(p1.measurementLabel, vector({7.75, -5}), 0.5, color.black);
+        char.textF(p1.measurementLabel, vector({7.0, -7}), 0.5, color.black);
+        char.textL(p1.measurementLabel, vector({7.5, -7}), 0.5, color.black);
+        char.textO(p1.measurementLabel, vector({8.25, -7}), 0.5, color.black);
+        char.textZ(p1.measurementLabel, vector({8.75, -7}), 0.5, color.black);
        
         for i=0, 12, 1 do
           char.num0(p1.nums, vector({-4.75, 1*i + -8.6}), 0.25, color.black);
@@ -1436,5 +1437,6 @@
       </stack>
     </stack>
   </sectionNoTitle>
+ 
 
 </document>

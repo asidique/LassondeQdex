@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G2D47AB01_7732_42AC_B9E5_F68146F2939B">
+
+ <metadata>
+    <title>NUM-2.2-Equivalent Fractions</title>
+    <creator>Sidique</creator>
+    <coverImage src="resources/cover.png" />
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+  </metadata>
+  
+  <include src="resources/curriculumStyles.xml" />
+  <include src="resources/Utilities.xml" />
+  <include src="resources/plotTools.xml" />
+
+   <!--                                      Header & Footer START                                         -->
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="whiteColor">Amanda Koon</p>
+      <p style="whiteColor rightText">NUMERACY</p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/logo1.png" inspect="false" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/logo2.png" inspect="false" />
+    </stack>
+  </footer>
+
+  <!-- Section 1 -->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">2.2 Equivalent Fractions</title>
+    <p style="sectionHeading">Introduction</p>
+    <p>
+      <br />
+    </p>
+    <stack orientation="horizontal">
+      <image src="resources/pizza1.png">
+        <style>
+        </style>
+      </image>
+      <image src="resources/pizza2.png">
+        <style>
+        </style>
+      </image>
+      <image src="resources/pizza3.png">
+        <style>
+        </style>
+      </image>
+    </stack>
+    <p>
+      <br />
+    </p>
+    <stack style="contentBG">
+      <p>Equivalent Fractions are fractions that have the same value but are represented using different fractions. For an example, take the 3 pizzas above. The green
+      shade is your piece of pizza. Notice that your piece of pizza remains the same, even as the pizza is divided into smaller and smaller pieces.</p>
+    </stack>
+  </section>
+  
+  <sectionNoTitle style="pageLayout" name="section2">
+    <onDocumentOpened>
+      og = stack1.p1.og;
+      og2 = stack1.p1.og2;
+      fra = stack1.p1.fra;
+      fra2 = stack1.p1.fra2;
+      lines = stack1.p1.lines;
+      bg = stack1.p1.bg;
+      bg.Style.ForegroundColor = color.rgb(225,225,225)
+      bg.Style.BackgroundColor = color.rgb(225,225,225)
+      fraCenter = {0, -2.5};
+      plotTools.drawSquare(og, {0, 2.5}, 18, 4, color.rgb(50, 133, 184));
+      plotTools.drawSquare(og2, {0, 2.5}, 18, 4, color.black);
+      og.Style.ForegroundColor = color.black;
+      og.Style.BackgroundColor = color.white;
+      char.num1(og2, {-0.5, 1.5}, 2, color.black);
+      plotTools.drawSquare(fra, {0, -2.5}, 18, 4, color.rgb(50, 133, 184));
+      plotTools.drawSquare(fra2, {0, -2.5}, 18, 4, color.black);
+    </onDocumentOpened>
+    <p style="sectionHeading">Equivalent Fractions Example</p>
+    <stack style="contentBG">
+      <p>Here's a simple example of an equivalent fraction:</p>
+      <equation>$ \frac{1}{2} = \frac{2}{4} = \frac{4}{8} $</equation>
+      <p>These values are <b>equivalent</b></p>
+    </stack>
+    <p style="sectionHeading">Equivalent Fraction Simulator</p>
+    <stack style="contentBG" name="stack1">
+      <p>Drag the slider below to cut one of the rectangles below into smaller pieces. Notice that we can represent
+      these small pieces as a fraction of a whole. If we add these fractions up, we see that it is equivalent in size
+      to the whole rectangle above. This is a visual of how equivalent fractions work.</p>
+      <xyPlot name="p1" manual="true">
+        <style>
+          <aspectRatio>0.4</aspectRatio>
+        </style>
+        <axis dim="x" auto="none" min="-10" max="10" major="false"></axis>
+        <axis dim="y" auto="none" min="-7" max="7" major="false"></axis>
+        <series name="bg" draw="triangles">
+          <data>
+            -20 -20; -20 20; 20 20; 20 20; 20 -20; -20 -20;
+          </data>
+        </series>
+        <series name="og" draw="segmentedFill"></series>
+        <series name="og2">
+          <style>
+            <lineThickness>1.2</lineThickness>
+          </style>
+        </series>
+        <series name="fra" draw="segmentedFill"></series>
+        <series name="fra2">
+          <style>
+            <lineThickness>1.2</lineThickness>
+          </style>
+        </series>
+        <series name="lines" manual="true" draw="lineSegments">
+          <style>
+            <foreground color="black" />
+            <lineThickness>1.2</lineThickness>
+          </style>
+        </series>
+      </xyPlot>
+      <equation name="label">Size of Pieces: 1/1</equation>
+      <slider name="sl" min="0" max="6">
+        <onValueChanged>
+          val = (round(value, 1));
+          numSquares = math.pow(2, val);
+          label.Text = "Size of Pieces: " .. "1/" .. tostring(math.pow(2, val+1));
+          width = 18;
+          lines:Clear();
+          for i=0, math.pow(2, val), 1 do
+              lines:Add(0, -4.5);
+              lines:Add(0, -0.5);
+            if(width/numSquares/2 + i*width/numSquares/2 &lt;= 9 and -width/numSquares/2 - i*width/numSquares/2 &gt;= -9) then
+              lines:Add(width/numSquares/2 + i*width/numSquares/2, -4.5);
+              lines:Add(width/numSquares/2 + i*width/numSquares/2, -0.5);
+              lines:Add(-width/numSquares/2 - i*width/numSquares/2, -4.5);
+              lines:Add(-width/numSquares/2 - i*width/numSquares/2, -0.5);
+            end
+          end
+          lines:Update();
+        </onValueChanged>
+      </slider>
+    </stack>
+  </sectionNoTitle>
+  
+  <sectionNoTitle name="section3" style="pageLayout">
+    <onDocumentOpened>
+      num1Pos = {3, 4};
+      num2Pos = {6.25, 4};
+      den1Pos = {3, 2};
+      den2Pos = {6, 2};
+      
+      function drawNum1(pos, color)
+        stack1.p1.num1:Clear();
+        drawNum(1, stack1.p1.num1, pos, 1, color);
+        drawNum(2, stack1.p1.num1, {pos[1] + 0.75, pos[2]}, 1, color);
+        stack1.p1.num1:Update();
+      end
+      
+      function drawNum2(pos, color)
+        stack1.p1.num2:Clear();
+        drawNum(8, stack1.p1.num2, pos, 1, color);
+        drawNum(4, stack1.p1.num2, {pos[1] +  0.75, pos[2]}, 1, color);
+        stack1.p1.num2:Update();
+      end
+      
+      function drawDen1(pos, color);
+        stack1.p1.den1:Clear();
+        drawNum(5, stack1.p1.den1, pos, 1, color);
+        drawNum(3, stack1.p1.den1, {pos[1] +  0.75, pos[2]}, 1, color);
+        stack1.p1.den1:Update();
+      end
+      
+      function drawDen2(pos, color)
+        stack1.p1.den2:Clear();
+        drawNum(3, stack1.p1.den2, pos, 1, color);
+        drawNum(7, stack1.p1.den2, {pos[1] +  0.75, pos[2]}, 1, color);
+        drawNum(1, stack1.p1.den2, {pos[1] + 1.5, pos[2]}, 1, color);
+        stack1.p1.den2:Update();
+      end
+      
+      function drawLine(color)
+        stack1.p1.lines:Clear();
+        stack1.p1.lines:Add(3, 3.5, color);
+        stack1.p1.lines:Add(4.5, 3.5, color); 
+        stack1.p1.lines:Add(6, 3.5, color);
+        stack1.p1.lines:Add(8, 3.5, color); 
+        stack1.p1.lines:Update();
+      end
+      
+      function drawX(color)
+        stack1.p1.x:Clear();
+        stack1.p1.x:Add(5, 4.8, color);
+        stack1.p1.x:Add(5.4, 4.2, color);
+        stack1.p1.x:Add(5.4, 4.8, color);
+        stack1.p1.x:Add(5, 4.2, color);
+        stack1.p1.x:Add(5, 2.8, color);
+        stack1.p1.x:Add(5.4, 2.2, color);
+        stack1.p1.x:Add(5, 2.2, color);
+        stack1.p1.x:Add(5.4, 2.8, color);
+        stack1.p1.x:Update();
+      end
+      lineAlpha = 255;
+      
+      drawNum1(num1Pos, color.black);
+      drawNum2(num2Pos, color.black);
+      drawDen1(den1Pos, color.black);
+      drawDen2(den2Pos, color.black);
+      drawLine(color.black);
+      stack1.p1.bg.Style.ForegroundColor = color.rgb(225,225,225)
+      stack1.p1.bg.Style.BackgroundColor = color.rgb(225,225,225)
+      
+    </onDocumentOpened>
+    <p style="sectionHeading">Cross Multiplication</p>
+    <stack style="contentBG" name="stack1">
+      <p>A useful tool when dealing with equivalent fractions is <b>cross multiplication</b>. This can help you verify that
+      two fractions are equivalent. For an example, let's take $ \frac{12}{53} = \frac{84}{371} $. At first glance, it may not seem obvious that these are equivalent. Let's
+      use cross multiplication to find out if it is in fact equivalent.</p>
+      <drawing name="p1" pan="disabled" zoom="disabled" tap="disabled">
+        <style>
+          <aspectRatio>0.5</aspectRatio>
+        </style>
+        <axis dim="x" min="1" max="10" auto="none"></axis>
+        <axis dim="y" min="1.5" max="6.5" auto="none"></axis>
+        <series name="bg" draw="triangles">
+          <data>
+            -20 -20; -20 20; 20 20; 20 20; 20 -20; -20 -20;
+          </data>
+        </series>
+        <series name="num1" manual="true"></series>
+        <series name="den1" manual="true"></series>
+        <series name="num2" manual="true"></series>
+        <series name="den2" manual="true"></series>
+        <series name="lines" draw="lineSegments" manual="true">
+          <style>
+            <foreground color="black" />
+            <lineThickness>2</lineThickness>
+          </style>
+        </series>
+        <series name="x" draw="lineSegments" manual="true">
+          <style>
+            <foreground color="black" />
+            <lineThickness>2</lineThickness>
+          </style>
+        </series>
+      </drawing>
+      <simulation duration="3" name="sim1" period="0.02">
+        <onDuration>
+          btn1.Text = "Reset";
+        </onDuration>
+        <onUpdate>
+          if time &gt; 0 and time &lt; 0.5 then
+            num2Pos = { num2Pos[1], 4 - (time*4) };
+            den2Pos = { den2Pos[1], 2 + (time*4) };
+            drawNum2(num2Pos, color.black);
+            drawDen2(den2Pos, color.black);
+          elseif time &gt; 0.5 and time &lt; 1 then
+            lineAlpha = 255-((2*(time-0.5))*255);
+            drawLine(color.rgba(0, 0, 0, lineAlpha));
+          elseif time &gt; 1 and time &lt; 1.5 then
+            lineAlpha = 255*((time-1)*2);
+            drawX(color.rgba(0,0,0,lineAlpha));
+          elseif time &gt; 1.5 and time &lt; 2 then
+            val = (time-1.5)*2;
+            drawNum2(num2Pos, color.rgb(0, 0, val*255));
+            drawDen1(den1Pos, color.rgb(0, 0, val*255));
+            drawDen2(den2Pos, color.rgb(val*255, 0, 0));
+            drawNum1(num1Pos, color.rgb(val*255, 0, 0));
+          end
+        </onUpdate>
+        
+      </simulation>
+      <button name="btn1" content="Cross Multiply">
+        <onClick>
+          if btn1.Text == "Cross Multiply" then
+            sim1:Start();
+          else
+            lineAlpha = 255;
+            num1Pos = {3, 4};
+            num2Pos = {6.25, 4};
+            den1Pos = {3, 2};
+            den2Pos = {6, 2};
+            drawNum1(num1Pos, color.black);
+            drawNum2(num2Pos, color.black);
+            drawDen1(den1Pos, color.black);
+            drawDen2(den2Pos, color.black);
+            drawLine(color.black);
+            drawX(color.rgba(0,0,0,0));
+            btn1.Text = "Cross Multiply";
+          end
+
+        </onClick>
+      </button>
+      <p>In this example, we multiply the <foreground color="red">numerator of the first fraction</foreground> with the <foreground color="red">denominator of the second fraction</foreground></p>
+      <p>Then we multiply the <foreground color="blue">denominator of the first fraction</foreground> with the <foreground color="blue">numerator of the second fraction</foreground></p>
+      <image src="resources/frac1.png" name="img1">
+        <style>
+          <widthPercentage>30%</widthPercentage>
+        </style>
+      </image>
+      <p>If these two numbers are the same, that means the fractions are equivalent. In this case: </p>
+      <equation> $ 12 \times 371 = 4452 $</equation>
+      <equation> $ 53 \times 84 = 4452 $</equation>
+      <equation>Therefore, we have an equivalent fraction</equation>
+    </stack>
+  </sectionNoTitle>
+  
+  <sectionNoTitle name="section4" style="pageLayout">
+    <p style="sectionHeading">Practice</p>
+    <stack name="mcStack" style="contentBG">
+      <script>
+        local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=2})
+      </script>
+			<p style="subSectionHeading">Question 1</p>
+			<table widths="10% 90%" grid="false">
+				<row>
+					<column>
+						<image src="resources/question.png" inspect="false" />
+					</column>
+					<column>
+						<p style="justifiedText">What is an equivalent fraction to: $ \frac{10}{12} $ ?</p>
+					</column>
+				</row>
+			</table>
+			<table name="choicesTable" grid="false" widths="50% 50%">
+				<row>
+					<column>
+						<equation>$ \frac{1}{2} $</equation>
+					</column>
+					<column>
+						<equation>$ \frac{5}{6} $</equation>
+					</column>
+				</row>
+				<row>
+					<column>
+						<button name="btn" content="A" style="btnUnselected">
+							<onClick>
+                mcController:select(1)
+							</onClick>
+						</button>
+					</column>
+					<column>
+						<button name="btn" content="B" style="btnUnselected">
+							<onClick>
+                mcController:select(2)
+              </onClick>
+						</button>
+					</column>
+				</row>
+				<row>
+					<column>
+						<equation>$ \frac{6}{5} $</equation>
+					</column>
+					<column>
+						<equation>$ \frac{20}{22} $</equation>
+					</column>
+				</row>
+				<row>
+					<column>
+						<button name="btn" content="C" style="btnUnselected">
+							<onClick>
+                mcController:select(3)
+              </onClick>
+						</button>
+					</column>
+					<column>
+						<button name="btn" content="D" style="btnUnselected">
+							<onClick>
+                mcController:select(4)
+              </onClick>
+						</button>
+					</column>
+				</row>
+			</table>
+			<button name="checkBtn" content="Check Answer">
+				<onClick>
+          mcController:checkAnswer()
+        </onClick>
+			</button>
+		</stack>
+    <p>
+      <br />
+    </p>
+    <stack name="mcStack2" style="contentBG">
+      <script>
+        local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=1})
+      </script>
+			<p style="subSectionHeading">Question 2</p>
+			<table widths="10% 90%" grid="false">
+				<row>
+					<column>
+						<image src="resources/question.png" inspect="false" />
+					</column>
+					<column>
+						<p style="justifiedText">$ \frac{x}{20} = \frac{8}{40} $, Find $ x $.</p>
+					</column>
+				</row>
+			</table>
+			<table name="choicesTable" grid="false" widths="50% 50%">
+				<row>
+					<column>
+						<equation>$ 4 $</equation>
+					</column>
+					<column>
+						<equation>$ 8 $</equation>
+					</column>
+				</row>
+				<row>
+					<column>
+						<button name="btn" content="A" style="btnUnselected">
+							<onClick>
+                mcController:select(1)
+							</onClick>
+						</button>
+					</column>
+					<column>
+						<button name="btn" content="B" style="btnUnselected">
+							<onClick>
+                mcController:select(2)
+              </onClick>
+						</button>
+					</column>
+				</row>
+				<row>
+					<column>
+						<equation>$ 2 $</equation>
+					</column>
+					<column>
+						<equation>$ 1 $</equation>
+					</column>
+				</row>
+				<row>
+					<column>
+						<button name="btn" content="C" style="btnUnselected">
+							<onClick>
+                mcController:select(3)
+              </onClick>
+						</button>
+					</column>
+					<column>
+						<button name="btn" content="D" style="btnUnselected">
+							<onClick>
+                mcController:select(4)
+              </onClick>
+						</button>
+					</column>
+				</row>
+			</table>
+			<button name="checkBtn" content="Check Answer">
+				<onClick>
+          mcController:checkAnswer()
+        </onClick>
+			</button>
+		</stack>
+    <p>
+      <br />
+    </p>
+    <stack name="mcStack3" style="contentBG">
+        <script>
+          local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=4})
+        </script>
+			  <p style="subSectionHeading">Question 3</p>
+			  <table widths="10% 90%" grid="false">
+				  <row>
+					  <column>
+						  <image src="resources/question.png" inspect="false" />
+					  </column>
+					  <column>
+						  <p style="justifiedText"> Which of the following fraction is not equivalent? $ \frac{1}{3} = \frac{2}{6} = \frac{5}{16} = \frac{10}{30} $.</p>
+					  </column>
+				  </row>
+			  </table>
+			  <table name="choicesTable" grid="false" widths="50% 50%">
+				  <row>
+					  <column>
+						  <equation>$ \frac{1}{3} $</equation>
+					  </column>
+					  <column>
+						  <equation>$ \frac{2}{6} $</equation>
+					  </column>
+				  </row>
+				  <row>
+					  <column>
+						  <button name="btn" content="A" style="btnUnselected">
+							  <onClick>
+                  mcController:select(1)
+							  </onClick>
+						  </button>
+					  </column>
+					  <column>
+						  <button name="btn" content="B" style="btnUnselected">
+							  <onClick>
+                  mcController:select(2)
+                </onClick>
+						  </button>
+					  </column>
+				  </row>
+				  <row>
+					  <column>
+						  <equation>$ \frac{10}{30} $</equation>
+					  </column>
+					  <column>
+						  <equation>$ \frac{5}{16} $</equation>
+					  </column>
+				  </row>
+				  <row>
+					  <column>
+						  <button name="btn" content="C" style="btnUnselected">
+							  <onClick>
+                  mcController:select(3)
+                </onClick>
+						  </button>
+					  </column>
+					  <column>
+						  <button name="btn" content="D" style="btnUnselected">
+							  <onClick>
+                  mcController:select(4)
+                </onClick>
+						  </button>
+					  </column>
+				  </row>
+			  </table>
+			  <button name="checkBtn" content="Check Answer">
+				  <onClick>
+            mcController:checkAnswer()
+          </onClick>
+			  </button>
+		  </stack>
+  </sectionNoTitle>
+
+</document>

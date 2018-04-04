@@ -994,4 +994,12 @@
     <image style="collapsed tiny" src="resources/wrong.png" />
   </sectionNoTitle>
 
+  <sectionNoTitle style="pageLayout">
+    <web url="https://drive.google.com/open?id=1xF3pVvQNzuxrGC3VImoXfJkXW9waJgXyxUR5G49OXvo">
+      <style>
+        <aspectRatio>2</aspectRatio>
+      </style>
+    </web>
+  </sectionNoTitle>
+
 </document>

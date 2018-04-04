@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2024
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{3509FA56-3B69-4017-88D1-3C70D67D8588}") = "EquivalentFractions", "EquivalentFractions\EquivalentFractions.qdexproj", "{63DE3D29-20D1-45DE-9CCE-4BC03765BB33}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{63DE3D29-20D1-45DE-9CCE-4BC03765BB33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63DE3D29-20D1-45DE-9CCE-4BC03765BB33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63DE3D29-20D1-45DE-9CCE-4BC03765BB33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63DE3D29-20D1-45DE-9CCE-4BC03765BB33}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B1F495C0-2EBF-4452-BDC5-9AF3DB08333A}
+	EndGlobalSection
+EndGlobal

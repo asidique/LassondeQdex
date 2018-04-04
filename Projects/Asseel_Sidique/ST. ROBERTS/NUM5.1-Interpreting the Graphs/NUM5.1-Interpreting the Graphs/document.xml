@@ -1,0 +1,589 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="GEFC80E07_A415_42B3_8183_99078557888E">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>NUM-5.1-Interpreting Graphs of Linear Relations</title>
+    <creator>Sidique</creator>
+    <coverImage src="resources/cover.png" />
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+  </metadata>
+
+  <include src="resources/curriculumStyles.xml" />
+  <include src="resources/Utilities.xml" />
+  <include src="resources/plotTools.xml" />
+
+  <!--                                      Header & Footer START                                         -->
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="whiteColor">Amanda Koon</p>
+      <p style="whiteColor rightText">NUMERACY</p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/logo1.png" inspect="false" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/logo2.png" inspect="false" />
+    </stack>
+  </footer>
+
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">5.1 Interpreting Graphs of Linear Relations</title>
+    <image src="resources/artistgraph.png"></image>
+    <stack style="contentBG">
+      <p>
+        In this module, we will look at how to read and understand graphs of linear relations. This includes looking at what the x and y axis represent and what the slope of a graph tells us. By the end of this module, we will
+        be able to make correct statements regarding any question that uses a linear relation.
+      </p>
+    </stack>
+  </section>
+
+  <sectionNoTitle name="section2" style="pageLayout">
+    <p style="sectionHeading">Review</p>
+    <stack style="contentBG">
+      <p style="subSectionHeading">Proportional Relationship</p>
+      <p>A proportional relationship can be thought of as a ratio between two things. For an example, the ratio of apples to oranges can be 2 : 1. These relations, when plotted on a graph, are always a straight line and begin at the origin.
+      The formula for a proprtional relationship is usually in the form $ y = mx $ where $ m $ is the slope or ratio between two things.</p>
+      <p style="subSectionHeading">Linear Relation</p>
+      <p>A linear relation is a comparison between two things (such as distance and time) such that when we plot this relationship on a graph, it gives us a straight line. Linear relations are in the form $ y = mx + b $, where $ m $ is the slope and
+      $ b $ is the y-intercept.</p>
+    </stack>
+    <p style="sectionHeading">Interpreting Graphs of Linear Relations</p>
+    <stack style="contentBG">
+      <p>Now that we understand what a linear relation is, let's discuss how to interpret a graph of it. Linear relations will always be comparing two different things. In this example,
+      we will be comparing distance (in km) to time (in hours). Let's assume the graph below shows the distance travelled by someone walking in relation to time.</p>
+      <xyPlot name="p2" pan="custom" tap="custom" zoom="disabled" manual="true">
+        <onDocumentOpened>
+          plotTools.drawArrow(yaxis, vector({0, -10}), vector({0, 10}), color.black);
+          plotTools.drawArrow(xaxis, vector({-7, 0}), vector({10, 0}), color.black);
+          labelSize = 0.1;
+          distanceApart = 1;
+          distanceAxis = -0.2;
+          begin = 0.95
+          char.textX(label, vector({6, 0.2}), 0.2, color.black);
+          char.textY(label, vector({0.2, 6}), 0.2, color.black);
+          char.num1(label, vector({begin, distanceAxis}), labelSize, color.black);
+          char.num2(label, vector({begin+distanceApart*1, distanceAxis}), labelSize, color.black);
+          char.num3(label, vector({begin+distanceApart*2, distanceAxis}), labelSize, color.black);
+          char.num4(label, vector({begin+distanceApart*3, distanceAxis}), labelSize, color.black);
+          char.num5(label, vector({begin+distanceApart*4, distanceAxis}), labelSize, color.black);
+          char.num6(label, vector({begin+distanceApart*5, distanceAxis}), labelSize, color.black);
+          char.num7(label, vector({begin+distanceApart*6, distanceAxis}), labelSize, color.black);
+          char.num8(label, vector({begin+distanceApart*7, distanceAxis}), labelSize, color.black);
+          char.num9(label, vector({begin+distanceApart*8, distanceAxis}), labelSize, color.black);
+
+
+          char.num1(label, vector({distanceAxis, begin+distanceApart*0}), labelSize, color.black);
+          char.num2(label, vector({distanceAxis, begin+distanceApart*1}), labelSize, color.black);
+          char.num3(label, vector({distanceAxis, begin+distanceApart*2}), labelSize, color.black);
+          char.num4(label, vector({distanceAxis, begin+distanceApart*3}), labelSize, color.black);
+          char.num5(label, vector({distanceAxis, begin+distanceApart*4}), labelSize, color.black);
+          char.num6(label, vector({distanceAxis, begin+distanceApart*5}), labelSize, color.black);
+          char.num7(label, vector({distanceAxis, begin+distanceApart*6}), labelSize, color.black);
+          char.num8(label, vector({distanceAxis, begin+distanceApart*7}), labelSize, color.black);
+          char.num9(label, vector({distanceAxis, begin+distanceApart*8}), labelSize, color.black);
+
+          points3:Add(0, 0);
+          points3:Add(1, 1);
+          points3:Add(2, 2);
+          points3:Add(3, 3);
+          points3:Add(4, 4);
+          points3:Add(5, 5);
+          points3:Add(6, 6);
+          sim1:Start();
+        </onDocumentOpened>
+        <axis name="XAxis" dim="x" min="-2" max="8" auto="none" minor="false">
+          <title>Time (hours)</title>
+        </axis>
+        <axis name="YAxis" dim="y" min="-2" max="8" auto="none" minor="false">
+          <title>Distance (km) </title>
+        </axis>
+        <onPan>
+          scaledX = p2.XAxis.Min + state.Current.X * (p2.XAxis.Max - p2.XAxis.Min);
+          scaledY = p2.YAxis.Min + state.Current.Y * (p2.YAxis.Max - p2.YAxis.Min);
+          points:Add(round(scaledX, 1), round(scaledY,1));
+        </onPan>
+        <series name="yaxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>2</lineThickness>
+          </style>
+        </series>
+        <series name="xaxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>2</lineThickness>
+          </style>
+        </series>
+        <series name="line" draw="lineSegments">
+          <style>
+            <lineThickness>2</lineThickness>
+          </style>
+        </series>
+        <series name="points3" draw="points">
+          <style>
+            <foreground color="red" />
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        <series name="label"></series>
+        <series name="graph">
+          <style>
+            <lineThickness>1.5</lineThickness>
+            <foreground color="red" />
+          </style>
+        </series>
+        <series name="points" draw="points" capacity="1">
+          <style>
+            <foreground color="red" />
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+      </xyPlot>
+      <simulation name="sim1" duration="2">
+        <onUpdate>
+          t = time/2;
+          p2.graph:Add(t*12-2, t*12-2);
+        </onUpdate>
+      </simulation>
+      <p>What does the point $ (3, 3) $ mean?</p>
+      <stack name="ans1">
+        <style>
+          <visibility>collapsed</visibility>
+        </style>
+        <p>The point $ (3, 3) $ represents distance over time. This means that the distance travelled
+        is $ 3 km $ and the time elapsed is $ 3 \; hours $. This point represents a speed of $ 1 \frac{km}{h} $.</p>
+      </stack>
+      <button name="btn1" content="Show Answer">
+        <onClick>
+          if btn1.Text == "Show Answer" then
+            ans1.Style.Visibility = "visible";
+            btn1.Text = "Hide Answer";
+          else
+            ans1.Style.Visibility = "collapsed";
+            btn1.Text = "Show Answer";
+          end
+        </onClick>
+      </button>
+      <p>How fast will the person be walking at 8 hours?</p>
+      <stack name="ans2">
+        <style>
+          <visibility>collapsed</visibility>
+        </style>
+        <p>
+          The person will be walking at a rate of $ 1 \frac{km}{h} $. This is true for any time or distance according to this graph.
+        </p>
+      </stack>
+      <button name="btn2" content="Show Answer">
+        <onClick>
+          if btn2.Text == "Show Answer" then
+          ans2.Style.Visibility = "visible";
+          btn2.Text = "Hide Answer";
+          else
+          ans2.Style.Visibility = "collapsed";
+          btn2.Text = "Show Answer";
+          end
+        </onClick>
+      </button>
+      <p>How far will the person travel at 4 hours in to his trip?</p>
+      <stack name="ans3">
+        <style>
+          <visibility>collapsed</visibility>
+        </style>
+        <p>
+          The person will travel 4 km. This is apparent by seeing what the value of $ y $ is when $ x = 4 $.
+        </p>
+      </stack>
+      <button name="btn3" content="Show Answer">
+        <onClick>
+          if btn3.Text == "Show Answer" then
+          ans3.Style.Visibility = "visible";
+          btn3.Text = "Hide Answer";
+          else
+          ans3.Style.Visibility = "collapsed";
+          btn3.Text = "Show Answer";
+          end
+        </onClick>
+      </button>
+      <p>How much time will it take to travel 20 km?</p>
+      <stack name="ans4">
+        <style>
+          <visibility>collapsed</visibility>
+        </style>
+        <p>
+          According to the graph, we should be able to draw a straight line that never ends. At $ y = 20 $ or when the person has travelled 20km,
+          our x value will be $ 20 \; hours $. Therefore it will take 20 hours to travel 20km.
+        </p>
+      </stack>
+      <button name="btn4" content="Show Answer">
+        <onClick>
+          if btn4.Text == "Show Answer" then
+          ans4.Style.Visibility = "visible";
+          btn4.Text = "Hide Answer";
+          else
+          ans4.Style.Visibility = "collapsed";
+          btn4.Text = "Show Answer";
+          end
+        </onClick>
+      </button>
+    </stack>
+  </sectionNoTitle>
+
+  <sectionNoTitle name="section3" style="pageLayout">
+    <p style="sectionHeading">Example</p>
+    <stack style="contentBG">
+      <xyPlot name="p2" pan="custom" tap="custom" zoom="disabled" manual="true">
+        <onDocumentOpened>
+          --plotTools.drawArrow(yaxis, vector({0, 0}), vector({0, 100}), color.black);
+          --plotTools.drawArrow(xaxis, vector({0, 0}), vector({10, 0}), color.black);
+          labelSize = 0.1;
+          distanceApart = 1;
+          distanceAxis = -0.2;
+          begin = 0.95
+          --char.textX(label, vector({6, 0.2}), 0.2, color.black);
+          --char.textY(label, vector({0.2, 6}), 0.2, color.black);
+          char.num1(label, vector({begin, distanceAxis}), labelSize, color.black);
+          char.num2(label, vector({begin+distanceApart*1, distanceAxis}), labelSize, color.black);
+          char.num3(label, vector({begin+distanceApart*2, distanceAxis}), labelSize, color.black);
+          char.num4(label, vector({begin+distanceApart*3, distanceAxis}), labelSize, color.black);
+          char.num5(label, vector({begin+distanceApart*4, distanceAxis}), labelSize, color.black);
+          char.num6(label, vector({begin+distanceApart*5, distanceAxis}), labelSize, color.black);
+          char.num7(label, vector({begin+distanceApart*6, distanceAxis}), labelSize, color.black);
+          char.num8(label, vector({begin+distanceApart*7, distanceAxis}), labelSize, color.black);
+          char.num9(label, vector({begin+distanceApart*8, distanceAxis}), labelSize, color.black);
+
+
+          char.num1(label, vector({distanceAxis, begin+distanceApart*0}), labelSize, color.black);
+          char.num2(label, vector({distanceAxis, begin+distanceApart*1}), labelSize, color.black);
+          char.num3(label, vector({distanceAxis, begin+distanceApart*2}), labelSize, color.black);
+          char.num4(label, vector({distanceAxis, begin+distanceApart*3}), labelSize, color.black);
+          char.num5(label, vector({distanceAxis, begin+distanceApart*4}), labelSize, color.black);
+          char.num6(label, vector({distanceAxis, begin+distanceApart*5}), labelSize, color.black);
+          char.num7(label, vector({distanceAxis, begin+distanceApart*6}), labelSize, color.black);
+          char.num8(label, vector({distanceAxis, begin+distanceApart*7}), labelSize, color.black);
+          char.num9(label, vector({distanceAxis, begin+distanceApart*8}), labelSize, color.black);
+
+          points3:Add(0, 80);
+          points3:Add(1, 60);
+          points3:Add(2, 40);
+          points3:Add(3, 20);
+          points3:Add(4, 0);
+          for i = 0, 4, 0.1 do
+            graph:Add(i, -20*i+80);
+          end
+        </onDocumentOpened>
+        <axis name="XAxis" dim="x" min="0" max="6" auto="none" minor="false">
+          <title>Number of People</title>
+        </axis>
+        <axis name="YAxis" dim="y" min="0" max="100" auto="none" minor="false">
+          <title>Number of Cupcakes</title>
+        </axis>
+        <onPan>
+          --scaledX = p2.XAxis.Min + state.Current.X * (p2.XAxis.Max - p2.XAxis.Min);
+          --scaledY = p2.YAxis.Min + state.Current.Y * (p2.YAxis.Max - p2.YAxis.Min);
+          --points:Add(round(scaledX, 1), round(scaledY,1));
+        </onPan>
+        <series name="yaxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>2</lineThickness>
+          </style>
+          <data>
+            0 0; 0 100;
+          </data>
+        </series>
+        <series name="xaxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>2</lineThickness>
+          </style>
+          <data>
+            0 0; 10 0;
+          </data>
+        </series>
+        <series name="line" draw="lineSegments">
+          <style>
+            <lineThickness>2</lineThickness>
+          </style>
+        </series>
+        <series name="points3" draw="points">
+          <style>
+            <foreground color="purple" />
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        <series name="label"></series>
+        <series name="graph">
+          <style>
+            <lineThickness>1.2</lineThickness>
+            <foreground color="purple" />
+          </style>
+        </series>
+        <series name="points" draw="points" capacity="1">
+          <style>
+            <foreground color="red" />
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+      </xyPlot>
+      <p>This graph shows the relation between the number of cupcakes remaining in relation to
+      the number of people. The Y-Axis represents the number of cupcakes and the X-Axis represents
+      the number of people. Answer the following questions:</p>
+      <p>How many people need to eat cupcakes for there to be 20 cupcakes left?</p>
+      <stack name="ans1">
+        <style>
+          <visibility>collapsed</visibility>
+        </style>
+        <p>There needs to be 3 people since the point $ (3, 20) $ represents 20 cupcakes left while 3 people are there.</p>
+      </stack>
+      <button name="btn1" content="Show Answer">
+        <onClick>
+          if btn1.Text == "Show Answer" then
+            ans1.Style.Visibility = "visible";
+            btn1.Text = "Hide Answer";
+          else
+            ans1.Style.Visibility = "collapsed";
+            btn1.Text = "Show Answer";
+          end
+        </onClick>
+      </button>
+      <p>How many cupcakes is each person eating?</p>
+      <stack name="ans2">
+        <style>
+          <visibility>collapsed</visibility>
+        </style>
+        <p>
+          Each person is eating 20 cupcakes. We find this out by using the formula $ y = \frac{y_{2} - y_{1}}{x_{2} - x_{1}} $ on any two points.
+        </p>
+      </stack>
+      <button name="btn2" content="Show Answer">
+        <onClick>
+          if btn2.Text == "Show Answer" then
+          ans2.Style.Visibility = "visible";
+          btn2.Text = "Hide Answer";
+          else
+          ans2.Style.Visibility = "collapsed";
+          btn2.Text = "Show Answer";
+          end
+        </onClick>
+      </button>
+      <p>Is the number of cupcakes increasing or decreasing?</p>
+      <stack name="ans3">
+        <style>
+          <visibility>collapsed</visibility>
+        </style>
+        <p>
+          The number of cupcakes are decreasing. You can find this out by calculating the slope or the 
+          <b>rise over run</b> of the function. If the slope is negative, it means it is decreasing. In this case,
+          the slope is $ m = -20 $.
+        </p>
+      </stack>
+      <button name="btn3" content="Show Answer">
+        <onClick>
+          if btn3.Text == "Show Answer" then
+          ans3.Style.Visibility = "visible";
+          btn3.Text = "Hide Answer";
+          else
+          ans3.Style.Visibility = "collapsed";
+          btn3.Text = "Show Answer";
+          end
+        </onClick>
+      </button>
+    </stack>
+  </sectionNoTitle>
+
+  <sectionNoTitle name="section4" style="pageLayout">
+    <p style="sectionHeading">Practice</p>
+    <stack style="contentBG">
+      <p style="subSectionHeading">Fill in the blanks</p>
+      <p>Two friends named Joe and Bob both open a bank account in 2008. Joe starts with $ \$ $500 whilst Bob starts with $ \$ $2000. Bob and Joe decide to invest
+      their money into different stocks. The graph below shoes the balance of each persons bank account in relation to time.</p>
+      <p>Use the graph below to help you answer the fill in the blank questions below on statements that interpret the graph.</p>
+      <xyPlot name="p2" pan="custom" tap="custom" zoom="disabled" manual="true">
+        <onDocumentOpened>
+          plotTools.drawArrow(yaxis, vector({0, -10}), vector({0, 10}), color.black);
+          plotTools.drawArrow(xaxis, vector({-7, 0}), vector({10, 0}), color.black);
+          labelSize = 0.1;
+          distanceApart = 1;
+          distanceAxis = -0.2;
+          begin = 0.95
+          char.textX(label, vector({9.5, 0.2}), 0.2, color.black);
+          char.textY(label, vector({0.2, 9.5}), 0.2, color.black);
+          char.num1(label, vector({begin, distanceAxis}), labelSize, color.black);
+          char.num2(label, vector({begin+distanceApart*1, distanceAxis}), labelSize, color.black);
+          char.num3(label, vector({begin+distanceApart*2, distanceAxis}), labelSize, color.black);
+          char.num4(label, vector({begin+distanceApart*3, distanceAxis}), labelSize, color.black);
+          char.num5(label, vector({begin+distanceApart*4, distanceAxis}), labelSize, color.black);
+          char.num6(label, vector({begin+distanceApart*5, distanceAxis}), labelSize, color.black);
+          char.num7(label, vector({begin+distanceApart*6, distanceAxis}), labelSize, color.black);
+          char.num8(label, vector({begin+distanceApart*7, distanceAxis}), labelSize, color.black);
+          char.num9(label, vector({begin+distanceApart*8, distanceAxis}), labelSize, color.black);
+
+
+          char.num1(label, vector({distanceAxis, begin+distanceApart*0}), labelSize, color.black);
+          char.num2(label, vector({distanceAxis, begin+distanceApart*1}), labelSize, color.black);
+          char.num3(label, vector({distanceAxis, begin+distanceApart*2}), labelSize, color.black);
+          char.num4(label, vector({distanceAxis, begin+distanceApart*3}), labelSize, color.black);
+          char.num5(label, vector({distanceAxis, begin+distanceApart*4}), labelSize, color.black);
+          char.num6(label, vector({distanceAxis, begin+distanceApart*5}), labelSize, color.black);
+          char.num7(label, vector({distanceAxis, begin+distanceApart*6}), labelSize, color.black);
+          char.num8(label, vector({distanceAxis, begin+distanceApart*7}), labelSize, color.black);
+          char.num9(label, vector({distanceAxis, begin+distanceApart*8}), labelSize, color.black);
+          for i=-10, 10, 1 do
+            line:Add(i, -10);
+            line:Add(i, 10);
+            line:Add(-10, i);
+            line:Add(10, i);
+          end
+          for i=0,10, 0.01 do
+          graph:Add(i, 0.5+i);
+          graph2:Add(i, 2+i/2);
+          end
+        </onDocumentOpened>
+        <axis name="XAxis" dim="x" min="-0.5" max="10" auto="none" minor="false">
+          <title>Time (Years)</title>
+        </axis>
+        <axis name="YAxis" dim="y" min="-0.5" max="10" auto="none" minor="false">
+          <title>Balance (in $1000's of Dollars)</title>
+        </axis>
+        <onPan>
+          scaledX = p2.XAxis.Min + state.Current.X * (p2.XAxis.Max - p2.XAxis.Min);
+          scaledY = p2.YAxis.Min + state.Current.Y * (p2.YAxis.Max - p2.YAxis.Min);
+          --points:Add(round(scaledX, 1), round(scaledY,1));
+        </onPan>
+        <series name="yaxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>2</lineThickness>
+          </style>
+        </series>
+        <series name="xaxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>2</lineThickness>
+          </style>
+        </series>
+        <series name="line" draw="lineSegments">
+          <style>
+            <lineThickness>1</lineThickness>
+            <foreground color="lightGray" />
+          </style>
+        </series>
+        <series name="points3" draw="points">
+          <style>
+            <foreground color="red" />
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        <series name="label"></series>
+        <series name="graph">
+          <style>
+            <lineThickness>1.5</lineThickness>
+            <foreground color="red" />
+          </style>
+        </series>
+        <series name="graph2">
+          <style>
+            <lineThickness>1.5</lineThickness>
+            <foreground color="blue" />
+          </style>
+        </series>
+        <series name="points" draw="points" capacity="1">
+          <style>
+            <foreground color="blue" />
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+      </xyPlot>
+      <p>Who's bank account is growing faster?</p>
+      <stack orientation="horizontal">
+        <button name="btn1" content="Joe">
+          <onClick>
+            btn1.Style.BackgroundColor = color.green;
+          </onClick>
+        </button>
+        <button name="btn2" content="Bob">
+          <onClick>
+            btn2.Style.BackgroundColor = color.gray;
+          </onClick>
+        </button>
+        <button name="btn3" content="Both are the same">
+          <onClick>
+            btn3.Style.BackgroundColor = color.gray;
+          </onClick>
+        </button>
+      </stack>
+      <p>
+        <br />
+      </p>
+      <p>In what year will Bob and Joe have the same balance in their bank accounts?</p>
+      <stack orientation="horizontal">
+        <button name="btn1" content="2012">
+          <onClick>
+            btn1.Style.BackgroundColor = color.gray;
+          </onClick>
+        </button>
+        <button name="btn2" content="2010">
+          <onClick>
+            btn2.Style.BackgroundColor = color.gray;
+          </onClick>
+        </button>
+        <button name="btn3" content="2011">
+          <onClick>
+            btn3.Style.BackgroundColor = color.green;
+          </onClick>
+        </button>
+      </stack>
+      <p>
+        <br />
+      </p>
+      <p>Who had a bigger balance in 2008?</p>
+      <stack orientation="horizontal">
+        <button name="btn1" content="Joe">
+          <onClick>
+            btn1.Style.BackgroundColor = color.gray;
+          </onClick>
+        </button>
+        <button name="btn2" content="Bob">
+          <onClick>
+            btn2.Style.BackgroundColor = color.green;
+          </onClick>
+        </button>
+        <button name="btn3" content="Neither">
+          <onClick>
+            btn3.Style.BackgroundColor = color.gray;
+          </onClick>
+        </button>
+      </stack>
+      <p>
+        <br />
+      </p>n
+      <p>How much money will Joe have in his bank after 8 years of opening his account?</p>
+      <stack orientation="horizontal">
+        <button name="btn1" content="$8500">
+          <onClick>
+            btn1.Style.BackgroundColor = color.green;
+          </onClick>
+        </button>
+        <button name="btn2" content="$7000">
+          <onClick>
+            btn2.Style.BackgroundColor = color.gray;
+          </onClick>
+        </button>
+        <button name="btn3" content="$6000">
+          <onClick>
+            btn3.Style.BackgroundColor = color.gray;
+          </onClick>
+        </button>
+      </stack>
+    </stack>
+  </sectionNoTitle>
+</document>

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2024
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{3509FA56-3B69-4017-88D1-3C70D67D8588}") = "NUM5.1-Interpreting the Graphs", "NUM5.1-Interpreting the Graphs\NUM5.1-Interpreting the Graphs.qdexproj", "{B39AC8B8-0D95-430F-9117-D7889D9DF7C9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B39AC8B8-0D95-430F-9117-D7889D9DF7C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B39AC8B8-0D95-430F-9117-D7889D9DF7C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B39AC8B8-0D95-430F-9117-D7889D9DF7C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B39AC8B8-0D95-430F-9117-D7889D9DF7C9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {869BE109-7D94-407F-B202-310F5AA8F0A9}
+	EndGlobalSection
+EndGlobal

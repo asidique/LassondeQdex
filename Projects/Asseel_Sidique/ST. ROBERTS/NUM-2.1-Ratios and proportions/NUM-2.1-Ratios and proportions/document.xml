@@ -38,13 +38,17 @@
 
   <!-- Section 1 -->
   <section name="section1" style="pageLayout">
-    <title style="chapterTitle">2.1 Rate and Proportions</title>
+    
+    <title style="chapterTitle">2.1 Ratios and Proportions</title>
+    <onDocumentOpened>
+
+    </onDocumentOpened>
     <!--FRONT IMAGE-->
     <p style="sectionHeading">Introduction</p>
     <image src="resources/ratio.png" />
     <stack style="contentBG">
       <p>Ratios and proportions are two really important mathematical concepts. A simple example of ratios is to say that in the picture above, the ratio of boys to girls is 5 : 7. A proportional statement would be to say that for every 10 boys, there are 14 girls. Notice
-      how there aren't 10 boys or 14 girls in the picture above, however the proportional statement is true because of the ratio of boys to girls in this scenatio. Let's look ahead at some more examples to get a better understanding.</p>
+      how there aren't 10 boys or 14 girls in the picture above, however the proportional statement is true because of the ratio of boys to girls in this scenario. Let's look ahead at some more examples to get a better understanding.</p>
     </stack>
   </section>
   
@@ -61,12 +65,753 @@
       we wanted to know on average how many meals 5 adults would have, we need to use proportions. $ \frac{1 \; adult}{3 \; meals} $ = $ \frac{5 \; adult}{15 \; meals} $. Proportions can be useful when you change the magnitude of a ratio and want to see
     how the things in that ratio are affected.</p>
     </stack>
+    <p style="sectionHeading">Check Your Understanding</p>
+    <stack style="contentBG">
+      <p>Now that we have the definitions out of the way, lets see if we have grasped the concept of ratios and proportions.</p>
+      <p>In the image below, what is the proportion of apples to oranges? Write your answer in the box below the image. It should be in the form "A:B" where A and B are whole numbers</p>
+      <image src="resources/applesoranges.png"></image>
+      <table style="center" grid="false" name="table">
+        <row name="r1">
+          <column><p style="alignRight">Ratio:</p></column>
+          <column name="c2"><textInput style="alignLeft" placeholder="Enter Answer Here" name="in1"></textInput></column>
+        </row>
+      </table>
+      <button style="center" content="Check Answer" name="btn1">
+            <onClick>
+              if table.r1.c2.in1.Text == "3:6" then
+                btn1.Text = "Correct!";
+                btn1.Style.BackgroundColor = color.green;
+              else
+                btn1.Text = "Try Again!";
+              end
+            </onClick>
+          </button>
+    </stack>
   </sectionNoTitle>
   
   <sectionNoTitle style="pageLayout" name="section3">
-    <p style="sectionHeading">Simulation</p>
-    <stack style="contentBG">
+    <onDocumentOpened>
+      numSquares = 5;
+      squareColor = color.rgb(255,0 ,0);
+      triangleColor = color.rgb(0, 255, 0);
+      numTriangles = 4;
+      qNum = 0;
+      result = false;
+      g1 = section3.stack1.g1;
+
+      function drawSquares()
+        for i=0, numSquares-1, 1 do
+          plotTools.drawSquare(g1.squares, {-5, -(numSquares)+(i*3)}, 2, 2, squareColor)
+        end
+      end
+      function drawTriangles()
+        for i=0, numTriangles-1, 1 do
+          plotTools.drawTriangle(g1.triangles, {5, -numTriangles+(i*3)}, 2, 2, triangleColor)
+        end
+      end
+      function clearSquares(duration, time)
+        g1.squares:Clear();
+        squareColor = color.rgba(255, 0, 0, duration/time);
+        drawSquares();
+        g1.squares:Update();
+      end
+      function clearTriangles(duration, time)
+        g1.triangles:Clear();
+        triangleColor = color.rgba(0, 255, 0, duration/time);
+        drawTriangles();
+        g1.triangles:Update();
+      end
+      function drawCorrect()
+        g1.result:Clear();
+        char.textC(g1.result, {-3, 0}, 1, color.green);
+        char.textO(g1.result, {-2, 0}, 1, color.green);
+        char.textR(g1.result, {-1, 0}, 1, color.green);
+        char.textR(g1.result, {0, 0}, 1, color.green);
+        char.textE(g1.result, {1, 0}, 1, color.green);
+        char.textC(g1.result, {2, 0}, 1, color.green);
+        char.textT(g1.result, {3, 0}, 1, color.green);
+        g1.result:Update();
+      end
       
+      function drawIncorrect()
+        g1.result:Clear();
+        char.textT(g1.result, {-4, 0}, 1, color.red);
+        char.textR(g1.result, {-3, 0}, 1, color.red);
+        char.textY(g1.result, {-2, 0}, 1, color.red);
+        
+        char.textA(g1.result, {0, 0}, 1, color.red);
+        char.textG(g1.result, {1, 0}, 1, color.red);
+        char.textA(g1.result, {2, 0}, 1, color.red);
+        char.textI(g1.result, {3, 0}, 1, color.red);
+        char.textN(g1.result, {3.25, 0}, 1, color.red);
+        g1.result:Update();
+      end
+            <![CDATA[
+      function split(str, pat)
+      local t = {}  -- NOTE: use {n = 0} in Lua-5.0
+      local fpat = "(.-)" .. pat
+      local last_end = 1
+      local s, e, cap = str:find(fpat, 1)
+      while s do
+      if s ~= 1 or cap ~= "" then
+          table.insert(t,cap)
+      end
+      last_end = e+1
+      s, e, cap = str:find(fpat, last_end)
+      end
+      if last_end <= #str then
+      cap = str:sub(last_end)
+      table.insert(t, cap)
+      end
+      return t
+      end
+      ]]>
+          
+      drawSquares();
+      drawTriangles();
+    </onDocumentOpened>
+    <p style="sectionHeading">Ratio and Equivalent Ratio Practice</p>
+    <stack name="stack1" style="contentBG">
+      <p>Count the ratio of red squares to green triangles and input them below. After that, calculate an equivalent ratio for the one
+      you just counted and input it below. Press 'Check Answer' to see if you got it right!</p>
+      <xyPlot name="g1">
+        <axis dim="x" auto="fixed" min="-10" max="10" major="false"></axis>
+        <axis dim="y" auto="fixed" min="-10" max="10" major="false"></axis>
+        <series name="squares" draw="segmentedFill" manual="true"></series>
+        <series name="triangles" draw="segmentedFill" manual="true"></series>
+        <series name="result" manual="true">
+          <style>
+            <lineThickness>4</lineThickness>
+          </style>
+        </series>
+      </xyPlot>
+      <simulation name="sim1" duration="1" period="0.01">
+        <onDuration>
+          qNum = qNum + 1;
+          if qNum == 1 then
+            numSquares = 3;
+            numTriangles = 2;
+          elseif qNum == 2 then
+            numSquares = 1;
+            numTriangles = 4;
+          elseif qNum == 3 then
+            numSquares = 2;
+            numTriangles = 6;
+          elseif qNum == 4 then
+            numSquares = 2;
+            numTriangles = 2;
+          elseif qNum == 5 then
+            numSquares = 5;
+            numTriangles = 2;
+          else
+            numSquares = 0;
+            numTriangles = 0;
+            btn.Text = "Reset";
+          end
+
+          sim2:Start();
+        </onDuration>
+        <onUpdate>
+          clearSquares(sim1.Duration, sim1.Time+0.001)
+          clearTriangles(sim1.Duration, sim1.Time+0.001)
+        </onUpdate>
+      </simulation>
+      <simulation name="sim2" duration="1" period="0.01">
+        <onDuration>
+          
+        </onDuration>
+        <onUpdate>
+            clearSquares(sim2.Duration, (sim2.Duration) - (sim2.Time)+0.001)
+            clearTriangles(sim2.Duration, (sim2.Duration) - (sim2.Time)+0.001)
+        </onUpdate>
+      </simulation>
+      <simulation name="sim3" duration="2" period="0.01">
+        <onDuration>
+          g1.result:Clear();
+          g1.result:Update();
+        </onDuration>
+      </simulation>
+      <p name="test" style="alignCenter"></p>
+      <stack name="stack3" orientation="horizontal">
+        <p style="alignRight">Enter the Ratio of Squares to Triangles: </p>
+        <textInput name="in1" placeholder="A:B"></textInput>
+      </stack>
+      <stack name="stack4" orientation="horizontal">
+        <p style="alignRight">Enter an equivalent ratio: </p>
+        <textInput name="in1" placeholder="A:B"></textInput>
+      </stack>
+      <button name="btn" content="Check Answer">
+        <onClick>
+          if qNum == 6 then  
+            qNum = 0;
+            numTriangles = 4;
+            numSquares = 5;
+            btn.Text = "Check Answer"
+            sim1:Start();
+          else
+            ans = tostring(numSquares) .. ":" .. tostring(numTriangles);          
+            cut = tonumber(tostring(string.find(stack4.in1.Text, ":")));
+            eq2 = tonumber(string.sub(stack4.in1.Text, cut+1));
+            eq1 = tonumber(string.sub(stack4.in1.Text, 0, cut-1));
+            if (stack3.in1.Text == ans) and (eq1/numSquares == eq2/numTriangles) then
+              if(eq1 == numSquares or eq2 == numTriangles) then
+                result = false;
+                test.Style.ForegroundColor = color.red;
+                test.Text = "Try writing an equivalent ratio that is not the exact ratio you entered above!"
+              else
+                test.Style.ForegroundColor = color.green;
+                test.Text = "Great job! That is correct"
+                result = true;
+              end
+            else
+              test.Style.ForegroundColor = color.red;
+              test.Text = "Try again! Remember, ratios can be thought of fractions."
+              result = false;
+            end
+          
+            if (result) then
+              drawCorrect()
+              sim3:Start();
+              sim1:Start();
+            else
+              drawIncorrect();
+              sim3:Start();
+            end
+          end
+        </onClick>
+      </button>
+    </stack>
+  </sectionNoTitle>
+
+  
+  <!--CAR SCALE SIMULATION HERE-->
+  <sectionNoTitle style="pageLayout" name="section5">
+    <onDocumentOpened>
+      myPlot = stack3.p;
+          myPlot.spin.Transform =  matrixf.scaling(0.4) * matrixf.rotationAboutAxis(0, 0, 1, 2.66) * matrixf.translation(-0.425, -0.4, 0);
+    </onDocumentOpened>
+    <p style="sectionHeading">Scale Models</p>
+    <stack style="contentBG">
+      <p>A popular practice in architecture and design is to create a scale model of something you are actually trying to build. Imagine trying to build
+      a 60-storey building that would take months or even years of construction. Wouldn't it be great if you could see how the building looks like before it was built? A scale model
+      can provide a visual of the building before the construction even starts.</p>
+      <p>Obviously, a scale model would not be the actual size of the object in question. Designers would use <b>ratios and proportions</b> to make a miniature model which would accurately represent the real life object.</p>
+    </stack>
+    <p style="sectionHeading">Scale Model Question</p>
+    <stack name="mcStack" style="mcStackLayout contentBG">
+      <script>
+        local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=2})
+      </script>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources/question.png" inspect="false" />
+          </column>
+          <column>
+            <p style="justifiedText">If you were designing a scale model of a 600m tall building, and your job was to make a 30cm tall scale model, what is the scale ratio you would use?</p>
+          </column>
+        </row>
+      </table>
+      <table name="choicesTable" grid="false" widths="50% 50%">
+        <row>
+          <column>
+            <p style="centerText">1 : 10000</p>
+
+          </column>
+          <column>
+            <p style="centerText">1 : 2000</p>
+
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="A" style="btnUnselected">
+              <onClick>
+                mcController:select(1)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="B" style="btnUnselected">
+              <onClick>
+                mcController:select(2)
+              </onClick>
+            </button>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p style="centerText">1 : 200</p>
+
+          </column>
+          <column>
+            <p style="centerText">1 : 6000</p>
+
+          </column>
+        </row>
+        <row>
+          <column>
+            <button name="btn" content="C" style="btnUnselected">
+              <onClick>
+                mcController:select(3)
+              </onClick>
+            </button>
+          </column>
+          <column>
+            <button name="btn" content="D" style="btnUnselected">
+              <onClick>
+                mcController:select(4)
+              </onClick>
+            </button>
+          </column>
+        </row>
+      </table>
+      <button name="checkBtn" content="Check Answer">
+        <onClick>
+          mcController:checkAnswer()
+        </onClick>
+      </button>
+    </stack>
+    <p style="sectionHeading">Fidget Spinner Scaling</p>
+    <stack style="contentBG" name="stack3">
+      <p>Let's take this fidget spinner image below. Imagine that this image represents the actual size of a fidget spinner.</p>
+      <image src="resources/fidget.png">
+        <style>
+          <widthPercentage>40%</widthPercentage>
+        </style>
+      </image>
+      <p>Now, use the slider below to change the scale of our model fidget spinner. Notice the ratio between our model and the reference image above which is the actual size of our fidget spinner.</p>
+      <drawing name="p">
+        <style>
+          <aspectRatio>1</aspectRatio>
+        </style>
+        <axis dim="x" min="-0.3" max="0.3" auto="none"></axis>
+        <axis dim="y" min="-0.3" max="0.3" auto="none"></axis>
+        <series draw="points" name="spin">
+          <style>
+            <lineThickness>0.75</lineThickness>
+          </style>
+          <data src="resources/spinner.csv" />
+          
+        </series>
+      </drawing>
+      <p style="centerText" name="label">Ratio: 1 : 1</p>
+      <slider max="5" min="0.1" value="0.4">
+        <onValueChanged>
+          label.Text = "Ratio: 1 : " .. tostring(round(value+0.6, .1))
+          myPlot.spin.Transform = matrixf.scaling(value) * matrixf.rotationAboutAxis(0, 0, 1, 2.66) * matrixf.translation(-0.425, -0.4, 0);
+        </onValueChanged>
+      </slider>
+    </stack>
+  </sectionNoTitle>
+
+  
+  <sectionNoTitle style="pageLayout" name="section4">
+    <onDocumentOpened>
+
+      function drawBowl(pos, rad)
+      plotTools.drawArc(stack2.g1.bowl, 180, 360, pos, rad, color.white);
+      end
+
+      function drawSugar(pos, height, col, ser)
+      char.textS(ser and ser or stack2.g1.sugarLabel, ({pos[1], pos[2]}), height, col);
+      --char.textS(ser and ser or stack2.g1.sugarLabel, ({pos[1] - height*2, pos[2]}), height, col);
+      --char.textU(ser and ser or stack2.g1.sugarLabel, {pos[1] - height, pos[2]}, height, col);
+      --char.textG(ser and ser or stack2.g1.sugarLabel, pos, height, col);
+      --char.textA(ser and ser or stack2.g1.sugarLabel, {pos[1] + height, pos[2]}, height, col);
+      --char.textR(ser and ser or stack2.g1.sugarLabel, {pos[1] + height*2, pos[2]}, height, col);
+      end
+
+      function drawFlour(pos, height, col, ser)
+      char.textF(ser and ser or stack2.g1.flourLabel, ({pos[1], pos[2]}), height, col);
+      --char.textF(ser and ser or stack2.g1.flourLabel, ({pos[1] - height*2, pos[2]}), height, col);
+      --char.textL(ser and ser or stack2.g1.flourLabel, {pos[1] - height, pos[2]}, height, col);
+      --char.textO(ser and ser or stack2.g1.flourLabel, pos, height, col);
+      --char.textU(ser and ser or stack2.g1.flourLabel, {pos[1] + height, pos[2]}, height, col);
+      --char.textR(ser and ser or stack2.g1.flourLabel, {pos[1] + height*2, pos[2]}, height, col);
+      end
+      
+      function drawSugar2(pos, height, col, ser)
+      char.textS(ser and ser or stack2.g1.sugarLabel, ({pos[1] - height*2, pos[2]}), height, col);
+      char.textU(ser and ser or stack2.g1.sugarLabel, {pos[1] - height, pos[2]}, height, col);
+      char.textG(ser and ser or stack2.g1.sugarLabel, pos, height, col);
+      char.textA(ser and ser or stack2.g1.sugarLabel, {pos[1] + height, pos[2]}, height, col);
+      char.textR(ser and ser or stack2.g1.sugarLabel, {pos[1] + height*2, pos[2]}, height, col);
+      end
+
+      function drawFlour2(pos, height, col, ser)
+      char.textF(ser and ser or stack2.g1.flourLabel, ({pos[1] - height*2, pos[2]}), height, col);
+      char.textL(ser and ser or stack2.g1.flourLabel, {pos[1] - height, pos[2]}, height, col);
+      char.textO(ser and ser or stack2.g1.flourLabel, pos, height, col);
+      char.textU(ser and ser or stack2.g1.flourLabel, {pos[1] + height, pos[2]}, height, col);
+      char.textR(ser and ser or stack2.g1.flourLabel, {pos[1] + height*2, pos[2]}, height, col);
+      end
+
+      function drawEggs(pos, height, col, ser)
+      char.textE(ser and ser or stack2.g1.eggLabel, {pos[1], pos[2]}, height, col);
+      --char.textE(ser and ser or stack2.g1.eggLabel, {pos[1] - (height*2) + height/2, pos[2]}, height, col);
+      --char.textG(ser and ser or stack2.g1.eggLabel, {pos[1] - (height/2), pos[2]}, height, col);
+      --char.textG(ser and ser or stack2.g1.eggLabel, {pos[1] + (height/2), pos[2]}, height, col);
+      --char.textS(ser and ser or stack2.g1.eggLabel, {pos[1] + (height*2) - height/2, pos[2]}, height, col);
+      end
+      
+      function drawEggs2(pos, height, col, ser)
+        char.textE(ser and ser or stack2.g1.eggLabel, {pos[1] - (height*2) + height/2, pos[2]}, height, col);
+        char.textG(ser and ser or stack2.g1.eggLabel, {pos[1] - (height/2), pos[2]}, height, col);
+        char.textG(ser and ser or stack2.g1.eggLabel, {pos[1] + (height/2), pos[2]}, height, col);
+        char.textS(ser and ser or stack2.g1.eggLabel, {pos[1] + (height*2) - height/2, pos[2]}, height, col);
+      end
+
+      function drawMilk(pos, height, col, ser)
+      char.textM(ser and ser or stack2.g1.milkLabel, {pos[1], pos[2]}, height, col);
+      --char.textM(ser and ser or stack2.g1.milkLabel, {pos[1] - (height*2) + height/2, pos[2]}, height, col);
+      --char.textI(ser and ser or stack2.g1.milkLabel, {pos[1] - (height/2) + height/2, pos[2]}, height, col);
+      --char.textL(ser and ser or stack2.g1.milkLabel, {pos[1] + (height/2), pos[2]}, height, col);
+      --char.textK(ser and ser or stack2.g1.milkLabel, {pos[1] + (height*2) - height/2, pos[2]}, height, col);
+      end
+      
+      function drawMilk2(pos, height, col, ser)
+      char.textM(ser and ser or stack2.g1.milkLabel, {pos[1] - (height*2) + height/2, pos[2]}, height, col);
+      char.textI(ser and ser or stack2.g1.milkLabel, {pos[1] - (height/2) + height/2, pos[2]}, height, col);
+      char.textL(ser and ser or stack2.g1.milkLabel, {pos[1] + (height/2), pos[2]}, height, col);
+      char.textK(ser and ser or stack2.g1.milkLabel, {pos[1] + (height*2) - height/2, pos[2]}, height, col);
+      end
+
+      function drawMix(pos, height, col, ser)
+      stack2.g1.mix:Clear();
+      stack2.g1.mixLabel:Clear();
+      plotTools.drawCircle(ser and ser or stack2.g1.mix, pos, height, col)
+      char.textM(ser and ser or stack2.g1.mixLabel, {pos[1] - (height/4), pos[2]}, height/4, color.black);
+      char.textI(ser and ser or stack2.g1.mixLabel, {pos[1] + height/8, pos[2]}, height/4, color.black);
+      char.textX(ser and ser or stack2.g1.mixLabel, {pos[1] + (height/4), pos[2]}, height/4, color.black);
+      stack2.g1.mix:Update();
+      stack2.g1.mixLabel:Update();
+      end
+
+      function drawReset(pos, height, col)
+      stack2.g1.reset:Clear();
+      stack2.g1.resetLabel:Clear();
+      plotTools.drawCircle(stack2.g1.reset, pos, height, col)
+      char.textR(stack2.g1.resetLabel, {pos[1] - (height*2/4), pos[2]}, height/4, color.black);
+      char.textE(stack2.g1.resetLabel, {pos[1] - height/4, pos[2]}, height/4, color.black);
+      char.textS(stack2.g1.resetLabel, {pos[1], pos[2]}, height/4, color.black);
+      char.textE(stack2.g1.resetLabel, {pos[1] + (height/4), pos[2]}, height/4, color.black);
+      char.textT(stack2.g1.resetLabel, {pos[1] + (height*2/4), pos[2]}, height/4, color.black);
+      stack2.g1.reset:Update();
+      stack2.g1.resetLabel:Update();
+      end
+
+      function drawSUG(pos, width, height, col)
+      stack2.g1.sugar:Clear();
+      plotTools.drawSquare(stack2.g1.sugar, pos, width, height, col);
+      drawSugar(pos, 0.3, color.black, stack2.g1.sugar);
+      stack2.g1.sugar:Update();
+      end
+
+      function drawFLO(pos, width, height, col)
+      stack2.g1.flour:Clear();
+      plotTools.drawSquare(stack2.g1.flour, pos, width, height, col);
+      drawFlour(pos, 0.3, color.black, stack2.g1.flour);
+      stack2.g1.flour:Update();
+      end
+
+      function drawEGG(pos, xrad, yrad, col)
+      stack2.g1.eggs:Clear();
+      plotTools.drawEllipse(stack2.g1.eggs, pos, xrad, yrad, col)
+      drawEggs(pos, 0.3, color.black, stack2.g1.eggs);
+      stack2.g1.eggs:Update();
+      end
+
+      function drawMIL(pos, width, height, col)
+      stack2.g1.milk:Clear();
+      plotTools.drawSquare(stack2.g1.milk, pos, width, height, col);
+      plotTools.drawTriangle(stack2.g1.milk, {pos[1] + width/2 - (width/10), pos[2] + height/2 - (height/10)}, width/5, height/5, col);
+      drawMilk(pos, 0.3, color.black, stack2.g1.milk);
+      stack2.g1.milk:Update();
+      end
+
+      onEgg = false;
+      onMilk = false;
+      onSugar = false;
+      onFlour = false;
+      hasIngredient = false;
+      mixAppear = false;
+      sugarCount = 0;
+      flourCount = 0;
+      eggCount = 0;
+      milkCount = 0;
+
+      function drawNum(num, ser, pos, he, col)
+      if num == 0 then
+      char.num0(ser, pos, he, col)
+      elseif num == 1 then
+      char.num1(ser, pos, he, col)
+      elseif num == 2 then
+      char.num2(ser, pos, he, col)
+      elseif num == 3 then
+      char.num3(ser, pos, he, col)
+      elseif num == 4 then
+      char.num4(ser, pos, he, col)
+      elseif num == 5 then
+      char.num5(ser, pos, he, col)
+      elseif num == 6 then
+      char.num6(ser, pos, he, col)
+      elseif num == 7 then
+      char.num7(ser, pos, he, col)
+      elseif num == 8 then
+      char.num8(ser, pos, he, col)
+      elseif num == 9 then
+      char.num9(ser, pos, he, col)
+      end
+      end
+
+      function updateLabelCount(sugarC, flourC, eggC, milkC)
+      stack2.g1.labelCount:Clear();
+      drawNum(sugarC, stack2.g1.labelCount, {-7.5, 6}, 0.5, color.black)
+      drawNum(flourC, stack2.g1.labelCount, {-2.5, 6}, 0.5, color.black)
+      drawNum(eggC, stack2.g1.labelCount, {2.5, 6}, 0.5, color.black)
+      drawNum(milkC, stack2.g1.labelCount, {7.5, 6}, 0.5, color.black)
+      stack2.g1.labelCount:Update();
+      end
+
+      function init()
+      onEgg = false;
+      onMilk = false;
+      onSugar = false;
+      onFlour = false;
+      hasIngredient = false;
+      mixAppear = false;
+      sugarCount = 0;
+      flourCount = 0;
+      milkCount = 0;
+      eggCount = 0;
+      drawBowl({0, 0}, 2.5);
+      drawSugar2({-7.5, 8}, 0.5, color.red)
+      drawFlour2({-2.5, 8}, 0.5, color.brown);
+      drawEggs2({2.5, 8}, 0.5, color.green);
+      drawMilk2({7.5, 8}, 0.5, color.blue);
+      updateLabelCount(0, 0, 0, 0)
+      drawSUG({-7.5, -7.5}, 1.5, 3, color.red);
+      drawFLO({-2.5, -7.5}, 1.5, 3, color.brown);
+      drawEGG({2.5, -7.5}, 1, 1.4, color.green);
+      drawMIL({7.5, -7.5}, 1.5, 3, color.blue);
+      drawReset({-7.5, 0}, 1, color.lightCoral);
+      stack2.bakeBtn.Style.BackgroundColor = color.rgb(50 , 133, 184);
+      stack2.correct1.Style.Visibility = "collapsed";
+     stack2.wrong1.Style.Visibility = "collapsed";
+      end
+
+      init();
+    </onDocumentOpened>
+    <image src="resources/cake.png" style="collapsed" />
+    <image src="resources/burnt.png" style="collapsed" />
+    <p style="sectionHeading">The Proportion Chef</p>
+    <stack name="stack2" style="contentBG">
+      <p>You are now a chef! Your job is to prepare a delicious cake for 12 people, but there is a small problem. The recipe for cake only serves 4 people. Use your proportion skills to make the perfect cake using the recipe provided!</p>
+      <p style="subSectionHeading">Instructions:</p>
+      <p>To use this simulation, you must tap on the ingredient at the bottom to hold it. Once you tap on an ingredient, notice the 'Currently Holding' label below will change. To let go of an item, tap on the item again. You can only hold one item at a time. Pan your finger around and drop it into the mixing bowl by hitting the mix button. Made a mistake? Use the reset button to 
+      start again. Once you are all done, hit the 'Bake' button below to see how you did! </p>
+      <p style="subSectionHeading">Recipe:</p>
+      <p>1 Cup of Sugar</p>
+      <p>2 Cups of Flour</p>
+      <p>1 Cup of Milk</p>
+      <p>3 Eggs</p>
+      <p>
+        <b>Remember, this recipe is only for 4 people. We need to make a cake for 12 people!</b>
+      </p>
+      <p name="currentLabel">Currently Holding: Nothing</p>
+      <xyPlot name="g1" tap="custom" pan="custom" zoom="disabled" manual="true">
+        <style>
+          <aspectRatio>1</aspectRatio>
+        </style>
+        <onPan>
+          local x1 = g1.XAxis.Min+ state.Current.X * (g1.XAxis.Max - g1.XAxis.Min);
+          local y1 = g1.YAxis.Min+ state.Current.Y * (g1.YAxis.Max - g1.YAxis.Min);
+          if hasIngredient == true then
+            if onEgg == true then
+              drawEGG({x1, y1}, 1, 1.4, color.green);
+            elseif onMilk == true then
+              drawMIL({x1, y1}, 1.5, 3, color.blue);
+            elseif onSugar == true then
+              drawSUG({x1, y1}, 1.5, 3, color.red);
+            elseif onFlour == true then
+              drawFLO({x1, y1}, 1.5, 3, color.brown);
+            end
+            if distanceBetween(x1, y1, 0, 1) &lt; 2 then
+              if mixAppear == false then
+                drawMix({5, 0}, 2, color.cornsilk)
+                mixAppear = true;
+              end
+            else
+              if mixAppear == true then
+                g1.mix:Clear();
+                g1.mixLabel:Clear();
+                g1.mix:Update();
+                g1.mixLabel:Update();
+                mixAppear = false;
+              end
+            end
+          end
+        </onPan>
+        <onTap>
+          x1 = g1.XAxis.Min + x * (g1.XAxis.Max - g1.XAxis.Min);
+          y1 = g1.YAxis.Min + y * (g1.YAxis.Max - g1.YAxis.Min);
+          if distanceBetween(-7.5, 0, x1, y1) &lt; 1 then
+            currentLabel.Text = "Resetting ... ";
+            init();
+          end
+          
+
+          
+          if mixAppear and distanceBetween(5, 0, x1, y1) &lt; 2 then
+            if onSugar then
+              sugarCount = sugarCount + 1;
+            elseif onFlour then
+              flourCount = flourCount + 1;
+            elseif onEgg then
+              eggCount = eggCount + 1;
+            elseif onMilk then
+              milkCount = milkCount + 1;
+            end
+            
+            updateLabelCount(sugarCount, flourCount, eggCount, milkCount);
+            
+          end
+
+
+          if sugarCount == 3 and flourCount == 6 and eggCount == 9 and milkCount == 3 then
+            bakeBtn.Style.BackgroundColor = color.green;
+          end
+          
+          
+          if pointToBoxIntersection(-7.5, -7.5, 2.5, 4, x1, y1) then --THIS IS SUGAR
+            if hasIngredient then
+              hasIngredient = false;
+              drawSUG({-7.5, -7.5}, 1.5, 3, color.red);
+              currentLabel.Text = "Currently Holding: Nothing";
+            else
+              hasIngredient = true;
+              onSugar = true;
+              currentLabel.Text = "Currently Holding: 1 Portion of Sugar";
+            end
+          elseif pointToBoxIntersection(-2.5, -7.5, 2.5, 4, x1, y1) then -- THIS IS FLOUR
+            if hasIngredient then
+              hasIngredient = false;
+              drawFLO({-2.5, -7.5}, 1.5, 3, color.red);
+              currentLabel.Text = "Currently Holding: Nothing";
+            else
+              hasIngredient = true;
+              onFlour = true;
+              currentLabel.Text = "Currently Holding: 1 Cup of Flour";
+            end
+          elseif pointToBoxIntersection(2.5, -7.5, 1, 1.8, x1, y1) then -- THIS IS EGG
+            if hasIngredient then
+              hasIngredient = false;
+              drawEGG({2.5, -7.5}, 1, 1.4, color.green);
+              currentLabel.Text = "Currently Holding: Nothing";
+            else
+              hasIngredient = true;
+              onEgg = true;
+              currentLabel.Text = "Currently Holding: An Egg";
+            end
+          elseif pointToBoxIntersection(7.5, -7.5, 1.5, 3, x1, y1) then -- THIS IS MILK
+            if hasIngredient then
+              hasIngredient = false;
+              drawMIL({7.5, -7.5}, 1.5, 3, color.blue);
+              currentLabel.Text = "Currently Holding: Nothing";
+            else
+              hasIngredient = true;
+              onMilk = true;
+              currentLabel.Text = "Currently Holding: 1 Cup of Milk";
+            end
+          else
+            hasIngredient = not hasIngredient
+            onEgg = false;
+            onSugar = false;
+            onFlour = false;
+            onMilk = false;
+            drawSUG({-7.5, -7.5}, 1.5, 3, color.red);
+            drawFLO({-2.5, -7.5}, 1.5, 3, color.brown);
+            drawEGG({2.5, -7.5}, 1, 1.4, color.green);
+            drawMIL({7.5, -7.5}, 1.5, 3, color.blue);
+            drawReset({-7.5, 0}, 1, color.lightCoral);
+            g1.mix:Clear();
+            g1.mixLabel:Clear();
+            g1.mix:Update();
+            g1.mixLabel:Update();
+            mixAppear = false;
+            currentLabel.Text = "Currently Holding: Nothing";
+          end
+        </onTap>
+        <axis dim="x" min="-10" max="10" auto="fixed" major="false" minor="0"></axis>
+        <axis dim="y" min="-10" max="10" auto="fixed" major="0" minor="0"></axis>
+        <series name="BG" draw="triangles">
+          <style>
+            <background color="225 225 225" />
+            <foreground color="225 225 225" />
+          </style>
+          <data>
+            -50 -50; -50 50; 50 50; 50 50; 50 -50; -50 -50;
+          </data>
+        </series>
+        <series name="bowl" draw="radialFill"></series>
+        <series name="sugarLabel"></series>
+        <series name="flourLabel"></series>
+        <series name="eggLabel"></series>
+        <series name="milkLabel"></series>
+        <series name="labelCount"></series>
+        <series name="sugar" manual="true">
+          <style>
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        <series name="flour" manual="true">
+          <style>
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        <series name="eggs" manual="true">
+          <style>
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        <series name="milk" manual="true">
+          <style>
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        <series name="mix" manual="true" draw="radialFill"></series>
+        <series name="mixLabel" manual="true"></series>
+        <series name="reset" manual="true" draw="radialFill"></series>
+        <series name="resetLabel" manual="true"></series>
+      </xyPlot>
+      <button name="bakeBtn" content="Bake">
+        <onClick>
+          if bakeBtn.Style.BackgroundColor == color.green then
+            correct1.Style.Visibility = "visible";
+            wrong1.Style.Visibility = "collapsed";
+          else
+              correct1.Style.Visibility = "collapsed";
+              wrong1.Style.Visibility = "visible";
+          end
+        </onClick>
+      </button>
+      <stack style="collapsed" name="correct1">
+        <p style="centerText">You are correct!</p>
+        <image src="resources/cake.png">
+          <style>
+            <widthPercentage>40%</widthPercentage>
+          </style>
+        </image>
+      </stack>
+      <stack style="collapsed" name="wrong1">
+        <p style="centerText">You are incorrect!</p>
+        <image src="resources/burnt.png">
+          <style>
+            <widthPercentage>40%</widthPercentage>
+          </style>
+        </image>
+      </stack>
     </stack>
   </sectionNoTitle>
 

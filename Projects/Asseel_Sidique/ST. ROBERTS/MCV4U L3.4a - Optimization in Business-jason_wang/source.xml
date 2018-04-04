@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="GE44458E9_E7A8_4A23_B611_DD7B7BF89AA0">
+
+	<!-- Meta Data -->
+	<metadata>
+		<title>MCV4U L3.4a - Optimization in Business</title>
+		<creator>jason_wang</creator>
+		<abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+		<coverImage src="resources/calculator.png" />
+	</metadata>
+
+	<include src="documentStyle.xml" />
+
+	<!-- Header & Footer -->
+	<header style="backgroundColor1">
+		<stack style="center" orientation="horizontal">
+			<p style="fontColor1">Ms. Koon</p>
+			<p style="fontColor1 rightText">MCV4U</p>
+		</stack>
+	</header>
+	<footer style="backgroundColor1">
+		<stack orientation="horizontal">
+			<image src="resources/logo1.png" style="tiny" />
+			<p style="fontColor1">
+				<style>
+					<numbering counter="pages" suffix="true" />
+					<textAlignment>center</textAlignment>
+					<marginTop>30</marginTop>
+					<foreground color="255 255 255" />
+				</style>
+			</p>
+			<image src="resources/logo2.png" style="tiny" />
+		</stack>
+	</footer>
+	<!-- Header & Footer END -->
+
+	<!--section 1 Optimization in Business-->
+	<section name="section1">
+		<title style="chaptNumTitle">
+			<size scale="xlarge">L3.4a</size>
+		</title>
+		<p style="chapterTitle">Optimization in Business</p>
+		<stack style="wrap">
+			<p style="sectionTitle1">
+				<size scale="large">Background</size>
+			</p>
+			<p style="justified marginTop15 marginBottom50">A market research shows that a local bubble tea shop sells 2000 cups of bubble tea a day and the average price of a drink is $\$5.50$. The research further shows that for every 10 cents increase in the average price, sales will go down by 40 drinks sold. The average cost of one drink is $\$1.50$.</p>
+			<style>
+				<counter name="bullet" format="lowerRoman" />
+			</style>
+			<style name="questionBullet">
+				<increment counter="bullet" />
+				<numbering counter="bullet" mode="flat" pattern="#) " />
+			</style>
+			<p style="questionBullet">Model the profit with a function.</p>
+			<p style="questionBullet">Determine the sales volume required to generate maximum profit.</p>
+			<p style="questionBullet">What other extraneous factors should you consider if you were to invest in this business?</p>
+		</stack>
+	</section>
+
+	<!--P.2-->
+	<sectionNoTitle name="section2">
+		<p style="sectionTitle1 marginTop50">Determine a function P(x) to model profit</p>
+		<stack style="wrap themeColour">
+			<stack name="stack" style="wrap">
+				<p>Profit of this business can be determined using the following word equation:</p>
+				<p style="centeredText">
+					<![CDATA[
+$\begin{matrix} Profit & = & Revenue-Cost & \; \\
+& = & (\#\;of\;drinks\;sold) & (sale\;price-cost) \end{matrix} $
+								]]>
+				</p>
+				<p>To write this in mathematical form, we will start with the existing sales and prices, and use a variable, $x$, to keep track of the number of changes made to the sale price.</p>
+				<p>
+					Let <b>$x$</b> be the number of 10 cents increase in price and <b>$P(x)$</b> be profit
+				</p>
+				<p style="centeredText">$P(x)=(2000-40x)(5.50+0.10x-1.50)$</p>
+				<p>Thus, the function that can be used to model profit with respect to the number of changes to price is:</p>
+				<p style="centeredText boldText">$P(x)=(2000-40x)(4+0.1x)$</p>
+				<p>Let’s take a closer look at this function to make meaning of $P$ and $x$.</p>
+
+				<button name="graphButton1" content="What does this graph look like?&#xD; How do you interpret P(2)? P(-10)?">
+					<onClick>
+						stack.graphStack.Style.Visibility = "visible";
+						graphButton1.Style.Visibility = "collapsed";
+					</onClick>
+				</button>
+
+				<stack name="graphStack" style="collapsed">
+					<image src="resources/g1.png" />
+					<p style="justified">The ordered pairs $(x, P(x))$ on the graph tell you more than just changes and profit. They allow you to determine the sale price and sales. For example:</p>
+					<table grid="true" widths="10% 15% 15% 30% 30%">
+						<head>
+							<column></column>
+							<column>
+								<p>Profit $(\$)$</p>
+							</column>
+							<column>
+								<p># of changes</p>
+							</column>
+							<column>
+								<p>Sale price $(\$)$</p>
+							</column>
+							<column>
+								<p>Sales (# of cups)</p>
+							</column>
+						</head>
+						<data>
+							$P(2)$,8064,2,$4+0.1(2)=4.20$,$2000-4(2)=1992$;
+							$P(-10)$,7200,-10,$4+0.1(-10)=3.00$,$2000-4(-10)=2040$;
+						</data>
+					</table>
+
+					<p>It is also clear that the current sale price of $\$4$ does not generate maximum profit.</p>
+				</stack>
+			</stack>
+		</stack>
+	</sectionNoTitle>
+	
+	<!--P.3-->
+	<sectionNoTitle name="section3">
+		<p style="sectionTitle1 marginTop50">Boundary conditions</p>
+		<stack style="wrap themeColour">
+			<stack style="wrap">
+				<p>Next, we will use optimization to determine the maximum profit. To do this, you also need to determine boundary conditions. If you are planning to invest in this business, what are some determining factors that may affect your business decisions?</p>
+
+				<p style="bullet">How many drinks can your shop make in an hour?</p>
+				<p style="bullet">How low/high should you set the price? This can affect your brand image.</p>
+
+				<p>For instance, we will say this shop can handle a daily sales volume of 2100 drinks and it must at least break-even. This sets our boundaries of:</p>
+				<table grid="false" widths="45% 10% 45%">
+					<row>
+						<column>
+							<p style="centeredText">$2000-4x \leq 2100$</p>
+							<p style="centeredText">$-4x \leq 100$</p>
+							<p style="centeredText">$x \geq -25$</p>
+						</column>
+						<column>
+							<p style="centeredText">and</p>
+						</column>
+						<column>
+							<p style="centeredText">$(2000-40x)(4+0.1x) \geq 0$</p>
+							<p style="centeredText">$-40 \leq x \leq 50$</p>
+						</column>
+					</row>
+				</table>
+				<p>
+					Putting this together, we have <b>$-25 \leq x \leq 50$</b>.
+				</p>
+			</stack>
+		</stack>
+	</sectionNoTitle>
+
+	<!--P.4-->
+	<sectionNoTitle name="section4">
+		<p style="sectionTitle1 marginTop50">Optimization and test for absolute maximum profit</p>
+		<stack style="wrap themeColour">
+			<stack style="wrap">
+				<p>You’ve learned previously that when a function reaches its local max/min, the slope of its tangent is 0. So:</p>
+				<p style="centeredText">
+					<![CDATA[$\begin{matrix}P(x)&=&(2000-40x)(4+0.1x)\qquad& \\
+&=&8000+200x-160x-4x^2& \\
+&=&8000+40x-4x^2\qquad\qquad& \end{matrix}$]]>
+				</p>
+				<p>Take the first derivative of $P(x)$ and set it to 0:</p>
+				<p style="centeredText">
+					<![CDATA[$\begin{matrix}P'(x)&=&40-8x& \\
+\qquad 0&=&40-8x& \\
+\qquad x&=&5 \qquad \end{matrix}$
+										]]>
+				</p>
+				<p>Test absolute max using the boundaries determined:</p>
+				<p style="centeredText">
+					<![CDATA[
+$P(-25)=8000+40(-25)-4(-25)^2=4500$
+$P(5)=8000+40(5)-4(5)^2=8100$
+$P(50)=8000+40(50)-4(50)^2=0$
+										]]>
+				</p>
+				<p>Therefore, an absolute profit of $\$8100$ is achieved when $x = 5$. This implies a sales volume of 1980 drinks and a sale price of $\$4.50$.</p>
+			</stack>
+		</stack>
+	</sectionNoTitle>
+
+	<!--P.5-->
+	<sectionNoTitle name="section5">
+		<stack style="wrap themeColour" name="mainStackWrapper">
+			<stack style="wrap" name="mainStack">
+				<p style="title">
+					<size scale="xlarge">Practice</size>
+				</p>
+				<p>There are 500 rooms in a hotel in Kyoto.  During cherry blossom season, it receives 420 bookings at a nightly rate of USD $\$200$. Research shows that 5 more rooms will be sold for every $\$25$ decrease in price. The hotel manager must ensure the hotel is at least 40% full every night. Let x represent the number of $\$25$ decrease in price.</p>
+
+				<!--Problem 1-->
+				<stack>
+					<p style="title qNum"></p>
+					<table grid="false" widths="10% 90%">
+						<row>
+							<column>
+								<image src="curriculumThemePack\question.png" inspect="false" />
+							</column>
+							<column>
+								<p>Model the revenue with a function.</p>
+							</column>
+						</row>
+					</table>
+					<p style="title">ANSWER</p>
+					<p name="answerA" style="collapsed">420</p>
+					<p name="answerB" style="collapsed">5</p>
+					<p name="answerC" style="collapsed">200</p>
+					<p name="answerD" style="collapsed">25</p>
+					<table name="table" grid="false" widths="10% 8% 14% 5% 14% 8% 14% 5% 14% 8%">
+						<row name="row">
+							<column>
+								<image src="curriculumThemePack\answer.png" inspect="false" />
+							</column>
+							<column>
+								<p>$R=($</p>
+							</column>
+							<column name="aCol">
+								<textField name="inputA" placeholder="_____" />
+							</column>
+							<column>
+								<p> $+$ </p>
+							</column>
+							<column name="bCol">
+								<textField name="inputB" placeholder="_____" />
+							</column>
+							<column>
+								<p>$x)($</p>
+							</column>
+							<column name="cCol">
+								<textField name="inputC" placeholder="_____" />
+							</column>
+							<column>
+								<p>$-$</p>
+							</column>
+							<column name="dCol">
+								<textField name="inputD" placeholder="_____" />
+							</column>
+							<column>
+								<p>$x)$</p>
+							</column>
+						</row>
+					</table>
+					<stack name="solution" style="collapsed">
+						<p>$R = (\underline{\;420\;} + \underline{\;5\;} x)(\underline{\;200\;}-\underline{\;25\;} x)$</p>
+					</stack>
+					<button content="Check Answer">
+						<onClick>
+							solution.Style.Visibility = "visible";
+						</onClick>
+					</button>
+				</stack>
+
+				<!--Problem 2-->
+				<stack>
+					<p style="title qNum"></p>
+					<table grid="false" widths="10% 90%">
+						<row>
+							<column>
+								<image src="curriculumThemePack\question.png" inspect="false" />
+							</column>
+							<column>
+								<p>Determine the test boundaries for x.</p>
+							</column>
+						</row>
+					</table>
+					<p style="title">ANSWER</p>
+					<p name="answerA" style="collapsed">-44</p>
+					<p name="answerB" style="collapsed">16</p>
+					<table name="table" grid="false" widths="10% 30% 20% 30% 10%">
+						<row name="row">
+							<column>
+								<image src="curriculumThemePack\answer.png" inspect="false" />
+							</column>
+							<column name="aCol">
+								<textField style="centeredText" name="inputA" placeholder="__________" />
+							</column>
+							<column>
+								<p style="centeredText"> $\leq x \leq$ </p>
+							</column>
+							<column name="bCol">
+								<textField style="centeredText" name="inputB" placeholder="__________" />
+							</column>
+							<column name="imgCol">
+							</column>
+						</row>
+					</table>
+					<stack name="solution" style="collapsed">
+						<p>$\underline{\;-44\;} \leq x \leq \underline{\;16\;}$</p>
+					</stack>
+					<button content="Check Answer">
+						<onClick>
+							solution.Style.Visibility = "visible";
+						</onClick>
+					</button>
+				</stack>
+
+				<!--Problem 3-->
+				<stack>
+					<p style="title qNum"></p>
+					<table grid="false" widths="10% 90%">
+						<row>
+							<column>
+								<image src="curriculumThemePack\question.png" inspect="false" />
+							</column>
+							<column>
+								<p>Determine the nightly rate required to generate maximum profit.</p>
+							</column>
+						</row>
+					</table>
+					<p style="title">ANSWER</p>
+					<p name="answerA" style="collapsed">1150</p>
+					<table name="table" grid="false" widths="10% 20% 60% 10%">
+						<row name="row">
+							<column>
+								<image src="curriculumThemePack\answer.png" inspect="false" />
+							</column>
+							<column>
+								<p>$\$$</p>
+							</column>
+							<column name="aCol">
+								<textField name="inputA" placeholder="__________" />
+							</column>
+							<column name="imgCol">
+							</column>
+						</row>
+					</table>
+					<stack name="solution" style="collapsed">
+						<p>$\$\underline{\;1150\;}$</p>
+					</stack>
+					<button content="Check Answer">
+						<onClick>
+							solution.Style.Visibility = "visible";
+						</onClick>
+					</button>
+				</stack>
+				<stack name="fullSolution" style="collapsed">
+				<p style="title">
+					<size scale="xlarge">Full Solution</size>
+				</p>
+				<p>
+					<b>Kyoto Hotel:</b> Let $x=\#\;of\;changes$
+				</p>
+
+				<style>
+					<counter name="decBullet" format="decimal" />
+				</style>
+
+				<style name="numberedBullet">
+					<increment counter="decBullet" />
+					<numbering counter="decBullet" mode="flat" />
+				</style>
+
+				<table grid="false" widths="10% 90%">
+					<row>
+						<column>
+							<p style="numberedBullet"></p>
+						</column>
+						<column>
+							<stack>
+								<p style="centeredText">
+									<![CDATA[$\begin{matrix}Revenue&=&(\#\;rooms\;sold)(price) \\
+\hspace{1.0cm}R&=&(420+5x)(200-25x) \\
+&=&84000-9500x-125x^2 \end{matrix}$
+					]]>
+								</p>
+								<p style="fontColorRed centeredText">Determine local max</p>
+								<p style="centeredText marginBottom15">
+									<![CDATA[$\begin{matrix}R'&=&-9500-250x \\
+0&=&-9500-250x \\
+x&=&-38\hspace{1.5cm} \end{matrix}$]]>
+								</p>
+							</stack>
+						</column>
+					</row>
+					<row>
+						<column>
+							<p style="numberedBullet"></p>
+						</column>
+						<column>
+							<stack>
+								<p style="centeredText boldText marginBottom15">Boundaries</p>
+								<p style="centeredText">$200 \leq \# \; rooms \leq 500$</p>
+								<p style="centeredText fontColorRed small marginBottom15">where 200 is 40% of 500</p>
+								<p style="centeredText">$200 \leq 420+5x \leq 500$</p>
+								<p style="centeredText marginBottom15">$-44 \leq x \leq 16$</p>
+							</stack>
+						</column>
+					</row>
+					<row>
+						<column>
+							<p style="numberedBullet"></p>
+						</column>
+						<column>
+							<stack>
+								<p style="centeredText boldText marginBottom15">Test absolute max</p>
+								<p style="centeredText">
+									<![CDATA[$\begin{matrix}R(-44)&=&84000-9500(-44)-125(-44)^2&=&260000 \\
+R(-38)&=&84000-9500(-38)-125(-38)^2&=&264500 \\
+R(16)&=&84000-9500(16)-125(16)^2&=&-100000 \end{matrix}$]]>
+								</p>
+							</stack>
+						</column>
+					</row>
+				</table>
+				<p style="centeredText boldText marginTop15 marginBottom15">Max revenue can be reached with a nightly rate of $(200-25(-38))=\$1150$.</p>
+				<image src="resources\solutionSheet.png" />
+				<image src="resources\g2.png" />
+
+			</stack>
+			</stack>
+		</stack>
+		
+		<button name="fullSolutionBtn" content="Check Full Solution">
+			<onClick>
+				section5.mainStackWrapper.mainStack.fullSolution.Style.Visibility = "visible";
+				fullSolutionBtn.Style.Visibility = "collapsed";
+			</onClick>
+		</button>
+	</sectionNoTitle>
+</document>

@@ -5,7 +5,9 @@
   <metadata>
     <title>LA-ALGE-1.7 Properties of Matrix Addition and Scalar Multiplication</title>
     <creator>jason_wang</creator>
-    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <abstract>
+      In this Module, we are going to introduce zero matrices and learn about the properties of matrix scalar multiplication and addition with examples.
+    </abstract>
     <coverImage src="resources/lassondeLogo.png" />
   </metadata>
   

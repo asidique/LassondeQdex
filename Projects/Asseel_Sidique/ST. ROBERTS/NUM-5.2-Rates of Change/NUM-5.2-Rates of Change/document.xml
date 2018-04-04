@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G088BC709_A1D9_4F11_8B7D_5AAE4FB785BB">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>NUM-5.2-Rates of Change</title>
+    <creator>Sidique</creator>
+    <coverImage src="resources/cover.png" />
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+  </metadata>
+
+  <include src="resources/curriculumStyles.xml" />
+  <include src="resources/Utilities.xml" />
+  <include src="resources/plotTools.xml" />
+
+  <!--                                      Header & Footer START                                         -->
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="whiteColor">Amanda Koon</p>
+      <p style="whiteColor rightText">NUMERACY</p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/logo1.png" inspect="false" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/logo2.png" inspect="false" />
+    </stack>
+  </footer>
+
+  <!-- Section 1 -->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">5.2 Rates of Change</title>
+    <image src="resources/riserun.png" />
+    <stack style="contentBG">
+      <p>Rates of change describes the change of a value over a certain amount of time. You may have heard of some Rates of Change already such as speed (disatnce over time) or even
+      wage (dollars over time). Rates of Change is an important concepts in math that helps us look at the bigger picture. In this module we will take a look at the precise definition of Rates of Change,
+      defining average rates of change, instantaneous rate of change and go through simulations and examples to help understand the concept.</p>
+    </stack>
+  </section>
+
+  <sectionNoTitle style="pageLayout" name="section2">
+    <p style="sectionHeading">Definition of a Rate of Change</p>
+    <stack style="contentBG">
+      <p>A Rate of Change can be defined as the change of a dependant variable over time. The formula we use to calculate rate of change is known
+      as the rise over run formula: $ \frac{ \triangle y}{ \triangle x} = \frac{y_{2} - y_{1}}{x_{2} - x_{1}}$</p>
+      <p>Rates of change have units in the form $ \frac{Dependant \; Variable}{Time} $</p>
+      <p style="subSectionHeading">
+        Average Rate of Change
+      </p>
+      <p>The average rate of change is the rate of change over a period of time.</p>
+      <p style="subSectionHeading">
+        Instantaneous Rate of Change
+      </p>
+      <p>The instantaneous rate of change is the rate of change at a particular time.</p>
+      <p>For an example, a driver on the highway looks at their speed and it reads $ 100 \frac{km}{h} $. This is their instantaneous rate of change.
+      When the driver finally reaches his destination, they take note that it took 1 hour to travel 50 kilometres.</p>
+      <p>In this example, when the driver noted their speed, it was the instantaenous rate of change they saw.</p>
+      <p>The average rate of change is $ 50 \frac{km}{hour} $ since it took the driver 1 hour to drive 50km. The average rate of change gives information about
+      the whole trip compared to just a single moment in time. But note that the average rate of change does not state the driver was travelling at $ 120 \frac{km}{hour} $</p>
+    </stack>
+    
+  </sectionNoTitle>
+  
+  <sectionNoTitle style="pageLayout" name="section3">
+    <p style="sectionHeading">Rate of Change Simulation</p>
+    <stack style="contentBG">
+      <p>Use the simulation below to visualize what the slope of a function looks like. Pan your finger around the plot to see the rise over run of the slope.</p>
+      
+    </stack>
+  </sectionNoTitle>
+
+</document>

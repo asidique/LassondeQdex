@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2024
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{3509FA56-3B69-4017-88D1-3C70D67D8588}") = "NUM-4.1-Linear and Non-Linear", "NUM-4.1-Linear and Non-Linear\NUM-4.1-Linear and Non-Linear.qdexproj", "{771DC26B-0AF2-4108-8D3D-8CBE798FCAAF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{771DC26B-0AF2-4108-8D3D-8CBE798FCAAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{771DC26B-0AF2-4108-8D3D-8CBE798FCAAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{771DC26B-0AF2-4108-8D3D-8CBE798FCAAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{771DC26B-0AF2-4108-8D3D-8CBE798FCAAF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B5AA9A52-787D-45A0-82C2-AC89533009C9}
+	EndGlobalSection
+EndGlobal

@@ -13,9 +13,18 @@
     <Content Include="document.xml">
     </Content>
     <Content Include="resources\answer.png" />
+    <Content Include="resources\applesoranges.png" />
+    <Content Include="resources\boss.png" />
+    <Content Include="resources\boss2.png" />
+    <Content Include="resources\bossHappy.png" />
+    <Content Include="resources\bossMad.png" />
+    <Content Include="resources\burnt.png" />
+    <Content Include="resources\cake.png" />
     <Content Include="resources\cover.png" />
+    <Content Include="resources\fidget.png" />
     <Content Include="resources\logo1.png" />
     <Content Include="resources\logo2.png" />
+    <Content Include="resources\q.jpeg" />
     <Content Include="resources\question.png" />
     <Content Include="resources\ratio.png" />
     <Content Include="resources\right.png" />
@@ -24,6 +33,7 @@
   <ItemGroup>
     <None Include="resources\curriculumStyles.xml" />
     <None Include="resources\plotTools.xml" />
+    <None Include="resources\spinner.csv" />
     <None Include="resources\Utilities.xml" />
   </ItemGroup>
   <PropertyGroup>

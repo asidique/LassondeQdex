@@ -6,7 +6,12 @@
     <title>LA-PHYS-1.8 Newton's Laws</title>
     <creator>Thiago</creator>
     <coverImage src="resources/LassondeLogo.png" />
-    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <abstract>
+      Sir Isaac Newton's three laws of motion describe the motion
+      of massive bodies and how they interact. While Newton’s laws may
+      seem obvious to us today, more than three
+      centuries ago they were considered to be revolutionary. We will look at these laws in detail.
+    </abstract>
   </metadata>
 
 

@@ -5,7 +5,7 @@
   <metadata>
     <title>LA-ALGE-1.4 Row-echelon form and Gaussian elimination</title>
     <creator>jason_wang</creator>
-    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <abstract>In this Module, we are going to learn how to solve a linear system by representing it with an augmented matrix and bringing the matrix to reduced row-echelon form.</abstract>
     <coverImage src="resources/lassondeLogo.png" />
   </metadata>
 

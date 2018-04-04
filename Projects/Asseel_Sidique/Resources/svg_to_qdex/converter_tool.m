@@ -6,15 +6,15 @@ Scale_Factor = 1/140;
 %include svg_to_qdex
 
 
-elements = svg_to_qdex('field2.svg', 3/180*pi);
+elements = svg_to_qdex('spinner.svg', 3/180*pi);
 
 
 % merge into one large series
 total_elements = 0;
 repeat_flag = 0
 
-fid = fopen('field2.csv', 'w');
-fic = fopen('field2_color.csv', 'w');
+fid = fopen('spinner.csv', 'w');
+fic = fopen('spinner3.csv', 'w');
       
 
 for i = 1:size(elements,2)

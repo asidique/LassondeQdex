@@ -1,0 +1,584 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G6234477F_588A_4DF7_87BE_22FFBF66A037">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>MCV4U L3.4b Optimization - A Box-Making Problem</title>
+    <creator>jason_wang</creator>
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+		<coverImage src="resources/calculator.png" />
+	</metadata>
+
+	<include src="documentStyle.xml" />
+
+	<!-- Header & Footer -->
+	<header style="backgroundColor1">
+		<stack style="center" orientation="horizontal">
+			<p style="fontColor1">Ms. Koon</p>
+			<p style="fontColor1 rightText">MCV4U</p>
+		</stack>
+	</header>
+	<footer style="backgroundColor1">
+		<stack orientation="horizontal">
+			<image src="resources/logo1.png" style="tiny" />
+			<p style="fontColor1">
+				<style>
+					<numbering counter="pages" suffix="true" />
+					<textAlignment>center</textAlignment>
+					<marginTop>30</marginTop>
+					<foreground color="255 255 255" />
+				</style>
+			</p>
+			<image src="resources/logo2.png" style="tiny" />
+		</stack>
+	</footer>
+	<!-- Header & Footer END -->
+	
+	<!--Section 1-->
+	<section name="section1">
+		<title style="chaptNumTitle">
+			<size scale="xlarge">L3.4b</size>
+		</title>
+		<p style="chapterTitle">Optimization - A Box-Making Problem</p>
+		<stack style="wrap">
+			<p style="sectionTitle1">
+				<size scale="large">Background Information</size>
+			</p>
+			<p style="justified marginTop15 marginBottom50">Your mom asked you to make a largest possible open box (no top!) using a piece of cardstock measuring 20 cm by 10 cm. To make this box, you will cut out 4 congruent squares from each corner of the cardstock as shown:</p>
+			<image src="resources/p1.png" style="large" />
+			<p style="marginTop15 marginBottom30">What should be the size of the squares?</p>
+		</stack>
+	</section>
+	
+	<!--section 2-->
+	<sectionNoTitle name="section2">
+    <script>
+      function round(value,multiple)
+      result = 0;
+
+      if value % multiple ~= 0 then
+      result = multiple;
+      division = math.floor((value/multiple)+1);
+      result = division*multiple;
+      return result;
+      else
+      return value;
+      end
+      end
+    </script>
+		<stack style="wrap themeColour">
+			<stack name="mainStack" style="width90">
+        <p style="title themeColourTitle">Experiment with the cut-out:</p>
+        <xyPlot name="plot1" style="width70 centeredText">
+          <title>Flat cardboard</title>
+          <subtitle>cut-out square has side length x cm.</subtitle>
+          <axis dim="x" min="-5" max="35" auto="fixed">
+            <title>x-axis (cm)</title>
+          </axis>
+          <axis dim="y" min="-5" max="25" auto="fixed">
+            <title>y-axis (cm)</title>
+          </axis>
+          <series name="square_series" manual="false" draw="radialFill" capacity="2000">
+            <style>
+              <foreground color="dodgerBlue" />
+            </style>
+          </series>
+          <series name="square_series_2" manual="false" draw="closedLine" capacity="2000" />
+        </xyPlot>
+        <table name="plotControlTable" grid="false" widths="10% 10% 10% 10% 10% 10% 10% 10% 10% 10%">
+          <row>
+            <column columnSpan="2"></column>
+            <column columnSpan="6">
+              <script>
+                slider1 = 3;
+              </script>
+              <slider name="slider" min="0" max="10" value="3">
+                <onValueChanged>
+                  local x = round(slider.Value, 0.1);
+                  if x ~= slider1 then updatePlot1(x); slider1 = x; end
+                </onValueChanged>
+              </slider>
+            </column>
+            <column columnSpan="2"></column>
+          </row>
+          <row>
+            <column columnSpan="2">
+              <p style="centeredText">x</p>
+            </column>
+            <column columnSpan="2">
+              <p style="centeredText">Length</p>
+            </column>
+            <column columnSpan="2">
+              <p style="centeredText">Width</p>
+            </column>
+            <column columnSpan="2">
+              <p style="centeredText">Height</p>
+            </column>
+            <column columnSpan="2">
+              <p style="centeredText">Volume</p>
+            </column>
+          </row>
+          <row>
+            <column columnSpan="2" name="xValue">
+              <p style="centeredText">3.00</p>
+            </column>
+            <column columnSpan="2" name="length">
+              <p style="centeredText">24.00</p>
+            </column>
+            <column columnSpan="2" name="width">
+              <p style="centeredText">14.00</p>
+            </column>
+            <column columnSpan="2" name="height">
+              <p style="centeredText">3.00</p>
+            </column>
+            <column columnSpan="2" name="volume">
+              <p style="centeredText">1008.00</p>
+            </column>
+          </row>
+        </table>
+
+
+        <script>
+          function updatePlot1(x)
+          <!--update table data-->
+          local l = 30 - 2 * x;
+          local w = 20 - 2 * x;
+          plotControlTable:Child(3).xValue:Child(1).Text = string.format("%.2f", x);
+          plotControlTable:Child(3).length:Child(1).Text = string.format("%.2f", l);
+          plotControlTable:Child(3).width:Child(1).Text = string.format("%.2f", w);
+          plotControlTable:Child(3).height:Child(1).Text = string.format("%.2f", x);
+          plotControlTable:Child(3).volume:Child(1).Text = string.format("%.2f", l*w*x);
+
+          local square1 = plot1.square_series;
+          local square2 = plot1.square_series_2;
+          <!--draw cardboard-->
+          square1:Clear();
+          local lx = 30 - x;
+          local wx = 20 - x;
+          square1:Add(x,x);
+          square1:Add(0,x);
+          square1:Add(0,wx);
+          square1:Add(x,wx);
+          square1:Add(x,20);
+          square1:Add(lx,20);
+          square1:Add(lx,wx);
+          square1:Add(30,wx);
+          square1:Add(30,x);
+          square1:Add(lx,x);
+          square1:Add(lx,0);
+          square1:Add(x,0);
+          square1:Add(x,x);
+
+          <!--add border square-->
+          square2:Clear();
+          square2:Add(0,0);
+          square2:Add(0,20);
+          square2:Add(30,20);
+          square2:Add(30,0);
+          square2:Add(0,0);
+          end
+          updatePlot1(plotControlTable:Child(1):Child(2).slider.Value);
+        </script>
+
+				<p style="marginTop15">In general, the volume of the box can be modelled using the equation:</p>
+				<p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/0fddf465f5974db198f11b48073f4a2e.png" alt="V(x)=x(20-2x)(10-2x)" scale="0.0175" baseline="0" inspect="true" /></p>
+				<image src="resources/p2.png" style="medium" />
+
+				<button name="btn1" content="Show graph of V(x)">
+					<onClick>
+						if btn1.Text == "Show graph of V(x)" then
+						btn1.Parent.stack2.Style.Visibility = "visible";
+						btn1.Text = "Hide graph of V(x)";
+						else
+						btn1.Parent.stack2.Style.Visibility = "collapsed";
+						btn1.Text = "Show graph of V(x)"
+						end
+					</onClick>
+				</button>
+
+
+				<stack name="stack2" style="invisible">
+					<image src="resources/p3.png" />
+					<p>To determine the largest volume, we can follow the steps for optimization:</p>
+					<p><![CDATA[    1)  Restrict domain]]></p>
+					<p><![CDATA[    2)  Find ]]><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/da8b81388ed247fd9a195f9e84d958f7.png" alt="x" scale="0.0175" baseline="0" inspect="false" /><![CDATA[ where ]]><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/5d7771b74a7549e49400cced91806d1a.png" alt="V'(x) = 0" scale="0.0175" baseline="0.25" inspect="false" /></p>
+					<p><![CDATA[    3)  Test absolute max and conclude.]]></p>
+				</stack>
+
+				<p style="title marginTop30">Solutions and Explanations</p>
+
+				<stack style="centeredText">
+					<p style="boldText marginTop30">
+						<![CDATA[1)  RESTRICT DOMAIN]]>
+					</p>
+					<p>Since neither of the sides can be negative, we have:</p>
+					<table grid="false" widths="33% 34% 33%">
+						<row>
+							<column>
+								<p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/aafc468337524e44b5fe422450c3a1ad.png" alt="x&amp;gt;0" scale="0.0175" baseline="0" inspect="true" /></p>
+							</column>
+							<column>
+								<p style="centeredText">
+									<image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/cbef0308ce014766b1113ace2bdf794d.png" alt="\begin{matrix}20-2x&amp;&amp;gt;&amp;0\; \\[6pt] \hspace{1.0cm}20&amp;&amp;gt;&amp;2x \\[6pt] \hspace{1.0cm}x&amp;&amp;lt;&amp;10 \end{matrix}" scale="0.0175" baseline="2.15" inspect="false" />
+								</p>
+							</column>
+							<column>
+								<p style="centeredText">
+									<image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/336c7991de5e4381bc147ce9f502f0f4.png" alt="\begin{matrix}10-2x&amp;&amp;gt;&amp;0\; \\[6pt] \hspace{1.0cm}10&amp;&amp;gt;&amp;2x \\[6pt] \hspace{1.0cm}x&amp;&amp;lt;&amp;5 \end{matrix}" scale="0.0175" baseline="2.15" inspect="false" />
+								</p>
+							</column>
+						</row>
+					</table>
+
+					<table name="resultTable1" grid="false" widths="30% 10% 5% 5% 5% 10% 35%">
+						<row>
+							<column>
+								<p style="centeredText">
+									Consolidating results:
+								</p>
+							</column>
+							<column name="left">
+								<textField style="centeredText" placeholder="____"></textField>
+							</column>
+							<column>
+								<p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/e9be584f1a714eb2a5a1e74c3fa2e512.png" alt="&amp;lt;" scale="0.0175" baseline="0" inspect="true" /></p>
+							</column>
+							<column>
+								<p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/3f47b6a15969494ba4683de8eec5d914.png" alt="x" scale="0.0175" baseline="0" inspect="true" /></p>
+							</column>
+							<column>
+								<p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/e9be584f1a714eb2a5a1e74c3fa2e512.png" alt="&amp;lt;" scale="0.0175" baseline="0" inspect="true" /></p>
+							</column>
+							<column name="right">
+								<textField style="centeredText" placeholder="____"></textField>
+							</column>
+							<column></column>
+						</row>
+					</table>
+					<p name="warn1" style="invisible fontColorRed">Try to answer the question first.</p>
+					<p name="answer1" style="invisible fontColorRed">
+						<![CDATA[Answer: ]]><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/604b96823e134304857c990d7b2121d5.png" alt="0&amp;lt;x&amp;lt;5" scale="0.0175" baseline="0.039098" inspect="false" />
+					</p>
+
+					<button name="btn1" content="Check Answer">
+						<onClick>
+							if btn1.Parent.resultTable1:Child(1).left:Child(1).Text == "" or btn1.Parent.resultTable1:Child(1).right:Child(1).Text == "" then
+							btn1.Parent.warn1.Style.Visibility = "visible";
+							btn1.Parent.answer1.Style.Visibility = "collapsed";
+							else
+							btn1.Parent.warn1.Style.Visibility = "collapsed";
+							btn1.Parent.answer1.Style.Visibility = "visible";
+							mainStack.solution2.Style.Visibility = "visible";
+							btn1.Style.Visibility = "collapsed";
+							end
+						</onClick>
+					</button>
+				</stack>
+
+				<stack name="solution2" style="centeredText invisible">
+					<p style="boldText marginTop30">
+						<![CDATA[2)  FIND ]]><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/da8b81388ed247fd9a195f9e84d958f7.png" alt="x" scale="0.0175" baseline="0" inspect="false" /><![CDATA[ WHERE ]]><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/6d73c9d60f624708b8972e4cb7f6b845.png" alt="V'(x)=0" scale="0.0175" baseline="0.25" inspect="false" />
+					</p>
+					<p>Write <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/788a4c33930945d7a9fc64b18c44376f.png" alt="V(x)" scale="0.0175" baseline="0.25" inspect="false" /> in expanded form:</p>
+					<p style="centeredText">
+						<image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/e1816b0e49a54df482c55eed72da817e.png" alt="\begin{matrix}V(x)&amp;=&amp;x(20-2x)(10-2x) \\[6pt] V(x)&amp;=&amp;x(200-40x-20x+4x^2) \\[6pt] V(x)&amp;=&amp;200x-60x^2+4x^3 \end{matrix}" scale="0.0175" baseline="2.15" inspect="false" />
+					</p>
+					<p>Differentiate <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/788a4c33930945d7a9fc64b18c44376f.png" alt="V(x)" scale="0.0175" baseline="0.25" inspect="false" />:</p>
+					<table name="resultTable1" grid="false" widths="8% 5% 10% 5% 10% 5% 5% 10% 10% 32%">
+						<row>
+							<column>
+								<p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/0a9605b76bfd411aa23bfcfe6cdec74e.png" alt="V'(x)" scale="0.0175" baseline="0" inspect="true" /></p>
+							</column>
+							<column>
+								<p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/563577fd41f94c41898d1b6615463a52.png" alt="=" scale="0.0175" baseline="0" inspect="true" /></p>
+							</column>
+							<column name="a">
+								<textField style="centeredText" placeholder="____"></textField>
+							</column>
+							<column>
+								<p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/8bf4158a2a564d58801567851ce43394.png" alt="-" scale="0.0175" baseline="0" inspect="true" /></p>
+							</column>
+							<column name="b">
+								<textField style="centeredText" placeholder="____"></textField>
+							</column>
+							<column>
+								<p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/3f47b6a15969494ba4683de8eec5d914.png" alt="x" scale="0.0175" baseline="0" inspect="true" /></p>
+							</column>
+							<column>
+								<p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/650889cc976f4d30922df660e08710c7.png" alt="+" scale="0.0175" baseline="0" inspect="true" /></p>
+							</column>
+							<column name="c">
+								<textField style="centeredText" placeholder="____"></textField>
+							</column>
+							<column>
+								<p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/69c84a140ab64860bbabcdc6e64da36f.png" alt="x^2" scale="0.0175" baseline="0" inspect="true" /></p>
+							</column>
+							<column></column>
+						</row>
+          </table>
+          
+					<stack name="answer1" style="invisible">
+            <p style="fontColorRed">Answer: <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/a8ea2b6def7049c78bcb84cd3b8c0c10.png" alt="V'(x)=200-120x+12x^2" scale="0.0175" baseline="0.25" inspect="false" /></p>
+            <p>Set <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/6d73c9d60f624708b8972e4cb7f6b845.png" alt="V'(x)=0" scale="0.0175" baseline="0.25" inspect="false" />, and solve for x.</p>
+            <p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/53aa7a4ab9c24bae9ea287c6b3f627f2.png" alt="\begin{matrix}0&amp;=&amp;200-120+12x^2 \\[6pt] 0&amp;=&amp;4(50-30x+3x^2) \\[6pt] 0&amp;=&amp;50-30x+3x^2 \end{matrix}" scale="0.0175" baseline="0" inspect="true" /></p>
+            <table name="resultTable" grid="false" widths="10% 20%">
+              <row>
+                <column>
+                  <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/2f27eaa6eb2d495585bb67530a5338f9.png" alt="x=" scale="0.0175" baseline="0" inspect="true" /></p>
+                </column>
+                <column>
+                  <textField name="xValue" placeholder="________"></textField>
+                </column>
+              </row>
+            </table>
+					</stack>
+          
+          <p name="warn1" style="invisible fontColorRed">Try to answer the question first.</p>
+          
+          <stack name="answer2" style="invisible">
+            <p style="marginTop30 marginBottom30">Solve using the quadratic formula:</p>
+            <p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/c7223b5464bc4317bc31a1f201a28c67.png" alt="x=\frac{30\pm\sqrt{(-30)^2-4(3)(50)}}{2(3)}\hspace{0.5cm}" scale="0.0175" baseline="0" inspect="true" /></p>
+            <p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/a7ff2f56f2354d34acc88a03ba36f8f9.png" alt="x=\frac{30\pm 10 \sqrt{3}}{6}\hspace{1.5cm}" scale="0.0175" baseline="0" inspect="true" /></p>
+            <p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/70bacc36586b4b4398e4e42fd0e14f31.png" alt="x=\frac{15+5\sqrt{3}}{3}=7.89&amp;gt;5;\;reject" scale="0.0175" baseline="0" inspect="true" /></p>
+            <p style="centeredText boldText">OR</p>
+            <p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/d076ef85583f463b9cdd96dabbe42ceb.png" alt="x=\frac{15-5\sqrt{3}}{3}=2.11" scale="0.0175" baseline="0" inspect="true" /></p>
+            <p style="fontColorRed">Answer: <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/68969b4a42074b12b8a002c0cdf30111.png" alt="x=2.11" scale="0.0175" baseline="0" inspect="false" /></p>
+          </stack>
+					<button name="btn1" content="Check Answer">
+						<onClick>
+							if resultTable1:Child(1).a:Child(1).Text == "" or resultTable1:Child(1).b:Child(1).Text == "" or resultTable1:Child(1).c:Child(1).Text == "" then
+              warn1.Style.Visibility = "visible";
+							answer1.Style.Visibility = "collapsed";
+							else
+							warn1.Style.Visibility = "collapsed";
+							answer1.Style.Visibility = "visible";
+							btn1.Style.Visibility = "collapsed";
+              btn2.Style.Visibility = "visible";
+							end
+						</onClick>
+					</button>
+          <button name="btn2" style="invisible" content="Check Answer">
+            <onClick>
+              if answer1.resultTable:Child(1):Child(2).xValue.Text == "" then
+              warn1.Style.Visibility = "visible";
+              answer2.Style.Visibility = "collapsed";
+              else
+              warn1.Style.Visibility = "collapsed";
+              answer2.Style.Visibility = "visible";
+              mainStack.solution3.Style.Visibility = "visible";
+              btn2.Style.Visibility = "collapsed";
+              end
+            </onClick>
+          </button>
+				</stack>
+
+				<stack name="solution3" style="centeredText invisible">
+					<p style="boldText marginTop30"><![CDATA[3)	TEST FOR ABSOLUTE MAXIMUM AND DRAW CONCLUSION]]></p>
+					<table grid="true" widths="50% 50%" name="resultTable1">
+						<head>
+							<column>
+								<p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/3f47b6a15969494ba4683de8eec5d914.png" alt="x" scale="0.0175" baseline="0" inspect="true" /></p>
+							</column>
+							<column>
+								<p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/8d6f5823782d442e82d63f221ab96dfa.png" alt="V(x)" scale="0.0175" baseline="0" inspect="true" /></p>
+							</column>
+						</head>
+						<row>
+							<column>
+								<p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/8e90221db5254d8e9c94a7e6854e13db.png" alt="0" scale="0.0175" baseline="0" inspect="true" /></p>
+							</column>
+							<column name="a">
+								<textField style="centeredText" placeholder="____"></textField>
+							</column>
+						</row>
+						<row>
+							<column>
+								<p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/e96b094eb91e4a9da568a5b2bf569f25.png" alt="2.11" scale="0.0175" baseline="0" inspect="true" /></p>
+							</column>
+							<column name="b">
+								<textField style="centeredText" placeholder="____"></textField>
+							</column>
+						</row>
+						<row>
+							<column>
+								<p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/1f332b2241404c7ab91c793e2fa6b0c0.png" alt="5" scale="0.0175" baseline="0" inspect="true" /></p>
+							</column>
+							<column name="c">
+								<textField style="centeredText" placeholder="____"></textField>
+							</column>
+						</row>
+					</table>
+
+					<p name="warn1" style="invisible fontColorRed">Try to answer the question first.</p>
+					<stack name="answer1" style="invisible">
+						<p style="fontColorRed">Answer:</p>
+						<table grid="true" widths="50% 50%">
+							<head>
+								<column>
+									<p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/3f47b6a15969494ba4683de8eec5d914.png" alt="x" scale="0.0175" baseline="0" inspect="true" /></p>
+								</column>
+								<column>
+									<p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/8d6f5823782d442e82d63f221ab96dfa.png" alt="V(x)" scale="0.0175" baseline="0" inspect="true" /></p>
+								</column>
+							</head>
+							<row>
+								<column>
+									<p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/8e90221db5254d8e9c94a7e6854e13db.png" alt="0" scale="0.0175" baseline="0" inspect="true" /></p>
+								</column>
+								<column name="a">
+									<p style="centeredText fontColorRed">0</p>
+								</column>
+							</row>
+							<row>
+								<column>
+									<p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/e96b094eb91e4a9da568a5b2bf569f25.png" alt="2.11" scale="0.0175" baseline="0" inspect="true" /></p>
+								</column>
+								<column name="b">
+									<p style="centeredText fontColorRed">192.4</p>
+								</column>
+							</row>
+							<row>
+								<column>
+									<p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/1f332b2241404c7ab91c793e2fa6b0c0.png" alt="5" scale="0.0175" baseline="0" inspect="true" /></p>
+								</column>
+								<column name="c">
+									<p style="centeredText fontColorRed">0</p>
+								</column>
+							</row>
+						</table>
+						<p style="fontColorRed">Therefore, the maximum volume of the box is <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/879f7b88d35e468eb0b21262b71e2cd2.png" alt="192.4cm^2" scale="0.0175" baseline="0" inspect="false" />. This can be achieved by cutting squares with side length <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/8f5c4763ff0241e587336e26117bca07.png" alt="2.11cm" scale="0.0175" baseline="0" inspect="false" />.</p>
+					</stack>
+
+					<button name="btn1" content="Check Answer">
+						<onClick>
+							if solution3.resultTable1:Child(2).a:Child(1).Text == "" or solution3.resultTable1:Child(3).b:Child(1).Text == "" or solution3.resultTable1:Child(4).c:Child(1).Text == "" then
+							btn1.Parent.warn1.Style.Visibility = "visible";
+							btn1.Parent.answer1.Style.Visibility = "collapsed";
+							else
+							btn1.Parent.warn1.Style.Visibility = "collapsed";
+							btn1.Parent.answer1.Style.Visibility = "visible";
+							btn1.Style.Visibility = "collapsed";
+							end
+						</onClick>
+					</button>
+				</stack>
+
+				
+			</stack>
+		</stack>
+	</sectionNoTitle>
+
+  <sectionNoTitle>
+    <stack name="practiceStack" style="marginBottom30">
+      <p style="title marginTop30">
+        <size scale="xlarge">Practice</size>
+      </p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="curriculumThemePack\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>
+              <b>Do this question on a piece of paper.  Then check your answer.</b>
+            </p>
+            <p>An open rectangular box with square base is to be made from <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/8e0b44363b7f4525955990ef8d7fb496.png" alt="48m^2" scale="0.0175" baseline="0" inspect="false" /> of material. What dimensions will result in a box with the largest possible volume?</p>
+          </column>
+        </row>
+      </table>
+      <p style="title">ANSWER</p>
+      <stack name="answerStack" style="invisible">
+        <table name="table" widths="10% 50% 40%" grid="false">
+          <row>
+            <column>
+              <image src="curriculumThemePack\answer.png" inspect="false" />
+            </column>
+            <column>
+              <p>Surface area of the box = <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/8e0b44363b7f4525955990ef8d7fb496.png" alt="48m^2" scale="0.0175" baseline="0" inspect="false" /></p>
+              <p>
+                <![CDATA[
+							
+							]]>
+              </p>
+              <p style="centeredText">
+                <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/684b550960ee4b038a1e04417f08435e.png" alt="\begin{matrix}x^2+4xy&amp;=&amp;48\hspace{0.7cm} \\[6pt] \hspace{0.8cm}4xy&amp;=&amp;48-x^2 \\[6pt] \hspace{1.0cm}y&amp;=&amp;\frac{48-x^2}{4x} \end{matrix}" scale="0.0175" baseline="2.238867" inspect="false" />
+              </p>
+            </column>
+            <column>
+              <image src="resources/p4.png" />
+              <p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/417c741e18c6429fb277f3bfd6a2ec59.png" alt="x&amp;gt;0 \hspace{1.0cm} y&amp;gt;0" scale="0.0175" baseline="0" inspect="true" /></p>
+            </column>
+          </row>
+        </table>
+        <p style="fontColorRed centeredText">Write a function of volume to be optimized</p>
+        <p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/2918045078ba413ab0b40809f4829121.png" alt="V=x^2y" scale="0.0175" baseline="0" inspect="true" /></p>
+        <p style="centeredText">Sub <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/f4f1aa88cff249018692f56b2979bb7b.png" alt="y=\frac{48-x^2}{4x}" scale="0.0175" baseline="0.344841" inspect="false" /></p>
+        <p style="centeredText">
+          <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/8afe4e9889a6479594a298bc69dc29ad.png" alt="\begin{matrix}V(x)&amp;=&amp;x^2(\frac{48-x^2}{4x}) \\[6pt] &amp;=&amp;\frac{48x}{4}-\frac{x^3}{4}\;\; \\[6pt] &amp;=&amp;12x-\frac{x^3}{4}\;\; \end{matrix}" scale="0.0175" baseline="2.416603" inspect="false" />
+        </p>
+        <p style="fontColorRed centeredText">Differentiate <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/788a4c33930945d7a9fc64b18c44376f.png" alt="V(x)" scale="0.0175" baseline="0.25" inspect="false" /> with respect to <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/da8b81388ed247fd9a195f9e84d958f7.png" alt="x" scale="0.0175" baseline="0" inspect="false" /> <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/7e840c7b93334b50a290844538dad005.png" alt="\hspace{0.5cm}" scale="0.0175" baseline="0" inspect="false" /> set to 0:</p>
+        <p style="centeredText">
+          <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/3e23df5924024fceb43ba82ce41aa2dd.png" alt="\begin{matrix}V'(x)&amp;=&amp;12-\frac{3x^2}{4} \\[6pt] \hspace{0.8cm}0&amp;=&amp;12-\frac{3x^2}{4} \\[6pt] \hspace{0.6cm}3x^2&amp;=&amp;48 \hspace{1.0cm} \\[6pt] \hspace{0.6cm}x^2&amp;=&amp;16 \hspace{1.0cm} \\[6pt] \hspace{0.6cm}x&amp;=&amp;\pm 4 \hspace{1.0cm} \end{matrix}" scale="0.0175" baseline="4.127736" inspect="false" />
+        </p>
+        <p style="centeredText fontColorRed">Determine boundaries</p>
+        <table grid="false" widths="50% 50%" style="width50">
+          <row>
+            <column>
+              <p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/aafc468337524e44b5fe422450c3a1ad.png" alt="x&amp;gt;0" scale="0.0175" baseline="0" inspect="true" /></p>
+            </column>
+            <column>
+              <p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/7cac425449ab4f819d9350ddb674516d.png" alt="y&amp;gt;0" scale="0.0175" baseline="0" inspect="true" /></p>
+            </column>
+          </row>
+          <row>
+            <column></column>
+            <column>
+              <p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/fe36e0317d804253a8c253c1378f7371.png" alt="\frac{48-x^2}{4x}&amp;gt;0" scale="0.0175" baseline="0" inspect="true" /></p>
+            </column>
+          </row>
+          <row>
+            <column></column>
+            <column>
+              <p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/9fa684751d52498e8d5c1c824ca89b6f.png" alt="48&amp;gt;x^2" scale="0.0175" baseline="0" inspect="true" /></p>
+            </column>
+          </row>
+          <row>
+            <column></column>
+            <column>
+              <p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/e4b7da6a423945648e9c4b2a7b5396e9.png" alt="\sqrt{48}&amp;gt;\mid x \mid" scale="0.0175" baseline="0" inspect="true" /></p>
+            </column>
+          </row>
+          <row>
+            <column columnSpan="2">
+              <p style="centeredText"><![CDATA[So  ]]><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/d6e9adb8bee5408dbfdb57c1800350aa.png" alt="0&amp;lt;x&amp;lt;\sqrt{48}" scale="0.0175" baseline="0.132779" inspect="false" /></p>
+            </column>
+          </row>
+        </table>
+
+        <p style="centeredText fontColorRed">Test for absolute max</p>
+        <table grid="true" widths="30% 70%" style="width50">
+          <head>
+            <column>
+              <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/3f47b6a15969494ba4683de8eec5d914.png" alt="x" scale="0.0175" baseline="0" inspect="true" /></p>
+            </column>
+            <column>
+              <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/8d6f5823782d442e82d63f221ab96dfa.png" alt="V(x)" scale="0.0175" baseline="0" inspect="true" /></p>
+            </column>
+          </head>
+          <data><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/6f033c842d0841298b688d064a758342.png" alt="0" scale="0.0175" baseline="0" inspect="false" />, <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/6f033c842d0841298b688d064a758342.png" alt="0" scale="0.0175" baseline="0" inspect="false" />; <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/5d0275d7bd904b809a6f9b61f85737d5.png" alt="4" scale="0.0175" baseline="0" inspect="false" />, <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/a9f8e6f2dda2416f964e463f5508963c.png" alt="48-\frac{4^3}{4}=32" scale="0.0175" baseline="0.344841" inspect="false" />; <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/246057dcd80e41fabcb1560ae9752a96.png" alt="\sqrt{48}" scale="0.0175" baseline="0.132779" inspect="false" />, <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/60a91892bdf2407a9fbdf4988441ed2e.png" alt="12\sqrt{48}-\frac{\sqrt{48}^3}{4}=2 \times 10^{-32}" scale="0.0175" baseline="0.344841" inspect="false" /></data>
+        </table>
+        <p style="centeredText boldText marginTop30">Therefore: The maximum volume is <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/4d55dba396cb484a94242242fa9cda3a.png" alt="32 m^3" scale="0.0175" baseline="0" inspect="false" /> when the square base has side length <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/03ebc3c1655441979cef791a18806f40.png" alt="4m" scale="0.0175" baseline="0" inspect="false" />.</p>
+
+      </stack>
+
+      <button name="btn1" content="Show Answer">
+        <onClick>
+          btn1.Parent.answerStack.Style.Visibility = "visible";
+          btn1.Style.Visibility = "collapsed";
+        </onClick>
+      </button>
+    </stack>
+  </sectionNoTitle>
+
+	
+</document>

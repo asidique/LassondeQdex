@@ -5,7 +5,9 @@
   <metadata>
     <title>LA-PHYS-1.6 Forces and Free Body Diagrams (FBD)</title>
     <creator>jason_wang</creator>
-    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <abstract>
+      One of the most useful aids for solving a statics problem is the free body diagram (FBD). A free body diagram is a visual way to understand forces. In this module, we are going to learn how to analyse forces and draw FBDs.
+    </abstract>
     <coverImage src="resources/lassondeLogo.png" />
   </metadata>
 

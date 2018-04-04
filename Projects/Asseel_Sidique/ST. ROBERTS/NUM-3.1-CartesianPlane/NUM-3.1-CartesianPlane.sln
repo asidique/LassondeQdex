@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2024
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{3509FA56-3B69-4017-88D1-3C70D67D8588}") = "NUM-3.1-CartesianPlane", "NUM-3.1-CartesianPlane\NUM-3.1-CartesianPlane.qdexproj", "{E96BE19A-E95F-4CCA-93FD-928F68508511}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E96BE19A-E95F-4CCA-93FD-928F68508511}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E96BE19A-E95F-4CCA-93FD-928F68508511}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E96BE19A-E95F-4CCA-93FD-928F68508511}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E96BE19A-E95F-4CCA-93FD-928F68508511}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {36A61905-4F50-4839-89DA-3E9B979CE6E1}
+	EndGlobalSection
+EndGlobal

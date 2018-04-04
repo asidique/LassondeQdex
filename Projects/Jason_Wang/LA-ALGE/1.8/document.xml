@@ -5,7 +5,8 @@
   <metadata>
     <title>LA-ALGE-1.8 Multiplying Matrices by Matrices</title>
     <creator>jason_wang</creator>
-    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <abstract>In this Module, we are going to learn how to multiply two matrices with simulations and examples. We introduce the concept of the 'dumping method' and how it helps
+    visualize multiplying matrices.</abstract>
     <coverImage src="resources/lassondeLogo.png" />
   </metadata>
 

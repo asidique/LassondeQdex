@@ -5,7 +5,7 @@
   <metadata>
     <title>LA-ALGE-1.2 Representing linear systems with matrices</title>
     <creator>jason_wang</creator>
-    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+    <abstract>Matrices can be used to solve systems of equations. In this Module, we are going to learn how systems of linear equations with multiple variables are represented with matrices.</abstract>
     <coverImage src="resources/lassondeLogo.png" />
   </metadata>
 

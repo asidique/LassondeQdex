@@ -1,0 +1,732 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="GF2BE3B3D_83B4_48F0_B529_1BF6D000B818">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>MCV4U – 3.1 Rectilinear Motion</title>
+    <creator>Asseel</creator>
+    <coverImage src="resources/cover.png" />
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+  </metadata>
+
+
+  <include src="resources/Utilities.xml" />
+  <include src="resources/curriculumStyles.xml" />
+
+  <!--                                      Header & Footer START                                         -->
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="whiteColor">Amanda Koon</p>
+      <p style="whiteColor rightText">MCV4U</p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/logo1.png" inspect="false" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/logo2.png" inspect="false" />
+    </stack>
+  </footer>
+
+  <!-- Cover Page -->
+  <!-- This is the standard way title pages are created. A great website to get copyright free images .. www.pexels.com
+  *** The style: "pageLayout" is defined in curriculumStylesLassonde.xml. It simply sets the content to the center and adjusts the width to 80% ***-->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">4.1 Rectilinear Motion</title>
+    <p style="sectionHeading">Introduction</p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="justifiedText">
+        Solve problems about motion along a line using the power of differential calculus. For example, given the position of a particle as a function of time s(t), find the particle's maximum velocity.
+      </p>
+    </stack>
+  </section>
+
+  <!--QUESTION STEP BY STEP LAYOUT-->
+  <!--Setup StepsController with correct number of Steps-->
+  <sectionNoTitle style="pageLayout">
+    <script>
+      local stepsController = StepsController:new({stepsStack=stepsStack, numOfSteps=4, showStepCounter=true})
+    </script>
+    <p style="sectionHeading">Step by Step</p>
+    <stack orientation="vertical" style="contentBG">
+      <p style="subSectionHeading">Example 1</p>
+      <p style="justifiedText">The position of a particle moving along the x-axis is given by <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/925d2227e61e47df8baab04391964363.png" alt="s(t)=t^3-6t^2+9t" scale="0.0175" baseline="0.25" inspect="false" />, where <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/5808b0d9430643638bbb181dfc3bca40.png" alt="t \geq 0" scale="0.0175" baseline="0.135971" inspect="false" />. When is the particle "speeding up"?</p>
+    </stack>
+    <stack name="stepsStack">
+      <!--Each step is a stack, and each step has alternating background colors-->
+      <!--Use Snippet to create any single step stack -->
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>"speeding up" cases</p>
+          <stack name="cont" style="invisible">
+            <p style="centeredText bullet"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/5be43018810a4f0bac9bdb92f03a4d16.png" alt="v(t)&amp;gt;0" scale="0.0175" baseline="0.25" inspect="false" /><![CDATA[ and ]]><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/32df48debc9145d39cbb854d9c687fba.png" alt="a(t)&amp;gt;0" scale="0.0175" baseline="0.25" inspect="false" /></p>
+					  <p style="centeredText bullet"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/e369a165dd21404a839f8794a334b778.png" alt="v(t)&amp;lt;0" scale="0.0175" baseline="0.25" inspect="false" /><![CDATA[ and ]]><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/28db69eb547440cb9d10e96b5679a5b1.png" alt="a(t)&amp;lt;0" scale="0.0175" baseline="0.25" inspect="false" /></p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(1)
+          </onClick>
+        </button>
+      </stack>
+
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Get v(t)</p>
+          <stack name="cont" style="invisible">
+            <p>To get velocity <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/d32927ce661542a7a1779f8766d48d17.png" alt="v(t)" scale="0.0175" baseline="0.25" inspect="false" />, we solve the first derivative of <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/fe11c2592a474a2ea8f6791346f3263e.png" alt="s(t)" scale="0.0175" baseline="0.25" inspect="false" />.</p>
+					  <p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/423d6fe07181458895d75527e9a1e00f.png" alt="s'(t) = \frac{ds}{dt} = v(t)" scale="0.0175" baseline="0" inspect="true" /></p>
+					  <p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/ec5293eaa81e4c3388385fdbbff63693.png" alt="v(t) = 3t^2 - 12t + 9" scale="0.0175" baseline="0" inspect="true" /></p>
+
+					  <p>Now we can get the inital velocity, which help us graph: <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/83e140de349e4702afbfc41d7f716375.png" alt="v(0)=9" scale="0.0175" baseline="0.25" inspect="false" /></p>
+					  <p>Also, we need to find the time(s) where velocity is 0.</p>
+					  <p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/118db2be360545f1b1292204d1a14292.png" alt=" \begin{matrix} 3t^2 - 12t + 9 &amp; = &amp; 0 \\[6pt] t^2-4t+3&amp;=&amp;0 \\[6pt] (t-3)(t-1)&amp;=&amp;0 \end{matrix}" scale="0.0175" baseline="0" inspect="true" /></p>
+					  <p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/36dcfd8b89ae4e2f8099b4122a365fe3.png" alt="t=1 \quad or \quad t=3" scale="0.0175" baseline="0" inspect="true" /></p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(2)
+          </onClick>
+        </button>
+      </stack>
+
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Get a(t)</p>
+          <stack name="cont" style="invisible">
+            <p style="justifiedText">To get acceleration, we will need to calculate the first derivative of <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/d32927ce661542a7a1779f8766d48d17.png" alt="v(t)" scale="0.0175" baseline="0.25" inspect="false" />.</p>
+					  <p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/101d41a273d54cd1ba4e9dbb09afe635.png" alt="v'(t)=\frac{dv}{dt}=a(t)" scale="0.0175" baseline="0" inspect="true" /></p>
+					  <p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/d451dca2c77b4072ab74f5108f78fb6a.png" alt="a(t)=6t-12" scale="0.0175" baseline="0" inspect="true" /></p>
+					  <p style="justifiedText">Then find the time where acceleration is 0.</p>
+					  <p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/99e028044fdd4457b11dcf508806e132.png" alt="\begin{matrix}6t-12&amp;=&amp;0\\[6pt]6t&amp;=&amp;12\\[6pt]t&amp;=&amp;2\end{matrix}" scale="0.0175" baseline="0" inspect="true" /></p>
+					  <p style="justifiedText">Therefore, the particle "speeding up" at <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/145a190b7cfe4cdda2a1702556b5956d.png" alt="1&amp;lt;t&amp;lt;2" scale="0.0175" baseline="0.039098" inspect="false" /><![CDATA[ and ]]><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/98cc627946fb4093a035e340aa05ac69.png" alt="t&amp;gt;3" scale="0.0175" baseline="0.039098" inspect="false" /></p>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(3)
+          </onClick>
+        </button>
+      </stack>
+
+      <stack orientation="horizontal">
+        <stack name="stepStack" orientation="vertical">
+          <p>Show Graph</p>
+          <stack name="cont" style="invisible">
+            <table name="controlTable" grid="false">
+							<style name="blue">
+								<background color="dodgerBlue" />
+								<foreground color="white" />
+							</style>
+							<style name="red">
+								<background color="quanserRed" />
+								<foreground color="white" />
+							</style>
+							<style name="green">
+								<background color="yellowGreen" />
+								<foreground color="white" />
+							</style>
+							<row>
+								<column>
+									<button name="sButton" content="Hide s(t)" style="red">
+										<onClick>
+											if sButton.Text == "Hide s(t)" then
+											controlTable.Parent.myPlot.s.Visible = false;
+											sButton.Text = "Show s(t)";
+											sButton.Style.BackgroundColor = color.transparent;
+											sButton.Style.ForegroundColor = color.quanserRed;
+											else
+											controlTable.Parent.myPlot.s.Visible = true;
+											sButton.Text = "Hide s(t)";
+											sButton.Style.BackgroundColor = color.quanserRed;
+											sButton.Style.ForegroundColor = color.white;
+											end
+
+										</onClick>
+									</button>
+								</column>
+								<column>
+									<button name="vButton" content="Hide v(t)" style="blue">
+										<onClick>
+											if vButton.Text == "Hide v(t)" then
+											controlTable.Parent.myPlot.v.Visible = false;
+											vButton.Text = "Show v(t)";
+											vButton.Style.BackgroundColor = color.transparent;
+											vButton.Style.ForegroundColor = color.dodgerBlue;
+											else
+											controlTable.Parent.myPlot.v.Visible = true;
+											vButton.Text = "Hide v(t)";
+											vButton.Style.BackgroundColor = color.dodgerBlue;
+											vButton.Style.ForegroundColor = color.white;
+											end
+										</onClick>
+									</button>
+								</column>
+								<column>
+									<button name="aButton" content="Hide a(t)" style="green">
+										<onClick>
+											if aButton.Text == "Hide a(t)" then
+											controlTable.Parent.myPlot.a.Visible = false;
+											aButton.Text = "Show a(t)";
+											aButton.Style.BackgroundColor = color.transparent;
+											aButton.Style.ForegroundColor = color.yellowGreen;
+											else
+											controlTable.Parent.myPlot.a.Visible = true;
+											aButton.Text = "Hide a(t)";
+											aButton.Style.BackgroundColor = color.yellowGreen;
+											aButton.Style.ForegroundColor = color.white;
+											end
+										</onClick>
+									</button>
+								</column>
+							</row>
+						</table>
+						<xyPlot name="myPlot">
+							<title>Displacement, Velocity, Acceleration</title>
+							<axis dim="x" auto="fixed" min="0" max="4">
+								<title>Time</title>
+							</axis>
+							<axis dim="y" auto="fixed" min="-5" max="10">
+							</axis>
+							<series name="s" manual="false" />
+							<series name="v" manual="false" />
+							<series name="a" manual="false" />
+						</xyPlot>
+
+						<script>
+							local t, s, v, a;
+							local sPointer = myPlot.s;
+							local vPointer = myPlot.v;
+							local aPointer = myPlot.a;
+
+							for t = 0, 4, 0.1 do
+							s = math.pow(t,3) - 6*math.pow(t,2) + 9*t;
+							v = 3*math.pow(t,2) - 12*t + 9;
+							a = 6*t - 12;
+							sPointer:Add(t,s);
+							vPointer:Add(t,v);
+							aPointer:Add(t,a);
+							end
+
+							sPointer:Update();
+							vPointer:Update();
+							aPointer:Update();
+						</script>
+          </stack>
+        </stack>
+        <button name="btn" style="stepByStepBtn">
+          <!-- Insert the step index to the method below -->
+          <onClick>
+            stepsController:toggleStep(4)
+          </onClick>
+        </button>
+      </stack>
+    </stack>
+  </sectionNoTitle>
+  
+  <!--Practices-->
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Practices</p>
+    <!--Q1-->
+    <stack style="mcStackLayout contentBG">
+      <p style="subSectionHeading">Question 1</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources/question.png" inspect="false" />
+          </column>
+          <column>
+            <p>A particle moves along the x-axis so that at any time <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/5808b0d9430643638bbb181dfc3bca40.png" alt="t \geq 0" scale="0.0175" baseline="0.135971" inspect="false" /> its velocity is given by <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/e7b792fe147342a193b35b2e7e2ddc2b.png" alt="v(t)=-t^3+6t^2+2t" scale="0.0175" baseline="0.25" inspect="false" />.</p>
+            <p style="boldText">At What value of <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/c24a5c07528f44bab8094529e9ff243b.png" alt="t" scale="0.0175" baseline="0" inspect="false" /> does the particle obtain its maximum acceleration?</p>
+          </column>
+        </row>
+      </table>
+      <textField name="input" placeholder="Enter your answer here." />
+      <stack name="answerStack" style="invisible">
+        <p>Answer: 2</p>
+        <stack name="fullSolution" style="invisible">
+          <p>To get the function of acceleration, solve the first derivative of <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/d32927ce661542a7a1779f8766d48d17.png" alt="v(t)" scale="0.0175" baseline="0.25" inspect="false" />:</p>
+          <p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/b38e8baa842647af8ab26368af1f834c.png" alt="a(t)=-3t^2+12t+2" scale="0.0175" baseline="0" inspect="true" /></p>
+          <p>Solve the first derivative of <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/76a998e9d1a1432683959b7a43223945.png" alt="a(t)" scale="0.0175" baseline="0.25" inspect="false" /> to get max/min value:</p>
+          <p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/b9f72ce32b27469e99ea6e74fb1d9a03.png" alt="a'(t)=-6t+12" scale="0.0175" baseline="0" inspect="true" /></p>
+          <p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/767fd4ea23ea42cf8cf58e0d1d73f79b.png" alt="\begin{matrix}-6t+12&amp;=&amp;0\\[6pt]6t&amp;=&amp;12\\[6pt]t&amp;=&amp;2\end{matrix}" scale="0.0175" baseline="0" inspect="true" /></p>
+          <p>In order to know if 2 is maximum, we need to solve the second derivative of <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/76a998e9d1a1432683959b7a43223945.png" alt="a(t)" scale="0.0175" baseline="0.25" inspect="false" />:</p>
+          <p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/53bb989f051c4cb9b1294081377bea81.png" alt="a''(t)=-6" scale="0.0175" baseline="0" inspect="true" /></p>
+          <p style="justifiedText">Since <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/1beabc9d0ef84bbd999b1cef726f7a83.png" alt="a''(t)" scale="0.0175" baseline="0.25" inspect="false" /> always less than 0, thus <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/780a3a9ad0fc49398d53e7a813bd30fe.png" alt="t=2" scale="0.0175" baseline="0" inspect="false" /> is the maximum acceleration.</p>
+
+          <xyPlot name="myPlot">
+            <title>Acceleration</title>
+            <axis dim="x" auto="fixed" min="0" max="5">
+              <title>Time</title>
+            </axis>
+            <axis dim="y" auto="fixed" min="0" max="20">
+            </axis>
+            <series name="a" manual="false" />
+          </xyPlot>
+
+          <script>
+            local t, a;
+            local aPointer = myPlot.a;
+
+            for t = 0, 5, 0.1 do
+            a = -3*math.pow(t,2)+12*t+2
+            aPointer:Add(t,a);
+            end
+            aPointer:Update();
+          </script>
+        </stack>
+        <button name="fullSolutionBtn" content="Show Full Solution">
+          <onClick>
+            if fullSolutionBtn.Text == "Show Full Solution" then
+            answerStack.fullSolution.Style.Visibility = "visible";
+            fullSolutionBtn.Text = "Hide Full Solution";
+            else
+            answerStack.fullSolution.Style.Visibility = "collapsed";
+            fullSolutionBtn.Text = "Show Full Solution";
+            end
+          </onClick>
+        </button>
+      </stack>
+      <p name="answer" style="invisible">2</p>
+      <p name="feedback" style="invisible" />
+      <script>
+        local attempt = 0;
+        local max = 3;
+      </script>
+      <button name="btn" content="Check Answer">
+        <onClick>
+          if input.Text ~= answer.Text then 
+            feedback.Style.Visibility = "visible" 
+            feedback.Text = "Incorrect! Try again." 
+            attempt = attempt + 1
+            if attempt &gt;= max then
+              answerStack.Style.Visibility = "visible"
+            end
+          else 
+            feedback.Style.Visibility = "visible" 
+            feedback.Text = "Correct, Good Job!" 
+          end
+        </onClick>
+      </button>
+    </stack>
+    <p>
+      <br />
+    </p>
+    <!--Q2-->
+    <stack style="mcStackLayout contentBG">
+      <script>
+        local mqController = MQController:new({mqStack=mqStack, numOfSteps=3})
+      </script>
+      <p style="subSectionHeading">Question 2</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources/question.png" inspect="false" />
+          </column>
+          <column>
+            <p style="justifiedText">A particle moves along a number line (not shown) for <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/5808b0d9430643638bbb181dfc3bca40.png" alt="t \geq 0" scale="0.0175" baseline="0.135971" inspect="false" />. Its position function <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/fe11c2592a474a2ea8f6791346f3263e.png" alt="s(t)" scale="0.0175" baseline="0.25" inspect="false" /> is shown in blue, its velocity function <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/d32927ce661542a7a1779f8766d48d17.png" alt="v(t)" scale="0.0175" baseline="0.25" inspect="false" /> is in red, and its acceleration function <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/76a998e9d1a1432683959b7a43223945.png" alt="a(t)" scale="0.0175" baseline="0.25" inspect="false" /> is in green. All are graphed with respect to time <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/c24a5c07528f44bab8094529e9ff243b.png" alt="t" scale="0.0175" baseline="0" inspect="false" /> in seconds.</p>
+            <p>With the graphs as an aid, answer the questions below.</p>
+          </column>
+        </row>
+      </table>
+
+      <stack name="mqStack" orientation="vertical">
+        <stack orientation="vertical">
+          <stack name="header" orientation="horizontal">
+            <!--Step Title and Button-->
+            <p name="title">PART A</p>
+            <button name="btn" content="Show Part A" style="stepByStepBtn">
+              <onClick>
+                mqController:toggleStep(1)
+              </onClick>
+            </button>
+          </stack>
+          <stack name="content" style="invisible">
+            <table widths="10% 90%" grid="false">
+              <row>
+                <column>
+                  <image src="resources\question.png" inspect="false" />
+                </column>
+                <column>
+                  <p>How many units per second is the initial velocity of the particle?</p>
+                </column>
+              </row>
+            </table>
+            <textField name="input" placeholder="Enter your answer here." />
+            <p name="answer" style="invisible">8</p>
+            <stack name="answerStack" style="invisible">
+              <!--q1 solution-->
+              <p>Answer: 8</p>
+              <stack name="fullSolution" style="invisible">
+                <p>The y-intersection of <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/d32927ce661542a7a1779f8766d48d17.png" alt="v(t)" scale="0.0175" baseline="0.25" inspect="false" />, which is 8.</p>
+              </stack>
+              <button name="fullSolutionBtn" content="Show Full Solution">
+                <onClick>
+                  if fullSolutionBtn.Text == "Show Full Solution" then
+                  answerStack.fullSolution.Style.Visibility = "visible";
+                  fullSolutionBtn.Text = "Hide Full Solution";
+                  else
+                  answerStack.fullSolution.Style.Visibility = "collapsed";
+                  fullSolutionBtn.Text = "Show Full Solution";
+                  end
+                </onClick>
+              </button>
+            </stack>
+            <p name="feedback" style="invisible" />
+            <script>
+              local attempt = 0;
+              local max = 3;
+            </script>
+            <button name="btn" content="Check Answer">
+              <onClick>
+                if input.Text ~= answer.Text then 
+                  feedback.Style.Visibility = "visible" 
+                  feedback.Text = "Incorrect! Try again." 
+                  attempt = attempt + 1
+                  if attempt &gt;= max then
+                    answerStack.Style.Visibility = "visible"
+                  end
+                else 
+                  feedback.Style.Visibility = "visible" 
+                  feedback.Text = "Correct, Good Job!" 
+                end
+              </onClick>
+            </button>
+          </stack>
+        </stack>
+        <stack orientation="vertical">
+          <stack name="header" orientation="horizontal">
+            <!--Step Title and Button-->
+            <p name="title">PART B</p>
+            <button name="btn" content="Show Part B" style="stepByStepBtn">
+              <onClick>
+                mqController:toggleStep(2)
+              </onClick>
+            </button>
+          </stack>
+          <stack name="content" style="invisible">
+            <!--Step Content-->
+            <table widths="10% 90%" grid="false">
+              <row>
+                <column>
+                  <image src="resources\question.png" inspect="false" />
+                </column>
+                <column>
+                  <p>The particle is moving to the right when <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/1d9557c4ec4a4b809692b5974f8b1209.png" alt="t \in" scale="0.0175" baseline="0.039098" inspect="false" /> __________. (Enter a range like <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/9f49844f49034be58841d7c148511677.png" alt="[3,63)" scale="0.0175" baseline="0.25" inspect="false" />)</p>
+                </column>
+              </row>
+            </table>
+            <textField name="input" placeholder="Enter your answer here." />
+            <p name="answer" style="invisible">[0,1)</p>
+            <stack name="answerStack" style="invisible">
+              <!--q2 solution-->
+              <p>Answer: [0,1)</p>
+              <stack name="fullSolution" style="invisible">
+                <p>The particle is moving to the right when velocity <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/5be43018810a4f0bac9bdb92f03a4d16.png" alt="v(t)&amp;gt;0" scale="0.0175" baseline="0.25" inspect="false" /></p>
+                <p><![CDATA[So, ]]><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/512e4cbdd111412a83651ba343730065.png" alt="time" scale="0.0175" baseline="0" inspect="false" /><![CDATA[ between 0 and 1 (exclusive), which answer is ]]><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/a2d3287a4fe34f02bcf45e896701d604.png" alt="[0,1)" scale="0.0175" baseline="0.25" inspect="false" /></p>
+              </stack>
+              <button name="fullSolutionBtn" content="Show Full Solution">
+                <onClick>
+                  if fullSolutionBtn.Text == "Show Full Solution" then
+                  answerStack.fullSolution.Style.Visibility = "visible";
+                  fullSolutionBtn.Text = "Hide Full Solution";
+                  else
+                  answerStack.fullSolution.Style.Visibility = "collapsed";
+                  fullSolutionBtn.Text = "Show Full Solution";
+                  end
+                </onClick>
+              </button>
+            </stack>
+            <p name="feedback" style="invisible" />
+            <script>
+              local attempt = 0;
+              local max = 3;
+            </script>
+            <button name="btn" content="Check Answer">
+              <onClick>
+                if input.Text ~= answer.Text then 
+                  feedback.Style.Visibility = "visible" 
+                  feedback.Text = "Incorrect! Try again." 
+                  attempt = attempt + 1
+                  if attempt &gt;= max then
+                    answerStack.Style.Visibility = "visible"
+                  end
+                else 
+                  feedback.Style.Visibility = "visible" 
+                  feedback.Text = "Correct, Good Job!" 
+                end
+              </onClick>
+            </button>
+          </stack>
+        </stack>
+        <stack orientation="vertical">
+          <stack name="header" orientation="horizontal">
+            <!--Step Title and Button-->
+            <p name="title">PART C</p>
+            <button name="btn" content="Show Part C" style="stepByStepBtn">
+              <onClick>
+                mqController:toggleStep(3)
+              </onClick>
+            </button>
+          </stack>
+          <stack name="content" style="invisible">
+            <!--Step Content-->
+            <table widths="10% 90%" grid="false">
+              <row>
+                <column>
+                  <image src="resources\question.png" inspect="false" />
+                </column>
+                <column>
+                  <p>The total distance tranveled by the particle for <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/60d63a01c9fc4dc3850ee13d6155fc40.png" alt="t \in [0,3]" scale="0.0175" baseline="0.25" inspect="false" /> is ______ units.</p>
+                </column>
+              </row>
+            </table>
+            <textField name="input" placeholder="Enter your answer here." />
+            <p name="answer" style="invisible">2.5</p>
+            <stack name="answerStack" style="invisible">
+              <!--q3 solution-->
+              <p>Answer: 2.5</p>
+              <stack name="fullSolution" style="invisible">
+                <p>Total distance means the displacement travelled ignoring directions. For example:</p>
+                <p>If you travel 3 units to the right and 1 unit to the left. The displacement would be 2, but total distance would be 4.</p>
+                <p>Now look at the graph, <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/d32927ce661542a7a1779f8766d48d17.png" alt="v(t)" scale="0.0175" baseline="0.25" inspect="false" /> became negative after 1, which means the particle changes the direction at 1.</p>
+                <p>Time between 0 and 1, <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/fe11c2592a474a2ea8f6791346f3263e.png" alt="s(t)" scale="0.0175" baseline="0.25" inspect="false" /> shows the particle has traveled 2 units forward, and 0.5 unit backward from 1 to 3.</p>
+                <p>Therefore, the total distance traveled by the particle for <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/60d63a01c9fc4dc3850ee13d6155fc40.png" alt="t \in [0,3]" scale="0.0175" baseline="0.25" inspect="false" /> is <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/e240e3e95fad4d199efde5982f1e0958.png" alt="2 + 0.5 = 2.5" scale="0.0175" baseline="0.083333" inspect="false" /> units.</p>
+              </stack>
+              <button name="fullSolutionBtn" content="Show Full Solution">
+                <onClick>
+                  if fullSolutionBtn.Text == "Show Full Solution" then
+                  answerStack.fullSolution.Style.Visibility = "visible";
+                  fullSolutionBtn.Text = "Hide Full Solution";
+                  else
+                  answerStack.fullSolution.Style.Visibility = "collapsed";
+                  fullSolutionBtn.Text = "Show Full Solution";
+                  end
+                </onClick>
+              </button>
+            </stack>
+            <p name="feedback" style="invisible" />
+            <script>
+              local attempt = 0;
+              local max = 3;
+            </script>
+            <button name="btn" content="Check Answer">
+              <onClick>
+                if input.Text ~= answer.Text then 
+                  feedback.Style.Visibility = "visible" 
+                  feedback.Text = "Incorrect! Try again." 
+                  attempt = attempt + 1
+                  if attempt &gt;= max then
+                    answerStack.Style.Visibility = "visible"
+                  end
+                else 
+                  feedback.Style.Visibility = "visible" 
+                  feedback.Text = "Correct, Good Job!" 
+                end
+              </onClick>
+            </button>
+          </stack>
+        </stack>
+      </stack>
+    </stack>
+    <p>
+      <br />
+    </p>
+    <!--Q3-->
+    <stack style="mcStackLayout contentBG">
+      <p style="subSectionHeading">Question 3</p>
+      <table widths="10% 90%" grid="false">
+        <row>
+          <column>
+            <image src="resources\question.png" inspect="false" />
+          </column>
+          <column>
+            <p>The position of a particle moving along a number line is given by</p>
+            <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/1b368f0155f34cd7b1728870479fcabe.png" alt="s(t)=\frac{2}{3}t^3-6t^2+10t \hspace{1.0cm}for\hspace{1.0cm} t \geq 0" scale="0.0175" baseline="0" inspect="true" /></p>
+            <p>where t is time in seconds.</p>
+            <p>The particle moves both left and right in the first six seconds. What's the total distance traveled by the particle for <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/0874299aedd14e05a9fe4c0e3ee82bd3.png" alt="0 \leq t \leq 6" scale="0.0175" baseline="0.135971" inspect="false" />?</p>
+          </column>
+        </row>
+      </table>
+			<textField name="input" placeholder="Enter your answer here." />
+			<p>
+        <size scale="small">Round answer to 2 decimal places.</size>
+      </p>
+      <p name="answer" style="invisible">30.67</p>
+      <stack name="answerStack" style="invisible">
+				<p>Answer: 30.67</p>
+				<stack name="fullSolution" style="invisible">
+          <p>First, we need to know when the particle is moving on the right and left.</p>
+				  <p>To do that, we need to get the velocity function, so do the first derivative of <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/fe11c2592a474a2ea8f6791346f3263e.png" alt="s(t)" scale="0.0175" baseline="0.25" inspect="false" />:</p>
+				  <p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/5e1c0039634d4342b48cceb5d629b623.png" alt="v(t)=2t^2-12t+10" scale="0.0175" baseline="0" inspect="true" /></p>
+				  <p>Solve for t-intersections of <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/d32927ce661542a7a1779f8766d48d17.png" alt="v(t)" scale="0.0175" baseline="0.25" inspect="false" /> to get direction changing point.</p>
+				  <p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/b5d4c84a46a440ebad9f1ef569fde36b.png" alt="\begin{matrix}2t^2-12t+10&amp;=&amp;0 \\[6pt] t^2-6t+5&amp;=&amp;0 \\[6pt] (t-1)(t-5)&amp;=&amp;0 \end{matrix}" scale="0.0175" baseline="0" inspect="true" /></p>
+				  <p style="centeredText"><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/d10ca9fe22ac4652a524425052b2cd6f.png" alt="t=1 \hspace{1.0cm} or \hspace{1.0cm} t=5" scale="0.0175" baseline="0" inspect="true" /></p>
+
+          <table grid="true" widths="50% 50%" style="width50">
+            <head>
+              <column>
+                <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/ee7f76a5ece440cfb266cba0e8cfe2d3.png" alt="t" scale="0.0175" baseline="0" inspect="true" /></p>
+              </column>
+              <column>
+                <p><image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/ec6726f28d0a437fa140b6c7f6027cd5.png" alt="s(t)" scale="0.0175" baseline="0" inspect="true" /></p>
+              </column>
+            </head>
+            <data>
+              0, 0; 1, <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/315a603fd998421f87a42c464c0ff9d9.png" alt="4\frac{2}{3}" scale="0.0175" baseline="0.344841" inspect="false" />; 5, <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/c6991337d3b04f789a0dd627cf44e882.png" alt="-16\frac{2}{3}" scale="0.0175" baseline="0.344841" inspect="false" />; 6, -12
+            </data>
+          </table>
+				  <p>Then, we solve for the distance for every segment:</p>
+          <table grid="true" widths="50% 50%" style="width50">
+            <head>
+              <column>
+                <p>range</p>
+              </column>
+              <column>
+                <p>distance</p>
+              </column>
+            </head>
+            <data>
+              <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/a2d9fb895bff4396bd443abe9873864e.png" alt="0 \leq 1" scale="0.0175" baseline="0.135971" inspect="false" />, <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/315a603fd998421f87a42c464c0ff9d9.png" alt="4\frac{2}{3}" scale="0.0175" baseline="0.344841" inspect="false" />;
+              <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/7b5ae04f34bd4b50be9ab5f25a71a3b9.png" alt="1 \leq 5" scale="0.0175" baseline="0.135971" inspect="false" />, <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/7e8141ce28b54f3995488c3796b31fb1.png" alt="21\frac{1}{3}" scale="0.0175" baseline="0.344841" inspect="false" />;
+              <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/d97c1cd034f649c7902c2910d7edd482.png" alt="5 \leq 6" scale="0.0175" baseline="0.135971" inspect="false" />, <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/315a603fd998421f87a42c464c0ff9d9.png" alt="4\frac{2}{3}" scale="0.0175" baseline="0.344841" inspect="false" />;
+            </data>
+          </table>
+				  <p>
+            <b>Finally, the sum of all distances: <image xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" src="Equations/456eed617cab46559852e3a8cc74e651.png" alt="4\frac{2}{3} + 21\frac{1}{3}+ 4\frac{2}{3} = 30\frac{2}{3}" scale="0.0175" baseline="0.344841" inspect="false" /></b>
+          </p>
+			    <stack name="graphStack" style="invisible">
+					  <table name="controlTable" grid="false">
+						  <style name="blue">
+							  <background color="dodgerBlue" />
+							  <foreground color="white" />
+						  </style>
+						  <style name="red">
+							  <background color="quanserRed" />
+							  <foreground color="white" />
+						  </style>
+						  <row>
+							  <column>
+								  <button name="sButton" content="Hide s(t)" style="red">
+									  <onClick>
+										  if sButton.Text == "Hide s(t)" then
+								  		  controlTable.Parent.myPlot.s.Visible = false;
+							  			  sButton.Text = "Show s(t)";
+											  sButton.Style.BackgroundColor = color.transparent;
+											  sButton.Style.ForegroundColor = color.quanserRed;
+										  else
+											  controlTable.Parent.myPlot.s.Visible = true;
+											  sButton.Text = "Hide s(t)";
+											  sButton.Style.BackgroundColor = color.quanserRed;
+											  sButton.Style.ForegroundColor = color.white;
+										  end
+                    </onClick>
+								  </button>
+							  </column>
+							  <column>
+								  <button name="vButton" content="Hide v(t)" style="blue">
+                    <onClick>
+                      if vButton.Text == "Hide v(t)" then
+                        controlTable.Parent.myPlot.v.Visible = false;
+                        vButton.Text = "Show v(t)";
+											  vButton.Style.BackgroundColor = color.transparent;
+											  vButton.Style.ForegroundColor = color.dodgerBlue;
+										  else
+											  controlTable.Parent.myPlot.v.Visible = true;
+											  vButton.Text = "Hide v(t)";
+											  vButton.Style.BackgroundColor = color.dodgerBlue;
+											  vButton.Style.ForegroundColor = color.white;
+										  end
+									  </onClick>
+								  </button>
+							  </column>
+						  </row>
+					  </table>
+            <xyPlot name="myPlot" style="width9">
+              <title>Displacement and Velocity</title>
+              <axis dim="x" auto="fixed" min="0" max="6">
+                <title>Time</title>
+              </axis>
+              <axis dim="y" auto="fixed" min="-20" max="20">
+              </axis>
+              <series name="s" manual="false" />
+              <series name="v" manual="false" />
+            </xyPlot>
+            <script>
+              local t, s, v;
+              local sPointer = myPlot.s;
+              local vPointer = myPlot.v;
+
+              for t = 0, 6, 0.1 do
+              s = 2/3*math.pow(t,3)-6*math.pow(t,2)+10*t;
+              v = 2*math.pow(t,2)-12*t+10;
+              sPointer:Add(t,s);
+              vPointer:Add(t,v);
+              end
+              sPointer:Update();
+              vPointer:Update();
+            </script>
+				  </stack>
+          <button name="showGraphBtn" content="Show Graph">
+            <onClick>
+              if showGraphBtn.Text == "Show Graph" then
+              showGraphBtn.Parent.graphStack.Style.Visibility = "visible";
+              showGraphBtn.Text = "Hide Graph";
+              else
+              showGraphBtn.Parent.graphStack.Style.Visibility = "collapsed";
+              showGraphBtn.Text = "Show Graph";
+              end
+            </onClick>
+          </button>
+        </stack>
+        <button name="fullSolutionBtn" content="Show Full Solution">
+          <onClick>
+            if fullSolutionBtn.Text == "Show Full Solution" then
+            answerStack.fullSolution.Style.Visibility = "visible";
+            fullSolutionBtn.Text = "Hide Full Solution";
+            else
+            answerStack.fullSolution.Style.Visibility = "collapsed";
+            fullSolutionBtn.Text = "Show Full Solution";
+            end
+          </onClick>
+        </button>
+			</stack>
+      <p name="feedback" style="invisible" />
+      <script>
+        local attempt = 0;
+        local max = 3;
+      </script>
+      <button name="btn" content="Check Answer">
+        <onClick>
+          if input.Text ~= answer.Text then 
+            feedback.Style.Visibility = "visible" 
+            feedback.Text = "Incorrect! Try again." 
+            attempt = attempt + 1
+            if attempt &gt;= max then
+              answerStack.Style.Visibility = "visible"
+            end
+          else 
+            feedback.Style.Visibility = "visible" 
+            feedback.Text = "Correct, Good Job!" 
+          end
+        </onClick>
+      </button>
+    </stack>
+    <p>
+      <br />
+    </p>
+
+  </sectionNoTitle>
+  
+</document>
