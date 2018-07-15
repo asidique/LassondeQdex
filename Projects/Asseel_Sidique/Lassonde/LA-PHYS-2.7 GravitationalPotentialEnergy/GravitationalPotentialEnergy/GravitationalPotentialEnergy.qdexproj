@@ -22,6 +22,7 @@
     <Content Include="resources\rollercoaster2.png" />
     <Content Include="resources\rollercoaster3.png" />
     <Content Include="resources\rollercoaster4.png" />
+    <Content Include="resources\rollercoastercart.png" />
     <Content Include="resources\wrong.png" />
     <Content Include="resources\york.png" />
   </ItemGroup>

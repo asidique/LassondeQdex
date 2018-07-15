@@ -1,0 +1,998 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="GF9C16173_3082_4D7B_ACD9_8226DA05817A">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>NUM-8.4-Angle Theorems</title>
+    <creator>Sidique</creator>
+    <coverImage src="resources/cover.png" />
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+  </metadata>
+
+  <include src="resources/curriculumStyles.xml" />
+  <include src="resources/Utilities.xml" />
+  <include src="resources/plotTools.xml" />
+
+  <!--                                      Header & Footer START                                         -->
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="whiteColor">Amanda Koon</p>
+      <p style="whiteColor rightText">NUMERACY</p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/logo1.png" inspect="false" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/logo2.png" inspect="false" />
+    </stack>
+  </footer>
+
+  <!-- Section 1 -->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">Angle Theorems</title>
+    <stack style="contentBG">
+      <image src="resources/angle.png" />
+      <p>Angles are an important property of shapes that we can measure. <b>Angle Theorems</b> are statements about angles that we can prove to be true. Triangles are important shapes when discussing angle
+      theories and can be used to prove angle theories of other shapes as well.
+    </p>
+    </stack>
+  </section>
+
+  <sectionNoTitle name="section2" style="pageLayout">
+    <onDocumentOpened>
+      isClicked = false;
+    </onDocumentOpened>
+    <p style="sectionHeading">Angles of a Triangle</p>
+    <stack style="contentBG" name="contentStack">
+      <p>Angles are formed when two lines meet at one point. In a triangle, there are 3 interior angles (angles on the inside of a shape).</p>
+      <image src="resources/triangleAngle.png" />
+      <p>In the image above, the angles are $ a, b, $ and $ c $. Notice that $ b $ is labelled using a square... this is because $ b $ is a 90° angle.</p>
+      <p>One statement about triangles is that all of the angles add up to 180°. How can we prove this?</p>
+      <p>
+        We know that a rectangle's angles add up to 360° since all of the sides are perpindicular to another. If we slice the rectangle diagonally so that we get 2 triangles, those triangles will have
+        one 90° angle and two other angles that add up to 90°. No matter how we transform the triangle, the angles must all add up to 180°.
+      </p>
+      <p>Take a look at this visually by hitting the <b>Start</b> button below</p>
+      <drawing manual="true" name="p1">
+        <onDocumentOpened>
+          squareX = 0;
+          squareY = 0;
+          squareWidth= 5;
+          squareHeight = 5;
+          miniSquareSize = 1;
+          function drawSquare(squareX, squareY, squareWidth, squareHeight, col)
+          shape:Clear();
+          shape:Add(squareX-squareWidth, squareY-squareHeight, col);
+          shape:Add(squareX-squareWidth, squareY+squareHeight, col);
+          shape:Add(squareX+squareWidth, squareY-squareHeight, col);
+
+          shape:Add(squareX+squareWidth, squareY+squareHeight, col);
+          shape:Add(squareX+squareWidth, squareY-squareHeight, col);
+          shape:Add(squareX-squareWidth, squareY+squareHeight, col);
+          shape:Update();
+          end
+
+          function drawSquareOutline(squareX, squareY, squareWidth, squareHeight, col)
+          shapeOutline:Clear();
+          shapeOutline:Add(squareX-squareWidth, squareY-squareHeight, col);
+          shapeOutline:Add(squareX-squareWidth, squareY+squareHeight, col);
+
+          shapeOutline:Add(squareX-squareWidth, squareY+squareHeight, col);
+          shapeOutline:Add(squareX+squareWidth, squareY+squareHeight, col);
+
+          shapeOutline:Add(squareX+squareWidth, squareY+squareHeight, col);
+          shapeOutline:Add(squareX+squareWidth, squareY-squareHeight, col);
+
+          shapeOutline:Add(squareX+squareWidth, squareY-squareHeight, col);
+          shapeOutline:Add(squareX-squareWidth, squareY-squareHeight, col);
+          --TOP RIGHT
+          shapeOutline:Add(squareX+squareWidth, squareY+squareHeight-miniSquareSize, col);
+          shapeOutline:Add(squareX+squareWidth-miniSquareSize, squareY+squareHeight-miniSquareSize, col);
+
+          shapeOutline:Add(squareX+squareWidth-miniSquareSize, squareY+squareHeight-miniSquareSize, col);
+          shapeOutline:Add(squareX+squareWidth-miniSquareSize, squareY+squareHeight, col);
+
+          shapeOutline:Add(squareX+squareWidth-miniSquareSize, squareY+squareHeight, col);
+          shapeOutline:Add(squareX+squareWidth, squareY+squareHeight, col);
+
+          --TOP LEFT
+          shapeOutline:Add(squareX-squareWidth, squareY+squareHeight-miniSquareSize, col);
+          shapeOutline:Add(squareX-squareWidth+miniSquareSize, squareY+squareHeight-miniSquareSize, col);
+
+          shapeOutline:Add(squareX-squareWidth+miniSquareSize, squareY+squareHeight-miniSquareSize, col);
+          shapeOutline:Add(squareX-squareWidth+miniSquareSize, squareY+squareHeight, col);
+
+          shapeOutline:Add(squareX-squareWidth+miniSquareSize, squareY+squareHeight, col);
+          shapeOutline:Add(squareX-squareWidth, squareY+squareHeight, col);
+
+
+          --BOTTOM LEFT
+          shapeOutline:Add(squareX-squareWidth, squareY-squareHeight+miniSquareSize, col);
+          shapeOutline:Add(squareX-squareWidth+miniSquareSize, squareY-squareHeight+miniSquareSize, col);
+
+          shapeOutline:Add(squareX-squareWidth+miniSquareSize, squareY-squareHeight+miniSquareSize, col);
+          shapeOutline:Add(squareX-squareWidth+miniSquareSize, squareY-squareHeight, col);
+
+          shapeOutline:Add(squareX-squareWidth+miniSquareSize, squareY-squareHeight, col);
+          shapeOutline:Add(squareX-squareWidth, squareY-squareHeight, col);
+          shapeOutline:Update();
+
+          --BOTTOM RIGHT
+          shapeOutline:Add(squareX+squareWidth, squareY-squareHeight+miniSquareSize, col);
+          shapeOutline:Add(squareX+squareWidth-miniSquareSize, squareY-squareHeight+miniSquareSize, col);
+
+          shapeOutline:Add(squareX+squareWidth-miniSquareSize, squareY-squareHeight+miniSquareSize, col);
+          shapeOutline:Add(squareX+squareWidth-miniSquareSize, squareY-squareHeight, col);
+
+          shapeOutline:Add(squareX+squareWidth-miniSquareSize, squareY-squareHeight, col);
+          shapeOutline:Add(squareX+squareWidth, squareY-squareHeight, col);
+          shapeOutline:Update();
+          end
+
+          function drawDiagnolLine(squareX, squareY, squareWidth, squareHeight, col)
+          diagnolLine:Clear();
+          diagnolLine:Add(squareX-squareWidth, squareY+squareHeight, col);
+          diagnolLine:Add(squareX+squareWidth, squareY-squareHeight, col);
+          diagnolLine:Update();
+          end
+
+          function drawTriangle1(squareX, squareY, squareWidth, squareHeight, col)
+          shape:Clear();
+          shape:Add(squareX-squareWidth, squareY-squareHeight, col);
+          shape:Add(squareX-squareWidth, squareY+squareHeight, col);
+          shape:Add(squareX+squareWidth, squareY-squareHeight, col);
+          shape:Update();
+          end
+
+          function drawTriangle2(squareX, squareY, squareWidth, squareHeight, col)
+          shape2:Clear();
+          shape2:Add(squareX+squareWidth, squareY+squareHeight, col);
+          shape2:Add(squareX+squareWidth, squareY-squareHeight, col);
+          shape2:Add(squareX-squareWidth, squareY+squareHeight, col);
+          shape2:Update();
+          end
+
+          function drawTriangleShapeOutline(squareX, squareY, squareWidth, squareHeight, col)
+          shapeOutline:Clear();
+
+          shapeOutline:Add(squareX + 1 + squareWidth, squareY + 1 + squareHeight, col);
+          shapeOutline:Add(squareX + 1 -squareWidth, squareY + 1 + squareHeight, col);
+
+          shapeOutline:Add(squareX + 1 -squareWidth, squareY + 1 + squareHeight, col);
+          shapeOutline:Add(squareX + 1 + squareWidth, squareY + 1 - squareHeight, col);
+
+          shapeOutline:Add(squareX + 1 + squareWidth, squareY + 1 - squareHeight, col);
+          shapeOutline:Add(squareX+1 + squareWidth, squareY + 1 + squareHeight, col);
+
+          shapeOutline:Add(squareX - 1 - squareWidth, squareY - 1 - squareHeight, col);
+          shapeOutline:Add(squareX - 1 + squareWidth, squareY - 1 - squareHeight, col);
+
+          shapeOutline:Add(squareX - 1 + squareWidth, squareY - 1 - squareHeight, col);
+          shapeOutline:Add(squareX - 1 - squareWidth, squareY - 1 + squareHeight, col);
+
+          shapeOutline:Add(squareX - 1 - squareWidth, squareY - 1 + squareHeight, col);
+          shapeOutline:Add(squareX - 1 - squareWidth, squareY - 1 - squareHeight, col);
+
+          shapeOutline:Add(squareX + 1 + squareWidth, squareY + 1 + squareHeight, col);
+          shapeOutline:Add(squareX + 1 + squareWidth, squareY + 1 + squareHeight - miniSquareSize, col);
+
+          shapeOutline:Add(squareX + 1 + squareWidth, squareY + 1 + squareHeight - miniSquareSize, col);
+          shapeOutline:Add(squareX + 1 + squareWidth - miniSquareSize, squareY + 1 + squareHeight - miniSquareSize, col);
+
+          shapeOutline:Add(squareX + 1 + squareWidth - miniSquareSize, squareY + 1 + squareHeight - miniSquareSize, col);
+          shapeOutline:Add(squareX + 1 + squareWidth - miniSquareSize, squareY + 1 + squareHeight, col);
+
+          shapeOutline:Add(squareX - 1 - squareWidth, squareY - 1 - squareHeight, col);
+          shapeOutline:Add(squareX - 1 - squareWidth + miniSquareSize, squareY - 1 - squareHeight, col);
+
+          shapeOutline:Add(squareX - 1 - squareWidth + miniSquareSize, squareY - 1 - squareHeight, col);
+          shapeOutline:Add(squareX - 1 - squareWidth + miniSquareSize, squareY - 1 - squareHeight + miniSquareSize, col);
+
+          shapeOutline:Add(squareX - 1 - squareWidth + miniSquareSize, squareY - 1 - squareHeight + miniSquareSize, col);
+          shapeOutline:Add(squareX - 1 - squareWidth, squareY - 1 - squareHeight + miniSquareSize, col);
+
+          shapeOutline:Update();
+          end
+
+
+        </onDocumentOpened>
+        <axis dim="x" auto="none" min="-10" max="10" />
+        <axis dim="y" auto="none" min="-10" max="10" />
+        <series name="shape" draw="triangles" manual="true">
+          <style>
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        <series name="shape2" draw="triangles" manual="true">
+          <style>
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        <series name="shapeOutline" draw="lineSegments" manual="true">
+          <style>
+            <foreground color="black" />
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        <series name="diagnolLine" draw="lineSegments" manual="true">
+          <style>
+            <foreground color="black" />
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+      </drawing>
+        <button content="Start" name="btn">
+          <onClick>
+            if (isClicked) then
+
+            else
+              section2.contentStack.s1:Start();
+              p1.shape:Clear();
+              p1.shape2:Clear();
+              p1.diagnolLine:Clear();
+              p1.shapeOutline:Clear();
+              p1.shape:Update();
+              p1.shape2:Update();
+              p1.diagnolLine:Update();
+              p1.shapeOutline:Update();
+              btn.Style.BackgroundColor = color.rgb(225, 225, 225);
+              isClicked = true;
+            end
+          </onClick>
+        </button>
+      <simulation name="s1" duration="1">
+        <onDuration>
+          s2:Start();
+        </onDuration>
+        <onUpdate>
+          drawSquare(squareX, squareY, squareWidth, squareHeight, color.rgba(0, 153, 255, time*255));
+          drawSquareOutline(squareX, squareY, squareWidth, squareHeight, color.rgba(0, 0, 0, time*255));
+        </onUpdate>
+      </simulation>
+      <simulation name="s2" duration="1">
+        <onDuration>
+          s3:Start();
+        </onDuration>
+        <onUpdate>
+          drawDiagnolLine(squareX, squareY, squareWidth, squareHeight, color.rgba(0,0,0,time*255));
+        </onUpdate>
+      </simulation>
+      <simulation name="s3" duration="1">
+        <onDuration>
+          s4:Start();
+        </onDuration>
+        <onUpdate>
+          drawSquareOutline(squareX, squareY, squareWidth, squareHeight, color.rgba(0,0,0,(1-time)*255));
+          drawDiagnolLine(squareX, squareY, squareWidth, squareHeight, color.rgba(0,0,0,(1-time)*255));
+        </onUpdate>
+      </simulation>
+      <simulation name="s4" duration="1">
+        <onDuration>
+          s5:Start();
+        </onDuration>
+        <onUpdate>
+          drawTriangle1(squareX, squareY, squareWidth, squareHeight, color.rgb(0, 153, 255));
+          drawTriangle2(squareX, squareY, squareWidth, squareHeight, color.rgb(time*244, 153+(time*(188-153)), 255-(time*(255-66))));
+        </onUpdate>
+      </simulation>
+      <simulation name="s5" duration="1">
+        <onDuration>
+          s6:Start();
+        </onDuration>
+        <onUpdate>
+          drawTriangle1(squareX - time, squareY - time, squareWidth, squareHeight, color.rgb(0, 153, 255));
+          drawTriangle2(squareX + time, squareY + time, squareWidth, squareHeight, color.rgb(244, 188, 66));
+        </onUpdate>
+      </simulation>
+      <simulation name="s6" duration="1">
+        <onDuration>
+          btn.Style.BackgroundColor = color.rgb(50,133,184);
+          isClicked = false;
+        </onDuration>  
+        <onUpdate>
+          drawTriangleShapeOutline(squareX, squareY, squareWidth, squareHeight, color.rgba(0, 0, 0, 255*time));
+        </onUpdate>
+      </simulation>
+    </stack>
+  </sectionNoTitle>
+
+  <sectionNoTitle name="section3" style="pageLayout">
+    <p style="sectionHeading">Angles of a Triangle (Continued)</p>
+    <stack style="contentBG">
+      <p>
+        Triangle angles must add up to 180°. This includes different types of triangles such as: Right Angle, Isoceles, Obtuse, Scalene, Acute and Equilateral. The simulation
+        below proves that no matter how you transform a triangle, it's angles will consistently add up to 180°.
+      </p>
+      <drawing name="p1" manual="true" pan="custom">
+        <onDocumentOpened>
+          triP1 = vector({-2.5, -2.5});
+          triP2 = vector({0, 2.5});
+          triP3 = vector({2.5, -2.5})
+          btnSelected = 1;
+
+          function resetButtons(btn1, btn2, btn3)
+          btn1.Style.BackgroundColor = color.green;
+          btn2.Style.BackgroundColor = color.red;
+          btn3.Style.BackgroundColor = color.purple;
+          end
+
+          function drawTri(p1, p2, p3, col)
+          triangle:Clear();
+          triangle:Add(p1[1], p1[2], col);
+          triangle:Add(p2[1], p2[2], col);
+          triangle:Add(p3[1], p3[2], col);
+          triangle:Update();
+          end
+
+          function drawTriOutline(p1, p2, p3, col)
+          triangleOutline:Clear();
+          triangleOutline:Add(p1[1], p1[2], col);
+          triangleOutline:Add(p2[1], p2[2], col);
+
+          triangleOutline:Add(p2[1], p2[2], col);
+          triangleOutline:Add(p3[1], p3[2], col);
+
+          triangleOutline:Add(p3[1], p3[2], col);
+          triangleOutline:Add(p1[1], p1[2], col);
+          triangleOutline:Update();
+          end
+          
+          function drawLabels(p1, p2, p3, col)
+            angleLabel:Clear();
+            char.num1(angleLabel, ({p1[1] + 0.15, p1[2] + 0.15}), 0.6, col);
+            char.num2(angleLabel, ({p2[1] + 0.15, p2[2] - 0.15}), 0.6, col);
+            char.num3(angleLabel, ({p3[1] - 0.15, p3[2] + 0.15}), 0.6, col);
+            angleLabel:Update();
+          end
+
+          function drawPoint(p1, p2, p3, bb)
+          currentPoint:Clear();
+          if bb == 1 then
+          currentPoint:Add(p1[1], p1[2], color.green);
+          elseif bb == 2 then
+          currentPoint:Add(p2[1], p2[2], color.red);
+          elseif bb == 3 then
+          currentPoint:Add(p3[1], p3[2], color.purple);
+          end
+          currentPoint:Update();
+          
+          end
+
+          function updateLabels(p1, p2, p3)
+            b = math.sqrt((p2[1]-p1[1])^2 + (p2[2] - p1[2])^2);
+            c = math.sqrt((p3[1]-p1[1])^2 + (p3[2] - p1[2])^2);
+            a = math.sqrt((p3[1]-p2[1])^2 + (p3[2] - p2[2])^2);
+            angleB = round(math.deg(math.acos((a^2+c^2-b^2)/(2*a*c))),0.2);
+            angleC = round(math.deg(math.asin(c*math.sin(math.rad(angleB))/b)), 0.2);
+            angleA = round(180 - angleB - angleC, 0.2);
+            labelStack.a1.Text = "Angle 1: " .. tostring(angleA) .. "°";
+            labelStack.a2.Text = "Angle 2: " .. tostring(angleB) .. "°";
+            labelStack.a3.Text = "Angle 3: " .. tostring(angleC) .. "°";
+          end
+
+          drawTri(triP1, triP2, triP3, color.rgba(224, 80, 44, 200));
+          drawTriOutline(triP1, triP2, triP3, color.black);
+          drawPoint(triP1, triP2, triP3, color.green);
+        </onDocumentOpened>
+        <onPan>
+          local scaledX = p1.XAxis.Min + state.Current.X * (p1.XAxis.Max - p1.XAxis.Min);
+          local scaledY = p1.YAxis.Min + state.Current.Y * (p1.YAxis.Max - p1.YAxis.Min);
+          if (btnSelected == 1) then
+            triP1 = ({scaledX, scaledY});
+          elseif btnSelected == 2 then
+            triP2 = ({scaledX, scaledY});
+          elseif btnSelected == 3 then
+            triP3 = ({scaledX, scaledY});
+          end
+          drawTri(triP1, triP2, triP3, color.rgba(224, 80, 44, 200));
+          drawTriOutline(triP1, triP2, triP3, color.black);
+          drawPoint(triP1, triP2, triP3, btnSelected);
+          updateLabels(triP1, triP2, triP3);
+          
+        </onPan>
+        <axis dim="x" auto="none" min="-8" max="8" />
+        <axis dim="y" auto="none" min="-8" max="8" />
+        <series name="triangle" manual="true" draw="triangles" capacity="3">
+          <style>
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        <series name="triangleOutline" manual="true" draw="lineSegments" capacity="6">
+          <style>
+            <foreground color="black" />
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        <series name="angleLabel" manual="true">
+          <style>
+            <foreground color="black" />
+            <lineThickness>2</lineThickness>
+          </style>
+        </series>
+        <series name="currentPoint" manual="true" draw="points" capacity="1">
+          <style>
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+       
+      </drawing>
+      <stack orientation="horizontal" name="labelStack">
+        <equation name="a1">Angle 1: </equation>
+        <equation name="a2">Angle 2: </equation>
+        <equation name="a3">Angle 3: </equation>
+      </stack>
+      <stack orientation="horizontal">
+        <button name="btnn1" content="Point 1">
+          <style>
+            <background color="green" />
+          </style>
+          <onClick>
+            btnSelected = 1;
+            resetButtons(btnn1, btnn2, btnn3);
+            btnn1.Style.BackgroundColor = color.green;
+            drawPoint(triP1, triP2, triP3, 1);
+          </onClick>
+        </button>
+        <button name="btnn2" content="Point 2">
+          <onClick>
+            btnSelected = 2;
+            resetButtons(btnn1, btnn2, btnn3);
+            btnn2.Style.BackgroundColor = color.red;
+            drawPoint(triP1, triP2, triP3, 2);
+          </onClick>
+        </button>
+        <button name="btnn3" content="Point 3">
+          <onClick>
+            btnSelected = 3;
+            resetButtons(btnn1, btnn2, btnn3);
+            btnn3.Style.BackgroundColor = color.purple;
+            drawPoint(triP1, triP2, triP3, 3);
+          </onClick>
+        </button>
+        
+      </stack>
+    </stack>    
+  </sectionNoTitle>
+  
+  <sectionNoTitle name="section5" style="pageLayout">
+    <p style="sectionHeading">Definitions</p>
+    <stack style="contentBG">
+      <p>Here are some useful definitions to help understand angle theorems better. Refer back to this list 
+      if you need to revise any definitions from the next pages.</p>
+      <table>
+        <row>
+          <column>
+            <p>Name</p>
+          </column>
+          <column>
+            <p>Definiton</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>Acute Angles</p>
+          </column>
+          <column>
+            <p>An Acute angle is any angle that is less than 90°.</p>
+          </column>
+          <column>
+            <image src="resources/acute.png" />
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>Obtuse Angles</p>
+          </column>
+          <column>
+            <p>An Obtuse angle is an angle that is greater than 90° and less than 180°.</p>
+          </column>
+          <column>
+            <image src="resources/obtuse.png" />
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>Right Angles</p>
+          </column>
+          <column>
+            <p>A Right Angle is any angle that is equal to 90°. It is represented by a square in the corner of where the angle forms.</p>
+          </column>
+          <column>
+            <image src="resources/rightangle.png" />
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>Perpindicular</p>
+          </column>
+          <column>
+            <p>A line is perpindicular if it forms a 90° angle when it intersects another line.</p>
+          </column>
+          <column>
+            <image src="resources/perpindicular.png" />
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>Complementary Angles</p>
+          </column>
+          <column>
+            <p>Two angles that when added together are 90°.</p>
+          </column>
+          <column>
+              <image src="resources/compl.png" />
+            </column>
+        </row>
+        <row>
+          <column>
+            <p>Supplementary Angles</p>
+          </column>
+          <column>
+            <p>Two angles that when added together are 180°.</p>
+          </column>
+          <column>
+              <image src="resources/suppl.png" />
+            </column>
+        </row>
+        <row>
+          <column>
+            <p>Transversal</p>
+          </column>
+          <column>
+            <p>A line that intersects two lines in the same plane at different points.</p>
+          </column>
+          <column>
+              <image src="resources/transversal.png" />
+            </column>
+        </row>
+        <row>
+          <column>
+            <p>Congruent Triangles</p>
+          </column>
+          <column>
+            <p>Triangles where the sides and angles are equal in measure.</p>
+          </column>
+          <column>
+              <image src="resources/congruent.png" />
+            </column>
+        </row>
+        <row>
+          <column>
+            <p>Similar Triangles</p>
+          </column>
+          <column>
+            <p>Triangles where the corresponding angles are equal in measure and the sides are proportionate.</p>
+          </column>
+          <column>
+            <image src="resources/similartri.png" />
+          </column>
+        </row>
+      </table>
+    </stack>
+  </sectionNoTitle>
+  
+<sectionNoTitle name="section4" style="pageLayout">
+  <p style="sectionHeading">Angle Theorems</p>
+  <stack style="contentBG">
+    <p>In order to talk about Angle Theoems, we must first talk about what a <b>Theorem</b> is.
+  </p>
+  <p>A <b>Theorem</b> is a statement that has been proved to be true using operations and facts that are already known to be true.</p>
+    <p>
+      We will now explore several different <b>Angle Theorems</b>. For each theorem, you can play the simulation to visualize the concept.
+    </p>
+  </stack>
+  <p style="sectionHeading">Alternate Exterior Angles Theorem</p>
+  <stack style="contentBG">
+    <p>If a <foreground color="red">Transversal</foreground> passes through two <foreground color="blue">Parallel Lines</foreground> , then the <foreground color="purple">Alternate Exterior Angles</foreground> are congruent.</p>
+    <drawing manual="true" name="p1" pan="custom">
+      <onDocumentOpened>
+        func1:Clear();
+        func2:Clear();
+        func1:Add(2, 2);
+        func1:Add(4, 4);
+        func2:Add(2, 1);
+        func2:Add(4, 3);
+        func1:Update();
+        func2:Update();
+        
+        
+      </onDocumentOpened>
+      <onPan>
+          local scaledX = p1.XAxis.Min + state.Current.X * (p1.XAxis.Max - p1.XAxis.Min);
+          local scaledY = p1.YAxis.Min + state.Current.Y * (p1.YAxis.Max - p1.YAxis.Min);
+          label1.Text = "( " .. tostring(round(scaledX, 0.01)) .. ", " .. tostring(round(scaledY, 0.01)) .. " )";
+        </onPan>
+      <axis dim="x" min="1.5" max="4.5" auto="none" />
+      <axis dim="y" min="0.5" max="4.5" auto="none" />
+      <series name="func1" manual="true">
+        <style>
+          <foreground color="blue" />
+          <lineThickness>1.5</lineThickness>
+        </style>
+      </series>
+      <series name="func2" manual="true">
+        <style>
+          <foreground color="blue" />
+          <lineThickness>1.5</lineThickness>
+        </style>
+      </series>
+      <series name="traverse" manual="true">
+        <style>
+          <foreground color="red" />
+          <lineThickness>1.5</lineThickness>
+        </style>
+      </series>
+      <series name="arc1" manual="true" draw="radialFill">
+        <style>
+          <aspectRatio>1</aspectRatio>
+          <foreground color="purple" />
+          <background color="purple" />
+          <lineThickness>1.5</lineThickness>
+        </style>
+      </series>
+      <series name="arc2" manual="true" draw="radialFill">
+        <style>
+          <aspectRatio>1</aspectRatio>
+          <foreground color="purple" />
+          <background color="purple" />
+          <lineThickness>1.5</lineThickness>
+        </style>
+      </series>
+    </drawing>
+    <p name="label1"></p>
+    <simulation name="s1" duration="1">
+      <onDuration>
+        s2:Start();
+      </onDuration>
+      <onUpdate>
+        p1.traverse:Clear();
+        p1.traverse:Add(time*2.25, 3.75*2 - time*3.75);
+        p1.traverse:Add(time*3.5, 1.75*2 - time*1.75);
+        p1.traverse:Update();
+      </onUpdate>
+    </simulation>
+    <simulation name="s2" duration="1">
+      <onUpdate>
+        p1.arc1:Clear();
+          plotTools.drawArc(p1.arc1, 46, 122, ({2.825, 2.81}), 0.25, color.rgba(173, 70, 236, time*255));
+          p1.arc1:Add(2.82, 2.8);
+        p1.arc1:Update();
+        p1.arc2:Clear();
+          plotTools.drawArc(p1.arc2, 225, 301, ({3.21, 2.21}), 0.25, color.rgba(173, 70, 236, time*255));
+          p1.arc2:Add(3.21, 2.21);
+        p1.arc2:Update();
+      </onUpdate>
+    </simulation>
+    <button name="btn1" content="Simulate">
+      <onClick>
+        p1.arc1:Clear();
+        p1.arc2:Clear();
+        p1.traverse:Clear();
+        s1:Start();
+      </onClick>
+    </button>
+  </stack>
+  <p style="sectionHeading">Alternate Interior Angles Theorem</p>
+  <stack style="contentBG">
+    <p>If a <foreground color="red">Transversal</foreground> passes through two <foreground color="blue">Parallel Lines</foreground>, then the <foreground color="green">Alternate Exterior Angles</foreground> are congruent.</p>
+        <drawing manual="true" name="p1" pan="custom">
+      <onDocumentOpened>
+        func1:Clear();
+        func2:Clear();
+        func1:Add(2, 2);
+        func1:Add(4, 4);
+        func2:Add(2, 1);
+        func2:Add(4, 3);
+        func1:Update();
+        func2:Update();
+      </onDocumentOpened>
+      <onPan>
+          local scaledX = p1.XAxis.Min + state.Current.X * (p1.XAxis.Max - p1.XAxis.Min);
+          local scaledY = p1.YAxis.Min + state.Current.Y * (p1.YAxis.Max - p1.YAxis.Min);
+        </onPan>
+      <axis dim="x" min="1.5" max="4.5" auto="none" />
+      <axis dim="y" min="0.5" max="4.5" auto="none" />
+      <series name="func1" manual="true">
+        <style>
+          <foreground color="blue" />
+          <lineThickness>1.5</lineThickness>
+        </style>
+      </series>
+      <series name="func2" manual="true">
+        <style>
+          <foreground color="blue" />
+          <lineThickness>1.5</lineThickness>
+        </style>
+      </series>
+      <series name="traverse" manual="true">
+        <style>
+          <foreground color="red" />
+          <lineThickness>1.5</lineThickness>
+        </style>
+      </series>
+      <series name="arc1" manual="true" draw="radialFill">
+        <style>
+          <aspectRatio>1</aspectRatio>
+          <foreground color="purple" />
+          <background color="purple" />
+          <lineThickness>1.5</lineThickness>
+        </style>
+      </series>
+      <series name="arc2" manual="true" draw="radialFill">
+        <style>
+          <aspectRatio>1</aspectRatio>
+          <foreground color="purple" />
+          <background color="purple" />
+          <lineThickness>1.5</lineThickness>
+        </style>
+      </series>
+    </drawing>
+    <simulation name="s1" duration="1">
+      <onDuration>
+        s2:Start();
+      </onDuration>
+      <onUpdate>
+        p1.traverse:Clear();
+        p1.traverse:Add(time*2.25, 3.75*2 - time*3.75);
+        p1.traverse:Add(time*3.5, 1.75*2 - time*1.75);
+        p1.traverse:Update();
+      </onUpdate>
+    </simulation>
+    <simulation name="s2" duration="1">
+      <onUpdate>
+        p1.arc1:Clear();
+          plotTools.drawArc(p1.arc1, 46+180, 122+180, ({2.83, 2.82}), 0.25, color.rgba(82, 224, 130, time*255));
+          p1.arc1:Add(2.83, 2.82);
+        p1.arc1:Update();
+        p1.arc2:Clear();
+          plotTools.drawArc(p1.arc2, 44, 120, ({3.21, 2.21}), 0.25, color.rgba(82, 224, 130, time*255));
+          p1.arc2:Add(3.21, 2.21);
+        p1.arc2:Update();
+      </onUpdate>
+    </simulation>
+    <button name="btn1" content="Simulate">
+      <onClick>
+        p1.arc1:Clear();
+        p1.arc2:Clear();
+        p1.traverse:Clear();
+        
+        p1.arc1:Update();
+        p1.arc2:Update();
+        p1.traverse:Update();
+        s1:Start();
+      </onClick>
+    </button>
+  </stack>
+  <p style="sectionHeading">Right Angles Theorem</p>
+  <stack style="contentBG">
+    <p>All right angles are congruent.</p>
+    <image src="resources/rightangles.png">
+      <style>
+        <widthPercentage>75%</widthPercentage>
+      </style>
+    </image>
+  </stack>
+  <p style="sectionHeading">Same-side Interior Angles Theorem</p>
+  <stack style="contentBG">
+    <p>If two <foreground color="blue">Parallel Lines</foreground> are intersected by a <foreground color="red">Transversal</foreground>, then same-side interior angles are supplementary.</p>
+        <drawing manual="true" name="p1" pan="custom">
+      <onDocumentOpened>
+        func1:Clear();
+        func2:Clear();
+        func1:Add(2, 2);
+        func1:Add(4, 4);
+        func2:Add(2, 1);
+        func2:Add(4, 3);
+        func1:Update();
+        func2:Update();
+      </onDocumentOpened>
+      <onPan>
+          local scaledX = p1.XAxis.Min + state.Current.X * (p1.XAxis.Max - p1.XAxis.Min);
+          local scaledY = p1.YAxis.Min + state.Current.Y * (p1.YAxis.Max - p1.YAxis.Min);
+        </onPan>
+      <axis dim="x" min="1.5" max="4.5" auto="none" />
+      <axis dim="y" min="0.5" max="4.5" auto="none" />
+      <series name="func1" manual="true">
+        <style>
+          <foreground color="blue" />
+          <lineThickness>1.5</lineThickness>
+        </style>
+      </series>
+      <series name="func2" manual="true">
+        <style>
+          <foreground color="blue" />
+          <lineThickness>1.5</lineThickness>
+        </style>
+      </series>
+      <series name="traverse" manual="true">
+        <style>
+          <foreground color="red" />
+          <lineThickness>1.5</lineThickness>
+        </style>
+      </series>
+      <series name="arc1" manual="true" draw="radialFill">
+        <style>
+          <aspectRatio>1</aspectRatio>
+          <foreground color="purple" />
+          <background color="purple" />
+          <lineThickness>1.5</lineThickness>
+        </style>
+      </series>
+      <series name="arc2" manual="true" draw="radialFill">
+        <style>
+          <aspectRatio>1</aspectRatio>
+          <foreground color="purple" />
+          <background color="purple" />
+          <lineThickness>1.5</lineThickness>
+        </style>
+      </series>
+        <series name="arc3" manual="true" draw="radialFill">
+        <style>
+          <aspectRatio>1</aspectRatio>
+          <foreground color="purple" />
+          <background color="purple" />
+          <lineThickness>1.5</lineThickness>
+        </style>
+      </series>
+      <series name="arc4" manual="true" draw="radialFill">
+        <style>
+          <aspectRatio>1</aspectRatio>
+          <foreground color="purple" />
+          <background color="purple" />
+          <lineThickness>1.5</lineThickness>
+        </style>
+      </series>
+    </drawing>
+    <simulation name="s1" duration="1">
+      <onDuration>
+        s2:Start();
+      </onDuration>
+      <onUpdate>
+        p1.traverse:Clear();
+        p1.traverse:Add(time*2.25, 3.75*2 - time*3.75);
+        p1.traverse:Add(time*3.5, 1.75*2 - time*1.75);
+        p1.traverse:Update();
+      </onUpdate>
+    </simulation>
+    <simulation name="s2" duration="1">
+      <onUpdate>
+        p1.arc1:Clear();
+          plotTools.drawArc(p1.arc1, -54, 46, ({2.825, 2.81}), 0.25, color.rgba(173, 70, 236, time*255));
+          p1.arc1:Add(2.82, 2.8);
+        p1.arc1:Update();
+        p1.arc2:Clear();
+          plotTools.drawArc(p1.arc2, 46, 122, ({3.21, 2.21}), 0.25, color.rgba(173, 70, 236, time*255));
+          p1.arc2:Add(3.21, 2.21);
+        p1.arc2:Update();
+        p1.arc3:Clear();
+          plotTools.drawArc(p1.arc3, 124+94, 304, ({2.825, 2.81}), 0.25, color.rgba(82, 224, 130, time*255));
+          p1.arc3:Add(2.82, 2.8);
+        p1.arc3:Update();
+        p1.arc4:Clear();
+          plotTools.drawArc(p1.arc4, 122, 130+94, ({3.21, 2.21}), 0.25, color.rgba(82, 224, 130, time*255));
+          p1.arc4:Add(3.21, 2.21);
+        p1.arc4:Update();
+      </onUpdate>
+    </simulation>
+    <button name="btn1" content="Simulate">
+      <onClick>
+        p1.arc1:Clear();
+        p1.arc2:Clear();
+        p1.arc3:Clear();
+        p1.arc4:Clear();
+        p1.traverse:Clear();
+        p1.arc1:Update();
+        p1.arc2:Update();
+        p1.arc3:Update();
+        p1.arc4:Update();
+        p1.traverse:Update();
+        s1:Start();
+      </onClick>
+    </button>
+  </stack>
+  <p style="sectionHeading">Perpindicular Transversal Theorem</p>
+  <stack style="contentBG">
+    <p>If two <foreground color="blue">Parallel Lines</foreground> are intersected by a <foreground color="red">Transversal</foreground> which is <foreground color="purple">perpindicular</foreground> to one of the lines, then it must be <foreground color="purple">perpindicular</foreground> to the other as well.</p>
+     <drawing manual="true" name="p1" pan="custom">
+      <onDocumentOpened>
+        func1:Clear();
+        func2:Clear();
+        func1:Add(2, 2);
+        func1:Add(4, 4);
+        func2:Add(2, 1);
+        func2:Add(4, 3);
+        func1:Update();
+        func2:Update();
+        
+      </onDocumentOpened>
+      <onPan>
+          local scaledX = p1.XAxis.Min + state.Current.X * (p1.XAxis.Max - p1.XAxis.Min);
+          local scaledY = p1.YAxis.Min + state.Current.Y * (p1.YAxis.Max - p1.YAxis.Min);
+        </onPan>
+      <axis dim="x" min="1.5" max="4.5" auto="none" />
+      <axis dim="y" min="0.5" max="4.5" auto="none" />
+      <series name="func1" manual="true">
+        <style>
+          <foreground color="blue" />
+          <lineThickness>1.5</lineThickness>
+        </style>
+      </series>
+      <series name="func2" manual="true">
+        <style>
+          <foreground color="blue" />
+          <lineThickness>1.5</lineThickness>
+        </style>
+      </series>
+      <series name="traverse" manual="true">
+        <style>
+          <foreground color="red" />
+          <lineThickness>1.5</lineThickness>
+        </style>
+      </series>
+      <series name="ra1" manual="true">
+        <style>
+          <aspectRatio>1</aspectRatio>
+          <foreground color="purple" />
+          <lineThickness>1.5</lineThickness>
+        </style>
+      </series>
+      <series name="ra2" manual="true">
+        <style>
+          <aspectRatio>1</aspectRatio>
+          <foreground color="purple" />
+          <background color="purple" />
+          <lineThickness>1.5</lineThickness>
+        </style>
+      </series>
+    </drawing>
+    <simulation name="s1" duration="1">
+      <onDuration>
+        s2:Start();
+      </onDuration>
+      <onUpdate> 
+        p1.traverse:Clear();
+        p1.traverse:Add(time*2.25, 3.75*2 - time*3.75);
+        p1.traverse:Add(time*3.5, 1.75*2 - time*1.75);
+        p1.traverse:Update();
+
+      </onUpdate>
+    </simulation>
+    <simulation name="s2" duration="1">
+      <onUpdate>
+        p1.ra1:Clear();
+        p1.ra1:Add(2.95, 2.95, color.rgba(173, 70, 236, time*255));
+        p1.ra1:Add(2.85, 3.08, color.rgba(173, 70, 236, time*255));
+        p1.ra1:Add(2.85, 3.08, color.rgba(173, 70, 236, time*255));
+        p1.ra1:Add(2.73, 2.98, color.rgba(173, 70, 236, time*255));
+        p1.ra1:Update();
+        p1.ra2:Clear();
+        p1.ra2:Add(3.335, 2.35, color.rgba(173, 70, 236, time*255));
+        p1.ra2:Add(3.235, 2.48, color.rgba(173, 70, 236, time*255));
+        p1.ra2:Add(3.235, 2.48, color.rgba(173, 70, 236, time*255));
+        p1.ra2:Add(3.115, 2.38, color.rgba(173, 70, 236, time*255));
+        p1.ra2:Update();
+      </onUpdate>
+    </simulation>
+    <button name="btn1" content="Simulate">
+      <onClick>
+        p1.ra1:Clear();
+        p1.ra2:Clear();
+        p1.traverse:Clear();
+        p1.ra1:Update();
+        p1.ra2:Update();
+        p1.traverse:Update();
+        s1:Start();
+      </onClick>
+    </button>
+  </stack>
+</sectionNoTitle>
+
+</document>

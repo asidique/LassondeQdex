@@ -1,0 +1,16 @@
+﻿Parsing document...
+Adding file resources/cover.png.
+Adding file resources/curriculumStyles.xml.
+Adding file resources/logo1.png.
+Adding file resources/logo2.png.
+Adding file resources/plotTools.xml.
+Adding file resources/riserun.png.
+Adding file resources/Utilities.xml.
+Extracting metadata...
+Processing cover image...
+Confirm record overwrite
+Validating LaTeX...
+Preparing for submission...
+Publishing the project "NUM-5.2-Rates of Change" to "https://repo.qdexapps.com/api/v2/publish/"
+Publish time: 00:00:01:644
+Publish was successful.

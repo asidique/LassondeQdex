@@ -21,7 +21,6 @@
     <Content Include="resources\right.png" />
     <Content Include="resources\wrong.png" />
     <Content Include="resources\york.png" />
-    <Content Include="resources\zoomincurve.mp4" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\curriculumStylesLassonde.xml" />

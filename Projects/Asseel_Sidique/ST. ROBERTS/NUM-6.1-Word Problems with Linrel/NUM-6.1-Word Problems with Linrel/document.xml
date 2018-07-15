@@ -1,0 +1,913 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G36985703_856C_4B93_86BD_E15A09EDAD4B">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>NUM-6.2-Word Problems involving Linear Relations</title>
+    <creator>Sidique</creator>
+    <coverImage src="resources/cover.png" />
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+  </metadata>
+  
+  <include src="resources/curriculumStyles.xml" />
+  <include src="resources/Utilities.xml" />
+  <include src="resources/plotTools.xml" />
+
+  <!--                                      Header & Footer START                                         -->
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="whiteColor">Amanda Koon</p>
+      <p style="whiteColor rightText">NUMERACY</p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/logo1.png" inspect="false" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/logo2.png" inspect="false" />
+    </stack>
+  </footer>
+
+  <!-- Section 1 -->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">6.2 Word Problems involving Linear Relations</title>
+    <image src="resources/linrel.png" />
+    <stack style="contentBG">
+      <p>Linear relations are useful tools that we can use to identify relationships between two things. In this module, we will solve some word problems involving linear relations. If you need some help answering the questions, look at
+      previous modules.</p>
+    </stack>
+  </section>
+
+  <sectionNoTitle name="section2" style="pageLayout">
+    <p style="sectionHeading">Problem 1</p>
+    <stack style="contentBG">
+      <p>Zack is a dangerous fellow who likes to go rock climbing inside an active volcano. He just heard some rumbling,
+      so he decided to climb out as quickly as he cane. Zack's elevation relative to the edge of the inside of the volcano (in meters), E, as a function
+    of time (in seconds), t, is shown in the table below. Zack climbs at a constant rate.</p>
+      <table>
+        <style>
+          <widthPercentage>50%</widthPercentage>
+          <horizontalAlignment>center</horizontalAlignment>
+        </style>
+        <row>
+          <column>
+            <equation>$ E $</equation>
+          </column>
+          <column>
+            <equation>$ t $</equation>
+          </column>
+        </row>
+        <row>
+          <column>
+            <equation>-36</equation>
+          </column>
+          <column>
+            <equation>0</equation>
+          </column>
+        </row>
+        <row>
+          <column>
+            <equation>-30</equation>
+          </column>
+          <column>
+            <equation>4</equation>
+          </column>
+        </row>
+        <row>
+          <column>
+            <equation>-27</equation>
+          </column>
+          <column>
+            <equation>6</equation>
+          </column>
+        </row>
+        <row>
+          <column>
+            <equation>-24</equation>
+          </column>
+          <column>
+            <equation>8</equation>
+          </column>
+        </row>
+        <row>
+          <column>
+            <equation>-18</equation>
+          </column>
+          <column>
+            <equation>12</equation>
+          </column>
+        </row>
+        <row>
+          <column>
+            <equation>-6</equation>
+          </column>
+          <column>
+            <equation>20</equation>
+          </column>
+        </row>
+        <row>
+          <column>
+            <equation>0</equation>
+          </column>
+          <column>
+            <equation>24</equation>
+          </column>
+        </row>
+      </table>
+      <script>
+        local stepsController = StepsController:new({stepsStack=stepsStack, numOfSteps=2})
+      </script>
+      <stack name="stepsStack">
+        <!--Each step is a stack, and each step has alternating background colors-->
+        <stack orientation="horizontal">
+          <stack name="stepStack" orientation="vertical">
+            <p>Find the correct statement</p>
+            <stack name="cont" style="invisible">
+              <!--CONTENT GOES HERE-->
+              <stack name="mcStack" style="mcStackLayout">
+                <script>
+                  local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=3})
+                </script>
+                <p style="subSectionHeading">Question 1</p>
+                <table widths="10% 90%" grid="false">
+                  <row>
+                    <column>
+                      <image src="resources/question.png" inspect="false" />
+                    </column>
+                    <column>
+                      <p>
+                        <b>Based on the table above, which on of the following statements are correct?</b>
+                      </p>
+                    </column>
+                  </row>
+                </table>
+                <table name="choicesTable" grid="false" widths="50% 50%">
+                  <row>
+                    <column>
+                      <equation>Zack reached the edge of the volcano after 16 seconds of climbing</equation>
+                    </column>
+                    <column>
+                      <equation>Zack started climbing at 30 meters below the edge of the volcano</equation>
+                    </column>
+                  </row>
+                  <row>
+                    <column>
+                      <button name="btn" content="A" style="btnUnselected">
+                        <onClick>
+                          mcController:select(1)
+                        </onClick>
+                      </button>
+                    </column>
+                    <column>
+                      <button name="btn" content="B" style="btnUnselected">
+                        <onClick>
+                          mcController:select(2)
+                        </onClick>
+                      </button>
+                    </column>
+                  </row>
+                  <row>
+                    <column>
+                      <equation>Zack's rate of climbing was $ 1.5 \frac{meters}{second} $</equation>
+                    </column>
+                    <column>
+                      <equation>Zack's rate of climbing was $ -1.5 \frac{meters}{second} $</equation>
+                    </column>
+                  </row>
+                  <row>
+                    <column>
+                      <button name="btn" content="C" style="btnUnselected">
+                        <onClick>
+                          mcController:select(3)
+                        </onClick>
+                      </button>
+                    </column>
+                    <column>
+                      <button name="btn" content="D" style="btnUnselected">
+                        <onClick>
+                          mcController:select(4)
+                        </onClick>
+                      </button>
+                    </column>
+                  </row>
+                </table>
+                <button name="checkBtn" content="Check Answer">
+                  <onClick>
+                    mcController:checkAnswer()
+                  </onClick>
+                </button>
+              </stack>
+            </stack>
+          </stack>
+          <button name="btn" style="stepByStepBtn">
+            <onClick>
+              stepsController:toggleStep(1)
+            </onClick>
+          </button>
+        </stack>
+        <stack orientation="horizontal">
+          <stack name="stepStack" orientation="vertical">
+            <p>Plot the graph</p>
+            <stack name="cont" style="invisible">
+              <stack orientation="horizontal">
+                <stack orientation="vertical">
+                  <!--CONTENT GOES HERE-->
+                  <xyPlot name="p2" pan="custom" tap="custom" zoom="disabled" manual="true">
+                    <onDocumentOpened>
+                      plotTools.drawArrow(yaxis, vector({0, 2}), vector({0, -40}), color.black);
+                      plotTools.drawArrow(xaxis, vector({-2, 0}), vector({28, 0}), color.black);
+                      labelSize = 0.4;
+                      distanceApart = 1;
+                      distanceAxis = -0.5;
+                      begin = 0.95
+                      beginY = 0.8
+                      char.textX(label, vector({28, 0.5}), 1, color.black);
+                      char.textY(label, vector({0.5, -38}), 1, color.black);
+
+
+
+                      distanceApart = -1;
+                      distanceAxis = -0.5;
+                      begin = -0.95
+                      beginY = -1.2
+                      minSignOffset = 0.2;
+ 
+
+
+                      for i=-2, 40, 0.01 do
+                        graph:Add(i, 1.5*i-36); 
+                      end
+
+                      for i=-40, 40, 1 do
+                      line:Add(i, -40);
+                      line:Add(i, 40);
+                      line:Add(-40, i);
+                      line:Add(40, i);
+                      end
+                    </onDocumentOpened>
+                    <onPan>
+                      scaledX = p2.XAxis.Min + state.Current.X * (p2.XAxis.Max - p2.XAxis.Min);
+                      scaledY = p2.YAxis.Min + state.Current.Y * (p2.YAxis.Max - p2.YAxis.Min);
+                      x = (round(scaledY, 0.1)+5)/-4;
+                      y = round(scaledY, 0.1)
+                    </onPan>
+                    <axis name="XAxis" dim="x" min="-2" max="30" auto="none" minor="false">
+                      <title>Time (seconds)</title>
+                    </axis>
+                    <axis name="YAxis" dim="y" min="-40" max="2" auto="none" minor="false">
+                      <title>Height from Edge (meters)</title>  
+                    </axis>
+                    <series name="line" draw="lineSegments">
+                      <style>
+                        <lineThickness>1</lineThickness>
+                        <foreground color="lightGray" />
+                      </style>
+                    </series>
+                    <series name="yaxis">
+                      <style>
+                        <foreground color="black" />
+                        <lineThickness>1.5</lineThickness>
+                      </style>
+                    </series>
+                    <series name="xaxis">
+                      <style>
+                        <foreground color="black" />
+                        <lineThickness>1.5</lineThickness>
+                      </style>
+                    </series>
+
+                    <series name="points3" draw="points">
+                      <style>
+                        <foreground color="red" />
+                        <lineThickness>1.5</lineThickness>
+                      </style>
+                    </series>
+                    <series name="label"></series>
+                    <series name="graph">
+                      <style>
+                        <lineThickness>1.5</lineThickness>
+                        <foreground color="red" />
+                      </style>
+                    </series>
+                    <series name="points" draw="points" capacity="1">
+                      <style>
+                        <foreground color="red" />
+                        <lineThickness>1.5</lineThickness>
+                      </style>
+                    </series>
+                  </xyPlot>
+                </stack>
+              </stack>
+            </stack>
+          </stack>
+          <button name="btn" style="stepByStepBtn">
+            <onClick>
+              stepsController:toggleStep(2)
+            </onClick>
+          </button>
+        </stack>
+      </stack>
+    </stack>
+  </sectionNoTitle>
+
+  <sectionNoTitle name="section3" style="pageLayout">
+    <p style="sectionHeading">Problem 2</p>
+    <stack style="contentBG">
+      <p>Lisa attends 5 weeks of culinary school to learn how to cook. Every week, she learns 3 new recipes. Answer the questions below.</p>
+      <image src="resources/chef.png">
+        <style>
+          <widthPercentage>50%</widthPercentage>
+        </style>
+      </image>
+       <script>
+        local stepsController = StepsController:new({stepsStack=stepsStack, numOfSteps=3})
+      </script>
+      <stack name="stepsStack">
+        <!--Each step is a stack, and each step has alternating background colors-->
+        <stack orientation="horizontal">
+          <stack name="stepStack" orientation="vertical">
+            <p>Find the correct statement</p>
+            <stack name="cont" style="invisible">
+              <!--CONTENT GOES HERE-->
+              <stack name="mcStack" style="mcStackLayout">
+                <script>
+                  local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=2})
+                </script>
+                <p style="subSectionHeading">Question 1</p>
+                <table widths="10% 90%" grid="false">
+                  <row>
+                    <column>
+                      <image src="resources/question.png" inspect="false" />
+                    </column>
+                    <column>
+                      <p>
+                        <b>Which one of the following statements are correct?</b>
+                      </p>
+                    </column>
+                  </row>
+                </table>
+                <table name="choicesTable" grid="false" widths="50% 50%">
+                  <row>
+                    <column>
+                      <equation>Lisa will learn 20 recipes by the end of culinary school</equation>
+                    </column>
+                    <column>
+                      <equation>Lisa will learn 15 recipes by the end of culinary school</equation>
+                    </column>
+                  </row>
+                  <row>
+                    <column>
+                      <button name="btn" content="A" style="btnUnselected">
+                        <onClick>
+                          mcController:select(1)
+                        </onClick>
+                      </button>
+                    </column>
+                    <column>
+                      <button name="btn" content="B" style="btnUnselected">
+                        <onClick>
+                          mcController:select(2)
+                        </onClick>
+                      </button>
+                    </column>
+                  </row>
+                  <row>
+                    <column>
+                      <equation>Lisa will learn 25 recipes by the end of culinary school</equation>
+                    </column>
+                    <column>
+                      <equation>Lisa will learn 30 recipes by the end of culinary school</equation>
+                    </column>
+                  </row>
+                  <row>
+                    <column>
+                      <button name="btn" content="C" style="btnUnselected">
+                        <onClick>
+                          mcController:select(3)
+                        </onClick>
+                      </button>
+                    </column>
+                    <column>
+                      <button name="btn" content="D" style="btnUnselected">
+                        <onClick>
+                          mcController:select(4)
+                        </onClick>
+                      </button>
+                    </column>
+                  </row>
+                </table>
+                <button name="checkBtn" content="Check Answer">
+                  <onClick>
+                    mcController:checkAnswer()
+                  </onClick>
+                </button>
+              </stack>
+            </stack>
+          </stack>
+          <button name="btn" style="stepByStepBtn">
+            <onClick>
+              stepsController:toggleStep(1)
+            </onClick>
+          </button>
+        </stack>
+        <stack orientation="horizontal">
+          <stack name="stepStack" orientation="vertical">
+            <p>Find the correct statement</p>
+            <stack name="cont" style="invisible">
+              <!--CONTENT GOES HERE-->
+              <stack name="mcStack" style="mcStackLayout">
+                <script>
+                  local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=3})
+                </script>
+                <p style="subSectionHeading">Question 2</p>
+                <table widths="10% 90%" grid="false">
+                  <row>
+                    <column>
+                      <image src="resources/question.png" inspect="false" />
+                    </column>
+                    <column>
+                      <p>
+                        <b>If Lisa spends 10 weeks in culinary school, how many recipes will she know by the end?</b>
+                      </p>
+                    </column>
+                  </row>
+                </table>
+                <table name="choicesTable" grid="false" widths="50% 50%">
+                  <row>
+                    <column>
+                      <equation>Lisa will learn 50 recipes </equation>
+                    </column>
+                    <column>
+                      <equation>Lisa will learn 35 recipes</equation>
+                    </column>
+                  </row>
+                  <row>
+                    <column>
+                      <button name="btn" content="A" style="btnUnselected">
+                        <onClick>
+                          mcController:select(1)
+                        </onClick>
+                      </button>
+                    </column>
+                    <column>
+                      <button name="btn" content="B" style="btnUnselected">
+                        <onClick>
+                          mcController:select(2)
+                        </onClick>
+                      </button>
+                    </column>
+                  </row>
+                  <row>
+                    <column>
+                      <equation>Lisa will learn 30 recipes</equation>
+                    </column>
+                    <column>
+                      <equation>Lisa will learn 40 recipes</equation>
+                    </column>
+                  </row>
+                  <row>
+                    <column>
+                      <button name="btn" content="C" style="btnUnselected">
+                        <onClick>
+                          mcController:select(3)
+                        </onClick>
+                      </button>
+                    </column>
+                    <column>
+                      <button name="btn" content="D" style="btnUnselected">
+                        <onClick>
+                          mcController:select(4)
+                        </onClick>
+                      </button>
+                    </column>
+                  </row>
+                </table>
+                <button name="checkBtn" content="Check Answer">
+                  <onClick>
+                    mcController:checkAnswer()
+                  </onClick>
+                </button>
+              </stack>
+            </stack>
+          </stack>
+          <button name="btn" style="stepByStepBtn">
+            <onClick>
+              stepsController:toggleStep(2)
+            </onClick>
+          </button>
+        </stack>
+        <stack orientation="horizontal">
+          <stack name="stepStack" orientation="vertical">
+            <p>Plot the graph</p>
+            <stack name="cont" style="invisible">
+              <stack orientation="horizontal">
+                <stack orientation="vertical">
+                  <!--CONTENT GOES HERE-->
+                  <xyPlot name="p2" pan="custom" tap="custom" zoom="disabled" manual="true">
+                    <onDocumentOpened>
+                      --plotTools.drawArrow(yaxis, vector({0, -2}), vector({0, 30}), color.black);
+                      --plotTools.drawArrow(xaxis, vector({-2, 0}), vector({10, 0}), color.black);
+                      labelSize = 0.4;
+                      distanceApart = 1;
+                      distanceAxis = -0.5;
+                      begin = 0.95
+                      beginY = 0.8
+                      --char.textX(label, vector({9, 0.5}), 1, color.black);
+                      --char.textY(label, vector({0.5, 28}), 1, color.black);
+
+
+
+                      distanceApart = -1;
+                      distanceAxis = -0.5;
+                      begin = -0.95
+                      beginY = -1.2
+                      minSignOffset = 0.2;
+ 
+
+
+                      for i=-2, 40, 0.01 do
+                        graph:Add(i, i*3); 
+                      end
+
+                      for i=-40, 40, 1 do
+                      line:Add(i, -40);
+                      line:Add(i, 40);
+                      line:Add(-40, i);
+                      line:Add(40, i);
+                      end
+                    </onDocumentOpened>
+                    <onPan>
+                      scaledX = p2.XAxis.Min + state.Current.X * (p2.XAxis.Max - p2.XAxis.Min);
+                      scaledY = p2.YAxis.Min + state.Current.Y * (p2.YAxis.Max - p2.YAxis.Min);
+                      x = (round(scaledY, 0.1)+5)/-4;
+                      y = round(scaledY, 0.1)
+                    </onPan>
+                    <axis name="XAxis" dim="x" min="-2" max="10" auto="none" minor="false">
+                      <title>Weeks</title>
+                    </axis>
+                    <axis name="YAxis" dim="y" min="-2" max="30" auto="none" minor="false">
+                      <title>Recipes Learned</title>  
+                    </axis>
+                    <series name="line" draw="lineSegments">
+                      <style>
+                        <lineThickness>1</lineThickness>
+                        <foreground color="lightGray" />
+                      </style>
+                    </series>
+                    <series name="yaxis">
+                      <style>
+                        <foreground color="black" />
+                        <lineThickness>1.5</lineThickness>
+                      </style>
+                      <data>
+                        0 -40; 0 40;
+                      </data>
+                    </series>
+                    <series name="xaxis">
+                      <style>
+                        <foreground color="black" />
+                        <lineThickness>1.5</lineThickness>
+                      </style>
+                      <data>  
+                        -40 0; 40 0;
+                      </data>
+                    </series>
+
+                    <series name="points3" draw="points">
+                      <style>
+                        <foreground color="red" />
+                        <lineThickness>1.5</lineThickness>
+                      </style>
+                    </series>
+                    <series name="label"></series>
+                    <series name="graph">
+                      <style>
+                        <lineThickness>1.5</lineThickness>
+                        <foreground color="red" />
+                      </style>
+                    </series>
+                    <series name="points" draw="points" capacity="1">
+                      <style>
+                        <foreground color="red" />
+                        <lineThickness>1.5</lineThickness>
+                      </style>
+                    </series>
+                  </xyPlot>
+                </stack>
+              </stack>
+            </stack>
+          </stack>
+          <button name="btn" style="stepByStepBtn">
+            <onClick>
+              stepsController:toggleStep(3)
+            </onClick>
+          </button>
+        </stack>
+      </stack>
+    </stack>
+  </sectionNoTitle>
+
+
+  <sectionNoTitle name="section4" style="pageLayout">
+    <p style="sectionHeading">Problem 3</p>
+    <stack style="contentBG">
+      <p>Jack and Jill are starting a business selling lemonade to people on the streets. They rent a lemonade stand for $ \$ $ 200 per month and charge $5 per cup of lemonade. Every week, the lemond stand sells 50 cups of lemonade. Assuming
+      there are 4 weeks in every month, answer the following questions about Jack and Jill's lemonade stand:</p>
+      <image src="resources/lemon.png">
+        <style>
+          <widthPercentage>35%</widthPercentage>
+        </style>
+      </image>
+       <script>
+        local stepsController = StepsController:new({stepsStack=stepsStack, numOfSteps=3})
+      </script>
+      <stack name="stepsStack">
+        <!--Each step is a stack, and each step has alternating background colors-->
+        <stack orientation="horizontal">
+          <stack name="stepStack" orientation="vertical">
+            <p>Find the correct statement</p>
+            <stack name="cont" style="invisible">
+              <!--CONTENT GOES HERE-->
+              <stack name="mcStack" style="mcStackLayout">
+                <script>
+                  local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=1})
+                </script>
+                <p style="subSectionHeading">Question 1</p>
+                <table widths="10% 90%" grid="false">
+                  <row>
+                    <column>
+                      <image src="resources/question.png" inspect="false" />
+                    </column>
+                    <column>
+                      <p>
+                        <b>Which one of the following statements are correct?</b>
+                      </p>
+                    </column>
+                  </row>
+                </table>
+                <table name="choicesTable" grid="false" widths="50% 50%">
+                  <row>
+                    <column>
+                      <equation>Jack and Jill will make $750 a month in profit selling lemonade</equation>
+                    </column>
+                    <column>
+                      <equation>Jack and Jill will make $1000 a month in profit selling lemonade</equation>
+                    </column>
+                  </row>
+                  <row>
+                    <column>
+                      <button name="btn" content="A" style="btnUnselected">
+                        <onClick>
+                          mcController:select(1)
+                        </onClick>
+                      </button>
+                    </column>
+                    <column>
+                      <button name="btn" content="B" style="btnUnselected">
+                        <onClick>
+                          mcController:select(2)
+                        </onClick>
+                      </button>
+                    </column>
+                  </row>
+                  <row>
+                    <column>
+                      <equation>Jack and Jill will make $1250 a month in profit selling lemonade</equation>
+                    </column>
+                    <column>
+                      <equation>Jack and Jill will make $950 a month in profit selling lemonade</equation>
+                    </column>
+                  </row>
+                  <row>
+                    <column>
+                      <button name="btn" content="C" style="btnUnselected">
+                        <onClick>
+                          mcController:select(3)
+                        </onClick>
+                      </button>
+                    </column>
+                    <column>
+                      <button name="btn" content="D" style="btnUnselected">
+                        <onClick>
+                          mcController:select(4)
+                        </onClick>
+                      </button>
+                    </column>
+                  </row>
+                </table>
+                <button name="checkBtn" content="Check Answer">
+                  <onClick>
+                    mcController:checkAnswer()
+                  </onClick>
+                </button>
+              </stack>
+            </stack>
+          </stack>
+          <button name="btn" style="stepByStepBtn">
+            <onClick>
+              stepsController:toggleStep(1)
+            </onClick>
+          </button>
+        </stack>
+        <stack orientation="horizontal">
+          <stack name="stepStack" orientation="vertical">
+            <p>Find the correct statement</p>
+            <stack name="cont" style="invisible">
+              <!--CONTENT GOES HERE-->
+              <stack name="mcStack" style="mcStackLayout">
+                <script>
+                  local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=4})
+                </script>
+                <p style="subSectionHeading">Question 2</p>
+                <table widths="10% 90%" grid="false">
+                  <row>
+                    <column>
+                      <image src="resources/question.png" inspect="false" />
+                    </column>
+                    <column>
+                      <p>
+                        <b>Which one of the sets of equations below show the cost and income per month of Jack and Jill's lemonade business?</b>
+                      </p>
+                    </column>
+                  </row>
+                </table>
+                <table name="choicesTable" grid="false" widths="50% 50%">
+                  <row>
+                    <column>
+                      <equation>Income: $ y = 250x $</equation>
+                      <equation>Cost: $ y = 200x $</equation>
+                    </column>
+                    <column>
+                      <equation>Income: $ y = 1000x $</equation>
+                      <equation>Cost: $ y = -250x $</equation>
+                    </column>
+                  </row>
+                  <row>
+                    <column>
+                      <button name="btn" content="A" style="btnUnselected">
+                        <onClick>
+                          mcController:select(1)
+                        </onClick>
+                      </button>
+                    </column>
+                    <column>
+                      <button name="btn" content="B" style="btnUnselected">
+                        <onClick>
+                          mcController:select(2)
+                        </onClick>
+                      </button>
+                    </column>
+                  </row>
+                  <row>
+                    <column>
+                      <equation>Income: $ y = 1000x $</equation>
+                      <equation>Cost: $ y = 200x $</equation>
+                    </column>
+                    <column>
+                      <equation>Income: $ y = 1000x $</equation>
+                      <equation>Cost: $ y = -200x $</equation>
+                    </column>
+                  </row>
+                  <row>
+                    <column>
+                      <button name="btn" content="C" style="btnUnselected">
+                        <onClick>
+                          mcController:select(3)
+                        </onClick>
+                      </button>
+                    </column>
+                    <column>
+                      <button name="btn" content="D" style="btnUnselected">
+                        <onClick>
+                          mcController:select(4)
+                        </onClick>
+                      </button>
+                    </column>
+                  </row>
+                </table>
+                <button name="checkBtn" content="Check Answer">
+                  <onClick>
+                    mcController:checkAnswer()
+                  </onClick>
+                </button>
+              </stack>
+            </stack>
+          </stack>
+          <button name="btn" style="stepByStepBtn">
+            <onClick>
+              stepsController:toggleStep(2)
+            </onClick>
+          </button>
+        </stack>
+        <stack orientation="horizontal">
+          <stack name="stepStack" orientation="vertical">
+            <p>Plot the graph for the profit of the income per month</p>
+            <stack name="cont" style="invisible">
+              <stack orientation="horizontal">
+                <stack orientation="vertical">
+                  <!--CONTENT GOES HERE-->
+                  <xyPlot name="p2" pan="custom" tap="custom" zoom="disabled" manual="true">
+                    <onDocumentOpened>
+                      --plotTools.drawArrow(yaxis, vector({0, -2}), vector({0, 30}), color.black);
+                      --plotTools.drawArrow(xaxis, vector({-2, 0}), vector({10, 0}), color.black);
+                      labelSize = 0.4;
+                      distanceApart = 1;
+                      distanceAxis = -0.5;
+                      begin = 0.95
+                      beginY = 0.8
+                      --char.textX(label, vector({9, 0.5}), 1, color.black);
+                      --char.textY(label, vector({0.5, 28}), 1, color.black);
+
+
+
+                      distanceApart = -1;
+                      distanceAxis = -0.5;
+                      begin = -0.95
+                      beginY = -1.2
+                      minSignOffset = 0.2;
+ 
+
+
+                      for i=-2, 40, 0.01 do
+                        graph:Add(i, i*750); 
+                      end
+
+                    </onDocumentOpened>
+                    <onPan>
+                      scaledX = p2.XAxis.Min + state.Current.X * (p2.XAxis.Max - p2.XAxis.Min);
+                      scaledY = p2.YAxis.Min + state.Current.Y * (p2.YAxis.Max - p2.YAxis.Min);
+                      x = (round(scaledY, 0.1)+5)/-4;
+                      y = round(scaledY, 0.1)
+                    </onPan>
+                    <axis name="XAxis" dim="x" min="-1" max="6" auto="none" minor="false">
+                      <title>Months</title>
+                    </axis>
+                    <axis name="YAxis" dim="y" min="-1" max="6000" auto="none" minor="false">
+                     <title>Profit</title>
+                    </axis>
+                    <series name="line" draw="lineSegments">
+                      <style>
+                        <lineThickness>1</lineThickness>
+                        <foreground color="lightGray" />
+                      </style>
+                    </series>
+                    <series name="yaxis">
+                      <style>
+                        <foreground color="black" />
+                        <lineThickness>1.5</lineThickness>
+                      </style>
+                      <data>
+                        0 -40; 0 6000;
+                      </data>
+                    </series>
+                    <series name="xaxis">
+                      <style>
+                        <foreground color="black" />
+                        <lineThickness>1.5</lineThickness>
+                      </style>
+                      <data>  
+                        -40 0; 6000 0;
+                      </data>
+                    </series>
+
+                    <series name="points3" draw="points">
+                      <style>
+                        <foreground color="red" />
+                        <lineThickness>1.5</lineThickness>
+                      </style>
+                    </series>
+                    <series name="label"></series>
+                    <series name="graph">
+                      <style>
+                        <lineThickness>1.5</lineThickness>
+                        <foreground color="red" />
+                      </style>
+                    </series>
+                    <series name="points" draw="points" capacity="1">
+                      <style>
+                        <foreground color="red" />
+                        <lineThickness>1.5</lineThickness>
+                      </style>
+                    </series>
+                  </xyPlot>
+                </stack>
+              </stack>
+            </stack>
+          </stack>
+          <button name="btn" style="stepByStepBtn">
+            <onClick>
+              stepsController:toggleStep(3)
+            </onClick>
+          </button>
+        </stack>
+      </stack>
+    </stack>
+  </sectionNoTitle>
+</document>

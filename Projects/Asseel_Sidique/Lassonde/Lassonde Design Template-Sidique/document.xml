@@ -276,6 +276,7 @@
     </stack>
 	</sectionNoTitle>
 
+  <!-- MC SINGLE PAGE-->
 	<sectionNoTitle name="section5" style="pageLayout">    
 		<p style="sectionHeading">Multiple Choice Single Page</p>
 		<stack name="mcStack" style="mcStackLayout">

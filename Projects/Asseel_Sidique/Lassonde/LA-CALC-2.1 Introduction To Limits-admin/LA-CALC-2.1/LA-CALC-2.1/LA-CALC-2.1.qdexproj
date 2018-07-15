@@ -12,6 +12,7 @@
   <ItemGroup>
     <Content Include="document.xml">
     </Content>
+    <Content Include="resources\coinanim.png" />
     <Content Include="resources\lassonde.png" />
     <Content Include="resources\lassondeLogo.png" />
     <Content Include="resources\title.png" />

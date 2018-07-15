@@ -1,0 +1,1185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G088BC709_A1D9_4F11_8B7D_5AAE4FB785BB">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>NUM-6.1-Initial Values and Rates of Change</title>
+    <creator>Sidique</creator>
+    <coverImage src="resources/cover.png" />
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+  </metadata>
+
+  <include src="resources/curriculumStyles.xml" />
+  <include src="resources/Utilities.xml" />
+  <include src="resources/plotTools.xml" />
+
+  <!--                                      Header & Footer START                                         -->
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="whiteColor">Amanda Koon</p>
+      <p style="whiteColor rightText">NUMERACY</p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/logo1.png" inspect="false" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/logo2.png" inspect="false" />
+    </stack>
+  </footer>
+
+  <!-- Section 1 -->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">6.1 Initial Values and Rates of Change</title>
+    <image src="resources/riserun.png" />
+    <stack style="contentBG">
+      <p>Rates of change describes the change of a value over a certain amount of time. You may have heard of some Rates of Change already such as speed (distance over time) or even
+      wage (dollars per hour). Rates of Change is an important concepts in math that helps us look at the bigger picture. In this module we will take a look at the precise definition of a Rate of Change,
+      defining average rates of change, instantaneous rate of change and go through simulations and examples to help understand the concept.</p>
+    </stack>
+  </section>
+
+  <sectionNoTitle style="pageLayout" name="section2">
+    <p style="sectionHeading">Definition of a Rate of Change</p>
+    <stack style="contentBG">
+      <p>A Rate of Change can be defined as the change of a dependant variable over time. The formula we use to calculate rate of change is known
+      as the rise over run formula: $ \frac{ \triangle y}{ \triangle x} = \frac{y_{2} - y_{1}}{x_{2} - x_{1}}$</p>
+      <p>Rates of change have units in the form $ \frac{Dependant \; Variable}{Time} $</p>
+      <p style="subSectionHeading">
+        Average Rate of Change
+      </p>
+      <p>The average rate of change is the rate of change over a period of time.</p>
+      <p style="subSectionHeading">  
+        Instantaneous Rate of Change
+      </p>
+      <p>The instantaneous rate of change is the rate of change at a particular time.</p>
+      <p>For an example, a driver on the highway looks at their speed and it reads $ 100 \frac{km}{h} $. This is their instantaneous rate of change.
+      When the driver finally reaches his destination, they take note that it took 1 hour to travel 50 kilometres.</p>
+      <p>In this example, when the driver noted their speed, it was the instantaenous rate of change they saw.</p>
+      <p>The average rate of change is $ 50 \frac{km}{hour} $ since it took the driver 1 hour to drive 50km. The average rate of change gives information about
+      the whole trip compared to just a single moment in time. But note that the average rate of change does not state the driver was travelling at $ 120 \frac{km}{hour} $</p>
+    </stack>
+    
+  </sectionNoTitle>
+  
+  <sectionNoTitle style="pageLayout" name="section3">
+    <onDocumentOpened>
+      average = false;
+      firstPoint = true;
+      pp1 = {};
+      pp2 = {};
+      pp1[1] = 0;
+      pp1[2] = 0;
+      pp2[1] = 10;
+      pp2[2] = 10;
+    </onDocumentOpened>
+    <p style="sectionHeading">Rate of Change Simulation</p>
+    <stack style="contentBG">
+      <p>Use the simulation below to visualize the rise over run of a function. You can switch between instantaneous rate of change and average rate of change. The value of the slope is shown above the graph.</p>
+      <p><b>Instantaneous Rate of Change</b></p>
+      <p>Pan accross the plot to see the slope at that current point.</p>
+      <p><b>Average Rate of Change</b></p>
+      <p>Click on the one of the two points and pan accross the plot for each to change their position.</p>
+      <button name="btn1" content="Instantaneous Rate of Change">
+        <onClick>
+          if btn1.Text == "Instantaneous Rate of Change" then
+            btn1.Text = "Average Rate of Change";
+            average = true;
+            btnStack.Style.Visibility = "visible";
+          else
+            btn1.Text = "Instantaneous Rate of Change";
+            average = false;
+            btnStack.Style.Visibility = "collapsed";
+          end
+        </onClick>
+      </button>
+      <stack orientation="horizontal" name="btnStack">
+        <style>
+          <visibility>collapsed</visibility>
+        </style>
+        <button name="btn2" content="First Point">
+          <style>
+            <background color="green" />
+          </style>
+          <onClick>
+            firstPoint = true;
+            btn3.Style.BackgroundColor = color.rgb(50, 133, 184);
+            btn2.Style.BackgroundColor = color.green;
+          </onClick>
+        </button>
+        <button name="btn3" content="Second Point">
+          <onClick>
+            firstPoint = false;
+            btn2.Style.BackgroundColor = color.rgb(50, 133, 184);
+            btn3.Style.BackgroundColor = color.purple;
+          </onClick>
+        </button>
+      </stack>
+            <equation name="label1">Slope: </equation>
+      <xyPlot name="p2" pan="custom" tap="custom" zoom="disabled" manual="true">
+        <onDocumentOpened>
+          plotTools.drawArrow(yaxis, vector({0, -10}), vector({0, 10}), color.black);
+          plotTools.drawArrow(xaxis, vector({-10, 0}), vector({10, 0}), color.black);
+          labelSize = 0.4;
+          distanceApart = 1;
+          distanceAxis = -0.5;
+          begin = 0.95
+          beginY = 0.8
+          char.textX(label, vector({9, 0.2}), 0.4, color.black);
+          char.textY(label, vector({0.2, 9}), 0.4, color.black);
+          char.num1(label, vector({begin, distanceAxis}), labelSize, color.black);
+          char.num2(label, vector({begin+distanceApart*1, distanceAxis}), labelSize, color.black);
+          char.num3(label, vector({begin+distanceApart*2, distanceAxis}), labelSize, color.black);
+          char.num4(label, vector({begin+distanceApart*3, distanceAxis}), labelSize, color.black);
+          char.num5(label, vector({begin+distanceApart*4, distanceAxis}), labelSize, color.black);
+          char.num6(label, vector({begin+distanceApart*5, distanceAxis}), labelSize, color.black);
+          char.num7(label, vector({begin+distanceApart*6, distanceAxis}), labelSize, color.black);
+          char.num8(label, vector({begin+distanceApart*7, distanceAxis}), labelSize, color.black);
+          char.num9(label, vector({begin+distanceApart*8, distanceAxis}), labelSize, color.black);
+
+
+          char.num1(label, vector({distanceAxis, beginY+distanceApart*0}), labelSize, color.black);
+          char.num2(label, vector({distanceAxis, beginY+distanceApart*1}), labelSize, color.black);
+          char.num3(label, vector({distanceAxis, beginY+distanceApart*2}), labelSize, color.black);
+          char.num4(label, vector({distanceAxis, beginY+distanceApart*3}), labelSize, color.black);
+          char.num5(label, vector({distanceAxis, beginY+distanceApart*4}), labelSize, color.black);
+          char.num6(label, vector({distanceAxis, beginY+distanceApart*5}), labelSize, color.black);
+          char.num7(label, vector({distanceAxis, beginY+distanceApart*6}), labelSize, color.black);
+          char.num8(label, vector({distanceAxis, beginY+distanceApart*7}), labelSize, color.black);
+          char.num9(label, vector({distanceAxis, beginY+distanceApart*8}), labelSize, color.black);
+
+
+          distanceApart = -1;
+          distanceAxis = -0.5;
+          begin = -0.95
+          beginY = -1.2
+          minSignOffset = 0.2;
+          symbol.drawMinus(label, vector({begin - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num1(label, vector({begin, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({begin+distanceApart*1 - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num2(label, vector({begin+distanceApart*1, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({begin+distanceApart*2 - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num3(label, vector({begin+distanceApart*2, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({begin+distanceApart*3 - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num4(label, vector({begin+distanceApart*3, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({begin+distanceApart*4 - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num5(label, vector({begin+distanceApart*4, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({begin+distanceApart*5 - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num6(label, vector({begin+distanceApart*5, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({begin+distanceApart*6 - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num7(label, vector({begin+distanceApart*6, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({begin+distanceApart*7 - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num8(label, vector({begin+distanceApart*7, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({begin+distanceApart*8 - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num9(label, vector({begin+distanceApart*8, distanceAxis}), labelSize, color.black);
+
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY}), labelSize, color.black)
+          char.num1(label, vector({distanceAxis, beginY}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY+distanceApart*1}), labelSize, color.black)
+          char.num2(label, vector({distanceAxis, beginY+distanceApart*1}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY+distanceApart*2}), labelSize, color.black)
+          char.num3(label, vector({distanceAxis, beginY+distanceApart*2}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY+distanceApart*3}), labelSize, color.black)
+          char.num4(label, vector({distanceAxis, beginY+distanceApart*3}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY+distanceApart*4}), labelSize, color.black)
+          char.num5(label, vector({distanceAxis, beginY+distanceApart*4}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY+distanceApart*5}), labelSize, color.black)
+          char.num6(label, vector({distanceAxis, beginY+distanceApart*5}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY+distanceApart*6}), labelSize, color.black)
+          char.num7(label, vector({distanceAxis, beginY+distanceApart*6}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY+distanceApart*7}), labelSize, color.black)
+          char.num8(label, vector({distanceAxis, beginY+distanceApart*7}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY+distanceApart*8}), labelSize, color.black)
+          char.num9(label, vector({distanceAxis, beginY+distanceApart*8}), labelSize, color.black);
+
+
+          for i=-10, 10, 0.01 do
+          graph:Add(i, 1/100*i^3);
+          end
+
+          for i=-10, 10, 1 do
+          line:Add(i, -10);
+          line:Add(i, 10);
+          line:Add(-10, i);
+          line:Add(10, i);
+          end
+        </onDocumentOpened>
+        <onPan>
+          scaledX = p2.XAxis.Min + state.Current.X * (p2.XAxis.Max - p2.XAxis.Min);
+          scaledY = p2.YAxis.Min + state.Current.Y * (p2.YAxis.Max - p2.YAxis.Min);
+          x = (round(scaledX, 0.1));
+          y = 1/100*x^3;
+          if (average == false) then
+            points:Add(x, y);
+            slope:Add(x-20, (3/100*x*x)*(-20)+1/100*x^3);
+            slope:Add(x+20, (3/100*x*x)*(20)+1/100*x^3);
+            points2:Clear();
+            points3:Clear();
+            label1.Text = "Slope: " .. tostring(round(3/100*x*x, 0.1));
+          else
+            points:Clear();
+            if (firstPoint) then
+              points2:Add(x, y);
+              pp1[1] = x;
+              pp1[2] = y;
+            else
+              points3:Add(x, y);
+              pp2[1] = x;
+              pp2[2] = y;
+            end
+            --slope:Add(pp1[1], pp1[2]);
+            --slope:Add(pp2[1], pp2[2]);
+            slope:Add(x-100, (pp2[2] - pp1[2])/(pp2[1] - pp1[1])*(x-100) - pp2[1] * ((pp2[2] - pp1[2])/(pp2[1] - pp1[1])) + pp2[2]);
+            slope:Add(x+100, (pp2[2] - pp1[2])/(pp2[1] - pp1[1])*(x+100) - pp2[1] * ((pp2[2] - pp1[2])/(pp2[1] - pp1[1])) + pp2[2]);
+            label1.Text = "Slope: " .. tostring(round((pp2[2] - pp1[2])/(pp2[1] - pp1[1]), 0.1));
+          end
+          
+        </onPan>
+        <axis name="XAxis" dim="x" min="-10" max="10" auto="none" minor="false" />
+        <axis name="YAxis" dim="y" min="-10" max="10" auto="none" minor="false" />
+        <series name="line" draw="lineSegments">
+          <style>
+            <lineThickness>1</lineThickness>
+            <foreground color="lightGray" />
+          </style>
+        </series>
+        <series name="yaxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        <series name="xaxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        
+        <series name="points3" draw="points" capacity="1">
+          <style>
+            <foreground color="purple" />
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        <series name="points2" draw="points" capacity="1">
+          <style>
+            <foreground color="green" />
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        <series name="label"></series>
+        <series name="graph">
+          <style>
+            <lineThickness>1.5</lineThickness>
+            <foreground color="red" />
+          </style>
+        </series>
+        <series name="slope" capacity="2">
+          <style>
+            <lineThickness>1.5</lineThickness>
+            <foreground color="blue" />
+          </style>
+        
+        </series>
+        <series name="points" draw="points" capacity="1">
+          <style>
+            <foreground color="green" />
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+      </xyPlot>
+    </stack>
+  
+    <p style="sectionHeading">Analysis</p>
+    <stack style="contentBG">
+      <p>After playing with the simulation for a while, you may notice a relationship between the average rate of change and the instantaneous relationship.
+      To see how they are related, select "Average Rate of Change" and bring the two points as close to each other as possible. Now select "Instantaneous Rate of Change" and drag the point
+      in the exact same spot where the two points were. Notice how the slopes look identical. This is because if you take the average rate of change of two points that are very close together,
+      you end up with the instantaneous rate of change at that point.</p>
+      <p>Another fact to mention is that when you are using the "Instantaneous Rate of Change" in this simulation, the blue colored line is actually known as the tangent line and while using "Average Rate of Change", the blue colored line represents
+      a secant line. Here are the formal definitions of both: </p>
+      <p style="subSectionHeading">Tangent Line</p>
+      <p>A line that intersects a function exactly at one point. This line represents the instantaneous rate of change.</p>
+      <p style="subSectionHeading">Secant Line</p>
+      <p>A line that joins two points on a function. This line represents the average rate of change of a function.</p>
+    </stack>
+  </sectionNoTitle>
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Rate of Change without a graph</p>
+    <stack style="contentBG">
+      <p>Let's take a function and find the instantaneous rate of change and average rate of change without plotting the function.
+      We can use some useful formulae to help us with this:</p>
+      <p>
+        <b>Instantaneous Rate of Change</b>
+      </p>
+      <p>        $ \displaystyle {\lim_{h\to 0} } \frac{f(a+h)-f(a)}{h} $       </p>
+      <p>
+        <b>Average Rate of Change</b>
+      </p>
+      <p>        $ \frac{f(b) - f(a)}{b - a} $  </p>
+    </stack>
+  
+    <p style="sectionHeading">Instantaneous Rate of Change Example</p>
+    <stack style="contentBG">
+      <p>For the function $ f(x)=x^2 $, what is the instantaneous rate of change at $ x = 3 $ ?</p>
+      <p>Let's use the function with our formula $ \; \displaystyle {\lim_{h\to 0} } \frac{f(a+h)-f(a)}{h}$</p>
+      <p>        $ = \displaystyle {\lim_{h\to 0} }  \frac{f(a+h)-f(a)}{h}  $       </p>
+      <p>        $ = \displaystyle {\lim_{h\to 0} } \frac{(a+h)^2-a^2}{h} $       </p>
+      <p>        $ = \displaystyle {\lim_{h\to 0} } \frac{a^2 + 2ah + h^2 - a^2}{h} $       </p>
+      <p>        $ = \displaystyle {\lim_{h\to 0} } \frac{2ah + h^2}{h} $       </p>
+      <p>       $ = \displaystyle {\lim_{h\to 0} } 2a+h $       </p>
+      <p> Setting $ \displaystyle {\lim_{h\to 0} } $ gives us $ 2a $. Hence the formula to find our instantaneous rate of change is $ 2x $. Plugging in $ x = 3 $: </p>
+      <p> The answer is $ 6 $.</p>
+    </stack>
+    
+    <p style="sectionHeading">Average Rate of Change Example</p>
+    <stack style="contentBG">
+      <p>For the function $ f(x) = x^2 $, what is the average rate of change  between $ f(3) $ and $ f(5) $ ?</p>
+      <p>Let's use the function with our formula $ \frac{f(b) - f(a)}{b - a} $</p>
+      <p> $ = \frac{f(b) - f(a)}{b - a} $</p>
+      <p> $ = \frac{f(5) - f(3)}{5 - 3} $</p>
+      <p> $ = \frac{5^2 - 3^2}{5 - 3} $</p>
+      <p> $ = \frac{25 - 9}{5 - 3} $</p>
+      <p> $ = \frac{14}{2} $</p>
+      <p> Hence the average rate of change between the two points is $ 7 $</p>
+    </stack>
+  </sectionNoTitle>
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Initial Value</p>
+    <stack style="contentBG">
+      <p>
+        <b>Initial Values</b> are important pieces of information that help us determine how a function starts. In other words,
+        we try to see what the value of the function is when we input zero. Take a look at the following functions to see what an initial value looks like.
+      </p>
+      <stack orientation="horizontal">
+      <xyPlot name="p2" pan="custom" tap="custom" zoom="disabled" manual="true">
+        <onDocumentOpened>
+          plotTools.drawArrow(yaxis, vector({0, -10}), vector({0, 10}), color.black);
+          plotTools.drawArrow(xaxis, vector({-10, 0}), vector({10, 0}), color.black);
+          labelSize = 0.4;
+          distanceApart = 1;
+          distanceAxis = -0.5;
+          begin = 0.95
+          beginY = 0.8
+          char.textX(label, vector({9, 0.2}), 0.4, color.black);
+          char.textY(label, vector({0.2, 9}), 0.4, color.black);
+          char.num1(label, vector({begin, distanceAxis}), labelSize, color.black);
+          char.num2(label, vector({begin+distanceApart*1, distanceAxis}), labelSize, color.black);
+          char.num3(label, vector({begin+distanceApart*2, distanceAxis}), labelSize, color.black);
+          char.num4(label, vector({begin+distanceApart*3, distanceAxis}), labelSize, color.black);
+          char.num5(label, vector({begin+distanceApart*4, distanceAxis}), labelSize, color.black);
+          char.num6(label, vector({begin+distanceApart*5, distanceAxis}), labelSize, color.black);
+          char.num7(label, vector({begin+distanceApart*6, distanceAxis}), labelSize, color.black);
+          char.num8(label, vector({begin+distanceApart*7, distanceAxis}), labelSize, color.black);
+          char.num9(label, vector({begin+distanceApart*8, distanceAxis}), labelSize, color.black);
+
+
+          char.num1(label, vector({distanceAxis, beginY+distanceApart*0}), labelSize, color.black);
+          char.num2(label, vector({distanceAxis, beginY+distanceApart*1}), labelSize, color.black);
+          char.num3(label, vector({distanceAxis, beginY+distanceApart*2}), labelSize, color.black);
+          char.num4(label, vector({distanceAxis, beginY+distanceApart*3}), labelSize, color.black);
+          char.num5(label, vector({distanceAxis, beginY+distanceApart*4}), labelSize, color.black);
+          char.num6(label, vector({distanceAxis, beginY+distanceApart*5}), labelSize, color.black);
+          char.num7(label, vector({distanceAxis, beginY+distanceApart*6}), labelSize, color.black);
+          char.num8(label, vector({distanceAxis, beginY+distanceApart*7}), labelSize, color.black);
+          char.num9(label, vector({distanceAxis, beginY+distanceApart*8}), labelSize, color.black);
+
+
+          distanceApart = -1;
+          distanceAxis = -0.5;
+          begin = -0.95
+          beginY = -1.2
+          minSignOffset = 0.2;
+          symbol.drawMinus(label, vector({begin - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num1(label, vector({begin, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({begin+distanceApart*1 - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num2(label, vector({begin+distanceApart*1, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({begin+distanceApart*2 - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num3(label, vector({begin+distanceApart*2, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({begin+distanceApart*3 - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num4(label, vector({begin+distanceApart*3, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({begin+distanceApart*4 - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num5(label, vector({begin+distanceApart*4, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({begin+distanceApart*5 - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num6(label, vector({begin+distanceApart*5, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({begin+distanceApart*6 - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num7(label, vector({begin+distanceApart*6, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({begin+distanceApart*7 - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num8(label, vector({begin+distanceApart*7, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({begin+distanceApart*8 - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num9(label, vector({begin+distanceApart*8, distanceAxis}), labelSize, color.black);
+
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY}), labelSize, color.black)
+          char.num1(label, vector({distanceAxis, beginY}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY+distanceApart*1}), labelSize, color.black)
+          char.num2(label, vector({distanceAxis, beginY+distanceApart*1}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY+distanceApart*2}), labelSize, color.black)
+          char.num3(label, vector({distanceAxis, beginY+distanceApart*2}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY+distanceApart*3}), labelSize, color.black)
+          char.num4(label, vector({distanceAxis, beginY+distanceApart*3}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY+distanceApart*4}), labelSize, color.black)
+          char.num5(label, vector({distanceAxis, beginY+distanceApart*4}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY+distanceApart*5}), labelSize, color.black)
+          char.num6(label, vector({distanceAxis, beginY+distanceApart*5}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY+distanceApart*6}), labelSize, color.black)
+          char.num7(label, vector({distanceAxis, beginY+distanceApart*6}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY+distanceApart*7}), labelSize, color.black)
+          char.num8(label, vector({distanceAxis, beginY+distanceApart*7}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY+distanceApart*8}), labelSize, color.black)
+          char.num9(label, vector({distanceAxis, beginY+distanceApart*8}), labelSize, color.black);
+
+
+          for i=-10, 10, 0.01 do
+            graph:Add(i, 1/100*i^3);
+          end
+          
+          points:Add(0,0);
+
+          for i=-10, 10, 1 do
+            line:Add(i, -10);
+            line:Add(i, 10);
+            line:Add(-10, i);
+            line:Add(10, i);
+          end
+        </onDocumentOpened>
+        <onPan>
+      
+        </onPan>
+        <axis name="XAxis" dim="x" min="-10" max="10" auto="none" minor="false" />
+        <axis name="YAxis" dim="y" min="-10" max="10" auto="none" minor="false" />
+        <series name="line" draw="lineSegments">
+          <style>
+            <lineThickness>1</lineThickness>
+            <foreground color="lightGray" />
+          </style>
+        </series>
+        <series name="yaxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        <series name="xaxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        
+        <series name="points3" draw="points" capacity="1">
+          <style>
+            <foreground color="purple" />
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        <series name="points2" draw="points" capacity="1">
+          <style>
+            <foreground color="green" />
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        <series name="label"></series>
+        <series name="graph">
+          <style>
+            <lineThickness>1.5</lineThickness>
+            <foreground color="red" />
+          </style>
+        </series>
+        <series name="slope" capacity="2">
+          <style>
+            <lineThickness>1.5</lineThickness>
+            <foreground color="blue" />
+          </style>
+        
+        </series>
+        <series name="points" draw="points" capacity="1">
+          <style>
+            <foreground color="green" />
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+      </xyPlot>
+      <xyPlot name="p3" pan="custom" tap="custom" zoom="disabled" manual="true">
+        <onDocumentOpened>
+          plotTools.drawArrow(yaxis, vector({0, -10}), vector({0, 10}), color.black);
+          plotTools.drawArrow(xaxis, vector({-10, 0}), vector({10, 0}), color.black);
+          labelSize = 0.4;
+          distanceApart = 1;
+          distanceAxis = -0.5;
+          begin = 0.95
+          beginY = 0.8
+          char.textX(label, vector({9, 0.2}), 0.4, color.black);
+          char.textY(label, vector({0.2, 9}), 0.4, color.black);
+          char.num1(label, vector({begin, distanceAxis}), labelSize, color.black);
+          char.num2(label, vector({begin+distanceApart*1, distanceAxis}), labelSize, color.black);
+          char.num3(label, vector({begin+distanceApart*2, distanceAxis}), labelSize, color.black);
+          char.num4(label, vector({begin+distanceApart*3, distanceAxis}), labelSize, color.black);
+          char.num5(label, vector({begin+distanceApart*4, distanceAxis}), labelSize, color.black);
+          char.num6(label, vector({begin+distanceApart*5, distanceAxis}), labelSize, color.black);
+          char.num7(label, vector({begin+distanceApart*6, distanceAxis}), labelSize, color.black);
+          char.num8(label, vector({begin+distanceApart*7, distanceAxis}), labelSize, color.black);
+          char.num9(label, vector({begin+distanceApart*8, distanceAxis}), labelSize, color.black);
+
+
+          char.num1(label, vector({distanceAxis, beginY+distanceApart*0}), labelSize, color.black);
+          char.num2(label, vector({distanceAxis, beginY+distanceApart*1}), labelSize, color.black);
+          char.num3(label, vector({distanceAxis, beginY+distanceApart*2}), labelSize, color.black);
+          char.num4(label, vector({distanceAxis, beginY+distanceApart*3}), labelSize, color.black);
+          char.num5(label, vector({distanceAxis, beginY+distanceApart*4}), labelSize, color.black);
+          char.num6(label, vector({distanceAxis, beginY+distanceApart*5}), labelSize, color.black);
+          char.num7(label, vector({distanceAxis, beginY+distanceApart*6}), labelSize, color.black);
+          char.num8(label, vector({distanceAxis, beginY+distanceApart*7}), labelSize, color.black);
+          char.num9(label, vector({distanceAxis, beginY+distanceApart*8}), labelSize, color.black);
+
+
+          distanceApart = -1;
+          distanceAxis = -0.5;
+          begin = -0.95
+          beginY = -1.2
+          minSignOffset = 0.2;
+          symbol.drawMinus(label, vector({begin - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num1(label, vector({begin, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({begin+distanceApart*1 - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num2(label, vector({begin+distanceApart*1, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({begin+distanceApart*2 - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num3(label, vector({begin+distanceApart*2, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({begin+distanceApart*3 - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num4(label, vector({begin+distanceApart*3, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({begin+distanceApart*4 - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num5(label, vector({begin+distanceApart*4, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({begin+distanceApart*5 - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num6(label, vector({begin+distanceApart*5, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({begin+distanceApart*6 - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num7(label, vector({begin+distanceApart*6, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({begin+distanceApart*7 - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num8(label, vector({begin+distanceApart*7, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({begin+distanceApart*8 - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num9(label, vector({begin+distanceApart*8, distanceAxis}), labelSize, color.black);
+
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY}), labelSize, color.black)
+          char.num1(label, vector({distanceAxis, beginY}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY+distanceApart*1}), labelSize, color.black)
+          char.num2(label, vector({distanceAxis, beginY+distanceApart*1}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY+distanceApart*2}), labelSize, color.black)
+          char.num3(label, vector({distanceAxis, beginY+distanceApart*2}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY+distanceApart*3}), labelSize, color.black)
+          char.num4(label, vector({distanceAxis, beginY+distanceApart*3}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY+distanceApart*4}), labelSize, color.black)
+          char.num5(label, vector({distanceAxis, beginY+distanceApart*4}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY+distanceApart*5}), labelSize, color.black)
+          char.num6(label, vector({distanceAxis, beginY+distanceApart*5}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY+distanceApart*6}), labelSize, color.black)
+          char.num7(label, vector({distanceAxis, beginY+distanceApart*6}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY+distanceApart*7}), labelSize, color.black)
+          char.num8(label, vector({distanceAxis, beginY+distanceApart*7}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY+distanceApart*8}), labelSize, color.black)
+          char.num9(label, vector({distanceAxis, beginY+distanceApart*8}), labelSize, color.black);
+
+
+          for i=-10, 10, 0.01 do
+            graph:Add(i, i + 5);
+          end
+          
+          
+          points:Add(0,5);
+
+          for i=-10, 10, 1 do
+            line:Add(i, -10);
+            line:Add(i, 10);
+            line:Add(-10, i);
+            line:Add(10, i);
+          end
+        </onDocumentOpened>
+        <onPan>
+        
+        </onPan>
+        <axis name="XAxis" dim="x" min="-10" max="10" auto="none" minor="false" />
+        <axis name="YAxis" dim="y" min="-10" max="10" auto="none" minor="false" />
+        <series name="line" draw="lineSegments">
+          <style>
+            <lineThickness>1</lineThickness>
+            <foreground color="lightGray" />
+          </style>
+        </series>
+        <series name="yaxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        <series name="xaxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        
+        <series name="points3" draw="points" capacity="1">
+          <style>
+            <foreground color="purple" />
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        <series name="points2" draw="points" capacity="1">
+          <style>
+            <foreground color="green" />
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        <series name="label"></series>
+        <series name="graph">
+          <style>
+            <lineThickness>1.5</lineThickness>
+            <foreground color="red" />
+          </style>
+        </series>
+        <series name="slope" capacity="2">
+          <style>
+            <lineThickness>1.5</lineThickness>
+            <foreground color="blue" />
+          </style>
+        
+        </series>
+        <series name="points" draw="points" capacity="1">
+          <style>
+            <foreground color="green" />
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+      </xyPlot>
+      </stack>
+      <stack orientation="horizontal">
+        <xyPlot name="p4" pan="custom" tap="custom" zoom="disabled" manual="true">
+        <onDocumentOpened>
+          plotTools.drawArrow(yaxis, vector({0, -10}), vector({0, 10}), color.black);
+          plotTools.drawArrow(xaxis, vector({-10, 0}), vector({10, 0}), color.black);
+          labelSize = 0.4;
+          distanceApart = 1;
+          distanceAxis = -0.5;
+          begin = 0.95
+          beginY = 0.8
+          char.textX(label, vector({9, 0.2}), 0.4, color.black);
+          char.textY(label, vector({0.2, 9}), 0.4, color.black);
+          char.num1(label, vector({begin, distanceAxis}), labelSize, color.black);
+          char.num2(label, vector({begin+distanceApart*1, distanceAxis}), labelSize, color.black);
+          char.num3(label, vector({begin+distanceApart*2, distanceAxis}), labelSize, color.black);
+          char.num4(label, vector({begin+distanceApart*3, distanceAxis}), labelSize, color.black);
+          char.num5(label, vector({begin+distanceApart*4, distanceAxis}), labelSize, color.black);
+          char.num6(label, vector({begin+distanceApart*5, distanceAxis}), labelSize, color.black);
+          char.num7(label, vector({begin+distanceApart*6, distanceAxis}), labelSize, color.black);
+          char.num8(label, vector({begin+distanceApart*7, distanceAxis}), labelSize, color.black);
+          char.num9(label, vector({begin+distanceApart*8, distanceAxis}), labelSize, color.black);
+
+
+          char.num1(label, vector({distanceAxis, beginY+distanceApart*0}), labelSize, color.black);
+          char.num2(label, vector({distanceAxis, beginY+distanceApart*1}), labelSize, color.black);
+          char.num3(label, vector({distanceAxis, beginY+distanceApart*2}), labelSize, color.black);
+          char.num4(label, vector({distanceAxis, beginY+distanceApart*3}), labelSize, color.black);
+          char.num5(label, vector({distanceAxis, beginY+distanceApart*4}), labelSize, color.black);
+          char.num6(label, vector({distanceAxis, beginY+distanceApart*5}), labelSize, color.black);
+          char.num7(label, vector({distanceAxis, beginY+distanceApart*6}), labelSize, color.black);
+          char.num8(label, vector({distanceAxis, beginY+distanceApart*7}), labelSize, color.black);
+          char.num9(label, vector({distanceAxis, beginY+distanceApart*8}), labelSize, color.black);
+
+
+          distanceApart = -1;
+          distanceAxis = -0.5;
+          begin = -0.95
+          beginY = -1.2
+          minSignOffset = 0.2;
+          symbol.drawMinus(label, vector({begin - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num1(label, vector({begin, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({begin+distanceApart*1 - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num2(label, vector({begin+distanceApart*1, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({begin+distanceApart*2 - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num3(label, vector({begin+distanceApart*2, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({begin+distanceApart*3 - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num4(label, vector({begin+distanceApart*3, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({begin+distanceApart*4 - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num5(label, vector({begin+distanceApart*4, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({begin+distanceApart*5 - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num6(label, vector({begin+distanceApart*5, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({begin+distanceApart*6 - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num7(label, vector({begin+distanceApart*6, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({begin+distanceApart*7 - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num8(label, vector({begin+distanceApart*7, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({begin+distanceApart*8 - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num9(label, vector({begin+distanceApart*8, distanceAxis}), labelSize, color.black);
+
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY}), labelSize, color.black)
+          char.num1(label, vector({distanceAxis, beginY}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY+distanceApart*1}), labelSize, color.black)
+          char.num2(label, vector({distanceAxis, beginY+distanceApart*1}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY+distanceApart*2}), labelSize, color.black)
+          char.num3(label, vector({distanceAxis, beginY+distanceApart*2}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY+distanceApart*3}), labelSize, color.black)
+          char.num4(label, vector({distanceAxis, beginY+distanceApart*3}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY+distanceApart*4}), labelSize, color.black)
+          char.num5(label, vector({distanceAxis, beginY+distanceApart*4}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY+distanceApart*5}), labelSize, color.black)
+          char.num6(label, vector({distanceAxis, beginY+distanceApart*5}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY+distanceApart*6}), labelSize, color.black)
+          char.num7(label, vector({distanceAxis, beginY+distanceApart*6}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY+distanceApart*7}), labelSize, color.black)
+          char.num8(label, vector({distanceAxis, beginY+distanceApart*7}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY+distanceApart*8}), labelSize, color.black)
+          char.num9(label, vector({distanceAxis, beginY+distanceApart*8}), labelSize, color.black);
+
+
+          for i=-10, 10, 0.01 do
+            graph:Add(i, -i^2-5);
+          end
+          
+          
+          points:Add(0,-5);
+
+          for i=-10, 10, 1 do
+            line:Add(i, -10);
+            line:Add(i, 10);
+            line:Add(-10, i);
+            line:Add(10, i);
+          end
+        </onDocumentOpened>
+        <onPan>
+         
+        </onPan>
+        <axis name="XAxis" dim="x" min="-10" max="10" auto="none" minor="false" />
+        <axis name="YAxis" dim="y" min="-10" max="10" auto="none" minor="false" />
+        <series name="line" draw="lineSegments">
+          <style>
+            <lineThickness>1</lineThickness>
+            <foreground color="lightGray" />
+          </style>
+        </series>
+        <series name="yaxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        <series name="xaxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        
+        <series name="points3" draw="points" capacity="1">
+          <style>
+            <foreground color="purple" />
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        <series name="points2" draw="points" capacity="1">
+          <style>
+            <foreground color="green" />
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        <series name="label"></series>
+        <series name="graph">
+          <style>
+            <lineThickness>1.5</lineThickness>
+            <foreground color="red" />
+          </style>
+        </series>
+        <series name="slope" capacity="2">
+          <style>
+            <lineThickness>1.5</lineThickness>
+            <foreground color="blue" />
+          </style>
+        
+        </series>
+        <series name="points" draw="points" capacity="1">
+          <style>
+            <foreground color="green" />
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+      </xyPlot>
+      <xyPlot name="p5" pan="custom" tap="custom" zoom="disabled" manual="true">
+        <onDocumentOpened>
+          plotTools.drawArrow(yaxis, vector({0, -10}), vector({0, 10}), color.black);
+          plotTools.drawArrow(xaxis, vector({-10, 0}), vector({10, 0}), color.black);
+          labelSize = 0.4;
+          distanceApart = 1;
+          distanceAxis = -0.5;
+          begin = 0.95
+          beginY = 0.8
+          char.textX(label, vector({9, 0.2}), 0.4, color.black);
+          char.textY(label, vector({0.2, 9}), 0.4, color.black);
+          char.num1(label, vector({begin, distanceAxis}), labelSize, color.black);
+          char.num2(label, vector({begin+distanceApart*1, distanceAxis}), labelSize, color.black);
+          char.num3(label, vector({begin+distanceApart*2, distanceAxis}), labelSize, color.black);
+          char.num4(label, vector({begin+distanceApart*3, distanceAxis}), labelSize, color.black);
+          char.num5(label, vector({begin+distanceApart*4, distanceAxis}), labelSize, color.black);
+          char.num6(label, vector({begin+distanceApart*5, distanceAxis}), labelSize, color.black);
+          char.num7(label, vector({begin+distanceApart*6, distanceAxis}), labelSize, color.black);
+          char.num8(label, vector({begin+distanceApart*7, distanceAxis}), labelSize, color.black);
+          char.num9(label, vector({begin+distanceApart*8, distanceAxis}), labelSize, color.black);
+
+
+          char.num1(label, vector({distanceAxis, beginY+distanceApart*0}), labelSize, color.black);
+          char.num2(label, vector({distanceAxis, beginY+distanceApart*1}), labelSize, color.black);
+          char.num3(label, vector({distanceAxis, beginY+distanceApart*2}), labelSize, color.black);
+          char.num4(label, vector({distanceAxis, beginY+distanceApart*3}), labelSize, color.black);
+          char.num5(label, vector({distanceAxis, beginY+distanceApart*4}), labelSize, color.black);
+          char.num6(label, vector({distanceAxis, beginY+distanceApart*5}), labelSize, color.black);
+          char.num7(label, vector({distanceAxis, beginY+distanceApart*6}), labelSize, color.black);
+          char.num8(label, vector({distanceAxis, beginY+distanceApart*7}), labelSize, color.black);
+          char.num9(label, vector({distanceAxis, beginY+distanceApart*8}), labelSize, color.black);
+
+
+          distanceApart = -1;
+          distanceAxis = -0.5;
+          begin = -0.95
+          beginY = -1.2
+          minSignOffset = 0.2;
+          symbol.drawMinus(label, vector({begin - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num1(label, vector({begin, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({begin+distanceApart*1 - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num2(label, vector({begin+distanceApart*1, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({begin+distanceApart*2 - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num3(label, vector({begin+distanceApart*2, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({begin+distanceApart*3 - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num4(label, vector({begin+distanceApart*3, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({begin+distanceApart*4 - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num5(label, vector({begin+distanceApart*4, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({begin+distanceApart*5 - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num6(label, vector({begin+distanceApart*5, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({begin+distanceApart*6 - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num7(label, vector({begin+distanceApart*6, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({begin+distanceApart*7 - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num8(label, vector({begin+distanceApart*7, distanceAxis}), labelSize, color.black);
+          symbol.drawMinus(label, vector({begin+distanceApart*8 - minSignOffset, distanceAxis}), labelSize, color.black)
+          char.num9(label, vector({begin+distanceApart*8, distanceAxis}), labelSize, color.black);
+
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY}), labelSize, color.black)
+          char.num1(label, vector({distanceAxis, beginY}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY+distanceApart*1}), labelSize, color.black)
+          char.num2(label, vector({distanceAxis, beginY+distanceApart*1}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY+distanceApart*2}), labelSize, color.black)
+          char.num3(label, vector({distanceAxis, beginY+distanceApart*2}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY+distanceApart*3}), labelSize, color.black)
+          char.num4(label, vector({distanceAxis, beginY+distanceApart*3}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY+distanceApart*4}), labelSize, color.black)
+          char.num5(label, vector({distanceAxis, beginY+distanceApart*4}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY+distanceApart*5}), labelSize, color.black)
+          char.num6(label, vector({distanceAxis, beginY+distanceApart*5}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY+distanceApart*6}), labelSize, color.black)
+          char.num7(label, vector({distanceAxis, beginY+distanceApart*6}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY+distanceApart*7}), labelSize, color.black)
+          char.num8(label, vector({distanceAxis, beginY+distanceApart*7}), labelSize, color.black);
+          symbol.drawMinus(label, vector({distanceAxis - minSignOffset, beginY+distanceApart*8}), labelSize, color.black)
+          char.num9(label, vector({distanceAxis, beginY+distanceApart*8}), labelSize, color.black);
+
+
+          for i=-10, 10, 0.01 do
+            graph:Add(i, i^3+2);
+          end
+          
+          
+          points:Add(0,2);
+
+          for i=-10, 10, 1 do
+            line:Add(i, -10);
+            line:Add(i, 10);
+            line:Add(-10, i);
+            line:Add(10, i);
+          end
+        </onDocumentOpened>
+        <onPan>
+ 
+        </onPan>
+        <axis name="XAxis" dim="x" min="-10" max="10" auto="none" minor="false" />
+        <axis name="YAxis" dim="y" min="-10" max="10" auto="none" minor="false" />
+        <series name="line" draw="lineSegments">
+          <style>
+            <lineThickness>1</lineThickness>
+            <foreground color="lightGray" />
+          </style>
+        </series>
+        <series name="yaxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        <series name="xaxis">
+          <style>
+            <foreground color="black" />
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        
+        <series name="points3" draw="points" capacity="1">
+          <style>
+            <foreground color="purple" />
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        <series name="points2" draw="points" capacity="1">
+          <style>
+            <foreground color="green" />
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        <series name="label"></series>
+        <series name="graph">
+          <style>
+            <lineThickness>1.5</lineThickness>
+            <foreground color="red" />
+          </style>
+        </series>
+        <series name="slope" capacity="2">
+          <style>
+            <lineThickness>1.5</lineThickness>
+            <foreground color="blue" />
+          </style>
+        
+        </series>
+        <series name="points" draw="points" capacity="1">
+          <style>
+            <foreground color="green" />
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+      </xyPlot>
+      </stack>
+      <p>Notice that all the initial values always intersect the y-axis. Another name for initial values is also called the y-intercept.</p>
+      <p>You can also find <b>initial values</b> by using an equation. Simply plugging in $ x = 0 $ or $ f(0) $ will result in the point that intersects the y-axis.</p>
+
+    </stack>
+  </sectionNoTitle>
+
+  <sectionNoTitle style="pageLayout">
+    <p style="sectionHeading">Practice</p>
+    <stack style="contentBG">
+      <stack name="mcStack" style="mcStackLayout">
+      <script>
+        local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=1})
+      </script>
+			<p style="subSectionHeading">Question 1</p>
+			<table widths="10% 90%" grid="false">
+				<row>
+					<column>
+						<image src="resources/question.png" inspect="false" />
+					</column>
+					<column>
+						<p style="justifiedText">For the function $ f(x) = x^2 + 2x + 16 $, what is the initial value?</p>
+					</column>
+				</row>
+			</table>
+			<table name="choicesTable" grid="false" widths="50% 50%">
+				<row>
+					<column>
+            <equation> $ 16 $</equation>
+					</column>
+					<column>
+						<equation> $ 13 $</equation>
+					</column>
+				</row>
+				<row>
+					<column>
+						<button name="btn" content="A" style="btnUnselected">
+							<onClick>
+                mcController:select(1)
+							</onClick>
+						</button>
+					</column>
+					<column>
+						<button name="btn" content="B" style="btnUnselected">
+							<onClick>
+                mcController:select(2)
+              </onClick>
+						</button>
+					</column>
+				</row>
+				<row>
+					<column>
+						<equation> $ 19 $</equation>
+					</column>
+					<column>
+						<equation> $ 0 $</equation>
+					</column>
+				</row>
+				<row>
+					<column>
+						<button name="btn" content="C" style="btnUnselected">
+							<onClick>
+                mcController:select(3)
+              </onClick>
+						</button>
+					</column>
+					<column>
+						<button name="btn" content="D" style="btnUnselected">
+							<onClick>
+                mcController:select(4)
+              </onClick>
+						</button>
+					</column>
+				</row>
+			</table>
+			<button name="checkBtn" content="Check Answer">
+				<onClick>
+          mcController:checkAnswer()
+        </onClick>
+			</button>
+		</stack>
+    </stack>
+    <stack style="contentBG">
+      <stack name="mcStack" style="mcStackLayout">
+      <script>
+        local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=3})
+      </script>
+			<p style="subSectionHeading">Question 2</p>
+			<table widths="10% 90%" grid="false">
+				<row>
+					<column>
+						<image src="resources/question.png" inspect="false" />
+					</column>
+					<column>
+						<p style="justifiedText">For the function $ f(x) = x^3 + 5 $, what is the instantaneous rate of change at $ x = 5 $?</p>
+					</column>
+				</row>
+			</table>
+			<table name="choicesTable" grid="false" widths="50% 50%">
+				<row>
+					<column>
+            <equation> $ 27 $</equation>
+					</column>
+					<column>
+						<equation> $ 130 $</equation>
+					</column>
+				</row>
+				<row>
+					<column>
+						<button name="btn" content="A" style="btnUnselected">
+							<onClick>
+                mcController:select(1)
+							</onClick>
+						</button>
+					</column>
+					<column>
+						<button name="btn" content="B" style="btnUnselected">
+							<onClick>
+                mcController:select(2)
+              </onClick>
+						</button>
+					</column>
+				</row>
+				<row>
+					<column>
+						<equation> $ 75 $</equation>
+					</column>
+					<column>
+						<equation> $ 125 $</equation>
+					</column>
+				</row>
+				<row>
+					<column>
+						<button name="btn" content="C" style="btnUnselected">
+							<onClick>
+                mcController:select(3)
+              </onClick>
+						</button>
+					</column>
+					<column>
+						<button name="btn" content="D" style="btnUnselected">
+							<onClick>
+                mcController:select(4)
+              </onClick>
+						</button>
+					</column>
+				</row>
+			</table>
+			<button name="checkBtn" content="Check Answer">
+				<onClick>
+          mcController:checkAnswer()
+        </onClick>
+			</button>
+		</stack>
+    </stack>
+    <stack style="contentBG">
+      <stack name="mcStack" style="mcStackLayout">
+      <script>
+        local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=4})
+      </script>
+			<p style="subSectionHeading">Question 3</p>
+			<table widths="10% 90%" grid="false">
+				<row>
+					<column>
+						<image src="resources/question.png" inspect="false" />
+					</column>
+					<column>
+						<p style="justifiedText">For the function $ f(x) = 2x^2 $, what is the average rate of change between $ x = 4 $ and $ x = 0 $?</p>
+					</column>
+				</row>
+			</table>
+			<table name="choicesTable" grid="false" widths="50% 50%">
+				<row>
+					<column>
+            <equation> $ 16 $</equation>
+					</column>
+					<column>
+						<equation> $ 0 $</equation>
+					</column>
+				</row>
+				<row>
+					<column>
+						<button name="btn" content="A" style="btnUnselected">
+							<onClick>
+                mcController:select(1)
+							</onClick>
+						</button>
+					</column>
+					<column>
+						<button name="btn" content="B" style="btnUnselected">
+							<onClick>
+                mcController:select(2)
+              </onClick>
+						</button>
+					</column>
+				</row>
+				<row>
+					<column>
+						<equation> $ 4 $</equation>
+					</column>
+					<column>
+						<equation> $ 8 $</equation>
+					</column>
+				</row>
+				<row>
+					<column>
+						<button name="btn" content="C" style="btnUnselected">
+							<onClick>
+                mcController:select(3)
+              </onClick>
+						</button>
+					</column>
+					<column>
+						<button name="btn" content="D" style="btnUnselected">
+							<onClick>
+                mcController:select(4)
+              </onClick>
+						</button>
+					</column>
+				</row>
+			</table>
+			<button name="checkBtn" content="Check Answer">
+				<onClick>
+          mcController:checkAnswer()
+        </onClick>
+			</button>
+		</stack>
+    </stack>
+  </sectionNoTitle>
+</document>

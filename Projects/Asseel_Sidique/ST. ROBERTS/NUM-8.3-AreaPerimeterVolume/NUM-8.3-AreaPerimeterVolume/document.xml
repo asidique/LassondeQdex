@@ -1,0 +1,776 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G4EC1C33F_2899_4231_9FCD_858BDA373379">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>NUM-8.3-Area, Perimeter and Volume</title>
+    <creator>Sidique</creator>
+    <coverImage src="resources/cover.png" />
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+  </metadata>
+
+  <include src="resources/curriculumStyles.xml" />
+  <include src="resources/Utilities.xml" />
+  <include src="resources/plotTools.xml" />
+
+  <!--                                      Header & Footer START                                         -->
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="whiteColor">Amanda Koon</p>
+      <p style="whiteColor rightText">NUMERACY</p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/logo1.png" inspect="false" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/logo2.png" inspect="false" />
+    </stack>
+  </footer>
+
+  <!-- Section 1 -->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">Area, Perimeter and Volume</title>
+    <image src="resources/shapes.png" />
+    <stack style="contentBG">
+      <p>In Geometry, there are many different shapes in many different dimensions. Some tools that we can use to measure these shapes are perimeter, area and volume. This module 
+      will explore what those three tools represent, how to use them and common formulae for calculating and measuring shapes.</p>
+    </stack>
+  </section>
+
+  <sectionNoTitle name="section2" style="pageLayout">
+    <p style="sectionHeading">Definitions</p>
+    <stack style="contentBG">
+      <p>Here are some useful definitions to understand.</p>
+      <p style="subSectionHeading">Perimeter</p>
+      <p>The perimeter is a continuous line that forms the outside of a shape. Perimeter is measured in a unit of length (such as meters or centimeters). If we take a square which has a length of $ 5cm $: </p>
+      <image src="resources/square2.png">
+        <style>
+          <widthPercentage>25%</widthPercentage>
+        </style>
+      </image>
+      <p>
+        The perimeter of this object would be the sum of the length of black lines on the outside of the square. In this case, we add $ 5cm $ + $ 5cm $ + $ 5cm $ + $ 5cm $ to get a total of
+        $ 20cm $
+      </p>
+      
+      <p style="subSectionHeading">Area</p>
+      <p>If we cut up the square above into pieces of $ 1cm \;\; \times \;\; 1cm $ smaller squares, the area will be how many of those smaller pieces we can fit into the entire square. Area is measured in a unit of distance squared (such as 
+      meters squared, centimeters squared).</p>
+      <image src="resources/square5.png">
+        <style>
+          <widthPercentage>65%</widthPercentage>
+        </style>
+      </image>
+      <p>In this case, the area will be $ 25cm^2 $.</p>
+      <p>Instead of cutting every square to find the area, a formula can be used to do this.</p>
+      <equation>$ Area \;\; of \;\; Square \;\; = \;\; L \times L \;\; = L^2 $</equation>
+    
+      <p style="subSectionHeading">Volume</p>
+      <p>Instead of using a square, let's look at a cube (a 3 dimensional shape). If we cut up the cube into smaller pieces, each of these pieces would be 1cm in width, height and depth. Note that the unit used when
+      dealing with volume is $ cm^3 $ (or any other unit for distance cubed). To calculate the volume of a cube, we must multiply the width (cm) by the height (cm) by the depth (cm).</p>
+      <image src="resources/square6.png">
+        <style>
+          <widthPercentage>65%</widthPercentage>
+        </style>
+      </image>
+      <equation>$ Volume \;\; of \;\; Square \;\; = \;\; W \times H \times D \;\; = W^3 $</equation>
+      <equation>(since all cubes have the same length sides)</equation>
+    </stack>
+    
+  </sectionNoTitle>
+  
+  <sectionNoTitle style="pageLayout" name="section3">
+    <p style="sectionHeading">Perimeter Simulation</p>
+    <stack style="contentBG" name="contentStack">
+      <p style="subSectionHeading">Instructions</p>
+      <p>Drag the sliders to change the width and the height of the rectangle. Notice how the value of perimeter changes when you change each side.</p>
+      <drawing manual="true" name="p1">
+        <onDocumentOpened>
+          plotTools.drawSquare(square, vector({5, 5}), 2, 2, color.black);
+          plotTools.drawSquare(squareFill, vector({5, 5}), 2, 2, color.rgb(255, 222, 57));
+          squareWidth = 2;
+          squareHeight = 2;
+          char.textW(section3.contentStack.p1.WLabel, vector({5 -0.125, 5 - squareHeight/2 - 0.5}), 0.25, color.blue)
+          char.textH(section3.contentStack.p1.HLabel, vector({5 + squareWidth/2 + 0.25, 5}), 0.25, color.red)
+          
+        </onDocumentOpened>
+        <axis dim="x" min="0" max="10" auto="none"></axis>
+        <axis dim="y" min="0" max="10" auto="none"></axis>
+        <series name="squareFill" manual="true" draw="segmentedFill">
+          
+        </series>
+        <series name="square" manual="true">
+          <style>
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        
+        <series name="WLabel" manual="true">
+          <style>
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        <series name="HLabel" manual="true">
+          <style>
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+      </drawing>
+      <equation name="label3">
+        Total Perimeter: 
+      </equation>
+      <equation name="label1">
+        <style>
+          <foreground color="blue" />
+        </style>
+        Width: 2</equation>
+      <slider name="s1" min="2" max="9">
+        <onValueChanged>
+          squareWidth = round(value, 0.2);
+          label1.Text = "Width: " .. tostring(round(value, 0.1));
+          label3.Text = "Total Perimeter = " .. squareWidth*2 + squareHeight*2;
+          section3.contentStack.p1.square:Clear();
+          section3.contentStack.p1.squareFill:Clear();
+          section3.contentStack.p1.HLabel:Clear();
+          plotTools.drawSquare(section3.contentStack.p1.square, vector({5, 5}), squareWidth, squareHeight, color.black);
+          plotTools.drawSquare(section3.contentStack.p1.squareFill, vector({5, 5}), squareWidth, squareHeight, color.rgb(255, 222, 57));
+          char.textH(section3.contentStack.p1.HLabel, vector({5 + squareWidth/2 + 0.25, 5}), 0.25, color.red)
+          section3.contentStack.p1.square:Update();
+          section3.contentStack.p1.squareFill:Update();
+          section3.contentStack.p1.HLabel:Update();
+        </onValueChanged>
+      </slider>
+      <equation name="label2">
+        <style>
+          <foreground color="red" />
+        </style>
+        Height: 2
+      </equation>
+      <slider name="s2" min="2" max="9">
+        <onValueChanged>
+          squareHeight = round(value, 0.2);
+          label3.Text = "Total Perimeter = " .. squareWidth*2 + squareHeight*2;
+          label2.Text = "Height: " .. tostring(round(value, 0.1));
+          section3.contentStack.p1.square:Clear();
+          section3.contentStack.p1.WLabel:Clear();
+          section3.contentStack.p1.squareFill:Clear();
+          plotTools.drawSquare(section3.contentStack.p1.square, vector({5, 5}), squareWidth, squareHeight, color.black);
+          plotTools.drawSquare(section3.contentStack.p1.squareFill, vector({5, 5}), squareWidth, squareHeight, color.rgb(255, 222, 57));
+          char.textW(section3.contentStack.p1.WLabel, vector({5-0.125, 5 - squareHeight/2 - 0.5}), 0.25, color.blue)
+          section3.contentStack.p1.square:Update();
+          section3.contentStack.p1.squareFill:Update();
+          section3.contentStack.p1.WLabel:Update();
+        </onValueChanged>
+      </slider>
+    </stack>
+    <p style="sectionHeading">Analysis</p>
+    <image src="resources/trianglediagram.png">
+      <style>
+        <widthPercentage>0%</widthPercentage>
+      </style>
+    </image>
+    <stack style="contentBG">
+      <p>The value of the perimeter changes according to the formula $ P = 2W + 2H $, where $ P $ is the perimeter, $ W $ is the width and $ H $ is the height. Think about what the perimeter formula for a triangle would be.</p>
+      <button name="btn1" content="Show Perimeter Formula for Triangle">
+        <onClick>
+          if btn1.Text == "Show Perimeter Formula for Triangle" then
+          btn1.Text = "Hide Perimeter Formula for Triangle";
+          show.Style.Visibility = "visible";
+          else
+          btn1.Text = "Show Perimeter Formula for Triangle";
+          show.Style.Visibility = "collapsed";
+          end
+        </onClick>
+      </button>
+      <stack name="show">
+        <style>
+          <visibility>collapsed</visibility>
+        </style>
+        <equation>Perimeter of Triangle</equation>
+        <p>For a triangle with different length sides labelled $ a $, $ b $ and $ c $, the formula for perimeter $ P $ is $ P = a + b + c $</p>
+        <image src="resources/trianglediagram.png" />
+      </stack>
+    </stack>
+  </sectionNoTitle>
+  
+  
+  
+
+  <sectionNoTitle name="section5" style="pageLayout">
+    <p style="sectionHeading">Area Simulation</p>
+        <stack style="contentBG" name="contentStack">
+          <p style="subSectionHeading">Instructions</p>
+          <p>Using the sliders below, change the width and the height of the rectangle below. Note the area of the rectangle as the sides change. The area of the rectangle will be equivalent to the number of smaller squares enclosed in the rectangle.</p>
+          <drawing manual="true" name="p1">
+        <onDocumentOpened>
+          plotTools.drawSquare(square, vector({5, 5}), 2, 2, color.black);
+          plotTools.drawSquare(squareFill, vector({5, 5}), 2, 2, color.rgb(255, 222, 57));
+          squareWidth = 2;
+          squareHeight = 2;
+          squareDepth = 2;
+          char.textW(section5.contentStack.p1.WLabel, vector({5 -0.125, 5 - squareHeight/2 - 0.5}), 0.25, color.blue)
+          char.textH(section5.contentStack.p1.HLabel, vector({5 + squareWidth/2 + 0.25, 5}), 0.25, color.red)
+          function drawGrid()
+            grid:Clear();
+            for i=0, squareWidth/2, 1 do
+              grid:Add(5 + i, 5 - squareHeight/2);
+              grid:Add(5 + i, 5 + squareHeight/2);
+              grid:Add(5 - i, 5 - squareHeight/2);
+              grid:Add(5 - i, 5 + squareHeight/2);
+            end
+          
+            for i=0, squareHeight/2, 1 do
+              grid:Add(5 + squareWidth/2, 5 + i);
+              grid:Add(5 - squareWidth/2, 5 + i);
+              grid:Add(5 + squareWidth/2, 5 - i);
+              grid:Add(5 - squareWidth/2, 5 - i);
+            end
+            grid:Update();
+          end
+          drawGrid();
+        </onDocumentOpened>
+        <axis dim="x" min="0" max="10" auto="none"></axis>
+        <axis dim="y" min="0" max="10" auto="none"></axis>
+        <series name="squareFill" manual="true" draw="segmentedFill">
+              
+        </series>
+        <series name="square" manual="true">
+          <style>
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        <series name="WLabel" manual="true">
+          <style>
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        <series name="HLabel" manual="true">
+          <style>
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        <series name="grid" manual="true" draw="lineSegments">
+          <style>
+            <foreground color="black" />
+          </style>
+        </series>
+      </drawing>
+      <equation name="label3">
+        Total Area: 
+      </equation>
+      <equation name="label1">
+        <style>
+          <foreground color="blue" />
+        </style>
+        Width: 2</equation>
+      <slider name="s1" min="2" max="9">
+        <onValueChanged>
+          squareWidth = round(value, 0.2);
+          label1.Text = "Width: " .. tostring(round(value, 0.1));
+          label3.Text = "Total Area = " .. squareWidth * squareHeight;
+          section5.contentStack.p1.square:Clear();
+          section5.contentStack.p1.HLabel:Clear();
+          section5.contentStack.p1.squareFill:Clear();
+          plotTools.drawSquare(section5.contentStack.p1.square, vector({5, 5}), squareWidth, squareHeight, color.black);
+          plotTools.drawSquare(section5.contentStack.p1.squareFill, vector({5, 5}), squareWidth, squareHeight, color.rgb(255, 222, 57));
+          char.textH(section5.contentStack.p1.HLabel, vector({5 + squareWidth/2 + 0.25, 5}), 0.25, color.red)
+          section5.contentStack.p1.square:Update();
+          section5.contentStack.p1.HLabel:Update();
+          section5.contentStack.p1.squareFill:Update();
+          drawGrid();
+        </onValueChanged>
+      </slider>
+      <equation name="label2">
+        <style>
+          <foreground color="red" />
+        </style>
+        Height: 2
+      </equation>
+      <slider name="s2" min="2" max="9">
+        <onValueChanged>
+          squareHeight = round(value, 0.2);
+          label3.Text = "Total Area = " .. squareWidth*squareHeight;
+          label2.Text = "Height: " .. tostring(round(value, 0.1));
+          section5.contentStack.p1.square:Clear();
+          section5.contentStack.p1.WLabel:Clear();
+          section5.contentStack.p1.squareFill:Clear();
+          plotTools.drawSquare(section5.contentStack.p1.square, vector({5, 5}), squareWidth, squareHeight, color.black);
+          char.textW(section5.contentStack.p1.WLabel, vector({5 -0.125, 5 - squareHeight/2 - 0.5}), 0.25, color.blue)
+          plotTools.drawSquare(section5.contentStack.p1.squareFill, vector({5, 5}), squareWidth, squareHeight, color.rgb(255, 222, 57));
+          section5.contentStack.p1.square:Update();
+          section5.contentStack.p1.WLabel:Update();
+          section5.contentStack.p1.squareFill:Update();
+          drawGrid();
+        </onValueChanged>
+      </slider>
+    </stack>
+  
+    <p style="sectionHeading">Analysis</p>
+    <stack style="contentBG">
+      <p>As the width and the height of the rectangle changes, more and more squares are visible. If we count how many of these squares we have, we will get the total area. The formula for area for rectangles and squares is $ A = W \times H $ where $ A $ is the area,
+       $ W $ is the width and $ H $ is the height.  </p>
+    </stack>
+  </sectionNoTitle>
+
+  <sectionNoTitle name="section4" style="pageLayout">
+    <p style="sectionHeading">Volume Simulation</p>
+    <stack style="contentBG" name="contentStack">
+      <p style="subSectionHeading">Instructions</p>
+      <p>For the simulation below, drag the sliders to change the cube's width, length and depth. Notice how moving these sliders changes the inside of the cube. The total number of smaller cubes that you see inside of the cube is the total volume.</p>
+      <drawing manual="true" name="p1">
+        <onDocumentOpened>
+          plotTools.drawSquare(square, vector({5, 5}), 2, 2, color.black);
+          plotTools.drawSquare(squareFill, vector({5, 5}), 2, 2, color.rgb(255, 222, 57));
+          
+          function drawFill1()
+            squareFill1:Clear();
+            squareFill1:Add(5+squareWidth/2, 5-squareHeight/2, color.rgb(221, 192, 59));
+            squareFill1:Add(5+squareWidth/2+squareDepth*math.cos(angle), 5-squareHeight/2+squareDepth*math.sin(angle), color.rgb(221, 192, 59));
+            squareFill1:Add(5+squareWidth/2, 5+squareHeight/2, color.rgb(221, 192, 59));
+            squareFill1:Add(5+squareWidth/2, 5+squareHeight/2, color.rgb(221, 192, 59));
+            squareFill1:Add(5+squareWidth/2+squareDepth*math.cos(angle), 5+squareHeight/2+squareDepth*math.sin(angle), color.rgb(221, 192, 59));
+            squareFill1:Add(5+squareWidth/2+squareDepth*math.cos(angle), 5-squareHeight/2+squareDepth*math.sin(angle), color.rgb(221, 192, 59));
+            squareFill1:Update();
+          end
+          
+          function drawFill2()
+            squareFill2:Clear();
+            squareFill2:Add(5-squareWidth/2, 5+squareHeight/2, color.rgb(221, 192, 59));
+            squareFill2:Add(5+squareWidth/2, 5+squareHeight/2, color.rgb(221, 192, 59));
+            squareFill2:Add(5+squareWidth/2+squareDepth*math.cos(angle), 5+squareHeight/2+squareDepth*math.sin(angle), color.rgb(221, 192, 59));
+            squareFill2:Add(5+squareWidth/2+squareDepth*math.cos(angle), 5+squareHeight/2+squareDepth*math.sin(angle), color.rgb(221, 192, 59));
+            squareFill2:Add(5-squareWidth/2+squareDepth*math.cos(angle), 5+squareHeight/2+squareDepth*math.sin(angle), color.rgb(221, 192, 59));
+            squareFill2:Add(5-squareWidth/2, 5+squareHeight/2, color.rgb(221, 192, 59));
+            squareFill2:Update();
+          end
+
+
+          squareWidth = 2;
+          squareHeight = 2;
+          squareDepth = 2;
+          angle=0.25;
+
+          function draw3D()
+            square1:Clear();
+            square1:Add(5+squareWidth/2, 5-squareHeight/2);
+            square1:Add(5+squareWidth/2+squareDepth*math.cos(angle), 5-squareHeight/2+squareDepth*math.sin(angle));
+            
+            square1:Add(5+squareWidth/2, 5+squareHeight/2);
+            square1:Add(5+squareWidth/2+squareDepth*math.cos(angle), 5+squareHeight/2+squareDepth*math.sin(angle));
+            
+            square1:Add(5+squareWidth/2+squareDepth*math.cos(angle), 5+squareHeight/2+squareDepth*math.sin(angle));
+            square1:Add(5+squareWidth/2+squareDepth*math.cos(angle), 5-squareHeight/2+squareDepth*math.sin(angle));
+            
+            square1:Add(5-squareWidth/2, 5+squareHeight/2);
+            square1:Add(5-squareWidth/2+squareDepth*math.cos(angle), 5+squareHeight/2+squareDepth*math.sin(angle));
+            
+            square1:Add(5-squareWidth/2+squareDepth*math.cos(angle), 5+squareHeight/2+squareDepth*math.sin(angle));
+            square1:Add(5+squareWidth/2+squareDepth*math.cos(angle), 5+squareHeight/2+squareDepth*math.sin(angle));
+
+            square1:Update();
+          end
+
+          char.textW(section4.contentStack.p1.WLabel, vector({5 -0.125, 5 - squareHeight/2 - 0.5}), 0.25, color.blue)
+          char.textH(section4.contentStack.p1.HLabel, vector({5 - squareWidth/2 - 0.25, 5}), 0.25, color.red)
+          char.textD(section4.contentStack.p1.DLabel, vector({5+squareWidth/2+squareDepth/2, 5-squareHeight/2+(squareDepth/2)*math.sin(angle)-0.6}), 0.25, color.purple)
+          function drawGrid2()
+          grid:Clear();
+          for i=0, squareWidth/2, 1 do
+            grid:Add(5 + i, 5 - squareHeight/2);
+            grid:Add(5 + i, 5 + squareHeight/2);
+            grid:Add(5 - i, 5 - squareHeight/2);
+            grid:Add(5 - i, 5 + squareHeight/2);
+          end
+
+          for i=0, squareHeight/2, 1 do
+            grid:Add(5 + squareWidth/2, 5 + i);
+            grid:Add(5 - squareWidth/2, 5 + i);
+            grid:Add(5 + squareWidth/2, 5 - i);
+            grid:Add(5 - squareWidth/2, 5 - i);
+          end
+          
+          for i=0, squareHeight/2, 1 do
+            grid:Add(5 + squareWidth/2, 5 + i);
+            grid:Add(5+squareWidth/2+squareDepth*math.cos(angle), 5 + math.sin(angle)*squareDepth + i);
+            
+            grid:Add(5 + squareWidth/2, 5 - i);
+            grid:Add(5+squareWidth/2+squareDepth*math.cos(angle), 5 + math.sin(angle)*squareDepth - i);
+          end
+          
+          for i=0, squareDepth-1.1, 1 do
+            grid:Add(5+squareWidth/2+1+i, 5 - squareHeight/2 + 0.25 + math.sin(angle)*i);
+            grid:Add(5+squareWidth/2+1+i, 5 + squareHeight/2 + 0.25 + math.sin(angle)*i);
+          end
+          
+          for i=0, squareWidth/2, 1 do
+            grid:Add(5 + i, 5 + squareHeight/2);
+            grid:Add(5 + i +squareDepth*math.cos(angle), 5 + squareHeight/2 + math.sin(angle)*squareDepth);
+            grid:Add(5 - i, 5 + squareHeight/2);
+            grid:Add(5 - i +squareDepth*math.cos(angle), 5 + squareHeight/2 + math.sin(angle)*squareDepth);
+          end
+          
+          for i=0, squareDepth-1.1, 1 do
+            grid:Add(5+squareWidth/2+1+i, 5 + squareHeight/2 + 0.25 + math.sin(angle)*i);
+            grid:Add(5-squareWidth/2+i+1, 5 + squareHeight/2 + 0.25 + math.sin(angle)*i);
+          end
+          
+          
+          grid:Update();
+          end
+          drawGrid2();
+          draw3D();
+          drawFill1();
+          drawFill2();
+        </onDocumentOpened>
+        <axis dim="x" min="1" max="11" auto="none"></axis>
+        <axis dim="y" min="1" max="9" auto="none"></axis>
+        <series name="squareFill2" manual="true" draw="segmentedFill">
+          
+        </series>
+        <series name="squareFill" manual="true" draw="segmentedFill">
+          
+        </series>
+        <series name="squareFill1" manual="true" draw="segmentedFill">
+          
+        </series>
+        <series name="square" manual="true">
+          <style>
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        <series name="square1" manual="true" draw="lineSegments">
+          <style>
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        <series name="square2" manual="true" draw="lineSegments">
+          <style>
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        <series name="WLabel" manual="true">
+          <style>
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        <series name="HLabel" manual="true">
+          <style>
+            <lineThickness>1.5</lineThickness>
+          </style>
+        </series>
+        <series name="DLabel" manual="true">
+          <style>
+            <lineThickness>1.5</lineThickness>
+            
+          </style>
+        </series>
+        <series name="grid" manual="true" draw="lineSegments">
+          <style>
+            <foreground color="black" />
+          </style>
+        </series>
+      </drawing>
+      <equation name="label3">
+        Total Volume:
+      </equation>
+      <equation name="label1">
+        <style>
+          <foreground color="blue" />
+        </style>
+        
+        Width: 2
+      </equation>
+      <slider name="s1" min="2" max="7">
+        <onValueChanged>
+          squareWidth = round(value, 0.2);
+          label1.Text = "Width: " .. tostring(round(value, 0.1));
+          label3.Text = "Total Volume " .. squareWidth*squareHeight*squareDepth;
+
+          section4.contentStack.p1.square:Clear();
+          section4.contentStack.p1.squareFill:Clear();
+          section4.contentStack.p1.HLabel:Clear();
+          section4.contentStack.p1.DLabel:Clear();
+          plotTools.drawSquare(section4.contentStack.p1.square, vector({5, 5}), squareWidth, squareHeight, color.black);
+          plotTools.drawSquare(section4.contentStack.p1.squareFill, vector({5, 5}), squareWidth, squareHeight, color.rgb(255, 222, 57));
+          char.textH(section4.contentStack.p1.HLabel, vector({5 - squareWidth/2 - 0.25, 5}), 0.25, color.red)
+          char.textD(section4.contentStack.p1.DLabel, vector({5+squareWidth/2+squareDepth/2, 5-squareHeight/2+(squareDepth/2)*math.sin(angle)-0.6}), 0.25, color.purple)
+          section4.contentStack.p1.square:Update();
+          section4.contentStack.p1.HLabel:Update();
+          section4.contentStack.p1.DLabel:Update();
+          section4.contentStack.p1.squareFill:Update();
+          drawGrid2();
+          draw3D();
+          drawFill1();
+          drawFill2();
+        </onValueChanged>
+      </slider>
+      <equation name="label2">
+        <style>
+          <foreground color="red" />
+        </style>
+        Height: 2
+      </equation>
+      <slider name="s2" min="2" max="6">
+        <onValueChanged>
+          squareHeight = round(value, 0.2);
+          label3.Text = "Total Volume = " .. squareWidth*squareHeight*squareDepth;
+          label2.Text = "Height: " .. tostring(round(value, 0.1));
+          section4.contentStack.p1.square:Clear();
+          section4.contentStack.p1.WLabel:Clear();
+          section4.contentStack.p1.squareFill:Clear();
+          section4.contentStack.p1.DLabel:Clear();
+          plotTools.drawSquare(section4.contentStack.p1.square, vector({5, 5}), squareWidth, squareHeight, color.black);
+          plotTools.drawSquare(section4.contentStack.p1.squareFill, vector({5, 5}), squareWidth, squareHeight, color.rgb(255, 222, 57));
+          char.textW(section4.contentStack.p1.WLabel, vector({5 -0.125, 5 - squareHeight/2 - 0.5}), 0.25, color.blue);
+          char.textD(section4.contentStack.p1.DLabel, vector({5+squareWidth/2+squareDepth/2, 5-squareHeight/2+(squareDepth/2)*math.sin(angle)-0.6}), 0.25, color.purple)
+          section4.contentStack.p1.DLabel:Update();
+          section4.contentStack.p1.square:Update();
+          section4.contentStack.p1.WLabel:Update();
+          section4.contentStack.p1.squareFill:Update();
+          drawGrid2();
+          draw3D();
+          drawFill1();
+          drawFill2();
+        </onValueChanged>
+      </slider>
+      <equation name="label4">
+        <style>
+          <foreground color="green" />
+        </style>
+        Depth: 2.0
+      </equation>
+      <slider name="s3" min="0" max="5">
+        <onValueChanged>
+          squareDepth = round(value, 0.2);
+          label3.Text = "Total Volume = " .. squareWidth*squareHeight*squareDepth;
+          label4.Text = "Depth: " .. tostring(round(value, 0.1));
+          section4.contentStack.p1.square:Clear();
+          section4.contentStack.p1.DLabel:Clear();
+          plotTools.drawSquare(section4.contentStack.p1.square, vector({5, 5}), squareWidth, squareHeight, color.black);
+          char.textD(section4.contentStack.p1.DLabel, vector({5+squareWidth/2+squareDepth/2, 5-squareHeight/2+(squareDepth/2)*math.sin(angle)-0.6}), 0.25, color.purple)
+          section4.contentStack.p1.square:Update();
+          section4.contentStack.p1.DLabel:Update();
+          drawFill1();
+          drawGrid2();
+          draw3D();
+          drawFill2();
+        </onValueChanged>
+      </slider>
+    </stack>
+
+    <p style="sectionHeading">Analysis</p>
+    <stack style="contentBG">
+      <p>We can see that volume represents the total space inside of a shape. In this case, the cube is filled with smaller cubes. When we change the lengths of the cube so that they are not all the same, it becomes a rectangular prism. But what happens if we set the depth of this square to 0? Well, it will start to look exactly like a square! Also, note how the volume changes when you change the lengths of the sides. The formula
+       for finding the volume of a cube is $ V = W^3 $ and the formula for finding the volume of a rectangular prism is $ V = W \times H \times D $ where $ V $ is volume, $ W $ is width, $ H $ is height and $ D $ is depth.</p>
+    </stack>
+  </sectionNoTitle>
+  
+  <sectionNoTitle name="section6" style="pageLayout">
+    <p style="sectionHeading">Common Geometric Formulas</p>
+    <stack style="contentBG">
+      <p>Below are some common formulas that are useful to memorize for 2D and 3D shapes.</p>
+    </stack>
+    <p style="sectionHeading">Perimeter Formulas</p>
+    <stack style="contentBG">
+      <table>
+        <row>
+          <column>
+            <p>Shape</p>
+          </column>
+          <column>
+            <p>Formula</p>
+          </column>
+          <column>
+            <p>Variables</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>Square</p>
+          </column>
+          <column>
+            <equation>$ P = 4s $</equation>
+          </column>
+          <column>
+            <p>$ s $ is the length of the side of the square</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>Rectangle</p>
+          </column>
+          <column>
+            <equation>$ P = 2L + 2W $</equation>
+          </column>
+          <column>
+            <p>$ L $ and $ W $ are the lengths of the rectangle's sides.</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>Triangle</p>
+          </column>
+          <column>
+            <equation>$ P = a + b + c $</equation>
+          </column>
+          <column>
+            <p>$ a $, $ b $, $ c $ are the side lengths.</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>Circle</p>
+          </column>
+          <column>
+            <equation>$ P = C = 2 \pi r = \pi d $</equation>
+          </column>
+          <column>
+            <p>$ r $ is the radius and $ d $ is the diameter. $ C $ is the circumference.</p>
+          </column>
+        </row>
+      </table>
+    </stack>
+    <p style="sectionHeading">Area Formulas</p>
+    <stack style="contentBG">
+      <table>
+        <row>
+          <column>
+            <p>Shape</p>
+          </column>
+          <column>
+            <p>Formula</p>
+          </column>
+          <column>
+            <p>Variables</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>Square</p>
+          </column>
+          <column>
+            <equation>$ A = s^2 $</equation>
+          </column>
+          <column>
+            <p>$ s $ is the length of the side of the square</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>Rectangle</p>
+          </column>
+          <column>
+            <equation>$ A = LW $</equation>
+          </column>
+          <column>
+            <p>$ L $ and $ W $ are the lengths of the rectangle's sides.</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>Triangle</p>
+          </column>
+          <column>
+            <equation>$ A = \frac{1}{2}bh $</equation>
+          </column>
+          <column>
+            <p>$ b $ is the base and $ h $ is the height.</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>Circle</p>
+          </column>
+          <column>
+            <equation>$ A = \pi r^2 $</equation>
+          </column>
+          <column>
+            <p>$ r $ is the radius.</p>
+          </column>
+        </row>
+      </table>
+    </stack>
+    <p style="sectionHeading">Volume Formulas</p>
+    <stack style="contentBG">
+      <table>
+        <row>
+          <column>
+            <p>Shape</p>
+          </column>
+          <column>
+            <p>Formula</p>
+          </column>
+          <column>
+            <p>Variables</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>Cube</p>
+          </column>
+          <column>
+            <equation>$ V = s^3 $</equation>
+          </column>
+          <column>
+            <p>$ s $ is the length of the side of the square</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>Rectangular Prism</p>
+          </column>
+          <column>
+            <equation>$ V = LWH $</equation>
+          </column>
+          <column>
+            <p>$ L $ and $ W $ are the lengths of the sides and $ H $ is the height.</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>Prism or Cylinder</p>
+          </column>
+          <column>
+            <equation>$ V = Ah $</equation>
+          </column>
+          <column>
+            <p>$ A $ is the area of the base and $ h $ is the height.</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>Pyramid or Cone</p>
+          </column>
+          <column>
+            <equation>$ V = \frac{1}{3}Ah $</equation>
+          </column>
+          <column>
+            <p>$ A $ is the area of the base and $ h $ is the height.</p>
+          </column>
+        </row>
+        <row>
+          <column>
+            <p>Sphere</p>
+          </column>
+          <column>
+            <equation>$ V = \frac{4}{3} \pi r^3 $</equation>
+          </column>
+          <column>
+            <p>$ r $ is the radius.</p>
+          </column>
+        </row>
+      </table>
+    </stack>
+  </sectionNoTitle>
+
+  
+
+</document>

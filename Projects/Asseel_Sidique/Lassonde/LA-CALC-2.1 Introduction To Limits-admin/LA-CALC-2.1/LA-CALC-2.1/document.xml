@@ -24,7 +24,7 @@
       <p style="fontColor"></p>
       <p style="fontColor rightText"></p>
     </stack>
-  </header>
+  </header> 
   <footer style="backgroundColor">
     <stack orientation="horizontal">
       <image style="tiny" src="resources/lassonde.png" inspect="false" />
@@ -309,11 +309,68 @@
         local myFunc = 0;
         ]]>
       </script>
+      
+      <drawing name="p1">
+        <style>
+          <aspectRatio>1</aspectRatio>
+          <widthPercentage>50%</widthPercentage>
+          <borderThickness>0</borderThickness>
+          <background color="225 225 225" />
+        </style>
+        <onDocumentOpened>
+          function drawCoin(pos, w) 
+            coin:Add(pos[1]-w/2, pos[2]-w/2);
+            coin:Add(pos[1]+w/2, pos[2]-w/2);
+            coin:Add(pos[1]+w/2, pos[2]+w/2);
+            coin:Add(pos[1]-w/2, pos[2]+w/2);
+          end
+          coinPos = vector({5, 5});
+          coinWidth = 5;
+          drawCoin(coinPos, coinWidth);
+        </onDocumentOpened>
+        <axis dim="x" min="0" max="10" auto="none" />
+        <axis dim="y" min="0" max="10" auto="none" />
+        <series name="bg" draw="triangles">
+          <style>
+            <foreground color="225 225 225" />
+            <background color="225 225 225" />
+          </style>
+          <data>0 0; 20 0; 20 20; 20 20; 0 20; 0 0;</data>
+        </series>
+        <texture name="coinTex">
+          <image src="resources/coinanim.png" />
+        </texture>
+        <series name="coin" draw="radialFill" manual="true">
+          <style>
+            <foreground color="white" />
+            <background color="white" />
+          </style>
+          <textureCoords ref="coinTex">
+            0 0; 0.14285 0; 0.14285 1; 0 1;
+          </textureCoords>
+        </series>
+        
+      </drawing>
+      
+      <simulation name="s1" duration="0.25">
+        <onUpdate>
+          -- Cycle through all 10 images every 0.75 seconds, then return to the beginning (the % operator ensures that after 10 frames, we return to frame 1)
+         local xd = (1/7) * math.floor((7/0.25) * (time % 0.25))
+     
+         local walkingCoords = matrixf({ {xd, 0}, {xd + (1/7), 0}, {xd + (1/7), 1}, {xd, 1} });  
+     
+         p1.coin.TextureCoordinates.Points:Clear();
+         p1.coin.TextureCoordinates.Points:Add(walkingCoords);
+
+         p1.coin:Update();
+        </onUpdate>
+      </simulation>
 
       <button content="Toss the coin">
 
         <onClick>
           <![CDATA[  
+          s1:Start();
           i = i+1;
           myFunc = math.pow(0.5, i)
           coin:Child(1).FormattedText = string.format("You tossed a coin <b> %d  </b> times. ", i)

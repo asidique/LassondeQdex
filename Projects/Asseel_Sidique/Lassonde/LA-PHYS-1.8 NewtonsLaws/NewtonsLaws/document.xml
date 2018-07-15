@@ -98,80 +98,80 @@
     <stack style="contentBG">
       
     <drawing name="aPlot">
+      <onDocumentOpened>
+        puckWidth=1;
+        puckHeight=1;
+        puckPos = vector({1, 1.5});
+        puckSpeed = 5;
+        puckFriction = 0;
+        function drawObject(ser, width, height, pos)
+          ser:Clear();
+          ser:Add(pos[1] - width/2, pos[2] - height/2);
+          ser:Add(pos[1] - width/2, pos[2] + height/2);
+          ser:Add(pos[1] + width/2, pos[2] + height/2);
+          ser:Add(pos[1] + width/2, pos[2] - height/2);
+          ser:Update();
+        end
+        drawObject(puck, puckWidth, puckHeight, puckPos);
+      </onDocumentOpened>
       <style>
         <widthPercentage>0.88</widthPercentage>
       </style>
-      <axis dim="x" auto="fixed" min="-1" max="5" />
-      <axis dim="y" auto="fixed" min="-2.2" max="2.2" />
-      <series name="arcSeries" manual="true">
+      <axis dim="x" auto="fixed" min="0" max="10" />
+      <axis dim="y" auto="fixed" min="0" max="10" />
+      <texture name="iceTexture">
+        <image src="resources/ice.png" />
+      </texture>
+      <texture name="iceRoughTexture">
+        <image src="resources/ice2.png" />
+      </texture>
+      <texture name="puckTexture">
+        <image src="resources/puck2.png" />
+      </texture>
+
+      <series name="bg" manual="true" draw="radialFill">
         <style>
-          <foreground color="black" />
+        <foreground color="white" />
+        <background color="white" />
         </style>
+        <textureCoords ref="iceTexture">1 1; 1 0; 0 0;  0 1;</textureCoords>
+        <data>0 0; 0 10; 10 10; 10 0;</data>
       </series>
-      <series name="firstBall" manual="true" draw="radialFill" capacity="360">
+      <series name="bg2" manual="true" draw="radialFill">
         <style>
-          <foreground color="red" />
+        <foreground color="255 255 255 0" />
+        <background color="255 255 255 0" />
         </style>
+        <textureCoords ref="iceRoughTexture">1 1; 1 0; 0 0;  0 1;</textureCoords>
+        <data>0 0; 0 10; 10 10; 10 0;</data>
+      </series>
+      <series name="puck" manual="true" draw="radialFill">
+        <style>
+          <foreground color="white" />
+          <background color="white" />
+        </style>
+        <textureCoords ref="puckTexture">1 1; 1 0; 0 0;  0 1;</textureCoords>
       </series>
 
     </drawing>
 
-    <script>
-      <![CDATA[
-        
-        rateFriction.zeroFriction.Style.ForegroundColor = color.rgb(194, 194, 194);
-        rateFriction.lowFriction.Style.ForegroundColor = color.rgb(194, 194, 194);
-        rateFriction.highFriction.Style.ForegroundColor = color.rgb(194, 194, 194);
-      
-    
-      
-    local plotArc = aPlot.arcSeries;
-    local plotBALL = aPlot.ball;
-    local curTime = 0;
-    local startSpeed = 10;
-    local friction = 0;
-    
-    for x = -10, 10, 0.05 do
-      y = 0
-      plotArc:Add(x,y)
-      end
-      plotArc:Update()
-      
-    local function drawArc()
-    
-    y = 0.1
-    a = -curTime+5
-   
-    x = curTime - (friction/4)*(curTime)*(curTime/4)
-    
-    
-    
-    
-    
-    if curTime > 0.1 then
-      
-    plotTools.drawCircle(aPlot.firstBall, vector({x,y}), 0.1)  
-    
-    aPlot.firstBall:Update()
-    
-    if (curTime - (friction/4)*(curTime)*(curTime/4)) <= ((friction/4)*(curTime)*(curTime/4)) then 
-    sliderA.Style.Visibility = "visible";
-    arcSim:Stop()
-    end
-    
-    
-    end
-    
-    
-    if curTime >= 7 then
-    sliderA.Style.Visibility = "visible";
-    arcSim:Stop()
-    end
-    
-    
-    end
-    ]]>
-    </script>
+    <simulation name="sim1" duration="4">
+      <onUpdate>
+        puckFriction = sliderA.Value/255 * 2;
+        if(puckPos[1] &lt; 1 + puckSpeed*time - puckFriction*time*time) then
+          puckPos[1] = 1 + puckSpeed*time - puckFriction*time*time;
+        end
+        drawObject(aPlot.puck, puckWidth, puckHeight, puckPos);
+      </onUpdate>
+      <onDuration>
+        puckWidth=1;
+        puckHeight=1;
+        puckPos = vector({1, 1.5});
+        puckSpeed = 5;
+        puckFriction = 0;
+        drawObject(aPlot.puck, puckWidth, puckHeight, puckPos);
+      </onDuration>
+    </simulation>
 
     <stack name="rateFriction" orientation="horizontal">
       <p name="zeroFriction" style="centerText">Zero</p>
@@ -179,31 +179,14 @@
       <p name="highFriction" style="centerText">High</p>
     </stack>
 
-    <slider name="sliderA" min="0" max="3" value="1">
+    <slider name="sliderA" min="0" max="255" value="1">
       <style>
         <widthPercentage>0.88</widthPercentage>
         <horizontalAlignment>center</horizontalAlignment>
       </style>
       <onValueChanged>
-        friction = value
-
-        if value == 0 then
-        rateFriction.zeroFriction.Style.ForegroundColor = color.red;
-        rateFriction.lowFriction.Style.ForegroundColor = color.rgb(194, 194, 194);
-        rateFriction.highFriction.Style.ForegroundColor = color.rgb(194, 194, 194);
-        end
-
-        if value &gt;= 0.2 then
-        rateFriction.zeroFriction.Style.ForegroundColor = color.rgb(194, 194, 194);
-        rateFriction.lowFriction.Style.ForegroundColor = color.red;
-        rateFriction.highFriction.Style.ForegroundColor = color.rgb(194, 194, 194);
-        end
-
-        if value &gt;= 2 then
-        rateFriction.zeroFriction.Style.ForegroundColor = color.rgb(194, 194, 194);
-        rateFriction.lowFriction.Style.ForegroundColor = color.rgb(194, 194, 194);
-        rateFriction.highFriction.Style.ForegroundColor = color.red;
-        end
+        aPlot.bg2.Style.ForegroundColor = color.rgba(255, 255, 255, value);
+        aPlot.bg2.Style.BackgroundColor = color.rgba(255, 255, 255, value);
       </onValueChanged>
     </slider>
 
@@ -215,17 +198,9 @@
         <marginBottom>50</marginBottom>
       </style>
       <onClick>
-        sliderA.Style.Visibility = "hidden";
-        aPlot.firstBall:Clear()
-        arcSim:Start()
+        sim1:Start();
       </onClick>
     </button>
-    <simulation name="arcSim" period="0.01">
-      <onUpdate>
-        curTime = time;
-        drawArc()
-      </onUpdate>
-    </simulation>
     </stack>
   </sectionNoTitle>
 

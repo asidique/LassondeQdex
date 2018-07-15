@@ -13,10 +13,13 @@
     <Content Include="document.xml">
     </Content>
     <Content Include="resources\answer.png" />
+    <Content Include="resources\ice.png" />
+    <Content Include="resources\ice2.png" />
     <Content Include="resources\invisible.png" />
     <Content Include="resources\lassonde.png" />
     <Content Include="resources\LassondeLogo.png" />
     <Content Include="resources\newton.png" />
+    <Content Include="resources\puck2.png" />
     <Content Include="resources\question.png" />
     <Content Include="resources\right.png" />
     <Content Include="resources\wrong.png" />

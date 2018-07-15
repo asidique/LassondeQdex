@@ -6,7 +6,7 @@
     <title>LA-PHYS-2.6 Gravitational Potential Energy and Conservation of Energy</title>
     <creator>Asseel</creator>
     <coverImage src="resources/LassondeLogo.png" />
-    <abstract>Have you ever been on a rollercoaster? If you have, then you have felt the force of gravitational potential energy. In this module we will explore this force.</abstract>
+    <abstract>Have you ever been on a rollercoaster? If you have, then you have felt the force of gravitational potential energy. In this module we will explore this force. </abstract>
   </metadata>
 
   <include src="resources/curriculumStylesLassonde.xml" />
@@ -35,7 +35,7 @@
   <!--                                      Header & Footer END                                         -->
   
   <section name="titleSection" style="pageLayout">
-    <title style="chapterTitle">2.7 Gravitational Potential Energy and Conservation of Energy</title>
+    <title style="chapterTitle">2.6 Gravitational Potential Energy and Conservation of Energy</title>
     <p style="sectionHeading">Introduction</p>
     <image src="resources/rollerCoaster.jpeg"></image>
     <stack name="content1" style="contentBG">
@@ -72,51 +72,6 @@
     <stack orientation="vertical" style="contentBG">
       <p>To understand how the Conservation of Energy works, take a look at this simulation below. The simulation will show the conversion of gravitational energy to kinetic energy in a friction-free roller coaster.
       Press "Start the Ride" to begin the simulation, and if it seems to be running slow, use the toggle to move the velocity and height labels. Notice how the roller coaster loses kinetic energy as it climbs hills and gains speed as it goes down hills!</p>
-      <button content="Switch Label Positions" name="btn1">
-        <style>
-          <horizontalAlignment>center</horizontalAlignment>
-        </style>
-        <onClick>
-          if (labelToggle == true) then
-            labelToggle = false;
-            btn1.Style.BackgroundColor = color.blue;
-          else
-            labelToggle = true;
-            btn1.Style.BackgroundColor = color.red;
-          end
-            if (labelsGone) then
-              char.textS(simStack.plot.speedLabel, {graphX-30, 57}, 1.5, color.black);
-              char.textP(simStack.plot.speedLabel, {graphX-28.5, 57}, 1.5, color.black);
-              char.textE(simStack.plot.speedLabel, {graphX-27, 57}, 1.5, color.black);
-              char.textE(simStack.plot.speedLabel, {graphX-25.5, 57}, 1.5, color.black);
-              char.textD(simStack.plot.speedLabel, {graphX-24, 57}, 1.5, color.black);
-      
-              char.textM(simStack.plot.speedLabel, {graphX-26, 60}, 1.5, color.black)
-              char.slash(simStack.plot.speedLabel, {graphX-24.5, 60}, 1.5, color.black)
-              char.textS(simStack.plot.speedLabel, {graphX-23, 60}, 1.5, color.black)
-      
-      
-              char.textH(simStack.plot.speedLabel, {graphX-19, 57}, 1.5, color.black);
-              char.textE(simStack.plot.speedLabel, {graphX-17.5, 57}, 1.5, color.black);
-              char.textI(simStack.plot.speedLabel, {graphX-16, 57}, 1.5, color.black);
-              char.textG(simStack.plot.speedLabel, {graphX-15.5, 57}, 1.5, color.black);
-              char.textH(simStack.plot.speedLabel, {graphX-14, 57}, 1.5, color.black);
-              char.textT(simStack.plot.speedLabel, {graphX-12.5, 57}, 1.5, color.black);
-              section1.labelStack.speedLabel.Text = "";
-              section1.labelStack.heightLabel.Text = "";
-              labelsGone = false;
-            end
-            
-            if (not labelsGone) then
-              simStack.plot.speedLabel:Clear();
-              simStack.plot.heightNumber1:Clear();
-              simStack.plot.heightNumber2:Clear();
-              simStack.plot.speedNumber1:Clear();
-              simStack.plot.speedNumber2:Clear();
-              labelsGone = true;
-            end
-        </onClick>
-      </button>
     </stack>
     <stack orientation="horizontal" name="labelStack">
       <p name="speedLabel">
@@ -134,42 +89,49 @@
       <drawing name="plot" manual="true">
         <axis dim="x" auto="none" min="0" max="100"></axis>
         <axis dim="y" auto="none" min="0" max="100"></axis>
+        <texture name="rollercoaster">
+          <image src="resources/rollercoastercart.png" />
+        </texture>
         <series name="track">
           <style>
             <lineThickness>2.5</lineThickness>
             <foreground color="black" />
           </style> 
         </series>
-        <series name="cart" draw="segmentedFill" capacity="6">
+        <series name="cart" draw="radialFill" capacity="4" manual="true">
           <style>
-            <foreground color="green" />
+            <background color="green" />
           </style>
+          <textureCoords ref="rollercoaster">0 1; 0 0; 1 0; 1 1</textureCoords>
           <data>
-          -1 50; -1 51; 1 51; 1 50; -1 50; -1 51;
+          -1 50; -1 51; 1 51; 1 50;
           </data>
         </series>
-        <series name="cart2" draw="segmentedFill" capacity="6">
+        <series name="cart2" draw="radialFill" capacity="4" manual="true">
           <style>
-            <foreground color="green" />
+            <background color="green" />
           </style>
+          <textureCoords ref="rollercoaster">0 1; 0 0; 1 0; 1 1</textureCoords>
           <data>
-          -1 50; -1 51; 1 51; 1 50; -1 50; -1 51;
+            -1 50; -1 51; 1 51; 1 50;
           </data>
         </series>
-        <series name="cart3" draw="segmentedFill" capacity="6">
+        <series name="cart3" draw="radialFill" capacity="4" manual="true">
           <style>
-            <foreground color="green" />
+            <background color="green" />
           </style>
+          <textureCoords ref="rollercoaster">0 1; 0 0; 1 0; 1 1</textureCoords>
           <data>
-          -1 50; -1 51; 1 51; 1 50; -1 50; -1 51;
+            -1 50; -1 51; 1 51; 1 50;
           </data>
         </series>
-        <series name="cart4" draw="segmentedFill" capacity="6">
+        <series name="cart4" draw="radialFill" capacity="4" manual="true">
           <style>
-            <foreground color="green" />
+            <background color="green" />
           </style>
+          <textureCoords ref="rollercoaster">0 1; 0 0; 1 0; 1 1</textureCoords>
           <data>
-          -1 50; -1 51; 1 51; 1 50; -1 50; -1 51;
+            -1 50; -1 51; 1 51; 1 50;
           </data>
         </series>
         <series name="graph1" draw="segmentedFill" capacity="6">
@@ -463,12 +425,12 @@
       </simulation>
     <onDocumentOpened>
       <![CDATA[
-      labelToggle = true;
+      labelToggle = false;
       labelsGone = false;
       allowedClick = true;
       
-      cartWidth = 1.2;
-      cartHeight = 1;
+      cartWidth = 1.6;
+      cartHeight = 1.2;
       cartX = 0;
       cartY = 52;
       cartX2 = -2.5;
@@ -504,12 +466,11 @@
       finalKinetic = initialPotential;
       
       function drawCart(x, y, ser)
+        ser:Clear();
         ser:Add(x-cartWidth, y-cartHeight);
         ser:Add(x-cartWidth, y+cartHeight);
         ser:Add(x+cartWidth, y+cartHeight);
         ser:Add(x+cartWidth, y-cartHeight);
-        ser:Add(x-cartWidth, y-cartHeight);
-        ser:Add(x-cartWidth, y+cartHeight);
         ser:Update();
       end
       
@@ -533,31 +494,11 @@
       drawGraph(graphX2, graphY2, simStack.plot.graph2, graphHeight2);
       drawGraph(graphX3, graphY3, simStack.plot.graph3, graphHeight3);
       drawGraph(graphX4, graphY4, simStack.plot.graph4, graphHeight4);
-  --    function char.textU(series, anchor, height, customColor)
 
       char.textU(simStack.plot.graphLabel1, {graphX, 57}, 1.5, color.black);
       char.textK(simStack.plot.graphLabel2, {graphX2, 57}, 1.5, color.black);
       char.textE(simStack.plot.graphLabel3, {graphX3, 57}, 1.5, color.black);
       
-      char.textS(simStack.plot.speedLabel, {graphX-30, 57}, 1.5, color.black);
-      char.textP(simStack.plot.speedLabel, {graphX-28.5, 57}, 1.5, color.black);
-      char.textE(simStack.plot.speedLabel, {graphX-27, 57}, 1.5, color.black);
-      char.textE(simStack.plot.speedLabel, {graphX-25.5, 57}, 1.5, color.black);
-      char.textD(simStack.plot.speedLabel, {graphX-24, 57}, 1.5, color.black);
-      
-      char.textM(simStack.plot.speedLabel, {graphX-26, 60}, 1.5, color.black)
-      char.slash(simStack.plot.speedLabel, {graphX-24.5, 60}, 1.5, color.black)
-      char.textS(simStack.plot.speedLabel, {graphX-23, 60}, 1.5, color.black)
-      
-      
-      char.textH(simStack.plot.speedLabel, {graphX-19, 57}, 1.5, color.black);
-      char.textE(simStack.plot.speedLabel, {graphX-17.5, 57}, 1.5, color.black);
-      char.textI(simStack.plot.speedLabel, {graphX-16, 57}, 1.5, color.black);
-      char.textG(simStack.plot.speedLabel, {graphX-15.5, 57}, 1.5, color.black);
-      char.textH(simStack.plot.speedLabel, {graphX-14, 57}, 1.5, color.black);
-      char.textT(simStack.plot.speedLabel, {graphX-12.5, 57}, 1.5, color.black);
-      
-      char.textM(simStack.plot.speedLabel, {graphX-12.5, 60}, 1.5, color.black);
 
 
       function getYPosCoaster(x)

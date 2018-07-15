@@ -72,7 +72,7 @@
 
   <!--Intro-->
   <section style="pageLayout">
-    <title style="chapterTitle">1.6 Frames of Reference</title>
+    <title style="chapterTitle">1.7 Frames of Reference</title>
     <p style="sectionHeading">Introduction</p>
     <image src="resources/camera.jpg" />
     <stack orientation="vertical" style="contentBG">
@@ -170,132 +170,287 @@
     <stack orientation="vertical" style="contentBG">
       <p style="subSectionHeading">Train, Car, Person Frame of Reference Example</p>
       <p>In this example, assume the train is moving at 100 k/h, car is moving at 60 k/h, and the person is moving at 5 k/h. Press a button (frame of reference) to see the speed of each object relative to a specific frame of reference. </p>
-      <stack name="plotStack" orientation="horizontal">
         <xyPlot name="boxPlot" pan="disabled" tap="disabled" zoom="disabled">
-          <style name="blackLine">
-            <foreground color="black" />
-          </style>
-          <style name="trainColor">
-            <foreground color="red" />
-            <background color="red" />
-          </style>
-
-          <style name="carColor">
-            <foreground color="blue" />
-            <background color="blue" />
-          </style>
-
-          <style name="personColor">
-            <foreground color="green" />
-            <background color="green" />
-          </style>
-          <axis name="YAxis" dim="y" auto="fixed" min="0" max="110" major="false"></axis>
-          <axis dim="x" auto="lockAspectRatio" min="0" max="110" major="false"></axis>
-          <series name="train" draw="radialFill" style="trainColor">
-            <data>
-              -20 100; -10 100; -10 90; -20 90
-            </data>
+          <onDocumentOpened>
+            personWidth = 2;
+            personHeight = 4;
+            personPos = vector({5, 2.2});
+            personSpeed=  0.005;
+            
+            carWidth = 4;
+            carHeight = 2;
+            carPos = vector({5, 3.5});
+            carSpeed = 0.05;
+            
+            trainWidth = 5;
+            trainHeight = 2.5;
+            trainPos = vector({5, 6});
+            trainSpeed = 0.075;
+            
+            bgPos = vector({5, 5});
+            bgWidth = 10;
+            bgHeight = 10;
+            bgSpeed = 0;
+            
+            
+            function drawObject(ser, width, height, pos) 
+              ser:Clear();
+              ser:Add(pos[1] - width/2, pos[2] - height/2);
+              ser:Add(pos[1] - width/2, pos[2] + height/2);
+              ser:Add(pos[1] + width/2, pos[2] + height/2);
+              ser:Add(pos[1] + width/2, pos[2] - height/2);
+              ser:Update();
+            end
+            drawObject(person, personWidth, personHeight, personPos);
+            drawObject(car, carWidth, carHeight, carPos);
+            drawObject(train, trainWidth, trainHeight, trainPos);
+          </onDocumentOpened>
+          <axis dim="y" auto="fixed" min="0" max="10" major="false"></axis>
+          <axis dim="x" auto="fixed" min="0" max="10" major="false"></axis>
+          <texture name="bgTexture">
+            <image src="resources/roadbg copy.png" />
+          </texture>
+          <texture name="walkTexture">
+            <image src="resources/walkinganim.png" />
+          </texture>
+          <texture name="carTexture">
+            <image src="resources/car3.png" />
+          </texture>
+          <texture name="trainTexture">
+            <image src="resources/train.png" />
+          </texture>
+          <texture name="fenceTexture">
+            <image src="resources/roadbg2.png" />
+          </texture>
+          <series name="bg" draw="radialFill" manual="true">
+            <style>
+              <background color="white" />
+              <foreground color="white" />
+            </style>
+            <data>0 0; 0 10; 10 10; 10 0;</data>
+            <textureCoords ref="bgTexture">0.6 1; 0.6 0; 0.3 0; 0.3 1;</textureCoords>
           </series>
-          <series name="car" draw="radialFill" style="carColor">
-            <data>
-              -20 60; -10 60; -10 50; -20 50
-            </data>
+          <series name="train" draw="radialFill" style="trainColor" manual="true">
+            <style>
+              <background color="white" />
+              <foreground color="white" />
+            </style>
+            <textureCoords ref="trainTexture">1 1; 1 0; 0 0; 0 1;</textureCoords>
           </series>
-
-          <series name="person" draw="radialFill" style="personColor">
-            <data>
-              -20 20; -10 20; -10 10; -20 10
-            </data>
+          <series name="bg2" draw="radialFill" manual="true">
+            <style>
+              <background color="white" />
+              <foreground color="white" />
+            </style>
+            <data>0 0; 0 10; 10 10; 10 0;</data>
+            <textureCoords ref="fenceTexture">0.6 1; 0.6 0; 0.3 0; 0.3 1;</textureCoords>
+          </series>
+          
+          <series name="car" draw="radialFill" style="carColor" manual="true">
+            <style>
+              <background color="white" />
+              <foreground color="white" />
+            </style>
+            <textureCoords ref="carTexture"> 0 1; 0 0; 1 0; 1 1;   </textureCoords>
+          </series>
+          <series name="person" draw="radialFill" manual="true">
+            <style>
+              <background color="white" />
+              <foreground color="white" />
+            </style>
+            <textureCoords ref="walkTexture">0.111 1; 0.111 0; 0 0; 0 1;</textureCoords>
           </series>
         </xyPlot>
-        <script>
-          <![CDATA[
-              xTrain = 0;
-              yTrain = 0;
-              
-              xCar = 0;
-              yCar = 0;
-              
-              xPerson = 0;
-              yPerson = 0;
-                            
-              trainSpeed = 100/60;
-              carSpeed = 60/60;
-              personSpeed = 5/60;
-              
-              relTrainSpeed = 0;
-              relCarSpeed = 0;
-              relPersonSpeed = 0;
-              
-              -- 0 is ground, 1 is train, 2 is car, 3 is person
-              typePicked = 0;
-              
-              trainSeries = plotStack.boxPlot.train;
-              carSeries = plotStack.boxPlot.car;
-              personSeries = plotStack.boxPlot.person;
-              
-        ]]>
-        </script>
-      </stack>
+        
+        <simulation name="walkingSim" duration="5">
+          <onUpdate>
+            local xd = (1/9) * math.floor((9/1.25) * (time % 1.25));
+            local xd2 = (1/2) * math.floor((0.25/0.25) * (time % 0.25));
+            local walkingCoords = matrixf({ {xd + (1/9), 1}, {xd + (1/9), 0}, {xd, 0}, {xd, 1}});
+            --local walkingCoords = matrixf({ {xd, 0}, {xd + (1/7), 0}, {xd + (1/7), 1}, {xd, 1} });
+            
+            local xb = (time % 10) / 30
+            local shiftBG = (1/3)
+            local backgroundCoords = matrixf({ {xb + shiftBG, 0}, {xb, 0}, {xb, 1}, {xb + shiftBG, 1}});        
+      
+
+            boxPlot.person.TextureCoordinates.Points:Clear();
+            boxPlot.person.TextureCoordinates.Points:Add(walkingCoords);
+            boxPlot.bg.TextureCoordinates.Points:Add(backgroundCoords);
+            boxPlot.bg2.TextureCoordinates.Points:Add(backgroundCoords);
+            personPos[1] = personPos[1] - personSpeed;
+            carPos[1] = carPos[1] + bgSpeed - carSpeed;
+            trainPos[1] = trainPos[1] + bgSpeed - trainSpeed;
+            bgSpeed = 0.015;
+            drawObject(boxPlot.person, personWidth, personHeight, personPos);
+            drawObject(boxPlot.car, carWidth, carHeight, carPos);
+            drawObject(boxPlot.train, trainWidth, trainHeight, trainPos);
+            drawObject(boxPlot.bg, bgWidth, bgHeight, bgPos);
+            drawObject(boxPlot.bg2, bgWidth, bgHeight, bgPos);
+          </onUpdate>
+          <onDuration>
+            personPos[1] = 5;
+            bgPos[1] = 5;
+            trainPos[1] = 5;
+            carPos[1] = 5;
+            drawObject(boxPlot.car, carWidth, carHeight, carPos);
+            drawObject(boxPlot.train, trainWidth, trainHeight, trainPos);
+            drawObject(boxPlot.person, personWidth, personHeight, personPos);
+            drawObject(boxPlot.bg, bgWidth, bgHeight, bgPos);
+            drawObject(boxPlot.bg2, bgWidth, bgHeight, bgPos);
+          </onDuration>
+        </simulation>
+        <simulation name="carSim" duration="5">
+          <onUpdate>
+            local xd = (1/9) * math.floor((9/1.25) * (time % 1.25));
+            local xd2 = (1/2) * math.floor((0.25/0.25) * (time % 0.25));
+            local walkingCoords = matrixf({ {xd + (1/9), 1}, {xd + (1/9), 0}, {xd, 0}, {xd, 1}});
+            --local walkingCoords = matrixf({ {xd, 0}, {xd + (1/7), 0}, {xd + (1/7), 1}, {xd, 1} });
+            bgSpeed = 0.035;
+
+            local xb = (time % 10) / 10
+            local shiftBG = (1/3)
+            local backgroundCoords = matrixf({ {xb + shiftBG, 0}, {xb, 0}, {xb, 1}, {xb + shiftBG, 1}});       
+
+            boxPlot.person.TextureCoordinates.Points:Clear();
+            boxPlot.person.TextureCoordinates.Points:Add(walkingCoords);
+            boxPlot.bg.TextureCoordinates.Points:Add(backgroundCoords);
+            boxPlot.bg2.TextureCoordinates.Points:Add(backgroundCoords);
+            personPos[1] = personPos[1] - personSpeed + bgSpeed;
+            carPos[1] = carPos[1] + bgSpeed + carSpeed; 
+            trainPos[1] = trainPos[1] + bgSpeed - trainSpeed;
+            drawObject(boxPlot.person, personWidth, personHeight, personPos);
+            
+            
+            
+            drawObject(boxPlot.train, trainWidth, trainHeight, trainPos);
+            drawObject(boxPlot.bg, bgWidth, bgHeight, bgPos);
+            drawObject(boxPlot.bg2, bgWidth, bgHeight, bgPos);
+          </onUpdate>
+          <onDuration>
+            personPos[1] = 5;
+            bgPos[1] = 5;
+            trainPos[1] = 5;
+            carPos[1] = 5;
+            drawObject(boxPlot.car, carWidth, carHeight, carPos);
+            drawObject(boxPlot.train, trainWidth, trainHeight, trainPos);
+            drawObject(boxPlot.person, personWidth, personHeight, personPos);
+            drawObject(boxPlot.bg, bgWidth, bgHeight, bgPos);
+            drawObject(boxPlot.bg2, bgWidth, bgHeight, bgPos);
+          </onDuration>
+        </simulation>
+      
+        <simulation name="trainSim" duration="5">
+          <onUpdate>
+            local xd = (1/9) * math.floor((9/1.25) * (time % 1.25));
+            local xd2 = (1/2) * math.floor((0.25/0.25) * (time % 0.25));
+            local walkingCoords = matrixf({ {xd + (1/9), 1}, {xd + (1/9), 0}, {xd, 0}, {xd, 1}});
+            --local walkingCoords = matrixf({ {xd, 0}, {xd + (1/7), 0}, {xd + (1/7), 1}, {xd, 1} });
+            bgSpeed = 0.025;
+
+            local xb = (time % 2.5) / 5
+            local shiftBG = (1/3)
+            local backgroundCoords = matrixf({ {xb + shiftBG, 0}, {xb, 0}, {xb, 1}, {xb + shiftBG, 1}});       
+
+            boxPlot.person.TextureCoordinates.Points:Clear();
+            boxPlot.person.TextureCoordinates.Points:Add(walkingCoords);
+            boxPlot.bg.TextureCoordinates.Points:Add(backgroundCoords);
+            boxPlot.bg2.TextureCoordinates.Points:Add(backgroundCoords);
+            personPos[1] = personPos[1] + carSpeed + bgSpeed;
+            carPos[1] = carPos[1] + personSpeed + bgSpeed; 
+            trainPos[1] = trainPos[1] - trainSpeed;
+            drawObject(boxPlot.person, personWidth, personHeight, personPos);
+            
+            drawObject(boxPlot.car, carWidth, carHeight, carPos);
+            drawObject(boxPlot.bg, bgWidth, bgHeight, bgPos);
+            drawObject(boxPlot.bg2, bgWidth, bgHeight, bgPos);
+          </onUpdate>
+          <onDuration>
+            personPos[1] = 5;
+            bgPos[1] = 5;
+            trainPos[1] = 5;
+            carPos[1] = 5;
+            drawObject(boxPlot.car, carWidth, carHeight, carPos);
+            drawObject(boxPlot.train, trainWidth, trainHeight, trainPos);
+            drawObject(boxPlot.person, personWidth, personHeight, personPos);
+            drawObject(boxPlot.bg, bgWidth, bgHeight, bgPos);
+            drawObject(boxPlot.bg2, bgWidth, bgHeight, bgPos);
+          </onDuration>
+        </simulation>
+      
+       <simulation name="groundSim" duration="5">
+          <onUpdate>
+            local xd = (1/9) * math.floor((9/1.25) * (time % 1.25));
+            local xd2 = (1/2) * math.floor((0.25/0.25) * (time % 0.25));
+            local walkingCoords = matrixf({ {xd + (1/9), 1}, {xd + (1/9), 0}, {xd, 0}, {xd, 1}});
+
+
+            boxPlot.person.TextureCoordinates.Points:Clear();
+            boxPlot.person.TextureCoordinates.Points:Add(walkingCoords);
+            personPos[1] = personPos[1] - personSpeed - 0.015 ;
+            carPos[1] = carPos[1] - carSpeed; 
+            trainPos[1] = trainPos[1] - trainSpeed;
+            drawObject(boxPlot.person, personWidth, personHeight, personPos);
+            
+            drawObject(boxPlot.car, carWidth, carHeight,  carPos);
+            drawObject(boxPlot.train, trainWidth, trainHeight, trainPos);
+            drawObject(boxPlot.bg, bgWidth, bgHeight, bgPos);
+            drawObject(boxPlot.bg2, bgWidth, bgHeight, bgPos);
+          </onUpdate>
+          <onDuration>
+            personPos[1] = 5;
+            bgPos[1] = 5;
+            trainPos[1] = 5;
+            carPos[1] = 5;
+            drawObject(boxPlot.car, carWidth, carHeight, carPos);
+            drawObject(boxPlot.train, trainWidth, trainHeight, trainPos);
+            drawObject(boxPlot.person, personWidth, personHeight, personPos);
+            drawObject(boxPlot.bg, bgWidth, bgHeight, bgPos);
+            drawObject(boxPlot.bg2, bgWidth, bgHeight, bgPos);
+          </onDuration>
+        </simulation>
+      
       <p name="stuff" style="center">
         <b>Pick a Frame of Reference, then click "Start Simulation"</b>
       </p>
-
-      <script>
-        <![CDATA[
-          local priorSelection = -1;
-
-          function chooseButton(i)
-          if priorSelection > 0 then
-          framesStack:Child(priorSelection).Style.BackgroundColor = color.gainsboro;
-          end
-          
-          if i == 1 then
-            framesStack:Child(i).Style.BackgroundColor = "gray";
-            priorSelection = i;
-          elseif i == 2 then
-            framesStack:Child(i).Style.BackgroundColor = "red";
-            priorSelection = i;
-          elseif i == 3 then
-            framesStack:Child(i).Style.BackgroundColor = "blue";
-            priorSelection = i;
-          elseif i == 4 then
-            framesStack:Child(i).Style.BackgroundColor = "green";
-            priorSelection = i;
-          end
-          ]]>
-        end
-      </script>
       <stack orientation="horizontal" name="framesStack">
         <button name="groundButton" content="Ground" style="setButtons">
           <onClick>
             <![CDATA[
-              chooseButton(1)
-              typePicked = 0;
+              groundSim:Start();
+              trainSim:Stop();
+              carSim:Stop();
+              walkingSim:Stop();
               ]]>
           </onClick>
         </button>
         <button name="trainButton" content="Train" style="setButtons">
           <onClick>
             <![CDATA[
-              chooseButton(2)
-              typePicked = 1;
+              groundSim:Stop();
+              trainSim:Start();
+              carSim:Stop();
+              walkingSim:Stop();
               ]]>
           </onClick>
         </button>
         <button name="carButton" content="Car" style="setButtons">
           <onClick>
             <![CDATA[
-              chooseButton(3)
-              typePicked = 2;
+              groundSim:Stop();
+              trainSim:Stop();
+              carSim:Start();
+              walkingSim:Stop();
               ]]>
           </onClick>
         </button>
         <button name="personButton" content="Person" style="setButtons">
           <onClick>
             <![CDATA[
-              chooseButton(4)
-              typePicked = 3;
+              groundSim:Stop();
+              trainSim:Stop();
+              carSim:Stop();
+              walkingSim:Start();
               ]]>
           </onClick>
         </button>
@@ -424,7 +579,7 @@
           A frame of reference is simply a portion of the world around us which we use to measure the motion of <b>moving bodies.</b>
         </p>
 
-        <image src="resources\car.jpg" style="medium" />
+        <image src="resources\car1.png" style="medium" />
 
         <p>The concept that a uniformly moving frame of reference such as the railway car should not change the laws of motion, was actually first proposed, albeit in a slightly different form, decades prior to Newton's stating his Laws, by Galileo Galilei </p>
 

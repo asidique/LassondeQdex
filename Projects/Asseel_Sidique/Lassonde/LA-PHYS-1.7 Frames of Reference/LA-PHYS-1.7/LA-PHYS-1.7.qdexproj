@@ -34,12 +34,18 @@
     <Content Include="resources\2D.png" />
     <Content Include="resources\2D1.png" />
     <Content Include="resources\camera.jpg" />
-    <Content Include="resources\car.jpg" />
+    <Content Include="resources\car1.png" />
+    <Content Include="resources\car3.png" />
     <Content Include="resources\lassonde.png" />
     <Content Include="resources\lassondeLogo.png" />
     <Content Include="resources\observer_train.png" />
+    <Content Include="resources\roadbg copy.png" />
+    <Content Include="resources\roadbg.png" />
+    <Content Include="resources\roadbg2.png" />
     <Content Include="resources\telescope.jpg" />
     <Content Include="resources\train.jpg" />
+    <Content Include="resources\train.png" />
+    <Content Include="resources\walkinganim.png" />
     <Content Include="resources\york.png" />
   </ItemGroup>
   <ItemGroup>

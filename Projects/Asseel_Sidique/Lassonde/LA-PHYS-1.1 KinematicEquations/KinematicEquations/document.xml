@@ -731,11 +731,53 @@
 
       <stack style="contentBG" name="contentStack2">
         <drawing name="simGraph">
+          <onDocumentOpened>
+            wave:Add(0,-2);
+            wave:Add(0,2);
+            wave:Add(10,2);
+            wave:Add(10, -2);
+            wave:Update();
+          </onDocumentOpened>
           <axis dim="x" max="10" min="0" auto="fixed"></axis>
           <axis dim="y" max="10" min="0" auto="fixed"></axis>
+          <texture name="rocketTexture">
+            <image src="resources/rock.png" />
+          </texture>
+          <texture name="cliffTexture">
+            <image src="resources/cliff_2.png" /> 
+          </texture>
+          <texture name="waveTexture">
+            <image src="resources/waves.png" />
+          </texture>
+          <series name="bg" draw="triangles">
+            <style>
+              <foreground color="skyBlue" />
+              <background color="skyBlue" />
+            </style>
+            <data>0 0; 50 0; 50 50; 50 50; 0 50; 0 0;</data>
+          </series>
+          <series name="wave" draw="radialFill" manual="true" capacity="4">
+            <style>
+                <foreground color="white" />
+                <background color="white" />
+              </style>
+            <textureCoords ref="waveTexture">0 0; 0 1; 1 1; 1 0</textureCoords>
+          </series>
           <series name="line" draw="lineSegments" manual="true"></series>
-          <series name="triangle" draw="segmentedFill" manual="true" capacity="3"></series>
-          <series name="platform" draw="segmentedFill" manual="true" capacity="5"></series>
+          <series name="platform" draw="radialFill" style="trueColor" capacity="4">
+            <style>
+                <foreground color="white" />
+                <background color="white" />
+              </style>
+            <textureCoords ref="cliffTexture">0 0; 0 1; 1 1; 1 0</textureCoords>
+          </series>
+          <series name="triangle" draw="radialFill" capacity="4">
+            <style>
+                <foreground color="white" />
+                <background color="white" />
+              </style>
+            <textureCoords ref="rocketTexture">0 0; 0 1; 1 1; 1 0</textureCoords>
+          </series>
         </drawing>
         <simulation name="sim1" duration="5" loop="false" period="0.01" asynchronous="false">
           <onActivePageChanged>
@@ -752,10 +794,10 @@
             platformSeries:Add(0, 0);
 
             <!--INITIALIZE DRAWING OF TRIANGLE-->
-            series:Add(startingPosX, startingPosY);
-            series:Add((startingPosX + (shapeSize/3)), startingPosY + shapeSize);
-            series:Add((startingPosX + (shapeSize*2/3)), startingPosY);
-
+            series:Add(1.5, 6);
+            series:Add(1.5 , 6 + (1/2));
+            series:Add(1.5 + (1/2), 6 + (1/2));
+            series:Add(1.5 + (1/2), 6 );
             series:Update();
             platformSeries:Update();
           </onActivePageChanged>
@@ -777,8 +819,9 @@
 
             <!--TRIANGLE UPDATE-->
             series:Add(startingPosX + 1.9*time6, startingPosY + 5*time6 - (2.2*time6^2));
-            series:Add((startingPosX + 1.9*time6 + (shapeSize/3)), startingPosY + 5*time6 - (2.2*time6^2) + shapeSize);
-            series:Add((startingPosX + 1.9*time6 + (shapeSize*2/3)), startingPosY + 5*time6 - (2.2*time6^2));
+            series:Add((startingPosX + 1.9*time6), startingPosY + 5*time6 - (2.2*time6^2) + (shapeSize/2));
+            series:Add((startingPosX + 1.9*time6 + (shapeSize/2)), startingPosY + 5*time6 - (2.2*time6^2) + (shapeSize/2));
+            series:Add(startingPosX + 1.9*time6 + (shapeSize/2), startingPosY + 5*time6 - (2.2*time6^2));
             graphSeries:Update();
             series:Update();
             platformSeries:Update();
@@ -890,8 +933,27 @@
           <drawing name="simGraph">
             <axis dim="x" min="0" max="10" auto="none"></axis>
             <axis dim="y" min="0" max="10" auto="none"></axis>
-            <series name="box" draw="segmentedFill" manual="true" capacity="5"></series>
-            <series name="triangle" draw="segmentedFill" manual="true" capacity="3"></series>
+            <texture name="ballTexture">
+              <image src="resources/ball.png" />
+            </texture>
+            <texture name="cliffTexture">
+              <image src="resources/cliff_3.png" />
+            </texture>
+            <series name="box" draw="radialFill" manual="true" capacity="4" style="trueColor">
+              <style>
+                <foreground color="white" />
+                <background color="white" />
+              </style>
+            <textureCoords ref="cliffTexture">1 1; 1 0; 0 0; 0 1</textureCoords>
+              
+            </series>
+            <series name="triangle" draw="radialFill" manual="true" capacity="4" style="trueColor">
+              <style>
+                <foreground color="white" />
+                <background color="white" />
+              </style>
+            <textureCoords ref="ballTexture">0 0; 0 1; 1 1; 1 0</textureCoords>
+            </series>
           </drawing>
         </stack>
         <simulation name="sim1" duration="3" loop="true" period="0.01" asynchronous="false">
@@ -906,11 +968,11 @@
             series:Add(0, 5);
             series:Add(3, 5);
             series:Add(3, 0);
-            series:Add(0, 0);
             series:Update();
             triSeries:Add(startingPointX, startingPointY);
-            triSeries:Add(startingPointX + size/3, startingPointY + size)
-            triSeries:Add(startingPointX + size*2/3, startingPointY);
+            triSeries:Add(startingPointX, startingPointY + size/2)
+            triSeries:Add(startingPointX + size/2, startingPointY + size/2);
+            triSeries:Add(startingPointX + size/2, startingPointY);
             triSeries:Update();
             sim1:Start();
           </onActivePageChanged>
@@ -923,8 +985,9 @@
             time2 = time;
             end
             triSeries:Add(startingPointX + 0*time2, startingPointY + 5*time2 - (2.2*time2^2));
-            triSeries:Add((startingPointX + 0*time2 + (size/3)), startingPointY + 5*time2 - (2.2*time2^2) + size);
-            triSeries:Add((startingPointX + 0*time2 + (size*2/3)), startingPointY + 5*time2 - (2.2*time2^2));
+            triSeries:Add(startingPointX + 0*time2, startingPointY + size/2 + 5*time2 - (2.2*time2^2))
+            triSeries:Add(startingPointX + size/2 + 0*time2, startingPointY + size/2 + 5*time2 - (2.2*time2^2));
+            triSeries:Add(startingPointX + size/2 + 0*time2, startingPointY + 5*time2 - (2.2*time2^2));
             triSeries:Update();
 
           </onUpdate>
@@ -1027,8 +1090,27 @@
         <drawing name="simGraph">
           <axis dim="x" min="0" max="10" auto="none"></axis>
           <axis dim="y" min="0" max="10" auto="none"></axis>
-          <series name="box" draw="segmentedFill" manual="true" capacity="5"></series>
-          <series name="triangle" draw="segmentedFill" manual="true" capacity="3"></series>
+          <texture name="ballTexture">
+              <image src="resources/ball.png" />
+            </texture>
+            <texture name="cliffTexture">
+              <image src="resources/cliff_3.png" />
+            </texture>
+            <series name="box" draw="radialFill" manual="true" capacity="4" style="trueColor">
+              <style>
+                <foreground color="white" />
+                <background color="white" />
+              </style>
+            <textureCoords ref="cliffTexture">1 1; 1 0; 0 0; 0 1</textureCoords>
+              
+            </series>
+            <series name="triangle" draw="radialFill" manual="true" capacity="4" style="trueColor">
+              <style>
+                <foreground color="white" />
+                <background color="white" />
+              </style>
+            <textureCoords ref="ballTexture">0 0; 0 1; 1 1; 1 0</textureCoords>
+            </series>
         </drawing>
       </stack>
       <simulation name="sim1" duration="3" loop="true" period="0.01" asynchronous="false">
@@ -1043,11 +1125,11 @@
           series:Add(0, 5);
           series:Add(3, 5);
           series:Add(3, 0);
-          series:Add(0, 0);
           series:Update();
           triSeries:Add(startingPointX, startingPointY);
-          triSeries:Add(startingPointX + size/3, startingPointY + size)
-          triSeries:Add(startingPointX + size*2/3, startingPointY);
+          triSeries:Add(startingPointX, startingPointY + size/2)
+          triSeries:Add(startingPointX + size/2, startingPointY + size/2);
+          triSeries:Add(startingPointX + size/2, startingPointY);
           triSeries:Update();
           sim1:Start();
         </onActivePageChanged>
@@ -1060,8 +1142,9 @@
           time2 = time;
           end
           triSeries:Add(startingPointX + 0*time2, startingPointY + 5*time2 - (2.2*time2^2));
-          triSeries:Add((startingPointX + 0*time2 + (size/3)), startingPointY + 5*time2 - (2.2*time2^2) + size);
-          triSeries:Add((startingPointX + 0*time2 + (size*2/3)), startingPointY + 5*time2 - (2.2*time2^2));
+          triSeries:Add(startingPointX + 0*time2, startingPointY + size/2 + 5*time2 - (2.2*time2^2))
+          triSeries:Add(startingPointX + size/2 + 0*time2, startingPointY + size/2 + 5*time2 - (2.2*time2^2));
+          triSeries:Add(startingPointX + size/2 + 0*time2, startingPointY + 5*time2 - (2.2*time2^2));
           triSeries:Update();
 
         </onUpdate>
@@ -1164,8 +1247,27 @@
         <drawing name="simGraph">
           <axis dim="x" min="0" max="10" auto="none"></axis>
           <axis dim="y" min="0" max="10" auto="none"></axis>
-          <series name="box" draw="segmentedFill" manual="true" capacity="5"></series>
-          <series name="triangle" draw="segmentedFill" manual="true" capacity="3"></series>
+          <texture name="bullTexture">
+              <image src="resources/bullet.png" />
+            </texture>
+            <texture name="cliffTexture">
+              <image src="resources/cliff_3.png" />
+            </texture>
+            <series name="box" draw="radialFill" manual="true" capacity="4" style="trueColor">
+              <style>
+                <foreground color="white" />
+                <background color="white" />
+              </style>
+            <textureCoords ref="cliffTexture">1 1; 1 0; 0 0; 0 1</textureCoords>
+              
+            </series>
+            <series name="triangle" draw="radialFill" manual="true" capacity="4" style="trueColor">
+              <style>
+                <foreground color="white" />
+                <background color="white" />
+              </style>
+            <textureCoords ref="bullTexture">0 0; 0 1; 1 1; 1 0</textureCoords>
+            </series>
         </drawing>
       </stack>
       <simulation name="sim1" duration="3" loop="true" period="0.01" asynchronous="false">
@@ -1180,11 +1282,11 @@
           series:Add(0, 5);
           series:Add(3, 5);
           series:Add(3, 0);
-          series:Add(0, 0);
           series:Update();
           triSeries:Add(startingPointX, startingPointY);
-          triSeries:Add(startingPointX + size/3, startingPointY + size)
-          triSeries:Add(startingPointX + size*2/3, startingPointY);
+          triSeries:Add(startingPointX, startingPointY + size/2)
+          triSeries:Add(startingPointX + size/2, startingPointY + size/2);
+          triSeries:Add(startingPointX + size/2, startingPointY);
           triSeries:Update();
           sim1:Start();
         </onActivePageChanged>
@@ -1197,8 +1299,9 @@
           time2 = time;
           end
           triSeries:Add(startingPointX + 2.3*time2, startingPointY + 0*time2 - (2.2*time2^2));
-          triSeries:Add((startingPointX + 2.3*time2 + (size/3)), startingPointY + 0*time2 - (2.2*time2^2) + size);
-          triSeries:Add((startingPointX + 2.3*time2 + (size*2/3)), startingPointY + 0*time2 - (2.2*time2^2));
+          triSeries:Add(startingPointX + 2.3*time2, startingPointY + size/2 + 0*time2 - (2.2*time2^2))
+          triSeries:Add(startingPointX + size/2 + 2.3*time2, startingPointY + size/2 + 0*time2 - (2.2*time2^2));
+          triSeries:Add(startingPointX + size/2 + 2.3*time2, startingPointY + 0*time2 - (2.2*time2^2));
           triSeries:Update();
 
         </onUpdate>
@@ -1313,8 +1416,27 @@
           </style>
           <axis dim="x" min="0" max="10" auto="none"></axis>
           <axis dim="y" min="0" max="10" auto="none"></axis>
-          <series name="box" draw="segmentedFill" manual="true" capacity="5"></series>
-          <series name="triangle" draw="segmentedFill" manual="true" capacity="3"></series>
+          <texture name="ballTexture">
+              <image src="resources/cannon_ball.png" />
+            </texture>
+            <texture name="cliffTexture">
+              <image src="resources/cliff_3.png" />
+            </texture>
+            <series name="box" draw="radialFill" manual="true" capacity="4" style="trueColor">
+              <style>
+                <foreground color="white" />
+                <background color="white" />
+              </style>
+            <textureCoords ref="cliffTexture">1 1; 1 0; 0 0; 0 1</textureCoords>
+              
+            </series>
+            <series name="triangle" draw="radialFill" manual="true" capacity="4" style="trueColor">
+              <style>
+                <foreground color="white" />
+                <background color="white" />
+              </style>
+            <textureCoords ref="ballTexture">0 0; 0 1; 1 1; 1 0</textureCoords>
+            </series>
         </drawing>
         <drawing name="simGraph2">
           <style>
@@ -1323,8 +1445,27 @@
           </style>
           <axis dim="x" min="0" max="10" auto="none"></axis>
           <axis dim="y" min="0" max="10" auto="none"></axis>
-          <series name="box" draw="segmentedFill" manual="true" capacity="5"></series>
-          <series name="triangle" draw="segmentedFill" manual="true" capacity="3"></series>
+          <texture name="ballTexture">
+              <image src="resources/arrow.png" />
+            </texture>
+            <texture name="cliffTexture">
+              <image src="resources/cliff_3.png" />
+            </texture>
+            <series name="box" draw="radialFill" manual="true" capacity="4" style="trueColor">
+              <style>
+                <foreground color="white" />
+                <background color="white" />
+              </style>
+            <textureCoords ref="cliffTexture">1 1; 1 0; 0 0; 0 1</textureCoords>
+              
+            </series>
+            <series name="triangle" draw="radialFill" manual="true" capacity="4" style="trueColor">
+              <style>
+                <foreground color="white" />
+                <background color="white" />
+              </style>
+            <textureCoords ref="ballTexture">0 0; 0 1; 1 1; 1 0</textureCoords>
+            </series>
         </drawing>
       </stack>
       <stack orientation="horizontal" name="btnStack1" style="contentBG">
@@ -1381,8 +1522,27 @@
           </style>
           <axis dim="x" min="0" max="10" auto="none"></axis>
           <axis dim="y" min="0" max="10" auto="none"></axis>
-          <series name="box" draw="segmentedFill" manual="true" capacity="5"></series>
-          <series name="triangle" draw="segmentedFill" manual="true" capacity="3"></series>
+          <texture name="ballTexture">
+              <image src="resources/tennis.png" />
+            </texture>
+            <texture name="cliffTexture">
+              <image src="resources/cliff_3.png" />
+            </texture>
+            <series name="box" draw="radialFill" manual="true" capacity="4" style="trueColor">
+              <style>
+                <foreground color="white" />
+                <background color="white" />
+              </style>
+            <textureCoords ref="cliffTexture">1 1; 1 0; 0 0; 0 1</textureCoords>
+              
+            </series>
+            <series name="triangle" draw="radialFill" manual="true" capacity="4" style="trueColor">
+              <style>
+                <foreground color="white" />
+                <background color="white" />
+              </style>
+            <textureCoords ref="ballTexture">0 0; 0 1; 1 1; 1 0</textureCoords>
+            </series>
         </drawing>
         <drawing name="simGraph2">
           <style>
@@ -1391,8 +1551,27 @@
           </style>
           <axis dim="x" min="0" max="10" auto="none"></axis>
           <axis dim="y" min="0" max="10" auto="none"></axis>
-          <series name="box" draw="segmentedFill" manual="true" capacity="5"></series>
-          <series name="triangle" draw="segmentedFill" manual="true" capacity="3"></series>
+          <texture name="ballTexture">
+              <image src="resources/car.png" />
+            </texture>
+            <texture name="cliffTexture">
+              <image src="resources/cliff_3.png" />
+            </texture>
+            <series name="box" draw="radialFill" manual="true" capacity="4" style="trueColor">
+              <style>
+                <foreground color="white" />
+                <background color="white" />
+              </style>
+            <textureCoords ref="cliffTexture">1 1; 1 0; 0 0; 0 1</textureCoords>
+              
+            </series>
+            <series name="triangle" draw="radialFill" manual="true" capacity="4" style="trueColor">
+              <style>
+                <foreground color="white" />
+                <background color="white" />
+              </style>
+            <textureCoords ref="ballTexture">1 1; 1 0; 0 0; 0 1</textureCoords>
+            </series>
         </drawing>
       </stack>
       <stack orientation="horizontal" name="btnStack2" style="contentBG">
@@ -1453,11 +1632,11 @@
             series:Add(0, 5);
             series:Add(3, 5);
             series:Add(3, 0);
-            series:Add(0, 0);
             series:Update();
             triSeries:Add(startingPointX, startingPointY);
-            triSeries:Add(startingPointX + size/3, startingPointY + size)
-            triSeries:Add(startingPointX + size*2/3, startingPointY);
+            triSeries:Add(startingPointX, startingPointY + size/2)
+            triSeries:Add(startingPointX + size/2, startingPointY + size/2);
+            triSeries:Add(startingPointX + size/2, startingPointY);
             triSeries:Update();
             sim1:Start();
           </onActivePageChanged>
@@ -1468,10 +1647,11 @@
             local size = 1;
             if (startingPointY + 5*time - (2.2*time^2)) &gt; 0 then
               time3 = time;
-            end
+            end            
             triSeries:Add(startingPointX + 1.9*time3, startingPointY + 5*time3 - (2.2*time3^2));
-            triSeries:Add((startingPointX + 1.9*time3 + (size/3)), startingPointY + 5*time3 - (2.2*time3^2) + size);
-            triSeries:Add((startingPointX + 1.9*time3 + (size*2/3)), startingPointY + 5*time3 - (2.2*time3^2));
+            triSeries:Add(startingPointX + 1.9*time3, startingPointY + size/2 + 5*time3 - (2.2*time3^2))
+            triSeries:Add(startingPointX + size/2 + 1.9*time3, startingPointY + size/2 + 5*time3 - (2.2*time3^2));
+            triSeries:Add(startingPointX + size/2 + 1.9*time3, startingPointY + 5*time3 - (2.2*time3^2));
             triSeries:Update();
             
           </onUpdate>
@@ -1488,11 +1668,11 @@
               series:Add(0, 5);
               series:Add(3, 5);
               series:Add(3, 0);
-              series:Add(0, 0);
               series:Update();
               triSeries:Add(startingPointX, startingPointY);
-              triSeries:Add(startingPointX + size/3, startingPointY + size)
-              triSeries:Add(startingPointX + size*2/3, startingPointY);
+              triSeries:Add(startingPointX, startingPointY + size/2)
+              triSeries:Add(startingPointX + size/2, startingPointY + size/2);
+              triSeries:Add(startingPointX + size/2, startingPointY);
               triSeries:Update();
               sim2:Start();
             </onActivePageChanged>
@@ -1506,8 +1686,9 @@
                 time3 = time;
               end
               triSeries:Add(startingPointX + 4.2*time3, startingPointY - (2.2*time3^2));
-              triSeries:Add((startingPointX + 4.2*time3 + (size/3)), startingPointY - (2.2*time3^2) + size);
-              triSeries:Add((startingPointX + 4.2*time3 + (size*2/3)), startingPointY - (2.2*time3^2));
+              triSeries:Add(startingPointX + 4.2*time3, startingPointY + size/2 - (2.2*time3^2))
+              triSeries:Add(startingPointX + size/2 + 4.2*time3, startingPointY + size/2 - (2.2*time3^2));
+              triSeries:Add(startingPointX + size/2 + 4.2*time3, startingPointY - (2.2*time3^2));
               triSeries:Update();
             
             </onUpdate>
@@ -1520,8 +1701,9 @@
               local size = 1;
               <!--INITIALIZE CLIFF DRAWING-->
               triSeries:Add(startingPointX, startingPointY);
-              triSeries:Add(startingPointX + size/3, startingPointY + size)
-              triSeries:Add(startingPointX + size*2/3, startingPointY);
+              triSeries:Add(startingPointX, startingPointY + size/2)
+              triSeries:Add(startingPointX + size/2, startingPointY + size/2);
+              triSeries:Add(startingPointX + size/2, startingPointY);
               triSeries:Update();
               sim3:Play();
             </onActivePageChanged>
@@ -1534,8 +1716,9 @@
                 time4 = time;
               end
               triSeries:Add(startingPointX + 4.9*time4, startingPointY - (2.2*time4^2));
-              triSeries:Add((startingPointX + 4.9*time4 + (size/3)), startingPointY - (2.2*time4^2) + size);
-              triSeries:Add((startingPointX + 4.9*time4 + (size*2/3)), startingPointY - (2.2*time4^2));
+              triSeries:Add(startingPointX + 4.9*time4, startingPointY + size/2 - (2.2*time4^2))
+              triSeries:Add(startingPointX + size/2 + 4.9*time4, startingPointY + size/2 - (2.2*time4^2));
+              triSeries:Add(startingPointX + size/2 + 4.9*time4, startingPointY - (2.2*time4^2));
               triSeries:Update();
             </onUpdate>
           </simulation>
@@ -1547,8 +1730,9 @@
               local size = 1;
               <!--INITIALIZE CLIFF DRAWING-->
               triSeries:Add(startingPointX, startingPointY);
-              triSeries:Add(startingPointX + size/3, startingPointY + size)
-              triSeries:Add(startingPointX + size*2/3, startingPointY);
+              triSeries:Add(startingPointX, startingPointY + size/2)
+              triSeries:Add(startingPointX + size/2, startingPointY + size/2);
+              triSeries:Add(startingPointX + size/2, startingPointY);
               triSeries:Update();
               sim4:Play();
             </onActivePageChanged>
@@ -1561,8 +1745,9 @@
                 time5 = time;
               end
               triSeries:Add(startingPointX + 1.3*time5, startingPointY + (5.9*time5) - (2.2*time5^2));
-              triSeries:Add((startingPointX + 1.3*time5 + (size/3)), startingPointY + (5.9*time5) - (2.2*time5^2) + size);
-              triSeries:Add((startingPointX + 1.3*time5 + (size*2/3)), startingPointY + (5.9*time5) - (2.2*time5^2));
+              triSeries:Add(startingPointX + 1.3*time5, startingPointY + size/2 + (5.9*time5) - (2.2*time5^2))
+              triSeries:Add(startingPointX + size/2 + 1.3*time5, startingPointY + size/2 + (5.9*time5) - (2.2*time5^2));
+              triSeries:Add(startingPointX + size/2 + 1.3*time5, startingPointY + (5.9*time5) - (2.2*time5^2));
               triSeries:Update();
             
             </onUpdate>

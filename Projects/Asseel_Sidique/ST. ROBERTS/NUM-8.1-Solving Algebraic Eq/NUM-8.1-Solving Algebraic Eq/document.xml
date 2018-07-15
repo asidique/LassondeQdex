@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="GEFE840F7_F426_4917_91D9_A241C78C22C2">
+
+  <!-- Meta Data -->
+  <metadata>
+    <title>NUM-8.1-Solving Algebraic Equations</title>
+    <creator>Sidique</creator>
+    <coverImage src="resources/cover.png" />
+    <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
+  </metadata>
+
+
+  <include src="resources/curriculumStyles.xml" />
+  <include src="resources/Utilities.xml" />
+  <include src="resources/plotTools.xml" />
+
+  <!--                                      Header & Footer START                                         -->
+  <header style="backgroundColor">
+    <stack style="center" orientation="horizontal">
+      <p style="whiteColor">Amanda Koon</p>
+      <p style="whiteColor rightText">NUMERACY</p>
+    </stack>
+  </header>
+  <footer style="backgroundColor">
+    <stack orientation="horizontal">
+      <image style="tiny" src="resources/logo1.png" inspect="false" />
+      <p style="fontColor">
+        <style>
+          <numbering suffix="true" counter="pages" />
+          <textAlignment>center</textAlignment>
+          <marginTop>30</marginTop>
+          <foreground color="255 255 255" />
+        </style>
+      </p>
+      <image style="tiny" src="resources/logo2.png" inspect="false" />
+    </stack>
+  </footer>
+
+  <!-- Section 1 -->
+  <section name="section1" style="pageLayout">
+    <title style="chapterTitle">Solving Algebraic Equations</title>
+    <image src="resources/algebra.png" />
+    <stack style="contentBG">
+      <p>When we say a statement in math such as $ 2 + 3 = 5 $, we are actually writing an equation. Notice how the left and the right sides have a relationship,
+       which in this case is $ = $ (equals). Algebraic Equations involve all the different equations that can be written using variables and expressions . These 
+     will all be defined in this module as well as examples/practice on how to solve them.</p>
+    </stack>
+  </section>
+
+  <sectionNoTitle name="section2" style="pageLayout">
+    <p style="sectionHeading">Equations</p>
+    <stack style="contentBG">
+      <p>Let's talk about what an equation is.</p>
+      <p>Now the word equation literally means "two mathematical expressions are equal".</p>
+      <p style="subSectionHeading">Expressions</p>
+      <p>Now, what is an expression? An expression can be any number. For an example: </p>
+      <p>$ 4 $ is an expression</p>
+      <p>$ 4 + 4 = 8 $ is not an expression</p>
+      <p>$ 4 + 4 $ is an expression</p>
+      <p>$ 8 $ is an expression</p>
+
+      <p style="subSectionHeading">True Equations</p>
+      <p>A true equation is simply one that is true when you evaluate it. For an example: </p>
+      <p>$ 1 + 1 = 2 $ is a true equation</p>
+      <p>$ 1 + 1 = 0 $ is not a true equation</p>
+    </stack>
+  </sectionNoTitle>
+
+  <sectionNoTitle name="section3" style="pageLayout">
+    <p style="sectionHeading">Variables</p>
+    <stack style="contentBG">
+      <p>
+        Equations can also have variables in them. A <b>Variable</b> is simply something that will change. In math, it is common to see
+        variables represented by $ x, y, z, a, b, c $ and others.
+      </p>
+       <p>Variables can be used in equations to make something true. For an example, if you were asked: </p>
+        <p>What number to you need to add to 7 to get to 10?</p>
+        <p>The trivial answer is 3. Now, let's write this in terms of a variable and an equation.</p>
+        <p>$ x + 7 = 10 $</p>
+        <p>The equation above says the same thing as what we asked. This would be read as: "What value to I give to $ x $ to make the equation true?"</p>
+       <p>Since a variable is something that changes, we know that a variable won't necessarily have the same value. </p>
+      <p>Here are some more examples of equations with variables in them:</p>
+      <p>$ y + 5 = 6 $</p>
+      <p>$ x + 3 = 3 $</p>
+      <p>$ x + y + z + 10 = 25 $</p>
+      <p>Let's take a look at the next page on steps for how to solve algebraic equations.</p>
+    </stack>
+  </sectionNoTitle>
+
+  <sectionNoTitle name="section4" style="pageLayout">
+    <p style="sectionHeading">Solving Algebraic Equations involving Addition and Subtraction</p>
+    <stack style="contentBG">
+      <p>When working with equations, we want to isolate variables so that the variable is on one side of the equation and a value is on the other side.</p>
+      <p style="subSectionHeading">Left-side and Right-side of an equation</p>
+      <p>Anything to the left of the equal sign is the left-side of an equation and anything to the right of an equal sign is to the 
+      right side of an equation.</p>
+      <p>A general rule when dealing with equations is whatever you do to one side, you must do to the other. For an example: </p>
+      <equation>$ x + 5 = 10 $</equation>
+      <p>Let's take the above equation and subtract 5 from each side.</p>
+      <p>$ x + 5 - 5 = 10 - 5 $</p>
+      <p>$ x + 0 = 5 $ (Let's ignore the 0 since it doesn't have a value)</p>
+      <p>$ x = 5 $</p>
+      <p>See the examples below on how to isolate variables.</p>
+    </stack>
+
+    <p style="sectionHeading">Examples</p>
+    <stack style="contentBG">
+      <p style="subSectionHeading">Example 1</p>
+      <p>$ x + 7 + 2 = 10 + 5 $</p>
+      <p>$ x + 9 = 15 $</p>
+      <p>$ x + 9 - 9 = 15 - 9 $</p>
+      <p>$ x + 0 = 6 $</p>
+      <p>$ x = 6 $</p>
+
+      <p style="subSectionHeading">Example 2</p>
+      <p>$ x + 9 = 0 $</p>
+      <p>$ x + 9 - 9 = 0 - 9 $</p>
+      <p>$ x + 0 = 0 - 9 $</p>
+      <p>$ x = -9 $</p>
+    </stack>
+  </sectionNoTitle>
+
+  <sectionNoTitle name="section5" style="pageLayout">
+    <p style="sectionHeading">Solving Algebraic Equations involving Multiplication and Division</p>
+    <stack style="contentBG">
+      <p>Using the same things we learned from the previous page, we can apply the same rules to multiplication and division.</p>
+      <p>When we multiply/divide one side of an equation, we must multiply the other left-side or right-side expression. For an example: </p>
+      <p>$ 5x = 25 $</p>
+      <p>$ \frac{5x}{5} = \frac{25}{5} $</p>
+      <p>$ x = \frac{25}{5} $</p>
+      <p>$ x = 5 $</p>
+      <p>See some more examples below:</p>
+    </stack>
+
+    <p style="sectionHeading">Examples</p>
+    <stack style="contentBG">
+      <p style="subSectionHeading">Example 1</p>
+      <p>$ 2(x + 7) = 20 $</p>
+      <p>$ \frac{2(x+7)}{2} = \frac{20}{2} $</p>
+      <p>$ x + 7 = 10 $</p>
+      <p>$ x + 7 - 7 = 10 - 7 $</p>
+      <p>$ x = 3 $</p>
+
+      <p style="subSectionHeading">Example 2</p>
+      <p>$ \frac{x}{2} + 20 = 0 $</p>
+      <p>$ 2(\frac{x}{2} + 20) = 2(0) $</p>
+      <p>$ x + 40 = 0 $</p>
+      <p>$ x + 40 - 40 = 0 - 40$</p>
+      <p>$ x + 0 = -40 $</p>
+      <p>$ x = -40 $</p>
+    </stack>
+  </sectionNoTitle>
+
+  <sectionNoTitle style="pageLayout" name="section6">
+    <p style="sectionHeading">Solving Algebraic Equations involving Variables on Both Sides</p>
+    <stack style="contentBG">
+      <p>What happens when there is variables on both sides of the equation? Using two general rules of thumb mentioned earlier:</p>
+      <p>1. We must move all the variables to one side of the equation
+       and values on the other side of the equation.</p>
+      <p>2. If we do something to one side, we must do it to the other as well.</p>
+      <p>For an example:</p>
+      <p>$ 2x + 5 = x - 10 $</p>
+      <p>$ 2x + 5 - 5 = x - 10 - 5 $</p>
+      <p>$ 2x + 0 = x - 15 $</p>
+      <p>$ 2x - x = x - x - 15 $</p>
+      <p>$ x = 0 - 15 $</p>
+      <p>$ x = -15 $</p>
+      <p>See some more examples below:</p>
+    </stack>
+
+    <p style="sectionHeading">Examples</p>
+    <stack style="contentBG">
+      <p style="subSectionHeading">Example 1</p>
+      <p>$ -5x + 2 = 4x - x - 6 $</p>
+      <p>$ -5x + 2 = 3x - 6 $</p>
+      <p>$ -5x + 2 - 3x = 3x - 3x - 6 $</p>
+      <p>$ -8x + 2 = 0 - 6 $</p>
+      <p>$ -8x + 2 = -6 $</p>
+      <p>$ -8x + 2 - 2 = -6 - 2$</p>
+      <p>$ -8x = -8 $</p>
+      <p>$ \frac{-8x}{-8} = \frac{-8}{-8} $</p>
+      <p>$ x = 1 $</p>
+
+      <p style="subSectionHeading">Example 2</p>
+      <p>$ 6y = 5y + 10 $</p>
+      <p>$ 6y - 5y = 5y - 5y + 10 $</p>
+      <p>$ y = 0 + 10 $</p>
+      <p>$ y = 10 $</p>
+    </stack>
+  </sectionNoTitle>
+  
+  <sectionNoTitle name="section7" style="pageLayout">
+    <p style="sectionHeading">Practice</p>
+    <stack style="contentBG">
+      <stack name="mcStack" style="mcStackLayout">
+        <script>
+          local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=3})
+        </script>
+        <p style="subSectionHeading">Question 1</p>
+        <table widths="10% 90%" grid="false">
+          <row>
+            <column>
+              <image src="resources/question.png" inspect="false" />
+            </column>
+            <column>
+              <p>For the following expression, find the value of $ x $.</p>
+              <equation>$ \frac{10 + 5}{x} = 25 $</equation>
+            </column>
+          </row>
+        </table>
+        <table name="choicesTable" grid="false" widths="50% 50%">
+          <row>
+            <column>
+
+
+              <equation>$ x = 25 $</equation>
+              
+              
+            </column>
+            <column>
+
+              <equation>$ x = 15 $</equation>
+
+
+            </column>
+          </row>
+          <row>
+            <column>
+              <button name="btn" content="A" style="btnUnselected">
+                <onClick>
+                  mcController:select(1)
+                </onClick>
+              </button>
+            </column>
+            <column>
+              <button name="btn" content="B" style="btnUnselected">
+                <onClick>
+                  mcController:select(2)
+                </onClick>
+              </button>
+            </column>
+          </row>
+          <row>
+            <column>
+
+              <equation>$ x = \frac{25}{15} $</equation>
+
+
+            </column>
+            <column>
+
+              <equation>$ x = \frac{25}{10} $</equation>
+              
+            </column>
+          </row>
+          <row>
+            <column>
+              <button name="btn" content="C" style="btnUnselected">
+                <onClick>
+                  mcController:select(3)
+                </onClick>
+              </button>
+            </column>
+            <column>
+              <button name="btn" content="D" style="btnUnselected">
+                <onClick>
+                  mcController:select(4)
+                </onClick>
+              </button>
+            </column>
+          </row>
+        </table>
+        <button name="checkBtn" content="Check Answer">
+          <onClick>
+            mcController:checkAnswer()
+          </onClick>
+        </button>
+      </stack>
+      <stack name="mcStack2" style="mcStackLayout">
+        <script>
+          local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=1})
+        </script>
+        <p style="subSectionHeading">Question 2</p>
+        <table widths="10% 90%" grid="false">
+          <row>
+            <column>
+              <image src="resources/question.png" inspect="false" />
+            </column>
+            <column>
+              <p>For the following expression, find the value of $ x $.</p>
+              <equation>$ 10x - 5 = -4x + 2 $</equation>
+            </column>
+          </row>
+        </table>
+        <table name="choicesTable" grid="false" widths="50% 50%">
+          <row>
+            <column>
+
+
+              <equation>$ x = \frac{1}{2} $</equation>
+
+
+            </column>
+            <column>
+
+              <equation>$ x = 7 $</equation>
+
+
+            </column>
+          </row>
+          <row>
+            <column>
+              <button name="btn" content="A" style="btnUnselected">
+                <onClick>
+                  mcController:select(1)
+                </onClick>
+              </button>
+            </column>
+            <column>
+              <button name="btn" content="B" style="btnUnselected">
+                <onClick>
+                  mcController:select(2)
+                </onClick>
+              </button>
+            </column>
+          </row>
+          <row>
+            <column>
+
+              <equation>$ x = \frac{2}{1} $</equation>
+
+
+            </column>
+            <column>
+
+              <equation>$ x = \frac{-1}{2} $</equation>
+
+            </column>
+          </row>
+          <row>
+            <column>
+              <button name="btn" content="C" style="btnUnselected">
+                <onClick>
+                  mcController:select(3)
+                </onClick>
+              </button>
+            </column>
+            <column>
+              <button name="btn" content="D" style="btnUnselected">
+                <onClick>
+                  mcController:select(4)
+                </onClick>
+              </button>
+            </column>
+          </row>
+        </table>
+        <button name="checkBtn" content="Check Answer">
+          <onClick>
+            mcController:checkAnswer()
+          </onClick>
+        </button>
+      </stack>
+      <stack name="mcStack3" style="mcStackLayout">
+        <script>
+          local mcController = MCController:new({choiceBtns={choicesTable:Child(2):Child(1).btn, choicesTable:Child(2):Child(2).btn, choicesTable:Child(4):Child(1).btn, choicesTable:Child(4):Child(2).btn}, checkBtn=checkBtn, answer=4})
+        </script>
+        <p style="subSectionHeading">Question 3</p>
+        <table widths="10% 90%" grid="false">
+          <row>
+            <column>
+              <image src="resources/question.png" inspect="false" />
+            </column>
+            <column>
+              <p>For the following expression, find the value of $ x $.</p>
+              <equation>$ x(10 + 5) = 30 $</equation>
+            </column>
+          </row>
+        </table>
+        <table name="choicesTable" grid="false" widths="50% 50%">
+          <row>
+            <column>
+
+
+              <equation>$ x = -2 $</equation>
+
+
+            </column>
+            <column>
+
+              <equation>$ x = 15 $</equation>
+
+
+            </column>
+          </row>
+          <row>
+            <column>
+              <button name="btn" content="A" style="btnUnselected">
+                <onClick>
+                  mcController:select(1)
+                </onClick>
+              </button>
+            </column>
+            <column>
+              <button name="btn" content="B" style="btnUnselected">
+                <onClick>
+                  mcController:select(2)
+                </onClick>
+              </button>
+            </column>
+          </row>
+          <row>
+            <column>
+
+              <equation>$ x = 4 $</equation>
+
+
+            </column>
+            <column>
+
+              <equation>$ x = 2 $</equation>
+
+            </column>
+          </row>
+          <row>
+            <column>
+              <button name="btn" content="C" style="btnUnselected">
+                <onClick>
+                  mcController:select(3)
+                </onClick>
+              </button>
+            </column>
+            <column>
+              <button name="btn" content="D" style="btnUnselected">
+                <onClick>
+                  mcController:select(4)
+                </onClick>
+              </button>
+            </column>
+          </row>
+        </table>
+        <button name="checkBtn" content="Check Answer">
+          <onClick>
+            mcController:checkAnswer()
+          </onClick>
+        </button>
+      </stack>
+    </stack>
+    
+  </sectionNoTitle>
+
+</document>

@@ -3,7 +3,7 @@
 
   <!-- Meta Data -->
   <metadata>
-    <title>NUM-3.2-Proportions and Linear Relations</title>
+    <title>NUM-3.1-Proportions and Linear Relations</title>
     <creator>Sidique</creator>
     <coverImage src="resources/cover.png" />
     <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
@@ -37,7 +37,7 @@
   
   <!-- Section 1 -->
   <section name="section1" style="pageLayout">
-    <title style="chapterTitle">3.2 Proportions and Linear Relations</title>
+    <title style="chapterTitle">3.1 Proportions and Linear Relations</title>
     <p style="sectionHeading">Introduction</p>
     <image src="resources/lineargraph.png">
       <style>

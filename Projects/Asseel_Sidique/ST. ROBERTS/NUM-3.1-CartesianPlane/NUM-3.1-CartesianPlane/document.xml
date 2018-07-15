@@ -2,7 +2,7 @@
 <document xmlns="http://resources.qdexapps.com/schema/v1/QDocument.xsd" name="myDocument" id="G99219BBC_4361_4BBF_9CEB_9C69BC7FC8D5">
 
   <metadata>
-    <title>NUM-3.1-Cartesian Plane and T-tables</title>
+    <title>NUM-3.2-Cartesian Plane and T-tables</title>
     <creator>Sidique</creator>
     <coverImage src="resources/cover.png" />
     <abstract>This document is for testing purposes only. The material that is presented here should be treated as an example only.</abstract>
@@ -49,7 +49,7 @@
   </section>
 
   <sectionNoTitle name="section2" style="pageLayout">
-    <p style="sectionHeading">Properties of the Cartesian Plane</p>
+    <p style="sectionHeading">3.2 Properties of the Cartesian Plane</p>
     <stack style="contentBG">
       <p style="subSectionHeading">Origin</p>
       <p>

@@ -14,12 +14,15 @@
     </Content>
     <Content Include="resources\answer.png" />
     <Content Include="resources\archer_1.mp4" />
+    <Content Include="resources\ball.png" />
     <Content Include="resources\Basketball_1.png" />
     <Content Include="resources\bowman.mp4" />
     <Content Include="resources\Cannon_1.png" />
     <Content Include="resources\Cliff_1.png" />
+    <Content Include="resources\cliff_2.png" />
     <Content Include="resources\lassonde.png" />
     <Content Include="resources\LassondeLogo.png" />
+    <Content Include="resources\pool.png" />
     <Content Include="resources\question.png" />
     <Content Include="resources\right.png" />
     <Content Include="resources\UFO_1.png" />

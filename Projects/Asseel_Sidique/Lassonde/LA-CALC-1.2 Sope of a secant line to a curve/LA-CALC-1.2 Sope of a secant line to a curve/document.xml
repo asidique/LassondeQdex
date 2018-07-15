@@ -556,12 +556,20 @@
 
         char.textX(xLab, {4.5, 0.2}, .2);
         char.textY(yLab, {0.2, 4.5}, .2);
-      
-        local series = section7.content.myPlot.l1;
-      
-        for x=0,5,0.1 do
-          series:Add(x, -1/4*math.pow(x,2) + 4);
+
+        ballWidth = 0.75;
+        ballCenter = vector({7,4});
+
+        function drawBall(width, center)
+        content.myPlot.ball:Clear();
+        content.myPlot.ball:Add(center[1]-width/2, center[2]-width/2);
+        content.myPlot.ball:Add(center[1]-width/2, center[2]+width/2);
+        content.myPlot.ball:Add(center[1]+width/2, center[2]+width/2);
+        content.myPlot.ball:Add(center[1]+width/2, center[2]-width/2);
+        content.myPlot.ball:Update();
         end
+        drawBall(ballWidth, ballCenter);
+        local series = section7.content.myPlot.l1;
       </onDocumentOpened>
       <script>
         local stepsController = StepsController:new({stepsStack=stepsStack, numOfSteps=3})
@@ -569,33 +577,62 @@
       <p style="sectionHeading">Word Problem</p>
       <stack name="content" orientation="vertical" style="contentBG">
         <p style="subSectionHeading">Question 1</p>
-        <p style="justifiedText">The motion of a ball falling from a vertical height of 4 metres is given by the function $ h( t ) = - \frac{1}{4} x^2 + 5 $ where $ t $ is the time in secionds</p>
+        <p style="justifiedText">The motion of a ball falling from a vertical height of 4 metres is given by the function $ h( t ) = - \frac{1}{4} t^2 + 4 $ where $ t $ is the time in seconds</p>
+        <button name="b1" content="Start Simulation">
+          <onClick>
+            content.s1:Start();
+          </onClick>
+          
+        </button>
         <xyPlot name="myPlot" pan="disabled" tap="disabled" zoom="disabled">
+          <style>
+            <aspectRatio>0.5</aspectRatio>
+          </style>
             <axis dim="y" auto="fixed" min="0" max="5"></axis>
-            <axis dim="x" auto="fixed" min="0" max="5"></axis>
+            <axis dim="x" auto="fixed" min="0" max="9"></axis>
             <series capacity="2" draw="line">
               <style>
                 <foreground color="black" />
                 <lineThickness>3</lineThickness>
               </style>
               <data>
-                -10 0; 10 0
+                -10 0; 5 0
               </data>
             </series>
-            <series capacity="2" draw="line">
+            <series capacity="3" draw="line">
               <style>
                 <foreground color="black" />
                 <lineThickness>3</lineThickness>
               </style>
               <data>
-                0 90; 0 -10
+                0 5; 0 -10
               </data>
             </series>
+            <texture name="ballTexture">
+              <image src="resources/pool.png" />
+            </texture>
             <series name="xLabel" manual="true"></series>
             <series name="yLabel" manual="true"></series>
             <series name="l1" manual="true" style="functionLine" />
             <series name="tang" style="tangentLine"></series>
+            <series name="ball" manual="true" draw="radialFill">
+              <textureCoords ref="ballTexture">0 0; 0 1; 1 1; 1 0</textureCoords>
+            </series>
           </xyPlot>
+        <simulation name="s1" duration="4">
+          <onUpdate>
+            t = time*2;
+            if t &lt; 4 then
+              myPlot.l1:Add(t, -1/4*math.pow(t,2) + 4);
+              drawBall(ballWidth, vector({ballCenter[1], ballCenter[2]-(1/4)*t*t}));
+            end
+            myPlot.l1:Update();
+          </onUpdate>
+          <onDuration>
+            myPlot.l1:Clear();
+            myPlot.l1:Update();
+          </onDuration>
+        </simulation>
       </stack>
       <stack name="stepsStack">
         <!--Each step is a stack, and each step has alternating background colors-->
@@ -636,10 +673,10 @@
                 </table>
                 <stack name="solution" style="collapsed">
                   <p> The ball hits the floor when $ h( t ) = 0 $. So plugging that in, we get: </p>
-                  <p> $ 0 =  - \frac{1}{4} x^2 + 5 $</p>
-                  <p> $ 4 = \frac{1}{4} x^2 $ </p>
-                  <p> $ 16 = x^2 $</p>
-                  <p> $ x = 4 $</p>
+                  <p> $ 0 =  - \frac{1}{4} t^2 + 4 $</p>
+                  <p> $ 4 = \frac{1}{4} t^2 $ </p>
+                  <p> $ 16 = t^2 $</p>
+                  <p> $ t = 4 $</p>
                 </stack>
                 <button content="Check Answer">
                   <onClick>
@@ -701,7 +738,7 @@
             </row>
           </table>
           <stack name="solution" style="collapsed">
-            <p> To find the IROC at $ t = 2 $, use the formula for instantaneous rate of change. $ \frac{f( x ) - f( a )}{x - a} $</p>
+            <p> To find the IROC at $ t = 2 $, use the formula for instantaneous rate of change. $ \frac{f( t ) - f( a )}{t - a} $</p>
             <p> $ IROC = \frac{ 3.00 - 3.001 }{ 2.00 - 2.001 } $</p>
             <p> $ IROC = -1 $ </p>
           </stack>
@@ -766,11 +803,11 @@
                   </row>
                 </table>
                 <stack name="solution" style="collapsed">
-                  <p> The speed of the ball can be determined using the formula $ \frac{ f( x ) - f( h ) }{ x - h } $ where x = 0 and h = 4</p>
-                  <p> $ f( 0 ) = 5 $</p>
-                  <p> $ f( 4 ) = 1 $</p>
-                  <p> $ Average = \frac{ 5 - 1 }{ 0 - 4 } $</p>
-                  <p> $ Average = -1 \frac{m}{s} $</p>
+                  <p> The speed of the ball can be determined using the formula $ \frac{ f( t ) - f( h ) }{ t - h } $ where t = 0 and h = 4</p>
+                  <p> $ h( 0 ) = 4 $</p>
+                  <p> $ h( 4 ) = 1 $</p>
+                  <p> $ Average = \frac{ 4 - 1 }{ 0 - 4 } $</p>
+                  <p> $ Average = \frac{-3}{4} \frac{m}{s} $</p>
                 </stack>
                 <button content="Check Answer">
                   <onClick>

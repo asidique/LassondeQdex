@@ -176,26 +176,28 @@
 	  </sectionNoTitle>
 
   <sectionNoTitle name="section3" style="pageLayout">
-    <onDocumentOpened>
-      contentStack.vid.Loop = true;
-      contentStack.vid.ControlsEnabled = false;
-      contentStack.vid:Play();
-    </onDocumentOpened>
     <p style="sectionHeading">Definition of a Derivative</p>
     <stack name="contentStack" style="contentBG">
       <p>The formal definition of a derivative is denoted by:</p>
       <equation> $ \frac{d}{dx} f(x) = \displaystyle{\lim_ {h \to 0 }} \frac{f(x+h) - f(x)}{h} $</equation>
       <p>In Algebra, it is easy to determine the slope of a line using the $ \frac{rise}{run} $ formula denoted by $ \frac{ \triangle y}{ \triangle x } $. To find
       the slope of a curve, we use derivatives to help us find the answer.</p>
-      <p>To give an idea of what the formula above really does, take a look at the video of a function below. Notice how as you zoom in on a curved part of the graph, it appears to be a straight line. It's not
-      magic, it's math!</p>
-      <video name="vid" src="resources/zoomincurve.mp4">
+      <p>To give an idea of what the formula above really does, zoom in on the plot below. Notice how it appears curved at first, but as you zoom in, it turns into a straight line.</p>
+      <xyPlot manual="true" zoom="enabled" pan="disabled" tap="disabled">
         <style>
-          <horizontalAlignment>center</horizontalAlignment>
           <aspectRatio>1</aspectRatio>
-          <widthPercentage>80%</widthPercentage>
         </style>
-      </video>
+        <onDocumentOpened>
+          for i=-20, 20, 0.01 do
+            graph:Add(i, i^2);
+          end
+        </onDocumentOpened>
+        <axis dim="x" min="-5" max="5" auto="none"></axis>
+        <axis dim="y" min="-2" max="7" auto="none"></axis>
+        <series name="graph">
+          
+        </series>
+      </xyPlot>
       
     </stack>
     <p style="sectionHeading">Derivative Notations</p>

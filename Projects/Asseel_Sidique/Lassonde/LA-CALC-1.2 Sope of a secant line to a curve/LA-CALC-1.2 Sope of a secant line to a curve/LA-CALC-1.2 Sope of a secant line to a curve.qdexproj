@@ -16,6 +16,7 @@
     <Content Include="resources\invisible.png" />
     <Content Include="resources\lassonde.png" />
     <Content Include="resources\LassondeLogo.png" />
+    <Content Include="resources\pool.png" />
     <Content Include="resources\question.png" />
     <Content Include="resources\right.png" />
     <Content Include="resources\secanttitle.png" />

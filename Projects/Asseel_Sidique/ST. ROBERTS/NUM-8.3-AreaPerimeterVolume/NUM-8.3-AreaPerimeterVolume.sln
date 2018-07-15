@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2024
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{3509FA56-3B69-4017-88D1-3C70D67D8588}") = "NUM-8.3-AreaPerimeterVolume", "NUM-8.3-AreaPerimeterVolume\NUM-8.3-AreaPerimeterVolume.qdexproj", "{E8EB2933-A781-418E-ADC4-DB15D561C54C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E8EB2933-A781-418E-ADC4-DB15D561C54C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8EB2933-A781-418E-ADC4-DB15D561C54C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8EB2933-A781-418E-ADC4-DB15D561C54C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8EB2933-A781-418E-ADC4-DB15D561C54C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {52135CDF-2BFF-4507-9CDE-A1E77A32A4D5}
+	EndGlobalSection
+EndGlobal

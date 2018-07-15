@@ -680,12 +680,22 @@
           <drawing name="xy1" pan="disabled" tap="disabled" zoom="disabled">
             <axis dim="x" min="-10" max="25" auto="fixed"></axis>
             <axis dim="y" min="-5" max="25" auto="fixed"></axis>
+            <texture name="poolBall">
+              <image src="resources/pool.png" />
+            </texture>
             <series name="table" draw="segmentedFill" capacity="5">
               <style>
                 <foreground color="green" />
               </style>
             </series>
-            <series name="ball" draw="radialFill" capacity="720">
+            <series name="ball" draw="radialFill" manual="true" capacity="4">
+              <style>
+                <foreground color="white" />
+                <background color="white" />
+              </style>
+              <textureCoords ref="poolBall">0 0; 0 1; 1 1; 1 0</textureCoords>
+            </series>
+            <series name="ball2" draw="radialFill" capacity="720">
             </series>
             <series name="ballTrail" draw="lineSegments">
               <style>
@@ -701,28 +711,38 @@
           </drawing>
           <script>
             plotTools.drawCircle(xy1.ball, ({10, 20}), 1, color.red);
-             ballPosX = 10;
-             ballPosY = 20;
-             initialVelocityX11 = 2.4;
-             gravity = -4.8;
-             timer = 0;
-             xy1.table:Add(10, 19.5);
-             xy1.table:Add(10, 0);
-             xy1.table:Add(0, 0);
-             xy1.table:Add(0, 19.5);
-             xy1.table:Add(10, 19.5);
+
+            ballPosX = 10;
+            ballPosY = 20;
+
+            initialVelocityX11 = 2.4;
+            gravity = -4.8;
+            timer = 0;
+            xy1.table:Add(10, 19.5);
+            xy1.table:Add(10, 0);
+            xy1.table:Add(0, 0);
+            xy1.table:Add(0, 19.5);
+            xy1.table:Add(10, 19.5);
+            xy1.ball:Add(ballPosX - 1, ballPosY - 1);
+            xy1.ball:Add(ballPosX - 1, ballPosY + 1);
+            xy1.ball:Add(ballPosX + 1, ballPosY + 1);
+            xy1.ball:Add(ballPosX + 1, ballPosY - 1);
+            xy1.ball:Update();
           </script>
           <simulation name="sim1" duration="3" loop="0" asynchronous="false" period="0.05">
             <onUpdate>
               timer = time;
               if timer &lt; 1.5 then
-                ballX = ballPosX+2.4*timer*initialVelocityX11;
-                ballY = ballPosY+gravity*timer^2
-                plotTools.drawCircle(xy1.ball, ({ballX,ballY}), 1, color.red);
-                xy1.ballTrail:Add(ballX, ballY);
-                xy1.ballTrail:Update();
-                xy1.ball:Update();
-              elseif timer &gt; 1.5 then
+              ballX = ballPosX+2.4*timer*initialVelocityX11;
+              ballY = ballPosY+gravity*timer^2
+              xy1.ball:Add(ballX - 1, ballY - 1);
+              xy1.ball:Add(ballX - 1, ballY + 1);
+              xy1.ball:Add(ballX + 1, ballY + 1);
+              xy1.ball:Add(ballX + 1, ballY - 1);
+              xy1.ballTrail:Add(ballX, ballY);
+              xy1.ballTrail:Update();
+              xy1.ball:Update();
+              elseif timer &gt; 1.49 then
                 xy1.horizontalLine:Add(10, 0);
                 xy1.horizontalLine:Add(20, 0);
                 char.textX(xy1.horizontalLabel, ({15, -0.2}), 0.5, color.black);
@@ -898,13 +918,30 @@
           <drawing name="xy1" pan="disabled" tap="disabled" zoom="disabled">
             <axis dim="x" min="-2" max="35" auto="fixed"></axis>
             <axis dim="y" min="-5" max="35" auto="fixed"></axis>
+            <series name="grass" draw="triangles">
+              <style>
+                <foreground color="darkGreen" />
+                <background color="darkGreen" />
+              </style>
+              <data>-2 -7; -2 7; 35 7; 35 7; 35 -5; -2 -7;</data>
+            </series>
+            <texture name="soccerBall">
+              <image src="resources/ball.png" />
+            </texture>
             <series name="table" capacity="5">
               <style>
                 <foreground color="gray" />
                 <lineThickness>4</lineThickness>
               </style>
             </series>
-            <series name="ball" draw="radialFill" capacity="720">
+            <series name="ball" draw="radialFill" manual="true" capacity="4">
+              <style>
+                <foreground color="white" />
+                <background color="white" />
+              </style>
+              <textureCoords ref="soccerBall">0 0; 0 1; 1 1; 1 0</textureCoords>
+            </series>
+            <series name="ball2" draw="radialFill" capacity="720">
             </series>
             <series name="ballTrail" draw="lineSegments">
               <style>
@@ -920,9 +957,13 @@
           </drawing>
           <simulation name="sim1" duration="3" loop="0" asynchronous="false" period="0.05">
             <onActivePageChanged>
-              plotTools.drawCircle(xy1.ball, ({0, 0}), 1, color.red);
+
               ballPosX2 = 0;
               ballPosY2 = 0;
+              xy1.ball:Add(ballPosX2 - 1, ballPosY2 - 1);
+              xy1.ball:Add(ballPosX2 - 1, ballPosY2 + 1);
+              xy1.ball:Add(ballPosX2 + 1, ballPosY2 + 1);
+              xy1.ball:Add(ballPosX2 + 1, ballPosY2 - 1);
               initialVelocityX22 = 6.7;
               initialVelocityY = 9.7;
               gravity = -4.8;
@@ -931,13 +972,17 @@
               xy1.table:Add(28, 8);
               xy1.table:Add(35, 8);
               xy1.table:Add(35, 0);
+              xy1.ball:Update();
             </onActivePageChanged>
             <onUpdate>
               timer = time;
               if timer &lt; 2 then
               ballX2 = ballPosX2+2.4*timer*initialVelocityX22;
               ballY2 = ballPosY2+initialVelocityY*time+gravity*timer^2
-              plotTools.drawCircle(xy1.ball, ({ballX2,ballY2}), 1, color.red);
+              xy1.ball:Add(ballX2 - 1, ballY2 - 1);
+              xy1.ball:Add(ballX2 - 1, ballY2 + 1);
+              xy1.ball:Add(ballX2 + 1, ballY2 + 1);
+              xy1.ball:Add(ballX2 + 1, ballY2 - 1);
               xy1.ballTrail:Add(ballX2, ballY2);
               xy1.ballTrail:Update();
               xy1.ball:Update();
@@ -1204,8 +1249,19 @@
         </style>
         <axis dim="x" auto="lockAspectRatio" min="-3" max="10"></axis>
         <axis dim="y" auto="lockAspectRatio" min="-3" max="10"></axis>
+        
         <series name="projectile" draw="segmentedFill" capacity="5"></series>
-        <series name="cliff" draw="segmentedFill" capacity="5"></series>
+        <texture name="cliffTexture">
+          <image src="resources/cliff_2.png" />
+        </texture>
+        <series name="cliff" draw="radialFill" manual="true" capacity="4">
+          <style>
+            <foreground color="white" />
+            <background color="white" />
+          </style>
+          <textureCoords ref="cliffTexture">0 0; 0 1; 1 1; 1 0</textureCoords>
+        </series>
+        <series name="cliff2" draw="segmentedFill" capacity="5"></series>
         <series name="graphLine" draw="lineSegments"></series>
       </drawing>
       <script>
