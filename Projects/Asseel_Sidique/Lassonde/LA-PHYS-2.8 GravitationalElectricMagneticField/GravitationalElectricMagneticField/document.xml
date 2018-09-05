@@ -40,7 +40,7 @@
 
  <!-- Section 1 -->
 <section name="section1" style="pageLayout">
-  <title style="chapterTitle">2.9 Gravitational, Magnetic and Electric Fields</title>
+  <title style="chapterTitle">2.8 Gravitational, Magnetic and Electric Fields</title>
   <p style="sectionHeading">Introduction</p>
   <image src="resources/arora.jpeg" />
   <stack orientation="vertical" style="contentBG">
@@ -123,35 +123,95 @@
   <p style="sectionHeading">Visualizing Gravitational Fields</p>
   <!--SIMULATION GOES HERE-->
   <stack orientation="vertical" style="contentBG">
+    
     <drawing name="plot1">
+      <onDocumentOpened>
+        function drawPlanet(ser, position, rad)
+          ser:Clear();
+          ser:Add(position[1]-rad/2, position[2]-rad/2);
+          ser:Add(position[1]-rad/2, position[2]+rad/2);
+          ser:Add(position[1]+rad/2, position[2]+rad/2);
+          ser:Add(position[1]+rad/2, position[2]-rad/2);
+          ser:Update();
+        end
+      </onDocumentOpened>
       <style>
         <aspectRatio>1</aspectRatio>
       </style>
+      <texture name="bgTexture">
+        <image src="resources/grid.png" />
+      </texture>
+      <texture name="sunTexture">
+        <image src="resources/sun.png" />
+      </texture>
+      <texture name="earthTexture">
+        <image src="resources/earth.png" />
+      </texture>
+      <texture name="marsTexture">
+        <image src="resources/mars.png" />
+      </texture>
+      <texture name="venusTexture">
+        <image src="resources/venus.png" />
+      </texture>
       <axis dim="x" auto="none" min="20" max="60"></axis>
       <axis dim="y" auto="none" min="20" max="60"></axis>
-      <series name="sun" draw="radialFill"></series>
-      <series name="earth" draw="radialFill" capacity="720"></series>
-      <series name="mars" draw="radialFill" capacity="720"></series>
-      <series name="mercury" draw="radialFill" capacity="720"></series>
+      <series name="bg" draw="radialFill" manual="true">
+        <style>
+          <foreground color="white" />
+          <background color="white" />
+        </style>
+        <textureCoords ref="bgTexture">0 0; 0 1; 1 1; 1 0;</textureCoords>
+        <data>20 20; 20 60; 60 60; 60 20;</data>
+      </series>
       <series name="sunLine" capacity="9000"></series>
       <series name="earthLine" capacity="7000"></series>
       <series name="mercuryLine" capacity="4000"></series>
+      <series name="sun" draw="radialFill" manual="true">
+        <style>
+          <foreground color="white" />
+          <background color="white" />
+        </style>
+        <textureCoords ref="sunTexture">0 0; 0 1; 1 1; 1 0;</textureCoords>
+      </series>
+      <series name="earth" draw="radialFill">
+        <style>
+          <foreground color="white" />
+          <background color="white" />
+        </style>
+        <textureCoords ref="earthTexture">0 0; 0 1; 1 1; 1 0;</textureCoords>
+      </series>
+      <series name="mars" draw="radialFill">
+        <style>
+          <foreground color="white" />
+          <background color="white" />
+        </style>
+        <textureCoords ref="marsTexture">0 0; 0 1; 1 1; 1 0;</textureCoords>
+      </series>
+      <series name="mercury" draw="radialFill">
+        <style>
+          <foreground color="white" />
+          <background color="white" />
+        </style>
+        <textureCoords ref="venusTexture">0 0; 0 1; 1 1; 1 0;</textureCoords>
+      </series>
+      
     </drawing>
     <simulation name="sim1" period="0.01" loop="1">
       <onDocumentOpened>
-        plotTools.drawCircle(plot1.sun, {sunX, sunY}, 2, color.yellow)
-        plotTools.drawCircle(plot1.earth, {earthX, earthY}, 1, color.green);
-        plotTools.drawCircle(plot1.mars, {marsX, marsY}, 0.8, color.orange);
-        plotTools.drawCircle(plot1.mercury, {mercX, mercY}, 0.6, color.red);
+
+        drawPlanet(plot1.sun, {sunX, sunY}, 4)
+        drawPlanet(plot1.earth, {earthX, earthY}, 2);
+        drawPlanet(plot1.mars, {marsX, marsY}, 2);
+        drawPlanet(plot1.mercury, {mercX, mercY}, 1);
         plotTools.drawCircle(plot1.mercuryLine, {sunX, sunY}, sunX-mercX, color.red);
         plotTools.drawCircle(plot1.earthLine, {sunX, sunY}, 10.63, color.green);
         plotTools.drawCircle(plot1.sunLine, {sunX, sunY}, 14.14, color.orange);
       </onDocumentOpened>
       <onUpdate>
         if plot1.earth ~= null and plot1.mars ~= null and plot1.mercury ~= null then
-        plot1.earth.Transform = matrixf.translation(sunX,sunY,0)*matrixf.rotationAboutAxis(0,0,1,-time)*matrixf.translation(-sunX,-sunY,0);
-        plot1.mars.Transform = matrixf.translation(sunX,sunY,0)*matrixf.rotationAboutAxis(0,0,1,-time)*matrixf.translation(-sunX,-sunY,0);
-        plot1.mercury.Transform = matrixf.translation(sunX,sunY,0)*matrixf.rotationAboutAxis(0,0,1,-time)*matrixf.translation(-sunX,-sunY,0);
+          plot1.earth.Transform = matrixf.translation(sunX,sunY,0)*matrixf.rotationAboutAxis(0,0,1,-time)*matrixf.translation(-sunX,-sunY,0);
+          plot1.mars.Transform = matrixf.translation(sunX,sunY,0)*matrixf.rotationAboutAxis(0,0,1,-time)*matrixf.translation(-sunX,-sunY,0);
+          plot1.mercury.Transform = matrixf.translation(sunX,sunY,0)*matrixf.rotationAboutAxis(0,0,1,-time)*matrixf.translation(-sunX,-sunY,0);
         end
       </onUpdate>
     </simulation>
@@ -201,10 +261,10 @@
       playerScore = 0;
 
       playerObj = vector2D:new();
-      playerObj.width = 2;
-      playerObj.height = 2;
+      playerObj.width = 5;
+      playerObj.height = 5;
       particleArray = {};
-
+      
       particle = vector2D:new();
       particle.x = 25;
       particle.y = 25;
@@ -271,10 +331,13 @@
           playerObj.x = plot1.XAxis.Min + state.Current.X * (plot1.XAxis.Max - plot1.XAxis.Min);
           playerObj.y = plot1.YAxis.Min + state.Current.Y * (plot1.YAxis.Max - plot1.YAxis.Min);
 
-          plotTools.drawCircle(plot1.main, {playerObj.x, playerObj.y}, playerObj.width, color.yellow);
+          drawPlanet(plot1.main, {playerObj.x, playerObj.y}, playerObj.width);
           plot1.main:Update();
         end
       </onPan>
+      <texture name="sunTexture">
+        <image src="resources/sun.png" />
+      </texture>
       <series name="background" draw="segmentedFill">
         <style>
           <foreground color="black" />
@@ -284,7 +347,13 @@
         </data>
 
       </series>
-      <series manual="true" name="main" draw="radialFill"></series>
+      <series name="main" draw="radialFill" manual="true">
+        <style>
+          <foreground color="white" />
+          <background color="white" />
+        </style>
+        <textureCoords ref="sunTexture">0 0; 0 1; 1 1; 1 0;</textureCoords>
+      </series>
       <series manual="true" name="particle1" capacity="5" draw="segmentedFill"></series>
       <series manual="true" name="particle2" capacity="5" draw="segmentedFill"></series>
       <series manual="true" name="particle3" capacity="5" draw="segmentedFill"></series>
@@ -363,7 +432,7 @@
         section5.gameStack.plot1.main:Clear();
         playerObj.width = massSlider.Value;
         playerObj.height = massSlider.Value;
-        plotTools.drawCircle(section5.gameStack.plot1.main, {playerObj.x, playerObj.y}, playerObj.width, color.yellow);
+        drawPlanet(section5.gameStack.plot1.main, {playerObj.x, playerObj.y}, playerObj.width);
         section5.gameStack.plot1.main:Update();
       </onValueChanged>
     </slider>
@@ -1332,6 +1401,8 @@
     </stack>
   </stack>
 </sectionNoTitle>
+  
+  
 
   
     

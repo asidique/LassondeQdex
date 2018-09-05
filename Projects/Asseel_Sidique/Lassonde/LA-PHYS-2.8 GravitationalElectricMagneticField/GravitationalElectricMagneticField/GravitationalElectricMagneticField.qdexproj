@@ -15,6 +15,7 @@
     <Content Include="resources\answer.png" />
     <Content Include="resources\arora.jpeg" />
     <Content Include="resources\blackhole.jpg" />
+    <Content Include="resources\earth.png" />
     <Content Include="resources\electricfield.png" />
     <Content Include="resources\electricfield2.png" />
     <Content Include="resources\electricfield3.png" />
@@ -24,6 +25,7 @@
     <Content Include="resources\gravity1.png" />
     <Content Include="resources\gravity2.png" />
     <Content Include="resources\gravity3.png" />
+    <Content Include="resources\grid.png" />
     <Content Include="resources\lassonde.png" />
     <Content Include="resources\LassondeLogo.png" />
     <Content Include="resources\magneticfield.png" />
@@ -31,10 +33,13 @@
     <Content Include="resources\magneticq2.png" />
     <Content Include="resources\magneticq3.png" />
     <Content Include="resources\magneticvselectric.png" />
+    <Content Include="resources\mars.png" />
     <Content Include="resources\orbit.png" />
     <Content Include="resources\parallelplates.png" />
     <Content Include="resources\question.png" />
     <Content Include="resources\right.png" />
+    <Content Include="resources\sun.png" />
+    <Content Include="resources\venus.png" />
     <Content Include="resources\wrong.png" />
     <Content Include="resources\york.png" />
   </ItemGroup>

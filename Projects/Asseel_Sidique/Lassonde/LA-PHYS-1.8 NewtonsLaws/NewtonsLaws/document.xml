@@ -44,7 +44,7 @@
 
   <!-- Section 1 -->
   <section name="section1" style="pageLayout">
-    <title style="chapterTitle">1.1 Newton's Laws</title>
+    <title style="chapterTitle">1.8 Newton's Laws</title>
     <p style="sectionHeading">Introduction</p>
     <image src="resources/newton.png">
       <style>
@@ -104,6 +104,7 @@
         puckPos = vector({1, 1.5});
         puckSpeed = 5;
         puckFriction = 0;
+        disableSlider = false;
         function drawObject(ser, width, height, pos)
           ser:Clear();
           ser:Add(pos[1] - width/2, pos[2] - height/2);
@@ -157,7 +158,7 @@
 
     <simulation name="sim1" duration="4">
       <onUpdate>
-        puckFriction = sliderA.Value/255 * 2;
+          
         if(puckPos[1] &lt; 1 + puckSpeed*time - puckFriction*time*time) then
           puckPos[1] = 1 + puckSpeed*time - puckFriction*time*time;
         end
@@ -170,6 +171,7 @@
         puckSpeed = 5;
         puckFriction = 0;
         drawObject(aPlot.puck, puckWidth, puckHeight, puckPos);
+        disableSlider = false;
       </onDuration>
     </simulation>
 
@@ -185,8 +187,8 @@
         <horizontalAlignment>center</horizontalAlignment>
       </style>
       <onValueChanged>
-        aPlot.bg2.Style.ForegroundColor = color.rgba(255, 255, 255, value);
-        aPlot.bg2.Style.BackgroundColor = color.rgba(255, 255, 255, value);
+          aPlot.bg2.Style.ForegroundColor = color.rgba(255, 255, 255, value);
+          aPlot.bg2.Style.BackgroundColor = color.rgba(255, 255, 255, value);
       </onValueChanged>
     </slider>
 
@@ -198,6 +200,7 @@
         <marginBottom>50</marginBottom>
       </style>
       <onClick>
+        puckFriction = sliderA.Value/255 * 2;
         sim1:Start();
       </onClick>
     </button>
