@@ -561,12 +561,12 @@
         ballCenter = vector({7,4});
 
         function drawBall(width, center)
-        content.myPlot.ball:Clear();
-        content.myPlot.ball:Add(center[1]-width/2, center[2]-width/2);
-        content.myPlot.ball:Add(center[1]-width/2, center[2]+width/2);
-        content.myPlot.ball:Add(center[1]+width/2, center[2]+width/2);
-        content.myPlot.ball:Add(center[1]+width/2, center[2]-width/2);
-        content.myPlot.ball:Update();
+          content.myPlot.ball:Clear();
+          content.myPlot.ball:Add(center[1]-width/2, center[2]-width/2);
+          content.myPlot.ball:Add(center[1]-width/2, center[2]+width/2);
+          content.myPlot.ball:Add(center[1]+width/2, center[2]+width/2);
+          content.myPlot.ball:Add(center[1]+width/2, center[2]-width/2);
+          content.myPlot.ball:Update();
         end
         drawBall(ballWidth, ballCenter);
         local series = section7.content.myPlot.l1;
@@ -582,7 +582,6 @@
           <onClick>
             content.s1:Start();
           </onClick>
-          
         </button>
         <xyPlot name="myPlot" pan="disabled" tap="disabled" zoom="disabled">
           <style>

@@ -30,14 +30,13 @@
           <textAlignment>center</textAlignment>
           <marginTop>30</marginTop>
           <foreground color="255 255 255" />
-          
         </style>
       </p>
       <image style="tiny" src="resources/york.png" inspect="false" />
     </stack>
   </footer>
-  <!--                                      Header & Footer END                                         --> 
   
+  <!--                                      Header & Footer END                                         --> 
   <!-- Section 1 --> 
   <section name="section1" style="pageLayout">
     <title style="chapterTitle">1.1 Introduction to Differential Calculus</title>
@@ -48,7 +47,6 @@
       we will be giving an introduction to Differential Calculus which focuses mainly on derivatives. To introduce this topic, let us start with a simple question.</p>  
     </stack>
   </section>
-
 
   <sectionNoTitle name="section2" style="pageLayout">
       <script>
@@ -470,8 +468,84 @@
 		  <p style="sectionHeading">Example 3</p>
 		  <stack orientation="vertical" style="contentBG">
         <p style="subSectionHeading">Question</p>
-        <equation>Let $ f(x) = 2x^2-16x+35 $ Find the derivative of $ f(x) $ using the definition of the derivative.</equation>      
+        <equation>Let $ f(x) = 2x^2-16x+35 $ Find the derivative of $ f(x) $ using the definition of the derivative.</equation>     
+        <button name="p1Show" content="Show Graph">
+          <onClick>
+            if p1Show.Text == "Show Graph" then
+              p1Show.Text = "Hide Graph"
+              content.Style.Visibility = "visible";
+            else
+              p1Show.Text = "Show Graph"
+              content.Style.Visibility = "collapsed";
+            end
+          </onClick>
+        </button>
 		  </stack>
+      
+      <stack name="content" style="contentBG">
+        <onDocumentOpened>
+          for i=-1, 8, 0.01 do
+            p1.func1:Add(i, 2*i*i - 16*i + 35)
+          end
+        </onDocumentOpened>
+        <style>
+          <visibility>collapsed</visibility>
+        </style>
+      <plot name="p1" tap="disabled">
+        <axis dim="x" min="1.5" max="6.5" auto="none"></axis>
+        <axis dim="y" min="2" max="8" auto="none"></axis>
+        <series name="func1"></series>
+        <series name="slope1" draw="line" capacity="2">
+          <style>
+            <foreground color="cadetBlue" />
+          </style>
+        </series>
+        <series name="poi1" draw="points" capacity="1">
+          <style>
+            <foreground color="cadetBlue" />
+          </style>
+        </series>
+        <series name="xy" draw="line" capacity="4">
+          <data>
+          -20 0; 20 0; 0 -20; 0 20
+          </data>
+        </series>
+      </plot>
+      <table name="t1" grid="false" widths="10% 90%">
+        <row>
+          <column>
+              <style>
+                <marginTop>25</marginTop>
+              </style>
+              <p>
+                <style>
+                  <textAlignment>right</textAlignment>
+                </style>
+                $ x_{1} $</p>
+          </column>
+          <column>
+            <stack name="sliderStack">
+              <style>
+                <horizontalAlignment>left</horizontalAlignment>
+              </style>
+              <slider min="1.5" max="7" name="s1" value="-2">
+                <onValueChanged>
+                  <![CDATA[
+                  p1 = section8.content.p1.poi1;
+                  l1 = section8.content.p1.slope1;
+                  slope = 4*value - 16                  
+                  p1:Add(value, (2*value*value - 16*value + 35))
+                  b = 2*value^2 -16*value + 35 - slope*value
+                  l1:Add(-10, (slope*-10 + b));
+                  l1:Add(10, (slope*10 + b));
+                  ]]>
+                </onValueChanged>
+              </slider>
+            </stack>
+          </column>
+        </row>
+      </table>
+    </stack> 
       <stack name="stepsStack">
         <!--Each step is a stack, and each step has alternating background colors-->
         <stack orientation="horizontal">
@@ -566,8 +640,6 @@
 					</column>
 					<column>
 						<equation> $ \frac{1}{10} $ </equation>
-
-              
 					</column>
 				</row>
 				<row>
@@ -593,8 +665,6 @@
 					</column>
 					<column>
 					  <equation> None of the above. </equation>
-
-              
 					</column>
 				</row>
 				<row>
@@ -619,6 +689,74 @@
           mcController:checkAnswer()
         </onClick>
 			</button>
+        <stack name="content" style="contentBG">
+          <onDocumentOpened>
+            for i=-5, 5, 0.01 do
+              p1.func1:Add(i, i*i*i - 3*i*i + i)
+            end
+          </onDocumentOpened>
+          <style>
+            <visibility>visible</visibility>
+          </style>
+        <plot name="p1" tap="disabled">
+          <axis dim="x" min="-5" max="5" auto="none"></axis>
+          <axis dim="y" min="-10" max="10" auto="none"></axis>
+          <series name="func1"></series>
+          <series name="slope1" draw="line" capacity="2">
+            <style>
+              <foreground color="cadetBlue" />
+            </style>
+          </series>
+          <series name="poi1" draw="points" capacity="1">
+            <style>
+              <foreground color="cadetBlue" />
+            </style>
+          </series>
+          <series name="xy" draw="line" capacity="4">
+            <style>
+              <foreground color="black" />
+              <lineThickness>1.5</lineThickness>
+            </style>
+            <data>
+            -20 0; 20 0; 0 -20; 0 20
+            </data>
+          </series>
+        </plot>
+        <table name="t1" grid="false" widths="10% 90%">
+          <row>
+            <column>
+                <style>
+                  <marginTop>25</marginTop>
+                </style>
+                <p>
+                  <style>
+                    <textAlignment>right</textAlignment>
+                  </style>
+                  $ x_{1} $</p>
+            </column>
+            <column>
+              <stack name="sliderStack">
+                <style>
+                  <horizontalAlignment>left</horizontalAlignment>
+                </style>
+                <slider min="-2" max="4" name="s1" value="-2">
+                  <onValueChanged>
+                    <![CDATA[
+                    p1 = section7.mcStack.content.p1.poi1;
+                    l1 = section7.mcStack.content.p1.slope1;
+                    slope = 3*value*value - 6*value + 1                  
+                    p1:Add(value, (value*value*value - 3*value*value + value))
+                    b = value*value*value - 3*value*value + value - slope*value
+                    l1:Add(-10, (slope*-10 + b));
+                    l1:Add(10, (slope*10 + b));
+                    ]]>
+                  </onValueChanged>
+                </slider>
+              </stack>
+            </column>
+          </row>
+        </table>
+      </stack>
 		</stack>
    <stack name="mcStack2" style="mcStackLayout">
       <script>
@@ -639,12 +777,9 @@
 				<row>
 					<column>
 						<equation>$ \frac{d}{dx} f(x) = \frac{2}{(x-2)^2} $ </equation>
-              
 					</column>
 					<column>
 						<equation>$ \frac{d}{dx} f(x) = \frac{2}{(x+2)^2} $ </equation>
-
-              
 					</column>
 				</row>
 				<row>
@@ -666,11 +801,9 @@
 				<row>
 					<column>
 					  <equation>$ \frac{d}{dx} f(x) = -\frac{2}{(x+2)^2} $ </equation>
-              
 					</column>
 					<column>
 					  <equation>$ \frac{d}{dx} f(x) = -\frac{2}{(x-2)^2} $ </equation>
-              
 					</column>
 				</row>
 				<row>
@@ -695,6 +828,77 @@
           mcController:checkAnswer()
         </onClick>
 			</button>
+      <stack name="content" style="contentBG">
+        <onDocumentOpened>
+          for i=-5, 5, 0.01 do
+            p1.func1:Add(i, i/(i-2))
+          end
+        </onDocumentOpened>
+        <style>
+          <visibility>visible</visibility>
+        </style>
+        <plot name="p1" tap="disabled">
+          <axis dim="x" min="-5" max="5" auto="none"></axis>
+          <axis dim="y" min="-10" max="10" auto="none"></axis>
+          <series name="func1"></series>
+          <series name="slope1" draw="line" capacity="2">
+            <style>
+              <foreground color="cadetBlue" />
+            </style>
+          </series>
+          <series name="poi1" draw="points" capacity="1">
+            <style>
+              <foreground color="cadetBlue" />
+            </style>
+          </series>
+          <series name="xy" draw="line" capacity="4">
+            <style>
+              <foreground color="black" />
+              <lineThickness>1.5</lineThickness>
+            </style>
+            <data>
+            -20 0; 20 0; 0 -20; 0 20
+            </data>
+            <colors>
+              0 0 0 
+            </colors>
+          </series>
+        </plot>
+        <table name="t1" grid="false" widths="10% 90%">
+          <row>
+            <column>
+                <style>
+                  <marginTop>25</marginTop>
+                </style>
+                <p>
+                  <style>
+                    <textAlignment>right</textAlignment>
+                  </style>
+                  $ x_{1} $</p>
+            </column>
+            <column>
+              <stack name="sliderStack">
+                <style>
+                  <horizontalAlignment>left</horizontalAlignment>
+                </style>
+                <slider min="-5" max="5" name="s1" value="-2">
+                  <onValueChanged>
+                    <![CDATA[
+                    p1 = section7.mcStack2.content.p1.poi1;
+                    l1 = section7.mcStack2.content.p1.slope1
+                    slope = -2/(value-2)^2
+                    p1:Add(value, (value/(value-2)))
+                    b = value/(value-2) - slope*value
+                    l1:Add(-10, (slope*-10 + b));
+                    l1:Add(10, (slope*10 + b));
+                    ]]>
+                  </onValueChanged>
+                </slider>
+              </stack>
+            </column>
+          </row>
+        </table>
+      </stack>
 		</stack>
   <stack name="mcStack3" style="mcStackLayout">
       <script>
@@ -771,6 +975,74 @@
           mcController:checkAnswer()
         </onClick>
 			</button>
+      <stack name="content" style="contentBG">
+        <onDocumentOpened>
+          for i=-5, 5, 0.01 do
+            p1.func1:Add(i, math.pow(math.exp(1), math.cos(i^2)))
+          end
+        </onDocumentOpened>
+        <style>
+          <visibility>visible</visibility>
+        </style>
+        <plot name="p1" tap="disabled">
+          <axis dim="x" min="-5" max="5" auto="none"></axis>
+          <axis dim="y" min="-10" max="10" auto="none"></axis>
+          <series name="func1"></series>
+          <series name="slope1" draw="line" capacity="2">
+            <style>
+              <foreground color="cadetBlue" />
+            </style>
+          </series>
+          <series name="poi1" draw="points" capacity="1">
+            <style>
+              <foreground color="cadetBlue" />
+            </style>
+          </series>
+          <series name="xy" draw="line" capacity="4">
+            <style>
+              <foreground color="black" />
+              <lineThickness>1.5</lineThickness>
+            </style>
+            <data>
+            -20 0; 20 0; 0 -20; 0 20
+            </data>
+          </series>
+        </plot>
+        <table name="t1" grid="false" widths="10% 90%">
+          <row>
+            <column>
+                <style>
+                  <marginTop>25</marginTop>
+                </style>
+                <p>
+                  <style>
+                    <textAlignment>right</textAlignment>
+                  </style>
+                  $ x_{1} $</p>
+            </column>
+            <column>
+              <stack name="sliderStack">
+                <style>
+                  <horizontalAlignment>left</horizontalAlignment>
+                </style>
+                <slider min="-5" max="5" name="s1" value="-2">
+                  <onValueChanged>
+                    <![CDATA[
+                    p1 = section7.mcStack3.content.p1.poi1;
+                    l1 = section7.mcStack3.content.p1.slope1
+                    slope = -2*math.exp(1)^(math.cos(value^2))*value*math.sin(value^2)
+                    p1:Add(value, math.pow(math.exp(1), math.cos(value^2)))
+                    b = math.pow(math.exp(1), math.cos(value^2)) - slope*value
+                    l1:Add(-10, (slope*-10 + b));
+                    l1:Add(10, (slope*10 + b));
+                    ]]>
+                  </onValueChanged>
+                </slider>
+              </stack>
+            </column>
+          </row>
+        </table>
+      </stack>
 		</stack>
   </sectionNoTitle>
 
